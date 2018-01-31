@@ -251,6 +251,18 @@
             }
 
             template <class T>
+            template <class K>
+            bool Matrix2x2<T>::operator==(Matrix2x2<K> const& m) {
+                return getL1() == m.getL1() && getL2() == m.getL2();
+            }
+
+            template <class T>
+            template <class K>
+            bool Matrix2x2<T>::operator!=(Matrix2x2<K> const& m) {
+                return !(*this == m);
+            }
+
+            template <class T>
             std::ostream& operator<<(std::ostream &stream, Matrix2x2<T> const& m) {
                 stream << "[" << m[0][0] << " " << m[0][1] << "]" << std::endl;
                 stream << "[" << m[1][0] << " " << m[1][1] << "]";

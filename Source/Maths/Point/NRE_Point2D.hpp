@@ -136,6 +136,8 @@
 
                     //## Access Operator ##//
 
+                    //## Assignment Operator ##//
+
                     //## Shortcut Operator ##//
                         /**
                          * @brief Shortcut Operator +=
@@ -245,7 +247,7 @@
             /**
              * @brief Shift Operator <<
              * Add p to an out stream with : (x, y)
-             * @param stream : std::ostream, the out stream to add this
+             * @param stream : std::ostream, the out stream to add p
              * @param p : Point2D<T>, the point to add
              * @return std::ostream, the modified out stream
              */

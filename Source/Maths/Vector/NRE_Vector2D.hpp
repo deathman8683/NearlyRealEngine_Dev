@@ -146,6 +146,8 @@
 
                     //## Access Operator ##//
 
+                    //## Assignment Operator ##//
+
                     //## Shortcut Operator ##//
                         /**
                          * @brief Shortcut Operator +=
@@ -167,7 +169,7 @@
                          * @brief Shortcut Operator *=
                          * Compute the multiplication of this by a generic-type factor k
                          * @param k : K, the multiplication factor
-                         * @return Vector2D<T>, this times k
+                         * @return Vector2D<T>, this multiplied by k
                          */
                         template <class K>
                         Vector2D<T>& operator*=(K const& k);
@@ -311,7 +313,7 @@
             /**
              * @brief Shift Operator <<
              * Add u to an out stream with : (x, y)
-             * @param stream : std::ostream, the out stream to add this
+             * @param stream : std::ostream, the out stream to add u
              * @param u : Vector2D<T>, the vector to add
              * @return std::ostream, the modified out stream
              */
