@@ -11,6 +11,11 @@
             }
 
             template <class T>
+            template <class K, class L>
+            Point2D<T>::Point2D(Point2D<K> const& p, Vector2D<L> const& u) : x(p.getX() + u.getX()), y(p.getX() + u.getX()) {
+            }
+
+            template <class T>
             Point2D<T>::Point2D(Point2D const& p) : x(p.x), y(p.y) {
             }
 
@@ -22,11 +27,6 @@
             template <class T>
             template <class K>
             Point2D<T>::Point2D(Vector2D<K> const& u) : x(u.getX()), y(u.getY()) {
-            }
-
-            template <class T>
-            template <class K, class L>
-            Point2D<T>::Point2D(Point2D<K> const& p, Vector2D<L> const& u) : x(p.getX() + u.getX()), y(p.getX() + u.getX()) {
             }
 
             template <class T>
@@ -74,14 +74,14 @@
             template <class T>
             template <class K>
             Point2D<T>& Point2D<T>::operator+=(Vector2D<K> const& u) {
-                setCoord(this->getX() + u.getX(), this->getY() + u.getY());
+                setCoord(getX() + u.getX(), getY() + u.getY());
                 return *this;
             }
 
             template <class T>
             template <class K>
             Point2D<T>& Point2D<T>::operator-=(Vector2D<K> const& u) {
-                setCoord(this->getX() - u.getX(), this->getY() - u.getY());
+                setCoord(getX() - u.getX(), getY() - u.getY());
                 return *this;
             }
 
@@ -101,14 +101,50 @@
 
             template <class T>
             Point2D<T> Point2D<T>::operator-() {
-                Point2D<T> tmp(-this->getX(), -this->getY());
+                Point2D<T> tmp(-getX(), -getY());
                 return tmp;
             }
 
             template <class T>
             template <class K>
             bool Point2D<T>::operator==(Point2D<K> const& p) {
-                return this->getX() == p.getX() && this->getY() == p.getY();
+                return getX() == p.getX() && getY() == p.getY();
+            }
+
+            template <class T>
+            template <class K>
+            bool Point2D<T>::operator!=(Point2D<K> const& p) {
+                return !(*this == p);
+            }
+
+            template <class T>
+            template <class K>
+            bool Point2D<T>::operator<(Point2D<K> const& p) {
+                return distanceSquared() < p.distanceSquared();
+            }
+
+            template <class T>
+            template <class K>
+            bool Point2D<T>::operator>(Point2D<K> const& p) {
+                return distanceSquared() > p.distanceSquared();
+            }
+
+            template <class T>
+            template <class K>
+            bool Point2D<T>::operator<=(Point2D<K> const& p) {
+                return distanceSquared() <= p.distanceSquared();
+            }
+
+            template <class T>
+            template <class K>
+            bool Point2D<T>::operator>=(Point2D<K> const& p) {
+                return distanceSquared() >= p.distanceSquared();
+            }
+
+            template <class T>
+            std::ostream& operator<<(std::ostream &stream, Point2D<T> const& p) {
+                stream << "(" << p.getX() << "," << p.getY() << ")";
+                return stream;
             }
 
         };
