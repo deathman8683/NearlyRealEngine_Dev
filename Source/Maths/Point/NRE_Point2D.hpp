@@ -106,17 +106,20 @@
                          * @brief X setter
                          * Change the x value
                          */
-                        void setX(T const& x);
+                        template <class K>
+                        void setX(K const& x);
                         /**
                          * @brief Y setter
                          * Change the y value
                          */
-                        void setY(T const& y);
+                        template <class K>
+                        void setY(K const& y);
                         /**
                          * @brief X and Y setter
                          * Change both x and y values
                          */
-                        void setCoord(T const& x, T const& y);
+                        template <class K, class L>
+                        void setCoord(K const& x, L const& y);
 
                     //## Methods ##//
                         /**

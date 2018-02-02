@@ -44,17 +44,20 @@
             }
 
             template <class T>
-            void Point2D<T>::setX(T const& x) {
+            template <class K>
+            void Point2D<T>::setX(K const& x) {
                 this->x = x;
             }
 
             template <class T>
-            void Point2D<T>::setY(T const& y) {
+            template <class K>
+            void Point2D<T>::setY(K const& y) {
                 this->y = x;
             }
 
             template <class T>
-            void Point2D<T>::setCoord(T const& x, T const& y) {
+            template <class K, class L>
+            void Point2D<T>::setCoord(K const& x, L const& y) {
                 setX(x); setY(y);
             }
 
