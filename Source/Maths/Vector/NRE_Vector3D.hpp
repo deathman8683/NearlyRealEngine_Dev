@@ -123,7 +123,7 @@
                         void setCoord(K const& x, L const& y, M const& z);
                         /**
                          * @brief X, y and z setter
-                         * Change x, y values from a base vector and z values
+                         * Change x, y values from a base 2D vector and z value
                          * @param u : Vector2D<K>, the base vector for x and y values
                          * @param z : L, the new z value
                          */
@@ -302,6 +302,12 @@
                          */
                         template <class K>
                         NREfloat operator|(Vector3D<K> const& u) const;
+                        /**
+                         * @brief BitWise Operator ^
+                         * Compute the vectorial product between this and a 3D generic-type vector
+                         * @param u : Vector3D<K>, the second vector for the vectorial product
+                         * @return Vector3D<T>, the computed vector via vectorial product
+                         */
                         template <class K>
                         Vector3D<T> operator^(Vector3D<K> const& u);
 
@@ -309,7 +315,7 @@
                     //## Shift Operator ##//
 
                 private:
-                    static NREfloat DEFAULT_Z;
+                    static NREfloat DEFAULT_Z;  /**< The default z axis translation */
             };
 
             template <class T>

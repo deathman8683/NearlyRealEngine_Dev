@@ -6,7 +6,7 @@
      * @version 1.0
      */
 
-     #pragma once
+    #pragma once
 
     #include "<Path>/Generic/NRE_Type.hpp"
 
