@@ -40,7 +40,6 @@
                           * Default constructor, iniatlize a 2x2 identity matrix
                           */
                         Matrix2x2();
-                        template <class K, class L, class M, class N>
                         /**
                          * @brief Constructor
                          * Initialize the matrix's value with 4 generic-type parameters
@@ -49,13 +48,14 @@
                          * @param c : M, the l2-c1 value
                          * @param d : N, the l2-c2 value
                          */
+                        template <class K, class L, class M, class N>
                         Matrix2x2(K const& a, L const& b,
                                   M const& c, N const& d);
                         /**
                          * @brief Constructor
                          * Initialize the matrix's value with two 2D generic-type vector as line
                          * @param l1 : Vector2D<K>, the matrix's first line
-                         * @param l2 : Vector2D<L>, the matrix's first line
+                         * @param l2 : Vector2D<L>, the matrix's second line
                          */
                         template <class K, class L>
                         Matrix2x2(Vector2D<K> const& l1, Vector2D<L> const& l2);
@@ -63,7 +63,7 @@
                          * @brief Constructor
                          * Initialize the matrix's value with two 2D generic-type point as line
                          * @param l1 : Point2D<K>, the matrix's first line
-                         * @param l2 : Point2D<L>, the matrix's first line
+                         * @param l2 : Point2D<L>, the matrix's second line
                          */
                         template <class K, class L>
                         Matrix2x2(Point2D<K> const& l1, Point2D<L> const& l2);
@@ -173,7 +173,7 @@
                         /**
                          * @brief Translate the matrix
                          * Apply a translation to the matrix with a generic-type factor u
-                         * @param u : K, the transation factor
+                         * @param u : K, the translation factor
                          */
                         template <class K>
                         void translate(K const& u);

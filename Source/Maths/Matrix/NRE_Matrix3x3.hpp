@@ -26,7 +26,7 @@
 
             /**
              * @class Matrix3x3
-             * @brief Maths's Object : 2x2 Generic Matrix
+             * @brief Maths's Object : 3x3 Generic Matrix
              */
             class Matrix3x3{
                 private:
@@ -36,86 +36,108 @@
                     //## Constructor ##//
                          /**
                           * @brief Constructor
-                          * Default constructor, iniatlize a 2x2 identity matrix
+                          * Default constructor, iniatlize a 3x3 identity matrix
                           */
-                        Matrix2x2();
-                        template <class K, class L, class M, class N>
+                        Matrix3x3();
+                          /**
+                           * @brief Constructor
+                           * Initialize the matrix's value with 9 generic-type parameters
+                           * @param a : K, the l1-c1 value
+                           * @param b : L, the l1-c2 value
+                           * @param c : M, the l1-c3 value
+                           * @param d : N, the l2-c1 value
+                           * @param e : O, the l2-c2 value
+                           * @param f : P, the l2-c3 value
+                           * @param g : Q, the l3-c1 value
+                           * @param h : R, the l3-c2 value
+                           * @param i : S, the l3-c3 value
+                           */
+                        template <class K, class L, class M,
+                                  class N, class O, class P,
+                                  class Q, class R, class S>
+                        Matrix3x3(K const& a, L const& b, M const& c,
+                                  N const& d, O const& e, P const& f,
+                                  Q const& g, R const& f, S const& i);
                         /**
                          * @brief Constructor
-                         * Initialize the matrix's value with 4 generic-type parameters
-                         * @param a : K, the l1-c1 value
-                         * @param b : L, the l1-c2 value
-                         * @param c : M, the l2-c1 value
-                         * @param d : N, the l2-c2 value
+                         * Initialize the matrix's value with three 3D generic-type vector as line
+                         * @param l1 : Vector3D<K>, the matrix's first line
+                         * @param l2 : Vector3D<L>, the matrix's second line
+                         * @param l3 : Vector3D<M>, the matrix's third line
                          */
-                        Matrix2x2(K const& a, L const& b,
-                                  M const& c, N const& d);
+                        template <class K, class L, class M>
+                        Matrix3x3(Vector3D<K> const& l1, Vector3D<L> const& l2, Vector3D<M> const& l3);
                         /**
                          * @brief Constructor
-                         * Initialize the matrix's value with two 2D generic-type vector as line
-                         * @param l1 : Vector2D<K>, the matrix's first line
-                         * @param l2 : Vector2D<L>, the matrix's first line
+                         * Initialize the matrix's value with three 3D generic-type point as line
+                         * @param l1 : Point3D<K>, the matrix's first line
+                         * @param l2 : Point3D<L>, the matrix's second line
+                         * @param l3 : Point3D<M>, the matrix's third line
                          */
                         template <class K, class L>
-                        Matrix2x2(Vector2D<K> const& l1, Vector2D<L> const& l2);
-                        /**
-                         * @brief Constructor
-                         * Initialize the matrix's value with two 2D generic-type point as line
-                         * @param l1 : Point2D<K>, the matrix's first line
-                         * @param l2 : Point2D<L>, the matrix's first line
-                         */
-                        template <class K, class L>
-                        Matrix2x2(Point2D<K> const& l1, Point2D<L> const& l2);
+                        Matrix3x3(Point3D<K> const& l1, Point3D<L> const& l2, Point3D<M> const& l3);
 
                     //## Copy-Constructor ##//
                         /**
                          * @brief Copy-Constructor
                          * Construct a copy of m
-                         * @param m : Matrix2x2<T>, the matrix to copy
+                         * @param m : Matrix3x3<T>, the matrix to copy
                          */
-                        Matrix2x2(Matrix2x2 const& m);
+                        Matrix3x3(Matrix3x3 const& m);
 
                     //## Convertor ##//
                         /**
                          * @brief Convertor
-                         * Convert a 2x2 generic-type matrix into a 2x2 T matrix
-                         * @param m : Matrix2x2<K>, the matrix to convert
+                         * Convert a 3x3 generic-type matrix into a 3x3 T matrix
+                         * @param m : Matrix3x3<K>, the matrix to convert
                          */
                         template <class K>
-                        Matrix2x2(Matrix2x2<K> const& m);
+                        Matrix3x3(Matrix3x3<K> const& m);
 
                     //## Deconstructor ##//
                         /**
                          * @brief Deconstructor
-                         * Deconstruct a 2x2 matrix
+                         * Deconstruct a 3x3 matrix
                          */
-                        ~Matrix2x2();
+                        ~Matrix3x3();
 
                     //## Getter ##//
                         /**
                          * @brief First line getter
-                         * Return the matrix's first line as a 2D vector
-                         * @return Vector2D<T>, the matrix's first line
+                         * Return the matrix's first line as a 3D vector
+                         * @return Vector3D<T>, the matrix's first line
                          */
-                        Vector2D<T> getL1() const;
+                        Vector3D<T> getL1() const;
                         /**
                          * @brief Second line getter
-                         * Return the matrix's second line as a 2D vector
-                         * @return Vector2D<T>, the matrix's second line
+                         * Return the matrix's second line as a 3D vector
+                         * @return Vector3D<T>, the matrix's second line
                          */
-                        Vector2D<T> getL2() const;
+                        Vector3D<T> getL2() const;
+                        /**
+                         * @brief Third line getter
+                         * Return the matrix's third line as a 3D vector
+                         * @return Vector3D<T>, the matrix's third line
+                         */
+                        Vector3D<T> getL3() const;
                         /**
                          * @brief First column getter
-                         * Return the matrix's first column as a 2D vector
-                         * @return Vector2D<T>, the matrix's first column
+                         * Return the matrix's first column as a 3D vector
+                         * @return Vector3D<T>, the matrix's first column
                          */
-                        Vector2D<T> getC1() const;
+                        Vector3D<T> getC1() const;
                         /**
                          * @brief Second column getter
-                         * Return the matrix's second column as a 2D vector
-                         * @return Vector2D<T>, the matrix's second column
+                         * Return the matrix's second column as a 3D vector
+                         * @return Vector3D<T>, the matrix's second column
                          */
-                        Vector2D<T> getC2() const;
+                        Vector3D<T> getC2() const;
+                        /**
+                         * @brief Third column getter
+                         * Return the matrix's third column as a 3D vector
+                         * @return Vector3D<T>, the matrix's third column
+                         */
+                        Vector3D<T> getC3() const;
                         /**
                          * @brief Determinant getter
                          * Compute the matrix's determinant
@@ -126,32 +148,46 @@
                     //## Setter ##//
                         /**
                          * @brief First line setter
-                         * Set the matrix's first line with a 2D generic-type vector
-                         * @param l1 : Vector2D<K>, the vector use as first line
+                         * Set the matrix's first line with a 3D generic-type vector
+                         * @param l1 : Vector3D<K>, the vector use as first line
                          */
                         template <class K>
-                        void setL1(Vector2D<K> const& l1);
+                        void setL1(Vector3D<K> const& l1);
                         /**
                          * @brief Second line setter
-                         * Set the matrix's second line with a 2D generic-type vector
-                         * @param l2 : Vector2D<K>, the vector use as second line
+                         * Set the matrix's second line with a 3D generic-type vector
+                         * @param l2 : Vector3D<K>, the vector use as second line
                          */
                         template <class K>
-                        void setL2(Vector2D<K> const& l2);
+                        void setL2(Vector3D<K> const& l2);
+                        /**
+                         * @brief Third line setter
+                         * Set the matrix's third line with a 3D generic-type vector
+                         * @param l3 : Vector3D<K>, the vector use as third line
+                         */
+                        template <class K>
+                        void setL3(Vector3D<K> const& l3);
                         /**
                          * @brief First column setter
-                         * Set the matrix's first column with a 2D generic-type vector
-                         * @param c1 : Vector2D<K>, the vector use as first column
+                         * Set the matrix's first column with a 3D generic-type vector
+                         * @param c1 : Vector3D<K>, the vector use as first column
                          */
                         template <class K>
-                        void setC1(Vector2D<K> const& c1);
+                        void setC1(Vector3D<K> const& c1);
                         /**
                          * @brief Second column setter
-                         * Set the matrix's second column with a 2D generic-type vector
-                         * @param c2 : Vector2D<K>, the vector use as second column
+                         * Set the matrix's second column with a 3D generic-type vector
+                         * @param c2 : Vector3D<K>, the vector use as second column
                          */
                         template <class K>
-                        void setC2(Vector2D<K> const& c2);
+                        void setC2(Vector3D<K> const& c2);
+                        /**
+                         * @brief Third column setter
+                         * Set the matrix's third column with a 3D generic-type vector
+                         * @param c3 : Vector3D<K>, the vector use as third column
+                         */
+                        template <class K>
+                        void setC3(Vector3D<K> const& c3);
                         /**
                          * @brief Identity setter
                          * Erase the matrix and transform it into the identity matrix
@@ -171,18 +207,18 @@
                         void inverse();
                         /**
                          * @brief Translate the matrix
-                         * Apply a translation to the matrix with a generic-type factor u
-                         * @param u : K, the transation factor
+                         * Apply a translation to the matrix with a 2D generic-type vector
+                         * @param u : Vector2D<K>, the translation vector
                          */
                         template <class K>
-                        void translate(K const& u);
+                        void translate(Vector2D<K> const& u);
                         /**
                          * @brief Scale the matrix
-                         * Apply a scale transformation to the matrix with a generic-type factor u
-                         * @param u : K, the scale factor
+                         * Apply a scale transformation to the matrix with a 2D generic-type vector
+                         * @param u : Vector2D<K>, the scale vector
                          */
                         template <class K>
-                        void scale(K const& u);
+                        void scale(Vector2D<K> const& u);
 
                     //## Access Operator ##//
                         /**
@@ -204,136 +240,136 @@
                         /**
                          * @brief Assignment Operator =
                          * Copy a generic-type matrix into this
-                         * @param m : Matrix2x2<K>, the matrix to copy
+                         * @param m : Matrix3x3<K>, the matrix to copy
                          */
                         template <class K>
-                        Matrix2x2<T>& operator=(Matrix2x2<K> const& m);
+                        Matrix3x3<T>& operator=(Matrix3x3<K> const& m);
 
                     //## Shortcut Operator ##//
                         /**
                          * @brief Shortcut Operator +=
-                         * Compute the addition between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to add into this
-                         * @return Matrix2x2<T>, this after the addition
+                         * Compute the addition between this and a 3x3 generic-type matrix
+                         * @param m : Matrix3x3<K>, the matrix to add into this
+                         * @return Matrix3x3<T>, this after the addition
                          */
                         template <class K>
-                        Matrix2x2<T>& operator+=(Matrix2x2<K> const& m);
+                        Matrix3x3<T>& operator+=(Matrix3x3<K> const& m);
                         /**
                          * @brief Shortcut Operator -=
-                         * Compute the substraction between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to substract into this
-                         * @return Matrix2x2<T>, this after the substraction
+                         * Compute the substraction between this and a 3x3 generic-type matrix
+                         * @param m : Matrix3x3<K>, the matrix to substract into this
+                         * @return Matrix3x3<T>, this after the substraction
                          */
                         template <class K>
-                        Matrix2x2<T>& operator-=(Matrix2x2<K> const& m);
+                        Matrix3x3<T>& operator-=(Matrix3x3<K> const& m);
                         /**
                          * @brief Shortcut Operator *=
                          * Compute the multiplication between this and a generic-type factor
                          * @param k : K, the multiplication factor
-                         * @return Matrix2x2<T>, this after the multiplication by k
+                         * @return Matrix3x3<T>, this after the multiplication by k
                          */
                         template <class K>
-                        Matrix2x2<T>& operator*=(K const& k);
+                        Matrix3x3<T>& operator*=(K const& k);
                         /**
                          * @brief Shortcut Operator *=
-                         * Compute the multiplication between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to multiply into this
-                         * @return Matrix2x2<T>, this after the multiplication by m
+                         * Compute the multiplication between this and a 3x3 generic-type matrix
+                         * @param m : Matrix3x3<K>, the matrix to multiply into this
+                         * @return Matrix3x3<T>, this after the multiplication by m
                          */
                         template <class K>
-                        Matrix2x2<T>& operator*=(Matrix2x2<K> const& m);
+                        Matrix3x3<T>& operator*=(Matrix3x3<K> const& m);
                         /**
                          * @brief Shortcut Operator /=
                          * Compute the division between this and a generic-type factor
                          * @param k : K, the division factor
-                         * @return Matrix2x2<T>, this after the division by k
+                         * @return Matrix3x3<T>, this after the division by k
                          */
                         template <class K>
-                        Matrix2x2<T>& operator/=(K const& k);
+                        Matrix3x3<T>& operator/=(K const& k);
                         /**
                          * @brief Shortcut Operator *=
-                         * Compute the multiplication between this and the inverse of a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to inverse and multiplicate into this
-                         * @return Matrix2x2<T>, this after the multiplication by 1/m
+                         * Compute the multiplication between this and the inverse of a 3x3 generic-type matrix
+                         * @param m : Matrix3x3<K>, the matrix to inverse and multiplicate into this
+                         * @return Matrix3x3<T>, this after the multiplication by 1/m
                          */
                         template <class K>
-                        Matrix2x2<T>& operator/=(Matrix2x2<K> const& m);
+                        Matrix3x3<T>& operator/=(Matrix3x3<K> const& m);
 
                     //## Arithmetic Operator ##//
                         /**
                          * @brief Arithmetic Operator +
-                         * Compute the addition between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to add to this
-                         * @return Matrix2x2<T>, a new matrix with this added to m
+                         * Compute the addition between this and a 3x3 generic-type matrix
+                         * @param m : Matrix3x3<K>, the matrix to add to this
+                         * @return Matrix3x3<T>, a new matrix with this added to m
                          */
                         template <class K>
-                        Matrix2x2<T> operator+(Matrix2x2<K> const& m);
+                        Matrix3x3<T> operator+(Matrix3x3<K> const& m);
                         /**
                          * @brief Arithmetic Operator -
-                         * Compute the substract between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to substract to this
-                         * @return Matrix2x2<T>, a new matrix with this substracted to m
+                         * Compute the substract between this and a 3x3 generic-type matrix
+                         * @param m : Matrix3x3<K>, the matrix to substract to this
+                         * @return Matrix3x3<T>, a new matrix with this substracted to m
                          */
                         template <class K>
-                        Matrix2x2<T> operator-(Matrix2x2<K> const& m);
+                        Matrix3x3<T> operator-(Matrix3x3<K> const& m);
                         /**
                          * @brief Arithmetic Operator *
                          * Compute the multiplication between this and a generic-type factor
                          * @param k : K, the multiplication factor
-                         * @return Matrix2x2<T>, a new matrix result of the multiplication of this and k
+                         * @return Matrix3x3<T>, a new matrix result of the multiplication of this and k
                          */
                         template <class K>
-                        Matrix2x2<T> operator*(K const& k);
+                        Matrix3x3<T> operator*(K const& k);
                         /**
                          * @brief Arithmetic Operator *
-                         * Compute the multiplication between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to multiply to this
-                         * @return Matrix2x2<T>, a new matrix with this multiplied to m
+                         * Compute the multiplication between this and a 3x3 generic-type matrix
+                         * @param m : Matrix3x3<K>, the matrix to multiply to this
+                         * @return Matrix3x3<T>, a new matrix with this multiplied to m
                          */
                         template <class K>
-                        Matrix2x2<T> operator*(Matrix2x2<K> const& m);
+                        Matrix3x3<T> operator*(Matrix3x3<K> const& m);
                         /**
                          * @brief Arithmetic Operator *
-                         * Compute the transformation of a 2D generic-type vector by this
-                         * @param u : Vector2D<K>, the vector to transform by this
-                         * @return Vector2D<K>, the transformed vector
+                         * Compute the transformation of a 3D generic-type vector by this
+                         * @param u : Vector3D<K>, the vector to transform by this
+                         * @return Vector3D<K>, the transformed vector
                          */
                         template <class K>
-                        Vector2D<K> operator*(Vector2D<K> const& u);
+                        Vector3D<K> operator*(Vector3D<K> const& u);
                         /**
                          * @brief Arithmetic Operator /
                          * Compute the division between this and a generic-type factor
                          * @param k : K, the division factor
-                         * @return Matrix2x2<T>, a new matrix result of the division of this and k
+                         * @return Matrix3x3<T>, a new matrix result of the division of this and k
                          */
                         template <class K>
-                        Matrix2x2<T> operator/(K const& k);
+                        Matrix3x3<T> operator/(K const& k);
                         /**
                          * @brief Arithmetic Operator /
-                         * Compute the multiplication between this and the inverse of a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to inverse and multiply to this
-                         * @return Matrix2x2<T>, a new matrix with this multiplied to 1/m
+                         * Compute the multiplication between this and the inverse of a 3x3 generic-type matrix
+                         * @param m : Matrix3x3<K>, the matrix to inverse and multiply to this
+                         * @return Matrix3x3<T>, a new matrix with this multiplied to 1/m
                          */
                         template <class K>
-                        Matrix2x2<T> operator/(Matrix2x2<K> const& m);
+                        Matrix3x3<T> operator/(Matrix3x3<K> const& m);
 
                     //## Comparison Operator ##//
                         /**
                          * @brief Comparison Operator ==
-                         * Compare if this and a 2x2 generic-type matrix are equal, based on vector == comparison
-                         * @param m : Matrix2x2<K>, the matrix to test
+                         * Compare if this and a 3x3 generic-type matrix are equal, based on vector == comparison
+                         * @param m : Matrix3x3<K>, the matrix to test
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator==(Matrix2x2<K> const& m);
+                        bool operator==(Matrix3x3<K> const& m);
                         /**
                          * @brief Comparison Operator ==
-                         * Compare if this and a 2x2 generic-type matrix aren't equal, based on the negation of the == test
-                         * @param m : Matrix2x2<K>, the matrix to test
+                         * Compare if this and a 3x3 generic-type matrix aren't equal, based on the negation of the == test
+                         * @param m : Matrix3x3<K>, the matrix to test
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator!=(Matrix2x2<K> const& m);
+                        bool operator!=(Matrix3x3<K> const& m);
 
                     //## BitWise Operator ##//
 
@@ -344,12 +380,12 @@
 
             /**
              * @brief Shift Operator <<
-             * Add m to an out stream with : [a, b]\n[c, d]
+             * Add m to an out stream with : [a, b, c]\n[d, e, f]\n[g, h, i]
              * @param stream : std::ostream, the out stream to add m
-             * @param m : Matrix2x2<T>, the matrix to add
+             * @param m : Matrix3x3<T>, the matrix to add
              * @return std::ostream, the modified out stream
              */
             template <class T>
-            std::ostream& operator<<(std::ostream &stream, Matrix2x2<T> const& m);
+            std::ostream& operator<<(std::ostream &stream, Matrix3x3<T> const& m);
         };
     };
