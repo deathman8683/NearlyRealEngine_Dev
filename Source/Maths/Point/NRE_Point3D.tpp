@@ -3,7 +3,7 @@
         namespace Maths {
 
             template <class T>
-            Point3D<T>::Point3D() : z(DEFAULT_Z ){
+            Point3D<T>::Point3D() : z(DEFAULT_Z) {
             }
 
             template <class T>
@@ -47,7 +47,7 @@
             template <class T>
             template <class K>
             void Point3D<T>::setZ(K const& z) {
-                this.z = z;
+                this->z = z;
             }
 
             template <class T>

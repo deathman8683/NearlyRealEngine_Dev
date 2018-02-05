@@ -3,7 +3,7 @@
         namespace Maths {
 
             template <class T>
-            Point4D<T>::Point4D() : z(DEFAULT_Z ){
+            Point4D<T>::Point4D() : w(DEFAULT_W) {
             }
 
             template <class T>
@@ -47,7 +47,7 @@
             template <class T>
             template <class K>
             void Point4D<T>::setW(K const& w) {
-                this.w = w;
+                this->w = w;
             }
 
             template <class T>

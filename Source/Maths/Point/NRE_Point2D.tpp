@@ -53,7 +53,7 @@
             template <class T>
             template <class K>
             void Point2D<T>::setY(K const& y) {
-                this->y = x;
+                this->y = y;
             }
 
             template <class T>

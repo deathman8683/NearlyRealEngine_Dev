@@ -7,17 +7,15 @@
     using namespace NRE::Maths;
 
     int main(int argc, char **argv) {
-        Matrix2x2<int> m1, m2;
-        std::cout << m1 << std::endl;
-        std::cout << m2 << std::endl;
-        std::cout << m1 + m2 << std::endl;
+        Point4D<int> l1(1, 2, 3, 4), l2, l3;
+        std::cout << l1 << std::endl;
+        l2.setCoord(1, 1, 1, 1);
+        l3.setCoord(1, 2, 3, 4);
+        l1 = l2;
+        std::cout << l1 << std::endl;
+        std::cout << l3 << std::endl;
 
-        Matrix3x3<int> n1, n2;
-        std::cout << n1 << std::endl;
-        std::cout << n2 << std::endl;
-        std::cout << n1 + n2 << std::endl;
-
-        Point3D<int> l1, l2, l3;
-        Matrix3x3<int> n3(l1, l2, l3);
-        std::cout << n3 << std::endl;
+        Point3D<int> c1;
+        c1.setCoord(1, 2, 3);
+        std::cout << c1 << std::endl;
     }
