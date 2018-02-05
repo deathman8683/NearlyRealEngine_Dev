@@ -15,21 +15,21 @@
 
     template <class T>
     template <class K, class L>
-    Point3D<T>::Point3D(Point3D<K> const& p, Vector3D<L> const& u) : x(p.getX() + u.getX()), y(p.getX() + u.getX()), z(p.getZ() + u.getZ()) {
+    Point3D<T>::Point3D(Point3D<K> const& p, Vector3D<L> const& u) : Point2D(p, u), z(p.getZ() + u.getZ()) {
     }
 
     template <class T>
-    Point3D<T>::Point3D(Point3D const& p) : x(p.getX()), y(p.getY()), z(p.getZ()) {
-    }
-
-    template <class T>
-    template <class K>
-    Point3D<T>::Point3D(Point3D<K> const& p) : x(p.getX()), y(p.getY()), z(p.getZ()) {
+    Point3D<T>::Point3D(Point3D const& p) : Point2D(p), z(p.getZ()) {
     }
 
     template <class T>
     template <class K>
-    Point3D<T>::Point3D(Vector3D<K> const& u) : x(u.getX()), y(u.getY()), z(u.getZ()) {
+    Point3D<T>::Point3D(Point3D<K> const& p) : Point2D(p), z(p.getZ()) {
+    }
+
+    template <class T>
+    template <class K>
+    Point3D<T>::Point3D(Vector3D<K> const& u) : Point2D(u), z(u.getZ()) {
     }
 
     template <class T>
@@ -68,11 +68,8 @@
 
     template <class T>
     NREfloat Point3D<T>::distanceSquared(Point3D<T> const& p) const {
-        NREfloat x_lenght, y_lenght, z_lenght;
-        x_lenght = b.getX() - getX();
-        y_lenght = b.getY() - getY();
-        z_lenght = b.getZ() - getZ();
-        return x_lenght * x_lenght + y_lenght * y_lenght + z_lenght * z_lenght;
+        NREfloat z_lenght = b.getZ() - getZ();
+        return Point2D::distanceSquared(p) + z_lenght * z_lenght;
     }
 
     template <class T>

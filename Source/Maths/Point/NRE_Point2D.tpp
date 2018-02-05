@@ -68,9 +68,8 @@
 
             template <class T>
             NREfloat Point2D<T>::distanceSquared(Point2D<T> const& p) const {
-                NREfloat x_lenght, y_lenght;
-                x_lenght = p.getX() - getX();
-                y_lenght = p.getY() - getY();
+                NREfloat x_lenght = p.getX() - getX();
+                NREfloat y_lenght = p.getY() - getY();
                 return x_lenght * x_lenght + y_lenght * y_lenght;
             }
 

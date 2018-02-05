@@ -291,13 +291,6 @@
                         NREfloat operator|(Vector2D<K> const& u) const;
 
                     //## Shift (Usually for printing methods) Operator ##//
-                        /**
-                         * @brief Shift Operator <<
-                         * Add this to an out stream with : (x, y)
-                         * @param stream : std::ostream, the out stream to add this
-                         * @return std::ostream, the modified out stream
-                         */
-                        std::ostream& operator<<(std::ostream &stream);
 
 
                 private:
