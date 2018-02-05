@@ -138,14 +138,14 @@
                          * @param p : Point3D<T>, the point to measure the distance with this
                          * @return NREfloat, the computed distance
                          */
-                        NREfloat distance(Point3D<T> const& p = {DEFAULT_X, DEFAULT_Y, DEFAULT_Z}) const;
+                        NREfloat distance(Point3D<T> const& p = {Point2D<T>::DEFAULT_X, Point2D<T>::DEFAULT_Y, DEFAULT_Z}) const;
                         /**
                          * @brief DistanceSquared getter
                          * Compute the squared distance between this and p, by default p is the default point
                          * @param p : Point3D<T>, the point to measure the squared distance with this
                          * @return NREfloat, the computed squared distance
                          */
-                        NREfloat distanceSquared(Point3D<T> const& p = {DEFAULT_X, DEFAULT_Y, DEFAULT_Z}) const;
+                        NREfloat distanceSquared(Point3D<T> const& p = {Point2D<T>::DEFAULT_X, Point2D<T>::DEFAULT_Y, DEFAULT_Z}) const;
 
                     //## Access Operator ##//
 
@@ -266,3 +266,5 @@
 
         };
     };
+
+    #include "NRE_Point3D.tpp"

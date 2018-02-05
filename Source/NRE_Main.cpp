@@ -2,20 +2,18 @@
     #include <iostream>
 
     #include "Generic/NRE_Type.hpp"
-    #include "Maths/Point/NRE_Point2D.hpp"
-    #include "Maths/Point/NRE_Point3D.hpp"
     #include "Maths/Vector/NRE_Vector2D.hpp"
+    #include "Maths/Point/NRE_Point2D.hpp"
     #include "Maths/Vector/NRE_Vector3D.hpp"
-    #include "Maths/Matrix/NRE_Matrix2x2.hpp"
+    #include "Maths/Point/NRE_Point3D.hpp"
+
+    using namespace NRE::Maths;
 
     int main(int argc, char **argv) {
-        NRE::Maths::Point2D<int> p1, p2;
-        NRE::Maths::Matrix2x2<double> tmp(p1, p2);
-        NRE::Maths::Vector2D<double> c1(2, 1);
-        tmp.setIdentity();
-        int i = 10;
-        tmp.translate(i);
+        Vector2D<int> mother;
+        Vector3D<int> daughter(mother, 0);
+        Point3D<int> tmp(daughter);
+        std::cout << mother << std::endl;
+        std::cout << daughter << std::endl;
         std::cout << tmp << std::endl;
-        c1 = tmp * c1;
-        std::cout << c1 << std::endl;
     }

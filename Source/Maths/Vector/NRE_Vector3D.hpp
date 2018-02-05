@@ -102,7 +102,7 @@
                          * Return the z attribute
                          * @return T, the z value
                          */
-                        const& T getZ() const;
+                        T const& getZ() const;
 
                     //## Setter ##//
                         /**
@@ -333,3 +333,5 @@
 
         };
     };
+
+    #include "NRE_Vector3D.tpp"
