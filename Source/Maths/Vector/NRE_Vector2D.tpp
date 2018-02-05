@@ -7,8 +7,7 @@
             }
 
             template <class T>
-            template <class K, class L>
-            Vector2D<T>::Vector2D(K const& x, L const& y) : x(x), y(y) {
+            Vector2D<T>::Vector2D(T const& x, T const& y) : x(x), y(y) {
             }
 
             template <class T>

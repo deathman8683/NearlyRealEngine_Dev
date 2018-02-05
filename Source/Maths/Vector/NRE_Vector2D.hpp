@@ -43,11 +43,10 @@
                         /**
                          * @brief Constructor
                          * Initialize a 2D vector with x and y
-                         * @param x : K, the x translation
-                         * @param y : L, the y translation
+                         * @param x : T, the x translation
+                         * @param y : T, the y translation
                          */
-                        template <class K, class L>
-                        Vector2D(K const& x, L const& y);
+                        Vector2D(T const& x, T const& y);
                         /**
                          * @brief Constructor
                          * Convert two 2D generic-type point into a 2D T vector

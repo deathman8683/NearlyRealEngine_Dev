@@ -30,7 +30,7 @@
             template <class T>
             class Point4D : public Point3D<T> {
                 private:
-                    T w;
+                    T w;    /**< The homogeneous coordinate of this */
 
                 public:
                     //## Constructor ##//

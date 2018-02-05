@@ -47,7 +47,7 @@
             template <class T>
             template <class K>
             void Vector3D<T>::setZ(K const& z) {
-                this.z = z;
+                this->z = z;
             }
 
             template <class T>

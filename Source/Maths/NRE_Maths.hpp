@@ -6,5 +6,5 @@
     #include "Vector/NRE_Vector3D.hpp"
     #include "Matrix/NRE_Matrix3x3.hpp"
     #include "Point/NRE_Point4D.hpp"
-    //#include "Vector/NRE_Vector4D.hpp"
+    #include "Vector/NRE_Vector4D.hpp"
     //#include "Matrix/NRE_Matrix4x4.hpp"
