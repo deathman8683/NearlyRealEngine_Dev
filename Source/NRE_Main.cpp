@@ -2,10 +2,7 @@
     #include <iostream>
 
     #include "Generic/NRE_Type.hpp"
-    #include "Maths/Vector/NRE_Vector2D.hpp"
-    #include "Maths/Point/NRE_Point2D.hpp"
-    #include "Maths/Vector/NRE_Vector3D.hpp"
-    #include "Maths/Point/NRE_Point3D.hpp"
+    #include "Maths/NRE_Maths.hpp"
 
     using namespace NRE::Maths;
 

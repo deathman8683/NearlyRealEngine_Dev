@@ -1,0 +1,7 @@
+
+    namespace NRE {
+        namespace Maths {
+
+
+        };
+    };
