@@ -7,7 +7,8 @@
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(T const& x, T const& y) : x(x), y(y) {
+            template <class K, class L>
+            Vector2D<T>::Vector2D(K const& x, L const& y) : x(x), y(y) {
             }
 
             template <class T>
@@ -44,17 +45,20 @@
             }
 
             template <class T>
-            void Vector2D<T>::setX(T const& x) {
+            template <class K>
+            void Vector2D<T>::setX(K const& x) {
                 this->x = x;
             }
 
             template <class T>
-            void Vector2D<T>::setY(T const& y) {
+            template <class K>
+            void Vector2D<T>::setY(K const& y) {
                 this->y = x;
             }
 
             template <class T>
-            void Vector2D<T>::setCoord(T const& x, T const& y) {
+            template <class K, class L>
+            void Vector2D<T>::setCoord(K const& x, L const& y) {
                 setX(x); setY(y);
             }
 

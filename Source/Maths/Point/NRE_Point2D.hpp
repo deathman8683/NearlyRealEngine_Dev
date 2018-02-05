@@ -43,10 +43,11 @@
                         /**
                          * @brief Constructor
                          * Initialize a 2D point with x and y
-                         * @param x : T, the x coordinate
-                         * @param y : T, the y coordinate
+                         * @param x : K, the x coordinate
+                         * @param y : L, the y coordinate
                          */
-                        Point2D(T const& x, T const& y);
+                        template <class K, class L>
+                        Point2D(K const& x, L const& y);
                         /**
                          * @brief Constructor
                          * Convert a 2D generic-type point and a translation 2D generic-type vector into a 2D T point
@@ -105,18 +106,22 @@
                         /**
                          * @brief X setter
                          * Change the x value
+                         * @param x : K, the new x value
                          */
                         template <class K>
                         void setX(K const& x);
                         /**
                          * @brief Y setter
                          * Change the y value
+                         * @param y : K, the new y value
                          */
                         template <class K>
                         void setY(K const& y);
                         /**
                          * @brief X and Y setter
                          * Change both x and y values
+                         * @param x : K, the new x value
+                         * @param y : L, the new y value
                          */
                         template <class K, class L>
                         void setCoord(K const& x, L const& y);

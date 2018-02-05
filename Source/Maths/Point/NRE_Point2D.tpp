@@ -7,7 +7,8 @@
             }
 
             template <class T>
-            Point2D<T>::Point2D(T const& x, T const& y) : x(x), y(y) {
+            template <class K, class L>
+            Point2D<T>::Point2D(K const& x, L const& y) : x(x), y(y) {
             }
 
             template <class T>

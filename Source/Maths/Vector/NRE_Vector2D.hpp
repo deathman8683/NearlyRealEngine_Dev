@@ -46,6 +46,7 @@
                          * @param x : T, the x translation
                          * @param y : T, the y translation
                          */
+                        template <class K, class L>
                         Vector2D(T const& x, T const& y);
                         /**
                          * @brief Constructor
@@ -105,18 +106,25 @@
                         /**
                          * @brief X setter
                          * Change the x value
+                         * @param x : K, the new x value
                          */
-                        void setX(T const& x);
+                        template <class K>
+                        void setX(K const& x);
                         /**
                          * @brief Y setter
                          * Change the y value
+                         * @param y : K, the new y value
                          */
+                        template <class K>
                         void setY(T const& y);
                         /**
                          * @brief X and Y setter
                          * Change both x and y values
+                         * @param x : K, the new x value
+                         * @param y : L, the new y value
                          */
-                        void setCoord(T const& x, T const& y);
+                        template <class K, class L>
+                        void setCoord(K const& x, L const& y);
 
                     //## Methods ##//
                         /**

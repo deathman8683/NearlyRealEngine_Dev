@@ -113,87 +113,98 @@
     template <class T>
     template <class K>
     Vector3D<T>& Vector3D<T>::operator^=(Vector3D<K> const& u) {
-
+        Vector3D<T> tmp(this->get_Y() * static_cast <T> (v.get_Z()) - this->get_Z() * static_cast <T> (v.get_Y()),
+                        this->get_Z() * static_cast <T> (v.get_X()) - this->get_X() * static_cast <T> (v.get_Z()),
+                        this->get_X() * static_cast <T> (v.get_Y()) - this->get_Y() * static_cast <T> (v.get_X()));
+        *this = tmp;
+        return *this;
     }
 
     template <class T>
     template <class K>
     Vector3D<T> Vector3D<T>::operator+(Vector3D<K> const& u) {
-
+        Vector3D<T> tmp(*this);
+        return tmp += u;
     }
 
     template <class T>
     template <class K>
     Vector3D<T> Vector3D<T>::operator-(Vector3D<K> const& u) {
-
+        Vector3D<T> tmp(*this);
+        return tmp -= u;
     }
 
     template <class T>
     Vector3D<T> Vector3D<T>::operator-() {
-
+        Vector3D<T> tmp(-getX(), -getY(), -getZ());
+        return tmp;
     }
 
     template <class T>
     template <class K>
     Vector3D<T> Vector3D<T>::operator*(K const& k) {
-
+        Vector3D<T> tmp(*this);
+        return tmp *= k;
     }
 
     template <class T>
     template <class K>
     Vector3D<T> Vector3D<T>::operator/(K const& k) {
-
+        Vector3D<T> tmp(*this);
+        return tmp /= k;
     }
 
     template <class T>
     template <class K>
     bool Vector3D<T>::operator==(Vector3D<K> const& u) {
-
+        return getX() == u.getX() && getY() == u.getY() && getZ() == u.getZ();
     }
 
     template <class T>
     template <class K>
     bool Vector3D<T>::operator!=(Vector3D<K> const& u) {
-
+        return !(this == u);
     }
 
     template <class T>
     template <class K>
     bool Vector3D<T>::operator<(Vector3D<K> const& u) {
-
+        return normSquared() < u.normSquared();
     }
 
     template <class T>
     template <class K>
     bool Vector3D<T>::operator>(Vector3D<K> const& u) {
-
+        return normSquared() > u.normSquared();
     }
 
     template <class T>
     template <class K>
     bool Vector3D<T>::operator<=(Vector3D<K> const& u) {
-
+        return normSquared() <= u.normSquared();
     }
 
     template <class T>
     template <class K>
     bool Vector3D<T>::operator>=(Vector3D<K> const& u) {
-
+        return normSquared() >= u.normSquared();
     }
 
     template <class T>
     template <class K>
     NREfloat Vector3D<T>::operator|(Vector3D<K> const& u) const {
-
+        return *this |= u;
     }
 
     template <class T>
     template <class K>
     Vector3D<T> Vector3D<T>::operator^(Vector3D<K> const& u) {
-
+        Vector3D<T> tmp(*this);
+        return tmp ^= u;
     }
 
     template <class T>
     std::ostream& operator<<(std::ostream &stream, Vector3D<T> const& u) {
-
+        stream << "(" << u.getX() << "," << u.getY() << "," << u.getZ() << ")";
+        return stream;
     }

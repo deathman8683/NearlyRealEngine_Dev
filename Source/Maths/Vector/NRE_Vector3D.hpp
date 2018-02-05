@@ -30,44 +30,123 @@
             template <class T>
             class Vector3D : public Vector2D<T> {
                 private:
-                    T z;
+                    T z;     /**< The z axis translation */
 
                 public:
                     //## Constructor ##//
+                        /**
+                         * @brief Constructor
+                         * Default constructor, iniatlize a 3D vector with default translation
+                         */
                         Vector3D();
+                        /**
+                         * @brief Constructor
+                         * Initialize a 3D vector with x, y and z
+                         * @param x : K, the x translation
+                         * @param y : L, the y translation
+                         * @param z : M, the z translation
+                         */
                         template <class K, class L, class M>
                         Vector3D(K const& x, L const& y, M const& z);
+                        /**
+                         * @brief Constructor
+                         * Initialize a 3D vector with 2D generic-type vector and z
+                         * @param u : Vector2D<K>, the base vector
+                         * @param y : L, the z translation
+                         */
                         template <class K, class L>
                         Vector3D(Vector2D<K> const& u, L const& z);
+                        /**
+                         * @brief Constructor
+                         * Convert two 3D generic-type point into a 3D T vector
+                         * @param a : Point3D<K>, the vector's start point
+                         * @param b : Point3D<L>, the vector's end point
+                         */
                         template <class K, class L>
                         Vector3D(Point3D<K> const& a, Point3D<L> const& b);
 
                     //## Copy-Constructor ##//
+                        /**
+                         * @brief Copy-Constructor
+                         * Construct a copy of u
+                         * @param u : Vector3D<T>, the vector to copy
+                         */
                         Vector3D(Vector3D const& u);
 
                     //## Convertor ##//
+                        /**
+                         * @brief Convertor
+                         * Convert a 3D generic-type vector into a 3D T vector
+                         * @param u : Vector3D<K>, the vector to convert
+                         */
                         template <class K>
                         Vector3D(Vector3D<K> const& u);
+                        /**
+                         * @brief Convertor
+                         * Convert a 3D generic-type point into a 3D T vector
+                         * @param p : Point3D<K>, the point to convert
+                         */
                         template <class K>
                         Vector3D(Point3D<K> const& p);
 
                     //## Deconstructor ##//
+                        /**
+                         * @brief Deconstructor
+                         * Deconstruct a 3D vector
+                         */
                         ~Vector3D();
 
                     //## Getter ##//
+                        /**
+                         * @brief Z getter
+                         * Return the z attribute
+                         * @return T, the z value
+                         */
                         const& T getZ() const;
 
                     //## Setter ##//
+                        /**
+                         * @brief Z setter
+                         * Change the z value
+                         * @param z : K, the new z value
+                         */
                         template <class K>
                         void setZ(K const& z);
+                        /**
+                         * @brief X, y and z setter
+                         * Change x, y and z values
+                         * @param x : K, the new x value
+                         * @param y : L, the new y value
+                         * @param z : M, the new z value
+                         */
                         template <class K, class L, class M>
                         void setCoord(K const& x, L const& y, M const& z);
+                        /**
+                         * @brief X, y and z setter
+                         * Change x, y values from a base vector and z values
+                         * @param u : Vector2D<K>, the base vector for x and y values
+                         * @param z : L, the new z value
+                         */
                         template <class K, class L>
                         void setCoord(Vector2D<K> const& u, L const& z);
 
                     //## Methods ##//
+                        /**
+                         * @brief Norm getter
+                         * Compute the vector's norm
+                         * @return NREfloat, the computed norm
+                         */
                         NREfloat norm() const;
+                        /**
+                         * @brief NormSquared getter
+                         * Compute the vector's squared norm
+                         * @return NREfloat, the computed squared norm
+                         */
                         NREfloat normSquared() const;
+                        /**
+                         * @brief Normlization
+                         * Normalize the vector, doesn't check if the vector's norm is null
+                         */
                         void normalize();
 
                     //## Access Operator ##//
@@ -115,6 +194,12 @@
                         */
                         template <class K>
                         NREfloat operator|=(Vector3D<K> const& u) const;
+                        /**
+                         * @brief Shortcut Operator ^=
+                         * Compute the vectorial product between this and a 3D generic-type vector
+                         * @param u : Vector3D<K>, the second vector for the vectorial product
+                         * @return Vector3D<T>, the computed vector via vectorial product
+                         */
                         template <class K>
                         Vector3D<T>& operator^=(Vector3D<K> const& u);
 
