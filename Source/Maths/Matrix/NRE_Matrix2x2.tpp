@@ -25,8 +25,8 @@
             template <class T>
             template <class K, class L>
             Matrix2x2<T>::Matrix2x2(Point2D<K> const& l1, Point2D<L> const& l2) {
-                setL1(l1);
-                setL2(l2);
+                setL1(Vector2D<K>(l1));
+                setL2(Vector2D<L>(l2));
             }
 
             template <class T>

@@ -11,16 +11,16 @@
             template <class K, class L, class M,
                       class N, class O, class P,
                       class Q, class R, class S>
-            Matrix3x3(K const& a, L const& b, M const& c,
-                      N const& d, O const& e, P const& f,
-                      Q const& g, R const& f, S const& i) {
+            Matrix3x3<T>::Matrix3x3(K const& a, L const& b, M const& c,
+                                    N const& d, O const& e, P const& f,
+                                    Q const& g, R const& h, S const& i) {
                 data[0] = {a, b, c};
                 data[1] = {d, e, f};
                 data[2] = {g, h, i};
             }
 
             template <class T>
-            template <class K, class L>
+            template <class K, class L, class M>
             Matrix3x3<T>::Matrix3x3(Vector3D<K> const& l1, Vector3D<L> const& l2, Vector3D<M> const& l3) {
                 setL1(l1);
                 setL2(l2);
@@ -28,11 +28,11 @@
             }
 
             template <class T>
-            template <class K, class L>
+            template <class K, class L, class M>
             Matrix3x3<T>::Matrix3x3(Point3D<K> const& l1, Point3D<L> const& l2, Point3D<M> const& l3) {
-                setL1(l1);
-                setL2(l2);
-                setL3(l3);
+                setL1(Vector3D<K>(l1));
+                setL2(Vector3D<L>(l2));
+                setL3(Vector3D<M>(l3));
             }
 
             template <class T>
@@ -178,8 +178,8 @@
             template <class T>
             template <class K>
             void Matrix3x3<T>::translate(Vector2D<K> const& u) {
-                tmp[0][2] = tmp[0][2] + u.getX();
-                tmp[1][2] = tmp[1][2] + u.getY();
+                data[0][2] = data[0][2] + u.getX();
+                data[1][2] = data[1][2] + u.getY();
             }
 
             template <class T>
@@ -221,6 +221,7 @@
                         data[i][j] = data[i][j] + m[i][j];
                     }
                 }
+                return *this;
             }
 
             template <class T>

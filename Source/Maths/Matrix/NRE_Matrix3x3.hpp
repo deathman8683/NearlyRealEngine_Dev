@@ -28,7 +28,8 @@
              * @class Matrix3x3
              * @brief Maths's Object : 3x3 Generic Matrix
              */
-            class Matrix3x3{
+            template <class T>
+            class Matrix3x3 {
                 private:
                     T data[3][3];   /**< Matrix's data */
 
@@ -57,7 +58,7 @@
                                   class Q, class R, class S>
                         Matrix3x3(K const& a, L const& b, M const& c,
                                   N const& d, O const& e, P const& f,
-                                  Q const& g, R const& f, S const& i);
+                                  Q const& g, R const& h, S const& i);
                         /**
                          * @brief Constructor
                          * Initialize the matrix's value with three 3D generic-type vector as line
@@ -74,7 +75,7 @@
                          * @param l2 : Point3D<L>, the matrix's second line
                          * @param l3 : Point3D<M>, the matrix's third line
                          */
-                        template <class K, class L>
+                        template <class K, class L, class M>
                         Matrix3x3(Point3D<K> const& l1, Point3D<L> const& l2, Point3D<M> const& l3);
 
                     //## Copy-Constructor ##//
@@ -387,5 +388,8 @@
              */
             template <class T>
             std::ostream& operator<<(std::ostream &stream, Matrix3x3<T> const& m);
+
         };
     };
+
+    #include "NRE_Matrix3x3.tpp"
