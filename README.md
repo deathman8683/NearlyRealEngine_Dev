@@ -8,3 +8,4 @@
 * Class Tested :
     * Maths
         * Point2D
+        * Point3D
