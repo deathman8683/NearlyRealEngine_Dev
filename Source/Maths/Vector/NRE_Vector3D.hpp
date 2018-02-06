@@ -52,10 +52,10 @@
                          * @brief Constructor
                          * Initialize a 3D vector with 2D generic-type vector and z
                          * @param u : Vector2D<K>, the base vector
-                         * @param z : L, the z translation
+                         * @param z : T, the z translation
                          */
-                        template <class K, class L>
-                        Vector3D(Vector2D<K> const& u, L const& z);
+                        template <class K>
+                        Vector3D(Vector2D<K> const& u, T const& z);
                         /**
                          * @brief Constructor
                          * Convert two 3D generic-type point into a 3D T vector

@@ -12,8 +12,8 @@
             }
 
             template <class T>
-            template <class K, class L>
-            Vector4D<T>::Vector4D(Vector3D<K> const& u, L const& w) : Vector3D<T>::Vector3D(u), w(w) {
+            template <class K>
+            Vector4D<T>::Vector4D(Vector3D<K> const& u, T const& w) : Vector3D<T>::Vector3D(u), w(w) {
             }
 
             template <class T>

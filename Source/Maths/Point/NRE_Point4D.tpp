@@ -12,8 +12,8 @@
             }
 
             template <class T>
-            template <class K, class L>
-            Point4D<T>::Point4D(Point3D<K> const& p, L const& w) : Point3D<T>::Point3D(p), w(w) {
+            template <class K>
+            Point4D<T>::Point4D(Point3D<K> const& p, T const& w) : Point3D<T>::Point3D(p), w(w) {
             }
 
             template <class T>

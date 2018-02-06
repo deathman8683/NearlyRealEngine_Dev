@@ -12,8 +12,8 @@
             }
 
             template <class T>
-            template <class K, class L>
-            Vector3D<T>::Vector3D(Vector2D<K> const& u, L const& z) : Vector2D<T>::Vector2D(u), z(z) {
+            template <class K>
+            Vector3D<T>::Vector3D(Vector2D<K> const& u, T const& z) : Vector2D<T>::Vector2D(u), z(z) {
             }
 
             template <class T>

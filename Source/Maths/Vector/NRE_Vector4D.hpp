@@ -53,10 +53,10 @@
                          * @brief Constructor
                          * Initialize a 4D vector with 3D generic-type vector and w
                          * @param u : Vector3D<K>, the base vector
-                         * @param w : L, the w translation
+                         * @param w : T, the w translation
                          */
-                        template <class K, class L>
-                        Vector4D(Vector3D<K> const& u, L const& w);
+                        template <class K>
+                        Vector4D(Vector3D<K> const& u, T const& w);
                         /**
                          * @brief Constructor
                          * Convert two 4D generic-type point into a 4D T vector

@@ -53,10 +53,10 @@
                          * @brief Constructor
                          * Initialize a 3D point with a base 2D point and z
                          * @param p : Point2D<K>, the base point
-                         * @param z : L, the z coordinate
+                         * @param z : T, the z coordinate
                          */
-                        template <class K, class L>
-                        Point3D(Point2D<K> const& p, L const& z);
+                        template <class K>
+                        Point3D(Point2D<K> const& p, T const& z);
                         /**
                          * @brief Constructor
                          * Convert a 3D generic-type point and a translation 3D generic-type vector into a 3D T point

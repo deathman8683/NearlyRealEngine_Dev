@@ -53,10 +53,10 @@
                          * @brief Constructor
                          * Initialize a 4D point with a base 3D point and w
                          * @param p : Point3D<K>, the base point
-                         * @param w : L, the w coordinate
+                         * @param w : T, the w coordinate
                          */
-                        template <class K, class L>
-                        Point4D(Point3D<K> const& p, L const& w);
+                        template <class K>
+                        Point4D(Point3D<K> const& p, T const& w);
                         /**
                          * @brief Constructor
                          * Convert a 4D generic-type point and a translation 4D generic-type vector into a 4D T point
