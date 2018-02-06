@@ -211,7 +211,7 @@
                         * @return Vector3D<T>, a new vector result of the addition of this and u
                         */
                         template <class K>
-                        Vector3D<T> operator+(Vector3D<K> const& u);
+                        Vector3D<T> operator+(Vector3D<K> const& u) const;
                         /**
                         * @brief Arithmetic Operator -
                         * Compute the substraction between this and a 3D generic-type vector
@@ -219,13 +219,13 @@
                         * @return Vector3D<T>, a new vector result of the substraction of this and u
                         */
                         template <class K>
-                        Vector3D<T> operator-(Vector3D<K> const& u);
+                        Vector3D<T> operator-(Vector3D<K> const& u) const;
                         /**
                         * @brief Negate Operator -
                         * Compute the negate of this
                         * @return Vector3D<T>, a new vector, the negate vector of this
                         */
-                        Vector3D<T> operator-();
+                        Vector3D<T> operator-() const;
                         /**
                         * @brief Arithmetic Operator *
                         * Compute the multiplication between this and a generic-type factor k
@@ -233,7 +233,7 @@
                         * @return Vector3D<T>, a new vector result of the multiplication of this with k
                         */
                         template <class K>
-                        Vector3D<T> operator*(K const& k);
+                        Vector3D<T> operator*(K const& k) const;
                         /**
                         * @brief Arithmetic Operator /
                         * Compute the division between this and a generic-type factor k
@@ -241,7 +241,7 @@
                         * @return Vector3D<T>, a new vector result of the divison of this with k
                         */
                         template <class K>
-                        Vector3D<T> operator/(K const& k);
+                        Vector3D<T> operator/(K const& k) const;
 
                     //## Comparison Operator ##//
                         /**
@@ -251,7 +251,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator==(Vector3D<K> const& u);
+                        bool operator==(Vector3D<K> const& u) const;
                         /**
                          * @brief Comparison Operator !=
                          * Compare if this and a 3D generic-type vector aren't equal, based of the negation of the == test
@@ -259,7 +259,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator!=(Vector3D<K> const& u);
+                        bool operator!=(Vector3D<K> const& u) const;
                         /**
                          * @brief Comparison Operator <
                          * Compare if this is inferior than a 3D generic-type vector, based on norm comparison
@@ -267,7 +267,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator<(Vector3D<K> const& u);
+                        bool operator<(Vector3D<K> const& u) const;
                         /**
                          * @brief Comparison Operator >
                          * Compare if this is superior than a 3D generic-type vector, based on norm comparison
@@ -275,7 +275,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator>(Vector3D<K> const& u);
+                        bool operator>(Vector3D<K> const& u) const;
                         /**
                          * @brief Comparison Operator <=
                          * Compare if this is inferior or equal than a 3D generic-type vector, based on norm comparison
@@ -283,7 +283,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator<=(Vector3D<K> const& u);
+                        bool operator<=(Vector3D<K> const& u) const;
                         /**
                          * @brief Comparison Operator >=
                          * Compare if this is superior or equal than a 3D generic-type vector, based on norm comparison
@@ -291,7 +291,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator>=(Vector3D<K> const& u);
+                        bool operator>=(Vector3D<K> const& u) const;
 
                     //## BitWise Operator ##//
                         /**
@@ -309,7 +309,7 @@
                          * @return Vector3D<T>, the computed vector via vectorial product
                          */
                         template <class K>
-                        Vector3D<T> operator^(Vector3D<K> const& u);
+                        Vector3D<T> operator^(Vector3D<K> const& u) const;
 
 
                     //## Shift Operator ##//

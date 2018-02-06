@@ -115,71 +115,71 @@
 
             template <class T>
             template <class K>
-            Vector4D<T> Vector4D<T>::operator+(Vector4D<K> const& u) {
+            Vector4D<T> Vector4D<T>::operator+(Vector4D<K> const& u) const {
                 Vector4D<T> tmp(*this);
                 return tmp += u;
             }
 
             template <class T>
             template <class K>
-            Vector4D<T> Vector4D<T>::operator-(Vector4D<K> const& u) {
+            Vector4D<T> Vector4D<T>::operator-(Vector4D<K> const& u) const {
                 Vector4D<T> tmp(*this);
                 return tmp -= u;
             }
 
             template <class T>
-            Vector4D<T> Vector4D<T>::operator-() {
+            Vector4D<T> Vector4D<T>::operator-() const {
                 Vector4D<T> tmp(-this->getX(), -this->getY(), -this->getZ(), -getW());
                 return tmp;
             }
 
             template <class T>
             template <class K>
-            Vector4D<T> Vector4D<T>::operator*(K const& k) {
+            Vector4D<T> Vector4D<T>::operator*(K const& k) const {
                 Vector4D<T> tmp(*this);
                 return tmp *= k;
             }
 
             template <class T>
             template <class K>
-            Vector4D<T> Vector4D<T>::operator/(K const& k) {
+            Vector4D<T> Vector4D<T>::operator/(K const& k) const {
                 Vector4D<T> tmp(*this);
                 return tmp /= k;
             }
 
             template <class T>
             template <class K>
-            bool Vector4D<T>::operator==(Vector4D<K> const& u) {
+            bool Vector4D<T>::operator==(Vector4D<K> const& u) const {
                 return this->getX() == u.getX() && this->getY() == u.getY() && this->getZ() == u.getZ() && this->getW() == u.getW();
             }
 
             template <class T>
             template <class K>
-            bool Vector4D<T>::operator!=(Vector4D<K> const& u) {
+            bool Vector4D<T>::operator!=(Vector4D<K> const& u) const {
                 return !(this == u);
             }
 
             template <class T>
             template <class K>
-            bool Vector4D<T>::operator<(Vector4D<K> const& u) {
+            bool Vector4D<T>::operator<(Vector4D<K> const& u) const {
                 return normSquared() < u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector4D<T>::operator>(Vector4D<K> const& u) {
+            bool Vector4D<T>::operator>(Vector4D<K> const& u) const {
                 return normSquared() > u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector4D<T>::operator<=(Vector4D<K> const& u) {
+            bool Vector4D<T>::operator<=(Vector4D<K> const& u) const {
                 return normSquared() <= u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector4D<T>::operator>=(Vector4D<K> const& u) {
+            bool Vector4D<T>::operator>=(Vector4D<K> const& u) const {
                 return normSquared() >= u.normSquared();
             }
 

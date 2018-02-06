@@ -205,7 +205,7 @@
                          * @return Vector2D<T>, a new vector result of the addition of this and u
                          */
                         template <class K>
-                        Vector2D<T> operator+(Vector2D<K> const& u);
+                        Vector2D<T> operator+(Vector2D<K> const& u) const;
                         /**
                          * @brief Arithmetic Operator -
                          * Compute the substraction between this and a 2D generic-type vector
@@ -213,13 +213,13 @@
                          * @return Vector2D<T>, a new vector result of the substraction of this and u
                          */
                         template <class K>
-                        Vector2D<T> operator-(Vector2D<K> const& u);
+                        Vector2D<T> operator-(Vector2D<K> const& u) const;
                         /**
                          * @brief Negate Operator -
                          * Compute the negate of this
                          * @return Vector2D<T>, a new vector, the negate vector of this
                          */
-                        Vector2D<T> operator-();
+                        Vector2D<T> operator-() const;
                         /**
                          * @brief Arithmetic Operator *
                          * Compute the multiplication between this and a generic-type factor k
@@ -227,7 +227,7 @@
                          * @return Vector2D<T>, a new vector result of the multiplication of this with k
                          */
                         template <class K>
-                        Vector2D<T> operator*(K const& k);
+                        Vector2D<T> operator*(K const& k) const;
                         /**
                          * @brief Arithmetic Operator /
                          * Compute the division between this and a generic-type factor k
@@ -235,7 +235,7 @@
                          * @return Vector2D<T>, a new vector result of the divison of this with k
                          */
                         template <class K>
-                        Vector2D<T> operator/(K const& k);
+                        Vector2D<T> operator/(K const& k) const;
 
                     //## Comparison Operator ##//
                         /**
@@ -245,7 +245,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator==(Vector2D<K> const& u);
+                        bool operator==(Vector2D<K> const& u) const;
                         /**
                          * @brief Comparison Operator !=
                          * Compare if this and a 2D generic-type vector aren't equal, based of the negation of the == test
@@ -253,7 +253,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator!=(Vector2D<K> const& u);
+                        bool operator!=(Vector2D<K> const& u) const;
                         /**
                          * @brief Comparison Operator <
                          * Compare if this is inferior than a 2D generic-type vector, based on norm comparison
@@ -261,7 +261,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator<(Vector2D<K> const& u);
+                        bool operator<(Vector2D<K> const& u) const;
                         /**
                          * @brief Comparison Operator >
                          * Compare if this is superior than a 2D generic-type vector, based on norm comparison
@@ -269,7 +269,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator>(Vector2D<K> const& u);
+                        bool operator>(Vector2D<K> const& u) const;
                         /**
                          * @brief Comparison Operator <=
                          * Compare if this is inferior or equal than a 2D generic-type vector, based on norm comparison
@@ -277,7 +277,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator<=(Vector2D<K> const& u);
+                        bool operator<=(Vector2D<K> const& u) const;
                         /**
                          * @brief Comparison Operator >=
                          * Compare if this is superior or equal than a 2D generic-type vector, based on norm comparison
@@ -285,7 +285,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator>=(Vector2D<K> const& u);
+                        bool operator>=(Vector2D<K> const& u) const;
 
                     //## BitWise Operator ##//
                         /**

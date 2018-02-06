@@ -275,61 +275,61 @@
 
             template <class T>
             template <class K>
-            Matrix3x3<T> Matrix3x3<T>::operator+(Matrix3x3<K> const& m) {
+            Matrix3x3<T> Matrix3x3<T>::operator+(Matrix3x3<K> const& m) const {
                 Matrix3x3<T> tmp(*this);
                 return tmp += m;
             }
 
             template <class T>
             template <class K>
-            Matrix3x3<T> Matrix3x3<T>::operator-(Matrix3x3<K> const& m) {
+            Matrix3x3<T> Matrix3x3<T>::operator-(Matrix3x3<K> const& m) const {
                 Matrix3x3<T> tmp(*this);
                 return tmp -= m;
             }
 
             template <class T>
             template <class K>
-            Matrix3x3<T> Matrix3x3<T>::operator*(K const& k)  {
+            Matrix3x3<T> Matrix3x3<T>::operator*(K const& k)  const {
                 Matrix3x3<T> tmp(*this);
                 return tmp *= k;
             }
 
             template <class T>
             template <class K>
-            Matrix3x3<T> Matrix3x3<T>::operator*(Matrix3x3<K> const& m) {
+            Matrix3x3<T> Matrix3x3<T>::operator*(Matrix3x3<K> const& m) const {
                 Matrix3x3<T> tmp(*this);
                 return tmp *= m;
             }
 
             template <class T>
             template <class K>
-            Vector3D<K> Matrix3x3<T>::operator*(Vector3D<K> const& u) {
+            Vector3D<K> Matrix3x3<T>::operator*(Vector3D<K> const& u) const {
                 return Vector3D<K>(u | getL1(), u | getL2(), u | getL3());
             }
 
             template <class T>
             template <class K>
-            Matrix3x3<T> Matrix3x3<T>::operator/(K const& k) {
+            Matrix3x3<T> Matrix3x3<T>::operator/(K const& k) const {
                 Matrix3x3<T> tmp(*this);
                 return tmp /= k;
             }
 
             template <class T>
             template <class K>
-            Matrix3x3<T> Matrix3x3<T>::operator/(Matrix3x3<K> const& m) {
+            Matrix3x3<T> Matrix3x3<T>::operator/(Matrix3x3<K> const& m) const {
                 Matrix3x3<T> tmp(*this);
                 return tmp /= m;
             }
 
             template <class T>
             template <class K>
-            bool Matrix3x3<T>::operator==(Matrix3x3<K> const& m) {
+            bool Matrix3x3<T>::operator==(Matrix3x3<K> const& m) const {
                 return getL1() == m.getL1() && getL2() == m.getL2() && getL3() == m.getL3();
             }
 
             template <class T>
             template <class K>
-            bool Matrix3x3<T>::operator!=(Matrix3x3<K> const& m) {
+            bool Matrix3x3<T>::operator!=(Matrix3x3<K> const& m) const {
                 return !(*this == m);
             }
 

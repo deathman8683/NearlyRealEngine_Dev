@@ -171,7 +171,7 @@
                          * @return Point2D<T>, a new point with the translation applied
                          */
                         template <class K>
-                        Point2D<T> operator+(Vector2D<K> const& u);
+                        Point2D<T> operator+(Vector2D<K> const& u) const;
                         /**
                          * @brief Arithmetic Operator -
                          * Compute the inverse translation of this with a translation 2D generic-type vector
@@ -179,13 +179,15 @@
                          * @return Point2D<T>, a new point with the inverse translation applied
                          */
                         template <class K>
-                        Point2D<T> operator-(Vector2D<K> const& u);
+                        Point2D<T> operator-(Vector2D<K> const& u) const;
+                        template <class K>
+                        Vector2D<T> operator-(Point2D<K> const& p) const;
                         /**
                          * @brief Negate Operator -
                          * Compute the negate of this
                          * @return Point2D<T>, a new point, the negate point of this
                          */
-                        Point2D<T> operator-();
+                        Point2D<T> operator-() const;
 
                     //## Comparison Operator ##//
                         /**
@@ -195,7 +197,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator==(Point2D<K> const& p);
+                        bool operator==(Point2D<K> const& p) const;
                         /**
                          * @brief Comparison Operator !=
                          * Compare if this and a 2D generic-type point aren't equal, based on the negation of the == test
@@ -203,7 +205,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator!=(Point2D<K> const& p);
+                        bool operator!=(Point2D<K> const& p) const;
                         /**
                          * @brief Comparison Operator <
                          * Compare if this is inferior than a 2D generic-type point , based on squared distance comparison
@@ -211,7 +213,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator<(Point2D<K> const& p);
+                        bool operator<(Point2D<K> const& p) const;
                         /**
                          * @brief Comparison Operator >
                          * Compare if this is superior than a 2D generic-type point , based on squared distance comparison
@@ -219,7 +221,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator>(Point2D<K> const& p);
+                        bool operator>(Point2D<K> const& p) const;
                         /**
                          * @brief Comparison Operator >
                          * Compare if this is inferior or equal than a 2D generic-type point , based on squared distance comparison
@@ -227,7 +229,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator<=(Point2D<K> const& p);
+                        bool operator<=(Point2D<K> const& p) const;
                         /**
                          * @brief Comparison Operator >
                          * Compare if this is superior or equal than a 2D generic-type point , based on squared distance comparison
@@ -235,7 +237,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator>=(Point2D<K> const& p);
+                        bool operator>=(Point2D<K> const& p) const;
 
                     //## BitWise Operator ##//
 

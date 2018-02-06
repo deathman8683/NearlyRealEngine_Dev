@@ -348,7 +348,7 @@
                          * @return Matrix4x4<T>, a new matrix with this added to m
                          */
                         template <class K>
-                        Matrix4x4<T> operator+(Matrix4x4<K> const& m);
+                        Matrix4x4<T> operator+(Matrix4x4<K> const& m) const;
                         /**
                          * @brief Arithmetic Operator -
                          * Compute the substract between this and a 4x4 generic-type matrix
@@ -356,7 +356,7 @@
                          * @return Matrix4x4<T>, a new matrix with this substracted to m
                          */
                         template <class K>
-                        Matrix4x4<T> operator-(Matrix4x4<K> const& m);
+                        Matrix4x4<T> operator-(Matrix4x4<K> const& m) const;
                         /**
                          * @brief Arithmetic Operator *
                          * Compute the multiplication between this and a generic-type factor
@@ -364,7 +364,7 @@
                          * @return Matrix4x4<T>, a new matrix result of the multiplication of this and k
                          */
                         template <class K>
-                        Matrix4x4<T> operator*(K const& k);
+                        Matrix4x4<T> operator*(K const& k) const;
                         /**
                          * @brief Arithmetic Operator *
                          * Compute the multiplication between this and a 4x4 generic-type matrix
@@ -372,7 +372,7 @@
                          * @return Matrix4x4<T>, a new matrix with this multiplied to m
                          */
                         template <class K>
-                        Matrix4x4<T> operator*(Matrix4x4<K> const& m);
+                        Matrix4x4<T> operator*(Matrix4x4<K> const& m) const;
                         /**
                          * @brief Arithmetic Operator *
                          * Compute the transformation of a 4D generic-type vector by this
@@ -380,7 +380,7 @@
                          * @return Vector4D<K>, the transformed vector
                          */
                         template <class K>
-                        Vector4D<K> operator*(Vector4D<K> const& u);
+                        Vector4D<K> operator*(Vector4D<K> const& u) const;
                         /**
                          * @brief Arithmetic Operator /
                          * Compute the division between this and a generic-type factor
@@ -388,7 +388,7 @@
                          * @return Matrix4x4<T>, a new matrix result of the division of this and k
                          */
                         template <class K>
-                        Matrix4x4<T> operator/(K const& k);
+                        Matrix4x4<T> operator/(K const& k) const;
                         /**
                          * @brief Arithmetic Operator /
                          * Compute the multiplication between this and the inverse of a 4x4 generic-type matrix
@@ -396,7 +396,7 @@
                          * @return Matrix4x4<T>, a new matrix with this multiplied to 1/m
                          */
                         template <class K>
-                        Matrix4x4<T> operator/(Matrix4x4<K> const& m);
+                        Matrix4x4<T> operator/(Matrix4x4<K> const& m) const;
 
                     //## Comparison Operator ##//
                         /**
@@ -406,7 +406,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator==(Matrix4x4<K> const& m);
+                        bool operator==(Matrix4x4<K> const& m) const;
                         /**
                          * @brief Comparison Operator ==
                          * Compare if this and a 4x4 generic-type matrix aren't equal, based on the negation of the == test
@@ -414,7 +414,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator!=(Matrix4x4<K> const& m);
+                        bool operator!=(Matrix4x4<K> const& m) const;
 
                     //## BitWise Operator ##//
 

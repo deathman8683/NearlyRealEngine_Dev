@@ -178,7 +178,7 @@
                          * @return Point4D<T>, a new point with the translation applied
                          */
                         template <class K>
-                        Point4D<T> operator+(Vector4D<K> const& u);
+                        Point4D<T> operator+(Vector4D<K> const& u) const;
                         /**
                          * @brief Arithmetic Operator -
                          * Compute the inverse translation of this with a translation 4D generic-type vector
@@ -186,13 +186,15 @@
                          * @return Point4D<T>, a new point with the inverse translation applied
                          */
                         template <class K>
-                        Point4D<T> operator-(Vector4D<K> const& u);
+                        Point4D<T> operator-(Vector4D<K> const& u) const;
+                        template <class K>
+                        Vector4D<T> operator-(Point4D<K> const& p) const;
                         /**
                          * @brief Negate Operator -
                          * Compute the negate of this
                          * @return Point4D<T>, a new point, the negate point of this
                          */
-                        Point4D<T> operator-();
+                        Point4D<T> operator-() const;
 
                     //## Comparison Operator ##//
                         /**
@@ -202,7 +204,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator==(Point4D<K> const& p);
+                        bool operator==(Point4D<K> const& p) const;
                         /**
                          * @brief Comparison Operator !=
                          * Compare if this and a 4D generic-type point aren't equal, based on the negation of the == test
@@ -210,7 +212,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator!=(Point4D<K> const& p);
+                        bool operator!=(Point4D<K> const& p) const;
                         /**
                          * @brief Comparison Operator <
                          * Compare if this is inferior than a 4D generic-type point , based on squared distance comparison
@@ -218,7 +220,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator<(Point4D<K> const& p);
+                        bool operator<(Point4D<K> const& p) const;
                         /**
                          * @brief Comparison Operator >
                          * Compare if this is superior than a 4D generic-type point , based on squared distance comparison
@@ -226,7 +228,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator>(Point4D<K> const& p);
+                        bool operator>(Point4D<K> const& p) const;
                         /**
                          * @brief Comparison Operator >
                          * Compare if this is inferior or equal than a 4D generic-type point , based on squared distance comparison
@@ -234,7 +236,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator<=(Point4D<K> const& p);
+                        bool operator<=(Point4D<K> const& p) const;
                         /**
                          * @brief Comparison Operator >
                          * Compare if this is superior or equal than a 4D generic-type point , based on squared distance comparison
@@ -242,7 +244,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator>=(Point4D<K> const& p);
+                        bool operator>=(Point4D<K> const& p) const;
 
                     //## BitWise Operator ##//
 

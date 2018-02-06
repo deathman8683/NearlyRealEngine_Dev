@@ -407,61 +407,61 @@
 
             template <class T>
             template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator+(Matrix4x4<K> const& m) {
+            Matrix4x4<T> Matrix4x4<T>::operator+(Matrix4x4<K> const& m) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp += m;
             }
 
             template <class T>
             template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator-(Matrix4x4<K> const& m) {
+            Matrix4x4<T> Matrix4x4<T>::operator-(Matrix4x4<K> const& m) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp -= m;
             }
 
             template <class T>
             template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator*(K const& k)  {
+            Matrix4x4<T> Matrix4x4<T>::operator*(K const& k)  const {
                 Matrix4x4<T> tmp(*this);
                 return tmp *= k;
             }
 
             template <class T>
             template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator*(Matrix4x4<K> const& m) {
+            Matrix4x4<T> Matrix4x4<T>::operator*(Matrix4x4<K> const& m) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp *= m;
             }
 
             template <class T>
             template <class K>
-            Vector4D<K> Matrix4x4<T>::operator*(Vector4D<K> const& u) {
+            Vector4D<K> Matrix4x4<T>::operator*(Vector4D<K> const& u) const {
                 return Vector4D<K>(u | getL1(), u | getL2(), u | getL3(), u | getL4());
             }
 
             template <class T>
             template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator/(K const& k) {
+            Matrix4x4<T> Matrix4x4<T>::operator/(K const& k) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp /= k;
             }
 
             template <class T>
             template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator/(Matrix4x4<K> const& m) {
+            Matrix4x4<T> Matrix4x4<T>::operator/(Matrix4x4<K> const& m) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp /= m;
             }
 
             template <class T>
             template <class K>
-            bool Matrix4x4<T>::operator==(Matrix4x4<K> const& m) {
+            bool Matrix4x4<T>::operator==(Matrix4x4<K> const& m) const {
                 return getL1() == m.getL1() && getL2() == m.getL2() && getL3() == m.getL3() && getL4() == m.getL4();
             }
 
             template <class T>
             template <class K>
-            bool Matrix4x4<T>::operator!=(Matrix4x4<K> const& m) {
+            bool Matrix4x4<T>::operator!=(Matrix4x4<K> const& m) const {
                 return !(*this == m);
             }
 

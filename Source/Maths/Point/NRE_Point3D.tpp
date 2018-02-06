@@ -91,57 +91,63 @@
 
             template <class T>
             template <class K>
-            Point3D<T> Point3D<T>::operator+(Vector3D<K> const& u) {
+            Point3D<T> Point3D<T>::operator+(Vector3D<K> const& u) const {
                 Point3D<T> tmp(*this);
                 return tmp += u;
             }
 
             template <class T>
             template <class K>
-            Point3D<T> Point3D<T>::operator-(Vector3D<K> const& u) {
+            Point3D<T> Point3D<T>::operator-(Vector3D<K> const& u) const {
                 Point3D<T> tmp(*this);
                 return tmp -= u;
             }
 
             template <class T>
-            Point3D<T> Point3D<T>::operator-() {
+            template <class K>
+            Vector3D<T> Point3D<T>::operator-(Point3D<K> const& p) const {
+                return Vector3D<T>(p, *this);
+            }
+
+            template <class T>
+            Point3D<T> Point3D<T>::operator-() const {
                 Point2D<T> tmp(-this->getX(), -this->getY(), -getZ());
                 return tmp;
             }
 
             template <class T>
             template <class K>
-            bool Point3D<T>::operator==(Point3D<K> const& p) {
+            bool Point3D<T>::operator==(Point3D<K> const& p) const {
                 return this->getX() == p.getX() && this->getY() == p.getY() && getZ() == p.getZ();
             }
 
             template <class T>
             template <class K>
-            bool Point3D<T>::operator!=(Point3D<K> const& p) {
+            bool Point3D<T>::operator!=(Point3D<K> const& p) const {
                 return !(this == p);
             }
 
             template <class T>
             template <class K>
-            bool Point3D<T>::operator<(Point3D<K> const& p) {
+            bool Point3D<T>::operator<(Point3D<K> const& p) const {
                 return distanceSquared() < p.distanceSquared();
             }
 
             template <class T>
             template <class K>
-            bool Point3D<T>::operator>(Point3D<K> const& p) {
+            bool Point3D<T>::operator>(Point3D<K> const& p) const {
                 return distanceSquared() > p.distanceSquared();
             }
 
             template <class T>
             template <class K>
-            bool Point3D<T>::operator<=(Point3D<K> const& p) {
+            bool Point3D<T>::operator<=(Point3D<K> const& p) const {
                 return distanceSquared() <= p.distanceSquared();
             }
 
             template <class T>
             template <class K>
-            bool Point3D<T>::operator>=(Point3D<K> const& p) {
+            bool Point3D<T>::operator>=(Point3D<K> const& p) const {
                 return distanceSquared() >= p.distanceSquared();
             }
 

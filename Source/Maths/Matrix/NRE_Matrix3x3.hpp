@@ -304,7 +304,7 @@
                          * @return Matrix3x3<T>, a new matrix with this added to m
                          */
                         template <class K>
-                        Matrix3x3<T> operator+(Matrix3x3<K> const& m);
+                        Matrix3x3<T> operator+(Matrix3x3<K> const& m) const;
                         /**
                          * @brief Arithmetic Operator -
                          * Compute the substract between this and a 3x3 generic-type matrix
@@ -312,7 +312,7 @@
                          * @return Matrix3x3<T>, a new matrix with this substracted to m
                          */
                         template <class K>
-                        Matrix3x3<T> operator-(Matrix3x3<K> const& m);
+                        Matrix3x3<T> operator-(Matrix3x3<K> const& m) const;
                         /**
                          * @brief Arithmetic Operator *
                          * Compute the multiplication between this and a generic-type factor
@@ -320,7 +320,7 @@
                          * @return Matrix3x3<T>, a new matrix result of the multiplication of this and k
                          */
                         template <class K>
-                        Matrix3x3<T> operator*(K const& k);
+                        Matrix3x3<T> operator*(K const& k) const;
                         /**
                          * @brief Arithmetic Operator *
                          * Compute the multiplication between this and a 3x3 generic-type matrix
@@ -328,7 +328,7 @@
                          * @return Matrix3x3<T>, a new matrix with this multiplied to m
                          */
                         template <class K>
-                        Matrix3x3<T> operator*(Matrix3x3<K> const& m);
+                        Matrix3x3<T> operator*(Matrix3x3<K> const& m) const;
                         /**
                          * @brief Arithmetic Operator *
                          * Compute the transformation of a 3D generic-type vector by this
@@ -336,7 +336,7 @@
                          * @return Vector3D<K>, the transformed vector
                          */
                         template <class K>
-                        Vector3D<K> operator*(Vector3D<K> const& u);
+                        Vector3D<K> operator*(Vector3D<K> const& u) const;
                         /**
                          * @brief Arithmetic Operator /
                          * Compute the division between this and a generic-type factor
@@ -344,7 +344,7 @@
                          * @return Matrix3x3<T>, a new matrix result of the division of this and k
                          */
                         template <class K>
-                        Matrix3x3<T> operator/(K const& k);
+                        Matrix3x3<T> operator/(K const& k) const;
                         /**
                          * @brief Arithmetic Operator /
                          * Compute the multiplication between this and the inverse of a 3x3 generic-type matrix
@@ -352,7 +352,7 @@
                          * @return Matrix3x3<T>, a new matrix with this multiplied to 1/m
                          */
                         template <class K>
-                        Matrix3x3<T> operator/(Matrix3x3<K> const& m);
+                        Matrix3x3<T> operator/(Matrix3x3<K> const& m) const;
 
                     //## Comparison Operator ##//
                         /**
@@ -362,7 +362,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator==(Matrix3x3<K> const& m);
+                        bool operator==(Matrix3x3<K> const& m) const;
                         /**
                          * @brief Comparison Operator ==
                          * Compare if this and a 3x3 generic-type matrix aren't equal, based on the negation of the == test
@@ -370,7 +370,7 @@
                          * @return bool, the test's result
                          */
                         template <class K>
-                        bool operator!=(Matrix3x3<K> const& m);
+                        bool operator!=(Matrix3x3<K> const& m) const;
 
                     //## BitWise Operator ##//
 

@@ -121,71 +121,71 @@
 
             template <class T>
             template <class K>
-            Vector2D<T> Vector2D<T>::operator+(Vector2D<K> const& u) {
+            Vector2D<T> Vector2D<T>::operator+(Vector2D<K> const& u) const {
                 Vector2D<T> tmp(*this);
                 return tmp += u;
             }
 
             template <class T>
             template <class K>
-            Vector2D<T> Vector2D<T>::operator-(Vector2D<K> const& u) {
+            Vector2D<T> Vector2D<T>::operator-(Vector2D<K> const& u) const {
                 Vector2D<T> tmp(*this);
                 return tmp -= u;
             }
 
             template <class T>
-            Vector2D<T> Vector2D<T>::operator-() {
+            Vector2D<T> Vector2D<T>::operator-() const {
                 Vector2D<T> tmp(-getX(), -getY());
                 return tmp;
             }
 
             template <class T>
             template <class K>
-            Vector2D<T> Vector2D<T>::operator*(K const& k) {
+            Vector2D<T> Vector2D<T>::operator*(K const& k) const {
                 Vector2D<T> tmp(*this);
                 return tmp *= k;
             }
 
             template <class T>
             template <class K>
-            Vector2D<T> Vector2D<T>::operator/(K const& k) {
+            Vector2D<T> Vector2D<T>::operator/(K const& k) const {
                 Vector2D<T> tmp(*this);
                 return tmp /= k;
             }
 
             template <class T>
             template <class K>
-            bool Vector2D<T>::operator==(Vector2D<K> const& u) {
+            bool Vector2D<T>::operator==(Vector2D<K> const& u) const {
                 return getX() == u.getX() && getY() == u.getY();
             }
 
             template <class T>
             template <class K>
-            bool Vector2D<T>::operator!=(Vector2D<K> const& u) {
+            bool Vector2D<T>::operator!=(Vector2D<K> const& u) const {
                 return !(*this == u);
             }
 
             template <class T>
             template <class K>
-            bool Vector2D<T>::operator<(Vector2D<K> const& u) {
+            bool Vector2D<T>::operator<(Vector2D<K> const& u) const {
                 return normSquared() < u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector2D<T>::operator>(Vector2D<K> const& u) {
+            bool Vector2D<T>::operator>(Vector2D<K> const& u) const {
                 return normSquared() > u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector2D<T>::operator<=(Vector2D<K> const& u) {
+            bool Vector2D<T>::operator<=(Vector2D<K> const& u) const {
                 return normSquared() <= u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector2D<T>::operator>=(Vector2D<K> const& u) {
+            bool Vector2D<T>::operator>=(Vector2D<K> const& u) const {
                 return normSquared() >= u.normSquared();
             }
 

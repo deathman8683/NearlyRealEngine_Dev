@@ -89,57 +89,63 @@
 
             template <class T>
             template <class K>
-            Point2D<T> Point2D<T>::operator+(Vector2D<K> const& u) {
+            Point2D<T> Point2D<T>::operator+(Vector2D<K> const& u) const {
                 Point2D<T> tmp(*this);
                 return tmp += u;
             }
 
             template <class T>
             template <class K>
-            Point2D<T> Point2D<T>::operator-(Vector2D<K> const& u) {
+            Point2D<T> Point2D<T>::operator-(Vector2D<K> const& u) const {
                 Point2D<T> tmp(*this);
                 return tmp -= u;
             }
 
             template <class T>
-            Point2D<T> Point2D<T>::operator-() {
+            template <class K>
+            Vector2D<T> Point2D<T>::operator-(Point2D<K> const& p) const {
+                return Vector2D<T>(p, *this);
+            }
+
+            template <class T>
+            Point2D<T> Point2D<T>::operator-() const {
                 Point2D<T> tmp(-getX(), -getY());
                 return tmp;
             }
 
             template <class T>
             template <class K>
-            bool Point2D<T>::operator==(Point2D<K> const& p) {
+            bool Point2D<T>::operator==(Point2D<K> const& p) const {
                 return getX() == p.getX() && getY() == p.getY();
             }
 
             template <class T>
             template <class K>
-            bool Point2D<T>::operator!=(Point2D<K> const& p) {
+            bool Point2D<T>::operator!=(Point2D<K> const& p) const {
                 return !(*this == p);
             }
 
             template <class T>
             template <class K>
-            bool Point2D<T>::operator<(Point2D<K> const& p) {
+            bool Point2D<T>::operator<(Point2D<K> const& p) const {
                 return distanceSquared() < p.distanceSquared();
             }
 
             template <class T>
             template <class K>
-            bool Point2D<T>::operator>(Point2D<K> const& p) {
+            bool Point2D<T>::operator>(Point2D<K> const& p) const {
                 return distanceSquared() > p.distanceSquared();
             }
 
             template <class T>
             template <class K>
-            bool Point2D<T>::operator<=(Point2D<K> const& p) {
+            bool Point2D<T>::operator<=(Point2D<K> const& p) const {
                 return distanceSquared() <= p.distanceSquared();
             }
 
             template <class T>
             template <class K>
-            bool Point2D<T>::operator>=(Point2D<K> const& p) {
+            bool Point2D<T>::operator>=(Point2D<K> const& p) const {
                 return distanceSquared() >= p.distanceSquared();
             }
 

@@ -220,61 +220,61 @@
 
             template <class T>
             template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator+(Matrix2x2<K> const& m) {
+            Matrix2x2<T> Matrix2x2<T>::operator+(Matrix2x2<K> const& m) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp += m;
             }
 
             template <class T>
             template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator-(Matrix2x2<K> const& m) {
+            Matrix2x2<T> Matrix2x2<T>::operator-(Matrix2x2<K> const& m) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp -= m;
             }
 
             template <class T>
             template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator*(K const& k)  {
+            Matrix2x2<T> Matrix2x2<T>::operator*(K const& k)  const {
                 Matrix2x2<T> tmp(*this);
                 return tmp *= k;
             }
 
             template <class T>
             template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator*(Matrix2x2<K> const& m) {
+            Matrix2x2<T> Matrix2x2<T>::operator*(Matrix2x2<K> const& m) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp *= m;
             }
 
             template <class T>
             template <class K>
-            Vector2D<K> Matrix2x2<T>::operator*(Vector2D<K> const& u) {
+            Vector2D<K> Matrix2x2<T>::operator*(Vector2D<K> const& u) const {
                 return Vector2D<K>(u | getL1(), u | getL2());
             }
 
             template <class T>
             template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator/(K const& k) {
+            Matrix2x2<T> Matrix2x2<T>::operator/(K const& k) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp /= k;
             }
 
             template <class T>
             template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator/(Matrix2x2<K> const& m) {
+            Matrix2x2<T> Matrix2x2<T>::operator/(Matrix2x2<K> const& m) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp /= m;
             }
 
             template <class T>
             template <class K>
-            bool Matrix2x2<T>::operator==(Matrix2x2<K> const& m) {
+            bool Matrix2x2<T>::operator==(Matrix2x2<K> const& m) const {
                 return getL1() == m.getL1() && getL2() == m.getL2();
             }
 
             template <class T>
             template <class K>
-            bool Matrix2x2<T>::operator!=(Matrix2x2<K> const& m) {
+            bool Matrix2x2<T>::operator!=(Matrix2x2<K> const& m) const {
                 return !(*this == m);
             }
 

@@ -125,71 +125,71 @@
 
             template <class T>
             template <class K>
-            Vector3D<T> Vector3D<T>::operator+(Vector3D<K> const& u) {
+            Vector3D<T> Vector3D<T>::operator+(Vector3D<K> const& u) const {
                 Vector3D<T> tmp(*this);
                 return tmp += u;
             }
 
             template <class T>
             template <class K>
-            Vector3D<T> Vector3D<T>::operator-(Vector3D<K> const& u) {
+            Vector3D<T> Vector3D<T>::operator-(Vector3D<K> const& u) const {
                 Vector3D<T> tmp(*this);
                 return tmp -= u;
             }
 
             template <class T>
-            Vector3D<T> Vector3D<T>::operator-() {
+            Vector3D<T> Vector3D<T>::operator-() const {
                 Vector3D<T> tmp(-this->getX(), -this->getY(), -getZ());
                 return tmp;
             }
 
             template <class T>
             template <class K>
-            Vector3D<T> Vector3D<T>::operator*(K const& k) {
+            Vector3D<T> Vector3D<T>::operator*(K const& k) const {
                 Vector3D<T> tmp(*this);
                 return tmp *= k;
             }
 
             template <class T>
             template <class K>
-            Vector3D<T> Vector3D<T>::operator/(K const& k) {
+            Vector3D<T> Vector3D<T>::operator/(K const& k) const {
                 Vector3D<T> tmp(*this);
                 return tmp /= k;
             }
 
             template <class T>
             template <class K>
-            bool Vector3D<T>::operator==(Vector3D<K> const& u) {
+            bool Vector3D<T>::operator==(Vector3D<K> const& u) const {
                 return this->getX() == u.getX() && this->getY() == u.getY() && getZ() == u.getZ();
             }
 
             template <class T>
             template <class K>
-            bool Vector3D<T>::operator!=(Vector3D<K> const& u) {
+            bool Vector3D<T>::operator!=(Vector3D<K> const& u) const {
                 return !(this == u);
             }
 
             template <class T>
             template <class K>
-            bool Vector3D<T>::operator<(Vector3D<K> const& u) {
+            bool Vector3D<T>::operator<(Vector3D<K> const& u) const {
                 return normSquared() < u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector3D<T>::operator>(Vector3D<K> const& u) {
+            bool Vector3D<T>::operator>(Vector3D<K> const& u) const {
                 return normSquared() > u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector3D<T>::operator<=(Vector3D<K> const& u) {
+            bool Vector3D<T>::operator<=(Vector3D<K> const& u) const {
                 return normSquared() <= u.normSquared();
             }
 
             template <class T>
             template <class K>
-            bool Vector3D<T>::operator>=(Vector3D<K> const& u) {
+            bool Vector3D<T>::operator>=(Vector3D<K> const& u) const {
                 return normSquared() >= u.normSquared();
             }
 
@@ -201,7 +201,7 @@
 
             template <class T>
             template <class K>
-            Vector3D<T> Vector3D<T>::operator^(Vector3D<K> const& u) {
+            Vector3D<T> Vector3D<T>::operator^(Vector3D<K> const& u) const {
                 Vector3D<T> tmp(*this);
                 return tmp ^= u;
             }
