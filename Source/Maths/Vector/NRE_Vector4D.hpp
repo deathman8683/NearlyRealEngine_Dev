@@ -301,11 +301,11 @@
                     //## Shift Operator ##//
 
                 private:
-                    static NREfloat DEFAULT_W;  /**< The default w axis translation */
+                    static int DEFAULT_W;  /**< The default w axis translation */
             };
 
             template <class T>
-            NREfloat Vector4D<T>::DEFAULT_W = 0.;
+            int Vector4D<T>::DEFAULT_W = 0.;
 
             /**
              * @brief Shift Operator <<

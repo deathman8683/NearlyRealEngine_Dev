@@ -251,11 +251,11 @@
                     //## Shift Operator ##//
 
                 private:
-                    static NREfloat DEFAULT_W;  /**< The default homogeneous coordinate */
+                    static int DEFAULT_W;  /**< The default homogeneous coordinate */
             };
 
             template <class T>
-            NREfloat Point4D<T>::DEFAULT_W = 0.;
+            int Point4D<T>::DEFAULT_W = 0.;
 
             /**
              * @brief Shift Operator <<

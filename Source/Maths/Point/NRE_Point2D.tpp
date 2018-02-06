@@ -12,7 +12,7 @@
 
             template <class T>
             template <class K, class L>
-            Point2D<T>::Point2D(Point2D<K> const& p, Vector2D<L> const& u) : x(p.getX() + u.getX()), y(p.getX() + u.getX()) {
+            Point2D<T>::Point2D(Point2D<K> const& p, Vector2D<L> const& u) : x(p.getX() + u.getX()), y(p.getY() + u.getY()) {
             }
 
             template <class T>

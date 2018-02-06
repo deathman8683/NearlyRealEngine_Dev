@@ -315,11 +315,11 @@
                     //## Shift Operator ##//
 
                 private:
-                    static NREfloat DEFAULT_Z;  /**< The default z axis translation */
+                    static int DEFAULT_Z;  /**< The default z axis translation */
             };
 
             template <class T>
-            NREfloat Vector3D<T>::DEFAULT_Z = 0.;
+            int Vector3D<T>::DEFAULT_Z = 0.;
 
             /**
              * @brief Shift Operator <<

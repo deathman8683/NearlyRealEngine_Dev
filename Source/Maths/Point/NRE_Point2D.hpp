@@ -244,14 +244,14 @@
                     //## Shift Operator ##//;
 
                 private:
-                    static NREfloat DEFAULT_X;  /**< The default abscissa */
-                    static NREfloat DEFAULT_Y;  /**< The default ordinate */
+                    static int DEFAULT_X;  /**< The default abscissa */
+                    static int DEFAULT_Y;  /**< The default ordinate */
             };
 
             template <class T>
-            NREfloat Point2D<T>::DEFAULT_X = 0.;
+            int Point2D<T>::DEFAULT_X = 0.;
             template <class T>
-            NREfloat Point2D<T>::DEFAULT_Y = 0.;
+            int Point2D<T>::DEFAULT_Y = 0.;
 
             /**
              * @brief Shift Operator <<

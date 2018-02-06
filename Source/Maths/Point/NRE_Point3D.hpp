@@ -250,11 +250,11 @@
                     //## Shift Operator ##//
 
                 private:
-                    static NREfloat DEFAULT_Z;  /**< The default applicate */
+                    static int DEFAULT_Z;  /**< The default applicate */
             };
 
             template <class T>
-            NREfloat Point3D<T>::DEFAULT_Z = 0.;
+            int Point3D<T>::DEFAULT_Z = 0.;
 
             /**
              * @brief Shift Operator <<
