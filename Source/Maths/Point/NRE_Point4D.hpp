@@ -127,7 +127,7 @@
                          * @brief X, y and z setter
                          * Change x, y, z values from a base 3D point and w value
                          * @param p : Point3D<K>, the base vector for x, y and z values
-                         * @param z : L, the new z value
+                         * @param w : L, the new w value
                          */
                         template <class K, class L>
                         void setCoord(Point3D<K> const& p, L const& w);

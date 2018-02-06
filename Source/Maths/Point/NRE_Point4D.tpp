@@ -59,7 +59,7 @@
 
             template <class T>
             template <class K, class L>
-            void Point4D<T>::setCoord(Point3D<K> const& p, L const& z) {
+            void Point4D<T>::setCoord(Point3D<K> const& p, L const& w) {
                 Point3D<T>::setCoord(p.getX(), p.getY(), p.getZ());
                 setW(w);
             }

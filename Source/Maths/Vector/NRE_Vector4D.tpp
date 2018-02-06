@@ -59,7 +59,7 @@
 
             template <class T>
             template <class K, class L>
-            void Vector4D<T>::setCoord(Vector3D<K> const& u, L const& z) {
+            void Vector4D<T>::setCoord(Vector3D<K> const& u, L const& w) {
                 Vector3D<T>::setCoord(u.getX(), u.getY(), u.getZ());
                 setW(w);
             }
