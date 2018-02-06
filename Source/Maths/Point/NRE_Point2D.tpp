@@ -104,7 +104,7 @@
             template <class T>
             template <class K>
             Vector2D<T> Point2D<T>::operator-(Point2D<K> const& p) const {
-                return Vector2D<T>(p, *this);
+                return Vector2D<T>(*this, p);
             }
 
             template <class T>
@@ -117,6 +117,12 @@
             template <class K>
             bool Point2D<T>::operator==(Point2D<K> const& p) const {
                 return getX() == p.getX() && getY() == p.getY();
+            }
+
+            template <>
+            template <class K>
+            bool Point2D<NREfloat>::operator==(Point2D<K> const& p) const {
+                return almostEqual(getX(), p.getX()) && almostEqual(getY(), p.getY());
             }
 
             template <class T>

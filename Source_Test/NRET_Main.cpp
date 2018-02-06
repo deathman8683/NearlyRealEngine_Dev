@@ -1,7 +1,7 @@
 
     #include <iostream>
 
-    #include "Maths/Point/NRET_Vector2D.hpp"
+    #include "Maths/Vector/NRET_Vector2D.hpp"
 
     using namespace NRE::Maths;
 

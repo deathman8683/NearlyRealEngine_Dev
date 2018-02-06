@@ -52,7 +52,7 @@
             template <class T>
             template <class K>
             void Vector2D<T>::setY(K const& y) {
-                this->y = x;
+                this->y = y;
             }
 
             template <class T>
@@ -157,6 +157,12 @@
             template <class K>
             bool Vector2D<T>::operator==(Vector2D<K> const& u) const {
                 return getX() == u.getX() && getY() == u.getY();
+            }
+
+            template <>
+            template <class K>
+            bool Vector2D<NREfloat>::operator==(Vector2D<K> const& u) const {
+                return almostEqual(getX(), u.getX()) && almostEqual(getY(), u.getY());
             }
 
             template <class T>

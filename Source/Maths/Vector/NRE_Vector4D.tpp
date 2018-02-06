@@ -153,6 +153,12 @@
                 return this->getX() == u.getX() && this->getY() == u.getY() && this->getZ() == u.getZ() && this->getW() == u.getW();
             }
 
+            template <>
+            template <class K>
+            bool Vector4D<NREfloat>::operator==(Vector4D<K> const& u) const {
+                return almostEqual(getX(), u.getX()) && almostEqual(getY(), u.getY()) && almostEqual(getZ(), u.getZ()) && almostEqual(getW(), u.getW());
+            }
+
             template <class T>
             template <class K>
             bool Vector4D<T>::operator!=(Vector4D<K> const& u) const {

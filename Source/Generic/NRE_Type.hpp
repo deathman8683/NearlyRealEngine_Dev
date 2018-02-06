@@ -12,8 +12,9 @@
 
             extern const NREfloat PI = 3.14159265359;
             extern const NREfloat EPSILON = 0.00001;
-            
+
         };
     };
 
     #define toRad(x) (x * NRE::Global::PI / 180.0)
+    #define almostEqual(a, b) (std::abs(a - b) < NRE::Global::EPSILON)

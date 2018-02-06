@@ -163,6 +163,12 @@
                 return this->getX() == u.getX() && this->getY() == u.getY() && getZ() == u.getZ();
             }
 
+            template <>
+            template <class K>
+            bool Vector3D<NREfloat>::operator==(Vector3D<K> const& u) const {
+                return almostEqual(getX(), u.getX()) && almostEqual(getY(), u.getY()) && almostEqual(getZ(), u.getZ());
+            }
+
             template <class T>
             template <class K>
             bool Vector3D<T>::operator!=(Vector3D<K> const& u) const {

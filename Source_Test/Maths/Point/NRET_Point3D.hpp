@@ -200,7 +200,7 @@
 
         Vector3D<int> tmp = p - q;
 
-        assert(tmp.getX() == -1 && tmp.getY() == -1 && tmp.getZ() == -1);
+        assert(tmp.getX() == 1 && tmp.getY() == 1 && tmp.getZ() == 1);
     }
 
     void testOperatorNegate() {

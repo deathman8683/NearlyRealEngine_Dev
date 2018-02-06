@@ -106,7 +106,7 @@
             template <class T>
             template <class K>
             Vector3D<T> Point3D<T>::operator-(Point3D<K> const& p) const {
-                return Vector3D<T>(p, *this);
+                return Vector3D<T>(*this, p);
             }
 
             template <class T>
@@ -119,6 +119,12 @@
             template <class K>
             bool Point3D<T>::operator==(Point3D<K> const& p) const {
                 return this->getX() == p.getX() && this->getY() == p.getY() && getZ() == p.getZ();
+            }
+
+            template <>
+            template <class K>
+            bool Point3D<NREfloat>::operator==(Point3D<K> const& p) const {
+                return almostEqual(getX(), p.getX()) && almostEqual(getY(), p.getY()) && almostEqual(getZ(), p.getZ());
             }
 
             template <class T>

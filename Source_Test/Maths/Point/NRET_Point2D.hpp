@@ -190,10 +190,10 @@
 
     void testOperatorSubPoint() {
         Point2D<int> p(2, 3);
-        Point2D<float> q(3, 4);
+        Point2D<float> q(3.4, 4.4);
 
         Vector2D<int> tmp = p - q;
-        assert(tmp.getX() == -1 && tmp.getY() == -1);
+        assert(tmp.getX() == 1 && tmp.getY() == 1);
     }
 
     void testOperatorNegate() {

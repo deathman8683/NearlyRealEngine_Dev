@@ -198,7 +198,7 @@
         Point4D<float> q(2.4, 3.4, 4.4, 5.4);
         Vector4D<int> tmp = p - q;
 
-        assert(tmp.getX() == -1 && tmp.getY() == -1 && tmp.getZ() == -1 && tmp.getW() == -1);
+        assert(tmp.getX() == 1 && tmp.getY() == 1 && tmp.getZ() == 1 && tmp.getW() == 1);
     }
 
     void testOperatorNegate() {
