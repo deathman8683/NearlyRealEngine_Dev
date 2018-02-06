@@ -7,7 +7,14 @@
     using namespace NRE::Maths;
 
     int main(int argc, char **argv) {
-        Point4D<int> c1(11, 22, 33, 44), c2(1, 2, 3, 4);
-        Vector4D<int> l1(c1, c2);
-        std::cout << -l1 << std::endl;
+        Matrix4x4<NREfloat> tmp;
+        std::cout << tmp << std::endl;
+        tmp.rotate(90, Vector3D<NREfloat>(0, 0, 1));
+        std::cout << tmp << std::endl;
+        tmp.setIdentity();
+        tmp.projection(90, 16/9, 0.1, 100);
+        std::cout << tmp << std::endl;
+        tmp.setIdentity();
+        tmp.lookAt(Point3D<NREfloat>(0, 0, 0), Point3D<NREfloat>(10, 0, 0), Vector3D<NREfloat>(0, 0, 1));
+        std::cout << tmp << std::endl;
     }

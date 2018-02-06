@@ -381,7 +381,7 @@
 
             /**
              * @brief Shift Operator <<
-             * Add m to an out stream with : [a, b, c]\n[d, e, f]\n[g, h, i]
+             * Add m to an out stream with : [a, b c]\n[d e f]\n[g h i]
              * @param stream : std::ostream, the out stream to add m
              * @param m : Matrix3x3<T>, the matrix to add
              * @return std::ostream, the modified out stream

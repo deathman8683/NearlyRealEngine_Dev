@@ -116,7 +116,7 @@
             template <class T>
             void Matrix2x2<T>::inverse() {
                 Matrix2x2<T> tmp;
-                T det = getDeterminant();
+                NREfloat det = getDeterminant();
                 if (std::abs(det) > Global::EPSILON) {
                     tmp[0][0] = (1.0 / det) * data[1][1];
                     tmp[0][1] = (1.0 / det) * -data[0][1];
