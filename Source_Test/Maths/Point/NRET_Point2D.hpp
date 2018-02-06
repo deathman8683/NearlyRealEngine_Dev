@@ -26,6 +26,8 @@
     void testSetCoord();
     void testDistanceOrigin();
     void testDistancePoint();
+    void testDistanceSquaredOrigin();
+    void testDistanceSquaredPoint();
     void testOperatorShortAdd();
     void testOperatorShortSub();
     void testOperatorAdd();
@@ -51,6 +53,8 @@
         testSetCoord();
         testDistanceOrigin();
         testDistancePoint();
+        testDistanceSquaredOrigin();
+        testDistanceSquaredPoint();
         testOperatorShortAdd();
         testOperatorShortSub();
         testOperatorAdd();
@@ -138,6 +142,18 @@
         Point2D<int> p(10, 10), tmp(10, 20);
 
         assert(tmp.distance(p) == 10.0);
+    }
+
+    void testDistanceSquaredOrigin() {
+        Point2D<int> tmp(0, 10);
+
+        assert(tmp.distanceSquared() == 100.0);
+    }
+
+    void testDistanceSquaredPoint() {
+        Point2D<int> p(10, 10), tmp(10, 20);
+
+        assert(tmp.distanceSquared(p) == 100.0);
     }
 
     void testOperatorShortAdd() {

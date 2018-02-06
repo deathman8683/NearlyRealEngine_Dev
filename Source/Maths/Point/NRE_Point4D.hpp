@@ -250,7 +250,7 @@
 
                     //## Shift Operator ##//
 
-                private:
+                protected:
                     static int DEFAULT_W;  /**< The default homogeneous coordinate */
             };
 

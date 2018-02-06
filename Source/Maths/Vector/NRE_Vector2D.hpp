@@ -300,7 +300,7 @@
                     //## Shift (Usually for printing methods) Operator ##//
 
 
-                private:
+                protected:
                     static int DEFAULT_X;  /**< The default x axis translation */
                     static int DEFAULT_Y;  /**< The default y axis translation */
             };

@@ -111,7 +111,7 @@
 
             template <class T>
             Point3D<T> Point3D<T>::operator-() const {
-                Point2D<T> tmp(-this->getX(), -this->getY(), -getZ());
+                Point3D<T> tmp(-this->getX(), -this->getY(), -getZ());
                 return tmp;
             }
 
@@ -124,7 +124,7 @@
             template <class T>
             template <class K>
             bool Point3D<T>::operator!=(Point3D<K> const& p) const {
-                return !(this == p);
+                return !(*this == p);
             }
 
             template <class T>

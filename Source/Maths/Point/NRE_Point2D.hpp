@@ -243,7 +243,7 @@
 
                     //## Shift Operator ##//;
 
-                private:
+                protected:
                     static int DEFAULT_X;  /**< The default abscissa */
                     static int DEFAULT_Y;  /**< The default ordinate */
             };

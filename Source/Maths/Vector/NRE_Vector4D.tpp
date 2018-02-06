@@ -156,7 +156,7 @@
             template <class T>
             template <class K>
             bool Vector4D<T>::operator!=(Vector4D<K> const& u) const {
-                return !(this == u);
+                return !(*this == u);
             }
 
             template <class T>

@@ -314,7 +314,7 @@
 
                     //## Shift Operator ##//
 
-                private:
+                protected:
                     static int DEFAULT_Z;  /**< The default z axis translation */
             };
 

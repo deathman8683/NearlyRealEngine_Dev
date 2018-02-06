@@ -166,7 +166,7 @@
             template <class T>
             template <class K>
             bool Vector3D<T>::operator!=(Vector3D<K> const& u) const {
-                return !(this == u);
+                return !(*this == u);
             }
 
             template <class T>

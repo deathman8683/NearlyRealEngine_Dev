@@ -300,7 +300,7 @@
 
                     //## Shift Operator ##//
 
-                private:
+                protected:
                     static int DEFAULT_W;  /**< The default w axis translation */
             };
 
