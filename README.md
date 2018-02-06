@@ -9,3 +9,4 @@
     * Maths
         * Point2D
         * Point3D
+        * Point4D
