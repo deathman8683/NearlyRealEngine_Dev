@@ -39,8 +39,12 @@
     void testOperatorShortAdd();
     void testOperatorShortSub();
     void testOperatorShortMult();
-    void testOperatorMultMatrix();
+    void testOperatorShortMultMatrix();
     void testOperatorShortDiv();
+    void testOperatorShortDivMatrix();
+    void testOperatorEqual();
+    void testOperatorNotEqual();
+    void testOStream();
 
     void mainTest() {
         testConstructorAtomic();
@@ -68,8 +72,12 @@
         testOperatorShortAdd();
         testOperatorShortSub();
         testOperatorShortMult();
-        testOperatorMultMatrix();
+        testOperatorShortMultMatrix();
         testOperatorShortDiv();
+        testOperatorShortDivMatrix();
+        testOperatorEqual();
+        testOperatorNotEqual();
+        testOStream();
     }
 
     void testConstructorAtomic() {
@@ -246,16 +254,42 @@
         assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
     }
 
-    void testOperatorMultMatrix() {
+    void testOperatorShortMultMatrix() {
         Matrix2x2<int> tmp(1, 2, 3, 4), m(2, 3, 4, 5);
         tmp *= m;
-        
+
         assert(tmp.getL1() == Vector2D<int>(10, 13) && tmp.getL2() == Vector2D<int>(22, 29));
     }
 
     void testOperatorShortDiv() {
+        Matrix2x2<int> tmp(2, 3, 4, 5);
+        float k = 1.2;
+        tmp /= k;
+
+        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+    }
+
+    void testOperatorShortDivMatrix() {
         Matrix2x2<float> tmp(1, 2, 3, 4), u(1, 2, 3, 4);
         tmp /= u;
 
         assert(tmp.getL1() == Vector2D<float>(1, 0) && tmp.getL2() == Vector2D<float>(0, 1));
+    }
+
+    void testOperatorEqual() {
+        Matrix2x2<int> m(1, 2, 3, 4), n(1, 2, 3, 4);
+
+        assert(m == n);
+    }
+
+    void testOperatorNotEqual() {
+        Matrix2x2<int> m(1, 2, 3, 5), n(1, 2, 3, 4);
+
+        assert(m != n);
+    }
+
+    void testOStream() {
+        std::ostringstream stream; Matrix2x2<int> tmp(1, 2, 3, 4);
+        stream << tmp;
+        assert(stream.str() == "[1 2]\n[3 4]");
     }
