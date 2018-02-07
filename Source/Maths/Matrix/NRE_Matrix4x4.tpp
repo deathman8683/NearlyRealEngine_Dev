@@ -16,10 +16,10 @@
                                     D const& e, F const& f, G const& g, H const& h,
                                     I const& i, J const& j, K const& k, L const& l,
                                     M const& m, N const& n, O const& o, P const& p) {
-                data[0] = {a, b, c, d};
-                data[1] = {e, f, g, h};
-                data[2] = {i, j, k, l};
-                data[3] = {m, n, o, p};
+                data[0][0] = a; data[0][1] = b; data[0][2] = c; data[0][3] = d;
+                data[1][0] = e; data[1][1] = f; data[1][2] = g; data[1][3] = h;
+                data[2][0] = i; data[2][1] = j; data[2][2] = k; data[2][3] = l;
+                data[3][0] = m; data[3][1] = n; data[3][2] = o; data[3][3] = p;
             }
 
             template <class T>

@@ -14,9 +14,9 @@
             Matrix3x3<T>::Matrix3x3(K const& a, L const& b, M const& c,
                                     N const& d, O const& e, P const& f,
                                     Q const& g, R const& h, S const& i) {
-                data[0] = {a, b, c};
-                data[1] = {d, e, f};
-                data[2] = {g, h, i};
+                data[0][0] = a; data[0][1] = b; data[0][2] = c;
+                data[1][0] = d; data[1][1] = e; data[1][2] = f;
+                data[2][0] = g; data[2][1] = h; data[2][2] = i;
             }
 
             template <class T>

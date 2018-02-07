@@ -11,8 +11,8 @@
             template <class K, class L, class M, class N>
             Matrix2x2<T>::Matrix2x2(K const& a, L const& b,
                                     M const& c, N const& d) {
-                data[0] = {a, b};
-                data[1] = {c, d};
+                data[0][0] = a; data[0][1] = b;
+                data[1][0] = c; data[1][1] = d;
             }
 
             template <class T>
