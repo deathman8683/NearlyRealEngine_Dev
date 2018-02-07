@@ -14,3 +14,4 @@
         * Vector3D
         * Vector4D
         * Matrix2x2
+        * Matrix3x3
