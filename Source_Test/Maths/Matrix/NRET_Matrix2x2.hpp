@@ -42,6 +42,12 @@
     void testOperatorShortMultMatrix();
     void testOperatorShortDiv();
     void testOperatorShortDivMatrix();
+    void testOperatorAdd();
+    void testOperatorSub();
+    void testOperatorMult();
+    void testOperatorMultMatrix();
+    void testOperatorDiv();
+    void testOperatorDivMatrix();
     void testOperatorEqual();
     void testOperatorNotEqual();
     void testOStream();
@@ -75,6 +81,12 @@
         testOperatorShortMultMatrix();
         testOperatorShortDiv();
         testOperatorShortDivMatrix();
+        testOperatorAdd();
+        testOperatorSub();
+        testOperatorMult();
+        testOperatorMultMatrix();
+        testOperatorDiv();
+        testOperatorDivMatrix();
         testOperatorEqual();
         testOperatorNotEqual();
         testOStream();
@@ -272,6 +284,52 @@
     void testOperatorShortDivMatrix() {
         Matrix2x2<float> tmp(1, 2, 3, 4), u(1, 2, 3, 4);
         tmp /= u;
+
+        assert(tmp.getL1() == Vector2D<float>(1, 0) && tmp.getL2() == Vector2D<float>(0, 1));
+    }
+
+    void testOperatorAdd() {
+        Matrix2x2<int> m(1, 2, 3, 4);
+        Matrix2x2<float> n(1.4, 2.4, 3.4, 4.4);
+        Matrix2x2<int> tmp = m + n;
+
+        assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
+    }
+
+    void testOperatorSub() {
+        Matrix2x2<int> m(2, 3, 4, 5);
+        Matrix2x2<float> n(1.4, 2.4, 3.4, 4.4);
+        Matrix2x2<int> tmp = m - n;
+
+        assert(tmp.getL1() == Vector2D<int>(0, 0) && tmp.getL2() == Vector2D<int>(0, 0));
+    }
+
+    void testOperatorMult() {
+        Matrix2x2<int> m(1, 2, 3, 4);
+        float k = 2.2;
+        Matrix2x2<int> tmp = m * k;
+
+        assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
+    }
+
+    void testOperatorMultMatrix() {
+        Matrix2x2<int> m(1, 2, 3, 4), n(2, 3, 4, 5);
+        Matrix2x2<int> tmp = m * n;
+
+        assert(tmp.getL1() == Vector2D<int>(10, 13) && tmp.getL2() == Vector2D<int>(22, 29));
+    }
+
+    void testOperatorDiv() {
+        Matrix2x2<int> m(2, 3, 4, 5);
+        float k = 1.2;
+        Matrix2x2<int> tmp = m / k;
+
+        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+    }
+
+    void testOperatorDivMatrix() {
+        Matrix2x2<float> m(1, 2, 3, 4), n(1, 2, 3, 4);
+        Matrix2x2<float> tmp = m / n;
 
         assert(tmp.getL1() == Vector2D<float>(1, 0) && tmp.getL2() == Vector2D<float>(0, 1));
     }

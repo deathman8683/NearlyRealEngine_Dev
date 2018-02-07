@@ -168,7 +168,7 @@
                     tmp[1][1] = (1.0 / det) * (data[0][0] * data[2][2] - data[0][2] * data[2][0]);
                     tmp[1][2] = (1.0 / det) * (data[0][2] * data[1][0] - data[0][0] * data[1][2]);
                     tmp[2][0] = (1.0 / det) * (data[1][0] * data[2][1] - data[1][1] * data[2][0]);
-                    tmp[2][1] = (1.0 / det) * (data[0][1] * data[2][1] - data[0][0] * data[2][1]);
+                    tmp[2][1] = (1.0 / det) * (data[0][1] * data[2][0] - data[0][0] * data[2][1]);
                     tmp[2][2] = (1.0 / det) * (data[0][0] * data[1][1] - data[0][1] * data[1][0]);
                 }
 
@@ -186,11 +186,7 @@
             template <class K>
             void Matrix3x3<T>::scale(Vector2D<K> const& u) {
                 data[0][0] = data[0][0] * u.getX();
-                data[1][0] = data[1][0] * u.getX();
-                data[2][0] = data[2][0] * u.getX();
-                data[0][1] = data[0][1] * u.getY();
                 data[1][1] = data[1][1] * u.getY();
-                data[2][1] = data[2][1] * u.getY();
             }
 
             template <class T>

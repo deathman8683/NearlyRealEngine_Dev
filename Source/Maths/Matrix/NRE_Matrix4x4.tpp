@@ -263,17 +263,8 @@
             template <class K>
             void Matrix4x4<T>::scale(Vector3D<K> const& u) {
                 data[0][0] = data[0][0] * u.getX();
-                data[1][0] = data[1][0] * u.getX();
-                data[2][0] = data[2][0] * u.getX();
-                data[3][0] = data[3][0] * u.getX();
-                data[0][1] = data[0][1] * u.getY();
                 data[1][1] = data[1][1] * u.getY();
-                data[2][1] = data[2][1] * u.getY();
-                data[3][1] = data[3][1] * u.getY();
-                data[0][2] = data[0][2] * u.getZ();
-                data[1][2] = data[1][2] * u.getZ();
                 data[2][2] = data[2][2] * u.getZ();
-                data[3][2] = data[3][2] * u.getZ();
             }
 
             template <class T>
