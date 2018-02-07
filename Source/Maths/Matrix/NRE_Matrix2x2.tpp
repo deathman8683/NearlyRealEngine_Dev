@@ -195,8 +195,10 @@
             template <class T>
             template <class K>
             Matrix2x2<T>& Matrix2x2<T>::operator*=(Matrix2x2<K> const& m) {
-                data[0][0] = getL1() | getC1(); data[0][1] = getL1() | getC2();
-                data[1][0] = getL2() | getC1(); data[1][1] = getL2() | getC2();
+                Matrix2x2<T> tmp(*this);
+                tmp[0][0] = getL1() | m.getC1(); tmp[0][1] = getL1() | m.getC2();
+                tmp[1][0] = getL2() | m.getC1(); tmp[1][1] = getL2() | m.getC2();
+                *this = tmp;
                 return *this;
             }
 
@@ -215,7 +217,7 @@
             template <class K>
             Matrix2x2<T>& Matrix2x2<T>::operator/=(Matrix2x2<K> const& m) {
                 Matrix2x2<K> tmp(m); tmp.inverse();
-                return *this * tmp;
+                return *this *= tmp;
             }
 
             template <class T>

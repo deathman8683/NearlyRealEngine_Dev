@@ -380,10 +380,12 @@
             template <class T>
             template <class K>
             Matrix4x4<T>& Matrix4x4<T>::operator*=(Matrix4x4<K> const& m) {
-                data[0][0] = getL1() | getC1(); data[0][1] = getL1() | getC2(); data[0][2] = getL1() | getC3(); data[0][3] = getL1() | getC4();
-                data[1][0] = getL2() | getC1(); data[1][1] = getL2() | getC2(); data[1][2] = getL2() | getC3(); data[1][3] = getL2() | getC4();
-                data[2][0] = getL3() | getC1(); data[2][1] = getL3() | getC2(); data[2][2] = getL3() | getC3(); data[2][3] = getL3() | getC4();
-                data[3][0] = getL4() | getC1(); data[3][1] = getL4() | getC2(); data[3][2] = getL4() | getC3(); data[3][3] = getL4() | getC4();
+                Matrix4x4<T> tmp(*this);
+                tmp[0][0] = getL1() | m.getC1(); tmp[0][1] = getL1() | m.getC2(); tmp[0][2] = getL1() | m.getC3(); tmp[0][3] = getL1() | m.getC4();
+                tmp[1][0] = getL2() | m.getC1(); tmp[1][1] = getL2() | m.getC2(); tmp[1][2] = getL2() | m.getC3(); tmp[1][3] = getL2() | m.getC4();
+                tmp[2][0] = getL3() | m.getC1(); tmp[2][1] = getL3() | m.getC2(); tmp[2][2] = getL3() | m.getC3(); tmp[2][3] = getL3() | m.getC4();
+                tmp[3][0] = getL4() | m.getC1(); tmp[3][1] = getL4() | m.getC2(); tmp[3][2] = getL4() | m.getC3(); tmp[3][3] = getL4() | m.getC4();
+                *this = tmp;
                 return *this;
             }
 
@@ -402,7 +404,7 @@
             template <class K>
             Matrix4x4<T>& Matrix4x4<T>::operator/=(Matrix4x4<K> const& m) {
                 Matrix4x4<K> tmp(m); tmp.inverse();
-                return *this * tmp;
+                return *this *= tmp;
             }
 
             template <class T>

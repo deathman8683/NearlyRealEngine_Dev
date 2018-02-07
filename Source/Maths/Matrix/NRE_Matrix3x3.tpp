@@ -249,9 +249,11 @@
             template <class T>
             template <class K>
             Matrix3x3<T>& Matrix3x3<T>::operator*=(Matrix3x3<K> const& m) {
-                data[0][0] = getL1() | getC1(); data[0][1] = getL1() | getC2(); data[0][2] = getL1() | getC3();
-                data[1][0] = getL2() | getC1(); data[1][1] = getL2() | getC2(); data[1][2] = getL2() | getC3();
-                data[2][0] = getL3() | getC1(); data[2][1] = getL3() | getC2(); data[2][2] = getL3() | getC3();
+                Matrix3x3<T> tmp(*this);
+                tmp[0][0] = getL1() | m.getC1(); tmp[0][1] = getL1() | m.getC2(); tmp[0][2] = getL1() | m.getC3();
+                tmp[1][0] = getL2() | m.getC1(); tmp[1][1] = getL2() | m.getC2(); tmp[1][2] = getL2() | m.getC3();
+                tmp[2][0] = getL3() | m.getC1(); tmp[2][1] = getL3() | m.getC2(); tmp[2][2] = getL3() | m.getC3();
+                *this = tmp;
                 return *this;
             }
 
@@ -270,7 +272,7 @@
             template <class K>
             Matrix3x3<T>& Matrix3x3<T>::operator/=(Matrix3x3<K> const& m) {
                 Matrix3x3<K> tmp(m); tmp.inverse();
-                return *this * tmp;
+                return *this *= tmp;
             }
 
             template <class T>
