@@ -1,7 +1,7 @@
 
     #include <iostream>
 
-    #include "Maths/Matrix/NRET_Matrix2x2.hpp"
+    #include "Maths/Matrix/NRET_Matrix3x3.hpp"
 
     using namespace NRE::Maths;
 
