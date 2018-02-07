@@ -206,6 +206,7 @@
     void testOperatorShortScalar() {
         Vector2D<int> tmp(2, 4);
         Vector2D<float> u(2.4, 4.4);
+        
         assert(almostEqual((tmp |= u), 22.4));
     }
 

@@ -11,3 +11,4 @@
         * Point3D
         * Point4D
         * Vector2D
+        * Vector3D
