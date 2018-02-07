@@ -46,7 +46,7 @@
 
             template <class T>
             template <class K>
-            void Vector4D<T>::setW(K const& z) {
+            void Vector4D<T>::setW(K const& w) {
                 this->w = w;
             }
 
@@ -103,7 +103,7 @@
             template <class T>
             template <class K>
             Vector4D<T>& Vector4D<T>::operator/=(K const& k) {
-                setCoord(this->getX() / k, this->getY() / k, this->getZ() / k, getW() * k);
+                setCoord(this->getX() / k, this->getY() / k, this->getZ() / k, getW() / k);
                 return *this;
             }
 
