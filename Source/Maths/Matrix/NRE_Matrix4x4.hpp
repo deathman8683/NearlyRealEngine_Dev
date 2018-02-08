@@ -65,7 +65,7 @@
                                   class I, class J, class K, class L,
                                   class M, class N, class O, class P>
                         Matrix4x4(A const& a, B const& b, C const& c, D const& d,
-                                  D const& e, F const& f, G const& g, H const& h,
+                                  E const& e, F const& f, G const& g, H const& h,
                                   I const& i, J const& j, K const& k, L const& l,
                                   M const& m, N const& n, O const& o, P const& p);
                         /**
