@@ -42,7 +42,11 @@
                 testSetC4();
                 testSetIdentity();
                 testTranspose();
-                testInverse();
+                testTranslate();
+                testScale();
+                testOperatorAccessRead();
+                testOperatorAccessWrite();
+                testOperatorAssign();
             }
 
         private:
@@ -232,5 +236,45 @@
 
                 assert(tmp.getL1() == Vector4D<float>(-1.0 / 4, 1.0 / 36.0, 1.0 / 2.0, 0.0) && tmp.getL2() == Vector4D<float>(-1.0 / 4.0, -1.0 / 12.0, 1.0 / 6.0, 2.0 / 3.0) &&
                        tmp.getL3() == Vector4D<float>(1.0 / 4.0, 1.0 / 12.0, -1.0 / 2.0, 0.0) && tmp.getL4() == Vector4D<float>(1.0 / 4.0, -1.0 / 36.0, 1.0 / 6.0, -1.0 / 3.0));
+            }
+
+            static void testTranslate() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                Vector3D<float> u(20.4, 21.4, 22.4);
+                tmp.translate(u);
+
+                assert(tmp.getL1() == Vector4D<int>(1, 2, 3, 24) && tmp.getL2() == Vector4D<int>(5, 6, 7, 29) &&
+                       tmp.getL3() == Vector4D<int>(9, 10, 11, 34) && tmp.getL4() == Vector4D<int>(13, 14, 15, 16));
+            }
+
+            static void testScale() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                Vector3D<float> u(20.4, 21.4, 22.4);
+                tmp.scale(u);
+                
+                assert(tmp.getL1() == Vector4D<int>(20, 2, 3, 4) && tmp.getL2() == Vector4D<int>(5, 128, 7, 8) &&
+                       tmp.getL3() == Vector4D<int>(9, 10, 246, 12) && tmp.getL4() == Vector4D<int>(13, 14, 15, 16));
+            }
+
+            static void testOperatorAccessRead() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+
+                assert(tmp[0][0] == 1);
+            }
+
+            static void testOperatorAccessWrite() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                tmp[0][0] = 20.4;
+
+                assert(tmp.getL1() == Vector4D<int>(20, 2, 3, 4) && tmp.getL2() == Vector4D<int>(5, 6, 7, 8) &&
+                       tmp.getL3() == Vector4D<int>(9, 10, 11, 12) && tmp.getL4() == Vector4D<int>(13, 14, 15, 16));
+            }
+
+            static void testOperatorAssign() {
+                Matrix4x4<float> m(1.4, 2.4, 3.4, 4.4, 5.4, 6.4, 7.4, 8.4, 9.4, 10.4, 11.4, 12.4, 13.4, 14.4, 15.4, 16.4);
+                Matrix4x4<int> tmp = m;
+
+                assert(tmp.getL1() == Vector4D<int>(1, 2, 3, 4) && tmp.getL2() == Vector4D<int>(5, 6, 7, 8) &&
+                       tmp.getL3() == Vector4D<int>(9, 10, 11, 12) && tmp.getL4() == Vector4D<int>(13, 14, 15, 16));
             }
     };

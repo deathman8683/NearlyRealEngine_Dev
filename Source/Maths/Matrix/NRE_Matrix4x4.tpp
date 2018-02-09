@@ -254,9 +254,9 @@
             template <class T>
             template <class K>
             void Matrix4x4<T>::translate(Vector3D<K> const& u) {
-                data[0][2] = data[0][2] + u.getX();
-                data[1][2] = data[1][2] + u.getY();
-                data[2][2] = data[2][2] + u.getZ();
+                data[0][3] = data[0][3] + u.getX();
+                data[1][3] = data[1][3] + u.getY();
+                data[2][3] = data[2][3] + u.getZ();
             }
 
             template <class T>
