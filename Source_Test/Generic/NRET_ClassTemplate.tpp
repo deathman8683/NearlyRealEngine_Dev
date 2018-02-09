@@ -14,6 +14,12 @@
 
     using namespace NRE::<Module>;
 
-    void mainTest() {
+    class Test<Class> {
+        public:
+            static void main() {
 
-    }
+            }
+
+        private:
+
+    };

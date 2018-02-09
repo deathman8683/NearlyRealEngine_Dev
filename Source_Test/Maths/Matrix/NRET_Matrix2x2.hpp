@@ -14,340 +14,306 @@
 
     using namespace NRE::Maths;
 
-    void testConstructorAtomic();
-    void testConstructorVector();
-    void testConstructorPoint();
-    void testCopyConstructor();
-    void testConvertor();
-    void testGetL1();
-    void testGetL2();
-    void testGetC1();
-    void testGetC2();
-    void testGetDeterminant();
-    void testSetL1();
-    void testSetL2();
-    void testSetC1();
-    void testSetC2();
-    void testSetIdentity();
-    void testTranspose();
-    void testInverse();
-    void testTranslate();
-    void testScale();
-    void testOperatorAccessRead();
-    void testOperatorAccessWrite();
-    void testOperatorAssign();
-    void testOperatorShortAdd();
-    void testOperatorShortSub();
-    void testOperatorShortMult();
-    void testOperatorShortMultMatrix();
-    void testOperatorShortDiv();
-    void testOperatorShortDivMatrix();
-    void testOperatorAdd();
-    void testOperatorSub();
-    void testOperatorMult();
-    void testOperatorMultMatrix();
-    void testOperatorDiv();
-    void testOperatorDivMatrix();
-    void testOperatorEqual();
-    void testOperatorNotEqual();
-    void testOStream();
-
-    void mainTest() {
-        testConstructorAtomic();
-        testConstructorVector();
-        testConstructorPoint();
-        testCopyConstructor();
-        testConvertor();
-        testGetL1();
-        testGetL2();
-        testGetC1();
-        testGetC2();
-        testGetDeterminant();
-        testSetL1();
-        testSetL2();
-        testSetC1();
-        testSetC2();
-        testSetIdentity();
-        testTranspose();
-        testInverse();
-        testTranslate();
-        testScale();
-        testOperatorAccessRead();
-        testOperatorAccessWrite();
-        testOperatorAssign();
-        testOperatorShortAdd();
-        testOperatorShortSub();
-        testOperatorShortMult();
-        testOperatorShortMultMatrix();
-        testOperatorShortDiv();
-        testOperatorShortDivMatrix();
-        testOperatorAdd();
-        testOperatorSub();
-        testOperatorMult();
-        testOperatorMultMatrix();
-        testOperatorDiv();
-        testOperatorDivMatrix();
-        testOperatorEqual();
-        testOperatorNotEqual();
-        testOStream();
-    }
-
-    void testConstructorAtomic() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
-
-    void testConstructorVector() {
-        Vector2D<float> l1(1.4, 2.4), l2(3.4, 4.4);
-        Matrix2x2<int> tmp(l1, l2);
-
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
-
-    void testConstructorPoint() {
-        Point2D<float> l1(1.4, 2.4), l2(3.4, 4.4);
-        Matrix2x2<int> tmp(l1, l2);
-
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
-
-    void testCopyConstructor() {
-        Matrix2x2<int> m(1, 2, 3, 4), tmp(m);
-
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
+    class TestMatrix2x2 {
+        public:
+            static void main() {
+                testConstructorAtomic();
+                testConstructorVector();
+                testConstructorPoint();
+                testCopyConstructor();
+                testConvertor();
+                testGetL1();
+                testGetL2();
+                testGetC1();
+                testGetC2();
+                testGetDeterminant();
+                testSetL1();
+                testSetL2();
+                testSetC1();
+                testSetC2();
+                testSetIdentity();
+                testTranspose();
+                testInverse();
+                testTranslate();
+                testScale();
+                testOperatorAccessRead();
+                testOperatorAccessWrite();
+                testOperatorAssign();
+                testOperatorShortAdd();
+                testOperatorShortSub();
+                testOperatorShortMult();
+                testOperatorShortMultMatrix();
+                testOperatorShortDiv();
+                testOperatorShortDivMatrix();
+                testOperatorAdd();
+                testOperatorSub();
+                testOperatorMult();
+                testOperatorMultMatrix();
+                testOperatorDiv();
+                testOperatorDivMatrix();
+                testOperatorEqual();
+                testOperatorNotEqual();
+                testOStream();
+            }
+
+        private:
+            static void testConstructorAtomic() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
+
+            static void testConstructorVector() {
+                Vector2D<float> l1(1.4, 2.4), l2(3.4, 4.4);
+                Matrix2x2<int> tmp(l1, l2);
+
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
+
+            static void testConstructorPoint() {
+                Point2D<float> l1(1.4, 2.4), l2(3.4, 4.4);
+                Matrix2x2<int> tmp(l1, l2);
+
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
+
+            static void testCopyConstructor() {
+                Matrix2x2<int> m(1, 2, 3, 4), tmp(m);
+
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
+
+            static void testConvertor() {
+                Matrix2x2<float> m(1.4, 2.4, 3.4, 4.4);
+                Matrix2x2<int> tmp(m);
+
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
+
+            static void testGetL1() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+
+                assert(tmp.getL1() == Vector2D<int>(1, 2));
+            }
+
+            static void testGetL2() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+
+                assert(tmp.getL2() == Vector2D<int>(3, 4));
+            }
+
+            static void testGetC1() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+
+                assert(tmp.getC1() == Vector2D<int>(1, 3));
+            }
+
+            static void testGetC2() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+
+                assert(tmp.getC2() == Vector2D<int>(2, 4));
+            }
+
+            static void testGetDeterminant() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
 
-    void testConvertor() {
-        Matrix2x2<float> m(1.4, 2.4, 3.4, 4.4);
-        Matrix2x2<int> tmp(m);
+                assert(tmp.getDeterminant() == -2);
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
+            static void testSetL1() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                Vector2D<float> u(5.4, 6.4);
+                tmp.setL1(u);
 
-    void testGetL1() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
+                assert(tmp.getL1() == Vector2D<int>(5, 6) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 2));
-    }
+            static void testSetL2() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                Vector2D<float> u(5.4, 6.4);
+                tmp.setL2(u);
 
-    void testGetL2() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(5, 6));
+            }
 
-        assert(tmp.getL2() == Vector2D<int>(3, 4));
-    }
+            static void testSetC1() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                Vector2D<float> u(5.4, 6.4);
+                tmp.setC1(u);
 
-    void testGetC1() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
+                assert(tmp.getL1() == Vector2D<int>(5, 2) && tmp.getL2() == Vector2D<int>(6, 4));
+            }
 
-        assert(tmp.getC1() == Vector2D<int>(1, 3));
-    }
+            static void testSetC2() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                Vector2D<float> u(5.4, 6.4);
+                tmp.setC2(u);
 
-    void testGetC2() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
+                assert(tmp.getL1() == Vector2D<int>(1, 5) && tmp.getL2() == Vector2D<int>(3, 6));
+            }
 
-        assert(tmp.getC2() == Vector2D<int>(2, 4));
-    }
+            static void testSetIdentity() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                tmp.setIdentity();
 
-    void testGetDeterminant() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
+                assert(tmp.getL1() == Vector2D<int>(1, 0) && tmp.getL2() == Vector2D<int>(0, 1));
+            }
 
-        assert(tmp.getDeterminant() == -2);
-    }
+            static void testTranspose() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                tmp.transpose();
 
-    void testSetL1() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        Vector2D<float> u(5.4, 6.4);
-        tmp.setL1(u);
+                assert(tmp.getL1() == Vector2D<int>(1, 3) && tmp.getL2() == Vector2D<int>(2, 4));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(5, 6) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
+            static void testInverse() {
+                Matrix2x2<float> tmp(1, 2, 3, 4);
+                tmp.inverse();
 
-    void testSetL2() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        Vector2D<float> u(5.4, 6.4);
-        tmp.setL2(u);
+                assert(tmp.getL1() == Vector2D<float>(-2, 1) && tmp.getL2() == Vector2D<float>(3.0 / 2.0, -1.0 / 2.0));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(5, 6));
-    }
+            static void testTranslate() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                tmp.translate(8.4);
 
-    void testSetC1() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        Vector2D<float> u(5.4, 6.4);
-        tmp.setC1(u);
+                assert(tmp.getL1() == Vector2D<int>(1, 10) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(5, 2) && tmp.getL2() == Vector2D<int>(6, 4));
-    }
+            static void testScale() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                tmp.scale(9.4);
 
-    void testSetC2() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        Vector2D<float> u(5.4, 6.4);
-        tmp.setC2(u);
+                assert(tmp.getL1() == Vector2D<int>(10, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 5) && tmp.getL2() == Vector2D<int>(3, 6));
-    }
+            static void testOperatorAccessRead() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
 
-    void testSetIdentity() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        tmp.setIdentity();
+                assert(tmp[0][0] == tmp.getL1().getX());
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 0) && tmp.getL2() == Vector2D<int>(0, 1));
-    }
+            static void testOperatorAccessWrite() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                tmp[0][0] = 5.4;
 
-    void testTranspose() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        tmp.transpose();
+                assert(tmp.getL1() == Vector2D<int>(5, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 3) && tmp.getL2() == Vector2D<int>(2, 4));
-    }
+            static void testOperatorAssign() {
+                Matrix2x2<float> m(1.4, 2.4, 3.4, 4.4);
+                Matrix2x2<int> tmp = m;
 
-    void testInverse() {
-        Matrix2x2<float> tmp(1, 2, 3, 4);
-        tmp.inverse();
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
 
-        assert(tmp.getL1() == Vector2D<float>(-2, 1) && tmp.getL2() == Vector2D<float>(3.0 / 2.0, -1.0 / 2.0));
-    }
+            static void testOperatorShortAdd() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                Matrix2x2<float> m(1.4, 2.4, 3.4, 4.4);
+                tmp += m;
 
-    void testTranslate() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        tmp.translate(8.4);
+                assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 10) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
+            static void testOperatorShortSub() {
+                Matrix2x2<int> tmp(2, 3, 4, 5);
+                Matrix2x2<float> m(1.4, 2.4, 3.4, 4.4);
+                tmp -= m;
 
-    void testScale() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        tmp.scale(9.4);
+                assert(tmp.getL1() == Vector2D<int>(0, 0) && tmp.getL2() == Vector2D<int>(0, 0));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(10, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
+            static void testOperatorShortMult() {
+                Matrix2x2<int> tmp(1, 2, 3, 4);
+                float k = 2.2;
+                tmp *= k;
 
-    void testOperatorAccessRead() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
+                assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
+            }
 
-        assert(tmp[0][0] == tmp.getL1().getX());
-    }
+            static void testOperatorShortMultMatrix() {
+                Matrix2x2<int> tmp(1, 2, 3, 4), m(2, 3, 4, 5);
+                tmp *= m;
 
-    void testOperatorAccessWrite() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        tmp[0][0] = 5.4;
+                assert(tmp.getL1() == Vector2D<int>(10, 13) && tmp.getL2() == Vector2D<int>(22, 29));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(5, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
+            static void testOperatorShortDiv() {
+                Matrix2x2<int> tmp(2, 3, 4, 5);
+                float k = 1.2;
+                tmp /= k;
 
-    void testOperatorAssign() {
-        Matrix2x2<float> m(1.4, 2.4, 3.4, 4.4);
-        Matrix2x2<int> tmp = m;
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
+            static void testOperatorShortDivMatrix() {
+                Matrix2x2<float> tmp(1, 2, 3, 4), u(1, 2, 3, 4);
+                tmp /= u;
 
-    void testOperatorShortAdd() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        Matrix2x2<float> m(1.4, 2.4, 3.4, 4.4);
-        tmp += m;
+                assert(tmp.getL1() == Vector2D<float>(1, 0) && tmp.getL2() == Vector2D<float>(0, 1));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
-    }
+            static void testOperatorAdd() {
+                Matrix2x2<int> m(1, 2, 3, 4);
+                Matrix2x2<float> n(1.4, 2.4, 3.4, 4.4);
+                Matrix2x2<int> tmp = m + n;
 
-    void testOperatorShortSub() {
-        Matrix2x2<int> tmp(2, 3, 4, 5);
-        Matrix2x2<float> m(1.4, 2.4, 3.4, 4.4);
-        tmp -= m;
+                assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(0, 0) && tmp.getL2() == Vector2D<int>(0, 0));
-    }
+            static void testOperatorSub() {
+                Matrix2x2<int> m(2, 3, 4, 5);
+                Matrix2x2<float> n(1.4, 2.4, 3.4, 4.4);
+                Matrix2x2<int> tmp = m - n;
 
-    void testOperatorShortMult() {
-        Matrix2x2<int> tmp(1, 2, 3, 4);
-        float k = 2.2;
-        tmp *= k;
+                assert(tmp.getL1() == Vector2D<int>(0, 0) && tmp.getL2() == Vector2D<int>(0, 0));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
-    }
+            static void testOperatorMult() {
+                Matrix2x2<int> m(1, 2, 3, 4);
+                float k = 2.2;
+                Matrix2x2<int> tmp = m * k;
 
-    void testOperatorShortMultMatrix() {
-        Matrix2x2<int> tmp(1, 2, 3, 4), m(2, 3, 4, 5);
-        tmp *= m;
+                assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(10, 13) && tmp.getL2() == Vector2D<int>(22, 29));
-    }
+            static void testOperatorMultMatrix() {
+                Matrix2x2<int> m(1, 2, 3, 4), n(2, 3, 4, 5);
+                Matrix2x2<int> tmp = m * n;
 
-    void testOperatorShortDiv() {
-        Matrix2x2<int> tmp(2, 3, 4, 5);
-        float k = 1.2;
-        tmp /= k;
+                assert(tmp.getL1() == Vector2D<int>(10, 13) && tmp.getL2() == Vector2D<int>(22, 29));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
+            static void testOperatorDiv() {
+                Matrix2x2<int> m(2, 3, 4, 5);
+                float k = 1.2;
+                Matrix2x2<int> tmp = m / k;
 
-    void testOperatorShortDivMatrix() {
-        Matrix2x2<float> tmp(1, 2, 3, 4), u(1, 2, 3, 4);
-        tmp /= u;
+                assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
+            }
 
-        assert(tmp.getL1() == Vector2D<float>(1, 0) && tmp.getL2() == Vector2D<float>(0, 1));
-    }
+            static void testOperatorDivMatrix() {
+                Matrix2x2<float> m(1, 2, 3, 4), n(1, 2, 3, 4);
+                Matrix2x2<float> tmp = m / n;
 
-    void testOperatorAdd() {
-        Matrix2x2<int> m(1, 2, 3, 4);
-        Matrix2x2<float> n(1.4, 2.4, 3.4, 4.4);
-        Matrix2x2<int> tmp = m + n;
+                assert(tmp.getL1() == Vector2D<float>(1, 0) && tmp.getL2() == Vector2D<float>(0, 1));
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
-    }
+            static void testOperatorEqual() {
+                Matrix2x2<int> m(1, 2, 3, 4), n(1, 2, 3, 4);
 
-    void testOperatorSub() {
-        Matrix2x2<int> m(2, 3, 4, 5);
-        Matrix2x2<float> n(1.4, 2.4, 3.4, 4.4);
-        Matrix2x2<int> tmp = m - n;
+                assert(m == n);
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(0, 0) && tmp.getL2() == Vector2D<int>(0, 0));
-    }
+            static void testOperatorNotEqual() {
+                Matrix2x2<int> m(1, 2, 3, 5), n(1, 2, 3, 4);
 
-    void testOperatorMult() {
-        Matrix2x2<int> m(1, 2, 3, 4);
-        float k = 2.2;
-        Matrix2x2<int> tmp = m * k;
+                assert(m != n);
+            }
 
-        assert(tmp.getL1() == Vector2D<int>(2, 4) && tmp.getL2() == Vector2D<int>(6, 8));
-    }
-
-    void testOperatorMultMatrix() {
-        Matrix2x2<int> m(1, 2, 3, 4), n(2, 3, 4, 5);
-        Matrix2x2<int> tmp = m * n;
-
-        assert(tmp.getL1() == Vector2D<int>(10, 13) && tmp.getL2() == Vector2D<int>(22, 29));
-    }
-
-    void testOperatorDiv() {
-        Matrix2x2<int> m(2, 3, 4, 5);
-        float k = 1.2;
-        Matrix2x2<int> tmp = m / k;
-
-        assert(tmp.getL1() == Vector2D<int>(1, 2) && tmp.getL2() == Vector2D<int>(3, 4));
-    }
-
-    void testOperatorDivMatrix() {
-        Matrix2x2<float> m(1, 2, 3, 4), n(1, 2, 3, 4);
-        Matrix2x2<float> tmp = m / n;
-
-        assert(tmp.getL1() == Vector2D<float>(1, 0) && tmp.getL2() == Vector2D<float>(0, 1));
-    }
-
-    void testOperatorEqual() {
-        Matrix2x2<int> m(1, 2, 3, 4), n(1, 2, 3, 4);
-
-        assert(m == n);
-    }
-
-    void testOperatorNotEqual() {
-        Matrix2x2<int> m(1, 2, 3, 5), n(1, 2, 3, 4);
-
-        assert(m != n);
-    }
-
-    void testOStream() {
-        std::ostringstream stream; Matrix2x2<int> tmp(1, 2, 3, 4);
-        stream << tmp;
-        assert(stream.str() == "[1 2]\n[3 4]");
-    }
+            static void testOStream() {
+                std::ostringstream stream; Matrix2x2<int> tmp(1, 2, 3, 4);
+                stream << tmp;
+                assert(stream.str() == "[1 2]\n[3 4]");
+            }
+    };

@@ -6,5 +6,5 @@
     using namespace NRE::Maths;
 
     int main(int argc, char **argv) {
-        mainTest();
+        TestMatrix4x4::main();
     }

@@ -14,273 +14,246 @@
 
     using namespace NRE::Maths;
 
-    void testConstructorAtomic();
-    void testConstructorPoint();
-    void testCopyConstructor();
-    void testConvertorType();
-    void testConvertorPoint();
-    void testGetX();
-    void testGetY();
-    void testSetX();
-    void testSetY();
-    void testSetCoord();
-    void testNorm();
-    void testNormSquared();
-    void testNormalize();
-    void testRotate();
-    void testOperatorShortAdd();
-    void testOperatorShortSub();
-    void testOperatorShortMult();
-    void testOperatorShortDiv();
-    void testOperatorShortScalar();
-    void testOperatorAdd();
-    void testOperatorSub();
-    void testOperatorNegate();
-    void testOperatorMult();
-    void testOperatorDiv();
-    void testOperatorEqual();
-    void testOperatorNotEqual();
-    void testOperatorInferior();
-    void testOperatorSuperior();
-    void testOperatorScalar();
-    void testOStream();
+    class TestVector2D {
+        public:
+            static void main() {
+                testConstructorAtomic();
+                testConstructorPoint();
+                testCopyConstructor();
+                testConvertorType();
+                testConvertorPoint();
+                testGetX();
+                testGetY();
+                testSetX();
+                testSetY();
+                testSetCoord();
+                testNorm();
+                testNormSquared();
+                testNormalize();
+                testRotate();
+                testOperatorShortAdd();
+                testOperatorShortSub();
+                testOperatorShortMult();
+                testOperatorShortDiv();
+                testOperatorShortScalar();
+                testOperatorAdd();
+                testOperatorSub();
+                testOperatorNegate();
+                testOperatorMult();
+                testOperatorDiv();
+                testOperatorEqual();
+                testOperatorNotEqual();
+                testOperatorInferior();
+                testOperatorSuperior();
+                testOperatorScalar();
+                testOStream();
+            }
 
-    void mainTest() {
-        testConstructorAtomic();
-        testConstructorPoint();
-        testCopyConstructor();
-        testConvertorType();
-        testConvertorPoint();
-        testGetX();
-        testGetY();
-        testSetX();
-        testSetY();
-        testSetCoord();
-        testNorm();
-        testNormSquared();
-        testNormalize();
-        testRotate();
-        testOperatorShortAdd();
-        testOperatorShortSub();
-        testOperatorShortMult();
-        testOperatorShortDiv();
-        testOperatorShortScalar();
-        testOperatorAdd();
-        testOperatorSub();
-        testOperatorNegate();
-        testOperatorMult();
-        testOperatorDiv();
-        testOperatorEqual();
-        testOperatorNotEqual();
-        testOperatorInferior();
-        testOperatorSuperior();
-        testOperatorScalar();
-        testOStream();
-    }
+        private:
+            static void testConstructorAtomic() {
+                Vector2D<int> tmp(1, 2);
 
-    void testConstructorAtomic() {
-        Vector2D<int> tmp(1, 2);
+                assert(tmp.getX() == 1 && tmp.getY() == 2);
+            }
 
-        assert(tmp.getX() == 1 && tmp.getY() == 2);
-    }
+            static void testConstructorPoint() {
+                Point2D<int> p(1, 2);
+                Point2D<float> q(2, 3);
+                Vector2D<int> tmp(p, q);
 
-    void testConstructorPoint() {
-        Point2D<int> p(1, 2);
-        Point2D<float> q(2, 3);
-        Vector2D<int> tmp(p, q);
+                assert(tmp.getX() == 1 && tmp.getY() == 1);
+            }
 
-        assert(tmp.getX() == 1 && tmp.getY() == 1);
-    }
+            static void testCopyConstructor() {
+                Vector2D<int> u(1, 2), tmp(u);
 
-    void testCopyConstructor() {
-        Vector2D<int> u(1, 2), tmp(u);
+                assert(tmp.getX() == 1 && tmp.getY() == 2);
+            }
 
-        assert(tmp.getX() == 1 && tmp.getY() == 2);
-    }
+            static void testConvertorType() {
+                Vector2D<float> u(1.4, 2.4);
+                Vector2D<int> tmp(u);
 
-    void testConvertorType() {
-        Vector2D<float> u(1.4, 2.4);
-        Vector2D<int> tmp(u);
+                assert(tmp.getX() == 1 && tmp.getY() == 2);
+            }
 
-        assert(tmp.getX() == 1 && tmp.getY() == 2);
-    }
+            static void testConvertorPoint() {
+                Point2D<float> p(1.4, 2.4);
+                Vector2D<int> tmp(p);
 
-    void testConvertorPoint() {
-        Point2D<float> p(1.4, 2.4);
-        Vector2D<int> tmp(p);
+                assert(tmp.getX() == 1 && tmp.getY() == 2);
+            }
 
-        assert(tmp.getX() == 1 && tmp.getY() == 2);
-    }
+            static void testGetX() {
+                Vector2D<int> tmp(1, 2);
 
-    void testGetX() {
-        Vector2D<int> tmp(1, 2);
+                assert(tmp.getX() == 1);
+            }
 
-        assert(tmp.getX() == 1);
-    }
+            static void testGetY() {
+                Vector2D<int> tmp(1, 2);
 
-    void testGetY() {
-        Vector2D<int> tmp(1, 2);
+                assert(tmp.getY() == 2);
+            }
 
-        assert(tmp.getY() == 2);
-    }
+            static void testSetX() {
+                Vector2D<int> tmp(1, 2);
+                tmp.setX(3.4);
 
-    void testSetX() {
-        Vector2D<int> tmp(1, 2);
-        tmp.setX(3.4);
+                assert(tmp.getX() == 3);
+            }
 
-        assert(tmp.getX() == 3);
-    }
+            static void testSetY() {
+                Vector2D<int> tmp(1, 2);
+                tmp.setY(4.4);
 
-    void testSetY() {
-        Vector2D<int> tmp(1, 2);
-        tmp.setY(4.4);
+                assert(tmp.getY() == 4);
+            }
 
-        assert(tmp.getY() == 4);
-    }
+            static void testSetCoord() {
+                Vector2D<int> tmp(1, 2);
+                tmp.setCoord(3.4, 4.4);
 
-    void testSetCoord() {
-        Vector2D<int> tmp(1, 2);
-        tmp.setCoord(3.4, 4.4);
+                assert(tmp.getX() == 3 && tmp.getY() == 4);
+            }
 
-        assert(tmp.getX() == 3 && tmp.getY() == 4);
-    }
+            static void testNorm() {
+                Vector2D<int> tmp(0, 10);
 
-    void testNorm() {
-        Vector2D<int> tmp(0, 10);
+                assert(tmp.norm() == 10.0);
+            }
 
-        assert(tmp.norm() == 10.0);
-    }
+            static void testNormSquared() {
+                Vector2D<int> tmp(0, 10);
 
-    void testNormSquared() {
-        Vector2D<int> tmp(0, 10);
+                assert(tmp.normSquared() == 100.0);
+            }
 
-        assert(tmp.normSquared() == 100.0);
-    }
+            static void testNormalize() {
+                Vector2D<float> tmp(0, 10);
+                tmp.normalize();
 
-    void testNormalize() {
-        Vector2D<float> tmp(0, 10);
-        tmp.normalize();
+                assert(tmp.getX() == 0 && tmp.getY() == 1.0);
+            }
 
-        assert(tmp.getX() == 0 && tmp.getY() == 1.0);
-    }
+            static void testRotate() {
+                Vector2D<float> tmp(5, 10);
+                tmp.rotate(90);
 
-    void testRotate() {
-        Vector2D<float> tmp(5, 10);
-        tmp.rotate(90);
+                assert(almostEqual(tmp.getX(), -10) && almostEqual(tmp.getY(), 5));
+            }
 
-        assert(almostEqual(tmp.getX(), -10) && almostEqual(tmp.getY(), 5));
-    }
+            static void testOperatorShortAdd() {
+                Vector2D<int> tmp(1, 2);
+                Vector2D<float> u(1.4, 2.4);
+                tmp += u;
 
-    void testOperatorShortAdd() {
-        Vector2D<int> tmp(1, 2);
-        Vector2D<float> u(1.4, 2.4);
-        tmp += u;
+                assert(tmp.getX() == 2 && tmp.getY() == 4);
+            }
 
-        assert(tmp.getX() == 2 && tmp.getY() == 4);
-    }
+            static void testOperatorShortSub() {
+                Vector2D<int> tmp(2, 3);
+                Vector2D<float> u(1.4, 2.4);
+                tmp -= u;
 
-    void testOperatorShortSub() {
-        Vector2D<int> tmp(2, 3);
-        Vector2D<float> u(1.4, 2.4);
-        tmp -= u;
+                assert(tmp.getX() == 0 && tmp.getY() == 0);
+            }
 
-        assert(tmp.getX() == 0 && tmp.getY() == 0);
-    }
+            static void testOperatorShortMult() {
+                Vector2D<int> tmp(1, 2);
+                float k = 2.2;
+                tmp *= k;
 
-    void testOperatorShortMult() {
-        Vector2D<int> tmp(1, 2);
-        float k = 2.2;
-        tmp *= k;
+                assert(tmp.getX() == 2 && tmp.getY() == 4);
+            }
 
-        assert(tmp.getX() == 2 && tmp.getY() == 4);
-    }
+            static void testOperatorShortDiv() {
+                Vector2D<int> tmp(2, 4);
+                float k = 1.2;
+                tmp /= k;
 
-    void testOperatorShortDiv() {
-        Vector2D<int> tmp(2, 4);
-        float k = 1.2;
-        tmp /= k;
+                assert(tmp.getX() == 1 && tmp.getY() == 3);
+            }
 
-        assert(tmp.getX() == 1 && tmp.getY() == 3);
-    }
+            static void testOperatorShortScalar() {
+                Vector2D<int> tmp(2, 4);
+                Vector2D<float> u(2.4, 4.4);
 
-    void testOperatorShortScalar() {
-        Vector2D<int> tmp(2, 4);
-        Vector2D<float> u(2.4, 4.4);
-        
-        assert(almostEqual((tmp |= u), 22.4));
-    }
+                assert(almostEqual((tmp |= u), 22.4));
+            }
 
-    void testOperatorAdd() {
-        Vector2D<int> u(1, 2);
-        Vector2D<float> v(1.4, 2.4);
-        Vector2D<int> tmp = u + v;
+            static void testOperatorAdd() {
+                Vector2D<int> u(1, 2);
+                Vector2D<float> v(1.4, 2.4);
+                Vector2D<int> tmp = u + v;
 
-        assert(tmp.getX() == 2 && tmp.getY() == 4);
-    }
+                assert(tmp.getX() == 2 && tmp.getY() == 4);
+            }
 
-    void testOperatorSub() {
-        Vector2D<int> u(2, 3);
-        Vector2D<float> v(1.4, 2.4);
-        Vector2D<int> tmp = u - v;
+            static void testOperatorSub() {
+                Vector2D<int> u(2, 3);
+                Vector2D<float> v(1.4, 2.4);
+                Vector2D<int> tmp = u - v;
 
-        assert(tmp.getX() == 0 && tmp.getY() == 0);
-    }
+                assert(tmp.getX() == 0 && tmp.getY() == 0);
+            }
 
-    void testOperatorNegate() {
-        Vector2D<int> tmp(-1, -2);
-        tmp = -tmp;
+            static void testOperatorNegate() {
+                Vector2D<int> tmp(-1, -2);
+                tmp = -tmp;
 
-        assert(tmp.getX() == 1 && tmp.getY() == 2);
-    }
+                assert(tmp.getX() == 1 && tmp.getY() == 2);
+            }
 
-    void testOperatorMult() {
-        Vector2D<int> u(1, 2);
-        float k = 2.2;
-        Vector2D<int> tmp = u * k;
+            static void testOperatorMult() {
+                Vector2D<int> u(1, 2);
+                float k = 2.2;
+                Vector2D<int> tmp = u * k;
 
-        assert(tmp.getX() == 2 && tmp.getY() == 4);
-    }
+                assert(tmp.getX() == 2 && tmp.getY() == 4);
+            }
 
-    void testOperatorDiv() {
-        Vector2D<int> u(2, 4);
-        float k = 1.2;
-        Vector2D<int> tmp = u / k;
+            static void testOperatorDiv() {
+                Vector2D<int> u(2, 4);
+                float k = 1.2;
+                Vector2D<int> tmp = u / k;
 
-        assert(tmp.getX() == 1 && tmp.getY() == 3);
-    }
+                assert(tmp.getX() == 1 && tmp.getY() == 3);
+            }
 
-    void testOperatorEqual() {
-        Vector2D<int> u(1, 2), v(1, 2);
+            static void testOperatorEqual() {
+                Vector2D<int> u(1, 2), v(1, 2);
 
-        assert(u == v);
-    }
+                assert(u == v);
+            }
 
-    void testOperatorNotEqual() {
-        Vector2D<int> u(1, 2), v(3, 4);
+            static void testOperatorNotEqual() {
+                Vector2D<int> u(1, 2), v(3, 4);
 
-        assert(u != v);
-    }
+                assert(u != v);
+            }
 
-    void testOperatorInferior() {
-        Vector2D<int> u(1, 2), v(3, 4);
+            static void testOperatorInferior() {
+                Vector2D<int> u(1, 2), v(3, 4);
 
-        assert(u < v);
-    }
+                assert(u < v);
+            }
 
-    void testOperatorSuperior() {
-        Vector2D<int> u(1, 2), v(3, 4);
+            static void testOperatorSuperior() {
+                Vector2D<int> u(1, 2), v(3, 4);
 
-        assert(v > u);
-    }
+                assert(v > u);
+            }
 
-    void testOperatorScalar() {
-        Vector2D<int> u(2, 4);
-        Vector2D<float> v(2.4, 4.4);
-        assert(almostEqual((u | v), 22.4));
-    }
+            static void testOperatorScalar() {
+                Vector2D<int> u(2, 4);
+                Vector2D<float> v(2.4, 4.4);
+                assert(almostEqual((u | v), 22.4));
+            }
 
-    void testOStream() {
-        std::ostringstream stream; Vector2D<int> tmp(1, 2);
-        stream << tmp;
-        assert(stream.str() == "(1,2)");
-    }
+            static void testOStream() {
+                std::ostringstream stream; Vector2D<int> tmp(1, 2);
+                stream << tmp;
+                assert(stream.str() == "(1,2)");
+            }
+    };
