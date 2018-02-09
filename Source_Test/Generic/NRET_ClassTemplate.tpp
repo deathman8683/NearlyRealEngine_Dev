@@ -8,7 +8,6 @@
 
     #include <sstream>
     #include <iostream>
-    #include <cassert>
     #include "<Path>/Generic/NRE_Type.hpp"
     #include "<Path>/<Module>/NRE_<Class>.hpp"
 

@@ -8,7 +8,6 @@
 
     #include <sstream>
     #include <iostream>
-    #include <cassert>
     #include "../../../Source/Generic/NRE_Type.hpp"
     #include "../../../Source/Maths/NRE_Maths.hpp"
 

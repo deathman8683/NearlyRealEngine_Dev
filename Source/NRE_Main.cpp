@@ -1,20 +1,14 @@
 
     #include <iostream>
 
-    #include "Generic/NRE_Type.hpp"
-    #include "Maths/NRE_Maths.hpp"
+    #include "SDL_Wrapper/Window/NRE_Window.hpp"
 
-    using namespace NRE::Maths;
+    using namespace NRE::SDL;
 
     int main(int argc, char **argv) {
-        Matrix4x4<NREfloat> tmp;
-        std::cout << tmp << std::endl;
-        tmp.rotate(90, Vector3D<NREfloat>(0, 0, 1));
-        std::cout << tmp << std::endl;
-        tmp.setIdentity();
-        tmp.projection(90, 16/9, 0.1, 100);
-        std::cout << tmp << std::endl;
-        tmp.setIdentity();
-        tmp.lookAt(Point3D<NREfloat>(0, 0, 0), Point3D<NREfloat>(10, 0, 0), Vector3D<NREfloat>(0, 0, 1));
-        std::cout << tmp << std::endl;
+        Window w("test", 0, 100, 840, 600, 0);
+
+        while(1){}
+
+        return 0;
     }

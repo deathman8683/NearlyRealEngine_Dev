@@ -2,6 +2,7 @@
     #pragma once
 
     #include <cmath>
+    #include <cassert>
     #include <iostream>
 
     //typedef double NREfloat;
@@ -10,8 +11,8 @@
     namespace NRE {
         namespace Global {
 
-            extern const NREfloat PI = 3.14159265359;
-            extern const NREfloat EPSILON = 0.00001;
+            static const NREfloat PI = 3.14159265359;
+            static const NREfloat EPSILON = 0.00001;
 
         };
     };

@@ -8,7 +8,6 @@
 
     #include <sstream>
     #include <iostream>
-    #include <cassert>
     #include "../../../Source/Generic/NRE_Type.hpp"
     #include "../../../Source/Maths/NRE_Maths.hpp"
 
@@ -251,7 +250,7 @@
                 Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
                 Vector3D<float> u(20.4, 21.4, 22.4);
                 tmp.scale(u);
-                
+
                 assert(tmp.getL1() == Vector4D<int>(20, 2, 3, 4) && tmp.getL2() == Vector4D<int>(5, 128, 7, 8) &&
                        tmp.getL3() == Vector4D<int>(9, 10, 246, 12) && tmp.getL4() == Vector4D<int>(13, 14, 15, 16));
             }
