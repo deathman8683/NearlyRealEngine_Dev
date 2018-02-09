@@ -36,6 +36,13 @@
                 testSetL2();
                 testSetL3();
                 testSetL4();
+                testSetC1();
+                testSetC2();
+                testSetC3();
+                testSetC4();
+                testSetIdentity();
+                testTranspose();
+                testInverse();
             }
 
         private:
@@ -165,5 +172,65 @@
 
                 assert(tmp.getL1() == Vector4D<int>(1, 2, 3, 4) && tmp.getL2() == Vector4D<int>(5, 6, 7, 8) &&
                        tmp.getL3() == Vector4D<int>(9, 10, 11, 12) && tmp.getL4() == Vector4D<int>(20, 21, 22, 23));
+            }
+
+            static void testSetC1() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                tmp.setC1(Vector4D<float>(20.4, 21.4, 22.4, 23.4));
+
+
+                assert(tmp.getL1() == Vector4D<int>(20, 2, 3, 4) && tmp.getL2() == Vector4D<int>(21, 6, 7, 8) &&
+                       tmp.getL3() == Vector4D<int>(22, 10, 11, 12) && tmp.getL4() == Vector4D<int>(23, 14, 15, 16));
+            }
+
+            static void testSetC2() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                tmp.setC2(Vector4D<float>(20.4, 21.4, 22.4, 23.4));
+
+
+                assert(tmp.getL1() == Vector4D<int>(1, 20, 3, 4) && tmp.getL2() == Vector4D<int>(5, 21, 7, 8) &&
+                       tmp.getL3() == Vector4D<int>(9, 22, 11, 12) && tmp.getL4() == Vector4D<int>(13, 23, 15, 16));
+            }
+
+            static void testSetC3() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                tmp.setC3(Vector4D<float>(20.4, 21.4, 22.4, 23.4));
+
+
+                assert(tmp.getL1() == Vector4D<int>(1, 2, 20, 4) && tmp.getL2() == Vector4D<int>(5, 6, 21, 8) &&
+                       tmp.getL3() == Vector4D<int>(9, 10, 22, 12) && tmp.getL4() == Vector4D<int>(13, 14, 23, 16));
+            }
+
+            static void testSetC4() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                tmp.setC4(Vector4D<float>(20.4, 21.4, 22.4, 23.4));
+
+
+                assert(tmp.getL1() == Vector4D<int>(1, 2, 3, 20) && tmp.getL2() == Vector4D<int>(5, 6, 7, 21) &&
+                       tmp.getL3() == Vector4D<int>(9, 10, 11, 22) && tmp.getL4() == Vector4D<int>(13, 14, 15, 23));
+            }
+
+            static void testSetIdentity() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                tmp.setIdentity();
+
+                assert(tmp.getL1() == Vector4D<int>(1, 0, 0, 0) && tmp.getL2() == Vector4D<int>(0, 1, 0, 0) &&
+                       tmp.getL3() == Vector4D<int>(0, 0, 1, 0) && tmp.getL4() == Vector4D<int>(0, 0, 0, 1));
+            }
+
+            static void testTranspose() {
+                Matrix4x4<int> tmp(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+                tmp.transpose();
+
+                assert(tmp.getL1() == Vector4D<int>(1, 5, 9, 13) && tmp.getL2() == Vector4D<int>(2, 6, 10, 14) &&
+                       tmp.getL3() == Vector4D<int>(3, 7, 11, 15) && tmp.getL4() == Vector4D<int>(4, 8, 12, 16));
+            }
+
+            static void testInverse() {
+                Matrix4x4<float> tmp(1, 2, 3, 4, 9, 0, 9, 0, 2, 1, 1, 2, 1, 2, 2, 1);
+                tmp.inverse();
+
+                assert(tmp.getL1() == Vector4D<float>(-1.0 / 4, 1.0 / 36.0, 1.0 / 2.0, 0.0) && tmp.getL2() == Vector4D<float>(-1.0 / 4.0, -1.0 / 12.0, 1.0 / 6.0, 2.0 / 3.0) &&
+                       tmp.getL3() == Vector4D<float>(1.0 / 4.0, 1.0 / 12.0, -1.0 / 2.0, 0.0) && tmp.getL4() == Vector4D<float>(1.0 / 4.0, -1.0 / 36.0, 1.0 / 6.0, -1.0 / 3.0));
             }
     };
