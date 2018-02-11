@@ -11,6 +11,7 @@
     #include <string>
     #include <SDL2/SDL.h>
     #include "../../Generic/NRE_Type.hpp"
+    #include "../../Maths/NRE_Maths.hpp"
 
     /**
      * @namespace NRE
@@ -46,9 +47,21 @@
 
                     //## Getter ##//
                     SDL_Window* const& getItem() const;
-
+                    NREfloat const getBrightness() const;
+                    std::string const getTitle() const;
+                    Maths::Vector2D<int> const getSize() const;
+                    Maths::Point2D<int> const getCoord() const;
+                    Maths::Vector2D<int> const getMinSize() const;
+                    Maths::Vector2D<int> const getMaxSize() const;
 
                     //## Setter ##//
+                    void setItem(SDL_Window* const& w);
+                    void setBrightness(NREfloat const& brightness);
+                    void setTitle(std::string const& title);
+                    void setSize(Maths::Vector2D<int> const& size);
+                    void setCoord(Maths::Point2D<int> const& coord);
+                    void setMinSize(Maths::Vector2D<int> const& minSize);
+                    void setMaxSize(Maths::Vector2D<int> const& maxSize);
 
                     //## Methods ##//
 
