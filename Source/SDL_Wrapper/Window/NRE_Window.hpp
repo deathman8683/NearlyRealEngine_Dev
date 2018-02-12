@@ -35,7 +35,7 @@
                 public:
                     //## Constructor ##//
                     Window();
-                    Window(std::string const& title, int const& x, int const& y, int const& w, int const& h, unsigned int const& flags);
+                    Window(std::string const& title, int const& x, int const& y, int const& w, int const& h, Uint32 const& flags);
 
                     //## Copy-Constructor ##//
                     Window(Window const& w);

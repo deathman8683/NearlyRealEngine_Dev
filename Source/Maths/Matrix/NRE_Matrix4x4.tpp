@@ -290,7 +290,7 @@
                 T f = tan(toRad(fov) / 2.0);
                 setL1(Vector4D<T>(1.0 / (ratio * f), 0, 0, 0));
                 setL2(Vector4D<T>(0, 1.0 / f, 0, 0));
-                setL3(Vector4D<T>(0, 0, (zFar + zNear) / (zNear - zFar), (2 * zFar * zNear) / (zNear - zFar)));
+                setL3(Vector4D<T>(0, 0, -(zFar + zNear) / (zFar - zNear), -(2 * zFar * zNear) / (zNear - zFar)));
                 setL4(Vector4D<T>(0, 0, -1, 1));
             }
 

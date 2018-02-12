@@ -7,7 +7,7 @@
             Window::Window() : item(0) {
             }
 
-            Window::Window(std::string const& title, int const& x, int const& y, int const& w, int const& h, unsigned int const& flags) {
+            Window::Window(std::string const& title, int const& x, int const& y, int const& w, int const& h, Uint32 const& flags) {
                 item = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
             }
 
