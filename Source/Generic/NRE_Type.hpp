@@ -2,7 +2,7 @@
     #pragma once
 
     #define GLEW_STATIC
-    
+
     #ifdef GLEW_STATIC
         #define GLEWAPI extern
     #else
@@ -16,6 +16,7 @@
     #include <cmath>
     #include <cassert>
     #include <iostream>
+    #include <GL/glew.h>
 
     //typedef double NREfloat;
     typedef float NREfloat;

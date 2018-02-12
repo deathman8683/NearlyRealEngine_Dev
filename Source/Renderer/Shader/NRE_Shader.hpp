@@ -10,7 +10,6 @@
 
     #include <fstream>
     #include "../../Generic/NRE_Type.hpp"
-    #include <GL/glew.h>
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace

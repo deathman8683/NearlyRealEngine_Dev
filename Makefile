@@ -4,9 +4,9 @@ export LD = g++.exe
 export CFLAGS = -Wall -std=c++14
 export LDFLAGS =
 
-export INC = -I"C:\lib\TDM-GCC-64\include" -I"C:\lib\SDL2-2.0.7\x86_64-w64-mingw32\include" -I"C:\lib\Glew2\include"
-export LIBDIR = -L"C:\lib\TDM-GCC-64\lib"  -L"C:\lib\SDL2-2.0.7\x86_64-w64-mingw32\lib" -L"C:\lib\Glew2\lib"
-export LIB = "C:\lib\TDM-GCC-64\x86_64-w64-mingw32\lib\libmingw32.a" "C:\lib\SDL2-2.0.7\x86_64-w64-mingw32\lib\libSDL2main.a" "C:\lib\SDL2-2.0.7\x86_64-w64-mingw32\lib\libSDL2.dll.a" "C:\lib\Glew2\lib\libglew32.dll.a"
+export INC = -I"C:\lib\TDM-GCC-64\include" -I"C:\lib\SDL2-2.0.7\x86_64-w64-mingw32\include" -I"C:\lib\Glew\include"
+export LIBDIR = -L"C:\lib\TDM-GCC-64\lib"  -L"C:\lib\SDL2-2.0.7\x86_64-w64-mingw32\lib" -L"C:\lib\Glew\lib"
+export LIB = "C:\lib\TDM-GCC-64\x86_64-w64-mingw32\lib\libmingw32.a" "C:\lib\SDL2-2.0.7\x86_64-w64-mingw32\lib\libSDL2main.a" "C:\lib\SDL2-2.0.7\x86_64-w64-mingw32\lib\libSDL2.dll.a" "C:\lib\Glew\lib\libglew32.dll.a"
 
 export TARGET = debug
 
@@ -44,6 +44,8 @@ clean :
 	@mkdir obj/Debug/Renderer/Shader
 	@mkdir obj/Debug/SDL_Wrapper
 	@mkdir obj/Debug/SDL_Wrapper/Window
+	@mkdir obj/Debug/Support
+	@mkdir obj/Debug/Support/Viewport
 	@echo "obj/-Tree creation done."
 	@echo "Clean done."
 
@@ -56,5 +58,7 @@ clean_Test :
 	@mkdir obj/Test/Renderer/Shader
 	@mkdir obj/Test/SDL_Wrapper
 	@mkdir obj/Test/SDL_Wrapper/Window
+	@mkdir obj/Test/Support
+	@mkdir obj/Test/Support/Viewport
 	@echo "obj/-Tree creation done."
 	@echo "Clean done."
