@@ -9,7 +9,6 @@
     #pragma once
 
     #include <string>
-    #include <SDL2/SDL.h>
     #include "../../Generic/NRE_Type.hpp"
     #include "../../Maths/NRE_Maths.hpp"
 
@@ -35,7 +34,7 @@
                 public:
                     //## Constructor ##//
                     Window();
-                    Window(std::string const& title, int const& x, int const& y, int const& w, int const& h, Uint32 const& flags);
+                    Window(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags);
 
                     //## Copy-Constructor ##//
                     Window(Window const& w);
@@ -64,6 +63,7 @@
                     void setMaxSize(Maths::Vector2D<int> const& maxSize);
 
                     //## Methods ##//
+                    void createWindow(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags);
 
                     //## Access Operator ##//
 

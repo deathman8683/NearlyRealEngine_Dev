@@ -7,8 +7,8 @@
             Window::Window() : item(0) {
             }
 
-            Window::Window(std::string const& title, int const& x, int const& y, int const& w, int const& h, Uint32 const& flags) {
-                item = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
+            Window::Window(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags) {
+                createWindow(title, coord, size, flags);
             }
 
             Window::Window(Window const& w) {
@@ -81,6 +81,10 @@
 
             void Window::setMaxSize(Maths::Vector2D<int> const& maxSize) {
                 SDL_SetWindowMaximumSize(item, maxSize.getX(), maxSize.getY());
+            }
+
+            void Window::createWindow(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags) {
+                item = SDL_CreateWindow(title.c_str(), coord.getX(), coord.getY(), size.getX(), size.getY(), flags);
             }
 
 

@@ -14,7 +14,7 @@ ifeq ($(TARGET), debug)
 	OBJDIR = obj/Debug/
 	BIN = bin/Debug/
 	SOURCE = Source
-	OBJ = $(OBJDIR)Renderer/Shader/NRE_Shader.o $(OBJDIR)SDL_Wrapper/Window/NRE_Window.o $(OBJDIR)NRE_Main.o
+	OBJ = $(OBJDIR)SDL_Wrapper/Window/NRE_Window.o $(OBJDIR)NRE_Main.o
 
 else
 	OBJDIR = obj/Test/
@@ -46,6 +46,7 @@ clean :
 	@mkdir obj/Debug/SDL_Wrapper/Window
 	@mkdir obj/Debug/Support
 	@mkdir obj/Debug/Support/Viewport
+	@mkdir obj/Debug/Support/Scene
 	@echo "obj/-Tree creation done."
 	@echo "Clean done."
 
@@ -60,5 +61,6 @@ clean_Test :
 	@mkdir obj/Test/SDL_Wrapper/Window
 	@mkdir obj/Test/Support
 	@mkdir obj/Test/Support/Viewport
+	@mkdir obj/Test/Support/Scene
 	@echo "obj/-Tree creation done."
 	@echo "Clean done."

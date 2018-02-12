@@ -53,6 +53,7 @@
                     void setGLSize(Maths::Vector2D<GLushort> const& size);
 
                     //## Methods ##//
+                    void createCurrent();
 
                     //## Access Operator ##//
 

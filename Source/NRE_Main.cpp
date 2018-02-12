@@ -1,7 +1,7 @@
 
     #include <iostream>
 
-    #include "SDL_Wrapper/Window/NRE_Window.hpp"
+    #include "Support/Scene/NRE_Scene.hpp"
     #include "Renderer/Shader/NRE_Shader.hpp"
 
     using namespace NRE::SDL;

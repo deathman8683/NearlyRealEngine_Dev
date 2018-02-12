@@ -6,10 +6,7 @@
 
             Viewport::Viewport(bool const& createCurrentViewport) {
                 if (createCurrentViewport) {
-                    GLint tmp[4];
-                    glGetIntegerv(GL_VIEWPORT, tmp);
-                    setWSize(Maths::Vector2D<GLushort>(tmp[0], tmp[1]));
-                    setGLSize(Maths::Vector2D<GLushort>(tmp[2], tmp[3]));
+                    createCurrent();
                 }
             }
 
@@ -36,6 +33,13 @@
 
             void Viewport::setGLSize(Maths::Vector2D<GLushort> const& size) {
                 glSize = size;
+            }
+
+            void Viewport::createCurrent() {
+                GLint tmp[4];
+                glGetIntegerv(GL_VIEWPORT, tmp);
+                setWSize(Maths::Vector2D<GLushort>(tmp[0], tmp[1]));
+                setGLSize(Maths::Vector2D<GLushort>(tmp[2], tmp[3]));
             }
 
         };

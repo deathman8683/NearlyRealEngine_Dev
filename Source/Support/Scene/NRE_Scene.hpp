@@ -29,13 +29,13 @@
             class Scene {
                 private:
                     SDL::Window window;
-                    Support::Viewport viewport;
+                    Viewport viewport;
                     SDL_GLContext context;
 
                 public:
                     //## Constructor ##//
                     Scene();
-                    Scene(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord = Point2D<int>(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED));
+                    Scene(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord = Maths::Point2D<int>(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED));
 
                     //## Copy-Constructor ##//
                     Scene(Scene const& s);
@@ -46,10 +46,17 @@
                     ~Scene();
 
                     //## Getter ##//
+                    SDL::Window const& getWindow() const;
+                    Viewport const& getViewport() const;
+                    SDL_GLContext const& getContext() const;
 
                     //## Setter ##//
+                    void setWindow(SDL::Window const& w);
+                    void setViewport(Viewport const& v);
+                    void setContext(SDL_GLContext const& c);
 
                     //## Methods ##//
+                    void init();
 
                     //## Access Operator ##//
 
@@ -66,6 +73,14 @@
                     //## Shift Operator ##//
 
                 private:
+                    void initScreen();
+                    void initGL();
+
+                    static Uint32 DEFAULT_FLAGS;
+                    static Uint32 SDL_INIT_FLAGS;
+                    static int MAJOR_VERSION;
+                    static int MINOR_VERSION;
+                    static int DEPTH_SIZE;
             };
 
         };
