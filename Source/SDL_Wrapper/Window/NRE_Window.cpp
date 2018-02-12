@@ -7,7 +7,7 @@
             Window::Window() : item(0) {
             }
 
-            Window::Window(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags) {
+            Window::Window(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags) : item(0) {
                 createWindow(title, coord, size, flags);
             }
 
