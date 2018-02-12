@@ -287,11 +287,11 @@
             template <class T>
             template <class K, class L, class M, class N>
             void Matrix4x4<T>::projection(K const& fov, L const& ratio, M const& zNear, N const& zFar) {
-                T f = tan(toRad(fov) / 2.0);
+                T f = tan(fov / 2.0);
                 setL1(Vector4D<T>(1.0 / (ratio * f), 0, 0, 0));
                 setL2(Vector4D<T>(0, 1.0 / f, 0, 0));
-                setL3(Vector4D<T>(0, 0, -(zFar + zNear) / (zFar - zNear), -(2 * zFar * zNear) / (zNear - zFar)));
-                setL4(Vector4D<T>(0, 0, -1, 1));
+                setL3(Vector4D<T>(0, 0, (zFar + zNear) / (zNear - zFar), -1));
+                setL4(Vector4D<T>(0, 0,  (2 * zFar * zNear) / (zNear - zFar), 0));
             }
 
             template <class T>
