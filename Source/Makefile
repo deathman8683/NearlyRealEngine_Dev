@@ -5,9 +5,11 @@ OBJDIR = ../obj/Debug/
 all : before $(TARGET)
 
 SDL_WRAPPER = SDL_Wrapper
+RENDERER = Renderer
 
 before :
 	@(cd $(SDL_WRAPPER) && $(MAKE))
+	@(cd $(RENDERER) && $(MAKE))
 
 debug : $(OBJ)
 
