@@ -9,6 +9,9 @@
     #pragma once
 
     #include "../../../Generic/NRE_Type.hpp"
+    #include "../Buffer/VertexBuffer.hpp"
+    #include "../Buffer/ColorBuffer.hpp"
+    #include "../Buffer/NormalBuffer.hpp"
     #include "../NRE_BufferObject.hpp"
 
     /**
@@ -28,6 +31,9 @@
              */
             class VBO : public BufferObject{
                 private:
+                    VertexBuffer vertex;
+                    ColorBuffer color;
+                    NormalBuffer normal;
 
                 public:
                     //## Constructor ##//
@@ -38,7 +44,7 @@
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~VBO();
+                    ~VBO();
 
                     //## Getter ##//
 

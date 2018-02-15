@@ -33,7 +33,7 @@
 
                 public:
                     //## Constructor ##//
-                    VertexBuffer(bool const& allocate = false);
+                    VertexBuffer(GLenum const& type, bool const& generate = false);
 
                     //## Copy-Constructor ##//
 
@@ -74,3 +74,5 @@
 
         };
     };
+
+    #include "NRE_VertexBuffer.tpp"
