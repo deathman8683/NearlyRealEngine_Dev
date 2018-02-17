@@ -26,7 +26,7 @@
              * @brief GL's Object : A typical buffer used in BufferObject - Interface for specilized buffer
              */
             class Buffer {
-                private:
+                protected:
                     GLuint id;
 
                 public:

@@ -9,9 +9,9 @@
     #pragma once
 
     #include "../../../Generic/NRE_Type.hpp"
-    #include "../Buffer/VertexBuffer.hpp"
-    #include "../Buffer/ColorBuffer.hpp"
-    #include "../Buffer/NormalBuffer.hpp"
+    #include "../Buffer/Vertex/NRE_VertexBuffer.hpp"
+    #include "../Buffer/Color/NRE_ColorBuffer.hpp"
+    #include "../Buffer/Normal/NRE_NormalBuffer.hpp"
     #include "../NRE_BufferObject.hpp"
 
     /**
@@ -29,9 +29,10 @@
              * @class VBO
              * @brief GL's Object : Specialization of an BufferObject for vertex managing
              */
+            template <class T>
             class VBO : public BufferObject{
                 private:
-                    VertexBuffer vertex;
+                    VertexBuffer<T> vertex;
                     ColorBuffer color;
                     NormalBuffer normal;
 
@@ -71,3 +72,5 @@
 
         };
     };
+
+    #include "NRE_VBO.tpp"

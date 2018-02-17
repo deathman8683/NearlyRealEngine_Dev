@@ -9,7 +9,7 @@
     #pragma once
 
     #include "../NRE_Buffer.hpp"
-    #include "../../../Generic/NRE_Type.hpp"
+    #include "../../../../Generic/NRE_Type.hpp"
 
     #define COLOR_BUFFER_SIZE sizeof(GLubyte)
 

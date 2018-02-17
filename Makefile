@@ -14,7 +14,7 @@ ifeq ($(TARGET), debug)
 	OBJDIR = obj/Debug/
 	BIN = bin/Debug/
 	SOURCE = Source
-	OBJ =  $(OBJDIR)SDL_Wrapper/Window/NRE_Window.o $(OBJDIR)GL_Wrapper/BufferObject/NRE_BufferObject.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/NRE_VBO.o $(OBJDIR)Support/Viewport/NRE_Viewport.o $(OBJDIR)Support/Scene/NRE_Scene.o $(OBJDIR)Renderer/Shader/NRE_Shader.o $(OBJDIR)NRE_Main.o
+	OBJ =  $(OBJDIR)SDL_Wrapper/Window/NRE_Window.o $(OBJDIR)GL_Wrapper/BufferObject/NRE_BufferObject.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/NRE_Buffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Color/NRE_ColorBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Index/NRE_IndexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Normal/NRE_NormalBuffer.o $(OBJDIR)Support/Viewport/NRE_Viewport.o $(OBJDIR)Support/Scene/NRE_Scene.o $(OBJDIR)Renderer/Shader/NRE_Shader.o $(OBJDIR)NRE_Main.o
 
 else
 	OBJDIR = obj/Test/
@@ -42,7 +42,10 @@ clean :
 	@mkdir obj/Debug
 	@mkdir obj/Debug/GL_Wrapper
 	@mkdir obj/Debug/GL_Wrapper/BufferObject
-	@mkdir obj/Debug/GL_Wrapper/BufferObject/VBO
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer/Color
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer/Index
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer/Normal
 	@mkdir obj/Debug/Renderer
 	@mkdir obj/Debug/Renderer/Shader
 	@mkdir obj/Debug/SDL_Wrapper
@@ -60,7 +63,10 @@ clean_Test :
 	@mkdir obj/Test
 	@mkdir obj/Test/GL_Wrapper
 	@mkdir obj/Test/GL_Wrapper/BufferObject
-	@mkdir obj/Test/GL_Wrapper/BufferObject/VBO
+	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer
+	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer/Color
+	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer/Index
+	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer/Normal
 	@mkdir obj/Test/Renderer
 	@mkdir obj/Test/Renderer/Shader
 	@mkdir obj/Test/SDL_Wrapper

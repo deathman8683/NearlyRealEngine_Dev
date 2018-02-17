@@ -2,12 +2,12 @@ SRC = NRE_BufferObject.cpp
 OBJ = $(OBJDIR)NRE_BufferObject.o
 OBJDIR = ../../../obj/Debug/GL_Wrapper/BufferObject/
 
-VBO = VBO
+BUFFER = Buffer
 
 all : $(TARGET) after
 
 after:
-	@(cd $(VBO) && $(MAKE))
+	@(cd $(BUFFER) && $(MAKE))
 
 debug: $(OBJ)
 

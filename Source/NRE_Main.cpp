@@ -6,11 +6,11 @@
     using namespace NRE;
 
     int main(int argc, char **argv) {
-        GL::VBO* tmp = new GL::VBO();
+        /*GL::VBO<int>* tmp = new GL::VBO<int>();
 
         std::cout << "Deconstruction" << std::endl;
 
-        delete tmp;
+        delete tmp;*/
 
         return 0;
     }
