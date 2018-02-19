@@ -10,6 +10,10 @@
             }
 
             template <class T>
+            VertexBuffer<T>::VertexBuffer(VertexBufferc const& buf) : Buffer::Buffer(buf), type(buf.getType()) {
+            }
+
+            template <class T>
             VertexBuffer<T>::~VertexBuffer() {
                 deleteID();
             }

@@ -7,6 +7,9 @@
             Buffer::Buffer() {
             }
 
+            Buffer::Buffer(Buffer const& buf) : id(buf.getID()) {
+            }
+
             Buffer::~Buffer() {
             }
 
@@ -16,6 +19,14 @@
 
             void Buffer::setID(GLuint const& id) {
                 this->id = id;
+            }
+
+            void Buffer::bind() {
+                glBindBuffer(id);
+            }
+
+            void Buffer::unbind() {
+                glBindBuffer(0);
             }
 
         };

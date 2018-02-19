@@ -1,15 +1,14 @@
 
     /**
-     * @file NRE_VertexBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : VertexBuffer
+     * @file NRE_VAO.hpp
+     * @brief Declaration of Engine's GL's Object : VAO
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NRE_Buffer.hpp"
-    #include "../../../../Generic/NRE_Type.hpp"
+    #include "../../Generic/NRE_Type.hpp"
 
     /**
      * @namespace NRE
@@ -23,38 +22,35 @@
         namespace GL {
 
             /**
-             * @class VertexBuffer
-             * @brief GL's Object : A specialized buffer for vertex
+             * @class VAO
+             * @brief GL's Object : Manage the storage of functions' call, like for VBO
              */
-            template <class T>
-            class VertexBuffer : public Buffer {
+            class VAO {
                 private:
-                    GLenum type;
+                    GLuint id;
 
                 public:
                     //## Constructor ##//
-                    VertexBuffer(GLenum const& type, bool const& generate = false);
+                    VAO();
 
                     //## Copy-Constructor ##//
-                    VertexBuffer(VertexBuffer const& buf);
+                    VAO(VAO const& arr);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~VertexBuffer();
+                    ~VAO();
 
                     //## Getter ##//
-                    GLenum const& getType() const;
+                    GLuint const& getID() const;
 
                     //## Setter ##//
-                    void setType(GLenum const& type);
+                    void setID(GLuint const& id);
 
                     //## Methods ##//
-                    void generateID() override;
-                    void deleteID() override;
-                    void reload() override;
-                    void allocate(unsigned int const& vertices, GLenum const& usage) override;
-                    void update(unsigned int const& vertices, GLvoid* const data) override;
+                    void generateID();
+                    void deleteID();
+                    void bind();
 
                     //## Access Operator ##//
 
@@ -75,5 +71,3 @@
 
         };
     };
-
-    #include "NRE_VertexBuffer.tpp"

@@ -34,7 +34,8 @@
                     Buffer();
 
                     //## Copy-Constructor ##//
-
+                    Buffer(Buffer const& buf);
+                    
                     //## Convertor ##//
 
                     //## Deconstructor ##//
@@ -52,6 +53,8 @@
                     virtual void reload() = 0;
                     virtual void allocate(unsigned int const& vertices, GLenum const& usage) = 0;
                     virtual void update(unsigned int const& vertices, GLvoid* const data) = 0;
+                    virtual void bind();
+                    virtual void unbind();
 
                     //## Access Operator ##//
 
