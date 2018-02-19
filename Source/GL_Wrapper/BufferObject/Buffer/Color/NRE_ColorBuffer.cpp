@@ -27,15 +27,23 @@
                 generateID();
             }
 
-            void ColorBuffer::allocate(unsigned int const& vertices, GLenum const& usage) {
-                glBindBuffer(GL_ARRAY_BUFFER, getID());
-                glBufferData(GL_ARRAY_BUFFER, COLOR_BUFFER_SIZE * vertices * 3, NULL, usage);
-                glBindBuffer(GL_ARRAY_BUFFER, 0);
+            void NormalBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) {
+                bind();
+                glBufferData(GL_ARRAY_BUFFER, size, NULL, usage);
+                unbind();
             }
 
-            void ColorBuffer::update(unsigned int const& vertices, GLvoid* const data) {
-                glBindBuffer(GL_ARRAY_BUFFER, getID());
-                glBufferSubData(GL_ARRAY_BUFFER, 0, COLOR_BUFFER_SIZE * vertices * 3, data);
+            void NormalBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) {
+                bind();
+                glBufferData(GL_ARRAY_BUFFER, offset, size, data);
+                unbind();
+            }
+
+            void NormalBuffer::bind() {
+                glBindBuffer(GL_ARRAY_BUFFER, getID();
+            }
+
+            void NormalBuffer::unbind() {
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
             }
 

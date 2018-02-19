@@ -35,7 +35,7 @@
 
                     //## Copy-Constructor ##//
                     Buffer(Buffer const& buf);
-                    
+
                     //## Convertor ##//
 
                     //## Deconstructor ##//
@@ -51,10 +51,10 @@
                     virtual void generateID() = 0;
                     virtual void deleteID() = 0;
                     virtual void reload() = 0;
-                    virtual void allocate(unsigned int const& vertices, GLenum const& usage) = 0;
-                    virtual void update(unsigned int const& vertices, GLvoid* const data) = 0;
-                    virtual void bind();
-                    virtual void unbind();
+                    virtual void allocate(GLenum const& target, GLsizeiptr const& size, GLenum const& usage);
+                    virtual void update(GLenum const& target, GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data);
+                    virtual void bind(GLenum const& target);
+                    virtual void unbind(GLenum const& target);
 
                     //## Access Operator ##//
 
@@ -72,6 +72,8 @@
 
                 private:
             };
+
+           std::ostream& operator<<(std::ostream &stream, Buffer const& buf);
 
         };
     };

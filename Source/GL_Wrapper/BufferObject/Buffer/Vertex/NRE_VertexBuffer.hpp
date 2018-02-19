@@ -26,17 +26,14 @@
              * @class VertexBuffer
              * @brief GL's Object : A specialized buffer for vertex
              */
-            template <class T>
             class VertexBuffer : public Buffer {
                 private:
-                    GLenum type;
 
                 public:
                     //## Constructor ##//
-                    VertexBuffer(GLenum const& type, bool const& generate = false);
+                    VertexBuffer(bool const& generate = false);
 
                     //## Copy-Constructor ##//
-                    VertexBuffer(VertexBuffer const& buf);
 
                     //## Convertor ##//
 
@@ -44,17 +41,17 @@
                     ~VertexBuffer();
 
                     //## Getter ##//
-                    GLenum const& getType() const;
 
                     //## Setter ##//
-                    void setType(GLenum const& type);
 
                     //## Methods ##//
                     void generateID() override;
                     void deleteID() override;
                     void reload() override;
-                    void allocate(unsigned int const& vertices, GLenum const& usage) override;
-                    void update(unsigned int const& vertices, GLvoid* const data) override;
+                    void allocate(GLsizeiptr const& size, GLenum const& usage) override;
+                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) override;
+                    void bind() override;
+                    void unbind() override;
 
                     //## Access Operator ##//
 
@@ -73,7 +70,8 @@
                 private:
             };
 
+            template <class T>
+            std::ostream& operator<<(std::ostream &stream, VertexBuffer<T> const& buf);
+
         };
     };
-
-    #include "NRE_VertexBuffer.tpp"

@@ -11,8 +11,6 @@
     #include "../NRE_Buffer.hpp"
     #include "../../../../Generic/NRE_Type.hpp"
 
-    #define COLOR_BUFFER_SIZE sizeof(GLubyte)
-
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace
@@ -50,8 +48,10 @@
                     void generateID() override;
                     void deleteID() override;
                     void reload() override;
-                    void allocate(unsigned int const& vertices, GLenum const& usage) override;
-                    void update(unsigned int const& vertices, GLvoid* const data) override;
+                    void allocate(GLsizeiptr const& size, GLenum const& usage) override;
+                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) override;
+                    void bind() override;
+                    void unbind() override;
 
                     //## Access Operator ##//
 

@@ -1,50 +1,55 @@
 
-    #include "NRE_NormalBuffer.hpp"
+    #include "NRE_VertexBuffer.hpp"
 
     namespace NRE {
         namespace GL {
 
-            NormalBuffer::NormalBuffer(bool const& generate) {
+            VertexBuffer::VertexBuffer(bool const& generate) {
                 if (generate) {
                     generateID();
                 }
             }
 
-            NormalBuffer::~NormalBuffer() {
+            VertexBuffer::~VertexBuffer() {
                 deleteID();
             }
 
-            void NormalBuffer::generateID() {
+            void VertexBuffer::generateID() {
                 glGenBuffers(1, &id);
             }
 
-            void NormalBuffer::deleteID() {
+            void VertexBuffer::deleteID() {
                 glDeleteBuffers(1, &id);
             }
 
-            void NormalBuffer::reload() {
+            void VertexBuffer::reload() {
                 deleteID();
                 generateID();
             }
 
-            void NormalBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) {
+            void VertexBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) {
                 bind();
                 glBufferData(GL_ARRAY_BUFFER, size, NULL, usage);
                 unbind();
             }
 
-            void NormalBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) {
+            void VertexBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) {
                 bind();
                 glBufferData(GL_ARRAY_BUFFER, offset, size, data);
                 unbind();
             }
 
-            void NormalBuffer::bind() {
+            void VertexBuffer::bind() {
                 glBindBuffer(GL_ARRAY_BUFFER, getID();
             }
 
-            void NormalBuffer::unbind() {
+            void VertexBuffer::unbind() {
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
+            }
+
+            std::ostream& operator<<(std::ostream &stream, VertexBuffer const& buf) {
+                stream << "(" << buf.getID() << ")";
+                return stream;
             }
 
         };

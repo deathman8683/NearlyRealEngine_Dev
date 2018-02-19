@@ -51,6 +51,7 @@
                     void generateID();
                     void deleteID();
                     void bind();
+                    void unbind();
 
                     //## Access Operator ##//
 

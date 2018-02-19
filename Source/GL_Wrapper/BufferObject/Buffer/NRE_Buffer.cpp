@@ -21,12 +21,29 @@
                 this->id = id;
             }
 
-            void Buffer::bind() {
-                glBindBuffer(id);
+            void ColorBuffer::allocate(GLenum const& target, GLsizeiptr const& size, GLenum const& usage) {
+                bind(target);
+                glBufferData(target, size, NULL, usage);
+                unbind(target);
             }
 
-            void Buffer::unbind() {
-                glBindBuffer(0);
+            void ColorBuffer::update(GLenum const& target, GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) {
+                bind(target);
+                glBufferSubData(target, offset, size, data);
+                unbind(target);
+            }
+
+            void Buffer::bind(GLenum const& target) {
+                glBindBuffer(target, id);
+            }
+
+            void Buffer::unbind(GLenum const& target) {
+                glBindBuffer(target, 0);
+            }
+
+            std::ostream& operator<<(std::ostream &stream, Buffer const& buf) {
+                stream << "(" << buf.getID() << ")";
+                return stream;
             }
 
         };

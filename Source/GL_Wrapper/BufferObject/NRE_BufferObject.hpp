@@ -41,8 +41,10 @@
                     virtual ~BufferObject();
 
                     //## Getter ##//
+                    virtual bool const& isAllocated() const;
 
                     //## Setter ##//
+                    virtual void setAllocated(bool const& state);
 
                     //## Methods ##//
 
