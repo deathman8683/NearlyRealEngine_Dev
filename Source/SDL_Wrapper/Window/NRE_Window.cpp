@@ -15,6 +15,9 @@
                 item = w.getItem();
             }
 
+            Window::Window(SDL_Window* const& w) : item(w) {
+            }
+
             Window::~Window() {
                 SDL_DestroyWindow(getItem());
             }

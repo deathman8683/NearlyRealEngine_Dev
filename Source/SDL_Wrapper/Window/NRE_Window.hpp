@@ -40,6 +40,7 @@
                     Window(Window const& w);
 
                     //## Convertor ##//
+                    Window(SDL_Window* const& w);
 
                     //## Deconstructor ##//
                     ~Window();
