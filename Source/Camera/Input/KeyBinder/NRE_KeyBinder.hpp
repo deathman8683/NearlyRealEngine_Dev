@@ -1,14 +1,16 @@
 
     /**
-     * @file NRE_Key.hpp
-     * @brief Declaration of Engine's Input's Object : Key
+     * @file NRE_KeyBinder.hpp
+     * @brief Declaration of Engine's Input's Object : KeyBinder
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../../Generic/NRE_Type.hpp"
+    #include <unordered_map>
+    #include "../../../Generic/NRE_Type.hpp"
+    #include "Key/NRE_Key.hpp"
 
     /**
      * @namespace NRE
@@ -22,37 +24,31 @@
         namespace Input {
 
             /**
-             * @class Key
-             * @brief Input's Object : Base component for KeyBinder
+             * @class KeyBinder
+             * @brief Input's Object : Base component for a specialized input system
              */
-            class Key {
+            class KeyBinder {
                 private:
-                    unsigned int code;
-                    bool state;
-                    bool isSwitch;
+                    std::unordered_map<unsigned int, Key> keyMap;
 
                 public:
                     //## Constructor ##//
-                    Key();
-                    Key(unsigned int const& code, bool const& state, bool const& isSwitch);
+                    KeyBinder();
+                    KeyBinder(size_t const& n);
 
                     //## Copy-Constructor ##//
-                    Key(Key const& k);
+                    KeyBinder(KeyBinder const& map);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Key();
+                    ~KeyBinder();
 
                     //## Getter ##//
-                    unsigned int const& getCode() const;
-                    bool const& getState() const;
-                    bool const& isSwitch() const;
+                    std::unordered_map<unsigned int, Key> const& getKeyMap() const;
 
                     //## Setter ##//
-                    void setCode(unsigned int const& code);
-                    void setState(bool const& state);
-                    void setSwitch(bool const& state);
+                    void setKeyMap(std::unordered_map<unsigned int, Key> const& map);
 
                     //## Methods ##//
 

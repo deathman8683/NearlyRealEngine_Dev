@@ -7,7 +7,7 @@
             Key::Key() : code(0), state(false), isSwitch(false) {
             }
 
-            Key::Key(SDL_Scancode const& code, bool const& state, bool const& isSwitch) : code(code), state(state), isSwitch(isSwitch) {
+            Key::Key(unsigned int const& code, bool const& state, bool const& isSwitch) : code(code), state(state), isSwitch(isSwitch) {
             }
 
             Key::Key(Key const& k) : code(k.getCode()), state(k.getState()), isSwitch(k.isSwitch()) {
@@ -16,7 +16,7 @@
             Key::~Key() {
             }
 
-            SDL_Scancode const& Key::getCode() const {
+            unsigned int const& Key::getCode() const {
                 return code;
             }
 
@@ -28,7 +28,7 @@
                 return isSwitch;
             }
 
-            void Key::setCode(SDL_Scancode const& code) {
+            void Key::setCode(unsigned int const& code) {
                 this->code = code;
             }
 
