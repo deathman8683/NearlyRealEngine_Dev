@@ -7,8 +7,7 @@
             BufferObject::BufferObject() : allocated(false) {
             }
 
-            BufferObject::~BufferObject(){
-                std::cout << "Base deconstructor" << std::endl;
+            BufferObject::~BufferObject() {
             }
 
         };
