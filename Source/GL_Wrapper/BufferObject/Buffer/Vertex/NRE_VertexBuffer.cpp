@@ -27,29 +27,20 @@
                 generateID();
             }
 
-            void VertexBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) {
-                bind();
-                glBufferData(GL_ARRAY_BUFFER, size, NULL, usage);
-                unbind();
+            void VertexBuffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
+                Buffer::allocate(size, usage, target);
             }
 
-            void VertexBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) {
-                bind();
-                glBufferData(GL_ARRAY_BUFFER, offset, size, data);
-                unbind();
+            void VertexBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target) {
+                Buffer::update(offset, size, data, target);
             }
 
-            void VertexBuffer::bind() {
-                glBindBuffer(GL_ARRAY_BUFFER, getID();
+            void VertexBuffer::bind(GLenum const& target) const {
+                Buffer::bind(target);
             }
 
-            void VertexBuffer::unbind() {
-                glBindBuffer(GL_ARRAY_BUFFER, 0);
-            }
-
-            std::ostream& operator<<(std::ostream &stream, VertexBuffer const& buf) {
-                stream << "(" << buf.getID() << ")";
-                return stream;
+            void VertexBuffer::unbind(GLenum const& target) const {
+                Buffer::bind(target);
             }
 
         };

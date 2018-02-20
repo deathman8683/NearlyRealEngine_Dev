@@ -51,10 +51,10 @@
                     virtual void generateID() = 0;
                     virtual void deleteID() = 0;
                     virtual void reload() = 0;
-                    virtual void allocate(GLenum const& target, GLsizeiptr const& size, GLenum const& usage);
-                    virtual void update(GLenum const& target, GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data);
-                    virtual void bind(GLenum const& target);
-                    virtual void unbind(GLenum const& target);
+                    virtual void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target);
+                    virtual void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target);
+                    virtual void bind(GLenum const& target) const;
+                    virtual void unbind(GLenum const& target) const;
 
                     //## Access Operator ##//
 

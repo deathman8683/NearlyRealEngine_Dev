@@ -10,5 +10,13 @@
             BufferObject::~BufferObject() {
             }
 
+            bool const& BufferObject::isAllocated() const {
+                return allocated;
+            }
+
+            void BufferObject::setAllocated(bool const& state) {
+                allocated = state;
+            }
+
         };
     };

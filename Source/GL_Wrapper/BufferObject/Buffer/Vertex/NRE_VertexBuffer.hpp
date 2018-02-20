@@ -48,10 +48,10 @@
                     void generateID() override;
                     void deleteID() override;
                     void reload() override;
-                    void allocate(GLsizeiptr const& size, GLenum const& usage) override;
-                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) override;
-                    void bind() override;
-                    void unbind() override;
+                    void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target = GL_ARRAY_BUFFER) override;
+                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target = GL_ARRAY_BUFFER) override;
+                    void bind(GLenum const& target = GL_ARRAY_BUFFER) const override;
+                    void unbind(GLenum const& target = GL_ARRAY_BUFFER) const override;
 
                     //## Access Operator ##//
 
@@ -69,9 +69,6 @@
 
                 private:
             };
-
-            template <class T>
-            std::ostream& operator<<(std::ostream &stream, VertexBuffer<T> const& buf);
 
         };
     };

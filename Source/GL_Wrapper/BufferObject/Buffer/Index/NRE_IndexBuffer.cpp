@@ -27,24 +27,20 @@
                 generateID();
             }
 
-            void NormalBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) {
-                bind();
-                glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, NULL, usage);
-                unbind();
+            void IndexBuffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
+                Buffer::allocate(size, usage, target);
             }
 
-            void NormalBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) {
-                bind();
-                glBufferData(GL_ELEMENT_ARRAY_BUFFER, offset, size, data);
-                unbind();
+            void IndexBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target) {
+                Buffer::update(offset, size, data, target);
             }
 
-            void NormalBuffer::bind() {
-                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, getID();
+            void IndexBuffer::bind(GLenum const& target) const {
+                Buffer::bind(target);
             }
 
-            void NormalBuffer::unbind() {
-                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+            void IndexBuffer::unbind(GLenum const& target) const {
+                Buffer::bind(target);
             }
 
         };

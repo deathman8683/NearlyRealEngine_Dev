@@ -31,7 +31,7 @@
 
                 public:
                     //## Constructor ##//
-                    VAO();
+                    VAO(bool const& generate = false);
 
                     //## Copy-Constructor ##//
                     VAO(VAO const& arr);
@@ -50,8 +50,9 @@
                     //## Methods ##//
                     void generateID();
                     void deleteID();
-                    void bind();
-                    void unbind();
+                    void reload();
+                    void bind() const;
+                    void unbind() const;
 
                     //## Access Operator ##//
 
@@ -69,6 +70,8 @@
 
                 private:
             };
+
+            std::ostream& operator<<(std::ostream &stream, VAO const& arr);
 
         };
     };

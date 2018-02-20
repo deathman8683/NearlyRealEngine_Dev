@@ -3,11 +3,13 @@ OBJ = $(OBJDIR)NRE_BufferObject.o
 OBJDIR = ../../../obj/Debug/GL_Wrapper/BufferObject/
 
 BUFFER = Buffer
+VBO = VBO
 
 all : $(TARGET) after
 
 after:
 	@(cd $(BUFFER) && $(MAKE))
+	@(cd $(VBO) && $(MAKE))
 
 debug: $(OBJ)
 

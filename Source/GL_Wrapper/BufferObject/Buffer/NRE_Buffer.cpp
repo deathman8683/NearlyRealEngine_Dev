@@ -21,23 +21,23 @@
                 this->id = id;
             }
 
-            void ColorBuffer::allocate(GLenum const& target, GLsizeiptr const& size, GLenum const& usage) {
+            void Buffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
                 bind(target);
                 glBufferData(target, size, NULL, usage);
                 unbind(target);
             }
 
-            void ColorBuffer::update(GLenum const& target, GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) {
+            void Buffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target) {
                 bind(target);
                 glBufferSubData(target, offset, size, data);
                 unbind(target);
             }
 
-            void Buffer::bind(GLenum const& target) {
+            void Buffer::bind(GLenum const& target) const {
                 glBindBuffer(target, id);
             }
 
-            void Buffer::unbind(GLenum const& target) {
+            void Buffer::unbind(GLenum const& target) const {
                 glBindBuffer(target, 0);
             }
 

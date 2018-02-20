@@ -29,18 +29,18 @@
              * @class VBO
              * @brief GL's Object : Specialization of an BufferObject for vertex managing
              */
-            template <class T>
             class VBO : public BufferObject{
                 private:
-                    VertexBuffer<T> vertex;
+                    VertexBuffer vertex;
                     ColorBuffer color;
                     NormalBuffer normal;
 
                 public:
                     //## Constructor ##//
-                    VBO();
+                    VBO(bool const& generate = false);
 
                     //## Copy-Constructor ##//
+                    VBO(VBO const& buf);
 
                     //## Convertor ##//
 
@@ -48,10 +48,23 @@
                     ~VBO();
 
                     //## Getter ##//
+                    VertexBuffer const& getVertexBuffer() const;
+                    ColorBuffer const& getColorBuffer() const;
+                    NormalBuffer const& getNormalBuffer() const;
 
                     //## Setter ##//
+                    void setVertexBuffer(VertexBuffer const& buf);
+                    void setColorBuffer(ColorBuffer const& buf);
+                    void setNormalBuffer(NormalBuffer const& buf);
 
                     //## Methods ##//
+                    void generateID();
+                    void deleteID();
+                    void reload();
+                    void allocate(size_t const& typeSize, size_t const& nbVertex, GLenum const& usage);
+                    void update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData);
+                    void bind() const;
+                    void unbind() const;
 
                     //## Access Operator ##//
 
@@ -70,7 +83,7 @@
                 private:
             };
 
+            std::ostream& operator<<(std::ostream &stream, VBO const& buf);
+
         };
     };
-
-    #include "NRE_VBO.tpp"
