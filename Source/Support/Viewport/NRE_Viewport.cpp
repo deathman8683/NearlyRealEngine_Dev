@@ -4,6 +4,9 @@
     namespace NRE {
         namespace Support {
 
+            Viewport::Viewport() {
+            }
+
             Viewport::Viewport(bool const& createCurrentViewport) {
                 if (createCurrentViewport) {
                     createCurrent();

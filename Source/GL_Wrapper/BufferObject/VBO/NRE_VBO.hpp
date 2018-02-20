@@ -37,7 +37,8 @@
 
                 public:
                     //## Constructor ##//
-                    VBO(bool const& generate = false);
+                    VBO();
+                    VBO(bool const& generate);
 
                     //## Copy-Constructor ##//
                     VBO(VBO const& buf);

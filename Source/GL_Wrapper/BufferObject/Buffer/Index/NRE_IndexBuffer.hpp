@@ -31,7 +31,8 @@
 
                 public:
                     //## Constructor ##//
-                    IndexBuffer(bool const& generate = false);
+                    IndexBuffer();
+                    IndexBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
 

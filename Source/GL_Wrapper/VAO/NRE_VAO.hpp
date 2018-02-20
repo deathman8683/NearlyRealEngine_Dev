@@ -31,7 +31,8 @@
 
                 public:
                     //## Constructor ##//
-                    VAO(bool const& generate = false);
+                    VAO();
+                    VAO(bool const& generate);
 
                     //## Copy-Constructor ##//
                     VAO(VAO const& arr);

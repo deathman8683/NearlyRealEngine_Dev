@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            VBO::VBO() {
+            }
+
             VBO::VBO(bool const& generate) {
                 if (generate) {
                     generateID();

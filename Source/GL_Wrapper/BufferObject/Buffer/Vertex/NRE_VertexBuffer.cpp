@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            VertexBuffer::VertexBuffer() {
+            }
+
             VertexBuffer::VertexBuffer(bool const& generate) {
                 if (generate) {
                     generateID();

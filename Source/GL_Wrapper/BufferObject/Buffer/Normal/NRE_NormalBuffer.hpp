@@ -33,7 +33,8 @@
 
                 public:
                     //## Constructor ##//
-                    NormalBuffer(bool const& generate = false);
+                    NormalBuffer();
+                    NormalBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
 

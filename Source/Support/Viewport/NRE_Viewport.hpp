@@ -33,7 +33,8 @@
 
                 public:
                     //## Constructor ##//
-                    Viewport(bool const& createCurrentViewport = false);
+                    Viewport();
+                    Viewport(bool const& createCurrentViewport);
                     Viewport(Maths::Vector2D<GLushort> const& wSize, Maths::Vector2D<GLushort> const& glSize);
 
                     //## Copy-Constructor ##//

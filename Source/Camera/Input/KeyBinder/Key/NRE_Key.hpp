@@ -27,9 +27,13 @@
              */
             class Key {
                 private:
+                    bool state;
+                    bool isSwitch;
 
                 public:
                     //## Constructor ##//
+                    Key();
+                    Key(bool const& state, bool const& isSwitch);
 
                     //## Copy-Constructor ##//
 

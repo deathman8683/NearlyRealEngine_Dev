@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            IndexBuffer::IndexBuffer() {
+            }
+
             IndexBuffer::IndexBuffer(bool const& generate) {
                 if (generate) {
                     generateID();

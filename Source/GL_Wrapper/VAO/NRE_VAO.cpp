@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            VAO::VAO() {
+            }
+
             VAO::VAO(bool const& generate) {
                 if (generate) {
                     generateID();

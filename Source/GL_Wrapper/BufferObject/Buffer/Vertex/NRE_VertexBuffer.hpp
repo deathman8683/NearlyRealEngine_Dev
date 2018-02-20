@@ -31,7 +31,8 @@
 
                 public:
                     //## Constructor ##//
-                    VertexBuffer(bool const& generate = false);
+                    VertexBuffer();
+                    VertexBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
 

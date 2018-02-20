@@ -33,7 +33,8 @@
 
                 public:
                     //## Constructor ##//
-                    ColorBuffer(bool const& generate = false);
+                    ColorBuffer();
+                    ColorBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
 

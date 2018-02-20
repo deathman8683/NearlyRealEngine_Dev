@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            NormalBuffer::NormalBuffer() {
+            }
+
             NormalBuffer::NormalBuffer(bool const& generate) {
                 if (generate) {
                     generateID();

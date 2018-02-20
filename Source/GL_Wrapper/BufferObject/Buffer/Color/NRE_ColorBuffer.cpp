@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            ColorBuffer::ColorBuffer() {
+            }
+
             ColorBuffer::ColorBuffer(bool const& generate) {
                 if (generate) {
                     generateID();
