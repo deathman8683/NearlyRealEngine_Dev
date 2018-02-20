@@ -27,23 +27,32 @@
              */
             class Key {
                 private:
+                    SDL_Scancode code;
                     bool state;
                     bool isSwitch;
 
                 public:
                     //## Constructor ##//
                     Key();
-                    Key(bool const& state, bool const& isSwitch);
+                    Key(SDL_Scancode const& code, bool const& state, bool const& isSwitch);
 
                     //## Copy-Constructor ##//
+                    Key(Key const& k);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
+                    ~Key();
 
                     //## Getter ##//
+                    SDL_Scancode const& getCode() const;
+                    bool const& getState() const;
+                    bool const& isSwitch() const;
 
                     //## Setter ##//
+                    void setCode(SDL_Scancode const& code);
+                    void setState(bool const& state);
+                    void setSwitch(bool const& state);
 
                     //## Methods ##//
 
