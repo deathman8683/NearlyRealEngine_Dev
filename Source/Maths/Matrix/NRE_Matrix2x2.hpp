@@ -199,7 +199,7 @@
                          * @param index : unsigned int, tell which line to return
                          * @return T*, the matrix's line
                          */
-                        const T* operator[](unsigned int const& index) const;
+                        T* const operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
                         /**

@@ -73,5 +73,7 @@
                 private:
             };
 
+            std::ostream& operator<<(std::ostream &stream, Key const& k);
+
         };
     };

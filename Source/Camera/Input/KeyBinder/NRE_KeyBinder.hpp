@@ -51,8 +51,11 @@
                     void setKeyMap(std::unordered_map<unsigned int, Key> const& map);
 
                     //## Methods ##//
+                    void insert(unsigned int const& code, Key const& k);
+                    void swap(unsigned int const& first, unsigned int const& second);
 
                     //## Access Operator ##//
+                    Key& operator[](unsigned int const& code);
 
                     //## Assignment Operator ##//
 

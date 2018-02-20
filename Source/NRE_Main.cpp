@@ -5,12 +5,12 @@
     #include "GL_Wrapper/VAO/NRE_VAO.hpp"
     #include "Support/Scene/NRE_Scene.hpp"
     #include "SDL_Wrapper/Event/NRE_Event.hpp"
-
+    #include "Camera/Input/KeyBinder/NRE_KeyBinder.hpp"
 
     using namespace NRE;
 
     int main(int argc, char **argv) {
-        Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
+        /*Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
         SDL::Event event;
         GL::VBO buffer(true);
         GL::VAO vao(true);
@@ -32,7 +32,22 @@
                     }
                 }
             }
-        }
+        }*/
+
+        Input::KeyBinder map;
+        map.insert(0, Input::Key(0, false, false));
+        map.insert(1, Input::Key(10, false, false));
+        map.insert(2, Input::Key(20, false, false));
+
+        std::cout << map[0] << std::endl;
+        std::cout << map[1] << std::endl;
+        std::cout << map[2] << std::endl;
+
+        map.swap(0, 1);
+
+        std::cout << map[0] << std::endl;
+        std::cout << map[1] << std::endl;
+        std::cout << map[2] << std::endl;
 
         return 0;
     }

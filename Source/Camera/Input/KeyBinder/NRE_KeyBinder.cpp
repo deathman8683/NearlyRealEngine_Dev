@@ -24,5 +24,19 @@
                 keyMap = map;
             }
 
+            void KeyBinder::insert(unsigned int const& code, Key const& k) {
+                keyMap.insert({code, k});
+            }
+
+            void KeyBinder::swap(unsigned int const& first, unsigned int const& second) {
+                Key tmp(keyMap[first]);
+                keyMap[first] = keyMap[second];
+                keyMap[second] = tmp;
+            }
+
+            Key& KeyBinder::operator[](unsigned int const& code) {
+                return keyMap[code];
+            }
+
         };
     };
