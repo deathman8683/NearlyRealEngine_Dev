@@ -4,13 +4,13 @@
     namespace NRE {
         namespace Input {
 
-            Key::Key() : code(0), state(false), isSwitch(false) {
+            Key::Key() : code(0), state(false), switchKey(false) {
             }
 
-            Key::Key(unsigned int const& code, bool const& state, bool const& isSwitch) : code(code), state(state), isSwitch(isSwitch) {
+            Key::Key(unsigned int const& code, bool const& state, bool const& switchKey) : code(code), state(state), switchKey(switchKey) {
             }
 
-            Key::Key(Key const& k) : code(k.getCode()), state(k.getState()), isSwitch(k.isSwitch()) {
+            Key::Key(Key const& k) : code(k.getCode()), state(k.getState()), switchKey(k.isSwitch()) {
             }
 
             Key::~Key() {
@@ -25,7 +25,7 @@
             }
 
             bool const& Key::isSwitch() const {
-                return isSwitch;
+                return switchKey;
             }
 
             void Key::setCode(unsigned int const& code) {
@@ -37,7 +37,7 @@
             }
 
             void Key::setSwitch(bool const& state) {
-                isSwitch = state;
+                switchKey = state;
             }
 
         };

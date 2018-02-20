@@ -8,10 +8,12 @@ SDL_WRAPPER = SDL_Wrapper
 GL_WRAPPER = GL_Wrapper
 SUPPORT = Support
 RENDERER = Renderer
+CAMERA = Camera
 
 before :
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))
+	@(cd $(CAMERA) && $(MAKE))
 	@(cd $(SUPPORT) && $(MAKE))
 	@(cd $(RENDERER) && $(MAKE))
 

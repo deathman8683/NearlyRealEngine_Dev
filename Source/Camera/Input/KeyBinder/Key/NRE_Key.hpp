@@ -29,12 +29,12 @@
                 private:
                     unsigned int code;
                     bool state;
-                    bool isSwitch;
+                    bool switchKey;
 
                 public:
                     //## Constructor ##//
                     Key();
-                    Key(unsigned int const& code, bool const& state, bool const& isSwitch);
+                    Key(unsigned int const& code, bool const& state, bool const& switchKey);
 
                     //## Copy-Constructor ##//
                     Key(Key const& k);
