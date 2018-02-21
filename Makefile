@@ -14,7 +14,7 @@ ifeq ($(TARGET), debug)
 	OBJDIR = obj/Debug/
 	BIN = bin/Debug/
 	SOURCE = Source
-	OBJ =  $(OBJDIR)SDL_Wrapper/Window/NRE_Window.o $(OBJDIR)SDL_Wrapper/Event/NRE_Event.o $(OBJDIR)GL_Wrapper/BufferObject/NRE_BufferObject.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/NRE_Buffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Vertex/NRE_VertexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Color/NRE_ColorBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Index/NRE_IndexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Normal/NRE_NormalBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/NRE_VBO.o $(OBJDIR)GL_Wrapper/VAO/NRE_VAO.o $(OBJDIR)Camera/Input/KeyBinder/Key/NRE_Key.o $(OBJDIR)Camera/Input/KeyBinder/NRE_KeyBinder.o $(OBJDIR)Camera/Input/Keyboard/NRE_Keyboard.o $(OBJDIR)Support/Viewport/NRE_Viewport.o $(OBJDIR)Support/Scene/NRE_Scene.o $(OBJDIR)Renderer/Shader/NRE_Shader.o $(OBJDIR)NRE_Main.o
+	OBJ =  $(OBJDIR)SDL_Wrapper/Window/NRE_Window.o $(OBJDIR)SDL_Wrapper/Event/NRE_Event.o $(OBJDIR)GL_Wrapper/BufferObject/NRE_BufferObject.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/NRE_Buffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Vertex/NRE_VertexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Color/NRE_ColorBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Index/NRE_IndexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Normal/NRE_NormalBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/NRE_VBO.o $(OBJDIR)GL_Wrapper/VAO/NRE_VAO.o $(OBJDIR)Camera/Input/KeyBinder/Key/NRE_Key.o $(OBJDIR)Camera/Input/KeyBinder/NRE_KeyBinder.o $(OBJDIR)Camera/Input/Keyboard/NRE_Keyboard.o $(OBJDIR)Camera/Input/Mouse/NRE_Mouse.o $(OBJDIR)Support/Viewport/NRE_Viewport.o $(OBJDIR)Support/Scene/NRE_Scene.o $(OBJDIR)Renderer/Shader/NRE_Shader.o $(OBJDIR)NRE_Main.o
 
 else
 	OBJDIR = obj/Test/
@@ -43,6 +43,7 @@ clean :
 	@mkdir obj/Debug/Camera
 	@mkdir obj/Debug/Camera/Input
 	@mkdir obj/Debug/Camera/Input/Keyboard
+	@mkdir obj/Debug/Camera/Input/Mouse
 	@mkdir obj/Debug/Camera/Input/KeyBinder
 	@mkdir obj/Debug/Camera/Input/KeyBinder/Key
 	@mkdir obj/Debug/GL_Wrapper
@@ -73,6 +74,7 @@ clean_Test :
 	@mkdir obj/Test/Camera
 	@mkdir obj/Test/Camera/Input
 	@mkdir obj/Test/Camera/Input/Keyboard
+	@mkdir obj/Test/Camera/Input/Mouse
 	@mkdir obj/Test/Camera/Input/KeyBinder
 	@mkdir obj/Test/Camera/Input/KeyBinder/Key
 	@mkdir obj/Test/GL_Wrapper

@@ -6,6 +6,7 @@
     #include "Support/Scene/NRE_Scene.hpp"
     #include "SDL_Wrapper/Event/NRE_Event.hpp"
     #include "Camera/Input/Keyboard/NRE_Keyboard.hpp"
+    #include "Camera/Input/Mouse/NRE_Mouse.hpp"
 
     using namespace NRE;
 
@@ -35,8 +36,10 @@
         }*/
 
         Input::Keyboard kb;
+        Input::Mouse m;
         kb.swap(15, 16);
         std::cout << kb << std::endl;
+        std::cout << m << std::endl;
 
         return 0;
     }
