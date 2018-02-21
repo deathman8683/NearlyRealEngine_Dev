@@ -28,13 +28,13 @@
             class Key {
                 private:
                     unsigned int code;
-                    bool state;
+                    bool active;
                     bool switchKey;
 
                 public:
                     //## Constructor ##//
                     Key();
-                    Key(unsigned int const& code, bool const& state, bool const& switchKey);
+                    Key(unsigned int const& code, bool const& active, bool const& switchKey);
 
                     //## Copy-Constructor ##//
                     Key(Key const& k);
@@ -46,12 +46,12 @@
 
                     //## Getter ##//
                     unsigned int const& getCode() const;
-                    bool const& getState() const;
+                    bool const& isActive() const;
                     bool const& isSwitch() const;
 
                     //## Setter ##//
                     void setCode(unsigned int const& code);
-                    void setState(bool const& state);
+                    void setActive(bool const& state);
                     void setSwitch(bool const& state);
 
                     //## Methods ##//

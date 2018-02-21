@@ -4,13 +4,13 @@
     namespace NRE {
         namespace Input {
 
-            Key::Key() : code(0), state(false), switchKey(false) {
+            Key::Key() : code(0), active(false), switchKey(false) {
             }
 
-            Key::Key(unsigned int const& code, bool const& state, bool const& switchKey) : code(code), state(state), switchKey(switchKey) {
+            Key::Key(unsigned int const& code, bool const& active, bool const& switchKey) : code(code), active(active), switchKey(switchKey) {
             }
 
-            Key::Key(Key const& k) : code(k.getCode()), state(k.getState()), switchKey(k.isSwitch()) {
+            Key::Key(Key const& k) : code(k.getCode()), active(k.isActive()), switchKey(k.isSwitch()) {
             }
 
             Key::~Key() {
@@ -20,8 +20,8 @@
                 return code;
             }
 
-            bool const& Key::getState() const {
-                return state;
+            bool const& Key::isActive() const {
+                return active;
             }
 
             bool const& Key::isSwitch() const {
@@ -32,8 +32,8 @@
                 this->code = code;
             }
 
-            void Key::setState(bool const& state) {
-                this->state = state;
+            void Key::setActive(bool const& state) {
+                active = state;
             }
 
             void Key::setSwitch(bool const& state) {
@@ -41,7 +41,7 @@
             }
 
             std::ostream& operator<<(std::ostream &stream, Key const& k) {
-                stream << "(" << k.getCode() << "," << k.getState() << "," << k.isSwitch() << ")";
+                stream << "(" << k.getCode() << "," << k.isActive() << "," << k.isSwitch() << ")";
                 return stream;
             }
 
