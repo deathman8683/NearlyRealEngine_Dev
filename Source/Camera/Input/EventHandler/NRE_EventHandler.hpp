@@ -1,14 +1,15 @@
 
     /**
-     * @file NRE_Event.hpp
-     * @brief Declaration of Engine's SDL's Object : Event
+     * @file NRE_EventHandler.hpp
+     * @brief Declaration of Engine's Input's Object : EventHandler
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../../../Generic/NRE_Type.hpp"
+    #include "../../../SDL_Wrapper/Event/NRE_Event.hpp"
 
     /**
      * @namespace NRE
@@ -16,44 +17,39 @@
      */
     namespace NRE {
         /**
-         * @namespace SDL
-         * @brief Engine's SDL's Wrapper's Module
+         * @namespace Input
+         * @brief Engine's Input Module
          */
-        namespace SDL {
+        namespace Input {
 
             /**
-             * @class Event
-             * @brief SDL's Object : Wrapper of SDL_Event
+             * @class EventHandler
+             * @brief Input's Object : Handle event
              */
-            class Event {
+            class EventHandler : public SDL::Event {
                 private:
-                    SDL_Event item;
+                    bool quit;
 
                 public:
                     //## Constructor ##//
-                    Event();
+                    EventHandler();
 
                     //## Copy-Constructor ##//
-                    Event(Event const& e);
+                    EventHandler(EventHandler const& e);
 
                     //## Convertor ##//
-                    Event(SDL_Event const& e);
+                    EventHandler(SDL::Event const& e);
 
                     //## Deconstructor ##//
-                    virtual ~Event();
+                    ~EventHandler();
 
                     //## Getter ##//
-                    virtual SDL_Event const& getItem() const;
-                    virtual Uint32 const& getType() const;
-                    virtual SDL_Scancode const& getKeyScancode() const;
-                    virtual SDL_Keycode const& getKeyKeycode() const;
+                    bool const& getQuit() const;
 
                     //## Setter ##//
-                    virtual void setItem(SDL_Event const& e);
+                    void setQuit(bool const& state);
 
                     //## Methods ##//
-                    virtual int poll();
-                    virtual int wait();
 
                     //## Access Operator ##//
 
