@@ -28,7 +28,7 @@
              * @brief Input's Object : Base component for a specialized input system
              */
             class KeyBinder {
-                private:
+                protected:
                     std::unordered_map<unsigned int, Key> keyMap;
 
                 public:
@@ -55,7 +55,7 @@
                     virtual void swap(unsigned int const& first, unsigned int const& second);
 
                     //## Access Operator ##//
-                    virtual Key& operator[](unsigned int const& code);
+                    virtual std::unordered_map<unsigned int, Key>::iterator operator[](unsigned int const& code);
 
                     //## Assignment Operator ##//
 

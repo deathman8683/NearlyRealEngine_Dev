@@ -32,6 +32,14 @@
                 return getItem().key.keysym.sym;
             }
 
+            Uint8 const& Event::getMouseButton() const {
+                return getItem().button.button;
+            }
+
+            Maths::Point2D<unsigned short int> const Event::getMouseClick() const {
+                return Maths::Point2D<unsigned short int>(getItem().button.x, getItem().button.y);
+            }
+
             void Event::setItem(SDL_Event const& e) {
                 item = e;
             }

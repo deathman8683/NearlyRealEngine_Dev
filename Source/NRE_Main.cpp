@@ -10,32 +10,16 @@
     using namespace NRE;
 
     int main(int argc, char **argv) {
-        /*Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
+        Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
         SDL::Event event;
         GL::VBO buffer(true);
         GL::VAO vao(true);
-
-        bool again = true;
-
-        while (again) {
-            while (event.poll()) {
-                switch(event.getType()) {
-                    case (SDL_QUIT) : {
-                        again = false;
-                        break;
-                    }
-                    case (SDL_KEYDOWN) : {
-                        std::cout << event.getKeyScancode() << std::endl;
-                        break;
-                    }
-                    default : {
-                    }
-                }
-            }
-        }*/
-
         Input::Input in;
-        std::cout << Input::Keyboard(in) << std::endl;
+
+        while (!in.getQuit()) {
+            in.update();
+        }
+
 
         return 0;
     }

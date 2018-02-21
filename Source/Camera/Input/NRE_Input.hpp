@@ -11,6 +11,7 @@
     #include "../../Generic/NRE_Type.hpp"
     #include "Keyboard/NRE_Keyboard.hpp"
     #include "Mouse/NRE_Mouse.hpp"
+    #include "EventHandler/NRE_EventHandler.hpp"
 
     /**
      * @namespace NRE
@@ -27,13 +28,13 @@
              * @class Input
              * @brief Input's Object : Manage input system
              */
-            class Input : public Keyboard, public Mouse {
+            class Input : public Keyboard, public Mouse, public EventHandler {
                 private:
 
                 public:
                     //## Constructor ##//
                     Input();
-                    Input(Keyboard const& kb, Mouse const& m);
+                    Input(Keyboard const& kb, Mouse const& m, EventHandler const& e);
 
                     //## Copy-Constructor ##//
                     Input(Input const& in);
@@ -48,6 +49,7 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                    void update();
 
                     //## Access Operator ##//
 

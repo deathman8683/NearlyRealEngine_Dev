@@ -35,16 +35,14 @@
                 keyMap[second] = tmp;
             }
 
-            Key& KeyBinder::operator[](unsigned int const& code) {
-                return keyMap[code];
+            std::unordered_map<unsigned int, Key>::iterator KeyBinder::operator[](unsigned int const& code) {
+                return keyMap.find(code);
             }
 
             std::ostream& operator<<(std::ostream &stream, KeyBinder const& map) {
                 for (unsigned int i = 0; i != map.getKeyMap().size(); i = i + 1) {
-                    for (auto it = map.getKeyMap().begin(i); it != map.getKeyMap().end(i); ++it) {
-                        stream << "(" << it->first << " | " << it->second << ")";
-                    }
-                    stream << std::endl;
+                    auto it = map.getKeyMap().find(i);
+                    stream << "(" << it->first << " | " << it->second << ")" << std::endl;
                 }
                 return stream;
             }

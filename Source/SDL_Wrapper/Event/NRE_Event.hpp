@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../../Generic/NRE_Type.hpp"
+    #include "../../Maths/NRE_Maths.hpp"
 
     /**
      * @namespace NRE
@@ -47,6 +48,8 @@
                     virtual Uint32 const& getType() const;
                     virtual SDL_Scancode const& getKeyScancode() const;
                     virtual SDL_Keycode const& getKeyKeycode() const;
+                    virtual Uint8 const& getMouseButton() const;
+                    virtual Maths::Point2D<unsigned short int> const getMouseClick() const;
 
                     //## Setter ##//
                     virtual void setItem(SDL_Event const& e);

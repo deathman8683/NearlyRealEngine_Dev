@@ -29,7 +29,6 @@
             class Keyboard : public KeyBinder  {
                 private:
 
-
                 public:
                     //## Constructor ##//
                     Keyboard();
