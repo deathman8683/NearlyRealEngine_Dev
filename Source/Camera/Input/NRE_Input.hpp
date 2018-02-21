@@ -1,15 +1,16 @@
 
     /**
-     * @file NRE_Keyboard.hpp
-     * @brief Declaration of Engine's Input's Object : Keyboard
+     * @file NRE_Input.hpp
+     * @brief Declaration of Engine's Input's Object : Input
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../Generic/NRE_Type.hpp"
-    #include "../KeyBinder/NRE_KeyBinder.hpp"
+    #include "../../Generic/NRE_Type.hpp"
+    #include "Keyboard/NRE_Keyboard.hpp"
+    #include "Mouse/NRE_Mouse.hpp"
 
     /**
      * @namespace NRE
@@ -23,24 +24,24 @@
         namespace Input {
 
             /**
-             * @class Keyboard
-             * @brief Input's Object : A particular input system
+             * @class Input
+             * @brief Input's Object : Manage input system
              */
-            class Keyboard : public KeyBinder  {
+            class Input : public Keyboard, public Mouse {
                 private:
-
 
                 public:
                     //## Constructor ##//
-                    Keyboard();
+                    Input();
+                    Input(Keyboard const& kb, Mouse const& m);
 
                     //## Copy-Constructor ##//
-                    Keyboard(Keyboard const& kb);
+                    Input(Input const& in);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Keyboard();
+                    ~Input();
 
                     //## Getter ##//
 

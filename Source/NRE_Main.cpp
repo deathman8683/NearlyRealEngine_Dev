@@ -5,8 +5,7 @@
     #include "GL_Wrapper/VAO/NRE_VAO.hpp"
     #include "Support/Scene/NRE_Scene.hpp"
     #include "SDL_Wrapper/Event/NRE_Event.hpp"
-    #include "Camera/Input/Keyboard/NRE_Keyboard.hpp"
-    #include "Camera/Input/Mouse/NRE_Mouse.hpp"
+    #include "Camera/Input/NRE_Input.hpp"
 
     using namespace NRE;
 
@@ -35,11 +34,8 @@
             }
         }*/
 
-        Input::Keyboard kb;
-        Input::Mouse m;
-        kb.swap(15, 16);
-        std::cout << kb << std::endl;
-        std::cout << m << std::endl;
+        Input::Input in;
+        std::cout << Input::Keyboard(in) << std::endl;
 
         return 0;
     }
