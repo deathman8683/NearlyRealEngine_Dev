@@ -24,31 +24,35 @@
                             break;
                         }
                         case (SDL_KEYDOWN) : {
-                            if (Keyboard::keyMap.at(getKeyScancode()).isSwitch()) {
-                                Keyboard::keyMap.at(getKeyScancode()).setActive(!Keyboard::keyMap.at(getKeyScancode()).isActive());
+                            Key& tmp = Keyboard::keyMap.at(getKeyScancode());
+                            if (tmp.isSwitch()) {
+                                tmp.setActive(!tmp.isActive());
                             } else {
-                                Keyboard::keyMap.at(getKeyScancode()).setActive(true);
+                                tmp.setActive(true);
                             }
                             break;
                         }
                         case (SDL_KEYUP) : {
-                            if (!Keyboard::keyMap.at(getKeyScancode()).isSwitch()) {
-                                Keyboard::keyMap.at(getKeyScancode()).setActive(false);
+                            Key& tmp = Keyboard::keyMap.at(getKeyScancode());
+                            if (!tmp.isSwitch()) {
+                                tmp.setActive(false);
                             }
                             break;
                         }
                         case (SDL_MOUSEBUTTONDOWN) : {
-                            if (Mouse::keyMap.at(getMouseButton()).isSwitch()) {
-                                Mouse::keyMap.at(getMouseButton()).setActive(!Keyboard::keyMap.at(getMouseButton()).isActive());
+                            Key& tmp = Mouse::keyMap.at(getMouseButton());
+                            if (tmp.isSwitch()) {
+                                tmp.setActive(!tmp.isActive());
                             } else {
-                                Mouse::keyMap.at(getMouseButton()).setActive(true);
+                                tmp.setActive(true);
                             }
                             setClick(getMouseClick());
                             break;
                         }
                         case (SDL_MOUSEBUTTONUP) : {
-                            if (!Mouse::keyMap.at(getMouseButton()).isSwitch()) {
-                                Mouse::keyMap.at(getMouseButton()).setActive(false);
+                            Key& tmp = Mouse::keyMap.at(getMouseButton());
+                            if (!tmp.isSwitch()) {
+                                tmp.setActive(false);
                             }
                             break;
                         }

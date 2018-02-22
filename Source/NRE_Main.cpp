@@ -18,6 +18,20 @@
 
         while (!in.getQuit()) {
             in.update();
+            if (in.Keyboard::getKeyMap().at(SDL_SCANCODE_W).isActive()) {
+                if (in.Keyboard::getKeyMap().at(SDL_SCANCODE_W).getCode() == SDL_SCANCODE_W) {
+                    std::cout << "UP Pressed" << std::endl;
+                } else {
+                    std::cout << "DOWN Pressed" << std::endl;
+                }
+            }
+            if (in.Keyboard::getKeyMap().at(SDL_SCANCODE_S).isActive()) {
+                if (in.Keyboard::getKeyMap().at(SDL_SCANCODE_S).getCode() == SDL_SCANCODE_S) {
+                    std::cout << "DOWN Pressed" << std::endl;
+                } else {
+                    std::cout << "UP Pressed" << std::endl;
+                }
+            }
         }
 
 
