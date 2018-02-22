@@ -50,6 +50,8 @@
                     virtual SDL_Keycode const& getKeyKeycode() const;
                     virtual Uint8 const& getMouseButton() const;
                     virtual Maths::Point2D<unsigned short int> const getMouseClick() const;
+                    virtual Maths::Point2D<unsigned short int> const getMotion() const;
+                    virtual Maths::Vector2D<NREfloat> const getMotionRel() const;
 
                     //## Setter ##//
                     virtual void setItem(SDL_Event const& e);

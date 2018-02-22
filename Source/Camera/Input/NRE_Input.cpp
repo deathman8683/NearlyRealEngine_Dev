@@ -16,7 +16,7 @@
             Input::~Input() {
             }
 
-            void Input::update() {
+            void Input::update(Maths::Vector2D<NREfloat>* cameraAngle) {
                 while (poll()) {
                     switch(getType()) {
                         case (SDL_QUIT) : {
@@ -54,6 +54,13 @@
                             if (!tmp.isSwitch()) {
                                 tmp.setActive(false);
                             }
+                            break;
+                        }
+                        case (SDL_MOUSEMOTION) : {
+                            if (cameraAngle) {
+                                *cameraAngle = *cameraAngle - (getMotionRel() * getSensitivity());
+                            }
+                            set_Cursor(getMotion());
                             break;
                         }
                     }

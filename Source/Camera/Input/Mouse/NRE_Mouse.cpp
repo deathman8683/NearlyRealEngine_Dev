@@ -32,12 +32,20 @@
                 return cursor;
             }
 
+            NREfloat const& Mouse::getSensitivity() const {
+                return sensitivity;
+            }
+
             void Mouse::setClick(Maths::Point2D<unsigned short int> const& p) {
                 click = p;
             }
 
             void Mouse::setCursor(Maths::Point2D<unsigned short int> const& p) {
                 cursor = p;
+            }
+
+            void Mouse::setSensitivity(NREfloat const& s) {
+                sensitivity = s;
             }
 
             std::ostream& operator<<(std::ostream &stream, Mouse const& m) {

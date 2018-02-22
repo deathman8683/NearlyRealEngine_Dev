@@ -40,6 +40,14 @@
                 return Maths::Point2D<unsigned short int>(getItem().button.x, getItem().button.y);
             }
 
+            Maths::Point2D<unsigned short int> const Event::getMotion() const {
+                return Maths::Point2D<unsigned short int>(getItem().motion.x, getItem().motion.y);
+            }
+
+            Maths::Vector2D<NREfloat> const Event::getMotionRel() const {
+                return Maths::Vector2D<NREfloat>(getItem().motion.xrel, getItem().motion.yrel);
+            }
+
             void Event::setItem(SDL_Event const& e) {
                 item = e;
             }
