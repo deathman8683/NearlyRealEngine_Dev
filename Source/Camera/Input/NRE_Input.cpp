@@ -30,6 +30,7 @@
                             } else {
                                 tmp.setActive(true);
                             }
+                            std::cout << getKeyScancode() << "|" << tmp << std::endl;
                             break;
                         }
                         case (SDL_KEYUP) : {

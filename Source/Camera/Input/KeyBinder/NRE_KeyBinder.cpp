@@ -35,6 +35,37 @@
                 keyMap[second] = tmp;
             }
 
+            void KeyBinder::save(std::string const& path) {
+                std::ofstream binderFile;
+                binderFile.open(path, std::ios::out);
+                if (binderFile.is_open()) {
+                    for (unsigned int i = 0; i!= getKeyMap().size(); i = i + 1) {
+                        auto it = getKeyMap().find(i);
+                        binderFile << it->second.getCode() << ":" << it->second.isSwitch() << std::endl;
+                    }
+                }
+            }
+
+            void KeyBinder::load(std::string const& path) {
+                std::ifstream binderFile;
+                binderFile.open(path, std::ios::in | std::ios::out);
+                if (binderFile.is_open()) {
+                    std::string line;
+                    unsigned int lineCounter = 0;
+                    while (!binderFile.eof()) {
+                        unsigned int code, isSwitch;
+                        std::string separator;
+
+                        std::getline(binderFile, line);
+                        std::istringstream parser(line);
+                        parser >> code >> isSwitch;
+
+                        insert(lineCounter, Key(code, false, isSwitch));
+                        lineCounter = lineCounter + 1;
+                    }
+                }
+            }
+
             std::unordered_map<unsigned int, Key>::iterator KeyBinder::operator[](unsigned int const& code) {
                 return keyMap.find(code);
             }

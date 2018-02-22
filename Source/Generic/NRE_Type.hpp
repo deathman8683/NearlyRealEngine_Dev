@@ -16,6 +16,7 @@
     #include <cmath>
     #include <cassert>
     #include <iostream>
+    #include <string>
     #include <GL/glew.h>
     #include <SDL2/SDL.h>
 

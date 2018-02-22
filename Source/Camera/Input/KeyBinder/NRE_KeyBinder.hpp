@@ -8,6 +8,8 @@
 
     #pragma once
 
+    #include <sstream>
+    #include <fstream>
     #include <unordered_map>
     #include "../../../Generic/NRE_Type.hpp"
     #include "Key/NRE_Key.hpp"
@@ -53,6 +55,8 @@
                     //## Methods ##//
                     virtual void insert(unsigned int const& code, Key const& k);
                     virtual void swap(unsigned int const& first, unsigned int const& second);
+                    virtual void save(std::string const& path);
+                    virtual void load(std::string const& path);
 
                     //## Access Operator ##//
                     virtual std::unordered_map<unsigned int, Key>::iterator operator[](unsigned int const& code);
