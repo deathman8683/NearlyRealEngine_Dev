@@ -49,7 +49,7 @@
                     //## Setter ##//
 
                     //## Methods ##//
-                    void update();
+                    void update(Maths::Vector2D<NREfloat>* cameraAngle);
 
                     //## Access Operator ##//
 

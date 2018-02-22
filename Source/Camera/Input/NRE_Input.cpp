@@ -60,8 +60,11 @@
                             if (cameraAngle) {
                                 *cameraAngle = *cameraAngle - (getMotionRel() * getSensitivity());
                             }
-                            set_Cursor(getMotion());
+                            setCursor(getMotion());
                             break;
+                        }
+                        default: {
+
                         }
                     }
                 }

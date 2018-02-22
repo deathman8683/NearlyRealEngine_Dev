@@ -17,7 +17,7 @@
         Input::Input in;
 
         while (!in.getQuit()) {
-            in.update();
+            in.update(NULL);
         }
 
 
