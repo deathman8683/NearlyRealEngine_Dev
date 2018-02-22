@@ -5,7 +5,7 @@
         namespace Input {
 
             unsigned int Mouse::NUM_BUTTONS = SDL_BUTTON_X2 + 1;
-            NREfloat DEFAULT_SENSITIVITY = 0.1;
+            NREfloat Mouse::DEFAULT_SENSITIVITY = 0.1;
 
             Mouse::Mouse() : KeyBinder::KeyBinder(NUM_BUTTONS), sensitivity(DEFAULT_SENSITIVITY) {
                 for (unsigned int i = 0; i < NUM_BUTTONS; i = i + 1) {

@@ -27,22 +27,29 @@
              * @class MoveableCamera
              * @brief Camera's Object : An advanced camera linked to input system
              */
-            class MoveableCamera : public FixedCamera, public Input {
+            class MoveableCamera : public FixedCamera, public Input::Input {
                 private:
                     NREfloat speed;
 
                 public:
                     //## Constructor ##//
+                    MoveableCamera();
+                    MoveableCamera(FixedCamera const& camera, Input const& in, NREfloat const& speed);
 
                     //## Copy-Constructor ##//
+                    MoveableCamera(MoveableCamera const& camera);
 
                     //## Convertor ##//
+                    MoveableCamera(FixedCamera const& camera);
 
                     //## Deconstructor ##//
+                    ~MoveableCamera();
 
                     //## Getter ##//
+                    NREfloat const& getSpeed() const;
 
                     //## Setter ##//
+                    void setSpeed(NREfloat const& speed);
 
                     //## Methods ##//
 
@@ -61,6 +68,7 @@
                     //## Shift Operator ##//
 
                 private:
+                    static NREfloat DEFAULT_SPEED;
             };
 
         };
