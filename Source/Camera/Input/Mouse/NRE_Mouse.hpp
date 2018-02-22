@@ -36,7 +36,7 @@
                 public:
                     //## Constructor ##//
                     Mouse();
-                    Mouse(Maths::Point2D<unsigned short int> const& click, Maths::Point2D<unsigned short int> const& cursor);
+                    Mouse(Maths::Point2D<unsigned short int> const& click, Maths::Point2D<unsigned short int> const& cursor, NREfloat const& sensitivity);
 
                     //## Copy-Constructor ##//
                     Mouse(Mouse const& m);
@@ -74,6 +74,7 @@
 
                 private:
                     static unsigned int NUM_BUTTONS;
+                    static NREfloat DEFAULT_SENSITIVITY;
             };
 
             std::ostream& operator<<(std::ostream &stream, Mouse const& m);

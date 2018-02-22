@@ -5,20 +5,21 @@
         namespace Input {
 
             unsigned int Mouse::NUM_BUTTONS = SDL_BUTTON_X2 + 1;
+            NREfloat DEFAULT_SENSITIVITY = 0.1;
 
-            Mouse::Mouse() : KeyBinder::KeyBinder(NUM_BUTTONS) {
+            Mouse::Mouse() : KeyBinder::KeyBinder(NUM_BUTTONS), sensitivity(DEFAULT_SENSITIVITY) {
                 for (unsigned int i = 0; i < NUM_BUTTONS; i = i + 1) {
                     insert(i, Key(i, false, false));
                 }
             }
 
-            Mouse::Mouse(Maths::Point2D<unsigned short int> const& click, Maths::Point2D<unsigned short int> const& cursor) : KeyBinder::KeyBinder(NUM_BUTTONS), click(click), cursor(cursor) {
+            Mouse::Mouse(Maths::Point2D<unsigned short int> const& click, Maths::Point2D<unsigned short int> const& cursor, NREfloat const& sensitivity) : KeyBinder::KeyBinder(NUM_BUTTONS), click(click), cursor(cursor), sensitivity(sensitivity) {
                 for (unsigned int i = 0; i < NUM_BUTTONS; i = i + 1) {
                     insert(i, Key(i, false, false));
                 }
             }
 
-            Mouse::Mouse(Mouse const& m) : KeyBinder::KeyBinder(m), click(m.getClick()), cursor(m.getCursor()) {
+            Mouse::Mouse(Mouse const& m) : KeyBinder::KeyBinder(m), click(m.getClick()), cursor(m.getCursor()), sensitivity(m.getSensitivity()) {
             }
 
             Mouse::~Mouse() {
@@ -49,7 +50,7 @@
             }
 
             std::ostream& operator<<(std::ostream &stream, Mouse const& m) {
-                stream << KeyBinder(m) << "(" << m.getClick() << "," << m.getCursor() << ")" << std::endl;
+                stream << KeyBinder(m) << "(" << m.getClick() << "," << m.getCursor() << "," << m.getSensitivity() << ")" << std::endl;
                 return stream;
             }
 
