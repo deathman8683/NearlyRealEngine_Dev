@@ -95,7 +95,7 @@
                          * @brief Deconstructor
                          * Deconstruct a 3D point
                          */
-                        ~Point3D();
+                        virtual ~Point3D();
 
                     //## Getter ##//
                         /**

@@ -94,7 +94,7 @@
                          * @brief Deconstructor
                          * Deconstruct a 3D vector
                          */
-                        ~Vector3D();
+                        virtual ~Vector3D();
 
                     //## Getter ##//
                         /**

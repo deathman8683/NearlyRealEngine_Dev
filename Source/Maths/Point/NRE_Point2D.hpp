@@ -85,7 +85,7 @@
                          * @brief Deconstructor
                          * Deconstruct a 2D point
                          */
-                        ~Point2D();
+                        virtual ~Point2D();
 
                         //## Getter ##//
                         /**

@@ -85,7 +85,7 @@
                          * @brief Deconstructor
                          * Deconstruct a 2D vector
                          */
-                        ~Vector2D();
+                        virtual ~Vector2D();
 
                     //## Getter ##//
                         /**
