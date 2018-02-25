@@ -13,6 +13,7 @@
         GL::VBO buffer(true);
         GL::VAO vao(true);
         Input::Input in("kBinder.cfg", "mBinder.cfg");
+        //Input::Input in;
 
         /*NREfloat data[3 * 3] = {-0.5, -0.5, -1.0,
                                  0.0, 0.5, -1.0,

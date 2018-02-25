@@ -13,7 +13,7 @@
                 }
             }
 
-            Mouse::Mouse(std::string const& path) : KeyBinder::KeyBinder(NUM_BUTTONS) {
+            Mouse::Mouse(std::string const& path) : KeyBinder::KeyBinder(NUM_BUTTONS, path) {
             }
 
             Mouse::Mouse(Maths::Point2D<unsigned short int> const& click, Maths::Point2D<unsigned short int> const& cursor, NREfloat const& sensitivity) : KeyBinder::KeyBinder(NUM_BUTTONS), click(click), cursor(cursor), sensitivity(sensitivity) {

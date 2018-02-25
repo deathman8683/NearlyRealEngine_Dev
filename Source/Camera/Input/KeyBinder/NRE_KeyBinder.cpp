@@ -43,16 +43,18 @@
                 std::ofstream binderFile;
                 binderFile.open(path, std::ios::out);
                 if (binderFile.is_open()) {
-                    for (unsigned int i = 0; i!= getKeyMap().size(); i = i + 1) {
+                    for (unsigned int i = 0; i < getKeyMap().size() - 1; i = i + 1) {
                         auto it = getKeyMap().find(i);
                         binderFile << it->second.getCode() << ":" << it->second.isSwitch() << std::endl;
                     }
+                    auto it = getKeyMap().find(getKeyMap().size() - 1);
+                    binderFile << it->second.getCode() << ":" << it->second.isSwitch();
                 }
             }
 
             void KeyBinder::load(std::string const& path) {
                 std::ifstream binderFile;
-                binderFile.open(path, std::ios::in | std::ios::out);
+                binderFile.open(path, std::ios::in);
                 if (binderFile.is_open()) {
                     std::string line;
                     unsigned int lineCounter = 0;
