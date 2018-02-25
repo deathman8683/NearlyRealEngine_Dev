@@ -10,6 +10,9 @@
                 }
             }
 
+            Keyboard::Keyboard(std::string const& path) : KeyBinder::KeyBinder(SDL_NUM_SCANCODES) {    
+            }
+
             Keyboard::Keyboard(Keyboard const& kb) : KeyBinder::KeyBinder(kb) {
             }
 

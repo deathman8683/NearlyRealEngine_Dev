@@ -37,6 +37,7 @@
                     //## Constructor ##//
                     KeyBinder();
                     KeyBinder(size_t const& n);
+                    KeyBinder(size_t const& n, std::string const& path);
 
                     //## Copy-Constructor ##//
                     KeyBinder(KeyBinder const& map);

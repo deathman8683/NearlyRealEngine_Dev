@@ -10,6 +10,10 @@
             KeyBinder::KeyBinder(size_t const& n) : keyMap(n) {
             }
 
+            KeyBinder::KeyBinder(size_t const& n, std::string const& path) : keyMap(n) {
+                load(path);
+            }
+
             KeyBinder::KeyBinder(KeyBinder const& map) : keyMap(map.getKeyMap()) {
             }
 
