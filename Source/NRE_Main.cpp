@@ -13,7 +13,6 @@
         GL::VBO buffer(true);
         GL::VAO vao(true);
         Input::Input in("kBinder.cfg", "mBinder.cfg");
-        //Input::Input in;
 
         /*NREfloat data[3 * 3] = {-0.5, -0.5, -1.0,
                                  0.0, 0.5, -1.0,
@@ -21,24 +20,27 @@
 
         GLubyte color[3 * 3] = {255, 0, 0,
                                 0, 255, 0,
-                                0, 0, 255};*/
+                                0, 0, 255};
 
-        /*GLbyte normal[3 * 3] = {1.0, 0.0, 0.0,
+        GLbyte normal[3 * 3] = {1.0, 0.0, 0.0,
                                 1.0, 0.0, 0.0,
-                                1.0, 0.0, 0.0};*/
+                                1.0, 0.0, 0.0};
 
-        /*buffer.allocate(sizeof(NREfloat), 3, GL_STREAM_DRAW);
-        buffer.update(0, sizeof(NREfloat), 3, data, color, NULL);*/
+        buffer.allocate(sizeof(NREfloat), 3, GL_STREAM_DRAW);
+        buffer.update(0, sizeof(NREfloat), 3, data, color, normal);
 
-        /*
         vao.bind();
             buffer.bind();
-                //glVertexAttribPointer
-                //glEnableVertexArray
-                // ...
+                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+                glEnableVertexAttribArray(0);
+
+                glVertexAttribPointer(1, 3, GL_UNSIGNED_BYTE, GL_FALSE, 0, 0);
+                glEnableVertexAttribArray(1);
+
+                glVertexAttribPointer(2, 3, GL_BYTE, GL_FALSE, 0, 0);
+                glEnableVertexAttribArray(2);
             buffer.unbind();
-        vao.unbind();
-        */
+        vao.unbind();*/
 
         while (!in.getQuit()) {
             in.update(NULL);
