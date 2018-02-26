@@ -27,7 +27,7 @@
              * @brief Camera's Object : A basic fixed camera
              */
             class FixedCamera {
-                private:
+                protected:
                     Maths::Point3D<NREfloat> eye;
                     Maths::Point3D<NREfloat> center;
                     Maths::Vector3D<NREfloat> up;
@@ -88,6 +88,8 @@
                     static NREfloat MAX_PHI;
                     static NREfloat MIN_PHI;
             };
+
+            std::ostream& operator<<(std::ostream &stream, FixedCamera const& camera);
 
         };
     };

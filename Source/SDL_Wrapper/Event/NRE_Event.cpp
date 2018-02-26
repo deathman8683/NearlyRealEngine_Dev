@@ -45,7 +45,7 @@
             }
 
             Maths::Vector2D<NREfloat> const Event::getMotionRel() const {
-                return Maths::Vector2D<NREfloat>(getItem().motion.xrel, getItem().motion.yrel);
+                return Maths::Vector2D<NREfloat>(getItem().motion.yrel, getItem().motion.xrel);
             }
 
             void Event::setItem(SDL_Event const& e) {

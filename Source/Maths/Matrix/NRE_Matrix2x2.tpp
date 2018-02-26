@@ -144,7 +144,7 @@
                 return data[index];
             }
             template <class T>
-            T* const Matrix2x2<T>::operator[](unsigned int const& index) const {
+            const T* Matrix2x2<T>::operator[](unsigned int const& index) const {
                 return data[index];
             }
 

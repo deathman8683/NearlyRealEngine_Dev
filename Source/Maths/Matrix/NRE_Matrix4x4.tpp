@@ -290,23 +290,24 @@
                 T f = tan(fov / 2.0);
                 setL1(Vector4D<T>(1.0 / (ratio * f), 0, 0, 0));
                 setL2(Vector4D<T>(0, 1.0 / f, 0, 0));
-                setL3(Vector4D<T>(0, 0, (zFar + zNear) / (zNear - zFar), -1));
-                setL4(Vector4D<T>(0, 0,  (2 * zFar * zNear) / (zNear - zFar), 0));
+                setL3(Vector4D<T>(0, 0, (zFar + zNear) / (zNear - zFar), (2 * zFar * zNear) / (zNear - zFar)));
+                setL4(Vector4D<T>(0, 0, -1, 0));
             }
 
             template <class T>
             template <class K, class L, class M>
             void Matrix4x4<T>::lookAt(Point3D<K> const& eye, Point3D<L> const& center, Vector3D<M> const& up) {
-                Vector3D<T> f = center - eye;
+                Vector3D<T> f = eye - center;
                 f.normalize();
                 Vector3D<T> s = f ^ up;
-                s.normalize();
                 Vector3D<T> u = s ^ f;
+                s.normalize();
+                u.normalize();
 
                 Vector3D<T> vEye(eye);
                 setL1(Vector4D<T>(s, -(s | vEye)));
                 setL2(Vector4D<T>(u, -(u | vEye)));
-                setL3(Vector4D<T>(-f, f | vEye));
+                setL3(Vector4D<T>(-f, (f | vEye)));
                 setL4(Vector4D<T>(0, 0, 0, 1));
             }
 
@@ -320,7 +321,7 @@
                 return data[index];
             }
             template <class T>
-            T* const Matrix4x4<T>::operator[](unsigned int const& index) const {
+            const T* Matrix4x4<T>::operator[](unsigned int const& index) const {
                 return data[index];
             }
 

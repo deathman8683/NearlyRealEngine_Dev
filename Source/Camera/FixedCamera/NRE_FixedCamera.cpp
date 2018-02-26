@@ -100,5 +100,11 @@
                 up.normalize();
             }
 
+            std::ostream& operator<<(std::ostream &stream, FixedCamera const& camera) {
+                stream << "(" << camera.getEye() << "," << camera.getCenter() << "," << camera.getAngle() << ")" << std::endl;
+                stream << "(" << camera.getForward() << "," << camera.getLeft() << "," << camera.getUp() << ")";
+                return stream;
+            }
+
         };
     };

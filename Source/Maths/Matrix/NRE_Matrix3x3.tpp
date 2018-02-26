@@ -194,7 +194,7 @@
                 return data[index];
             }
             template <class T>
-            T* const Matrix3x3<T>::operator[](unsigned int const& index) const {
+            const T* Matrix3x3<T>::operator[](unsigned int const& index) const {
                 return data[index];
             }
 

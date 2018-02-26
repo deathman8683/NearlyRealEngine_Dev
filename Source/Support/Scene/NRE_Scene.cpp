@@ -57,6 +57,8 @@
             void Scene::init() {
                 initScreen();
                 initGL();
+
+                SDL_SetRelativeMouseMode(SDL_TRUE);
             }
 
             void Scene::initScreen() {
