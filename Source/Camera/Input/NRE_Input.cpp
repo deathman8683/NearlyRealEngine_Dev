@@ -27,7 +27,8 @@
                             break;
                         }
                         case (SDL_KEYDOWN) : {
-                            Key& tmp = Keyboard::keyMap.at(getKeyScancode());
+                            Key& it = Keyboard::keyMap.at(getKeyScancode());
+                            Key& tmp = Keyboard::keyMap.at(it.getCode());
                             if (tmp.isSwitch()) {
                                 tmp.setActive(!tmp.isActive());
                             } else {
@@ -36,14 +37,16 @@
                             break;
                         }
                         case (SDL_KEYUP) : {
-                            Key& tmp = Keyboard::keyMap.at(getKeyScancode());
+                            Key& it = Keyboard::keyMap.at(getKeyScancode());
+                            Key& tmp = Keyboard::keyMap.at(it.getCode());
                             if (!tmp.isSwitch()) {
                                 tmp.setActive(false);
                             }
                             break;
                         }
                         case (SDL_MOUSEBUTTONDOWN) : {
-                            Key& tmp = Mouse::keyMap.at(getMouseButton());
+                            Key& it = Mouse::keyMap.at(getMouseButton());
+                            Key& tmp = Mouse::keyMap.at(it.getCode());
                             if (tmp.isSwitch()) {
                                 tmp.setActive(!tmp.isActive());
                             } else {
@@ -53,7 +56,9 @@
                             break;
                         }
                         case (SDL_MOUSEBUTTONUP) : {
-                            Key& tmp = Mouse::keyMap.at(getMouseButton());
+                            Key& it = Mouse::keyMap.at(getMouseButton());
+                            Key& tmp = Mouse::keyMap.at(it.getCode());
+                            tmp = Mouse::keyMap.at(tmp.getCode());
                             if (!tmp.isSwitch()) {
                                 tmp.setActive(false);
                             }
