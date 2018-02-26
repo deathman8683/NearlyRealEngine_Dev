@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            GLenum ColorBuffer::COLOR_BUFFER_TYPE = GL_FLOAT;
+            int ColorBuffer::COLOR_BUFFER_SIZE = sizeof(COLOR_BUFFER_TYPE);
+
             ColorBuffer::ColorBuffer() {
             }
 
@@ -36,6 +39,10 @@
 
             void ColorBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target) {
                 Buffer::update(offset, size, data, target);
+            }
+
+            void ColorBuffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target) {
+                Buffer::allocateAndFill(size, usage, data, target);
             }
 
             void ColorBuffer::bind(GLenum const& target) const {

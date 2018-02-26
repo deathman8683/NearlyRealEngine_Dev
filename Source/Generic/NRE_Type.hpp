@@ -20,8 +20,8 @@
     #include <GL/glew.h>
     #include <SDL2/SDL.h>
 
-    //typedef double NREfloat;
-    typedef float NREfloat;
+    //typedef GLdouble NREfloat;
+    typedef GLfloat NREfloat;
 
     namespace NRE {
         namespace Global {

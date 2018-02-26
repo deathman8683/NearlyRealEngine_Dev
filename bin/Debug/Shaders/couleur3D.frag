@@ -1,14 +1,14 @@
 // Version du GLSL
 
-#version 150 core
+#version 450 core
 
 
-// Entrée
+// Entrï¿½e
 
 in vec3 color;
 
 
-// Sortie 
+// Sortie
 
 out vec4 out_Color;
 

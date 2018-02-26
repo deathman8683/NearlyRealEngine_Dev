@@ -1,9 +1,9 @@
 // Version du GLSL
 
-#version 150 core
+#version 450 core
 
 
-// Entrées
+// Entrï¿½es
 
 in vec3 in_Vertex;
 in vec2 in_TexCoord0;
@@ -29,7 +29,7 @@ void main()
     gl_Position = projection * modelview * vec4(in_Vertex, 1.0);
 
 
-    // Envoi des coordonnées de texture au Fragment Shader
+    // Envoi des coordonnï¿½es de texture au Fragment Shader
 
     coordTexture = in_TexCoord0;
 }

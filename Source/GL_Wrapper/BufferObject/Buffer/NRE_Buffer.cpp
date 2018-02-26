@@ -33,6 +33,12 @@
                 unbind(target);
             }
 
+            void Buffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target) {
+                bind(target);
+                glBufferData(target, size, data, usage);
+                unbind(target);
+            }
+
             void Buffer::bind(GLenum const& target) const {
                 glBindBuffer(target, id);
             }

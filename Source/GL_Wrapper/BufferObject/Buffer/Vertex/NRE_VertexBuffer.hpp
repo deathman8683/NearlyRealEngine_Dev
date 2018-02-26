@@ -51,6 +51,7 @@
                     void reload() override;
                     void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target = GL_ARRAY_BUFFER) override;
                     void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target = GL_ARRAY_BUFFER) override;
+                    void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target = GL_ARRAY_BUFFER) override;
                     void bind(GLenum const& target = GL_ARRAY_BUFFER) const override;
                     void unbind(GLenum const& target = GL_ARRAY_BUFFER) const override;
 

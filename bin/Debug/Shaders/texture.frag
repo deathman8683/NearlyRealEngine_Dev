@@ -1,9 +1,9 @@
 // Version du GLSL
 
-#version 150 core
+#version 450 core
 
 
-// Entrée
+// Entrï¿½e
 
 in vec2 coordTexture;
 
@@ -13,7 +13,7 @@ in vec2 coordTexture;
 uniform sampler2D texture;
 
 
-// Sortie 
+// Sortie
 
 out vec4 out_Color;
 

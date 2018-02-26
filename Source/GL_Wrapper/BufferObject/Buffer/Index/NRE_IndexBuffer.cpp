@@ -38,6 +38,10 @@
                 Buffer::update(offset, size, data, target);
             }
 
+            void IndexBuffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target) {
+                Buffer::allocateAndFill(size, usage, data, target);
+            }
+
             void IndexBuffer::bind(GLenum const& target) const {
                 Buffer::bind(target);
             }

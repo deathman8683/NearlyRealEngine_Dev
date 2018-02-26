@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            GLenum NormalBuffer::NORMAL_BUFFER_TYPE = GL_BYTE;
+            int NormalBuffer::NORMAL_BUFFER_SIZE = sizeof(NORMAL_BUFFER_TYPE);
+
             NormalBuffer::NormalBuffer() {
             }
 
@@ -36,6 +39,10 @@
 
             void NormalBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target) {
                 Buffer::update(offset, size, data, target);
+            }
+
+            void NormalBuffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target) {
+                Buffer::allocateAndFill(size, usage, data, target);
             }
 
             void NormalBuffer::bind(GLenum const& target) const {

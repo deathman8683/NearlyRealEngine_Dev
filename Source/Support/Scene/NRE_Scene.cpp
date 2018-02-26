@@ -7,7 +7,7 @@
             Uint32 Scene::DEFAULT_FLAGS = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
             Uint32 Scene::SDL_INIT_FLAGS = SDL_INIT_VIDEO;
             int Scene::MAJOR_VERSION = 4;
-            int Scene::MINOR_VERSION = 4;
+            int Scene::MINOR_VERSION = 5;
             int Scene::DEPTH_SIZE = 24;
 
             Scene::Scene() : context(0) {

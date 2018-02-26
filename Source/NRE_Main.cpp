@@ -1,52 +1,59 @@
 
-    #include "GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
-    #include "GL_Wrapper/VAO/NRE_VAO.hpp"
     #include "Support/Scene/NRE_Scene.hpp"
-    #include "SDL_Wrapper/Event/NRE_Event.hpp"
     #include "Camera/Input/NRE_Input.hpp"
+    #include "Renderer/Shader/NRE_Shader.hpp"
+    #include "GL_Wrapper/VAO/NRE_VAO.hpp"
 
     using namespace NRE;
 
+    #define BUFFER_OFFSET(offset) ((char*)NULL + (offset))
+
     int main(int argc, char **argv) {
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
-        SDL::Event event;
-        GL::VBO buffer(true);
-        GL::VAO vao(true);
         Input::Input in("kBinder.cfg", "mBinder.cfg");
+        GL::VBO vbo(true);
+        GL::VAO vao(true);
 
-        /*NREfloat data[3 * 3] = {-0.5, -0.5, -1.0,
-                                 0.0, 0.5, -1.0,
-                                 0.5, -0.5, -1.0};
+        NREfloat vertices[] = {-1.0, -1.0, -1.0,  -1.0, 1.0, -1.0,  1.0, 1.0, -1.0,
+                                1.0, 1.0, -1.0,  1.0, -1.0, -1.0, -1.0, -1.0, -1.0};
+        NREfloat couleurs[] = {1.0, 0.0, 0.0,  0.0, 1.0, 0.0,  0.0, 0.0, 1.0,
+                               0.0, 0.0, 1.0,  1.0, 1.0, 0.0,  1.0, 0.0, 0.0};
+        GLbyte normal[] = {1, 0, 0,  1, 0, 0, 1, 0, 0,
+                           1, 0, 0,  1, 0, 0, 1, 0, 0};
 
-        GLubyte color[3 * 3] = {255, 0, 0,
-                                0, 255, 0,
-                                0, 0, 255};
+        vbo.allocateAndFill(sizeof(NREfloat), 6, GL_STATIC_DRAW, vertices, couleurs, normal);
+        vao.access(vbo, GL_FLOAT);
 
-        GLbyte normal[3 * 3] = {1.0, 0.0, 0.0,
-                                1.0, 0.0, 0.0,
-                                1.0, 0.0, 0.0};
+        Renderer::Shader shaderCouleur("Shaders/couleur3D.vert", "Shaders/couleur3D.frag", true);
 
-        buffer.allocate(sizeof(NREfloat), 3, GL_STREAM_DRAW);
-        buffer.update(0, sizeof(NREfloat), 3, data, color, normal);
+        Maths::Matrix4x4<NREfloat> projection;
+        Maths::Matrix4x4<NREfloat> modelview;
 
-        vao.bind();
-            buffer.bind();
-                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-                glEnableVertexAttribArray(0);
+        projection.projection(70.0, 800.0 / 600.0, 0.1, 100.0);
 
-                glVertexAttribPointer(1, 3, GL_UNSIGNED_BYTE, GL_FALSE, 0, 0);
-                glEnableVertexAttribArray(1);
-
-                glVertexAttribPointer(2, 3, GL_BYTE, GL_FALSE, 0, 0);
-                glEnableVertexAttribArray(2);
-            buffer.unbind();
-        vao.unbind();*/
-
-        while (!in.getQuit()) {
+        while(!in.getQuit())
+        {
             in.update(NULL);
+
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            modelview.setIdentity();
+
+            glUseProgram(shaderCouleur.getProgramID());
+
+                vao.bind();
+
+                    glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "modelview"), 1, GL_FALSE, modelview.value());
+                    glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "projection"), 1, GL_FALSE, projection.value());
+
+                    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+                vao.unbind();
+
+            glUseProgram(0);
+
+            SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }
-        std::cout << Input::Keyboard(in) << std::endl;
-        std::cout << Input::Mouse(in) << std::endl;
 
         in.Keyboard::save("kBinder.cfg");
         in.Mouse::save("mBinder.cfg");

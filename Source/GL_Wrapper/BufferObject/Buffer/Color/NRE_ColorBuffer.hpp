@@ -11,8 +11,6 @@
     #include "../NRE_Buffer.hpp"
     #include "../../../../Generic/NRE_Type.hpp"
 
-    #define COLOR_BUFFER_SIZE sizeof(GLubyte)
-
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace
@@ -53,6 +51,7 @@
                     void reload() override;
                     void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target = GL_ARRAY_BUFFER) override;
                     void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target = GL_ARRAY_BUFFER) override;
+                    void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target = GL_ARRAY_BUFFER) override;
                     void bind(GLenum const& target = GL_ARRAY_BUFFER) const override;
                     void unbind(GLenum const& target = GL_ARRAY_BUFFER) const override;
 
@@ -70,7 +69,9 @@
 
                     //## Shift Operator ##//
 
-                private:
+                public:
+                    static GLenum COLOR_BUFFER_TYPE;
+                    static int COLOR_BUFFER_SIZE;
             };
 
         };

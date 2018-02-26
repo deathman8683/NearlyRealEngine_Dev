@@ -53,6 +53,7 @@
                     virtual void reload() = 0;
                     virtual void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target);
                     virtual void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target);
+                    virtual void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target);
                     virtual void bind(GLenum const& target) const;
                     virtual void unbind(GLenum const& target) const;
 

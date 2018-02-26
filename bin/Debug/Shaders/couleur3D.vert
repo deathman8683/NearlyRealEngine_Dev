@@ -1,9 +1,9 @@
 // Version du GLSL
 
-#version 150 core
+#version 450 core
 
 
-// Entrées
+// Entrï¿½es
 
 in vec3 in_Vertex;
 in vec3 in_Color;

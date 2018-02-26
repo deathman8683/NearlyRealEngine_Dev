@@ -65,15 +65,22 @@
 
             void VBO::allocate(size_t const& typeSize, size_t const& nbVertex, GLenum const& usage) {
                 vertex.allocate(typeSize * nbVertex * 3, usage);
-                color.allocate(COLOR_BUFFER_SIZE * nbVertex * 3, usage);
-                normal.allocate(NORMAL_BUFFER_SIZE * nbVertex * 3, usage);
+                color.allocate(ColorBuffer::COLOR_BUFFER_SIZE * nbVertex * 3, usage);
+                normal.allocate(NormalBuffer::NORMAL_BUFFER_SIZE * nbVertex * 3, usage);
                 setAllocated(true);
             }
 
             void VBO::update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData) {
                 vertex.update(offset, typeSize * nbVertex * 3, vData);
-                color.update(offset, COLOR_BUFFER_SIZE * nbVertex * 3, cData);
-                normal.update(offset, NORMAL_BUFFER_SIZE * nbVertex * 3, cData);
+                color.update(offset, ColorBuffer::COLOR_BUFFER_SIZE * nbVertex * 3, cData);
+                normal.update(offset, NormalBuffer::NORMAL_BUFFER_SIZE * nbVertex * 3, nData);
+            }
+
+            void VBO::allocateAndFill(size_t typeSize, size_t const& nbVertex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData) {
+                vertex.allocateAndFill(typeSize * nbVertex * 3, usage, vData);
+                color.allocateAndFill(ColorBuffer::COLOR_BUFFER_SIZE * nbVertex * 3, usage, cData);
+                normal.allocateAndFill(NormalBuffer::NORMAL_BUFFER_SIZE * nbVertex * 3, usage, nData);
+                setAllocated(true);
             }
 
             void VBO::bind() const {
@@ -85,6 +92,27 @@
                 vertex.unbind();
                 color.unbind();
                 normal.unbind();
+            }
+
+            void VBO::access(GLenum const& vertexType, bool const& enableVAA) const {
+                getVertexBuffer().bind();
+                    glVertexAttribPointer(0, 3, vertexType, GL_FALSE, 0, 0);
+                    if (enableVAA) {
+                        glEnableVertexAttribArray(0);
+                    }
+                getVertexBuffer().unbind();
+                getColorBuffer().bind();
+                    glVertexAttribPointer(1, 3, ColorBuffer::COLOR_BUFFER_TYPE, GL_FALSE, 0, 0);
+                    if (enableVAA) {
+                        glEnableVertexAttribArray(1);
+                    }
+                getColorBuffer().unbind();
+                getNormalBuffer().bind();
+                    glVertexAttribPointer(2, 3, NormalBuffer::NORMAL_BUFFER_TYPE, GL_FALSE, 0, 0);
+                    if (enableVAA) {
+                        glEnableVertexAttribArray(2);
+                    }
+                getNormalBuffer().unbind();
             }
 
             std::ostream& operator<<(std::ostream &stream, VBO const& buf) {
