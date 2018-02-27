@@ -34,7 +34,7 @@
                 public:
                     //## Constructor ##//
                     MoveableCamera();
-                    MoveableCamera(std::string const& kbPath, std::string const& mPath, Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle, bool const& calculate = false);
+                    MoveableCamera(std::string const& kbPath, std::string const& mPath, Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle, NREfloat const& speed = DEFAULT_SPEED, bool const& calculate = false);
                     MoveableCamera(FixedCamera const& camera, Input const& in, NREfloat const& speed);
 
                     //## Copy-Constructor ##//

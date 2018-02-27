@@ -26,7 +26,7 @@
              * @brief World's Object : A basic voxel
              */
             class Voxel {
-                private:
+                protected:
                     bool active;
 
                 public:
@@ -40,7 +40,7 @@
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Voxel();
+                    virtual ~Voxel();
 
                     //## Getter ##//
                     bool const& isActive() const;
@@ -50,6 +50,7 @@
 
                     //## Methods ##//
                     void getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf);
+                    virtual GLint const getType() const = 0;
 
                     //## Access Operator ##//
 
@@ -69,6 +70,8 @@
                     static bool DEFAULT_STATE;
                     static int NB_VERTICES;
             };
+
+            std::ostream& operator<<(std::ostream &stream, Voxel const& vox);
 
         };
     };

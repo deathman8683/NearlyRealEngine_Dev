@@ -3,13 +3,13 @@
     #include "Camera/NRE_MoveableCamera.hpp"
     #include "Renderer/Shader/NRE_Shader.hpp"
     #include "GL_Wrapper/VAO/NRE_VAO.hpp"
-    #include "World/Voxel/NRE_Voxel.hpp"
+    #include "World/Voxel/Type/NRE_VoxelType.hpp"
 
     using namespace NRE;
 
     int main(int argc, char **argv) {
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
-        Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", Maths::Vector3D<NREfloat>(-3, -3, -3), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0));
+        Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", Maths::Vector3D<NREfloat>(-3, -3, -3), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0), 0.01);
         GL::VBO vbo(true);
         GL::VAO vao(true);
 
@@ -17,8 +17,10 @@
         GLfloat* couleurs;
         GLbyte* normal;
 
-        World::Voxel blockTest;
-        blockTest.getVertices(vertices, couleurs, normal);
+        Voxel::Grass test;
+        World::Voxel *blockTest = &test;
+
+        blockTest->getVertices(vertices, couleurs, normal);
 
         vbo.allocateAndFill(sizeof(GLint), 36, GL_STATIC_DRAW, vertices, couleurs, normal);
         vao.access(vbo, GL_INT);
@@ -29,7 +31,7 @@
         Maths::Matrix4x4<NREfloat> modelview;
 
 
-        projection.projection(70.0, 800.0 / 600.0, 1, 10000.0);
+        projection.projection(70.0, 800.0 / 600.0, 0.1, 10000.0);
 
         while(!camera.getQuit())
         {
@@ -52,8 +54,8 @@
                 vao.unbind();
 
                 for (int i = 0; i < 10; i = i + 1) {
-                    modelview.translate(Maths::Vector3D<NREfloat>(1, -0.5, -0.5));
-                    modelview.scale(Maths::Vector3D<NREfloat>(2, 2, 2));
+                    modelview.translate(Maths::Vector3D<NREfloat>(0.05, 0.05, 1));
+                    modelview.scale(Maths::Vector3D<NREfloat>(0.9, 0.9, 0.9));
 
                     vao.bind();
 
