@@ -5,17 +5,7 @@
     #include "GL_Wrapper/VAO/NRE_VAO.hpp"
     #include "World/Voxel/NRE_Voxel.hpp"
 
-    #define GLM_ENABLE_EXPERIMENTAL
-
-    #include <glm/glm.hpp>
-    #include <glm/gtx/transform.hpp>
-    #include <glm/gtx/string_cast.hpp>
-    #include <glm/gtc/type_ptr.hpp>
-
     using namespace NRE;
-    using namespace glm;
-
-    #define BUFFER_OFFSET(offset) ((char*)NULL + (offset))
 
     int main(int argc, char **argv) {
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
@@ -37,7 +27,6 @@
 
         Maths::Matrix4x4<NREfloat> projection;
         Maths::Matrix4x4<NREfloat> modelview;
-        mat4 m2(1.0);
 
 
         projection.projection(70.0, 800.0 / 600.0, 0.1, 100.0);
@@ -52,6 +41,17 @@
             camera.setView(modelview);
 
             glUseProgram(shaderCouleur.getProgramID());
+
+                vao.bind();
+
+                    glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
+                    glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+
+                    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+                vao.unbind();
+
+                modelview.translate(Maths::Vector3D<NREfloat>(2, 0, 0));
 
                 vao.bind();
 

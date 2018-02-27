@@ -130,13 +130,13 @@
             template <class T>
             template <class K>
             void Matrix2x2<T>::translate(K const& u) {
-                data[0][1] = data[0][1] + u;
+                setC2(getC1() * u + getC2());
             }
 
             template <class T>
             template <class K>
             void Matrix2x2<T>::scale(K const& u) {
-                data[0][0] = data[0][0] + u;
+                setC1(getC1() * u);
             }
 
             template <class T>

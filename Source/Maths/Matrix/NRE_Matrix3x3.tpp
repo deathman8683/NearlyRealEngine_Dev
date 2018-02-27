@@ -178,15 +178,14 @@
             template <class T>
             template <class K>
             void Matrix3x3<T>::translate(Vector2D<K> const& u) {
-                data[0][2] = data[0][2] + u.getX();
-                data[1][2] = data[1][2] + u.getY();
+                setC3(getC1() * u.getX() + getC2() * u.getY() + getC3());
             }
 
             template <class T>
             template <class K>
             void Matrix3x3<T>::scale(Vector2D<K> const& u) {
-                data[0][0] = data[0][0] * u.getX();
-                data[1][1] = data[1][1] * u.getY();
+                setC1(getC1() * u.getX());
+                setC2(getC2() * u.getY());
             }
 
             template <class T>

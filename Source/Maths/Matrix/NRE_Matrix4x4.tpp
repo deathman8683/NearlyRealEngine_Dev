@@ -254,17 +254,15 @@
             template <class T>
             template <class K>
             void Matrix4x4<T>::translate(Vector3D<K> const& u) {
-                data[0][3] = data[0][3] + u.getX();
-                data[1][3] = data[1][3] + u.getY();
-                data[2][3] = data[2][3] + u.getZ();
+                setC4(getC1() * u.getX() + getC2() * u.getY() + getC3() * u.getZ() + getC4());
             }
 
             template <class T>
             template <class K>
             void Matrix4x4<T>::scale(Vector3D<K> const& u) {
-                data[0][0] = data[0][0] * u.getX();
-                data[1][1] = data[1][1] * u.getY();
-                data[2][2] = data[2][2] * u.getZ();
+                setC1(getC1() * u.getX());
+                setC2(getC2() * u.getY());
+                setC3(getC3() * u.getZ());
             }
 
             template <class T>
