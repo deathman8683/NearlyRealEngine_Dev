@@ -29,8 +29,6 @@
         GLbyte normal[] = {1, 0, 0,  1, 0, 0, 1, 0, 0,
                            1, 0, 0,  1, 0, 0, 1, 0, 0};
 
-        camera.Keyboard::swap(SDL_SCANCODE_LSHIFT, SDL_SCANCODE_SPACE);
-
         vbo.allocateAndFill(sizeof(NREfloat), 6, GL_STATIC_DRAW, vertices, couleurs, normal);
         vao.access(vbo, GL_FLOAT);
 
@@ -45,7 +43,6 @@
 
         while(!camera.getQuit())
         {
-            camera.calculateVector();
             camera.update();
 
             glClear(GL_COLOR_BUFFER_BIT);

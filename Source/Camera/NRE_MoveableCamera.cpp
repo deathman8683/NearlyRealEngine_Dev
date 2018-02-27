@@ -65,6 +65,7 @@
                 tmp = tmp * getSpeed();
                 setEye(getEye() + tmp);
                 setCenter(getEye() + getForward());
+                calculateVector();
             }
 
         };
