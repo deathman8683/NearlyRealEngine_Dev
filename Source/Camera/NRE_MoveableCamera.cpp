@@ -4,7 +4,7 @@
     namespace NRE {
         namespace Camera {
 
-            NREfloat MoveableCamera::DEFAULT_SPEED = 0.01;
+            NREfloat MoveableCamera::DEFAULT_SPEED = 0.1;
 
             MoveableCamera::MoveableCamera() : speed(DEFAULT_SPEED) {
             }

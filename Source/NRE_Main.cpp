@@ -29,7 +29,7 @@
         Maths::Matrix4x4<NREfloat> modelview;
 
 
-        projection.projection(70.0, 800.0 / 600.0, 0.1, 100.0);
+        projection.projection(70.0, 800.0 / 600.0, 1, 10000.0);
 
         while(!camera.getQuit())
         {
@@ -51,16 +51,19 @@
 
                 vao.unbind();
 
-                modelview.translate(Maths::Vector3D<NREfloat>(2, 0, 0));
+                for (int i = 0; i < 10; i = i + 1) {
+                    modelview.translate(Maths::Vector3D<NREfloat>(1, -0.5, -0.5));
+                    modelview.scale(Maths::Vector3D<NREfloat>(2, 2, 2));
 
-                vao.bind();
+                    vao.bind();
 
-                    glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
-                    glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+                        glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
+                        glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
 
-                    glDrawArrays(GL_TRIANGLES, 0, 36);
+                        glDrawArrays(GL_TRIANGLES, 0, 36);
 
-                vao.unbind();
+                    vao.unbind();
+                }
 
             glUseProgram(0);
 
