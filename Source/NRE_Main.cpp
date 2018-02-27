@@ -3,6 +3,7 @@
     #include "Camera/NRE_MoveableCamera.hpp"
     #include "Renderer/Shader/NRE_Shader.hpp"
     #include "GL_Wrapper/VAO/NRE_VAO.hpp"
+    #include "World/Voxel/NRE_Voxel.hpp"
 
     #define GLM_ENABLE_EXPERIMENTAL
 
@@ -22,15 +23,15 @@
         GL::VBO vbo(true);
         GL::VAO vao(true);
 
-        NREfloat vertices[] = {-1.0, -1.0, -1.0,  -1.0, 1.0, -1.0,  1.0, 1.0, -1.0,
-                                1.0, 1.0, -1.0,  1.0, -1.0, -1.0, -1.0, -1.0, -1.0};
-        NREfloat couleurs[] = {1.0, 0.0, 0.0,  0.0, 1.0, 0.0,  0.0, 0.0, 1.0,
-                               0.0, 0.0, 1.0,  1.0, 1.0, 0.0,  1.0, 0.0, 0.0};
-        GLbyte normal[] = {1, 0, 0,  1, 0, 0, 1, 0, 0,
-                           1, 0, 0,  1, 0, 0, 1, 0, 0};
+        GLint* vertices;
+        GLfloat* couleurs;
+        GLbyte* normal;
 
-        vbo.allocateAndFill(sizeof(NREfloat), 6, GL_STATIC_DRAW, vertices, couleurs, normal);
-        vao.access(vbo, GL_FLOAT);
+        World::Voxel blockTest;
+        blockTest.getVertices(vertices, couleurs, normal);
+
+        vbo.allocateAndFill(sizeof(GLint), 36, GL_STATIC_DRAW, vertices, couleurs, normal);
+        vao.access(vbo, GL_INT);
 
         Renderer::Shader shaderCouleur("Shaders/couleur3D.vert", "Shaders/couleur3D.frag", true);
 
@@ -45,7 +46,7 @@
         {
             camera.update();
 
-            glClear(GL_COLOR_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             modelview.setIdentity();
             camera.setView(modelview);
@@ -57,7 +58,7 @@
                     glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
                     glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
 
-                    glDrawArrays(GL_TRIANGLES, 0, 6);
+                    glDrawArrays(GL_TRIANGLES, 0, 36);
 
                 vao.unbind();
 

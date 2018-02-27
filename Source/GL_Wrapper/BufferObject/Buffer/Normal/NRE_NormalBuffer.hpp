@@ -70,8 +70,8 @@
                     //## Shift Operator ##//
 
                 public:
-                    static GLenum NORMAL_BUFFER_TYPE;
-                    static int NORMAL_BUFFER_SIZE;
+                    static GLenum TYPE;
+                    static int SIZE;
             };
 
         };

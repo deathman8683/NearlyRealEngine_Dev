@@ -4,8 +4,8 @@
     namespace NRE {
         namespace GL {
 
-            GLenum NormalBuffer::NORMAL_BUFFER_TYPE = GL_BYTE;
-            int NormalBuffer::NORMAL_BUFFER_SIZE = sizeof(NORMAL_BUFFER_TYPE);
+            GLenum NormalBuffer::TYPE = GL_BYTE;
+            int NormalBuffer::SIZE = sizeof(GLbyte);
 
             NormalBuffer::NormalBuffer() {
             }

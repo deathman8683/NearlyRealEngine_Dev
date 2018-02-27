@@ -58,6 +58,7 @@
                 initScreen();
                 initGL();
 
+                glEnable(GL_DEPTH_TEST);
                 SDL_SetRelativeMouseMode(SDL_TRUE);
             }
 

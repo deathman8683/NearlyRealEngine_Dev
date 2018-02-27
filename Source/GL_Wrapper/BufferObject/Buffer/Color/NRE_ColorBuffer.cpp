@@ -4,8 +4,8 @@
     namespace NRE {
         namespace GL {
 
-            GLenum ColorBuffer::COLOR_BUFFER_TYPE = GL_FLOAT;
-            int ColorBuffer::COLOR_BUFFER_SIZE = sizeof(COLOR_BUFFER_TYPE);
+            GLenum ColorBuffer::TYPE = GL_FLOAT;
+            int ColorBuffer::SIZE = sizeof(GLfloat);
 
             ColorBuffer::ColorBuffer() {
             }

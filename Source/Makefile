@@ -9,11 +9,13 @@ GL_WRAPPER = GL_Wrapper
 SUPPORT = Support
 RENDERER = Renderer
 CAMERA = Camera
+WORLD = World
 
 before :
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))
 	@(cd $(CAMERA) && $(MAKE))
+	@(cd $(WORLD) && $(MAKE))
 	@(cd $(SUPPORT) && $(MAKE))
 	@(cd $(RENDERER) && $(MAKE))
 
