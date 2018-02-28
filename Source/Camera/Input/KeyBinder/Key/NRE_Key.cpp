@@ -40,7 +40,7 @@
                 switchKey = state;
             }
 
-            std::ostream& operator<<(std::ostream &stream, Key const& k) {
+            inline std::ostream& operator<<(std::ostream &stream, Key const& k) {
                 stream << "(" << k.getCode() << "," << k.isActive() << "," << k.isSwitch() << ")";
                 return stream;
             }

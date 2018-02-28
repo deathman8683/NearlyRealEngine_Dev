@@ -351,7 +351,7 @@
              * @return std::ostream, the modified out stream
              */
             template <class T>
-            std::ostream& operator<<(std::ostream &stream, Matrix2x2<T> const& m);
+            inline std::ostream& operator<<(std::ostream &stream, Matrix2x2<T> const& m);
 
         };
     };

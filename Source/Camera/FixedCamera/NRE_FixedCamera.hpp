@@ -89,7 +89,7 @@
                     static NREfloat MIN_PHI;
             };
 
-            std::ostream& operator<<(std::ostream &stream, FixedCamera const& camera);
+            inline std::ostream& operator<<(std::ostream &stream, FixedCamera const& camera);
 
         };
     };

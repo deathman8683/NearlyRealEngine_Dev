@@ -261,7 +261,7 @@
              * @return std::ostream, the modified out stream
              */
             template <class T>
-            std::ostream& operator<<(std::ostream &stream, Point2D<T> const& p);
+            inline std::ostream& operator<<(std::ostream &stream, Point2D<T> const& p);
 
         };
     };

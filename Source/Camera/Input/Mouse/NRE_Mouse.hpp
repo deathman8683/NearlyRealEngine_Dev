@@ -78,7 +78,7 @@
                     static NREfloat DEFAULT_SENSITIVITY;
             };
 
-            std::ostream& operator<<(std::ostream &stream, Mouse const& m);
+            inline std::ostream& operator<<(std::ostream &stream, Mouse const& m);
 
         };
     };

@@ -86,7 +86,7 @@
                     static GLubyte DEFAULT_A;
             };
 
-            std::ostream& operator<<(std::ostream &stream, RGBA const& c);
+            inline std::ostream& operator<<(std::ostream &stream, RGBA const& c);
 
         };
     };

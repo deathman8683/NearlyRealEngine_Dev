@@ -74,7 +74,7 @@
                 private:
             };
 
-            std::ostream& operator<<(std::ostream &stream, VAO const& arr);
+            inline std::ostream& operator<<(std::ostream &stream, VAO const& arr);
 
         };
     };

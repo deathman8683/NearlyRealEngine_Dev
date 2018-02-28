@@ -82,35 +82,39 @@
             template <class T>
             template <class K>
             Vector4D<T>& Vector4D<T>::operator+=(Vector4D<K> const& u) {
-                setCoord(this->getX() + u.getX(), this->getY() + u.getY(), this->getZ() + u.getZ(), getW() + u.getW());
+                Vector3D<T>::operator+=(u);
+                setW(getW() + u.getW());
                 return *this;
             }
 
             template <class T>
             template <class K>
             Vector4D<T>& Vector4D<T>::operator-=(Vector4D<K> const& u) {
-                setCoord(this->getX() - u.getX(), this->getY() - u.getY(), this->getZ() - u.getZ(), getW() - u.getW());
+                Vector3D<T>::operator-=(u);
+                setW(getW() - u.getW());
                 return *this;
             }
 
             template <class T>
             template <class K>
             Vector4D<T>& Vector4D<T>::operator*=(K const& k) {
-                setCoord(this->getX() * k, this->getY() * k, this->getZ() * k, getW() * k);
+                Vector3D<T>::operator*=(k);
+                setW(getW() * k);
                 return *this;
             }
 
             template <class T>
             template <class K>
             Vector4D<T>& Vector4D<T>::operator/=(K const& k) {
-                setCoord(this->getX() / k, this->getY() / k, this->getZ() / k, getW() / k);
+                Vector3D<T>::operator/=(k);
+                setW(getW() / k);
                 return *this;
             }
 
             template <class T>
             template <class K>
             NREfloat Vector4D<T>::operator|=(Vector4D<K> const& u) const {
-                return this->getX() * u.getX() + this->getY() * u.getY() + this->getZ() * u.getZ() + getW() * u.getW();
+                return Vector3D<T>::operator|=(u) + getW() * u.getW();
             }
 
             template <class T>
@@ -150,13 +154,13 @@
             template <class T>
             template <class K>
             bool Vector4D<T>::operator==(Vector4D<K> const& u) const {
-                return this->getX() == u.getX() && this->getY() == u.getY() && this->getZ() == u.getZ() && this->getW() == u.getW();
+                return Vector3D<T>::operator==(u) && getW() == u.getW();
             }
 
             template <>
             template <class K>
             bool Vector4D<NREfloat>::operator==(Vector4D<K> const& u) const {
-                return almostEqual(getX(), u.getX()) && almostEqual(getY(), u.getY()) && almostEqual(getZ(), u.getZ()) && almostEqual(getW(), u.getW());
+                return Vector3D<NREfloat>::operator==(u) && almostEqual(getW(), u.getW());
             }
 
             template <class T>

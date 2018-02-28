@@ -318,7 +318,7 @@
              * @return std::ostream, the modified out stream
              */
            template <class T>
-           std::ostream& operator<<(std::ostream &stream, Vector2D<T> const& u);
+           inline std::ostream& operator<<(std::ostream &stream, Vector2D<T> const& u);
 
         };
     };

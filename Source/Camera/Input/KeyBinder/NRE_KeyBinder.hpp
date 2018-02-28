@@ -77,7 +77,7 @@
                 private:
             };
 
-            std::ostream& operator<<(std::ostream &stream, KeyBinder const& map);
+            inline std::ostream& operator<<(std::ostream &stream, KeyBinder const& map);
 
         };
     };

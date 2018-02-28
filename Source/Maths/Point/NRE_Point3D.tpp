@@ -160,7 +160,7 @@
             }
 
             template <class T>
-            std::ostream& operator<<(std::ostream &stream, Point3D<T> const& p) {
+            inline std::ostream& operator<<(std::ostream &stream, Point3D<T> const& p) {
                 stream << "(" << p.getX() << "," << p.getY() << "," << p.getZ() << ")";
                 return stream;
             }

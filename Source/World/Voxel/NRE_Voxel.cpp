@@ -176,7 +176,7 @@
                     nBuf[105] = 1; nBuf[106] = 0; nBuf[107] = 0;
             }
 
-            std::ostream& operator<<(std::ostream &stream, Voxel const& vox) {
+            inline std::ostream& operator<<(std::ostream &stream, Voxel const& vox) {
                 stream << "(" << vox.getType() << ")";
                 return stream;
             }

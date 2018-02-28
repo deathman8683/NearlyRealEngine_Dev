@@ -47,7 +47,7 @@
                 glBindBuffer(target, 0);
             }
 
-            std::ostream& operator<<(std::ostream &stream, Buffer const& buf) {
+            inline std::ostream& operator<<(std::ostream &stream, Buffer const& buf) {
                 stream << "(" << buf.getID() << ")";
                 return stream;
             }

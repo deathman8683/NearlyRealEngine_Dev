@@ -71,7 +71,7 @@
                     static int NB_VERTICES;
             };
 
-            std::ostream& operator<<(std::ostream &stream, Voxel const& vox);
+            inline std::ostream& operator<<(std::ostream &stream, Voxel const& vox);
 
         };
     };

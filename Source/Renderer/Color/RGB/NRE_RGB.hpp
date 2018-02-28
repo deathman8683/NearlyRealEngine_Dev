@@ -92,7 +92,7 @@
                     static GLubyte DEFAULT_B;
             };
 
-            std::ostream& operator<<(std::ostream &stream, RGB const& c);
+            inline std::ostream& operator<<(std::ostream &stream, RGB const& c);
 
         };
     };

@@ -74,7 +74,7 @@
                 private:
             };
 
-           std::ostream& operator<<(std::ostream &stream, Buffer const& buf);
+           inline std::ostream& operator<<(std::ostream &stream, Buffer const& buf);
 
         };
     };
