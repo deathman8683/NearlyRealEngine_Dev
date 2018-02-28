@@ -58,29 +58,29 @@
                     void setB(GLubyte const& value);
 
                     //## Methods ##//
-                    virtual NREfloat distance(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
-                    virtual NREfloat distanceSquared(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
+                    NREfloat distance(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
+                    NREfloat distanceSquared(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
 
                     //## Shortcut Operator ##//
-                    virtual RGB& operator+=(RGB const& c);
-                    virtual RGB& operator-=(RGB const& c);
+                    RGB& operator+=(RGB const& c);
+                    RGB& operator-=(RGB const& c);
 
                     //## Arithmetic Operator ##//
-                    virtual RGB operator+(RGB const& c);
-                    virtual RGB operator-(RGB const& c);
-                    virtual RGB operator-();
+                    RGB operator+(RGB const& c);
+                    RGB operator-(RGB const& c);
+                    RGB operator-();
 
                     //## Comparison Operator ##//
-                    virtual bool operator==(RGB const& c);
-                    virtual bool operator!=(RGB const& c);
-                    virtual bool operator<(RGB const& c);
-                    virtual bool operator>(RGB const& c);
-                    virtual bool operator<=(RGB const& c);
-                    virtual bool operator>=(RGB const& c);
+                    bool operator==(RGB const& c);
+                    bool operator!=(RGB const& c);
+                    bool operator<(RGB const& c);
+                    bool operator>(RGB const& c);
+                    bool operator<=(RGB const& c);
+                    bool operator>=(RGB const& c);
 
                     //## BitWise Operator ##//
 

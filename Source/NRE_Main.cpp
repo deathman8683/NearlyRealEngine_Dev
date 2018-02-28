@@ -30,7 +30,6 @@
         Maths::Matrix4x4<NREfloat> projection;
         Maths::Matrix4x4<NREfloat> modelview;
 
-
         projection.projection(70.0, 800.0 / 600.0, 0.1, 100.0);
 
         while(!camera.getQuit())

@@ -78,14 +78,16 @@
             template <class T>
             template <class K>
             Point4D<T>& Point4D<T>::operator+=(Vector4D<K> const& u) {
-                setCoord(this->getX() + u.getX(), this->getY() + u.getY(), this->getZ() + u.getZ(), getW() + u.getW());
+                Point3D<T>::operator+=(u);
+                setW(getW() + u.getW());
                 return *this;
             }
 
             template <class T>
             template <class K>
             Point4D<T>& Point4D<T>::operator-=(Vector4D<K> const& u) {
-                setCoord(this->getX() - u.getX(), this->getY() - u.getY(), this->getZ() - u.getZ(), getW() - u.getW());
+                Point3D<T>::operator-=(u);
+                setW(getW() - u.getW());
                 return *this;
             }
 
@@ -111,20 +113,20 @@
 
             template <class T>
             Point4D<T> Point4D<T>::operator-() const {
-                Point4D<T> tmp(-this->getX(), -this->getY(), -this->getZ(), -getW());
+                Point3D<T> tmp(Point3D<T>::operator-(), -getW());
                 return tmp;
             }
 
             template <class T>
             template <class K>
             bool Point4D<T>::operator==(Point4D<K> const& p) const {
-                return this->getX() == p.getX() && this->getY() == p.getY() && this->getZ() == p.getZ() && getW() == p.getW();
+                return Point3D<T>::operator==(p) && getW() == p.getW();
             }
 
             template <>
             template <class K>
             bool Point4D<NREfloat>::operator==(Point4D<K> const& p) const {
-                return almostEqual(getX(), p.getX()) && almostEqual(getY(), p.getY()) && almostEqual(getZ(), p.getZ()) && almostEqual(getW(), p.getW());
+                return Point3D<NREfloat>::operator==(p) && almostEqual(getW(), p.getW());
             }
 
             template <class T>

@@ -88,28 +88,32 @@
             template <class T>
             template <class K>
             Vector2D<T>& Vector2D<T>::operator+=(Vector2D<K> const& u) {
-                setCoord(getX() + u.getX(), getY() + u.getY());
+                setX(getX() + u.getX());
+                setY(getY() + u.getY());
                 return *this;
             }
 
             template <class T>
             template <class K>
             Vector2D<T>& Vector2D<T>::operator-=(Vector2D<K> const& u) {
-                setCoord(getX() - u.getX(), getY() - u.getY());
+                setX(getX() - u.getX());
+                setY(getY() - u.getY());
                 return *this;
             }
 
             template <class T>
             template <class K>
             Vector2D<T>& Vector2D<T>::operator*=(K const& k) {
-                setCoord(getX() * k, getY() * k);
+                setX(getX() * k);
+                setY(getY() * k);
                 return *this;
             }
 
             template <class T>
             template <class K>
             Vector2D<T>& Vector2D<T>::operator/=(K const& k) {
-                setCoord(getX() / k, getY() / k);
+                setX(getX() / k);
+                setY(getY() / k);
                 return *this;
             }
 
