@@ -17,7 +17,7 @@
             RGB::RGB(RGB const& color) : r(color.getR()), g(color.getG()), b(color.getB()) {
             }
 
-            RGB::RGB(HSL const& color) {
+            RGB::RGB(HSL const& color) : r(DEFAULT_R), g(DEFAULT_G), b(DEFAULT_B) {
                 NREfloat c = (1 - std::abs(2 * color.getL() - 1 * color.getS()));
                 NREfloat x = c * (1 - std::abs((color.getH() / 60) % 2 - 1));
                 NREfloat m = color.getL() - c / 2;
