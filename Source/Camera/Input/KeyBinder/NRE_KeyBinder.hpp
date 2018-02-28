@@ -48,19 +48,19 @@
                     virtual ~KeyBinder();
 
                     //## Getter ##//
-                    virtual std::unordered_map<unsigned int, Key> const& getKeyMap() const;
+                    std::unordered_map<unsigned int, Key> const& getKeyMap() const;
 
                     //## Setter ##//
-                    virtual void setKeyMap(std::unordered_map<unsigned int, Key> const& map);
+                    void setKeyMap(std::unordered_map<unsigned int, Key> const& map);
 
                     //## Methods ##//
-                    virtual void insert(unsigned int const& code, Key const& k);
-                    virtual void swap(unsigned int const& first, unsigned int const& second);
-                    virtual void save(std::string const& path);
-                    virtual void load(std::string const& path);
+                    void insert(unsigned int const& code, Key const& k);
+                    void swap(unsigned int const& first, unsigned int const& second);
+                    void save(std::string const& path);
+                    void load(std::string const& path);
 
                     //## Access Operator ##//
-                    virtual std::unordered_map<unsigned int, Key>::iterator operator[](unsigned int const& code);
+                    std::unordered_map<unsigned int, Key>::iterator operator[](unsigned int const& code);
 
                     //## Assignment Operator ##//
 

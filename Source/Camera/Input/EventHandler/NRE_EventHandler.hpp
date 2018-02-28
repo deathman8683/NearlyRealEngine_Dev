@@ -41,7 +41,7 @@
                     EventHandler(SDL::Event const& e);
 
                     //## Deconstructor ##//
-                    ~EventHandler();
+                    virtual ~EventHandler();
 
                     //## Getter ##//
                     bool const& getQuit() const;

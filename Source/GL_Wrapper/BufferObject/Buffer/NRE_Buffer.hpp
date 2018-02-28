@@ -42,10 +42,10 @@
                     virtual ~Buffer();
 
                     //## Getter ##//
-                    virtual GLuint const& getID() const;
+                    GLuint const& getID() const;
 
                     //## Setter ##//
-                    virtual void setID(GLuint const& id);
+                    void setID(GLuint const& id);
 
                     //## Methods ##//
                     virtual void generateID() = 0;

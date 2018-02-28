@@ -48,14 +48,14 @@
                     virtual ~Mouse();
 
                     //## Getter ##//
-                    virtual Maths::Point2D<unsigned short int> const& getClick() const;
-                    virtual Maths::Point2D<unsigned short int> const& getCursor() const;
-                    virtual NREfloat const& getSensitivity() const;
+                    Maths::Point2D<unsigned short int> const& getClick() const;
+                    Maths::Point2D<unsigned short int> const& getCursor() const;
+                    NREfloat const& getSensitivity() const;
 
                     //## Setter ##//
-                    virtual void setClick(Maths::Point2D<unsigned short int> const& p);
-                    virtual void setCursor(Maths::Point2D<unsigned short int> const& p);
-                    virtual void setSensitivity(NREfloat const& s);
+                    void setClick(Maths::Point2D<unsigned short int> const& p);
+                    void setCursor(Maths::Point2D<unsigned short int> const& p);
+                    void setSensitivity(NREfloat const& s);
 
                     //## Methods ##//
 

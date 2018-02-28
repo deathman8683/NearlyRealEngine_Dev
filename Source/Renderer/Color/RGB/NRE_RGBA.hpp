@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_BufferObject.hpp
-     * @brief Declaration of Engine's GL's Object : BufferObject
+     * @file NRE_RGBA.hpp
+     * @brief Declaration of Engine's Color's Object : RGBA
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../../../Generic/NRE_Type.hpp"
 
     /**
      * @namespace NRE
@@ -16,35 +16,30 @@
      */
     namespace NRE {
         /**
-         * @namespace GL
-         * @brief Engine's OpenGL's Wrapper's Module
+         * @namespace Color
+         * @brief Engine's Color's Managment System
          */
-        namespace GL {
+        namespace Color {
 
             /**
-             * @class BufferObject
-             * @brief GL's Object : Base for openGL advanced buffer object
+             * @class RGBA
+             * @brief Color's Object : RGBA color system : Red - Green - Blue - Alpha
              */
-            class BufferObject {
+            class RGBA : public RGB {
                 private:
-                    bool allocated;
 
                 public:
                     //## Constructor ##//
-                    BufferObject();
 
                     //## Copy-Constructor ##//
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~BufferObject();
 
                     //## Getter ##//
-                    bool const& isAllocated() const;
 
                     //## Setter ##//
-                    void setAllocated(bool const& state);
 
                     //## Methods ##//
 

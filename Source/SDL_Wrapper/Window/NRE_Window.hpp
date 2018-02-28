@@ -43,7 +43,7 @@
                     Window(SDL_Window* const& w);
 
                     //## Deconstructor ##//
-                    ~Window();
+                    virtual ~Window();
 
                     //## Getter ##//
                     SDL_Window* const& getItem() const;

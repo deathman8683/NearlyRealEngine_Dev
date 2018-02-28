@@ -45,7 +45,7 @@
                     RGB(HSL const& color);
 
                     //## Deconstructor ##//
-                    ~RGB();
+                    virtual ~RGB();
 
                     //## Getter ##//
                     GLubyte const& getR() const;
@@ -58,29 +58,29 @@
                     void setB(GLubyte const& value);
 
                     //## Methods ##//
-                    NREfloat distance(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
-                    NREfloat distanceSquared(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
+                    virtual NREfloat distance(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
+                    virtual NREfloat distanceSquared(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
 
                     //## Shortcut Operator ##//
-                    RGB& operator+=(RGB const& c);
-                    RGB& operator-=(RGB const& c);
+                    virtual RGB& operator+=(RGB const& c);
+                    virtual RGB& operator-=(RGB const& c);
 
                     //## Arithmetic Operator ##//
-                    RGB operator+(RGB const& c);
-                    RGB operator-(RGB const& c);
-                    RGB operator-();
+                    virtual RGB operator+(RGB const& c);
+                    virtual RGB operator-(RGB const& c);
+                    virtual RGB operator-();
 
                     //## Comparison Operator ##//
-                    bool operator==(RGB const& c);
-                    bool operator!=(RGB const& c);
-                    bool operator<(RGB const& c);
-                    bool operator>(RGB const& c);
-                    bool operator<=(RGB const& c);
-                    bool operator>=(RGB const& c);
+                    virtual bool operator==(RGB const& c);
+                    virtual bool operator!=(RGB const& c);
+                    virtual bool operator<(RGB const& c);
+                    virtual bool operator>(RGB const& c);
+                    virtual bool operator<=(RGB const& c);
+                    virtual bool operator>=(RGB const& c);
 
                     //## BitWise Operator ##//
 

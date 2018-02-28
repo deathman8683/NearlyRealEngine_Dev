@@ -44,17 +44,17 @@
                     virtual ~Event();
 
                     //## Getter ##//
-                    virtual SDL_Event const& getItem() const;
-                    virtual Uint32 const& getType() const;
-                    virtual SDL_Scancode const& getKeyScancode() const;
-                    virtual SDL_Keycode const& getKeyKeycode() const;
-                    virtual Uint8 const& getMouseButton() const;
-                    virtual Maths::Point2D<unsigned short int> const getMouseClick() const;
-                    virtual Maths::Point2D<unsigned short int> const getMotion() const;
-                    virtual Maths::Vector2D<NREfloat> const getMotionRel() const;
+                    SDL_Event const& getItem() const;
+                    Uint32 const& getType() const;
+                    SDL_Scancode const& getKeyScancode() const;
+                    SDL_Keycode const& getKeyKeycode() const;
+                    Uint8 const& getMouseButton() const;
+                    Maths::Point2D<unsigned short int> const getMouseClick() const;
+                    Maths::Point2D<unsigned short int> const getMotion() const;
+                    Maths::Vector2D<NREfloat> const getMotionRel() const;
 
                     //## Setter ##//
-                    virtual void setItem(SDL_Event const& e);
+                    void setItem(SDL_Event const& e);
 
                     //## Methods ##//
                     virtual int poll();

@@ -51,24 +51,24 @@
                     virtual ~FixedCamera();
 
                     //## Getter ##//
-                    virtual Maths::Point3D<NREfloat> const& getEye() const;
-                    virtual Maths::Point3D<NREfloat> const& getCenter() const;
-                    virtual Maths::Vector3D<NREfloat> const& getUp() const;
-                    virtual Maths::Vector3D<NREfloat> const& getForward() const;
-                    virtual Maths::Vector3D<NREfloat> const& getLeft() const;
-                    virtual Maths::Vector2D<NREfloat> const& getAngle() const;
+                    Maths::Point3D<NREfloat> const& getEye() const;
+                    Maths::Point3D<NREfloat> const& getCenter() const;
+                    Maths::Vector3D<NREfloat> const& getUp() const;
+                    Maths::Vector3D<NREfloat> const& getForward() const;
+                    Maths::Vector3D<NREfloat> const& getLeft() const;
+                    Maths::Vector2D<NREfloat> const& getAngle() const;
 
                     //## Setter ##//
-                    virtual void setEye(Maths::Point3D<NREfloat> const& p);
-                    virtual void setCenter(Maths::Point3D<NREfloat> const& p);
-                    virtual void setUp(Maths::Vector3D<NREfloat> const& u);
-                    virtual void setForward(Maths::Vector3D<NREfloat> const& u);
-                    virtual void setLeft(Maths::Vector3D<NREfloat> const& u);
-                    virtual void setAngle(Maths::Vector2D<NREfloat> const& u);
+                    void setEye(Maths::Point3D<NREfloat> const& p);
+                    void setCenter(Maths::Point3D<NREfloat> const& p);
+                    void setUp(Maths::Vector3D<NREfloat> const& u);
+                    void setForward(Maths::Vector3D<NREfloat> const& u);
+                    void setLeft(Maths::Vector3D<NREfloat> const& u);
+                    void setAngle(Maths::Vector2D<NREfloat> const& u);
 
                     //## Methods ##//
-                    virtual void setView(Maths::Matrix4x4<NREfloat>& modelview) const;
-                    virtual void calculateVector();
+                    void setView(Maths::Matrix4x4<NREfloat>& modelview) const;
+                    void calculateVector();
 
                     //## Access Operator ##//
 

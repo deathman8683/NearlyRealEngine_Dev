@@ -43,7 +43,7 @@
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Input();
+                    virtual ~Input();
 
                     //## Getter ##//
 
