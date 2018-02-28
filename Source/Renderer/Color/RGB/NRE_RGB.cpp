@@ -116,7 +116,7 @@
             }
 
             RGB RGB::operator-() {
-                RGB tmp(255 - getR(), 255 - getG(), 255 - getB());
+                return RGB(255 - getR(), 255 - getG(), 255 - getB());
             }
 
             bool RGB::operator==(RGB const& c) {

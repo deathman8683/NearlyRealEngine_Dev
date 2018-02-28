@@ -45,46 +45,52 @@
             }
 
             RGBA& RGBA::operator-=(RGBA const& c) {
-
+                RGB::operator-=(c);
+                setA(static_cast <GLubyte> (static_cast <NREfloat> (getA()) * 0.5 - static_cast <NREfloat> (c.getA()) * 0.5));
             }
 
             RGBA RGBA::operator+(RGBA const& c) {
-
+                RGBA tmp(*this);
+                return tmp += c;
             }
 
             RGBA RGBA::operator-(RGBA const& c) {
-
+                RGBA tmp(*this);
+                return tmp -= c;
             }
 
             RGBA RGBA::operator-() {
-
+                return RGBA(RGB::operator-(), 255 - getA());
             }
 
             bool RGBA::operator==(RGBA const& c) {
-
+                return RGB::operator==(c) && getA() == c.getA();
             }
 
             bool RGBA::operator!=(RGBA const& c) {
-
+                return !(*this == c);
             }
 
             bool RGBA::operator<(RGBA const& c) {
-
+                return distanceSquared() < c.distanceSquared();
             }
 
             bool RGBA::operator>(RGBA const& c) {
-
+                return distanceSquared() > c.distanceSquared();
             }
 
             bool RGBA::operator<=(RGBA const& c) {
-
+                return distanceSquared() <= c.distanceSquared();
             }
 
             bool RGBA::operator>=(RGBA const& c) {
-
+                return distanceSquared() >= c.distanceSquared();
             }
 
-            inline std::ostream& operator<<(std::ostream &stream, RGBA const& c);
+            inline std::ostream& operator<<(std::ostream &stream, RGBA const& c) {
+                stream << "(" << static_cast <GLuint> (c.getR()) << "," << static_cast <GLuint> (c.getG()) << "," << static_cast <GLuint> (c.getB()) << "," << static_cast <GLuint> (c.getA()) << ")";
+                return stream;
+            }
 
         };
     };
