@@ -66,13 +66,13 @@
 
             template <class T>
             NREfloat Point3D<T>::distance(Point3D<T> const& p) const {
-                return sqrt(distanceSquared(p));
+                return std::sqrt(distanceSquared(p));
             }
 
             template <class T>
             NREfloat Point3D<T>::distanceSquared(Point3D<T> const& p) const {
-                NREfloat z_lenght = p.getZ() - getZ();
-                return Point2D<T>::distanceSquared(p) + z_lenght * z_lenght;
+                NREfloat zLenght = p.getZ() - getZ();
+                return Point2D<T>::distanceSquared(p) + zLenght * zLenght;
             }
 
             template <class T>
