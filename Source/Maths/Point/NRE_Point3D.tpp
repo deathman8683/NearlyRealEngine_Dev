@@ -159,11 +159,5 @@
                 return distanceSquared() >= p.distanceSquared();
             }
 
-            template <class T>
-            inline std::ostream& operator<<(std::ostream &stream, Point3D<T> const& p) {
-                stream << "(" << p.getX() << "," << p.getY() << "," << p.getZ() << ")";
-                return stream;
-            }
-
         };
     };

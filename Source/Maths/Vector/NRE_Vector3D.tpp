@@ -216,11 +216,5 @@
                 return tmp ^= u;
             }
 
-            template <class T>
-            std::ostream& operator<<(std::ostream &stream, Vector3D<T> const& u) {
-                stream << "(" << u.getX() << "," << u.getY() << "," << u.getZ() << ")";
-                return stream;
-            }
-
         };
     };

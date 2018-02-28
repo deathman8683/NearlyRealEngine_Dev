@@ -328,9 +328,12 @@
              * @param u : Vector3D<T>, the vector to add
              * @return std::ostream, the modified out stream
              */
-           template <class T>
-           inline std::ostream& operator<<(std::ostream &stream, Vector3D<T> const& u);
-
+             template <class T>
+             std::ostream& operator<<(std::ostream &stream, Vector3D<T> const& u) {
+                 stream << "(" << u.getX() << "," << u.getY() << "," << u.getZ() << ")";
+                 return stream;
+             }
+             
         };
     };
 

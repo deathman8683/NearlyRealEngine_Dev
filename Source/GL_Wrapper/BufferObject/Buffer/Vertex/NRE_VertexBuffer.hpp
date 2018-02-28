@@ -8,8 +8,8 @@
 
     #pragma once
 
-    #include "../NRE_Buffer.hpp"
     #include "../../../../Generic/NRE_Type.hpp"
+    #include "../NRE_Buffer.hpp"
 
     /**
      * @namespace NRE

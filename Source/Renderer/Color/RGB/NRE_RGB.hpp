@@ -92,7 +92,10 @@
                     static GLubyte DEFAULT_B;
             };
 
-            inline std::ostream& operator<<(std::ostream &stream, RGB const& c);
-
+            inline std::ostream& operator<<(std::ostream &stream, RGB const& c) {
+                stream << "(" << static_cast <GLuint> (c.getR()) << "," << static_cast <GLuint> (c.getG()) << "," << static_cast <GLuint> (c.getB()) << ")";
+                return stream;
+            }
+            
         };
     };

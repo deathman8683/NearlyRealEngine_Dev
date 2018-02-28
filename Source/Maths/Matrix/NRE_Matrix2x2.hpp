@@ -350,8 +350,12 @@
              * @param m : Matrix2x2<T>, the matrix to add
              * @return std::ostream, the modified out stream
              */
-            template <class T>
-            inline std::ostream& operator<<(std::ostream &stream, Matrix2x2<T> const& m);
+             template <class T>
+             inline std::ostream& operator<<(std::ostream &stream, Matrix2x2<T> const& m) {
+                 stream << "[" << m[0][0] << " " << m[0][1] << "]" << std::endl;
+                 stream << "[" << m[1][0] << " " << m[1][1] << "]";
+                 return stream;
+             }
 
         };
     };

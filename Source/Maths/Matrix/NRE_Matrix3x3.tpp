@@ -330,13 +330,5 @@
                 return !(*this == m);
             }
 
-            template <class T>
-            inline std::ostream& operator<<(std::ostream &stream, Matrix3x3<T> const& m) {
-                stream << "[" << m[0][0] << " " << m[0][1] << " " << m[0][2] << "]" << std::endl;
-                stream << "[" << m[1][0] << " " << m[1][1] << " " << m[1][2] << "]" << std::endl;
-                stream << "[" << m[2][0] << " " << m[2][1] << " " << m[2][2] << "]";
-                return stream;
-            }
-
         };
     };

@@ -14,10 +14,10 @@ WORLD = World
 before :
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))
+	@(cd $(RENDERER) && $(MAKE))
 	@(cd $(CAMERA) && $(MAKE))
 	@(cd $(WORLD) && $(MAKE))
 	@(cd $(SUPPORT) && $(MAKE))
-	@(cd $(RENDERER) && $(MAKE))
 
 debug : $(OBJ)
 

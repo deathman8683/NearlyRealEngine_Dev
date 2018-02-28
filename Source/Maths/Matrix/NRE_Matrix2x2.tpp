@@ -280,12 +280,5 @@
                 return !(*this == m);
             }
 
-            template <class T>
-            inline std::ostream& operator<<(std::ostream &stream, Matrix2x2<T> const& m) {
-                stream << "[" << m[0][0] << " " << m[0][1] << "]" << std::endl;
-                stream << "[" << m[1][0] << " " << m[1][1] << "]";
-                return stream;
-            }
-
         };
     };

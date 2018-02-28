@@ -52,10 +52,5 @@
                 sensitivity = s;
             }
 
-            inline std::ostream& operator<<(std::ostream &stream, Mouse const& m) {
-                stream << KeyBinder(m) << "(" << m.getClick() << "," << m.getCursor() << "," << m.getSensitivity() << ")" << std::endl;
-                return stream;
-            }
-
         };
     };

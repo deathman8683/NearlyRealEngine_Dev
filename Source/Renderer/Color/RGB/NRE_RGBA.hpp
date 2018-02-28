@@ -39,7 +39,7 @@
                     RGBA(RGB const& color, GLubyte const& a);
 
                     //## Copy-Constructor ##//
-                    RGBA(RGBA const& color)
+                    RGBA(RGBA const& color);
 
                     //## Convertor ##//
                     RGBA(HSLA const& color);
@@ -86,7 +86,10 @@
                     static GLubyte DEFAULT_A;
             };
 
-            inline std::ostream& operator<<(std::ostream &stream, RGBA const& c);
+            inline std::ostream& operator<<(std::ostream &stream, RGBA const& c) {
+                stream << "(" << static_cast <GLuint> (c.getR()) << "," << static_cast <GLuint> (c.getG()) << "," << static_cast <GLuint> (c.getB()) << "," << static_cast <GLuint> (c.getA()) << ")";
+                return stream;
+            }
 
         };
     };

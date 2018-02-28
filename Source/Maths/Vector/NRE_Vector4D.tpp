@@ -199,11 +199,5 @@
                 return *this |= u;
             }
 
-            template <class T>
-            std::ostream& operator<<(std::ostream &stream, Vector4D<T> const& u) {
-                stream << "(" << u.getX() << "," << u.getY() << "," << u.getZ() << "," << u.getW() << ")";
-                return stream;
-            }
-
         };
     };

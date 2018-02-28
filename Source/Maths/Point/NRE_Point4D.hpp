@@ -264,8 +264,11 @@
              * @param p : Point4D<T>, the point to add
              * @return std::ostream, the modified out stream
              */
-            template <class T>
-            inline std::ostream& operator<<(std::ostream &stream, Point4D<T> const& p);
+             template <class T>
+             inline std::ostream& operator<<(std::ostream &stream, Point4D<T> const& p) {
+                 stream << "(" << p.getX() << "," << p.getY() << "," << p.getZ() << "," << p.getW() << ")";
+                 return stream;
+             }
 
         };
     };

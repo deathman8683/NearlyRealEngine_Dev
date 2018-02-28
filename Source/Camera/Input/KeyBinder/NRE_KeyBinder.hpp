@@ -77,7 +77,13 @@
                 private:
             };
 
-            inline std::ostream& operator<<(std::ostream &stream, KeyBinder const& map);
-
+            inline std::ostream& operator<<(std::ostream &stream, KeyBinder const& map) {
+                for (unsigned int i = 0; i != map.getKeyMap().size(); i = i + 1) {
+                    auto it = map.getKeyMap().find(i);
+                    stream << "(" << it->first << " | " << it->second << ")" << std::endl;
+                }
+                return stream;
+            }
+            
         };
     };

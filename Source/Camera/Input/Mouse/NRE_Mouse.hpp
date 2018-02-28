@@ -78,7 +78,9 @@
                     static NREfloat DEFAULT_SENSITIVITY;
             };
 
-            inline std::ostream& operator<<(std::ostream &stream, Mouse const& m);
-
+            inline std::ostream& operator<<(std::ostream &stream, Mouse const& m) {
+                stream << KeyBinder(m) << "(" << m.getClick() << "," << m.getCursor() << "," << m.getSensitivity() << ")" << std::endl;
+                return stream;
+            }
         };
     };

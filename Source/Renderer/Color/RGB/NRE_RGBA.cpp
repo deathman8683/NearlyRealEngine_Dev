@@ -4,6 +4,8 @@
     namespace NRE {
         namespace Color {
 
+            GLubyte RGBA::DEFAULT_A = 0;
+
             RGBA::RGBA() : a(DEFAULT_A) {
             }
 
@@ -14,9 +16,6 @@
             }
 
             RGBA::RGBA(RGBA const& color) : RGB::RGB(color), a(color.getA()) {
-            }
-
-            RGBA::RGBA(HSLA const& color) : RGB::RGB(color), a(static_cast <GLubyte> (color.getA() * 255)) {
             }
 
             RGBA::~RGBA() {
@@ -42,11 +41,13 @@
             RGBA& RGBA::operator+=(RGBA const& c) {
                 RGB::operator+=(c);
                 setA(static_cast <GLubyte> (static_cast <NREfloat> (getA()) * 0.5 + static_cast <NREfloat> (c.getA()) * 0.5));
+                return *this;
             }
 
             RGBA& RGBA::operator-=(RGBA const& c) {
                 RGB::operator-=(c);
                 setA(static_cast <GLubyte> (static_cast <NREfloat> (getA()) * 0.5 - static_cast <NREfloat> (c.getA()) * 0.5));
+                return *this;
             }
 
             RGBA RGBA::operator+(RGBA const& c) {
@@ -85,11 +86,6 @@
 
             bool RGBA::operator>=(RGBA const& c) {
                 return distanceSquared() >= c.distanceSquared();
-            }
-
-            inline std::ostream& operator<<(std::ostream &stream, RGBA const& c) {
-                stream << "(" << static_cast <GLuint> (c.getR()) << "," << static_cast <GLuint> (c.getG()) << "," << static_cast <GLuint> (c.getB()) << "," << static_cast <GLuint> (c.getA()) << ")";
-                return stream;
             }
 
         };

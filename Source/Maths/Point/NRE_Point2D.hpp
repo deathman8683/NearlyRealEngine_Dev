@@ -260,8 +260,11 @@
              * @param p : Point2D<T>, the point to add
              * @return std::ostream, the modified out stream
              */
-            template <class T>
-            inline std::ostream& operator<<(std::ostream &stream, Point2D<T> const& p);
+             template <class T>
+             inline std::ostream& operator<<(std::ostream &stream, Point2D<T> const& p) {
+                 stream << "(" << p.getX() << "," << p.getY() << ")";
+                 return stream;
+             }
 
         };
     };

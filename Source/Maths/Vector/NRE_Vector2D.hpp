@@ -317,9 +317,12 @@
              * @param u : Vector2D<T>, the vector to add
              * @return std::ostream, the modified out stream
              */
-           template <class T>
-           inline std::ostream& operator<<(std::ostream &stream, Vector2D<T> const& u);
-
+             template <class T>
+             inline std::ostream& operator<<(std::ostream &stream, Vector2D<T> const& u) {
+                 stream << "(" << u.getX() << "," << u.getY() << ")";
+                 return stream;
+             }
+             
         };
     };
 

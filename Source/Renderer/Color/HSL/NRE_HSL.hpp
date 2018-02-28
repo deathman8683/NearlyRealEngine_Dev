@@ -84,7 +84,10 @@
                     static NREfloat DEFAULT_L;
             };
 
-            inline std::ostream& operator<<(std::ostream &stream, HSL const& c);
-
+            inline std::ostream& operator<<(std::ostream &stream, HSL const& c) {
+                stream << "(" << c.getH() << "," << c.getS() << "," << c.getL() << ")";
+                return stream;
+            }
+            
         };
     };

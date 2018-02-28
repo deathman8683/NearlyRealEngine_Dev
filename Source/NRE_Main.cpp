@@ -4,6 +4,7 @@
     #include "Renderer/Shader/NRE_Shader.hpp"
     #include "GL_Wrapper/VAO/NRE_VAO.hpp"
     #include "World/Voxel/Type/NRE_VoxelType.hpp"
+    #include "Renderer/Color/NRE_Color.hpp"
 
     using namespace NRE;
 
@@ -12,6 +13,11 @@
         Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", Maths::Vector3D<NREfloat>(-3, -3, -3), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0), 0.01);
         GL::VBO vbo(true);
         GL::VAO vao(true);
+
+        Color::RGB test0;
+        Color::RGBA test1;
+        Color::HSL test2;
+        Color::HSLA test3;
 
         GLint* vertices;
         GLfloat* couleurs;
