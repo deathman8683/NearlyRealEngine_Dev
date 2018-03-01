@@ -40,6 +40,7 @@
 
                     //## Methods ##//
                     GLint const getType() const override;
+                    Color::RGB const getColor() const override;
             };
 
             /**
@@ -60,6 +61,7 @@
 
                     //## Methods ##//
                     GLint const getType() const override;
+                    Color::RGB const getColor() const override;
             };
 
         };

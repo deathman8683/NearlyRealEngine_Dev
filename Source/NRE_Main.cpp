@@ -23,7 +23,7 @@
         GLfloat* couleurs;
         GLbyte* normal;
 
-        Voxel::Grass test;
+        Voxel::Stone test;
         World::Voxel *blockTest = &test;
 
         blockTest->getVertices(vertices, couleurs, normal);

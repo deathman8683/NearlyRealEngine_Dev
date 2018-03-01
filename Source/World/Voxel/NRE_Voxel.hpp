@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../../Generic/NRE_Type.hpp"
+    #include "../../Renderer/Color/NRE_Color.hpp"
 
     /**
      * @namespace NRE
@@ -51,6 +52,7 @@
                     //## Methods ##//
                     void getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf);
                     virtual GLint const getType() const = 0;
+                    virtual Color::RGB const getColor() const = 0;
 
                     //## Access Operator ##//
 
@@ -75,6 +77,6 @@
                 stream << "(" << vox.getType() << ")";
                 return stream;
             }
-            
+
         };
     };
