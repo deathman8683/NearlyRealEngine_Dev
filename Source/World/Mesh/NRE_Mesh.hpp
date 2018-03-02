@@ -8,8 +8,7 @@
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
-    #include "../../Maths/NRE_Maths.hpp"
+    #include "../Voxel/PackedVertex/NRE_PackedVertex.hpp"
     #include <vector>
     #include <unordered_map>
 
