@@ -8,9 +8,8 @@
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../../Generic/Array/NRE_ArrayOperation.hpp"
     #include "../Voxel/Type/NRE_VoxelType.hpp"
-    #include "../../Maths/NRE_Maths.hpp"
     #include "../../GL_Wrapper/VAO/NRE_VAO.hpp"
 
     /**
@@ -50,13 +49,15 @@
                     ~Chunk();
 
                     //## Getter ##//
-                    Voxel* const& getVoxel(Maths::Point3D<GLuint> const& p) const;
-                    Voxel* const& getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const;
+                    Voxel* const& getVoxels() const;
+                    Voxel const& getVoxel(Maths::Point3D<GLuint> const& p) const;
+                    Voxel const& getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const;
                     Maths::Point2D<GLint> const& getCoord() const;
                     GL::IBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
 
                     //## Setter ##//
+                    void setVoxels(Voxel* const& vox);
                     void setVoxel(Maths::Point3D<GLuint> const& p, Voxel const& vox);
                     void setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel const& vox);
                     void setCoord(Maths::Point2D<GLint> const& p);
@@ -66,6 +67,7 @@
                     //## Methods ##//
                     void constructMesh();
                     void render();
+                    void getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z);
 
                     //## Access Operator ##//
 
@@ -82,6 +84,10 @@
                     //## Shift Operator ##//
 
                 private:
+                    static GLuint SIZE_X;
+                    static GLuint SIZE_Y;
+                    static GLuint SIZE_Z;
+                    static Maths::Vector3D<GLuint> SIZE;
             };
 
         };
