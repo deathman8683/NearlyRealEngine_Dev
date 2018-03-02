@@ -4,6 +4,9 @@
     namespace NRE {
         namespace GL {
 
+            GLenum IndexBuffer::TYPE = GL_UNSIGNED_INT;
+            int IndexBuffer::SIZE = sizeof(GLuint);
+
             IndexBuffer::IndexBuffer() {
             }
 

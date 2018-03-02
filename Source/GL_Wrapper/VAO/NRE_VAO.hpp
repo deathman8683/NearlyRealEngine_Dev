@@ -9,7 +9,7 @@
     #pragma once
 
     #include "../../Generic/NRE_Type.hpp"
-    #include "../BufferObject/VBO/NRE_VBO.hpp"
+    #include "../BufferObject/IBO/NRE_IBO.hpp"
 
     /**
      * @namespace NRE
@@ -56,6 +56,7 @@
                     void bind() const;
                     void unbind() const;
                     void access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;
+                    void access(IBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;
 
                     //## Access Operator ##//
 
@@ -78,6 +79,6 @@
                 stream << "(" << arr.getID() << ")";
                 return stream;
             }
-            
+
         };
     };

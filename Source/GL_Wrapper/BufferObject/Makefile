@@ -4,12 +4,14 @@ OBJDIR = ../../../obj/Debug/GL_Wrapper/BufferObject/
 
 BUFFER = Buffer
 VBO = VBO
+IBO = VBO
 
 all : $(TARGET) after
 
 after:
 	@(cd $(BUFFER) && $(MAKE))
 	@(cd $(VBO) && $(MAKE))
+	@(cd $(IBO) && $(MAKE))
 
 debug: $(OBJ)
 

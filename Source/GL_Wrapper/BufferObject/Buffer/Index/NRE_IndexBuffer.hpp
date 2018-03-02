@@ -69,7 +69,9 @@
 
                     //## Shift Operator ##//
 
-                private:
+                public:
+                    static GLenum TYPE;
+                    static int SIZE;
             };
 
         };

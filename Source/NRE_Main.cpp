@@ -11,7 +11,7 @@
     int main(int argc, char **argv) {
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
         Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", Maths::Vector3D<NREfloat>(-3, -3, -3), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0), 0.01);
-        GL::VBO vbo(true);
+        GL::IBO ibo(true);
         GL::VAO vao(true);
 
         Color::RGB test0;
@@ -29,7 +29,7 @@
         blockTest->getVertices(vertices, couleurs, normal);
 
         vbo.allocateAndFill(sizeof(GLint), 36, GL_STATIC_DRAW, vertices, couleurs, normal);
-        vao.access(vbo, GL_INT);
+        vao.access(VBO(ibo), GL_INT);
 
         Renderer::Shader shaderCouleur("Shaders/couleur3D.vert", "Shaders/couleur3D.frag", true);
 

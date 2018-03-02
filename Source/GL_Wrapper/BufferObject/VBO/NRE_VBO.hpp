@@ -30,7 +30,7 @@
              * @brief GL's Object : Specialization of an BufferObject for vertex managing
              */
             class VBO : public BufferObject{
-                private:
+                protected:
                     VertexBuffer vertex;
                     ColorBuffer color;
                     NormalBuffer normal;
@@ -59,15 +59,13 @@
                     void setNormalBuffer(NormalBuffer const& buf);
 
                     //## Methods ##//
-                    void generateID();
-                    void deleteID();
-                    void reload();
+                    virtual void generateID();
+                    virtual void deleteID();
+                    virtual void reload();
                     void allocate(size_t const& typeSize, size_t const& nbVertex, GLenum const& usage);
                     void update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData);
                     void allocateAndFill(size_t typeSize, size_t const& nbVertex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData);
-                    void bind() const;
-                    void unbind() const;
-                    void access(GLenum const& vertexType, bool const& enableVAA = true) const;
+                    virtual void access(GLenum const& vertexType, bool const& enableVAA = true) const;
 
                     //## Access Operator ##//
 

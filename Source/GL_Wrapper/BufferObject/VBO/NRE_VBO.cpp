@@ -83,17 +83,6 @@
                 setAllocated(true);
             }
 
-            void VBO::bind() const {
-                vertex.bind();
-                color.bind();
-                normal.bind();
-            }
-            void VBO::unbind() const {
-                vertex.unbind();
-                color.unbind();
-                normal.unbind();
-            }
-
             void VBO::access(GLenum const& vertexType, bool const& enableVAA) const {
                 getVertexBuffer().bind();
                     glVertexAttribPointer(0, 3, vertexType, GL_FALSE, 0, 0);
