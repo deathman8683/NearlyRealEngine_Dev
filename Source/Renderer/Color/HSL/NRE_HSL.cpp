@@ -8,7 +8,7 @@
             NREfloat HSL::DEFAULT_S = 0;
             NREfloat HSL::DEFAULT_L = 0;
 
-            HSL::HSL() : h(DEFAULT_H), s(DEFAULT_S), l(DEFAULT_L) {
+            HSL::HSL() : HSL(DEFAULT_H, DEFAULT_S, DEFAULT_L) {
             }
 
             HSL::HSL(unsigned short int const& h, NREfloat const& s, NREfloat const& l) : h(h), s(s), l(l) {

@@ -4,7 +4,7 @@
     namespace NRE {
         namespace Input {
 
-            Key::Key() : code(0), active(false), switchKey(false) {
+            Key::Key() : Key(0, false, false) {
             }
 
             Key::Key(unsigned int const& code, bool const& active, bool const& switchKey) : code(code), active(active), switchKey(switchKey) {

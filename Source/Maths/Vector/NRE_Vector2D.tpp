@@ -3,7 +3,7 @@
         namespace Maths {
 
             template <class T>
-            Vector2D<T>::Vector2D() : x(DEFAULT_X), y(DEFAULT_Y) {
+            Vector2D<T>::Vector2D() : Vector2D(DEFAULT_X, DEFAULT_Y) {
             }
 
             template <class T>

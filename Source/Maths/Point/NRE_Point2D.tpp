@@ -3,7 +3,7 @@
         namespace Maths {
 
             template <class T>
-            Point2D<T>::Point2D() : x(DEFAULT_X), y(DEFAULT_Y) {
+            Point2D<T>::Point2D() : Point2D(DEFAULT_X, DEFAULT_Y) {
             }
 
             template <class T>

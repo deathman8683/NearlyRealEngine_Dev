@@ -8,7 +8,7 @@
             GLubyte RGB::DEFAULT_G = 0;
             GLubyte RGB::DEFAULT_B = 0;
 
-            RGB::RGB() : r(DEFAULT_R), g(DEFAULT_G), b(DEFAULT_B) {
+            RGB::RGB() : RGB(DEFAULT_R, DEFAULT_G ,DEFAULT_B) {
             }
 
             RGB::RGB(GLubyte const& r, GLubyte const& g, GLubyte const& b) : r(r), g(g), b(b) {

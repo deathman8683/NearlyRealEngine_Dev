@@ -8,7 +8,7 @@
             int Voxel::NB_VERTICES = 3 * 8;
             size_t Voxel::NB_INDEX = 36;
 
-            Voxel::Voxel() : active(DEFAULT_STATE) {
+            Voxel::Voxel() : Voxel(DEFAULT_STATE) {
             }
 
             Voxel::Voxel(bool const& state) : active(state) {
