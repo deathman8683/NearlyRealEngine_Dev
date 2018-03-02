@@ -56,7 +56,6 @@
                     void bind() const;
                     void unbind() const;
                     void access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;
-                    void access(IBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;
 
                     //## Access Operator ##//
 

@@ -22,14 +22,15 @@
         GLint* vertices;
         GLfloat* couleurs;
         GLbyte* normal;
+        GLuint* index;
 
         Voxel::Stone test;
         World::Voxel *blockTest = &test;
 
-        blockTest->getVertices(vertices, couleurs, normal);
+        size_t iCpt = blockTest->getVertices(vertices, couleurs, normal, index);
 
-        vbo.allocateAndFill(sizeof(GLint), 36, GL_STATIC_DRAW, vertices, couleurs, normal);
-        vao.access(VBO(ibo), GL_INT);
+        ibo.allocateAndFill(sizeof(GLint), 36, iCpt, GL_STATIC_DRAW, vertices, couleurs, normal, index);
+        vao.access(ibo, GL_INT);
 
         Renderer::Shader shaderCouleur("Shaders/couleur3D.vert", "Shaders/couleur3D.frag", true);
 
@@ -54,7 +55,7 @@
                     glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
                     glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
 
-                    glDrawArrays(GL_TRIANGLES, 0, 36);
+                    glDrawElements(GL_TRIANGLES, iCpt, GL_UNSIGNED_INT, 0);
 
                 vao.unbind();
 
@@ -67,7 +68,7 @@
                         glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
                         glUniformMatrix4fv(glGetUniformLocation(shaderCouleur.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
 
-                        glDrawArrays(GL_TRIANGLES, 0, 36);
+                        glDrawElements(GL_TRIANGLES, iCpt, GL_UNSIGNED_INT, 0);
 
                     vao.unbind();
                 }

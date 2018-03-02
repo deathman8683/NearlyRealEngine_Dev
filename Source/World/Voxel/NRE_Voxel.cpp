@@ -5,7 +5,8 @@
         namespace World {
 
             bool Voxel::DEFAULT_STATE = true;
-            int Voxel::NB_VERTICES = 3 * 36;
+            int Voxel::NB_VERTICES = 3 * 8;
+            size_t Voxel::NB_INDEX = 36;
 
             Voxel::Voxel() : active(DEFAULT_STATE) {
             }
@@ -27,55 +28,16 @@
                 active = state;
             }
 
-            void Voxel::getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf) {
+            size_t Voxel::getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf) {
                 vBuf = new GLint[NB_VERTICES];
                     vBuf[0] = 0; vBuf[1] = 0; vBuf[2] = 0;
                     vBuf[3] = 0; vBuf[4] = 0; vBuf[5] = 1;
                     vBuf[6] = 0; vBuf[7] = 1; vBuf[8] = 0;
-
                     vBuf[9] = 0; vBuf[10] = 1; vBuf[11] = 1;
-                    vBuf[12] = 0; vBuf[13] = 1; vBuf[14] = 0;
-                    vBuf[15] = 0; vBuf[16] = 0; vBuf[17] = 1;
-
-                    vBuf[18] = 0; vBuf[19] = 0; vBuf[20] = 0;
-                    vBuf[21] = 0; vBuf[22] = 0; vBuf[23] = 1;
-                    vBuf[24] = 1; vBuf[25] = 0; vBuf[26] = 0;
-
-                    vBuf[27] = 1; vBuf[28] = 0; vBuf[29] = 1;
-                    vBuf[30] = 1; vBuf[31] = 0; vBuf[32] = 0;
-                    vBuf[33] = 0; vBuf[34] = 0; vBuf[35] = 1;
-
-                    vBuf[36] = 0; vBuf[37] = 0; vBuf[38] = 1;
-                    vBuf[39] = 1; vBuf[40] = 0; vBuf[41] = 1;
-                    vBuf[42] = 0; vBuf[43] = 1; vBuf[44] = 1;
-
-                    vBuf[45] = 1; vBuf[46] = 1; vBuf[47] = 1;
-                    vBuf[48] = 0; vBuf[49] = 1; vBuf[50] = 1;
-                    vBuf[51] = 1; vBuf[52] = 0; vBuf[53] = 1;
-
-                    vBuf[54] = 0; vBuf[55] = 0; vBuf[56] = 0;
-                    vBuf[57] = 0; vBuf[58] = 1; vBuf[59] = 0;
-                    vBuf[60] = 1; vBuf[61] = 0; vBuf[62] = 0;
-
-                    vBuf[63] = 1; vBuf[64] = 1; vBuf[65] = 0;
-                    vBuf[66] = 1; vBuf[67] = 0; vBuf[68] = 0;
-                    vBuf[69] = 0; vBuf[70] = 1; vBuf[71] = 0;
-
-                    vBuf[72] = 1; vBuf[73] = 0; vBuf[74] = 0;
-                    vBuf[75] = 1; vBuf[76] = 0; vBuf[77] = 1;
-                    vBuf[78] = 1; vBuf[79] = 1; vBuf[80] = 0;
-
-                    vBuf[81] = 1; vBuf[82] = 1; vBuf[83] = 1;
-                    vBuf[84] = 1; vBuf[85] = 1; vBuf[86] = 0;
-                    vBuf[87] = 1; vBuf[88] = 0; vBuf[89] = 1;
-
-                    vBuf[90] = 0; vBuf[91] = 1; vBuf[92] = 0;
-                    vBuf[93] = 0; vBuf[94] = 1; vBuf[95] = 1;
-                    vBuf[96] = 1; vBuf[97] = 1; vBuf[98] = 0;
-
-                    vBuf[99] = 1; vBuf[100] = 1; vBuf[101] = 1;
-                    vBuf[102] = 1; vBuf[103] = 1; vBuf[104] = 0;
-                    vBuf[105] = 0; vBuf[106] = 1; vBuf[107] = 1;
+                    vBuf[12] = 1; vBuf[13] = 0; vBuf[14] = 0;
+                    vBuf[15] = 1; vBuf[16] = 0; vBuf[17] = 1;
+                    vBuf[18] = 1; vBuf[19] = 1; vBuf[20] = 1;
+                    vBuf[21] = 1; vBuf[22] = 1; vBuf[23] = 0;
 
                 cBuf = new GLfloat[NB_VERTICES];
                     Color::RGB voxColor = getColor();
@@ -91,7 +53,46 @@
                         nBuf[i + 1] = 0;
                         nBuf[i + 2] = 0;
                     }
-            }
 
+                iBuf = new GLuint[NB_INDEX];
+                    iBuf[0] = 0;
+                    iBuf[1] = 1;
+                    iBuf[2] = 2;
+                    iBuf[3] = 3;
+                    iBuf[4] = 2;
+                    iBuf[5] = 1;
+                    iBuf[6] = 0;
+                    iBuf[7] = 1;
+                    iBuf[8] = 4;
+                    iBuf[9] = 5;
+                    iBuf[10] = 4;
+                    iBuf[11] = 1;
+                    iBuf[12] = 1;
+                    iBuf[13] = 5;
+                    iBuf[14] = 3;
+                    iBuf[15] = 6;
+                    iBuf[16] = 3;
+                    iBuf[17] = 5;
+                    iBuf[18] = 0;
+                    iBuf[19] = 2;
+                    iBuf[20] = 4;
+                    iBuf[21] = 7;
+                    iBuf[22] = 4;
+                    iBuf[23] = 2;
+                    iBuf[24] = 4;
+                    iBuf[25] = 5;
+                    iBuf[26] = 7;
+                    iBuf[27] = 6;
+                    iBuf[28] = 7;
+                    iBuf[29] = 5;
+                    iBuf[30] = 2;
+                    iBuf[31] = 3;
+                    iBuf[32] = 7;
+                    iBuf[33] = 6;
+                    iBuf[34] = 7;
+                    iBuf[35] = 3;
+
+                return NB_INDEX;
+            }
         };
     };

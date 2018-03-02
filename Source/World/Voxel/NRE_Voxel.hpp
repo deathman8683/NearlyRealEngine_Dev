@@ -50,7 +50,7 @@
                     void setActive(bool const& state);
 
                     //## Methods ##//
-                    void getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf);
+                    size_t getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf);
                     virtual GLint const getType() const = 0;
                     virtual Color::RGB const getColor() const = 0;
 
@@ -71,6 +71,7 @@
                 private:
                     static bool DEFAULT_STATE;
                     static int NB_VERTICES;
+                    static size_t NB_INDEX;
             };
 
             inline std::ostream& operator<<(std::ostream &stream, Voxel const& vox) {

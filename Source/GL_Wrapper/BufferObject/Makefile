@@ -4,7 +4,7 @@ OBJDIR = ../../../obj/Debug/GL_Wrapper/BufferObject/
 
 BUFFER = Buffer
 VBO = VBO
-IBO = VBO
+IBO = IBO
 
 all : $(TARGET) after
 
