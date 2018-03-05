@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../NRE_Type.hpp"
+    #include "../../Maths/NRE_Maths.hpp"
 
     /**
      * @namespace NRE

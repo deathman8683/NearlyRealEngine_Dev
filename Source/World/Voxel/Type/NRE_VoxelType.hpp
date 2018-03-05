@@ -30,7 +30,6 @@
                 public:
                     //## Constructor ##//
                     Grass();
-                    Grass(bool const& state);
 
                     //## Copy-Constructor ##//
                     Grass(Grass const& vox);
@@ -51,7 +50,6 @@
                 public:
                     //## Constructor ##//
                     Stone();
-                    Stone(bool const& state);
 
                     //## Copy-Constructor ##//
                     Stone(Stone const& vox);

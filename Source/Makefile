@@ -4,6 +4,7 @@ OBJDIR = ../obj/Debug/
 
 all : before $(TARGET)
 
+GENERIC = Generic
 SDL_WRAPPER = SDL_Wrapper
 GL_WRAPPER = GL_Wrapper
 SUPPORT = Support
@@ -12,6 +13,7 @@ CAMERA = Camera
 WORLD = World
 
 before :
+	@(cd $(GENERIC) && $(MAKE))
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))
 	@(cd $(RENDERER) && $(MAKE))

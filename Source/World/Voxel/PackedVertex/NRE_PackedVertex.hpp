@@ -27,14 +27,14 @@
              * @class PackedVertex
              * @brief Voxel's Object : A vertex with his attributes : Color + Normal
              */
-            class PackedVertex : public Maths::Point3D<GLint>, public Maths::Vector<GLbyte>, public Color::RGB {
+            class PackedVertex : public Maths::Point3D<GLint>, public Maths::Vector3D<GLbyte>, public Color::RGB {
                 private:
                     size_t nCode;
                     size_t cCode;
 
                 public:
                     //## Constructor ##//
-                    PackedVertex()
+                    PackedVertex();
                     PackedVertex(Maths::Point3D<GLint> const& p, Maths::Vector3D<GLbyte> const& n, Color::RGB const& c, size_t const& nCode, size_t const& cCode);
 
                     //## Copy-Constructor ##//
@@ -50,8 +50,8 @@
                     size_t const& getCCode() const;
 
                     //## Setter ##//
-                    void setNCode(size_t const& code) const;
-                    void setCCode(size_t const& code) const;
+                    void setNCode(size_t const& code);
+                    void setCCode(size_t const& code);
 
                     //## Methods ##//
 
@@ -64,8 +64,9 @@
                     //## Arithmetic Operator ##//
 
                     //## Comparison Operator ##//
-                    bool operator<(PackedVertex const& p);
-                    bool operator>(PackedVertex const& p);
+                    bool operator==(PackedVertex const& p) const;
+                    bool operator<(PackedVertex const& p) const;
+                    bool operator>(PackedVertex const& p) const;
 
                     //## BitWise Operator ##//
 
@@ -74,12 +75,22 @@
                 private:
             };
 
-            namespace std {
-                class hash<PackedVertex> {
-                    public:
-                        size_t operator()(PackedVertex const& p) const;
-                }
-            };
+        };
+    };
 
+
+    namespace std {
+        template <>
+        class hash<NRE::Voxel::PackedVertex> {
+            public:
+                size_t operator()(NRE::Voxel::PackedVertex const& p) const
+                {
+                    size_t h1 = p.NRE::Maths::Point3D<GLint>::getX();
+                    size_t h2 = p.NRE::Maths::Point3D<GLint>::getY();
+                    size_t h3 = p.NRE::Maths::Point3D<GLint>::getZ();
+
+                    size_t hV = h3 * 100'000'000 + h2 * 1'000'000 + h1 * 10'000 + p.getNCode() * 1'000 + p.getCCode();
+                    return hV;
+                }
         };
     };

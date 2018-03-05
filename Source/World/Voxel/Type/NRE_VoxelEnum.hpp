@@ -20,10 +20,22 @@
         namespace Voxel {
 
             enum VoxelType {
+                VOID,
                 GRASS,
                 STONE,
 
                 TYPE_NUM
+            };
+
+            enum VoxelFace {
+                XNegative,
+                YNegative,
+                ZNegative,
+                XPositive,
+                YPositive,
+                ZPositive,
+
+                FACE_NUM
             };
 
         };

@@ -28,12 +28,10 @@
              */
             class Voxel {
                 protected:
-                    bool active;
 
                 public:
                     //## Constructor ##//
                     Voxel();
-                    Voxel(bool const& state);
 
                     //## Copy-Constructor ##//
                     Voxel(Voxel const& vox);
@@ -44,10 +42,8 @@
                     virtual ~Voxel();
 
                     //## Getter ##//
-                    bool const& isActive() const;
 
                     //## Setter ##//
-                    void setActive(bool const& state);
 
                     //## Methods ##//
                     size_t getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf);
@@ -69,7 +65,6 @@
                     //## Shift Operator ##//
 
                 private:
-                    static bool DEFAULT_STATE;
                     static int NB_VERTICES;
                     static size_t NB_INDEX;
             };

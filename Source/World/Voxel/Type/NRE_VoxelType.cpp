@@ -7,9 +7,6 @@
             Grass::Grass() {
             }
 
-            Grass::Grass(bool const& state) : Voxel::Voxel(state) {
-            }
-
             Grass::Grass(Grass const& vox) : Voxel::Voxel(vox) {
             }
 
@@ -25,9 +22,6 @@
             }
 
             Stone::Stone() {
-            }
-
-            Stone::Stone(bool const& state) : Voxel::Voxel(state) {
             }
 
             Stone::Stone(Stone const& vox) : Voxel::Voxel(vox) {

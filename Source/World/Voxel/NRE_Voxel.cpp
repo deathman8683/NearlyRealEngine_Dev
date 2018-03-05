@@ -4,28 +4,16 @@
     namespace NRE {
         namespace World {
 
-            bool Voxel::DEFAULT_STATE = true;
             int Voxel::NB_VERTICES = 3 * 8;
             size_t Voxel::NB_INDEX = 36;
 
-            Voxel::Voxel() : Voxel(DEFAULT_STATE) {
+            Voxel::Voxel() {
             }
 
-            Voxel::Voxel(bool const& state) : active(state) {
-            }
-
-            Voxel::Voxel(Voxel const& vox) : active(vox.isActive()) {
+            Voxel::Voxel(Voxel const& vox) {
             }
 
             Voxel::~Voxel() {
-            }
-
-            bool const& Voxel::isActive() const {
-                return active;
-            }
-
-            void Voxel::setActive(bool const& state) {
-                active = state;
             }
 
             size_t Voxel::getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf) {

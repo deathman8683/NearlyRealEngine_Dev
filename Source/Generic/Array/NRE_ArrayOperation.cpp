@@ -13,7 +13,7 @@
             }
 
             GLuint const get1DIndexFrom2D(Maths::Point2D<GLuint> const& p, Maths::Vector2D<GLuint> const& size) {
-                return get1get1DIndexFrom2D(p.getX(), p.getY(), size);
+                return get1DIndexFrom2D(p.getX(), p.getY(), size);
             }
 
             GLuint const get1DIndexFrom2D(GLuint const& x, GLuint const& y, Maths::Vector2D<GLuint> const& size) {
