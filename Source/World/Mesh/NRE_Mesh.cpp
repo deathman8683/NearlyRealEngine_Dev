@@ -87,9 +87,9 @@
             }
 
             void Mesh::addColor(Color::RGB const& c) {
-                cData.push_back(c.getR());
-                cData.push_back(c.getG());
-                cData.push_back(c.getB());
+                cData.push_back(static_cast <NREfloat> (c.getR()) / 255.0);
+                cData.push_back(static_cast <NREfloat> (c.getG()) / 255.0);
+                cData.push_back(static_cast <NREfloat> (c.getB()) / 255.0);
             }
 
             void Mesh::addNormal(Maths::Vector3D<GLbyte> const& n) {
@@ -159,10 +159,10 @@
                 Color::RGB voxColor = getTarget()->getVoxel(voxCoord)->getColor();
 
                 if (face[NRE::Voxel::XNegative]) {
-                    p[0] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ()};
-                    p[1] = {realCoord.getX(), realCoord.getY(), realCoord.getZ()};
-                    p[2] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ() + 1};
-                    p[3] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + 1};
+                    p[0] = {realCoord.getX(), realCoord.getY(), realCoord.getZ()};
+                    p[1] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ()};
+                    p[2] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + 1};
+                    p[3] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ() + 1};
 
                     addPackedVertex(p, voxColor, NRE::Voxel::XNegative, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
                 }
@@ -186,28 +186,28 @@
                 }
 
                 if (face[NRE::Voxel::XPositive]) {
-                    p[0] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ()};
-                    p[1] = {realCoord.getX(), realCoord.getY(), realCoord.getZ()};
-                    p[2] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ() + 1};
-                    p[3] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + 1};
+                    p[0] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ()};
+                    p[1] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ()};
+                    p[2] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ() + 1};
+                    p[3] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ() + 1};
 
                     addPackedVertex(p, voxColor, NRE::Voxel::XPositive, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
                 }
 
                 if (face[NRE::Voxel::YPositive]) {
-                    p[0] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ()};
-                    p[1] = {realCoord.getX(), realCoord.getY(), realCoord.getZ()};
-                    p[2] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ() + 1};
-                    p[3] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + 1};
+                    p[0] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ()};
+                    p[1] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ()};
+                    p[2] = {realCoord.getX(),  realCoord.getY() + 1, realCoord.getZ() + 1};
+                    p[3] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ() + 1};
 
                     addPackedVertex(p, voxColor, NRE::Voxel::YPositive, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
                 }
 
                 if (face[NRE::Voxel::ZPositive]) {
-                    p[0] = {realCoord.getX(), realCoord.getY(), realCoord.getZ()};
-                    p[1] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ()};
-                    p[2] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ()};
-                    p[3] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ()};
+                    p[0] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ() + 1};
+                    p[1] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + 1};
+                    p[2] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ() + 1};
+                    p[3] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ() + 1};
 
                     addPackedVertex(p, voxColor, NRE::Voxel::ZPositive, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
                 }

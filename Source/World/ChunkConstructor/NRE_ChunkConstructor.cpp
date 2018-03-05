@@ -8,6 +8,8 @@
             void Chunk::constructMesh() {
                 Mesh* cMesh = new Mesh{this};
 
+                cMesh->constructMesh();
+
                 if (!getBuffer().isAllocated()) {
                     buffer.allocateAndFill(sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), GL_STREAM_DRAW, cMesh->getVPointer(), cMesh->getCPointer(), cMesh->getNPointer(), cMesh->getIPointer());
                 } else {

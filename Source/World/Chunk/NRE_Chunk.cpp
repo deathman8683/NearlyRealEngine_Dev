@@ -33,7 +33,7 @@
 
             Chunk::~Chunk() {
                 for (GLuint i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
-                    delete[] voxel[i];
+                    delete voxel[i];
                 }
                 delete[] voxel;
             }
@@ -104,6 +104,7 @@
                         glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 
                     vao.unbind();
+                glUseProgram(0);
             }
 
             GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) {
