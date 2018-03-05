@@ -6,7 +6,7 @@
 
             GLuint Chunk::SIZE_X = 16;
             GLuint Chunk::SIZE_Y = 16;
-            GLuint Chunk::SIZE_Z = 16;
+            GLuint Chunk::SIZE_Z = 128;
             Maths::Vector3D<GLuint> Chunk::SIZE = Maths::Vector3D<GLuint>(SIZE_X, SIZE_Y, SIZE_Z);
 
             Chunk::Chunk() : voxel(0) {
@@ -32,6 +32,7 @@
             }
 
             Chunk::~Chunk() {
+                save();
                 for (GLuint i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
                     delete voxel[i];
                 }
@@ -106,6 +107,43 @@
                     vao.unbind();
                 glUseProgram(0);
             }
+
+            void Chunk::save() {
+                std::ofstream chunkFile;
+                std::ostringstream xStr, yStr;
+                std::string chunkName;
+                xStr << getCoord().getX();
+                yStr << getCoord().getY();
+                chunkName = "Data/Chunk/c." + xStr.str() + "." + yStr.str() + ".dat";
+                chunkFile.open(chunkName, std::ios::out);
+                if (chunkFile.is_open()) {
+                    GLuint x = 0, y = 0, z = 0;
+                    GLuint currentType = getVoxel(x, y, z)->getType(), currentLineSize = 0;
+                    while (z != SIZE_Z) {
+                        if (currentType == static_cast <GLuint> (getVoxel(x, y, z)->getType())) {
+                            currentLineSize = currentLineSize + 1;
+                        } else {
+                            chunkFile << currentLineSize << "_" << currentType << "-" << getVoxel(x, y, z)->getType();
+                            currentLineSize = 1;
+                        }
+
+                        x = x + 1;
+                        if (x == SIZE_X) {
+                            x = 0;
+                            y = y + 1;
+                            if (y == SIZE_Y) {
+                                y = 0;
+                                z = z + 1;
+                            }
+                        }
+                    }
+
+                    chunkFile << currentLineSize << "_" << currentType << "-";
+                    chunkFile.close();
+                }
+            }
+
+
 
             GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) {
                 return Array::get1DIndexFrom3D(x, y, z, Chunk::SIZE);

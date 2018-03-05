@@ -8,6 +8,8 @@
 
     #pragma once
 
+    #include <sstream>
+    #include <fstream>
     #include "../../Generic/Array/NRE_ArrayOperation.hpp"
     #include "../Voxel/Type/NRE_VoxelType.hpp"
     #include "../../GL_Wrapper/VAO/NRE_VAO.hpp"
@@ -70,6 +72,7 @@
                     //## Methods ##//
                     void constructMesh();
                     void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection);
+                    void save();
 
                     //## Access Operator ##//
 
