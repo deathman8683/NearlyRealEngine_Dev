@@ -20,11 +20,15 @@
                 for (GLuint i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
                     voxel[i] = new NRE::Voxel::Grass;
                 }
+
+                vao.access(getBuffer(), GL_INT);
             }
 
             Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
+
+                vao.access(getBuffer(), GL_INT);
             }
 
             Chunk::~Chunk() {
@@ -88,6 +92,18 @@
 
             void Chunk::setVAO(GL::VAO const& vao) {
                 this->vao = vao;
+            }
+
+            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection) {
+                glUseProgram(shader.getProgramID());
+                    vao.bind();
+
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+
+                        glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
+
+                    vao.unbind();
             }
 
             GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) {

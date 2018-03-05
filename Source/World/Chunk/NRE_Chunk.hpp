@@ -11,6 +11,7 @@
     #include "../../Generic/Array/NRE_ArrayOperation.hpp"
     #include "../Voxel/Type/NRE_VoxelType.hpp"
     #include "../../GL_Wrapper/VAO/NRE_VAO.hpp"
+    #include "../../Renderer/Shader/NRE_Shader.hpp"
 
     /**
      * @namespace NRE
@@ -68,7 +69,7 @@
 
                     //## Methods ##//
                     void constructMesh();
-                    void render();
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection);
 
                     //## Access Operator ##//
 

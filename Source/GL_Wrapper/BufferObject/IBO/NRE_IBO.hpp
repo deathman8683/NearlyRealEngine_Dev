@@ -30,6 +30,7 @@
             class IBO : public VBO {
                 private:
                     IndexBuffer index;
+                    GLuint nb;
 
                 public:
                     //## Constructor ##//
@@ -46,9 +47,11 @@
 
                     //## Getter ##//
                     IndexBuffer const& getIndexBuffer() const;
+                    GLuint const& getNb() const;
 
                     //## Setter ##//
                     void setIndexBuffer(IndexBuffer const& buf);
+                    void setNb(GLuint const& n);
 
                     //## Methods ##//
                     void generateID() override;

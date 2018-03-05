@@ -13,7 +13,7 @@
                 }
             }
 
-            IBO::IBO(IBO const& buf) : VBO::VBO(buf), index(buf.getIndexBuffer()) {
+            IBO::IBO(IBO const& buf) : VBO::VBO(buf), index(buf.getIndexBuffer()), nb(buf.getNb()) {
             }
 
             IBO::~IBO() {
@@ -24,8 +24,16 @@
                 return index;
             }
 
+            GLuint const& IBO::getNb() const {
+                return nb;
+            }
+
             void IBO::setIndexBuffer(IndexBuffer const& buf) {
                 index = buf;
+            }
+
+            void IBO::setNb(GLuint const& n) {
+                nb = n;
             }
 
             void IBO::generateID() {
@@ -50,11 +58,13 @@
 
             void IBO::update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, size_t const& nbIndex, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData, GLvoid* const& iData) {
                 index.update(offset, IndexBuffer::SIZE * nbIndex, iData);
+                setNb(nbIndex);
                 VBO::update(offset, typeSize, nbVertex, vData, cData, nData);
             }
 
             void IBO::allocateAndFill(size_t typeSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData, GLvoid* const& iData) {
                 index.allocateAndFill(IndexBuffer::SIZE * nbIndex, usage, iData);
+                setNb(nbIndex);
                 VBO::allocateAndFill(typeSize, nbVertex, usage, vData, cData, nData);
             }
 
