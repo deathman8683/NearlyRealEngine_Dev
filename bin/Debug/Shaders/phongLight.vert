@@ -1,21 +1,21 @@
 
     #version 450
 
-    uniform mat4 camera;
-    uniform mat4 model;
+    in vec3 in_Vertex;
+    in vec3 in_Color;
+    in vec3 in_Normal;
 
-    in vec3 vert;
-    in vec3 vertColor;
-    in vec3 vertNormal;
+    uniform mat4 projection;
+    uniform mat4 modelview;
 
-    out vec3 fragVert;
-    out vec3 fragColor;
-    out vec3 fragNormal;
+    out vec3 vertex;
+    out vec3 color;
+    out vec3 normal;
 
     void main() {
-        fragVert = vert;
-        fragColor = vertColor;
-        fragNormal = vertNormal;
+        gl_Position = projection * modelview * vec4(in_Vertex, 1.0);
 
-        gl_Position = camera * model * vec4(vert, 1);
+        vertex = in_Vertex;
+        color = in_Color;
+        normal = in_Normal;
     }

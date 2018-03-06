@@ -91,11 +91,17 @@
             }
 
             void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection) {
+
+                GLfloat coord[3] = {0, 0, 80};
+                GLfloat intensity[3] = {1, 1, 1};
+
                 glUseProgram(shader.getProgramID());
                     vao.bind();
 
                         glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+                        glUniform3fv(glGetUniformLocation(shader.getProgramID(), "light.position"), 1, coord);
+                        glUniform3fv(glGetUniformLocation(shader.getProgramID(), "light.intensities"), 1, intensity);
 
                         glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 

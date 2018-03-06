@@ -83,12 +83,15 @@
 
                 glBindAttribLocation(getProgramID(), 0, "in_Vertex");
                 glBindAttribLocation(getProgramID(), 1, "in_Color");
-                glBindAttribLocation(getProgramID(), 2, "in_TexCoord0");
+                glBindAttribLocation(getProgramID(), 2, "in_Normal");
 
                 glLinkProgram(getProgramID());
 
-                /*GLint linkError = 0;
-                glGetProgramiv(get_ProgramID(), GL_LINK_STATUS, &linkError);*/
+                GLint linkError = 0;
+                glGetProgramiv(getProgramID(), GL_LINK_STATUS, &linkError);
+                if (linkError != GL_TRUE) {
+                    std::cout << "Load Error" << std::endl;
+                }
             }
 
             void Shader::compile(GLint & shader, GLenum const& type, std::string const& source) {
@@ -110,8 +113,11 @@
 
                 glCompileShader(shader);
 
-                /*GLint compileError(0);
-                glGetShaderiv(shader, GL_COMPILE_STATUS, &compileError);*/
+                GLint compileError(0);
+                glGetShaderiv(shader, GL_COMPILE_STATUS, &compileError);
+                if (compileError != GL_TRUE) {
+                    std::cout << "Compile Error" << std::endl;
+                }
             }
 
         };

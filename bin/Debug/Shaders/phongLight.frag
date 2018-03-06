@@ -6,23 +6,19 @@
        vec3 intensities;
     } light;
 
-    in vec3 fragVert;
-    in vec3 fragColor;
-    in vec3 fragNormal;
+    in vec3 vertex;
+    in vec3 color;
+    in vec3 normal;
 
-    out vec4 finalColor;
+    out vec4 out_Color;
 
     void main() {
-        mat3 normalMatrix = transpose(inverse(mat3(model)));
-        vec3 normal = normalize(normalMatrix * fragNormal);
-
-        vec3 fragPosition = vec3(vec4(fragVert, 1));
-
-        vec3 surfaceToLight = light.position - fragVert;
+        vec3 surfaceToLight = light.position - vertex;
 
         float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));
         brightness = clamp(brightness, 0, 1);
 
-        vec4 surfaceColor = vec4(fragColor, 1.0);
-        finalColor = vec4(brightness * light.intensities * surfaceColor.rgb, surfaceColor.a);
+        vec4 tmpColor = vec4(color, 1.0);
+        out_Color = vec4(brightness * light.intensities * tmpColor.rgb, tmpColor.a);
+
     }
