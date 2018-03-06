@@ -113,7 +113,7 @@
                             if (getTarget()->getVoxel(index)->getType() != NRE::Voxel::VOID) {
                                 if (x == 0) {
                                     if (getTarget()->getCoord().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
-                                        face[NRE::Voxel::XNegative] = true;
+                                        face[NRE::Voxel::XNegative] = false;
                                     } else {
                                         face[NRE::Voxel::XNegative] = w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->second->getVoxel(Chunk::SIZE_X - 1, y, z)->getType() == NRE::Voxel::VOID;
                                     }
@@ -123,7 +123,7 @@
 
                                 if (x == Chunk::SIZE_X - 1) {
                                     if (getTarget()->getCoord().getX() == static_cast <GLint> (w->getHExtent().getX())) {
-                                        face[NRE::Voxel::XPositive] = true;
+                                        face[NRE::Voxel::XPositive] = false;
                                     } else {
                                         face[NRE::Voxel::XPositive] = w->getChunk(getTarget()->getCoord().getX() + 1, getTarget()->getCoord().getY())->second->getVoxel(0, y, z)->getType() == NRE::Voxel::VOID;
                                     }
@@ -133,7 +133,7 @@
 
                                 if (y == 0) {
                                     if (getTarget()->getCoord().getY() == -1 * static_cast <GLint> (w->getHExtent().getY())) {
-                                        face[NRE::Voxel::YNegative] = true;
+                                        face[NRE::Voxel::YNegative] = false;
                                     } else {
                                         face[NRE::Voxel::YNegative] = w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() - 1)->second->getVoxel(x, Chunk::SIZE_Y - 1, z)->getType() == NRE::Voxel::VOID;
                                     }
@@ -143,7 +143,7 @@
 
                                 if (y == Chunk::SIZE_Y - 1) {
                                     if (getTarget()->getCoord().getY() == static_cast <GLint> (w->getHExtent().getY())) {
-                                        face[NRE::Voxel::YPositive] = true;
+                                        face[NRE::Voxel::YPositive] = false;
                                     } else {
                                         face[NRE::Voxel::YPositive] = w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() + 1)->second->getVoxel(x, 0, z)->getType() == NRE::Voxel::VOID;
                                     }
@@ -152,13 +152,13 @@
                                 }
 
                                 if (z == 0) {
-                                    face[NRE::Voxel::ZNegative] = true;
+                                    face[NRE::Voxel::ZNegative] = false;
                                 } else {
                                     face[NRE::Voxel::ZNegative] = getTarget()->getVoxel(x, y, z - 1)->getType() == NRE::Voxel::VOID;
                                 }
 
                                 if (z == Chunk::SIZE_Z - 1) {
-                                    face[NRE::Voxel::ZPositive] = true;
+                                    face[NRE::Voxel::ZPositive] = false;
                                 } else {
                                     face[NRE::Voxel::ZPositive] = getTarget()->getVoxel(x, y, z + 1)->getType() == NRE::Voxel::VOID;
                                 }

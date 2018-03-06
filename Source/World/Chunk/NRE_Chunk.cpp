@@ -155,7 +155,7 @@
                         std::getline(chunkFile, line);
                         std::istringstream parser(line);
                         parser >> voxNumber >> voxType;
-
+                        
                         loadVoxels(x, y, z, voxNumber, voxType);
                     }
                 } else {

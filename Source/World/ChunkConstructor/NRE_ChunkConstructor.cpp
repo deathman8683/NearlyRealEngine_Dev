@@ -42,11 +42,12 @@
                         }
 
                         if (z <= 40) {
-                            for (int zPrime = 40 - z; zPrime < 40; zPrime = zPrime + 1) {
+                            for (int zPrime = static_cast <int> (z); zPrime < 40; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
                                 voxel[index] = new NRE::Voxel::Water;
                             }
                             for (unsigned int zPrime = 40; zPrime < SIZE_Z; zPrime = zPrime + 1) {
+                                std::cout << Maths::Point3D<GLint>(x, y, zPrime) << std::endl;
                                 index = getVoxelIndex(x, y, zPrime);
                                 voxel[index] = new NRE::Voxel::Void;
                             }
