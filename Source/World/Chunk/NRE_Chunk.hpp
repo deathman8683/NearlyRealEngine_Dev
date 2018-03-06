@@ -73,6 +73,8 @@
                     void constructMesh();
                     void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection);
                     void save();
+                    void load();
+                    void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
 
                     //## Access Operator ##//
 

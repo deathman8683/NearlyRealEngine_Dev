@@ -38,5 +38,22 @@
                 return Color::RGB(55, 55, 55);
             }
 
+            Void::Void() {
+            }
+
+            Void::Void(Void const& vox) : Voxel::Voxel(vox) {
+            }
+
+            Void::~Void() {
+            }
+
+            GLint const Void::getType() const {
+                return VoxelType::VOID;
+            }
+
+            Color::RGB const Void::getColor() const {
+                return Color::RGB(255, 255, 255);
+            }
+
         };
     };

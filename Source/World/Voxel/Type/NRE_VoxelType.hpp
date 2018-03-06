@@ -62,5 +62,25 @@
                     Color::RGB const getColor() const override;
             };
 
+            /**
+             * @class Void
+             * @brief Voxel's Object : a void type voxel
+             */
+            class Void : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Void();
+
+                    //## Copy-Constructor ##//
+                    Void(Void const& vox);
+
+                    //## Deconstructor ##//
+                    ~Void();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
         };
     };

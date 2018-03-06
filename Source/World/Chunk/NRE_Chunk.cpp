@@ -17,17 +17,12 @@
 
             Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), buffer(generateID), vao(generateID) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
-                for (GLuint i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
-                    voxel[i] = new NRE::Voxel::Grass;
-                }
-
                 vao.access(getBuffer(), GL_INT);
             }
 
             Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
-
                 vao.access(getBuffer(), GL_INT);
             }
 
@@ -123,7 +118,8 @@
                         if (currentType == static_cast <GLuint> (getVoxel(x, y, z)->getType())) {
                             currentLineSize = currentLineSize + 1;
                         } else {
-                            chunkFile << currentLineSize << "_" << currentType << "-" << getVoxel(x, y, z)->getType();
+                            chunkFile << currentLineSize << " " << currentType << std::endl;
+                            currentType = getVoxel(x, y, z)->getType();
                             currentLineSize = 1;
                         }
 
@@ -138,12 +134,65 @@
                         }
                     }
 
-                    chunkFile << currentLineSize << "_" << currentType << "-";
+                    chunkFile << currentLineSize << " " << currentType;
                     chunkFile.close();
                 }
             }
 
+            void Chunk::load() {
+                std::ifstream chunkFile;
+                std::ostringstream xStr, yStr;
+                std::string chunkName;
+                xStr << getCoord().getX();
+                yStr << getCoord().getY();
+                chunkName = "Data/Chunk/c." + xStr.str() + "." + yStr.str() + ".dat";
+                chunkFile.open(chunkName, std::ios::in);
+                if (chunkFile.is_open()) {
+                    GLuint x = 0, y = 0, z = 0;
+                    GLuint voxNumber = 0, voxType = 0;
+                    std::string line;
+                    while (!chunkFile.eof()) {
+                        std::getline(chunkFile, line);
+                        std::istringstream parser(line);
+                        parser >> voxNumber >> voxType;
 
+                        loadVoxels(x, y, z, voxNumber, voxType);
+                    }
+                }
+            }
+
+            void Chunk::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type) {
+                GLuint index, n = nb;
+                while (n != 0) {
+                    index = getVoxelIndex(x, y, z);
+                    switch (type) {
+                        case (NRE::Voxel::VOID): {
+                            voxel[index] = new NRE::Voxel::Void;
+                            break;
+                        }
+                        case (NRE::Voxel::GRASS): {
+                            voxel[index] = new NRE::Voxel::Grass;
+                            break;
+                        }
+                        case (NRE::Voxel::STONE): {
+                            voxel[index] = new NRE::Voxel::Stone;
+                            break;
+                        }
+                        default: {
+                        }
+                    }
+                    x = x + 1;
+                    if (x == SIZE_X) {
+                        x = 0;
+                        y = y + 1;
+                        if (y == SIZE_Y) {
+                            y = 0;
+                            z = z + 1;
+                        }
+                    }
+                    n = n - 1;
+                }
+            }
 
             GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) {
                 return Array::get1DIndexFrom3D(x, y, z, Chunk::SIZE);

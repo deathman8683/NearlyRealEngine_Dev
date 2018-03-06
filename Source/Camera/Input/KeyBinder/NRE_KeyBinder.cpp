@@ -45,10 +45,10 @@
                 if (binderFile.is_open()) {
                     for (unsigned int i = 0; i < getKeyMap().size() - 1; i = i + 1) {
                         auto it = getKeyMap().find(i);
-                        binderFile << it->second.getCode() << ":" << it->second.isSwitch() << std::endl;
+                        binderFile << it->second.getCode() << " " << it->second.isSwitch() << std::endl;
                     }
                     auto it = getKeyMap().find(getKeyMap().size() - 1);
-                    binderFile << it->second.getCode() << ":" << it->second.isSwitch();
+                    binderFile << it->second.getCode() << " " << it->second.isSwitch();
                 }
             }
 
@@ -60,7 +60,6 @@
                     unsigned int lineCounter = 0;
                     while (!binderFile.eof()) {
                         unsigned int code, isSwitch;
-                        std::string separator;
 
                         std::getline(binderFile, line);
                         std::istringstream parser(line);
