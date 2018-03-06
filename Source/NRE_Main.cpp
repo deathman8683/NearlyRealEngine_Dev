@@ -19,7 +19,7 @@
         Maths::Matrix4x4<NREfloat> projection;
         Maths::Matrix4x4<NREfloat> modelview;
 
-        projection.projection(70.0, 800.0 / 600.0, 0.1, 100.0);
+        projection.projection(70.0, 800.0 / 600.0, 0.1, 1000.0);
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         while(!camera.getQuit())

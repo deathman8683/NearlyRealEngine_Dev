@@ -11,9 +11,11 @@ SUPPORT = Support
 RENDERER = Renderer
 CAMERA = Camera
 WORLD = World
+LIB = lib
 
 before :
 	@(cd $(GENERIC) && $(MAKE))
+	@(cd $(LIB) && $(MAKE))
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))
 	@(cd $(RENDERER) && $(MAKE))
