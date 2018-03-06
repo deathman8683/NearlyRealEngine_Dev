@@ -22,6 +22,26 @@
          */
         namespace Voxel {
 
+        /**
+             * @class Void
+             * @brief Voxel's Object : a void type voxel
+             */
+            class Void : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Void();
+
+                    //## Copy-Constructor ##//
+                    Void(Void const& vox);
+
+                    //## Deconstructor ##//
+                    ~Void();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
             /**
              * @class Grass
              * @brief Voxel's Object : a grass type voxel
@@ -63,19 +83,19 @@
             };
 
             /**
-             * @class Void
-             * @brief Voxel's Object : a void type voxel
+             * @class Water
+             * @brief Voxel's Object : a water type voxel
              */
-            class Void : public World::Voxel {
+            class Water : public World::Voxel {
                 public:
                     //## Constructor ##//
-                    Void();
+                    Water();
 
                     //## Copy-Constructor ##//
-                    Void(Void const& vox);
+                    Water(Water const& vox);
 
                     //## Deconstructor ##//
-                    ~Void();
+                    ~Water();
 
                     //## Methods ##//
                     GLint const getType() const override;

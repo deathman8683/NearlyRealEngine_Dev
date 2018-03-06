@@ -17,9 +17,6 @@
 
             Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
-                for (unsigned int i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
-                    voxel[i] = new NRE::Voxel::Grass;
-                }
                 vao.access(getBuffer(), GL_INT);
             }
 
@@ -142,7 +139,7 @@
                 }
             }
 
-            void Chunk::load() {
+            void Chunk::load(World * w) {
                 std::ifstream chunkFile;
                 std::ostringstream xStr, yStr;
                 std::string chunkName;
@@ -161,6 +158,10 @@
 
                         loadVoxels(x, y, z, voxNumber, voxType);
                     }
+                } else {
+                    createPerlinTerrain(w);
+                    chunkFile.open(chunkName, std::ios::trunc | std::ios::out);
+                    chunkFile.close();
                 }
             }
 
@@ -179,6 +180,10 @@
                         }
                         case (NRE::Voxel::STONE): {
                             voxel[index] = new NRE::Voxel::Stone;
+                            break;
+                        }
+                        case (NRE::Voxel::WATER): {
+                            voxel[index] = new NRE::Voxel::Water;
                             break;
                         }
                         default: {

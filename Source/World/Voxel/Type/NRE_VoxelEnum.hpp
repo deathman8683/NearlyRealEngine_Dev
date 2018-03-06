@@ -23,6 +23,7 @@
                 VOID,
                 GRASS,
                 STONE,
+                WATER,
 
                 TYPE_NUM
             };

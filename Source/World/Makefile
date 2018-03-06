@@ -7,12 +7,14 @@ CHUNK = Chunk
 MESH = Mesh
 CONSTRUCTOR = ChunkConstructor
 
-all : before $(TARGET)
+all : before $(TARGET) after
 
 before:
 	@(cd $(VOXEL) && $(MAKE))
 	@(cd $(CHUNK) && $(MAKE))
 	@(cd $(MESH) && $(MAKE))
+
+after:
 	@(cd $(CONSTRUCTOR) && $(MAKE))
 
 debug: $(OBJ)

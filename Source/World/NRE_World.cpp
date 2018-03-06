@@ -4,14 +4,22 @@
     namespace NRE {
         namespace World {
 
+            int World::DEFAULT_SEED = 6'032'018;
+
             World::World() : World(Maths::Vector2D<GLuint>(0, 0), true) {
             }
 
             World::World(Maths::Vector2D<GLuint> const& size, bool const& loadGenericTerrain) : chunkMap((size.getX() * 2 + 1) * (size.getY() * 2 + 1)), hExtent(size) {
+                FastNoise worldGen;
+                worldGen.SetNoiseType(FastNoise::Perlin);
+                worldGen.SetSeed(DEFAULT_SEED);
+                generator = worldGen;
                 for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
                         Maths::Point2D<GLint> tmp(x, y);
                         chunkMap[tmp] = new Chunk(tmp, true);
+                        Chunk*& it = chunkMap.at(tmp);
+                        it->load(this);
                     }
                 }
             }

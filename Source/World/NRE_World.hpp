@@ -78,6 +78,7 @@
                     //## Shift Operator ##//
 
                 private:
+                    static int DEFAULT_SEED;
             };
 
         };

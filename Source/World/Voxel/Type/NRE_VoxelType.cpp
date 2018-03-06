@@ -4,6 +4,23 @@
     namespace NRE {
         namespace Voxel {
 
+            Void::Void() {
+            }
+
+            Void::Void(Void const& vox) : Voxel::Voxel(vox) {
+            }
+
+            Void::~Void() {
+            }
+
+            GLint const Void::getType() const {
+                return VoxelType::VOID;
+            }
+
+            Color::RGB const Void::getColor() const {
+                return Color::RGB(255, 255, 255);
+            }
+
             Grass::Grass() {
             }
 
@@ -38,21 +55,21 @@
                 return Color::RGB(55, 55, 55);
             }
 
-            Void::Void() {
+            Water::Water() {
             }
 
-            Void::Void(Void const& vox) : Voxel::Voxel(vox) {
+            Water::Water(Water const& vox) : Voxel::Voxel(vox) {
             }
 
-            Void::~Void() {
+            Water::~Water() {
             }
 
-            GLint const Void::getType() const {
-                return VoxelType::VOID;
+            GLint const Water::getType() const {
+                return VoxelType::WATER;
             }
 
-            Color::RGB const Void::getColor() const {
-                return Color::RGB(255, 255, 255);
+            Color::RGB const Water::getColor() const {
+                return Color::RGB(50, 50, 255);
             }
 
         };
