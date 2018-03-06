@@ -269,4 +269,19 @@
         };
     };
 
+    namespace std {
+        template <>
+        class hash<NRE::Maths::Point2D<GLint>> {
+            public:
+                size_t operator()(NRE::Maths::Point2D<GLint> const& p) const
+                {
+                    size_t h1 = p.getX();
+                    size_t h2 = p.getY();
+
+                    size_t hV = h2 * 100'000'000 + h1;
+                    return hV;
+                }
+        };
+    };
+
     #include "NRE_Point2D.tpp"

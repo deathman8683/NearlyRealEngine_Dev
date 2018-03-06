@@ -15,8 +15,11 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0, 0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), buffer(generateID), vao(generateID) {
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
+                for (unsigned int i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
+                    voxel[i] = new NRE::Voxel::Grass;
+                }
                 vao.access(getBuffer(), GL_INT);
             }
 

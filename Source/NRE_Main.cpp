@@ -1,8 +1,7 @@
 
     #include "Support/Scene/NRE_Scene.hpp"
     #include "Camera/NRE_MoveableCamera.hpp"
-    #include "Renderer/Shader/NRE_Shader.hpp"
-    #include "World/Chunk/NRE_Chunk.hpp"
+    #include "World/NRE_World.hpp"
 
     using namespace NRE;
 
@@ -10,9 +9,8 @@
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
         Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", Maths::Vector3D<NREfloat>(-3, -3, -3), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0), 0.01);
 
-        World::Chunk test(true);
-        test.load();
-        test.constructMesh();
+        World::World engineWorld(Maths::Vector2D<GLuint>(1, 1));
+        engineWorld.constructChunksMesh();
 
         Renderer::Shader shaderCouleur("Shaders/couleur3D.vert", "Shaders/couleur3D.frag", true);
 
@@ -31,7 +29,7 @@
             modelview.setIdentity();
             camera.setView(modelview);
 
-            test.render(shaderCouleur, modelview, projection);
+            engineWorld.render(shaderCouleur, modelview, projection);
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }

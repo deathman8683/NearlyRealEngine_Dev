@@ -14,6 +14,7 @@
     #include "../Voxel/Type/NRE_VoxelType.hpp"
     #include "../../GL_Wrapper/VAO/NRE_VAO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
+    #include "../../lib/FastNoise/FastNoise.h"
 
     /**
      * @namespace NRE
