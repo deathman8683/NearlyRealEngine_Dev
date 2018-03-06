@@ -22,6 +22,8 @@
          */
         namespace Array {
 
+            GLuint const get1DIndexFrom4D(Maths::Point4D<GLuint> const& p, Maths::Vector4D<GLuint> const& size);
+            GLuint const get1DIndexFrom4D(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& w, Maths::Vector4D<GLuint> const& size);
             GLuint const get1DIndexFrom3D(Maths::Point3D<GLuint> const& p, Maths::Vector3D<GLuint> const& size);
             GLuint const get1DIndexFrom3D(GLuint const& x, GLuint const& y, GLuint const& z, Maths::Vector3D<GLuint> const& size);
             GLuint const get1DIndexFrom2D(Maths::Point2D<GLuint> const& p, Maths::Vector2D<GLuint> const& size);

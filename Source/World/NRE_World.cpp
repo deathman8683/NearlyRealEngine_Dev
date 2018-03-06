@@ -9,11 +9,14 @@
             World::World() : World(Maths::Vector2D<GLuint>(0, 0), true) {
             }
 
-            World::World(Maths::Vector2D<GLuint> const& size, bool const& loadGenericTerrain) : chunkMap((size.getX() * 2 + 1) * (size.getY() * 2 + 1)), hExtent(size) {
+            World::World(Maths::Vector2D<GLuint> const& size, bool const& loadGenericTerrain) : chunkMap((size.getX() * 2 + 1) * (size.getY() * 2 + 1)), hExtent(size), voxelMergingGlobalCache(0) {
                 FastNoise worldGen;
                 worldGen.SetNoiseType(FastNoise::Perlin);
                 worldGen.SetSeed(DEFAULT_SEED);
                 generator = worldGen;
+
+                voxelMergingGlobalCache = new bool[Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * NRE::Voxel::FACE_NUM];
+
                 for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
                         Maths::Point2D<GLint> tmp(x, y);
@@ -24,10 +27,11 @@
                 }
             }
 
-            World::World(World const& w) : chunkMap(w.getChunkMap()), hExtent(w.getHExtent()), generator(w.getGenerator()) {
+            World::World(World const& w) : chunkMap(w.getChunkMap()), hExtent(w.getHExtent()), generator(w.getGenerator()), voxelMergingGlobalCache(w.getVoxelMergingGlobalCache()) {
             }
 
             World::~World() {
+                delete[] voxelMergingGlobalCache;
                 for (const auto &it : chunkMap) {
                     delete it.second;
                 }
@@ -53,6 +57,18 @@
                 return generator;
             }
 
+            bool* World::getVoxelMergingGlobalCache() const {
+                return voxelMergingGlobalCache;
+            }
+
+            bool const& World::getVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face) const {
+                return getVoxelMergingFace(p.getX(), p.getY(), p.getZ(), face);
+            }
+
+            bool const& World::getVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face) const {
+                return voxelMergingGlobalCache[getVoxelCacheIndex(x, y, z, face)];
+            }
+
             void World::setChunkMap(std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& map) {
                 chunkMap = map;
             }
@@ -73,6 +89,17 @@
                 generator = gen;
             }
 
+            void World::setVoxelMergingGlobalCache(bool* (&cache)) {
+                voxelMergingGlobalCache = cache;
+            }
+            void World::setVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face, bool const& state) {
+                setVoxelMergingFace(p.getX(), p.getY(), p.getZ(), face, state);
+            }
+
+            void World::setVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face, bool const& state) {
+                voxelMergingGlobalCache[getVoxelCacheIndex(x, y, z, face)] = state;
+            }
+
             void World::constructChunksMesh() {
                 for (const auto &it : chunkMap) {
                     it.second->constructMesh(this);
@@ -83,6 +110,14 @@
                 for (const auto &it : chunkMap) {
                     it.second->render(shader, modelview, projection);
                 }
+            }
+
+            void World::resetVoxelMergingGlobalCache() {
+                std::fill(voxelMergingGlobalCache, voxelMergingGlobalCache + (Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * NRE::Voxel::FACE_NUM), false);
+            }
+
+            GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face) {
+                return Array::get1DIndexFrom4D(x, y, z, face, Maths::Vector4D<GLuint>(Chunk::SIZE, NRE::Voxel::FACE_NUM));
             }
 
         };
