@@ -100,6 +100,11 @@
                     static Maths::Vector3D<GLuint> SIZE;
             };
 
+            inline std::ostream& operator<<(std::ostream &stream, Chunk const& c) {
+                stream << "(" << c.getCoord() << "," << c.getBuffer() << "," << c.getVAO() << ")";
+                return stream;
+            }
+
             GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z);
 
         };

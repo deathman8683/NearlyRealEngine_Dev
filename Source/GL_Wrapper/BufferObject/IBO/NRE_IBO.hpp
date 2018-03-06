@@ -79,5 +79,10 @@
                 private:
             };
 
+            inline std::ostream& operator<<(std::ostream &stream, IBO const& buf) {
+                stream << "(" << buf.getVertexBuffer() << buf.getColorBuffer() << buf.getNormalBuffer() << buf.getIndexBuffer() << "," << buf.getNb() << ")";
+                return stream;
+            }
+
         };
     };

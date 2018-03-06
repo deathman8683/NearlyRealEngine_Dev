@@ -7,7 +7,7 @@
             IBO::IBO() {
             }
 
-            IBO::IBO(bool const& generate) : VBO::VBO(generate) {
+            IBO::IBO(bool const& generate) : VBO::VBO(generate), nb(0) {
                 if (generate) {
                     generateID();
                 }
