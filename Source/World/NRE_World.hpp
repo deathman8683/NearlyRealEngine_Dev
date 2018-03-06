@@ -47,8 +47,8 @@
 
                     //## Getter ##//
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& getChunkMap() const;
-                    std::unordered_map<Maths::Point2D<GLint>, Chunk*>::const_iterator getChunk(Maths::Point2D<GLint> const& p) const;
-                    std::unordered_map<Maths::Point2D<GLint>, Chunk*>::const_iterator getChunk(GLint const& x, GLint const& y) const;
+                    std::unordered_map<Maths::Point2D<GLint>, Chunk*>::iterator getChunk(Maths::Point2D<GLint> const& p);
+                    std::unordered_map<Maths::Point2D<GLint>, Chunk*>::iterator getChunk(GLint const& x, GLint const& y);
                     Maths::Vector2D<GLuint> const& getHExtent() const;
                     FastNoise const& getGenerator() const;
 

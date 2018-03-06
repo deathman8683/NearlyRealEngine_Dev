@@ -27,6 +27,8 @@
          */
         namespace World {
 
+            class World;
+
             /**
              * @class Chunk
              * @brief World's Object : A collection of voxel
@@ -71,7 +73,7 @@
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
-                    void constructMesh();
+                    void constructMesh(World* w);
                     void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection);
                     void save();
                     void load();

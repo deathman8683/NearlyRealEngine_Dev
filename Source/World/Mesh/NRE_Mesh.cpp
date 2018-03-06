@@ -102,7 +102,7 @@
                 iData.push_back(index);
             }
 
-            void Mesh::constructMesh() {
+            void Mesh::constructMesh(World* w) {
                 GLuint index;
                 bool face[NRE::Voxel::FACE_NUM];
 
@@ -112,7 +112,11 @@
                             index = getVoxelIndex(x, y, z);
                             if (getTarget()->getVoxel(index)->getType() != NRE::Voxel::VOID) {
                                 if (x == 0) {
-                                    face[NRE::Voxel::XNegative] = true;
+                                    if (getTarget()->getCoord().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
+                                        face[NRE::Voxel::XNegative] = true;
+                                    } else {
+                                        face[NRE::Voxel::XNegative] = w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->second->getVoxel(x - 1, y, z)->getType() == NRE::Voxel::VOID;
+                                    }
                                 } else {
                                     face[NRE::Voxel::XNegative] = getTarget()->getVoxel(x - 1, y, z)->getType() == NRE::Voxel::VOID;
                                 }

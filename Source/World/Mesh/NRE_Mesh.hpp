@@ -10,6 +10,7 @@
 
     #include "../Voxel/PackedVertex/NRE_PackedVertex.hpp"
     #include "../Chunk/NRE_Chunk.hpp"
+    #include "../NRE_World.hpp"
     #include <vector>
     #include <unordered_map>
 
@@ -75,7 +76,7 @@
                     void addColor(Color::RGB const& c);
                     void addNormal(Maths::Vector3D<GLbyte> const& n);
                     void addIndex(GLuint const& index);
-                    void constructMesh();
+                    void constructMesh(World* w);
                     void addVoxel(Maths::Point3D<GLuint> const& voxCoord, Maths::Point3D<GLint> const& realCoord, bool const (&face)[6]);
                     void addPackedVertex(Maths::Point3D<GLint> const (&p)[4], Color::RGB const& voxColor, GLuint const& face, size_t const& cCode);
                     bool const getSimilarVertexIndex(NRE::Voxel::PackedVertex const& packed, std::unordered_map<NRE::Voxel::PackedVertex, size_t> const& map, GLuint &result) const;

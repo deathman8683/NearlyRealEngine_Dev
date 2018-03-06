@@ -29,11 +29,11 @@
                 return chunkMap;
             }
 
-            std::unordered_map<Maths::Point2D<GLint>, Chunk*>::const_iterator World::getChunk(Maths::Point2D<GLint> const& p) const {
+            std::unordered_map<Maths::Point2D<GLint>, Chunk*>::iterator World::getChunk(Maths::Point2D<GLint> const& p) {
                 return chunkMap.find(p);
             }
 
-            std::unordered_map<Maths::Point2D<GLint>, Chunk*>::const_iterator World::getChunk(GLint const& x, GLint const& y) const {
+            std::unordered_map<Maths::Point2D<GLint>, Chunk*>::iterator World::getChunk(GLint const& x, GLint const& y) {
                 return getChunk(Maths::Point2D<GLint>(x, y));
             }
 
@@ -67,7 +67,7 @@
 
             void World::constructChunksMesh() {
                 for (const auto &it : chunkMap) {
-                    it.second->constructMesh();
+                    it.second->constructMesh(this);
                 }
             }
 
