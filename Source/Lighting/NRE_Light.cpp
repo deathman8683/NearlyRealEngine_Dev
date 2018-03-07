@@ -4,10 +4,10 @@
     namespace NRE {
         namespace Light {
 
-            Light::Light() : Light(Maths::Point3D<NREfloat>(), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0)) {
+            Light::Light() : Light(Maths::Point3D<NREfloat>(), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), 1.0, 1.0) {
             }
 
-            Light::Light(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color) : position{coord.getX(), coord.getY(), coord.getZ()}, intensities{color.getX(), color.getY(), color.getZ()} {
+            Light::Light(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, NREfloat const& attenuation, NREfloat const& ambientCoeff) : position{coord.getX(), coord.getY(), coord.getZ()}, intensities{color.getX(), color.getY(), color.getZ()}, attenuation(attenuation), ambientCoeff(ambientCoeff) {
             }
 
             Light::Light(Light const& l) : position{l.getPosition().getX(), l.getPosition().getY(), l.getPosition().getZ()}, intensities{l.getIntensities().getX(), l.getIntensities().getY(), l.getIntensities().getZ()} {
@@ -24,12 +24,28 @@
                 return Maths::Vector3D<NREfloat>(intensities[0], intensities[1], intensities[2]);
             }
 
+            NREfloat const& Light::getAttenuation() const {
+                return attenuation;
+            }
+
+            NREfloat const& Light::getAmbientCoeff() const {
+                return ambientCoeff;
+            }
+
             NREfloat* const Light::getPositionValue() {
                 return position;
             }
 
             NREfloat* const Light::getIntensitiesValue() {
                 return intensities;
+            }
+
+            NREfloat* const Light::getAttenuationValue() {
+                return &attenuation;
+            }
+
+            NREfloat* const Light::getAmbientCoeffValue() {
+                return &ambientCoeff;
             }
 
             void Light::setPosition(Maths::Point3D<NREfloat> const& p) {
@@ -42,6 +58,14 @@
                 intensities[0] = color.getX();
                 intensities[1] = color.getY();
                 intensities[2] = color.getZ();
+            }
+
+            void Light::setAttenuation(NREfloat const& coeff) {
+                attenuation = coeff;
+            }
+
+            void Light::setAmbientCoeff(NREfloat const& coeff) {
+                ambientCoeff = coeff;
             }
 
         };

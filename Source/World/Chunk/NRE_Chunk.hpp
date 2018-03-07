@@ -16,6 +16,7 @@
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../lib/FastNoise/FastNoise.h"
     #include "../../Lighting/NRE_Light.hpp"
+    #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
 
     /**
      * @namespace NRE

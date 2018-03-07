@@ -1,8 +1,6 @@
 
     #version 450
 
-    uniform vec3 cameraPosition;
-
     uniform float materialShininess;
     uniform vec3 materialSpecularColor;
 
@@ -21,14 +19,14 @@
 
     void main() {
         vec3 surfaceToLight = normalize(light.position - vertex);
-        vec3 surfaceToCamera = normalize(cameraPosition - vertex);
+        vec3 surfaceToCamera = normalize(vertex);
 
         //ambient
         vec3 ambient = light.ambientCoefficient * color * light.intensities;
 
         //diffuse
         float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
-        vec3 diffuse = diffuseCoefficient * surfaceColor * light.intensities;
+        vec3 diffuse = diffuseCoefficient * color * light.intensities;
 
         //specular
         float specularCoefficient = 0.0;

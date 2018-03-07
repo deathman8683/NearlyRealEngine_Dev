@@ -30,11 +30,13 @@
                 private:
                     NREfloat position[3];
                     NREfloat intensities[3];
+                    NREfloat attenuation;
+                    NREfloat ambientCoeff;
 
                 public:
                     //## Constructor ##//
                     Light();
-                    Light(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color);
+                    Light(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, NREfloat const& attenuation, NREfloat const& ambientCoeff);
 
                     //## Copy-Constructor ##//
                     Light(Light const& l);
@@ -47,12 +49,18 @@
                     //## Getter ##//
                     Maths::Point3D<NREfloat> getPosition() const;
                     Maths::Vector3D<NREfloat> getIntensities() const;
+                    NREfloat const& getAttenuation() const;
+                    NREfloat const& getAmbientCoeff() const;
                     NREfloat* const getPositionValue();
                     NREfloat* const getIntensitiesValue();
+                    NREfloat* const getAttenuationValue();
+                    NREfloat* const getAmbientCoeffValue();
 
                     //## Setter ##//
                     void setPosition(Maths::Point3D<NREfloat> const& p);
                     void setIntensities(Maths::Vector3D<NREfloat> const& color);
+                    void setAttenuation(NREfloat const& coeff);
+                    void setAmbientCoeff(NREfloat const& coeff);
 
                     //## Methods ##//
 
