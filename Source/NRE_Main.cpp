@@ -13,7 +13,7 @@
         engineWorld.constructChunksMesh();
 
         Renderer::Shader lightShader("Shaders/PhongReflection.vert", "Shaders/PhongReflection.frag", true);
-        Light::Light engineLight(Maths::Point3D<NREfloat>(0, 0, 100), Maths::Vector3D<NREfloat>(.8, 1.0, .8), 0.01, 0);
+        Light::Light engineLight(Maths::Point3D<NREfloat>(64, -55, 45), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), 0.01, 0);
 
         Maths::Matrix4x4<NREfloat> projection;
         Maths::Matrix4x4<NREfloat> modelview;
@@ -31,7 +31,7 @@
             camera.setView(modelview);
             //engineLight.setPosition(camera.getEye());
 
-            engineWorld.render(lightShader, modelview, projection, engineLight);
+            engineWorld.render(lightShader, modelview, projection, camera, engineLight);
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }

@@ -94,6 +94,6 @@
                 stream << "(" << camera.getForward() << "," << camera.getLeft() << "," << camera.getUp() << ")";
                 return stream;
             }
-            
+
         };
     };

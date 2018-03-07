@@ -1,8 +1,7 @@
 
     #version 450
 
-    uniform float materialShininess;
-    uniform vec3 materialSpecularColor;
+    uniform vec3 camera;
 
     uniform struct Light {
        vec3 position;
@@ -19,7 +18,7 @@
 
     void main() {
         vec3 surfaceToLight = normalize(light.position - vertex);
-        vec3 surfaceToCamera = normalize(vertex);
+        vec3 surfaceToCamera = normalize(camera - vertex);
 
         //ambient
         vec3 ambient = light.ambientCoefficient * color * light.intensities;
@@ -30,9 +29,14 @@
 
         //specular
         float specularCoefficient = 0.0;
-        if(diffuseCoefficient > 0.0)
-            specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), materialShininess);
-        vec3 specular = specularCoefficient * materialSpecularColor * light.intensities;
+        if(diffuseCoefficient > 0.0) {
+            if (color == vec3(50.0/255.0, 50.0/255.0, 1.0)) {
+                specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), 10);
+            } else {
+                specularCoefficient = max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal)));
+            }
+        }
+        vec3 specular = specularCoefficient * color;
 
         //attenuation
         float distanceToLight = length(light.position - vertex);
