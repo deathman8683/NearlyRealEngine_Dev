@@ -9,10 +9,11 @@
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
         Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", Maths::Vector3D<NREfloat>(-2, -2, -2), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0), 0.1);
 
-        World::World engineWorld(Maths::Vector2D<GLuint>(3, 3));
+        World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
         engineWorld.constructChunksMesh();
 
         Renderer::Shader lightShader("Shaders/phongLight.vert", "Shaders/phongLight.frag", true);
+        Light::Light engineLight(camera.getEye(), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0));
 
         Maths::Matrix4x4<NREfloat> projection;
         Maths::Matrix4x4<NREfloat> modelview;
@@ -28,8 +29,9 @@
 
             modelview.setIdentity();
             camera.setView(modelview);
+            engineLight.setPosition(camera.getEye());
 
-            engineWorld.render(lightShader, modelview, projection);
+            engineWorld.render(lightShader, modelview, projection, engineLight);
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }

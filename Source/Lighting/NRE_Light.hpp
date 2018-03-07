@@ -28,21 +28,31 @@
              */
             class Light {
                 private:
-                    Maths::Point3D<NREfloat> position;
-                    Maths::Vector3D<NREfloat> diffusion;
+                    NREfloat position[3];
+                    NREfloat intensities[3];
 
                 public:
                     //## Constructor ##//
+                    Light();
+                    Light(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color);
 
                     //## Copy-Constructor ##//
+                    Light(Light const& l);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
+                    ~Light();
 
                     //## Getter ##//
+                    Maths::Point3D<NREfloat> getPosition() const;
+                    Maths::Vector3D<NREfloat> getIntensities() const;
+                    NREfloat* const getPositionValue();
+                    NREfloat* const getIntensitiesValue();
 
                     //## Setter ##//
+                    void setPosition(Maths::Point3D<NREfloat> const& p);
+                    void setIntensities(Maths::Vector3D<NREfloat> const& color);
 
                     //## Methods ##//
 

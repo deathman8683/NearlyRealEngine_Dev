@@ -69,7 +69,7 @@
 
                     //## Methods ##//
                     void constructChunksMesh();
-                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Light::Light &light);
                     void resetVoxelMergingGlobalCache();
 
                     //## Access Operator ##//

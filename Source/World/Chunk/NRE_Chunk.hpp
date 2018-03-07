@@ -15,6 +15,7 @@
     #include "../../GL_Wrapper/VAO/NRE_VAO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../lib/FastNoise/FastNoise.h"
+    #include "../../Lighting/NRE_Light.hpp"
 
     /**
      * @namespace NRE
@@ -74,7 +75,7 @@
 
                     //## Methods ##//
                     void constructMesh(World* w);
-                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Light::Light &light);
                     void save();
                     void load(World* w);
                     void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);

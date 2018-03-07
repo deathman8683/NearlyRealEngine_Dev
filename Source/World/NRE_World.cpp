@@ -106,9 +106,9 @@
                 }
             }
 
-            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection) {
+            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Light::Light &light) {
                 for (const auto &it : chunkMap) {
-                    it.second->render(shader, modelview, projection);
+                    it.second->render(shader, modelview, projection, light);
                 }
             }
 
