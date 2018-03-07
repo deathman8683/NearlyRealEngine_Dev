@@ -29,12 +29,10 @@
 
         //specular
         float specularCoefficient = 0.0;
-        if(diffuseCoefficient > 0.0) {
-            if (color == vec3(50.0/255.0, 50.0/255.0, 1.0)) {
-                specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), 10);
-            } else {
-                specularCoefficient = max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal)));
-            }
+        if (color == vec3(50.0/255.0, 50.0/255.0, 1.0)) {
+            specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), 10);
+        } else {
+            specularCoefficient = max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal)));
         }
         vec3 specular = specularCoefficient * color;
 
