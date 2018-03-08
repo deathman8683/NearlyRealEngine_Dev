@@ -90,19 +90,25 @@
                 this->vao = vao;
             }
 
-            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, Light::Light &light) {
+            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
                 NREfloat eye[3] = {camera.getEye().getX(), camera.getEye().getY(), camera.getEye().getZ()};
 
                 glUseProgram(shader.getProgramID());
                     vao.bind();
 
+                        for (unsigned int i = 0; i < light.size(); i = i + 1) {
+                            std::ostringstream index;
+                            index << i;
+                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPositionValue());
+                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensitiesValue());
+                            glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].attenuation").c_str()), 1, light.at(i)->getAttenuationValue());
+                            glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
+                        }
+
                         glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
                         glUniform3fv(glGetUniformLocation(shader.getProgramID(), "camera"), 1, eye);
-                        glUniform3fv(glGetUniformLocation(shader.getProgramID(), "light.position"), 1, light.getPositionValue());
-                        glUniform3fv(glGetUniformLocation(shader.getProgramID(), "light.intensities"), 1, light.getIntensitiesValue());
-                        glUniform1fv(glGetUniformLocation(shader.getProgramID(), "light.attenuation"), 1, light.getAttenuationValue());
-                        glUniform1fv(glGetUniformLocation(shader.getProgramID(), "light.ambientCoefficient"), 1, light.getAmbientCoeffValue());
+                        glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());
 
                         glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 

@@ -17,6 +17,7 @@
     #include <cassert>
     #include <iostream>
     #include <string>
+    #include <vector>
     #include <GL/glew.h>
     #include <SDL2/SDL.h>
 

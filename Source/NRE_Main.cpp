@@ -13,7 +13,15 @@
         engineWorld.constructChunksMesh();
 
         Renderer::Shader lightShader("Shaders/PhongReflection.vert", "Shaders/PhongReflection.frag", true);
-        Light::Light engineLight(Maths::Point3D<NREfloat>(64, -55, 45), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), 0.01, 0);
+        std::vector<Light::Light*> engineLighting;
+        Light::Light engineLight1(Maths::Point3D<NREfloat>(64, -55, 45), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), 0.01, 0);
+        Light::Light engineLight2(Maths::Point3D<NREfloat>(36, 3, 51), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), 0.01, 0);
+        Light::Light engineLight3(Maths::Point3D<NREfloat>(17, -41, 69), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), 0.01, 0);
+        Light::Light engineLight4(Maths::Point3D<NREfloat>(0, 0, 80), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), 0.01, 0);
+        engineLighting.push_back(&engineLight1);
+        engineLighting.push_back(&engineLight2);
+        engineLighting.push_back(&engineLight3);
+        engineLighting.push_back(&engineLight4);
 
         Maths::Matrix4x4<NREfloat> projection;
         Maths::Matrix4x4<NREfloat> modelview;
@@ -29,9 +37,9 @@
 
             modelview.setIdentity();
             camera.setView(modelview);
-            //engineLight.setPosition(camera.getEye());
+            //engineLight4.setPosition(camera.getEye());
 
-            engineWorld.render(lightShader, modelview, projection, camera, engineLight);
+            engineWorld.render(lightShader, modelview, projection, camera, engineLighting);
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }

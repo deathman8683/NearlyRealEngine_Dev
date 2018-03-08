@@ -106,7 +106,7 @@
                 }
             }
 
-            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, Light::Light &light) {
+            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
                 for (const auto &it : chunkMap) {
                     it.second->render(shader, modelview, projection, camera, light);
                 }
