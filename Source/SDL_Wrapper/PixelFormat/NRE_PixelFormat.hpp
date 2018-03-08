@@ -55,6 +55,8 @@
                     Uint32 const& getFormat() const;
 
                     //## Setter ##//
+                    void setItem(SDL_PixelFormat* const& pf);
+                    void setAllocated(bool const& state);
 
                     //## Methods ##//
 

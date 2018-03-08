@@ -57,5 +57,13 @@
                 return getItem()->format;
             }
 
+            void PixelFormat::setItem(SDL_PixelFormat* const& pf) {
+                item = pf;
+            }
+
+            void PixelFormat::setAllocated(bool const& state) {
+                allocated = state;
+            }
+
         };
     };

@@ -2,7 +2,7 @@ export CXX = g++.exe
 export LD = g++.exe
 
 export CFLAGS = -Wall -std=c++14
-export LDFLAGS = -lopengl32 -lglu32
+export LDFLAGS = -lSDL2 -lSDL2_image -lopengl32 -lglu32
 
 export INC = -I"C:\lib\TDM-GCC-64\include" -I"C:\lib\Glew\include" -I"C:\lib\GLM" -I"C:\lib\SDL2-2.0.8\x86_64-w64-mingw32\include"
 export LIBDIR = -L"C:\lib\TDM-GCC-64\lib" -L"C:\lib\Glew\lib" -L"C:\lib\SDL2-2.0.8\x86_64-w64-mingw32\lib"

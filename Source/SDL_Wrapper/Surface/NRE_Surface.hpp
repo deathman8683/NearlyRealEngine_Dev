@@ -30,6 +30,8 @@
             class Surface {
                 private:
                     SDL_Surface* item;
+                    GLenum glFormat;
+                    GLenum glInternalFormat;
 
                 public:
                     //## Constructor ##//
@@ -47,6 +49,8 @@
 
                     //## Getter ##//
                     SDL_Surface* const& getItem() const;
+                    GLenum const& getGLFormat() const;
+                    GLenum const& getGLInternalFormat() const;
                     SDL_Rect const& getClipRect() const;
                     Uint32 const& getFlags() const;
                     PixelFormat const getFormat() const;
@@ -57,8 +61,16 @@
                     void* const& getPixels() const;
 
                     //## Setter ##//
+                    void setItem(SDL_Surface* const& s);
+                    void setGLFormat(GLenum const& f);
+                    void setGLInternalFormat(GLenum const& f);
 
                     //## Methods ##//
+                    void free();
+                    void lock();
+                    void unlock();
+                    void loadByIMG(std::string const& path);
+                    void flip();
 
                     //## Access Operator ##//
 
