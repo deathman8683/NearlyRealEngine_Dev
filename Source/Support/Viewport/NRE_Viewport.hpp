@@ -28,14 +28,14 @@
              */
             class Viewport {
                 private:
-                    Maths::Vector2D<GLushort> wSize;
-                    Maths::Vector2D<GLushort> glSize;
+                    Maths::Point2D<GLushort> coord;
+                    Maths::Vector2D<GLushort> size;
 
                 public:
                     //## Constructor ##//
                     Viewport();
                     Viewport(bool const& createCurrentViewport);
-                    Viewport(Maths::Vector2D<GLushort> const& wSize, Maths::Vector2D<GLushort> const& glSize);
+                    Viewport(Maths::Point2D<GLushort> const& coord, Maths::Vector2D<GLushort> const& size);
 
                     //## Copy-Constructor ##//
                     Viewport(Viewport const& v);
@@ -46,12 +46,12 @@
                     ~Viewport();
 
                     //## Getter ##//
-                    Maths::Vector2D<GLushort> const& getWSize() const;
-                    Maths::Vector2D<GLushort> const& getGLSize() const;
+                    Maths::Point2D<GLushort> const& getCoord() const;
+                    Maths::Vector2D<GLushort> const& getSize() const;
 
                     //## Setter ##//
-                    void setWSize(Maths::Vector2D<GLushort> const& size);
-                    void setGLSize(Maths::Vector2D<GLushort> const& size);
+                    void setCoord(Maths::Point2D<GLushort> const& coord);
+                    void setSize(Maths::Vector2D<GLushort> const& size);
 
                     //## Methods ##//
                     void createCurrent();

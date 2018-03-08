@@ -13,36 +13,36 @@
                 }
             }
 
-            Viewport::Viewport(Maths::Vector2D<GLushort> const& wSize, Maths::Vector2D<GLushort> const& glSize) : wSize(wSize), glSize(glSize) {
+            Viewport::Viewport(Maths::Point2D<GLushort> const& coord, Maths::Vector2D<GLushort> const& size) : coord(coord), size(size) {
             }
 
-            Viewport::Viewport(Viewport const& v) : wSize(v.getWSize()), glSize(v.getGLSize()) {
+            Viewport::Viewport(Viewport const& v) : coord(v.getCoord()), size(v.getSize()) {
             }
 
             Viewport::~Viewport() {
             }
 
-            Maths::Vector2D<GLushort> const& Viewport::getWSize() const {
-                return wSize;
+            Maths::Point2D<GLushort> const& Viewport::getCoord() const {
+                return coord;
             }
 
-            Maths::Vector2D<GLushort> const& Viewport::getGLSize() const {
-                return glSize;
+            Maths::Vector2D<GLushort> const& Viewport::getSize() const {
+                return size;
             }
 
-            void Viewport::setWSize(Maths::Vector2D<GLushort> const& size) {
-                wSize = size;
+            void Viewport::setCoord(Maths::Point2D<GLushort> const& coord) {
+                this->coord = coord;
             }
 
-            void Viewport::setGLSize(Maths::Vector2D<GLushort> const& size) {
-                glSize = size;
+            void Viewport::setSize(Maths::Vector2D<GLushort> const& size) {
+                this->size = size;
             }
 
             void Viewport::createCurrent() {
                 GLint tmp[4];
                 glGetIntegerv(GL_VIEWPORT, tmp);
-                setWSize(Maths::Vector2D<GLushort>(tmp[0], tmp[1]));
-                setGLSize(Maths::Vector2D<GLushort>(tmp[2], tmp[3]));
+                setCoord(Maths::Point2D<GLushort>(tmp[0], tmp[1]));
+                setSize(Maths::Vector2D<GLushort>(tmp[2], tmp[3]));
             }
 
         };
