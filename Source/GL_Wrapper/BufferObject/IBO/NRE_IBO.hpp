@@ -8,9 +8,8 @@
 
     #pragma once
 
-    #include "../../../Generic/NRE_Type.hpp"
-    #include "Buffer/Index/NRE_IndexBuffer.hpp"
     #include "../VBO/NRE_VBO.hpp"
+    #include "Buffer/Index/NRE_IndexBuffer.hpp"
 
     /**
      * @namespace NRE

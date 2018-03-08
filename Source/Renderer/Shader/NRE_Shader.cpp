@@ -84,6 +84,7 @@
                 glBindAttribLocation(getProgramID(), 0, "in_Vertex");
                 glBindAttribLocation(getProgramID(), 1, "in_Color");
                 glBindAttribLocation(getProgramID(), 2, "in_Normal");
+                glBindAttribLocation(getProgramID(), 3, "in_UV");
 
                 glLinkProgram(getProgramID());
 

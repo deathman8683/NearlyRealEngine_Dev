@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_IndexBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : IndexBuffer
+     * @file NRE_UVBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : UVBuffer
      * @author Louis ABEL
      * @version 1.0
      */
@@ -23,23 +23,23 @@
         namespace Buffer {
 
             /**
-             * @class IndexBuffer
-             * @brief GL's Object : A specialized buffer for Index
+             * @class UVBuffer
+             * @brief GL's Object : A specialized buffer for UV coord
              */
-            class IndexBuffer : public GL::Buffer {
+            class UVBuffer : public GL::Buffer {
                 private:
 
                 public:
                     //## Constructor ##//
-                    IndexBuffer();
-                    IndexBuffer(bool const& generate);
+                    UVBuffer();
+                    UVBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~IndexBuffer();
+                    ~UVBuffer();
 
                     //## Getter ##//
 
@@ -49,11 +49,11 @@
                     void generateID() override;
                     void deleteID() override;
                     void reload() override;
-                    void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target = GL_ELEMENT_ARRAY_BUFFER) override;
-                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target = GL_ELEMENT_ARRAY_BUFFER) override;
-                    void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target = GL_ELEMENT_ARRAY_BUFFER) override;
-                    void bind(GLenum const& target = GL_ELEMENT_ARRAY_BUFFER) const override;
-                    void unbind(GLenum const& target = GL_ELEMENT_ARRAY_BUFFER) const override;
+                    void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target = GL_ARRAY_BUFFER) override;
+                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target = GL_ARRAY_BUFFER) override;
+                    void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target = GL_ARRAY_BUFFER) override;
+                    void bind(GLenum const& target = GL_ARRAY_BUFFER) const override;
+                    void unbind(GLenum const& target = GL_ARRAY_BUFFER) const override;
 
                     //## Access Operator ##//
 
@@ -69,9 +69,7 @@
 
                     //## Shift Operator ##//
 
-                public:
-                    static GLenum TYPE;
-                    static int SIZE;
+                private:
             };
 
         };

@@ -9,7 +9,7 @@
     #pragma once
 
     #include "../../../../../Generic/NRE_Type.hpp"
-    #include "../NRE_Buffer.hpp"
+    #include "../../../NBO/Buffer/NRE_Buffer.hpp"
 
     /**
      * @namespace NRE

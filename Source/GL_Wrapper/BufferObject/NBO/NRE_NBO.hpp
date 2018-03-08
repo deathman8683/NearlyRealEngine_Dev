@@ -1,15 +1,17 @@
 
     /**
-     * @file NRE_VBO.hpp
-     * @brief Declaration of Engine's GL's Object : VBO
+     * @file NRE_NBO.hpp
+     * @brief Declaration of Engine's GL's Object : NBO
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NBO/NRE_NBO.hpp"
-    #include "Buffer/Color/NRE_ColorBuffer.hpp"
+    #include "../../../Generic/NRE_Type.hpp"
+    #include "Buffer/Vertex/NRE_VertexBuffer.hpp"
+    #include "Buffer/Normal/NRE_NormalBuffer.hpp"
+    #include "../NRE_BufferObject.hpp"
 
     /**
      * @namespace NRE
@@ -23,39 +25,42 @@
         namespace GL {
 
             /**
-             * @class VBO
-             * @brief GL's Object : Specialization of an BufferObject for vertex managing
+             * @class NBO
+             * @brief GL's Object : Specialization of an BufferObject for position and normal managing
              */
-            class VBO : public NBO {
+            class NBO : public BufferObject{
                 protected:
-                    NRE::Buffer::ColorBuffer color;
+                    NRE::Buffer::VertexBuffer vertex;
+                    NRE::Buffer::NormalBuffer normal;
 
                 public:
                     //## Constructor ##//
-                    VBO();
-                    VBO(bool const& generate);
+                    NBO();
+                    NBO(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    VBO(VBO const& buf);
+                    NBO(NBO const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~VBO();
+                    ~NBO();
 
                     //## Getter ##//
-                    NRE::Buffer::ColorBuffer const& getColorBuffer() const;
+                    NRE::Buffer::VertexBuffer const& getVertexBuffer() const;
+                    NRE::Buffer::NormalBuffer const& getNormalBuffer() const;
 
                     //## Setter ##//
-                    void setColorBuffer(NRE::Buffer::ColorBuffer const& buf);
+                    void setVertexBuffer(NRE::Buffer::VertexBuffer const& buf);
+                    void setNormalBuffer(NRE::Buffer::NormalBuffer const& buf);
 
                     //## Methods ##//
                     virtual void generateID();
                     virtual void deleteID();
                     virtual void reload();
                     void allocate(size_t const& typeSize, size_t const& nbVertex, GLenum const& usage);
-                    void update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData);
-                    void allocateAndFill(size_t typeSize, size_t const& nbVertex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData);
+                    void update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& nData);
+                    void allocateAndFill(size_t typeSize, size_t const& nbVertex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& nData);
                     virtual void access(GLenum const& vertexType, bool const& enableVAA = true) const;
 
                     //## Access Operator ##//
@@ -75,8 +80,8 @@
                 private:
             };
 
-            inline std::ostream& operator<<(std::ostream &stream, VBO const& buf) {
-                stream << "(" << buf.getVertexBuffer() << buf.getColorBuffer() << buf.getNormalBuffer() << ")";
+            inline std::ostream& operator<<(std::ostream &stream, NBO const& buf) {
+                stream << "(" << buf.getVertexBuffer() << buf.getNormalBuffer() << ")";
                 return stream;
             }
 
