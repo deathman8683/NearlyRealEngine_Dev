@@ -4,6 +4,9 @@
     namespace NRE {
         namespace Buffer {
 
+            GLenum UVBuffer::TYPE = GL_SHORT;
+            int UVBuffer::SIZE = sizeof(GLshort);
+
             UVBuffer::UVBuffer() {
             }
 

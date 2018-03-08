@@ -24,7 +24,7 @@
 
             /**
              * @class VBO
-             * @brief GL's Object : Specialization of an BufferObject for vertex managing
+             * @brief GL's Object : Specialization of an BufferObject for colored vertex managing
              */
             class VBO : public NBO {
                 protected:
