@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_Surface.hpp
-     * @brief Declaration of Engine's SDL's Object : Surface
+     * @file NRE_PixelFormat.hpp
+     * @brief Declaration of Engine's SDL's Object : PixelFormat
      * @author Louis ABEL
      * @version 1.0
      */
@@ -9,8 +9,6 @@
     #pragma once
 
     #include "../../Generic/NRE_Type.hpp"
-    #include "../../Maths/NRE_Maths.hpp"
-    #include "../PixelFormat/NRE_PixelFormat.hpp"
 
     /**
      * @namespace NRE
@@ -24,37 +22,37 @@
         namespace SDL {
 
             /**
-             * @class Surface
-             * @brief SDL's Object : Wrapper of SDL_Surface*
+             * @class PixelFormat
+             * @brief SDL's Object : Wrapper of SDL_PixelFormat*
              */
-            class Surface {
+            class PixelFormat {
                 private:
-                    SDL_Surface* item;
+                    SDL_PixelFormat* item;
+                    bool allocated;
 
                 public:
                     //## Constructor ##//
-                    Surface();
-                    Surface(std::string const& path);
+                    PixelFormat();
+                    PixelFormat(bool const& allocate, Uint32 const& format);
 
                     //## Copy-Constructor ##//
-                    Surface(Surface const& s);
+                    PixelFormat(PixelFormat const& pf);
 
                     //## Convertor ##//
-                    Surface(SDL_Surface* const& s);
+                    PixelFormat(SDL_PixelFormat* const& pf);
 
                     //## Deconstructor ##//
-                    virtual ~Surface();
+                    ~PixelFormat();
 
                     //## Getter ##//
-                    SDL_Surface* const& getItem() const;
-                    SDL_Rect const& getClipRect() const;
-                    Uint32 const& getFlags() const;
-                    PixelFormat const getFormat() const;
-                    int const& getW() const;
-                    int const& getH() const;
-                    Maths::Vector2D<int> const getSize() const;
-                    int const& getPitch() const;
-                    void* const& getPixels() const;
+                    SDL_PixelFormat* const& getItem() const;
+                    bool const& isAllocated() const;
+                    Uint8 const& getBitsPerPixel() const;
+                    Uint32 const& getRMask() const;
+                    Uint32 const& getGMask() const;
+                    Uint32 const& getBMask() const;
+                    Uint32 const& getAMask() const;
+                    Uint32 const& getFormat() const;
 
                     //## Setter ##//
 

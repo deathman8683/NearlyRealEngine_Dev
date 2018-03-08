@@ -32,8 +32,8 @@
                 return getItem()->flags;
             }
 
-            SDL_PixelFormat* const& Surface::getFormat() const {
-                return getItem()->format;
+            PixelFormat const Surface::getFormat() const {
+                return PixelFormat(getItem()->format);
             }
 
             int const& Surface::getW() const {
