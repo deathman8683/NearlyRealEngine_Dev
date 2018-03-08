@@ -1,6 +1,6 @@
 SRC = NRE_IndexBuffer.cpp
 OBJ = $(OBJDIR)NRE_IndexBuffer.o
-OBJDIR = ../../../../../obj/Debug/GL_Wrapper/BufferObject/Buffer/Index/
+OBJDIR = ../../../../../../obj/Debug/GL_Wrapper/BufferObject/IBO/Buffer/Index/
 
 all : $(TARGET)
 

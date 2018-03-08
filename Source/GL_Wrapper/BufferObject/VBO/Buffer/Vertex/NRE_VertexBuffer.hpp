@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_NormalBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : NormalBuffer
+     * @file NRE_VertexBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : VertexBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../../Generic/NRE_Type.hpp"
+    #include "../../../../../Generic/NRE_Type.hpp"
     #include "../NRE_Buffer.hpp"
 
     /**
@@ -20,26 +20,26 @@
          * @namespace GL
          * @brief Engine's OpenGL's Wrapper's Module
          */
-        namespace GL {
+        namespace Buffer {
 
             /**
-             * @class NormalBuffer
-             * @brief GL's Object : A specialized buffer for normal
+             * @class VertexBuffer
+             * @brief GL's Object : A specialized buffer for vertex
              */
-            class NormalBuffer : public Buffer {
+            class VertexBuffer : public GL::Buffer {
                 private:
 
                 public:
                     //## Constructor ##//
-                    NormalBuffer();
-                    NormalBuffer(bool const& generate);
+                    VertexBuffer();
+                    VertexBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~NormalBuffer();
+                    ~VertexBuffer();
 
                     //## Getter ##//
 
@@ -69,9 +69,7 @@
 
                     //## Shift Operator ##//
 
-                public:
-                    static GLenum TYPE;
-                    static int SIZE;
+                private:
             };
 
         };

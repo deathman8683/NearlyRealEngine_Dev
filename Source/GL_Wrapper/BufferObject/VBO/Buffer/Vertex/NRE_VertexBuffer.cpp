@@ -2,7 +2,7 @@
     #include "NRE_VertexBuffer.hpp"
 
     namespace NRE {
-        namespace GL {
+        namespace Buffer {
 
             VertexBuffer::VertexBuffer() {
             }

@@ -2,7 +2,7 @@
     #include "NRE_NormalBuffer.hpp"
 
     namespace NRE {
-        namespace GL {
+        namespace Buffer {
 
             GLenum NormalBuffer::TYPE = GL_BYTE;
             int NormalBuffer::SIZE = sizeof(GLbyte);

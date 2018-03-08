@@ -1,8 +1,6 @@
 
     #version 450
 
-    uniform vec3 camera;
-
     uniform struct Light {
        vec3 position;
        vec3 intensities;
@@ -13,28 +11,27 @@
     in vec3 vertex;
     in vec3 color;
     in vec3 normal;
+    in vec3 cameraVertex;
 
     out vec4 out_Color;
 
     void main() {
-        vec3 surfaceToLight = normalize(light.position - vertex);
-        vec3 surfaceToCamera = normalize(camera - vertex);
-
+        vec3 lightVertex = normalize(light.position - vertex);
         //ambient
         vec3 ambient = light.ambientCoefficient * color * light.intensities;
 
         //diffuse
-        float diffuseCoefficient = max(0.0, dot(normal, surfaceToLight));
+        float diffuseCoefficient = max(0.0, dot(normal, lightVertex));
         vec3 diffuse = diffuseCoefficient * color * light.intensities;
 
         //specular
         float specularCoefficient = 0.0;
         if (color == vec3(50.0/255.0, 50.0/255.0, 1.0)) {
-            specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), 10);
+            specularCoefficient = pow(max(0.0, dot(cameraVertex, reflect(-lightVertex, normal))), 10);
         } else {
-            specularCoefficient = max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal)));
+            specularCoefficient = max(0.0, dot(cameraVertex, reflect(-lightVertex, normal)));
         }
-        vec3 specular = specularCoefficient * color;
+        vec3 specular = specularCoefficient * color * light.intensities;
 
         //attenuation
         float distanceToLight = length(light.position - vertex);

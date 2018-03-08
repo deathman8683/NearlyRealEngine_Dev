@@ -2,7 +2,7 @@
     #include "NRE_ColorBuffer.hpp"
 
     namespace NRE {
-        namespace GL {
+        namespace Buffer {
 
             GLenum ColorBuffer::TYPE = GL_FLOAT;
             int ColorBuffer::SIZE = sizeof(GLfloat);

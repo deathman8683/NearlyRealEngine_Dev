@@ -14,7 +14,7 @@ ifeq ($(TARGET), debug)
 	OBJDIR = obj/Debug/
 	BIN = bin/Debug/
 	SOURCE = Source
-	OBJ =  $(OBJDIR)Generic/Array/NRE_ArrayOperation.o $(OBJDIR)lib/FastNoise/FastNoise.o $(OBJDIR)SDL_Wrapper/Window/NRE_Window.o $(OBJDIR)SDL_Wrapper/Event/NRE_Event.o $(OBJDIR)GL_Wrapper/BufferObject/NRE_BufferObject.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/NRE_Buffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Vertex/NRE_VertexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Color/NRE_ColorBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Index/NRE_IndexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/Buffer/Normal/NRE_NormalBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/NRE_VBO.o $(OBJDIR)GL_Wrapper/BufferObject/IBO/NRE_IBO.o $(OBJDIR)GL_Wrapper/VAO/NRE_VAO.o $(OBJDIR)Renderer/Color/RGB/NRE_RGB.o $(OBJDIR)Renderer/Color/HSL/NRE_HSL.o $(OBJDIR)Renderer/Color/RGB/NRE_RGBA.o $(OBJDIR)Renderer/Color/HSL/NRE_HSLA.o $(OBJDIR)Renderer/Color/NRE_ColorConverter.o $(OBJDIR)Renderer/Shader/NRE_Shader.o $(OBJDIR)Lighting/NRE_Light.o $(OBJDIR)Camera/Input/KeyBinder/Key/NRE_Key.o $(OBJDIR)Camera/Input/KeyBinder/NRE_KeyBinder.o $(OBJDIR)Camera/Input/Keyboard/NRE_Keyboard.o $(OBJDIR)Camera/Input/EventHandler/NRE_EventHandler.o $(OBJDIR)Camera/Input/Mouse/NRE_Mouse.o $(OBJDIR)Camera/Input/NRE_Input.o $(OBJDIR)Camera/FixedCamera/NRE_FixedCamera.o $(OBJDIR)Camera/NRE_MoveableCamera.o $(OBJDIR)World/Voxel/NRE_Voxel.o $(OBJDIR)World/Voxel/Type/NRE_VoxelType.o $(OBJDIR)World/Voxel/PackedVertex/NRE_PackedVertex.o $(OBJDIR)World/Mesh/NRE_Mesh.o $(OBJDIR)World/Chunk/NRE_Chunk.o $(OBJDIR)World/NRE_World.o $(OBJDIR)World/ChunkConstructor/NRE_ChunkConstructor.o $(OBJDIR)Support/Viewport/NRE_Viewport.o $(OBJDIR)Support/Scene/NRE_Scene.o $(OBJDIR)NRE_Main.o
+	OBJ =  $(OBJDIR)Generic/Array/NRE_ArrayOperation.o $(OBJDIR)lib/FastNoise/FastNoise.o $(OBJDIR)SDL_Wrapper/Window/NRE_Window.o $(OBJDIR)SDL_Wrapper/Event/NRE_Event.o $(OBJDIR)GL_Wrapper/BufferObject/NRE_BufferObject.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/Buffer/NRE_Buffer.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/Buffer/Vertex/NRE_VertexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/Buffer/Color/NRE_ColorBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/Buffer/Normal/NRE_NormalBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/VBO/NRE_VBO.o $(OBJDIR)GL_Wrapper/BufferObject/IBO/Buffer/Index/NRE_IndexBuffer.o $(OBJDIR)GL_Wrapper/BufferObject/IBO/NRE_IBO.o $(OBJDIR)GL_Wrapper/VAO/NRE_VAO.o $(OBJDIR)Renderer/Color/RGB/NRE_RGB.o $(OBJDIR)Renderer/Color/HSL/NRE_HSL.o $(OBJDIR)Renderer/Color/RGB/NRE_RGBA.o $(OBJDIR)Renderer/Color/HSL/NRE_HSLA.o $(OBJDIR)Renderer/Color/NRE_ColorConverter.o $(OBJDIR)Renderer/Shader/NRE_Shader.o $(OBJDIR)Lighting/NRE_Light.o $(OBJDIR)Camera/Input/KeyBinder/Key/NRE_Key.o $(OBJDIR)Camera/Input/KeyBinder/NRE_KeyBinder.o $(OBJDIR)Camera/Input/Keyboard/NRE_Keyboard.o $(OBJDIR)Camera/Input/EventHandler/NRE_EventHandler.o $(OBJDIR)Camera/Input/Mouse/NRE_Mouse.o $(OBJDIR)Camera/Input/NRE_Input.o $(OBJDIR)Camera/FixedCamera/NRE_FixedCamera.o $(OBJDIR)Camera/NRE_MoveableCamera.o $(OBJDIR)World/Voxel/NRE_Voxel.o $(OBJDIR)World/Voxel/Type/NRE_VoxelType.o $(OBJDIR)World/Voxel/PackedVertex/NRE_PackedVertex.o $(OBJDIR)World/Mesh/NRE_Mesh.o $(OBJDIR)World/Chunk/NRE_Chunk.o $(OBJDIR)World/NRE_World.o $(OBJDIR)World/ChunkConstructor/NRE_ChunkConstructor.o $(OBJDIR)Support/Viewport/NRE_Viewport.o $(OBJDIR)Support/Scene/NRE_Scene.o $(OBJDIR)NRE_Main.o
 
 else
 	OBJDIR = obj/Test/
@@ -53,12 +53,13 @@ clean :
 	@mkdir obj/Debug/GL_Wrapper
 	@mkdir obj/Debug/GL_Wrapper/BufferObject
 	@mkdir obj/Debug/GL_Wrapper/BufferObject/VBO
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/VBO/Buffer
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/VBO/Buffer/Color
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/VBO/Buffer/Normal
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/VBO/Buffer/Vertex
 	@mkdir obj/Debug/GL_Wrapper/BufferObject/IBO
-	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer
-	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer/Color
-	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer/Index
-	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer/Normal
-	@mkdir obj/Debug/GL_Wrapper/BufferObject/Buffer/Vertex
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/IBO/Buffer
+	@mkdir obj/Debug/GL_Wrapper/BufferObject/IBO/Buffer/Index
 	@mkdir obj/Debug/GL_Wrapper/VAO
 	@mkdir obj/Debug/lib
 	@mkdir obj/Debug/lib/FastNoise
@@ -102,12 +103,13 @@ clean_Test :
 	@mkdir obj/Test/GL_Wrapper
 	@mkdir obj/Test/GL_Wrapper/BufferObject
 	@mkdir obj/Test/GL_Wrapper/BufferObject/VBO
+	@mkdir obj/Test/GL_Wrapper/BufferObject/VBO/Buffer
+	@mkdir obj/Test/GL_Wrapper/BufferObject/VBO/Buffer/Color
+	@mkdir obj/Test/GL_Wrapper/BufferObject/VBO/Buffer/Normal
+	@mkdir obj/Test/GL_Wrapper/BufferObject/VBO/Buffer/Vertex
 	@mkdir obj/Test/GL_Wrapper/BufferObject/IBO
-	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer
-	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer/Color
-	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer/Index
-	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer/Normal
-	@mkdir obj/Test/GL_Wrapper/BufferObject/Buffer/Vertex
+	@mkdir obj/Test/GL_Wrapper/BufferObject/IBO/Buffer
+	@mkdir obj/Test/GL_Wrapper/BufferObject/IBO/Buffer/Index
 	@mkdir obj/Test/GL_Wrapper/VAO
 	@mkdir obj/Test/lib
 	@mkdir obj/Test/lib/FastNoise

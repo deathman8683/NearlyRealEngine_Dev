@@ -35,7 +35,7 @@
             }
 
             Color::RGB const Grass::getColor() const {
-                return Color::RGB(12, 147, 47);
+                return Color::RGB(75, 255, 30);
             }
 
             Stone::Stone() {

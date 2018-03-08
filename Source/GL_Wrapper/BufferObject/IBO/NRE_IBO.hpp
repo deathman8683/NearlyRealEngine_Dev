@@ -9,7 +9,7 @@
     #pragma once
 
     #include "../../../Generic/NRE_Type.hpp"
-    #include "../Buffer/Index/NRE_IndexBuffer.hpp"
+    #include "Buffer/Index/NRE_IndexBuffer.hpp"
     #include "../VBO/NRE_VBO.hpp"
 
     /**
@@ -29,7 +29,7 @@
              */
             class IBO : public VBO {
                 private:
-                    IndexBuffer index;
+                    NRE::Buffer::IndexBuffer index;
                     GLuint nb;
 
                 public:
@@ -46,11 +46,11 @@
                     ~IBO();
 
                     //## Getter ##//
-                    IndexBuffer const& getIndexBuffer() const;
+                    NRE::Buffer::IndexBuffer const& getIndexBuffer() const;
                     GLuint const& getNb() const;
 
                     //## Setter ##//
-                    void setIndexBuffer(IndexBuffer const& buf);
+                    void setIndexBuffer(NRE::Buffer::IndexBuffer const& buf);
                     void setNb(GLuint const& n);
 
                     //## Methods ##//

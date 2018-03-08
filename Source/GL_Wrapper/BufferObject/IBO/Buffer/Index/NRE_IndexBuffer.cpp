@@ -2,7 +2,7 @@
     #include "NRE_IndexBuffer.hpp"
 
     namespace NRE {
-        namespace GL {
+        namespace Buffer {
 
             GLenum IndexBuffer::TYPE = GL_UNSIGNED_INT;
             int IndexBuffer::SIZE = sizeof(GLuint);

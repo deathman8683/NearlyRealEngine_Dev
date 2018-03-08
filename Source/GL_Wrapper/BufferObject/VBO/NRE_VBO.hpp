@@ -9,9 +9,9 @@
     #pragma once
 
     #include "../../../Generic/NRE_Type.hpp"
-    #include "../Buffer/Vertex/NRE_VertexBuffer.hpp"
-    #include "../Buffer/Color/NRE_ColorBuffer.hpp"
-    #include "../Buffer/Normal/NRE_NormalBuffer.hpp"
+    #include "Buffer/Vertex/NRE_VertexBuffer.hpp"
+    #include "Buffer/Color/NRE_ColorBuffer.hpp"
+    #include "Buffer/Normal/NRE_NormalBuffer.hpp"
     #include "../NRE_BufferObject.hpp"
 
     /**
@@ -31,9 +31,9 @@
              */
             class VBO : public BufferObject{
                 protected:
-                    VertexBuffer vertex;
-                    ColorBuffer color;
-                    NormalBuffer normal;
+                    NRE::Buffer::VertexBuffer vertex;
+                    NRE::Buffer::ColorBuffer color;
+                    NRE::Buffer::NormalBuffer normal;
 
                 public:
                     //## Constructor ##//
@@ -49,14 +49,14 @@
                     ~VBO();
 
                     //## Getter ##//
-                    VertexBuffer const& getVertexBuffer() const;
-                    ColorBuffer const& getColorBuffer() const;
-                    NormalBuffer const& getNormalBuffer() const;
+                    NRE::Buffer::VertexBuffer const& getVertexBuffer() const;
+                    NRE::Buffer::ColorBuffer const& getColorBuffer() const;
+                    NRE::Buffer::NormalBuffer const& getNormalBuffer() const;
 
                     //## Setter ##//
-                    void setVertexBuffer(VertexBuffer const& buf);
-                    void setColorBuffer(ColorBuffer const& buf);
-                    void setNormalBuffer(NormalBuffer const& buf);
+                    void setVertexBuffer(NRE::Buffer::VertexBuffer const& buf);
+                    void setColorBuffer(NRE::Buffer::ColorBuffer const& buf);
+                    void setNormalBuffer(NRE::Buffer::NormalBuffer const& buf);
 
                     //## Methods ##//
                     virtual void generateID();

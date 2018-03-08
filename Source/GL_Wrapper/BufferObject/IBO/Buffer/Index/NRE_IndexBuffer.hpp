@@ -8,8 +8,8 @@
 
     #pragma once
 
-    #include "../../../../Generic/NRE_Type.hpp"
-    #include "../NRE_Buffer.hpp"
+    #include "../../../../../Generic/NRE_Type.hpp"
+    #include "../../../VBO/Buffer/NRE_Buffer.hpp"
 
     /**
      * @namespace NRE
@@ -20,13 +20,13 @@
          * @namespace GL
          * @brief Engine's OpenGL's Wrapper's Module
          */
-        namespace GL {
+        namespace Buffer {
 
             /**
              * @class IndexBuffer
              * @brief GL's Object : A specialized buffer for Index
              */
-            class IndexBuffer : public Buffer {
+            class IndexBuffer : public GL::Buffer {
                 private:
 
                 public:

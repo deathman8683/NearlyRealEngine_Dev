@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_ColorBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : ColorBuffer
+     * @file NRE_NormalBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : NormalBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../../Generic/NRE_Type.hpp"
+    #include "../../../../../Generic/NRE_Type.hpp"
     #include "../NRE_Buffer.hpp"
 
     /**
@@ -20,26 +20,26 @@
          * @namespace GL
          * @brief Engine's OpenGL's Wrapper's Module
          */
-        namespace GL {
+        namespace Buffer {
 
             /**
-             * @class ColorBuffer
-             * @brief GL's Object : A specialized buffer for color
+             * @class NormalBuffer
+             * @brief GL's Object : A specialized buffer for normal
              */
-            class ColorBuffer : public Buffer {
+            class NormalBuffer : public GL::Buffer {
                 private:
 
                 public:
                     //## Constructor ##//
-                    ColorBuffer();
-                    ColorBuffer(bool const& generate);
+                    NormalBuffer();
+                    NormalBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~ColorBuffer();
+                    ~NormalBuffer();
 
                     //## Getter ##//
 

@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_VertexBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : VertexBuffer
+     * @file NRE_ColorBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : ColorBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../../Generic/NRE_Type.hpp"
+    #include "../../../../../Generic/NRE_Type.hpp"
     #include "../NRE_Buffer.hpp"
 
     /**
@@ -20,26 +20,26 @@
          * @namespace GL
          * @brief Engine's OpenGL's Wrapper's Module
          */
-        namespace GL {
+        namespace Buffer {
 
             /**
-             * @class VertexBuffer
-             * @brief GL's Object : A specialized buffer for vertex
+             * @class ColorBuffer
+             * @brief GL's Object : A specialized buffer for color
              */
-            class VertexBuffer : public Buffer {
+            class ColorBuffer : public GL::Buffer {
                 private:
 
                 public:
                     //## Constructor ##//
-                    VertexBuffer();
-                    VertexBuffer(bool const& generate);
+                    ColorBuffer();
+                    ColorBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~VertexBuffer();
+                    ~ColorBuffer();
 
                     //## Getter ##//
 
@@ -69,7 +69,9 @@
 
                     //## Shift Operator ##//
 
-                private:
+                public:
+                    static GLenum TYPE;
+                    static int SIZE;
             };
 
         };
