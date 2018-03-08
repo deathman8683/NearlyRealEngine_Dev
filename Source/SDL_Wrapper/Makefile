@@ -1,4 +1,5 @@
 WINDOW = Window
+SURFACE = Surface
 EVENT = Event
 
 all : $(TARGET)
@@ -6,3 +7,4 @@ all : $(TARGET)
 debug:
 	@(cd $(WINDOW) && $(MAKE))
 	@(cd $(EVENT) && $(MAKE))
+	@(cd $(SURFACE) && $(MAKE))
