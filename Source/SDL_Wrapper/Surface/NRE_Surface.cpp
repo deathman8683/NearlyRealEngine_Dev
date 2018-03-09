@@ -114,7 +114,6 @@
             }
 
             void Surface::flip() {
-                int pitch;
                 Surface flippedSurface(SDL_CreateRGBSurface(SDL_SWSURFACE,
                                                             getW(),getH(),
                                                             getFormat().getBitsPerPixel(),
@@ -126,7 +125,7 @@
                 lock();
                 flippedSurface.lock();
 
-                pitch = getPitch();
+                int pitch = getPitch();
                 for (unsigned int currentLine = 0; currentLine < static_cast <unsigned int> (getH()); currentLine = currentLine + 1) {
                     memcpy(&((unsigned char*)flippedSurface.getPixels())[currentLine * pitch],
                            &((unsigned char*)getPixels())[(getH() - 1 - currentLine) * pitch],

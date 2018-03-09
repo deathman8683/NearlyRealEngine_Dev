@@ -17,7 +17,7 @@
         Light::Light engineLight1(Maths::Point3D<NREfloat>(0, 0, 80), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), 0.01, 0);
         Light::Light engineLight2(Maths::Point3D<NREfloat>(0, 0, 80), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), 0.01, 0);
         Light::Light engineLight3(Maths::Point3D<NREfloat>(0, 0, 80), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), 0.01, 0);
-        Light::Light engineLight4(Maths::Point3D<NREfloat>(0, 0, 80), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), 0.01, 0);
+        Light::Light engineLight4(Maths::Point3D<NREfloat>(64, -55, 45), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), 0.01, 0);
         engineLighting.push_back(&engineLight1);
         engineLighting.push_back(&engineLight2);
         engineLighting.push_back(&engineLight3);
