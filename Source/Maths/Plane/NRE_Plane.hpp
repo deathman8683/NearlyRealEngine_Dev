@@ -9,8 +9,8 @@
     #pragma once
 
     #include "../../Generic/NRE_Type.hpp"
-    #include "../../Vector/NRE_Vector3D.hpp"
-    #include "../../Point/NRE_Point3D.hpp"
+    #include "../Vector/NRE_Vector3D.hpp"
+    #include "../Point/NRE_Point3D.hpp"
 
     /**
      * @namespace NRE

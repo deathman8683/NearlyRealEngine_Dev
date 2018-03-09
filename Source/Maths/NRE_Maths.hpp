@@ -8,3 +8,5 @@
     #include "Point/NRE_Point4D.hpp"
     #include "Vector/NRE_Vector4D.hpp"
     #include "Matrix/NRE_Matrix4x4.hpp"
+    #include "Plane/NRE_Plane.hpp"
+    #include "Frustum/NRE_Frustum.hpp"

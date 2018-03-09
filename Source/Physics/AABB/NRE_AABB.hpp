@@ -22,6 +22,12 @@
          */
         namespace Physics {
 
+            enum CollisionResult {
+                OUTSIDE,
+                INTERSECT,
+                INSIDE
+            };
+
             /**
              * @class AABB
              * @brief Physics's Object : Axis-Aligned Bounding Box, with center + half extent

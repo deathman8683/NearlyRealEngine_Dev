@@ -30,14 +30,14 @@
             Plane<T>::~Plane() {
             }
 
+            template <class T>
             Vector3D<T> const& Plane<T>::getNormal() const {
-                return normal;
+                return n;
             }
-
 
             template <class T>
             Point3D<T> const& Plane<T>::getPoint() const {
-                return point;
+                return p;
             }
 
             template <class T>
@@ -55,17 +55,17 @@
             template <class T>
             template <class K, class L, class M>
             void Plane<T>::computeNormalFrom3Point(Point3D<K> const& p1, Point3D<L> const& p2, Point3D<M> const& p3) {
-                NRE_Vector3D<T> v, u;
+                Vector3D<T> v, u;
                 v = p2 - p1;
-                u = p3 - p1
+                u = p3 - p1;
                 setNormal((v ^ u).normalize());
             }
 
             template <class T>
             template <class K>
             void Plane<T>::distance(Point3D<K> const& p) {
-                T D = (-get_Normal()) | Vector3D<T>(getPoint());
-                return (get_Normal() | Vector3D<T>(p)) + D;
+                T D = (-getNormal()) | Vector3D<T>(getPoint());
+                return (getNormal() | Vector3D<T>(p)) + D;
             }
 
         };
