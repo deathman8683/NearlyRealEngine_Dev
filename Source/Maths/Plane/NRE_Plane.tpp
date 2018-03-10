@@ -53,6 +53,13 @@
             }
 
             template <class T>
+            template <class K, class L>
+            void Plane<T>::setNormalAndPoint(Vector3D<K> const& u, Point3D<L> const& p) {
+                setNormal(u);
+                setPoint(p);
+            }
+
+            template <class T>
             template <class K, class L, class M>
             void Plane<T>::computeNormalFrom3Point(Point3D<K> const& p1, Point3D<L> const& p2, Point3D<M> const& p3) {
                 Vector3D<T> v, u;

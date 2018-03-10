@@ -3,29 +3,23 @@
         namespace Maths {
 
             template <class T>
-            Frustum<T>::Frustum() : Frustum(Vector2D<T>(0, 0)) {
+            Frustum<T>::Frustum() : Frustum(DEFAULT_FOV, DEFAULT_RATIO, Vector2D<T>(0, 0)) {
             }
 
             template <class T>
             template <class K, class L, class M>
-            Frustum<T>::Frustum(K const& fov, L const& ratio, Vector2D<M> const& dist) : plane(0), dist(dist) {
+            Frustum<T>::Frustum(K const& fov, L const& ratio, Vector2D<M> const& dist) : plane(0), dist(dist), fov(fov), ratio(ratio) {
                 plane = new Plane<T>[FACE_NUM];
-                computeNearAndFar(fov, ratio);
+                computeNearAndFar();
             }
 
             template <class T>
-            template <class K, class L, class M>
-            Frustum<T>::Frustum(Vector2D<K> const& near, Vector2D<L> const& far, Vector2D<M> const& dist) : plane(0), near(near), far(far), dist(dist) {
-                plane = new Plane<T>[FACE_NUM];
-            }
-
-            template <class T>
-            Frustum<T>::Frustum(Frustum const& f) : plane(f.getPlanes()), near(f.getNear()), far(f.getFar()), dist(f.getDist()) {
+            Frustum<T>::Frustum(Frustum const& f) : plane(f.getPlanes()), near(f.getNear()), far(f.getFar()), dist(f.getDist()), fov(f.getFov()), ratio(f.getRatio()) {
             }
 
             template <class T>
             template <class K>
-            Frustum<T>::Frustum(Frustum<K> const& f) : plane(f.getPlanes()), near(f.getNear()), far(f.getFar()), dist(f.getDist()) {
+            Frustum<T>::Frustum(Frustum<K> const& f) : plane(f.getPlanes()), near(f.getNear()), far(f.getFar()), dist(f.getDist()), fov(f.getFov()), ratio(f.getRatio()) {
             }
 
             template <class T>
@@ -57,6 +51,15 @@
             Vector2D<T> const& Frustum<T>::getDist() const {
                 return dist;
             }
+            template <class T>
+            T const& Frustum<T>::getFov() const {
+                return fov;
+            }
+
+            template <class T>
+            T const& Frustum<T>::getRatio() const {
+                return ratio;
+            }
 
             template <class T>
             void Frustum<T>::setPlanes(Plane<T>* const& p) {
@@ -86,14 +89,24 @@
             void Frustum<T>::setDist(Vector2D<K> const& size) {
                 dist = size;
             }
+            template <class T>
+            template <class K>
+            void Frustum<T>::setFov(K const& f) {
+                fov = f;
+            }
 
             template <class T>
-            template <class K, class L>
-            void Frustum<T>::computeNearAndFar(K const& fov, L const& ratio) {
-                T tang = std::tan(toRad(fov) * 0.5);
+            template <class K>
+            void Frustum<T>::setRatio(K const& r) {
+                ratio = r;
+            }
 
-                setNear(Vector2D<T>(tang * getDist().getX(), getNear().getY() * ratio));
-                setFar(Vector2D<T>(tang * getDist().getY(), getFar().getY() * ratio));
+            template <class T>
+            void Frustum<T>::computeNearAndFar() {
+                T tang = std::tan(toRad(getFov()) * 0.5);
+
+                setNear(Vector2D<T>(tang * getDist().getX(), getNear().getY() * getRatio()));
+                setFar(Vector2D<T>(tang * getDist().getY(), getFar().getY() * getRatio()));
             }
 
             template <class T>
@@ -122,6 +135,12 @@
                     }
                 }
                 return result;
+            }
+
+            template <class T>
+            template <class K>
+            void Frustum<T>::computeProjectionMatrix(Matrix4x4<K> &m) {
+                m.projection(getFov(), getRatio(), getDist().getX(), getDist().getY());
             }
 
         };

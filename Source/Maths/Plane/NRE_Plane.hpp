@@ -60,6 +60,8 @@
                     void setNormal(Vector3D<K> const& u);
                     template <class K>
                     void setPoint(Point3D<K> const& p);
+                    template <class K, class L>
+                    void setNormalAndPoint(Vector3D<K> const& u, Point3D<L> const& p);
 
                     //## Methods ##//
                     template <class K, class L, class M>

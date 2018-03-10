@@ -9,7 +9,9 @@
             MoveableCamera::MoveableCamera() : speed(DEFAULT_SPEED) {
             }
 
-            MoveableCamera::MoveableCamera(std::string const& kbPath, std::string const& mPath, Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle, NREfloat const& speed, bool const& calculate) : FixedCamera::FixedCamera(eye, center, angle, calculate), Input::Input(kbPath, mPath), speed(speed) {
+            MoveableCamera::MoveableCamera(std::string const& kbPath, std::string const& mPath, NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
+                                           Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle,
+                                           NREfloat const& speed, bool const& calculate) : FixedCamera::FixedCamera(fov, ratio, dist, eye, center, angle, calculate), Input::Input(kbPath, mPath), speed(speed) {
             }
 
             MoveableCamera::MoveableCamera(FixedCamera const& camera, Input const& in, NREfloat const& speed) : FixedCamera::FixedCamera(camera), Input::Input(in), speed(speed) {
@@ -65,7 +67,7 @@
                 tmp = tmp * getSpeed();
                 setEye(getEye() + tmp);
                 setCenter(getEye() + getForward());
-                calculateVector();
+                computeVector();
             }
 
         };

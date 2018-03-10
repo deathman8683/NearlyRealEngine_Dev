@@ -26,7 +26,7 @@
              * @class FixedCamera
              * @brief Camera's Object : A basic fixed camera
              */
-            class FixedCamera {
+            class FixedCamera  : public Maths::Frustum<NREfloat> {
                 protected:
                     Maths::Point3D<NREfloat> eye;
                     Maths::Point3D<NREfloat> center;
@@ -38,8 +38,11 @@
                 public:
                     //## Constructor ##//
                     FixedCamera();
-                    FixedCamera(Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle, bool const& calculate = false);
-                    FixedCamera(Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle,
+                    FixedCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
+                                Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle,
+                                bool const& calculate = false);
+                    FixedCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
+                                Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle,
                                 Maths::Vector3D<NREfloat> const& up, Maths::Vector3D<NREfloat> const& forward, Maths::Vector3D<NREfloat> const& left);
 
                     //## Copy-Constructor ##//
@@ -68,7 +71,8 @@
 
                     //## Methods ##//
                     void setView(Maths::Matrix4x4<NREfloat>& modelview) const;
-                    void calculateVector();
+                    void computeVector();
+                    void computePlane();
 
                     //## Access Operator ##//
 

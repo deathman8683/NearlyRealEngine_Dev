@@ -40,19 +40,19 @@
              */
             template <class T>
             class Frustum {
-                private:
+                protected:
                     Plane<T> *plane;
                     Vector2D<T> near;
                     Vector2D<T> far;
                     Vector2D<T> dist;
+                    T fov;
+                    T ratio;
 
                 public:
                     //## Constructor ##//
                     Frustum();
                     template <class K, class L, class M>
                     Frustum(K const& fov, L const& ratio, Vector2D<M> const& dist);
-                    template <class K, class L, class M>
-                    Frustum(Vector2D<K> const& near, Vector2D<L> const& far, Vector2D<M> const& dist);
 
                     //## Copy-Constructor ##//
                     Frustum(Frustum const& f);
@@ -70,6 +70,8 @@
                     Vector2D<T> const& getNear() const;
                     Vector2D<T> const& getFar() const;
                     Vector2D<T> const& getDist() const;
+                    T const& getFov() const;
+                    T const& getRatio() const;
 
                     //## Setter ##//
                     void setPlanes(Plane<T>* const& p);
@@ -81,14 +83,19 @@
                     void setFar(Vector2D<K> const& size);
                     template <class K>
                     void setDist(Vector2D<K> const& size);
+                    template <class K>
+                    void setFov(K const& f);
+                    template <class K>
+                    void setRatio(K const& r);
 
                     //## Methods ##//
-                    template <class K, class L>
-                    void computeNearAndFar(K const& fov, L const& ratio);
+                    void computeNearAndFar();
                     template <class K>
                     Physics::CollisionResult const& pointCollision(Point3D<K> const& p) const;
                     template <class K, class L>
                     Physics::CollisionResult const& sphereCollision(Point3D<K> const& p, L const& radius);
+                    template <class K>
+                    void computeProjectionMatrix(Matrix4x4<K> &m);
 
                     //## Access Operator ##//
 
@@ -104,8 +111,15 @@
 
                     //## Shift Operator ##//
 
-                private:
+                    protected:
+                    static NREfloat DEFAULT_FOV;
+                    static NREfloat DEFAULT_RATIO;
             };
+
+            template <class T>
+            NREfloat Frustum<T>::DEFAULT_FOV = 70.0;
+            template <class T>
+            NREfloat Frustum<T>::DEFAULT_RATIO = 800.0 / 600.0;
 
         };
     };
