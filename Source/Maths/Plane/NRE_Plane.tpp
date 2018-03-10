@@ -70,7 +70,7 @@
 
             template <class T>
             template <class K>
-            void Plane<T>::distance(Point3D<K> const& p) {
+            NREfloat Plane<T>::distance(Point3D<K> const& p) const {
                 T D = (-getNormal()) | Vector3D<T>(getPoint());
                 return (getNormal() | Vector3D<T>(p)) + D;
             }

@@ -107,8 +107,8 @@
             void FixedCamera::computePlane() {
                 Maths::Point3D<NREfloat> fc, nc;
                 Maths::Vector3D<NREfloat> a, normal;
-                fc = getEye() + getForward() * getDist().getX();
-                nc = getEye() + getForward() * getDist().getY();
+                nc = getEye() + getForward() * getDist().getX();
+                fc = getEye() + getForward() * getDist().getY();
 
                 plane[Maths::NEAR].setNormalAndPoint(getForward(), nc);
                 plane[Maths::FAR].setNormalAndPoint(-getForward(), fc);
@@ -133,6 +133,76 @@
                 a.normalize();
                 normal = a ^ getUp();
                 plane[Maths::LEFT].setNormalAndPoint(normal, nc + getLeft() * getNear().getX());
+            }
+
+            size_t FixedCamera::getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf) {
+                Math::Point3D<NREfloat> nc, fc;
+                vBuf = new GLint[24];
+                nc = getEye() + getForward() * getDist().getX() - (getNear() / 2);
+                    vBuf[0] = nc.getX(); vBuf[1] = nc.getY(); vBuf[2] = nc.getZ();
+                    vBuf[3] = nc.getX(); vBuf[4] = nc.getY(); vBuf[5] = nc.getZ() + getNear().getY();
+                    vBuf[6] = nc.getX(); vBuf[7] = nc.getY() + getNear().getX(); vBuf[8] = nc.getZ();
+                    vBuf[9] = nc.getX(); vBuf[10] = nc.getY() + getNear().getX(); vBuf[11] = nc.getZ() + getNear().getY();
+                fc = getEye() + getForward() * getDist().getY();
+                    vBuf[12] = fc.getX(); vBuf[13] = fc.getY(); vBuf[14] = fc.getZ();
+                    vBuf[15] = fc.getX(); vBuf[16] = fc.getY(); vBuf[17] = fc.getZ() + getFar().getY();
+                    vBuf[18] = fc.getX(); vBuf[19] = fc.getY() + getFar().getX(); vBuf[20] = fc.getZ() + getFar().getY();
+                    vBuf[21] = fc.getX(); vBuf[22] = fc.getY() + getFar().getX(); vBuf[23] = fc.getZ();
+
+                cBuf = new GLfloat[24];
+                    Color::RGB voxColor = Color::RGB(255, 255, 255);
+                    for (int i = 0; i < NB_VERTICES; i = i + 3) {
+                        cBuf[i] = voxColor.getR() / 255.0;
+                        cBuf[i + 1] = voxColor.getG() / 255.0;
+                        cBuf[i + 2] = voxColor.getB() / 255.0;
+                    }
+
+                nBuf = new GLbyte[24];
+                    for (int i = 0; i < NB_VERTICES; i = i + 3) {
+                        nBuf[i] = 1;
+                        nBuf[i + 1] = 0;
+                        nBuf[i + 2] = 0;
+                    }
+
+                iBuf = new GLuint[108];
+                    iBuf[0] = 0;
+                    iBuf[1] = 1;
+                    iBuf[2] = 2;
+                    iBuf[3] = 3;
+                    iBuf[4] = 2;
+                    iBuf[5] = 1;
+                    iBuf[6] = 0;
+                    iBuf[7] = 1;
+                    iBuf[8] = 4;
+                    iBuf[9] = 5;
+                    iBuf[10] = 4;
+                    iBuf[11] = 1;
+                    iBuf[12] = 1;
+                    iBuf[13] = 5;
+                    iBuf[14] = 3;
+                    iBuf[15] = 6;
+                    iBuf[16] = 3;
+                    iBuf[17] = 5;
+                    iBuf[18] = 0;
+                    iBuf[19] = 2;
+                    iBuf[20] = 4;
+                    iBuf[21] = 7;
+                    iBuf[22] = 4;
+                    iBuf[23] = 2;
+                    iBuf[24] = 4;
+                    iBuf[25] = 5;
+                    iBuf[26] = 7;
+                    iBuf[27] = 6;
+                    iBuf[28] = 7;
+                    iBuf[29] = 5;
+                    iBuf[30] = 2;
+                    iBuf[31] = 3;
+                    iBuf[32] = 7;
+                    iBuf[33] = 6;
+                    iBuf[34] = 7;
+                    iBuf[35] = 3;
+
+                return NB_INDEX;
             }
 
         };

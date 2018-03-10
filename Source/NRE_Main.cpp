@@ -9,7 +9,7 @@
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
         Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(-2, -2, -2), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0), 0.1);
 
-        World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
+        World::World engineWorld(Maths::Vector2D<GLuint>(0, 0));
         engineWorld.constructChunksMesh();
 
         Renderer::Shader lightShader("Shaders/PhongReflection.vert", "Shaders/PhongReflection.frag", true);
@@ -61,6 +61,8 @@
             engineLight1.setPosition(eye1);
             engineLight2.setPosition(eye2);
             engineLight3.setPosition(eye3);
+
+            std::cout << camera.pointCollision(engineWorld.getChunk(0, 0)->second->getBounding().getCenter()) << std::endl;
 
             //engineLight4.setPosition(camera.getEye());
 

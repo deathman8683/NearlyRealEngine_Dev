@@ -15,12 +15,12 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0, 0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID) {
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)){
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true) {
+            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()){
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
                 vao.access(getBuffer(), GL_INT);
@@ -62,6 +62,10 @@
                 return vao;
             }
 
+            Physics::AABB<GLint> const& Chunk::getBounding() const {
+                return bounding;
+            }
+
             void Chunk::setVoxels(Voxel** const& vox) {
                 voxel = vox;
             }
@@ -88,6 +92,10 @@
 
             void Chunk::setVAO(GL::VAO const& vao) {
                 this->vao = vao;
+            }
+
+            void Chunk::setBounding(Physics::AABB<GLint> const& box) {
+                bounding = box;
             }
 
             void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {

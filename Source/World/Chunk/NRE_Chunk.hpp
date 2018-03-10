@@ -41,6 +41,7 @@
                     Maths::Point2D<GLint> coord;
                     GL::IBO buffer;
                     GL::VAO vao;
+                    Physics::AABB<GLint> bounding;
 
                 public:
                     //## Constructor ##//
@@ -64,6 +65,7 @@
                     Maths::Point2D<GLint> const& getCoord() const;
                     GL::IBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
+                    Physics::AABB<GLint> const& getBounding() const;
 
                     //## Setter ##//
                     void setVoxels(Voxel** const& vox);
@@ -73,6 +75,7 @@
                     void setCoord(Maths::Point2D<GLint> const& p);
                     void setBuffer(GL::IBO const& buffer);
                     void setVAO(GL::VAO const& vao);
+                    void setBounding(Physics::AABB<GLint> const& box);
 
                     //## Methods ##//
                     void constructMesh(World* w);

@@ -91,9 +91,11 @@
                     //## Methods ##//
                     void computeNearAndFar();
                     template <class K>
-                    Physics::CollisionResult const& pointCollision(Point3D<K> const& p) const;
+                    Physics::CollisionResult const pointCollision(Point3D<K> const& p) const;
                     template <class K, class L>
-                    Physics::CollisionResult const& sphereCollision(Point3D<K> const& p, L const& radius);
+                    Physics::CollisionResult const sphereCollision(Point3D<K> const& p, L const& radius);
+                    template <class K>
+                    Physics::CollisionResult const AABBCollision(Physics::AABB<K> const& box);
                     template <class K>
                     void computeProjectionMatrix(Matrix4x4<K> &m);
 
@@ -120,6 +122,18 @@
             NREfloat Frustum<T>::DEFAULT_FOV = 70.0;
             template <class T>
             NREfloat Frustum<T>::DEFAULT_RATIO = 800.0 / 600.0;
+
+            template <class T>
+            inline std::ostream& operator<<(std::ostream &stream, Frustum<T> const& f) {
+                stream << "TOP[" << f.getPlane(TOP) << "]" << std::endl;
+                stream << "BOTTOM[" << f.getPlane(BOTTOM) << "]" << std::endl;
+                stream << "RIGHT[" << f.getPlane(RIGHT) << "]" << std::endl;
+                stream << "LEFT[" << f.getPlane(LEFT) << "]" << std::endl;
+                stream << "NEAR[" << f.getPlane(NEAR) << "]" << std::endl;
+                stream << "FAR[" << f.getPlane(FAR) << "]" << std::endl;
+                stream << "(" << f.getNear() << "," << f.getFar() << "," << f.getDist() << "," << f.getFov() << "," << f.getRatio() << ")";
+                return stream;
+            }
 
         };
     };

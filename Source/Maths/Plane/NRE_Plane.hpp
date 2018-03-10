@@ -67,7 +67,7 @@
                     template <class K, class L, class M>
                     void computeNormalFrom3Point(Point3D<K> const& p1, Point3D<L> const& p2, Point3D<M> const& p3);
                     template <class K>
-                    void distance(Point3D<K> const& p);
+                    NREfloat distance(Point3D<K> const& p) const;
 
                     //## Access Operator ##//
 
@@ -85,6 +85,12 @@
 
                 private:
             };
+
+            template <class T>
+            inline std::ostream& operator<<(std::ostream &stream, Plane<T> const& p) {
+                stream << "(" << p.getPoint() << "," << p.getNormal() << ")";
+                return stream;
+            }
 
         };
     };

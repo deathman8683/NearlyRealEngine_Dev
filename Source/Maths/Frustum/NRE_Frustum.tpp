@@ -105,13 +105,17 @@
             void Frustum<T>::computeNearAndFar() {
                 T tang = std::tan(toRad(getFov()) * 0.5);
 
-                setNear(Vector2D<T>(tang * getDist().getX(), getNear().getY() * getRatio()));
-                setFar(Vector2D<T>(tang * getDist().getY(), getFar().getY() * getRatio()));
+
+                setNear(Vector2D<T>(0, tang * getDist().getX()));
+                setNear(Vector2D<T>(getNear().getY() * getRatio(), getNear().getY()));
+                setFar(Vector2D<T>(0, tang * getDist().getY()));
+                setFar(Vector2D<T>(getFar().getY() * getRatio(), getFar().getX()));
+
             }
 
             template <class T>
             template <class K>
-            Physics::CollisionResult const& Frustum<T>::pointCollision(Point3D<K> const& p) const {
+            Physics::CollisionResult const Frustum<T>::pointCollision(Point3D<K> const& p) const {
                 for (GLuint i = 0; i < FACE_NUM; i = i + 1) {
                     if (getPlane(i).distance(p) < 0) {
                         return Physics::OUTSIDE;
@@ -122,7 +126,7 @@
 
             template <class T>
             template <class K, class L>
-            Physics::CollisionResult const& Frustum<T>::sphereCollision(Point3D<K> const& p, L const& radius) {
+            Physics::CollisionResult const Frustum<T>::sphereCollision(Point3D<K> const& p, L const& radius) {
                 T distance;
                 Physics::CollisionResult result = Physics::INSIDE;
 
@@ -134,6 +138,33 @@
                         result = Physics::INTERSECT;
                     }
                 }
+                return result;
+            }
+
+            template <class T>
+            template <class K>
+            Physics::CollisionResult const Frustum<T>::AABBCollision(Physics::AABB<K> const& box) {
+                Physics::CollisionResult result = Physics::INSIDE;
+                int in, out;
+                Point3D<T> *corner = new Point3D<T>[8];
+                box.getCorner(corner);
+
+                for (GLuint i = 0; i < FACE_NUM; i = i + 1) {
+                    in = 0; out = 0;
+                    for (GLuint j = 0; j < FACE_NUM; j = j + 1) {
+                        if (getPlane(i).distance(corner[j]) > 0) {
+                            out = out + 1;
+                        } else {
+                            in = in + 1;
+                        }
+                    }
+                    if (!in) {
+                        return Physics::OUTSIDE;
+                    } else if (out) {
+                        result = Physics::INTERSECT;
+                    }
+                }
+                delete[] corner;
                 return result;
             }
 

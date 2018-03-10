@@ -59,6 +59,14 @@
                     //## Getter ##//
                     Maths::Point3D<T> const& getCenter() const;
                     Maths::Vector3D<T> const& getHExtent() const;
+                    Maths::Point3D<T> const getMin() const;
+                    Maths::Point3D<T> const getMax() const;
+                    template <class K>
+                    Maths::Point3D<T> const getPVertex(Maths::Vector3D<K> const& n) const;
+                    template <class K>
+                    Maths::Point3D<T> const getNVertex(Maths::Vector3D<K> const& n) const;
+                    template <class K>
+                    void getCorner(Maths::Point3D<K> *&corner) const;
 
                     //## Setter ##//
                     template <class K>
@@ -84,6 +92,12 @@
 
                 private:
             };
+
+            template <class T>
+            inline std::ostream& operator<<(std::ostream &stream, AABB<T> const& box) {
+                stream << "(" << box.getCenter() << "," << box.getHExtent() << ")";
+                return stream;
+            }
 
         };
     };
