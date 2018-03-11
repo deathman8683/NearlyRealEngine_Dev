@@ -42,6 +42,7 @@
                     GL::IBO buffer;
                     GL::VAO vao;
                     Physics::AABB<GLint> bounding;
+                    bool active;
 
                 public:
                     //## Constructor ##//
@@ -66,6 +67,7 @@
                     GL::IBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
                     Physics::AABB<GLint> const& getBounding() const;
+                    bool const& isActive() const;
 
                     //## Setter ##//
                     void setVoxels(Voxel** const& vox);
@@ -76,6 +78,7 @@
                     void setBuffer(GL::IBO const& buffer);
                     void setVAO(GL::VAO const& vao);
                     void setBounding(Physics::AABB<GLint> const& box);
+                    void setActive(bool const& state);
 
                     //## Methods ##//
                     void constructMesh(World* w);
@@ -84,6 +87,7 @@
                     void load(World* w);
                     void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
                     void createPerlinTerrain(World* w);
+                    void checkActiveState(Camera::FixedCamera const& camera);
 
                     //## Access Operator ##//
 

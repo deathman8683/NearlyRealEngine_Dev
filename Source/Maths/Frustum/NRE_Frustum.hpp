@@ -93,9 +93,9 @@
                     template <class K>
                     Physics::CollisionResult const pointCollision(Point3D<K> const& p) const;
                     template <class K, class L>
-                    Physics::CollisionResult const sphereCollision(Point3D<K> const& p, L const& radius);
+                    Physics::CollisionResult const sphereCollision(Point3D<K> const& p, L const& radius) const;
                     template <class K>
-                    Physics::CollisionResult const AABBCollision(Physics::AABB<K> const& box);
+                    Physics::CollisionResult const AABBCollision(Physics::AABB<K> const& box) const;
                     template <class K>
                     void computeProjectionMatrix(Matrix4x4<K> &m);
 

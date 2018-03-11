@@ -101,7 +101,7 @@
 
                 up = forward ^ left;
                 up.normalize();
-                computePlane();
+                //computePlane();
             }
 
             void FixedCamera::computePlane() {
@@ -177,17 +177,23 @@
                 vBuf[57] = plane[Maths::RIGHT].getPoint().getX() + plane[Maths::RIGHT].getNormal().getX() * 10; vBuf[58] = plane[Maths::RIGHT].getPoint().getY() + plane[Maths::RIGHT].getNormal().getY() * 10; vBuf[59] = plane[Maths::RIGHT].getPoint().getZ() + plane[Maths::RIGHT].getNormal().getZ() * 10;
 
                 cBuf = new GLfloat[60];
-                    for (int i = 0; i < 60; i = i + 3) {
+                    for (int i = 0; i < 24; i = i + 3) {
                         cBuf[i] = 1.0;
                         cBuf[i + 1] = 1.0;
                         cBuf[i + 2] = 1.0;
                     }
+                    for (int i = 24; i < 60; i = i + 1) {
+                        cBuf[i] = vBuf[i];
+                    }
 
                 nBuf = new GLbyte[60];
-                    for (int i = 0; i < 60; i = i + 3) {
+                    for (int i = 0; i < 24; i = i + 3) {
                         nBuf[i] = 1;
                         nBuf[i + 1] = 0;
                         nBuf[i + 2] = 0;
+                    }
+                    for (int i = 24; i < 60; i = i + 1) {
+                        nBuf[i] = vBuf[i];
                     }
 
                 iBuf = new GLuint[36];

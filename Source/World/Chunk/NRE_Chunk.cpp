@@ -15,12 +15,12 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0, 0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)){
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), active(true) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()){
+            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), active(c.isActive()) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
                 vao.access(getBuffer(), GL_INT);
@@ -66,6 +66,10 @@
                 return bounding;
             }
 
+            bool const& Chunk::isActive() const {
+                return active;
+            }
+
             void Chunk::setVoxels(Voxel** const& vox) {
                 voxel = vox;
             }
@@ -98,30 +102,38 @@
                 bounding = box;
             }
 
+            void Chunk::setActive(bool const& state) {
+                active = state;
+            }
+
             void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
                 NREfloat eye[3] = {camera.getEye().getX(), camera.getEye().getY(), camera.getEye().getZ()};
 
-                glUseProgram(shader.getProgramID());
-                    vao.bind();
+                setActive(camera.AABBCollision(getBounding()));
 
-                        for (unsigned int i = 0; i < light.size(); i = i + 1) {
-                            std::ostringstream index;
-                            index << i;
-                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPositionValue());
-                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensitiesValue());
-                            glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].attenuation").c_str()), 1, light.at(i)->getAttenuationValue());
-                            glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
-                        }
+                if (isActive()) {
+                    glUseProgram(shader.getProgramID());
+                        vao.bind();
 
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
-                        glUniform3fv(glGetUniformLocation(shader.getProgramID(), "camera"), 1, eye);
-                        glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());
+                            for (unsigned int i = 0; i < light.size(); i = i + 1) {
+                                std::ostringstream index;
+                                index << i;
+                                glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPositionValue());
+                                glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensitiesValue());
+                                glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].attenuation").c_str()), 1, light.at(i)->getAttenuationValue());
+                                glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
+                            }
 
-                        glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), "camera"), 1, eye);
+                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());
 
-                    vao.unbind();
-                glUseProgram(0);
+                            glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
+
+                        vao.unbind();
+                    glUseProgram(0);
+                }
             }
 
             void Chunk::save() {

@@ -125,7 +125,7 @@
 
             template <class T>
             template <class K, class L>
-            Physics::CollisionResult const Frustum<T>::sphereCollision(Point3D<K> const& p, L const& radius) {
+            Physics::CollisionResult const Frustum<T>::sphereCollision(Point3D<K> const& p, L const& radius) const {
                 T distance;
                 Physics::CollisionResult result = Physics::INSIDE;
 
@@ -142,7 +142,7 @@
 
             template <class T>
             template <class K>
-            Physics::CollisionResult const Frustum<T>::AABBCollision(Physics::AABB<K> const& box) {
+            Physics::CollisionResult const Frustum<T>::AABBCollision(Physics::AABB<K> const& box) const {
                 Physics::CollisionResult result = Physics::INSIDE;
                 int in, out;
                 Point3D<T> *corner = new Point3D<T>[8];
@@ -170,7 +170,8 @@
             template <class T>
             template <class K>
             void Frustum<T>::computeProjectionMatrix(Matrix4x4<K> &m) {
-                m.projection(getFov(), getRatio(), getDist().getX(), getDist().getY());
+                //m.projection(getFov(), getRatio(), getDist().getX(), getDist().getY());
+                m.projection(getFov(), getRatio(), getDist().getX(), 1000.0);
             }
 
         };
