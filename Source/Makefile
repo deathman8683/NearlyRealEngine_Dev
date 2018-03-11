@@ -7,6 +7,7 @@ all : before $(TARGET)
 GENERIC = Generic
 SDL_WRAPPER = SDL_Wrapper
 GL_WRAPPER = GL_Wrapper
+TIME = Time
 SUPPORT = Support
 RENDERER = Renderer
 LIGHTING = Lighting
@@ -19,6 +20,7 @@ before :
 	@(cd $(LIB) && $(MAKE))
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))
+	@(cd $(TIME) && $(MAKE))
 	@(cd $(RENDERER) && $(MAKE))
 	@(cd $(LIGHTING) && $(MAKE))
 	@(cd $(CAMERA) && $(MAKE))
