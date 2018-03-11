@@ -73,7 +73,7 @@
                     void setView(Maths::Matrix4x4<NREfloat>& modelview) const;
                     void computeVector();
                     void computePlane();
-                    size_t getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf);
+                    size_t getVertices(GLfloat* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf);
 
                     //## Access Operator ##//
 

@@ -105,11 +105,10 @@
             void Frustum<T>::computeNearAndFar() {
                 T tang = std::tan(toRad(getFov()) * 0.5);
 
-
                 setNear(Vector2D<T>(0, tang * getDist().getX()));
                 setNear(Vector2D<T>(getNear().getY() * getRatio(), getNear().getY()));
                 setFar(Vector2D<T>(0, tang * getDist().getY()));
-                setFar(Vector2D<T>(getFar().getY() * getRatio(), getFar().getX()));
+                setFar(Vector2D<T>(getFar().getY() * getRatio(), getFar().getY()));
 
             }
 
@@ -152,7 +151,7 @@
                 for (GLuint i = 0; i < FACE_NUM; i = i + 1) {
                     in = 0; out = 0;
                     for (GLuint j = 0; j < FACE_NUM; j = j + 1) {
-                        if (getPlane(i).distance(corner[j]) > 0) {
+                        if (getPlane(i).distance(corner[j]) < 0) {
                             out = out + 1;
                         } else {
                             in = in + 1;

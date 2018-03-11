@@ -116,93 +116,110 @@
 
                 a = (nc + getUp() * getNear().getY()) - getEye();
                 a.normalize();
-                normal = getLeft() ^ a;
+                normal = a ^ getLeft();
                 plane[Maths::TOP].setNormalAndPoint(normal, nc + getUp() * getNear().getY());
 
                 a = (nc - getUp() * getNear().getY()) - getEye();
                 a.normalize();
-                normal = a ^ getLeft();
+                normal = getLeft() ^ a;
                 plane[Maths::BOTTOM].setNormalAndPoint(normal, nc - getUp() * getNear().getY());
 
                 a = (nc - getLeft() * getNear().getX()) - getEye();
                 a.normalize();
-                normal = getUp() ^ a;
-                plane[Maths::RIGHT].setNormalAndPoint(normal, nc - getLeft() * getNear().getX());
+                normal = a ^ getUp();
+                plane[Maths::LEFT].setNormalAndPoint(normal, nc - getLeft() * getNear().getX());
 
                 a = (nc + getLeft() * getNear().getX()) - getEye();
                 a.normalize();
-                normal = a ^ getUp();
-                plane[Maths::LEFT].setNormalAndPoint(normal, nc + getLeft() * getNear().getX());
+                normal = getUp() ^ a;
+                plane[Maths::RIGHT].setNormalAndPoint(normal, nc + getLeft() * getNear().getX());
             }
 
-            size_t FixedCamera::getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf) {
-                Math::Point3D<NREfloat> nc, fc;
-                vBuf = new GLint[24];
-                nc = getEye() + getForward() * getDist().getX() - (getNear() / 2);
-                    vBuf[0] = nc.getX(); vBuf[1] = nc.getY(); vBuf[2] = nc.getZ();
-                    vBuf[3] = nc.getX(); vBuf[4] = nc.getY(); vBuf[5] = nc.getZ() + getNear().getY();
-                    vBuf[6] = nc.getX(); vBuf[7] = nc.getY() + getNear().getX(); vBuf[8] = nc.getZ();
-                    vBuf[9] = nc.getX(); vBuf[10] = nc.getY() + getNear().getX(); vBuf[11] = nc.getZ() + getNear().getY();
+            size_t FixedCamera::getVertices(GLfloat* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf) {
+                Maths::Point3D<NREfloat> nc, fc, ftl, ftr, fbl, fbr, ntl, ntr, nbl, nbr;
                 fc = getEye() + getForward() * getDist().getY();
-                    vBuf[12] = fc.getX(); vBuf[13] = fc.getY(); vBuf[14] = fc.getZ();
-                    vBuf[15] = fc.getX(); vBuf[16] = fc.getY(); vBuf[17] = fc.getZ() + getFar().getY();
-                    vBuf[18] = fc.getX(); vBuf[19] = fc.getY() + getFar().getX(); vBuf[20] = fc.getZ() + getFar().getY();
-                    vBuf[21] = fc.getX(); vBuf[22] = fc.getY() + getFar().getX(); vBuf[23] = fc.getZ();
+                nc = getEye() + getForward() * getDist().getX();
 
-                cBuf = new GLfloat[24];
-                    Color::RGB voxColor = Color::RGB(255, 255, 255);
-                    for (int i = 0; i < NB_VERTICES; i = i + 3) {
-                        cBuf[i] = voxColor.getR() / 255.0;
-                        cBuf[i + 1] = voxColor.getG() / 255.0;
-                        cBuf[i + 2] = voxColor.getB() / 255.0;
+                ftl = fc + (getUp() * getFar().getY() / 2) - (getLeft() * getFar().getX() / 2);
+                ftr = fc + (getUp() * getFar().getY() / 2) + (getLeft() * getFar().getX() / 2);
+                fbl = fc - (getUp() * getFar().getY() / 2) - (getLeft() * getFar().getX() / 2);
+                fbr = fc - (getUp() * getFar().getY() / 2) + (getLeft() * getFar().getX() / 2);
+
+                ntl = nc + (getUp() * getNear().getY() / 2) - (getLeft() * getNear().getX() / 2);
+                ntr = nc + (getUp() * getNear().getY() / 2) + (getLeft() * getNear().getX() / 2);
+                nbl = nc - (getUp() * getNear().getY() / 2) - (getLeft() * getNear().getX() / 2);
+                nbr = nc - (getUp() * getNear().getY() / 2) + (getLeft() * getNear().getX() / 2);
+
+                vBuf = new GLfloat[60];
+                vBuf[0] = nbl.getX(); vBuf[1] = nbl.getY(); vBuf[2] = nbl.getZ();
+                vBuf[3] = ntl.getX(); vBuf[4] = ntl.getY(); vBuf[5] = ntl.getZ();
+                vBuf[6] = nbr.getX(); vBuf[7] = nbr.getY(); vBuf[8] = nbr.getZ();
+                vBuf[9] = ntr.getX(); vBuf[10] = ntr.getY(); vBuf[11] = ntr.getZ();
+
+                vBuf[12] = fbl.getX(); vBuf[13] = fbl.getY(); vBuf[14] = fbl.getZ();
+                vBuf[15] = ftl.getX(); vBuf[16] = ftl.getY(); vBuf[17] = ftl.getZ();
+                vBuf[18] = fbr.getX(); vBuf[19] = fbr.getY(); vBuf[20] = fbr.getZ();
+                vBuf[21] = ftr.getX(); vBuf[22] = ftr.getY(); vBuf[23] = ftr.getZ();
+
+                vBuf[24] = plane[Maths::TOP].getPoint().getX(); vBuf[25] = plane[Maths::TOP].getPoint().getY(); vBuf[26] = plane[Maths::TOP].getPoint().getZ();
+                vBuf[27] = plane[Maths::TOP].getPoint().getX() + plane[Maths::TOP].getNormal().getX() * 10; vBuf[28] = plane[Maths::TOP].getPoint().getY() + plane[Maths::TOP].getNormal().getY() * 10; vBuf[29] = plane[Maths::TOP].getPoint().getZ() + plane[Maths::TOP].getNormal().getZ() * 10;
+                vBuf[30] = plane[Maths::BOTTOM].getPoint().getX(); vBuf[31] = plane[Maths::BOTTOM].getPoint().getY(); vBuf[32] = plane[Maths::BOTTOM].getPoint().getZ();
+                vBuf[33] = plane[Maths::BOTTOM].getPoint().getX() + plane[Maths::BOTTOM].getNormal().getX() * 10; vBuf[34] = plane[Maths::BOTTOM].getPoint().getY() + plane[Maths::BOTTOM].getNormal().getY() * 10; vBuf[35] = plane[Maths::BOTTOM].getPoint().getZ() + plane[Maths::BOTTOM].getNormal().getZ() * 10;
+
+                vBuf[36] = plane[Maths::NEAR].getPoint().getX(); vBuf[37] = plane[Maths::NEAR].getPoint().getY(); vBuf[38] = plane[Maths::NEAR].getPoint().getZ();
+                vBuf[39] = plane[Maths::NEAR].getPoint().getX() + plane[Maths::NEAR].getNormal().getX() * 10; vBuf[40] = plane[Maths::NEAR].getPoint().getY() + plane[Maths::NEAR].getNormal().getY() * 10; vBuf[41] = plane[Maths::NEAR].getPoint().getZ() + plane[Maths::NEAR].getNormal().getZ() * 10;
+                vBuf[42] = plane[Maths::FAR].getPoint().getX(); vBuf[43] = plane[Maths::FAR].getPoint().getY(); vBuf[44] = plane[Maths::FAR].getPoint().getZ();
+                vBuf[45] = plane[Maths::FAR].getPoint().getX() + plane[Maths::FAR].getNormal().getX() * 10; vBuf[46] = plane[Maths::FAR].getPoint().getY() + plane[Maths::FAR].getNormal().getY() * 10; vBuf[47] = plane[Maths::FAR].getPoint().getZ() + plane[Maths::FAR].getNormal().getZ() * 10;
+
+                vBuf[48] = plane[Maths::LEFT].getPoint().getX(); vBuf[49] = plane[Maths::LEFT].getPoint().getY(); vBuf[50] = plane[Maths::LEFT].getPoint().getZ();
+                vBuf[51] = plane[Maths::LEFT].getPoint().getX() + plane[Maths::LEFT].getNormal().getX() * 10; vBuf[52] = plane[Maths::LEFT].getPoint().getY() + plane[Maths::LEFT].getNormal().getY() * 10; vBuf[53] = plane[Maths::LEFT].getPoint().getZ() + plane[Maths::LEFT].getNormal().getZ() * 10;
+                vBuf[54] = plane[Maths::RIGHT].getPoint().getX(); vBuf[55] = plane[Maths::RIGHT].getPoint().getY(); vBuf[56] = plane[Maths::RIGHT].getPoint().getZ();
+                vBuf[57] = plane[Maths::RIGHT].getPoint().getX() + plane[Maths::RIGHT].getNormal().getX() * 10; vBuf[58] = plane[Maths::RIGHT].getPoint().getY() + plane[Maths::RIGHT].getNormal().getY() * 10; vBuf[59] = plane[Maths::RIGHT].getPoint().getZ() + plane[Maths::RIGHT].getNormal().getZ() * 10;
+
+                cBuf = new GLfloat[60];
+                    for (int i = 0; i < 60; i = i + 3) {
+                        cBuf[i] = 1.0;
+                        cBuf[i + 1] = 1.0;
+                        cBuf[i + 2] = 1.0;
                     }
 
-                nBuf = new GLbyte[24];
-                    for (int i = 0; i < NB_VERTICES; i = i + 3) {
+                nBuf = new GLbyte[60];
+                    for (int i = 0; i < 60; i = i + 3) {
                         nBuf[i] = 1;
                         nBuf[i + 1] = 0;
                         nBuf[i + 2] = 0;
                     }
 
-                iBuf = new GLuint[108];
+                iBuf = new GLuint[36];
                     iBuf[0] = 0;
                     iBuf[1] = 1;
-                    iBuf[2] = 2;
-                    iBuf[3] = 3;
-                    iBuf[4] = 2;
+                    iBuf[2] = 0;
+                    iBuf[3] = 2;
+                    iBuf[4] = 3;
                     iBuf[5] = 1;
-                    iBuf[6] = 0;
-                    iBuf[7] = 1;
+                    iBuf[6] = 3;
+                    iBuf[7] = 2;
                     iBuf[8] = 4;
                     iBuf[9] = 5;
                     iBuf[10] = 4;
-                    iBuf[11] = 1;
-                    iBuf[12] = 1;
+                    iBuf[11] = 6;
+                    iBuf[12] = 7;
                     iBuf[13] = 5;
-                    iBuf[14] = 3;
+                    iBuf[14] = 7;
                     iBuf[15] = 6;
-                    iBuf[16] = 3;
-                    iBuf[17] = 5;
-                    iBuf[18] = 0;
-                    iBuf[19] = 2;
-                    iBuf[20] = 4;
-                    iBuf[21] = 7;
-                    iBuf[22] = 4;
-                    iBuf[23] = 2;
-                    iBuf[24] = 4;
-                    iBuf[25] = 5;
-                    iBuf[26] = 7;
-                    iBuf[27] = 6;
-                    iBuf[28] = 7;
-                    iBuf[29] = 5;
-                    iBuf[30] = 2;
-                    iBuf[31] = 3;
-                    iBuf[32] = 7;
-                    iBuf[33] = 6;
-                    iBuf[34] = 7;
-                    iBuf[35] = 3;
+                    iBuf[16] = 0;
+                    iBuf[17] = 4;
+                    iBuf[18] = 1;
+                    iBuf[19] = 5;
+                    iBuf[20] = 2;
+                    iBuf[21] = 6;
+                    iBuf[22] = 3;
+                    iBuf[23] = 7;
+                    for (int i = 24; i < 36; i = i + 1) {
+                        iBuf[i] = i - 16;
+                    }
 
-                return NB_INDEX;
+                return 36;
             }
 
         };
