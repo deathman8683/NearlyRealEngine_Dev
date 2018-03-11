@@ -101,7 +101,7 @@
 
                 up = forward ^ left;
                 up.normalize();
-                //computePlane();
+                computePlane();
             }
 
             void FixedCamera::computePlane() {

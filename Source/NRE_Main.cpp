@@ -7,7 +7,7 @@
 
     int main(int argc, char **argv) {
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
-        Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(1, 100), Maths::Vector3D<NREfloat>(-2, -2, -2), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0), 0.1);
+        Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(1, 1000.0), Maths::Vector3D<NREfloat>(-2, -2, -2), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector2D<NREfloat>(0, 0), 0.1);
 
         World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
         engineWorld.constructChunksMesh();
@@ -27,19 +27,10 @@
         Maths::Matrix4x4<NREfloat> projection;
         Maths::Matrix4x4<NREfloat> modelview;
 
-        GL::IBO frustum(true);
-        GL::VAO frustumVao(true);
-
-        GLfloat* vData;
-        GLfloat *cData;
-        GLbyte* nData;
-        GLuint* iData;
-
         double angle = 0;
-        int test = 0;
-        size_t iCpt;
 
         camera.computeProjectionMatrix(projection);
+        //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         while(!camera.getQuit())
         {
@@ -47,14 +38,7 @@
             if (angle > 360) {
                 angle = 0;
             }
-            test++;
             camera.update();
-            if (test == 5000) {
-                camera.computePlane();
-                iCpt = camera.getVertices(vData, cData, nData, iData);
-                frustum.allocateAndFill(sizeof(GLfloat), 20, iCpt, GL_STATIC_DRAW, vData, cData, nData, iData);
-                frustumVao.access(frustum, GL_FLOAT);
-            }
 
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -81,31 +65,13 @@
 
             //engineLight4.setPosition(camera.getEye());
 
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             engineWorld.render(lightShader, modelview, projection, camera, engineLighting);
-
-            if (test >= 5000) {
-                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-                glUseProgram(colorShader.getProgramID());
-                    frustumVao.bind();
-                        glUniformMatrix4fv(glGetUniformLocation(colorShader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
-                        glUniformMatrix4fv(glGetUniformLocation(colorShader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
-
-                        glDrawElements(GL_LINES, iCpt, GL_UNSIGNED_INT, 0);
-                    frustumVao.unbind();
-                glUseProgram(0);
-            }
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }
 
         camera.Keyboard::save("kBinder.cfg");
         camera.Mouse::save("mBinder.cfg");
-
-        delete[] vData;
-        delete[] cData;
-        delete[] nData;
-        delete[] iData;
 
         return 0;
     }

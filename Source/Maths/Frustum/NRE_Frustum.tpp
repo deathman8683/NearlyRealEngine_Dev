@@ -144,34 +144,22 @@
             template <class K>
             Physics::CollisionResult const Frustum<T>::AABBCollision(Physics::AABB<K> const& box) const {
                 Physics::CollisionResult result = Physics::INSIDE;
-                int in, out;
-                Point3D<T> *corner = new Point3D<T>[8];
-                box.getCorner(corner);
 
                 for (GLuint i = 0; i < FACE_NUM; i = i + 1) {
-                    in = 0; out = 0;
-                    for (GLuint j = 0; j < FACE_NUM; j = j + 1) {
-                        if (getPlane(i).distance(corner[j]) < 0) {
-                            out = out + 1;
-                        } else {
-                            in = in + 1;
-                        }
-                    }
-                    if (!in) {
+                    if (getPlane(i).distance(box.getPVertex(getPlane(i).getNormal())) < 0) {
                         return Physics::OUTSIDE;
-                    } else if (out) {
+                    } else if (getPlane(i).distance(box.getNVertex(getPlane(i).getNormal())) < 0) {
                         result = Physics::INTERSECT;
                     }
                 }
-                delete[] corner;
+
                 return result;
             }
 
             template <class T>
             template <class K>
             void Frustum<T>::computeProjectionMatrix(Matrix4x4<K> &m) {
-                //m.projection(getFov(), getRatio(), getDist().getX(), getDist().getY());
-                m.projection(getFov(), getRatio(), getDist().getX(), 1000.0);
+                m.projection(getFov(), getRatio(), getDist().getX(), getDist().getY());
             }
 
         };
