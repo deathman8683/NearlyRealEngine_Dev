@@ -3,10 +3,10 @@
 
     in vec3 UV;
 
-    uniform samplerCube cubemap;
+    uniform samplerCube skyBox;
 
     out vec4 out_Color;
 
     void main() {
-        out_Color = textureCube(cubemap, UV);
+        out_Color = textureCube(skyBox, UV);
     }

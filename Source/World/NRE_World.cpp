@@ -13,6 +13,7 @@
                 FastNoise worldGen;
                 worldGen.SetNoiseType(FastNoise::Perlin);
                 worldGen.SetSeed(DEFAULT_SEED);
+                worldGen.SetFrequency(0.008);
                 generator = worldGen;
 
                 voxelMergingGlobalCache = new bool[Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * NRE::Voxel::FACE_NUM];
@@ -108,7 +109,7 @@
 
             void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
                 for (const auto &it : chunkMap) {
-                    
+
                     it.second->render(shader, modelview, projection, camera, light);
                 }
             }

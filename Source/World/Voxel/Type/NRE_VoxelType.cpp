@@ -69,7 +69,7 @@
             }
 
             Color::RGB const Water::getColor() const {
-                return Color::RGB(5, 75, 255);
+                return Color::RGB(255, 255, 255);
             }
 
         };

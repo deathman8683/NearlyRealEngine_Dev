@@ -128,7 +128,7 @@
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
                             glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
-                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), "camera"), 1, eye);
+                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
                             glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());
 
                             glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);

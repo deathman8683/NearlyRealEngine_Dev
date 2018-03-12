@@ -5,7 +5,7 @@
     in vec3 in_Color;
     in vec3 in_Normal;
 
-    uniform vec3 camera;
+    uniform vec3 cameraV;
 
     uniform mat4 projection;
     uniform mat4 modelview;
@@ -22,5 +22,5 @@
         vertex = in_Vertex;
         color = in_Color;
         normal = in_Normal;
-        cameraVertex = normalize(camera - vertex);
+        cameraVertex = normalize(cameraV - vertex);
     }
