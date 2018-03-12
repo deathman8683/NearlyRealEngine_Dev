@@ -49,7 +49,7 @@
                 glBindVertexArray(0);
             }
 
-            void VAO::access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA) const {
+            void VAO::access(NBO const& buffer, GLenum const& vertexType, bool const& enableVAA) const {
                 bind();
                     buffer.access(vertexType, enableVAA);
                 unbind();

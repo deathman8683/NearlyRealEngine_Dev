@@ -15,25 +15,37 @@
         engineWorld.constructChunksMesh();
 
         Renderer::Shader lightShader("Shaders/PhongReflection.vert", "Shaders/PhongReflection.frag", true);
+        Renderer::Shader textureShader("Shaders/texture.vert", "Shaders/texture.frag", true);
         std::vector<Light::Light*> engineLighting;
-        //Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 1), Maths::Vector3D<NREfloat>(2.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1, 0, 30.0);
-        //Light::Light engineLight2(Maths::Point4D<NREfloat>(0, 0, 80, 1), Maths::Vector3D<NREfloat>(0.0, 2.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1, 0, 30.0);
-        //Light::Light engineLight3(Maths::Point4D<NREfloat>(0, 0, 80, 1), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.01, 0, 15.0);
-        Light::Light engineLight4(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(0.03, 0.08, 0.25), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0, 0.06, 360);
-        //Light::Light engineLight4(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0, 0.06, 360);
-        Light::Light engineLight5(Maths::Point4D<NREfloat>(64, -55, 45, 1), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.05, 0.01, 360);
-        //engineLighting.push_back(&engineLight1);
-        //engineLighting.push_back(&engineLight2);
-        //engineLighting.push_back(&engineLight3);
-        engineLighting.push_back(&engineLight4);
-        engineLighting.push_back(&engineLight5);
+        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(0.03, 0.08, 0.25), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0, 0.06, 360);
+        Light::Light engineLight2(Maths::Point4D<NREfloat>(64, -55, 45, 1), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.05, 0.01, 360);
+        engineLighting.push_back(&engineLight1);
+        engineLighting.push_back(&engineLight2);
 
-        Maths::Matrix4x4<NREfloat> projection;
-        Maths::Matrix4x4<NREfloat> modelview;
+        Maths::Matrix4x4<NREfloat> projection, modelview;
 
         Time::Clock engineClock;
 
-        GL::Texture engineTexture("Data/SkyBox/Dark_Left.png");
+        GL::Texture engineTexture("Data/SkyBox/Light_Left.png");
+        GL::ITBO itbo(true);
+        GL::VAO vao(true);
+
+        GLfloat vData[4 * 3] = {
+            0, 0, -1,  10, 0, -1,  0, 10, -1, 10, 10, -1
+        };
+
+        GLshort tData[4 * 2] = {
+            0, 0,  0, 1,  1, 0,  1, 1
+        };
+
+        GLbyte nData[4 * 3] = {
+            1, 0, 0,  1, 0, 0,  1, 0, 0,  1, 0, 0
+        };
+
+        GLuint iData[6] = {0, 1, 2, 3, 2, 1};
+
+        itbo.allocateAndFill(sizeof(GLfloat), 4, 6, GL_STATIC_DRAW, vData, tData, nData, iData);
+        vao.access(itbo, GL_FLOAT);
 
         camera.computeProjectionMatrix(projection);
         //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -49,10 +61,21 @@
             modelview.setIdentity();
             camera.setView(modelview);
 
-            //engineLight3.setConeDirection(camera.getForward());
-            //engineLight3.setPosition(Maths::Point4D<NREfloat>(camera.getEye(), 1.0));
-
             engineWorld.render(lightShader, modelview, projection, camera, engineLighting);
+
+            glUseProgram(textureShader.getProgramID());
+                vao.bind();
+                    engineTexture.bind();
+
+                    glUniformMatrix4fv(glGetUniformLocation(textureShader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
+                    glUniformMatrix4fv(glGetUniformLocation(textureShader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+
+                    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+                    engineTexture.unbind();
+                vao.unbind();
+            glUseProgram(0);
+
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }

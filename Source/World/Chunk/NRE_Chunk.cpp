@@ -54,7 +54,7 @@
                 return coord;
             }
 
-            GL::IBO const& Chunk::getBuffer() const {
+            GL::IVBO const& Chunk::getBuffer() const {
                 return buffer;
             }
 
@@ -90,7 +90,7 @@
                 coord = p;
             }
 
-            void Chunk::setBuffer(GL::IBO const& buffer) {
+            void Chunk::setBuffer(GL::IVBO const& buffer) {
                 this->buffer = buffer;
             }
 

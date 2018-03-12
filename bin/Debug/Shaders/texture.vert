@@ -6,7 +6,7 @@
 // Entr�es
 
 in vec3 in_Vertex;
-in vec2 in_TexCoord0;
+in vec2 in_UV;
 
 
 // Uniform
@@ -17,7 +17,7 @@ uniform mat4 modelview;
 
 // Sortie
 
-out vec2 coordTexture;
+out vec2 UV;
 
 
 // Fonction main
@@ -31,5 +31,5 @@ void main()
 
     // Envoi des coordonn�es de texture au Fragment Shader
 
-    coordTexture = in_TexCoord0;
+    UV = in_UV;
 }

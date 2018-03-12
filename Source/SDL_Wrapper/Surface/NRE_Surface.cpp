@@ -30,7 +30,7 @@
                 return glFormat;
             }
 
-            GLenum const& Surface::getGLInternalFormat() const {
+            GLint const& Surface::getGLInternalFormat() const {
                 return glInternalFormat;
             }
 
@@ -74,7 +74,7 @@
                 glFormat = f;
             }
 
-            void Surface::setGLInternalFormat(GLenum const& f) {
+            void Surface::setGLInternalFormat(GLint const& f) {
                 glInternalFormat = f;
             }
 
@@ -97,6 +97,7 @@
                 item = IMG_Load(path.c_str());
 
                 flip();
+
                 loadFormat();
             }
 
@@ -128,14 +129,14 @@
             }
 
             void Surface::loadFormat() {
-                if (getFormat().getBitsPerPixel() == 3) {
+                if (getFormat().getBytesPerPixel() == 3) {
                     setGLInternalFormat(GL_RGB);
                     if (getFormat().getRMask() == 0xFF) {
                         setGLFormat(GL_RGB);
                     } else {
                         setGLFormat(GL_BGR);
                     }
-                } else if (getFormat().getBitsPerPixel() == 4) {
+                } else if (getFormat().getBytesPerPixel() == 4) {
                     setGLInternalFormat(GL_RGBA);
                     if (getFormat().getRMask() == 0xFF) {
                         setGLFormat(GL_RGBA);

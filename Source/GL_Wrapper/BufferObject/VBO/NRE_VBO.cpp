@@ -65,7 +65,6 @@
                     if (enableVAA) {
                         glEnableVertexAttribArray(1);
                     }
-                getColorBuffer().unbind();
             }
 
         };

@@ -48,13 +48,13 @@
                 NBO::allocate(typeSize, nbVertex, usage);
             }
 
-            void TBO::update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData) {
-                uv.update(offset, NRE::Buffer::UVBuffer::SIZE * nbVertex * 2, cData);
+            void TBO::update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& uvData, GLvoid* const& nData) {
+                uv.update(offset, NRE::Buffer::UVBuffer::SIZE * nbVertex * 2, uvData);
                 NBO::update(offset, typeSize, nbVertex, vData, nData);
             }
 
-            void TBO::allocateAndFill(size_t typeSize, size_t const& nbVertex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData) {
-                uv.allocateAndFill(NRE::Buffer::UVBuffer::SIZE * nbVertex * 2, usage, cData);
+            void TBO::allocateAndFill(size_t typeSize, size_t const& nbVertex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& uvData, GLvoid* const& nData) {
+                uv.allocateAndFill(NRE::Buffer::UVBuffer::SIZE * nbVertex * 2, usage, uvData);
                 NBO::allocateAndFill(typeSize, nbVertex, usage, vData, nData);
             }
 
@@ -65,7 +65,6 @@
                     if (enableVAA) {
                         glEnableVertexAttribArray(3);
                     }
-                getUVBuffer().unbind();
             }
 
         };

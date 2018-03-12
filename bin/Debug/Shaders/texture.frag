@@ -5,7 +5,7 @@
 
 // Entr�e
 
-in vec2 coordTexture;
+in vec2 UV;
 
 
 // Uniform
@@ -24,5 +24,5 @@ void main()
 {
     // Couleur du pixel
 
-    out_Color = texture(texture, coordTexture);
+    out_Color = texture(texture, UV);
 }

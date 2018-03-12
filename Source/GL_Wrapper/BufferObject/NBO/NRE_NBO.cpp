@@ -75,13 +75,11 @@
                     if (enableVAA) {
                         glEnableVertexAttribArray(0);
                     }
-                getVertexBuffer().unbind();
                 getNormalBuffer().bind();
                     glVertexAttribPointer(2, 3, NRE::Buffer::NormalBuffer::TYPE, GL_FALSE, 0, 0);
                     if (enableVAA) {
                         glEnableVertexAttribArray(2);
                     }
-                getNormalBuffer().unbind();
             }
 
         };

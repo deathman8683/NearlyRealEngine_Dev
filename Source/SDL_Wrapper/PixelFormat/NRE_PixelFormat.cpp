@@ -37,6 +37,10 @@
                 return getItem()->BitsPerPixel;
             }
 
+            Uint8 const& PixelFormat::getBytesPerPixel() const {
+                return getItem()->BytesPerPixel;
+            }
+
             Uint32 const& PixelFormat::getRMask() const {
                 return getItem()->Rmask;
             }

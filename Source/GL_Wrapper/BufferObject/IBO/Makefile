@@ -1,15 +1,10 @@
-SRC = NRE_IBO.cpp
-OBJ = $(OBJDIR)NRE_IBO.o
-OBJDIR = ../../../../obj/Debug/GL_Wrapper/BufferObject/IBO/
-
 BUFFER = Buffer
+IVBO = IVBO
+ITBO = ITBO
 
-all : before $(TARGET)
+all : $(TARGET)
 
-before:
+debug:
 	@(cd $(BUFFER) && $(MAKE))
-
-debug: $(OBJ)
-
-$(OBJDIR)%.o : %.cpp %.hpp
-	@$(CXX) -o $@ -c $< $(CFLAGS) $(INC)
+	@(cd $(IVBO) && $(MAKE))
+	@(cd $(ITBO) && $(MAKE))

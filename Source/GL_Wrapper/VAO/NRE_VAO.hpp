@@ -9,7 +9,8 @@
     #pragma once
 
     #include "../../Generic/NRE_Type.hpp"
-    #include "../BufferObject/IBO/NRE_IBO.hpp"
+    #include "../BufferObject/IBO/IVBO/NRE_IVBO.hpp"
+    #include "../BufferObject/IBO/ITBO/NRE_ITBO.hpp"
 
     /**
      * @namespace NRE
@@ -55,7 +56,7 @@
                     void reload();
                     void bind() const;
                     void unbind() const;
-                    void access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;
+                    void access(NBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;
 
                     //## Access Operator ##//
 

@@ -48,6 +48,7 @@
                     SDL_PixelFormat* const& getItem() const;
                     bool const& isAllocated() const;
                     Uint8 const& getBitsPerPixel() const;
+                    Uint8 const& getBytesPerPixel() const;
                     Uint32 const& getRMask() const;
                     Uint32 const& getGMask() const;
                     Uint32 const& getBMask() const;

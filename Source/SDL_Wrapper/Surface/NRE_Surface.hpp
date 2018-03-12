@@ -31,7 +31,7 @@
                 private:
                     SDL_Surface* item;
                     GLenum glFormat;
-                    GLenum glInternalFormat;
+                    GLint glInternalFormat;
 
                 public:
                     //## Constructor ##//
@@ -50,7 +50,7 @@
                     //## Getter ##//
                     SDL_Surface* const& getItem() const;
                     GLenum const& getGLFormat() const;
-                    GLenum const& getGLInternalFormat() const;
+                    GLint const& getGLInternalFormat() const;
                     SDL_Rect const& getClipRect() const;
                     Uint32 const& getFlags() const;
                     PixelFormat const getFormat() const;
@@ -63,7 +63,7 @@
                     //## Setter ##//
                     void setItem(SDL_Surface* const& s);
                     void setGLFormat(GLenum const& f);
-                    void setGLInternalFormat(GLenum const& f);
+                    void setGLInternalFormat(GLint const& f);
 
                     //## Methods ##//
                     void free();
