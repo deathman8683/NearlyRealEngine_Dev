@@ -35,7 +35,7 @@
             }
 
             Color::RGB const Grass::getColor() const {
-                return Color::RGB(75, 255, 30);
+                return Color::RGB(5, 80, 5);
             }
 
             Stone::Stone() {
@@ -69,7 +69,7 @@
             }
 
             Color::RGB const Water::getColor() const {
-                return Color::RGB(50, 50, 255);
+                return Color::RGB(5, 75, 255);
             }
 
         };

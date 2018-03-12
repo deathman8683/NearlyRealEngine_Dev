@@ -14,16 +14,17 @@
         engineWorld.constructChunksMesh();
 
         Renderer::Shader lightShader("Shaders/PhongReflection.vert", "Shaders/PhongReflection.frag", true);
-        Renderer::Shader colorShader("Shaders/color3D.vert", "Shaders/color3D.frag", true);
         std::vector<Light::Light*> engineLighting;
-        Light::Light engineLight1(Maths::Point3D<NREfloat>(0, 0, 80), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), 0.01, 0);
-        Light::Light engineLight2(Maths::Point3D<NREfloat>(0, 0, 80), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), 0.01, 0);
-        Light::Light engineLight3(Maths::Point3D<NREfloat>(0, 0, 80), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), 0.01, 0);
-        Light::Light engineLight4(Maths::Point3D<NREfloat>(64, -55, 45), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), 0.01, 0);
+        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 1), Maths::Vector3D<NREfloat>(2.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1, 0, 30.0);
+        Light::Light engineLight2(Maths::Point4D<NREfloat>(0, 0, 80, 1), Maths::Vector3D<NREfloat>(0.0, 2.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1, 0, 30.0);
+        Light::Light engineLight3(Maths::Point4D<NREfloat>(0, 0, 80, 1), Maths::Vector3D<NREfloat>(0.0, 0.0, 2.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1, 0, 30.0);
+        Light::Light engineLight4(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0, 0.06, 360);
+        Light::Light engineLight5(Maths::Point4D<NREfloat>(64, -55, 45, 1), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.05, 0.01, 360);
         engineLighting.push_back(&engineLight1);
         engineLighting.push_back(&engineLight2);
         engineLighting.push_back(&engineLight3);
         engineLighting.push_back(&engineLight4);
+        engineLighting.push_back(&engineLight5);
 
         Maths::Matrix4x4<NREfloat> projection;
         Maths::Matrix4x4<NREfloat> modelview;
@@ -47,15 +48,15 @@
             modelview.setIdentity();
             camera.setView(modelview);
 
-            Maths::Point3D<NREfloat> eye1 = engineLight1.getPosition();
+            Maths::Point4D<NREfloat> eye1 = engineLight1.getPosition();
             eye1.setX(std::sin(toRad(angle)) * 50);
             eye1.setY(std::cos(toRad(angle)) * 50);
 
-            Maths::Point3D<NREfloat> eye2 = engineLight2.getPosition();
+            Maths::Point4D<NREfloat> eye2 = engineLight2.getPosition();
             eye2.setX(std::sin(toRad((angle + 120))) * 50);
             eye2.setY(std::cos(toRad((angle + 120))) * 50);
 
-            Maths::Point3D<NREfloat> eye3 = engineLight3.getPosition();
+            Maths::Point4D<NREfloat> eye3 = engineLight3.getPosition();
             eye3.setX(std::sin(toRad((angle + 240))) * 50);
             eye3.setY(std::cos(toRad((angle + 240))) * 50);
 
@@ -63,7 +64,8 @@
             engineLight2.setPosition(eye2);
             engineLight3.setPosition(eye3);
 
-            engineLight4.setPosition(camera.getEye());
+            //engineLight4.setConeDirection(camera.getEye());
+            //engineLight4.setPosition(Maths::Point4D<NREfloat>(camera.getEye(), 1.0));
 
             engineWorld.render(lightShader, modelview, projection, camera, engineLighting);
 

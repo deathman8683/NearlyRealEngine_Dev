@@ -28,15 +28,17 @@
              */
             class Light {
                 private:
-                    NREfloat position[3];
+                    NREfloat position[4];
                     NREfloat intensities[3];
+                    NREfloat coneDirection[3];
                     NREfloat attenuation;
                     NREfloat ambientCoeff;
+                    NREfloat coneAngle;
 
                 public:
                     //## Constructor ##//
                     Light();
-                    Light(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, NREfloat const& attenuation, NREfloat const& ambientCoeff);
+                    Light(Maths::Point4D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> const& dir, NREfloat const& attenuation, NREfloat const& ambientCoeff, NREfloat const& angle);
 
                     //## Copy-Constructor ##//
                     Light(Light const& l);
@@ -47,20 +49,26 @@
                     ~Light();
 
                     //## Getter ##//
-                    Maths::Point3D<NREfloat> getPosition() const;
+                    Maths::Point4D<NREfloat> getPosition() const;
                     Maths::Vector3D<NREfloat> getIntensities() const;
+                    Maths::Vector3D<NREfloat> getConeDirection() const;
                     NREfloat const& getAttenuation() const;
                     NREfloat const& getAmbientCoeff() const;
+                    NREfloat const& getConeAngle() const;
                     NREfloat* const getPositionValue();
                     NREfloat* const getIntensitiesValue();
+                    NREfloat* const getConeDirectionValue();
                     NREfloat* const getAttenuationValue();
                     NREfloat* const getAmbientCoeffValue();
+                    NREfloat* const getConeAngleValue();
 
                     //## Setter ##//
-                    void setPosition(Maths::Point3D<NREfloat> const& p);
+                    void setPosition(Maths::Point4D<NREfloat> const& p);
                     void setIntensities(Maths::Vector3D<NREfloat> const& color);
+                    void setConeDirection(Maths::Vector3D<NREfloat> const& dir);
                     void setAttenuation(NREfloat const& coeff);
                     void setAmbientCoeff(NREfloat const& coeff);
+                    void setConeAngle(NREfloat const& angle);
 
                     //## Methods ##//
 
