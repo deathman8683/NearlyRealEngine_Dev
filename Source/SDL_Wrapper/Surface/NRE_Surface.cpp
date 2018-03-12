@@ -81,6 +81,7 @@
             void Surface::free() {
                 if (getItem() != 0) {
                     SDL_FreeSurface(getItem());
+                    setItem(0);
                 }
             }
 

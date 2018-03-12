@@ -3,6 +3,7 @@
     #include "Camera/NRE_MoveableCamera.hpp"
     #include "World/NRE_World.hpp"
     #include "Time/Clock/NRE_Clock.hpp"
+    #include "GL_Wrapper/Texture/NRE_Texture.hpp"
 
     using namespace NRE;
 
@@ -31,6 +32,8 @@
         Maths::Matrix4x4<NREfloat> modelview;
 
         Time::Clock engineClock;
+
+        GL::Texture engineTexture("Data/SkyBox/Dark_Left.png");
 
         camera.computeProjectionMatrix(projection);
         //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

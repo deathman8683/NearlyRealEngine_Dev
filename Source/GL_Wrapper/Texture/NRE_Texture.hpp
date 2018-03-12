@@ -43,7 +43,7 @@
                     ~Texture();
 
                     //## Getter ##//
-                    GLuint const& getID();
+                    GLuint const& getID() const;
 
                     //## Setter ##//
                     void setID(GLuint const& id);
@@ -52,8 +52,10 @@
                     void generateID();
                     void deleteID();
                     void reload();
-                    void bind(GLenum target = GL_TEXTURE_2D) const;
-                    void unbind(GLenum target = GL_TEXTURE_2D) const;
+                    void bind() const;
+                    void unbind() const;
+                    void load();
+                    void applyFilter();
 
                     //## Access Operator ##//
 
