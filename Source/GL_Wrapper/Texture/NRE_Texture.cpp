@@ -51,8 +51,8 @@
 
             void Texture::load() {
                 bind();
-                glTexImage2D(GL_TEXTURE_2D, 0, getGLInternalFormat(), getW(), getH(), 0, getGLFormat(), GL_UNSIGNED_BYTE, getPixels());
-                applyFilter();
+                    glTexImage2D(GL_TEXTURE_2D, 0, getGLInternalFormat(), getW(), getH(), 0, getGLFormat(), GL_UNSIGNED_BYTE, getPixels());
+                    applyFilter();
                 unbind();
             }
 
