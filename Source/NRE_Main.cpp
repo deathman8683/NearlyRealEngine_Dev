@@ -27,7 +27,7 @@
 
         Time::Clock engineClock;
 
-        GL::SkyBox engineSkybox("Data/SkyBox/Light", "png");
+        GL::SkyBox engineSkybox("Data/SkyBox/Warm", "png");
 
         camera.computeProjectionMatrix(projection);
         //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
