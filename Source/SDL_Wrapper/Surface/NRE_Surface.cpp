@@ -4,17 +4,18 @@
     namespace NRE {
         namespace SDL {
 
-            Surface::Surface() : item(0) {
+            Surface::Surface() : item(0), glFormat(0), glInternalFormat(0) {
             }
 
-            Surface::Surface(std::string const& path) : item(0) {
+            Surface::Surface(std::string const& path) : item(0), glFormat(0), glInternalFormat(0) {
                 loadByIMG(path);
             }
 
-            Surface::Surface(Surface const& s) : item(s.getItem()) {
+            Surface::Surface(Surface const& s) : item(s.getItem()), glFormat(s.getGLFormat()), glInternalFormat(s.getGLInternalFormat()) {
             }
 
             Surface::Surface(SDL_Surface* const& s) : item(s) {
+                loadFormat();
             }
 
             Surface::~Surface() {
@@ -95,22 +96,7 @@
                 item = IMG_Load(path.c_str());
 
                 flip();
-
-                if (getFormat().getBitsPerPixel() == 3) {
-                    setGLInternalFormat(GL_RGB);
-                    if (getFormat().getRMask() == 0xFF) {
-                        setGLFormat(GL_RGB);
-                    } else {
-                        setGLFormat(GL_BGR);
-                    }
-                } else if (getFormat().getBitsPerPixel() == 4) {
-                    setGLInternalFormat(GL_RGBA);
-                    if (getFormat().getRMask() == 0xFF) {
-                        setGLFormat(GL_RGBA);
-                    } else {
-                        setGLFormat(GL_BGRA);
-                    }
-                }
+                loadFormat();
             }
 
             void Surface::flip() {
@@ -138,6 +124,24 @@
                 free();
                 setItem(flippedSurface.getItem());
                 flippedSurface.setItem(0);
+            }
+
+            void Surface::loadFormat() {
+                if (getFormat().getBitsPerPixel() == 3) {
+                    setGLInternalFormat(GL_RGB);
+                    if (getFormat().getRMask() == 0xFF) {
+                        setGLFormat(GL_RGB);
+                    } else {
+                        setGLFormat(GL_BGR);
+                    }
+                } else if (getFormat().getBitsPerPixel() == 4) {
+                    setGLInternalFormat(GL_RGBA);
+                    if (getFormat().getRMask() == 0xFF) {
+                        setGLFormat(GL_RGBA);
+                    } else {
+                        setGLFormat(GL_BGRA);
+                    }
+                }
             }
 
 

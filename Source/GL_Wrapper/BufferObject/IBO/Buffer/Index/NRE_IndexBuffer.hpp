@@ -46,9 +46,6 @@
                     //## Setter ##//
 
                     //## Methods ##//
-                    void generateID() override;
-                    void deleteID() override;
-                    void reload() override;
                     void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target = GL_ELEMENT_ARRAY_BUFFER) override;
                     void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target = GL_ELEMENT_ARRAY_BUFFER) override;
                     void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target = GL_ELEMENT_ARRAY_BUFFER) override;

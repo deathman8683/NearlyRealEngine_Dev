@@ -20,19 +20,6 @@
                 deleteID();
             }
 
-            void IndexBuffer::generateID() {
-                glGenBuffers(1, &id);
-            }
-
-            void IndexBuffer::deleteID() {
-                glDeleteBuffers(1, &id);
-            }
-
-            void IndexBuffer::reload() {
-                deleteID();
-                generateID();
-            }
-
             void IndexBuffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
                 Buffer::allocate(size, usage, target);
             }

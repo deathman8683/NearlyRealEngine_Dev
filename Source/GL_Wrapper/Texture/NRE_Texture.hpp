@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_Buffer.hpp
-     * @brief Declaration of Engine's GL's Object : Buffer
+     * @file NRE_Texture.hpp
+     * @brief Declaration of Engine's GL's Object : Texture
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../../Generic/NRE_Type.hpp"
+    #include "../../SDL_Wrapper/Surface/NRE_Surface.hpp"
 
     /**
      * @namespace NRE
@@ -22,27 +22,28 @@
         namespace GL {
 
             /**
-             * @class Buffer
-             * @brief GL's Object : A typical buffer used in BufferObject - Interface for specilized buffer
+             * @class Texture
+             * @brief GL's Object : A simple texture
              */
-            class Buffer {
-                protected:
+            class Texture : public SDL::Surface {
+                private:
                     GLuint id;
 
                 public:
                     //## Constructor ##//
-                    Buffer();
+                    Texture();
+                    Texture(std::string const& path);
 
                     //## Copy-Constructor ##//
-                    Buffer(Buffer const& buf);
+                    Texture(Texture const& tex);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Buffer();
+                    ~Texture();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
+                    GLuint const& getID();
 
                     //## Setter ##//
                     void setID(GLuint const& id);
@@ -51,11 +52,8 @@
                     void generateID();
                     void deleteID();
                     void reload();
-                    virtual void allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target);
-                    virtual void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data, GLenum const& target);
-                    virtual void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data, GLenum const& target);
-                    virtual void bind(GLenum const& target) const;
-                    virtual void unbind(GLenum const& target) const;
+                    void bind(GLenum target = GL_TEXTURE_2D) const;
+                    void unbind(GLenum target = GL_TEXTURE_2D) const;
 
                     //## Access Operator ##//
 
@@ -73,11 +71,6 @@
 
                 private:
             };
-
-            inline std::ostream& operator<<(std::ostream &stream, Buffer const& buf) {
-                stream << "(" << buf.getID() << ")";
-                return stream;
-            }
 
         };
     };

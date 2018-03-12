@@ -21,6 +21,19 @@
                 this->id = id;
             }
 
+            void Buffer::generateID() {
+                glGenBuffers(1, &id);
+            }
+
+            void Buffer::deleteID() {
+                glDeleteBuffers(1, &id);
+            }
+
+            void Buffer::reload() {
+                deleteID();
+                generateID();
+            }
+
             void Buffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
                 bind(target);
                 glBufferData(target, size, NULL, usage);

@@ -20,19 +20,6 @@
                 deleteID();
             }
 
-            void NormalBuffer::generateID() {
-                glGenBuffers(1, &id);
-            }
-
-            void NormalBuffer::deleteID() {
-                glDeleteBuffers(1, &id);
-            }
-
-            void NormalBuffer::reload() {
-                deleteID();
-                generateID();
-            }
-
             void NormalBuffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
                 Buffer::allocate(size, usage, target);
             }

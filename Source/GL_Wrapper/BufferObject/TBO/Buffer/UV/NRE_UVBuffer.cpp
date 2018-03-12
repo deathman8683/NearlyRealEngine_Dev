@@ -20,19 +20,6 @@
                 deleteID();
             }
 
-            void UVBuffer::generateID() {
-                glGenBuffers(1, &id);
-            }
-
-            void UVBuffer::deleteID() {
-                glDeleteBuffers(1, &id);
-            }
-
-            void UVBuffer::reload() {
-                deleteID();
-                generateID();
-            }
-
             void UVBuffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
                 Buffer::allocate(size, usage, target);
             }

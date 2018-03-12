@@ -20,19 +20,6 @@
                 deleteID();
             }
 
-            void ColorBuffer::generateID() {
-                glGenBuffers(1, &id);
-            }
-
-            void ColorBuffer::deleteID() {
-                glDeleteBuffers(1, &id);
-            }
-
-            void ColorBuffer::reload() {
-                deleteID();
-                generateID();
-            }
-
             void ColorBuffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
                 Buffer::allocate(size, usage, target);
             }

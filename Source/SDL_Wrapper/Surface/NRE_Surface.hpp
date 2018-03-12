@@ -71,6 +71,7 @@
                     void unlock();
                     void loadByIMG(std::string const& path);
                     void flip();
+                    void loadFormat();
 
                     //## Access Operator ##//
 

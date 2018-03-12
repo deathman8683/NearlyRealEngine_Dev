@@ -17,19 +17,6 @@
                 deleteID();
             }
 
-            void VertexBuffer::generateID() {
-                glGenBuffers(1, &id);
-            }
-
-            void VertexBuffer::deleteID() {
-                glDeleteBuffers(1, &id);
-            }
-
-            void VertexBuffer::reload() {
-                deleteID();
-                generateID();
-            }
-
             void VertexBuffer::allocate(GLsizeiptr const& size, GLenum const& usage, GLenum const& target) {
                 Buffer::allocate(size, usage, target);
             }
