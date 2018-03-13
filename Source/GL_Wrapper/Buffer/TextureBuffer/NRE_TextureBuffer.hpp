@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../NRE_Buffer.hpp"
+    #include "../../../SDL_Wrapper/Surface/NRE_Surface.hpp"
 
     /**
      * @namespace NRE
@@ -42,6 +43,7 @@
                     virtual ~TextureBuffer();
 
                     //## Getter ##//
+                    virtual GLenum const getType() const = 0;
 
                     //## Setter ##//
 
@@ -50,9 +52,9 @@
                     void deleteID();
                     void bind(GLenum const& target) const override;
                     void unbind(GLenum const& target) const override;
-                    void allocate(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLenum const& type, bool const& callFilter) const;
-                    void update(GLenum const& target, GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLenum const& type, GLvoid* const& data) const;
-                    void allocateAndFill(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLenum const& type, GLvoid* const& data, bool const& callFilter) const;
+                    void allocate(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, bool const& callFilter) const;
+                    void update(GLenum const& target, GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const;
+                    void allocateAndFill(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data, bool const& callFilter) const;
                     virtual void applyFilter() const = 0;
                     void access(GLenum const& target) const;
 

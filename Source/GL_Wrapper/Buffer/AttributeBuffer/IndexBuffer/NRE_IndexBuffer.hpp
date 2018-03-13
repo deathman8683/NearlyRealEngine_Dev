@@ -42,6 +42,8 @@
                     virtual ~IndexBuffer();
 
                     //## Getter ##//
+                    GLint const getTypeSize() const;
+                    GLenum const getType() const;
 
                     //## Setter ##//
 
@@ -51,7 +53,7 @@
                     void allocate(GLsizeiptr const& size, GLenum const& usage) const;
                     void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const;
                     void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const;
-                    void access();
+                    void access() const;
 
                     //## Access Operator ##//
 

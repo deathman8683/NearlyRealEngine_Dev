@@ -1,6 +1,6 @@
-SRC = NRE_SkyBox.cpp
-OBJ = $(OBJDIR)NRE_SkyBox.o
-OBJDIR = ../../../obj/Debug/GL_Wrapper/SkyBox/
+SRC = NRE_VAO.cpp
+OBJ = $(OBJDIR)NRE_VAO.o
+OBJDIR = ../../../obj/Debug/GL_Wrapper/VAO/
 
 all : $(TARGET)
 

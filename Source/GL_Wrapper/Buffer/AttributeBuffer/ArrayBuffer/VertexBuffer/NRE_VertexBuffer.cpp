@@ -19,12 +19,20 @@
             VertexBuffer::~VertexBuffer() {
             }
 
+            GLint const VertexBuffer::getTypeSize() const {
+                return sizeof(GLint);
+            }
+
             GLint const VertexBuffer::getSize() const {
                 return SIZE;
             }
 
-            void VertexBuffer::access(GLenum const& type, bool const& enableVAA) {
-                ArrayBuffer::access(type, INDEX, SIZE, enableVAA);
+            GLenum const VertexBuffer::getType() const {
+                return GL_INT;
+            }
+
+            GLint const VertexBuffer::getIndex() const {
+                return INDEX;
             }
 
         };

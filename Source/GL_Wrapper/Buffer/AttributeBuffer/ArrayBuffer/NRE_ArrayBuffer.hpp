@@ -42,9 +42,8 @@
                     virtual ~ArrayBuffer();
 
                     //## Getter ##//
-                    virtual GLint const getTypeSize() const = 0;
                     virtual GLint const getSize() const = 0;
-                    virtual GLenum const getType() const = 0;
+                    virtual GLint const getIndex() const = 0;
 
                     //## Setter ##//
 

@@ -8,10 +8,10 @@
             }
 
             VBO::VBO(bool const& generate) {
-                attributes.push_back(new VertexBuffer(generate));
+                push_back(new VertexBuffer(generate));
             }
 
-            VBO::VBO(VBO const& buf) : attributes(buf.getAttributes()) {
+            VBO::VBO(VBO const& buf) : BufferObject::BufferObject(buf), attributes(buf.getAttributes()) {
             }
 
             VBO::~VBO() {
@@ -38,30 +38,38 @@
 
             void VBO::allocate(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage) {
                 getAttribute(0)->allocate(vertexSize * nbVertex * getAttribute(0)->getSize(), usage);
-                for (ArrayBuffer* attr : attributes) {
-                    attr->allocate(attr->getTypeSize() * nbVertex * attr->getSize(), usage);
+                for (GLuint i = 1; i < attributes.size(); i = i + 1) {
+                    getAttribute(i)->allocate(getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), usage);
+                }
+                setAllocated(true);
+            }
+
+            void VBO::update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data) {
+                getAttribute(0)->update(offset, vertexSize * nbVertex * getAttribute(0)->getSize(), data[0]);
+                for (GLuint i = 1; i < attributes.size(); i = i + 1) {
+                    getAttribute(i)->update(offset, getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), data[i]);
                 }
             }
 
-            void VBO::update(GLintptr const& offset, GLuint const& typeSize, size_t const& nbVertex, std::vector<GLvoid*> const& data) {
-                    getAttribute(0)->update(offset, vertexSize * nbVertex * getAttribute(0)->getSize(), data[0]);
-                    for (GLuint i = 1; i < attributes.size(); i = i + 1) {
-                        getAttribute(i)->update(offset, getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), date[i]);
-                    }
-            }
-
-            void VBO::allocateAndFill(GLuint typeSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data) {
-                    getAttribute(0)->allocateAndFill(vertexSize * nbVertex * getAttribute(0)->getSize(), usage, data[0]);
-                    for (GLuint i = 0; i < attributes.size(); i = i + 1) {
-                        getAttribute(i)->allocateAndFill(getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), usage, date[i]);
-                    }
+            void VBO::allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data) {
+                getAttribute(0)->allocateAndFill(vertexSize * nbVertex * getAttribute(0)->getSize(), usage, data[0]);
+                std::cout << "Vertex : " << data[0] << std::endl;
+                for (GLuint i = 1; i < attributes.size(); i = i + 1) {
+                    getAttribute(i)->allocateAndFill(getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), usage, data[i]);
+                    std::cout << "Element " << i << " : " << data[i] << std::endl;
+                }
+                setAllocated(true);
             }
 
             void VBO::access(GLenum const& vertexType, bool const& enableVAA) const {
-                getAttribute(0)->access(vertexType, enableVAA);
-                for (GLuint i = 0; i < attributes.size(); i = i + 1) {
-                    getAttribute(i)->access(enableVAA);
+                getAttribute(0)->access(vertexType, getAttribute(0)->getIndex(), getAttribute(0)->getSize(), enableVAA);
+                for (GLuint i = 1; i < attributes.size(); i = i + 1) {
+                    getAttribute(i)->access(getAttribute(i)->getType(), getAttribute(i)->getIndex(), getAttribute(i)->getSize(), enableVAA);
                 }
+            }
+
+            void VBO::push_back(ArrayBuffer* const& attr) {
+                attributes.push_back(attr);
             }
 
         };

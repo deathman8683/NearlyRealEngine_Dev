@@ -1,6 +1,6 @@
 SRC = NRE_UVBuffer.cpp
 OBJ = $(OBJDIR)NRE_UVBuffer.o
-OBJDIR = ../../../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer/ArrayBuffer/UVBuffer
+OBJDIR = ../../../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer/ArrayBuffer/UVBuffer/
 
 all : $(TARGET)
 

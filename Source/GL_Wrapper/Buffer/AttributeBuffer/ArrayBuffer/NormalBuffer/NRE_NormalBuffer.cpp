@@ -33,8 +33,8 @@
                 return TYPE;
             }
 
-            void NormalBuffer::access(bool const& enableVAA) {
-                ArrayBuffer::access(TYPE, INDEX, SIZE, enableVAA);
+            GLint const NormalBuffer::getIndex() const {
+                return INDEX;
             }
 
         };

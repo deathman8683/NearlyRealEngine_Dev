@@ -17,12 +17,16 @@
 
             Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), active(true) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
+                buffer.push_back(new GL::ColorBuffer(generateID));
+                buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
 
             Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), active(c.isActive()) {
                 voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
+                buffer.push_back(new GL::ColorBuffer(true));
+                buffer.push_back(new GL::NormalBuffer(true));
                 vao.access(getBuffer(), GL_INT);
             }
 
@@ -54,7 +58,7 @@
                 return coord;
             }
 
-            GL::IVBO const& Chunk::getBuffer() const {
+            GL::IBO const& Chunk::getBuffer() const {
                 return buffer;
             }
 
@@ -90,7 +94,7 @@
                 coord = p;
             }
 
-            void Chunk::setBuffer(GL::IVBO const& buffer) {
+            void Chunk::setBuffer(GL::IBO const& buffer) {
                 this->buffer = buffer;
             }
 

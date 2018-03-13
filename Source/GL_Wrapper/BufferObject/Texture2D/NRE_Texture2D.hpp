@@ -1,15 +1,15 @@
 
     /**
-     * @file NRE_ArrayBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : VAO
+     * @file NRE_Texture.hpp
+     * @brief Declaration of Engine's GL's Object : Texture2D
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NRE_Buffer.hpp"
-    #include "../../BufferObject/VBO/NRE_VBO.hpp"
+    #include "../NRE_BufferObject.hpp"
+    #include "../../Buffer/TextureBuffer/NRE_TextureBuffer.hpp"
 
     /**
      * @namespace NRE
@@ -23,35 +23,38 @@
         namespace GL {
 
             /**
-             * @class VAO
-             * @brief GL's Object : A specialized buffer for VAO managing
+             * @class Texture2D
+             * @brief GL's Object : A simple 2D Texture
              */
-            class VAO : public Buffer {
+            class Texture2D : public TextureBuffer, public BufferObject, public SDL::Surface {
                 private:
 
                 public:
                     //## Constructor ##//
-                    VAO();
-                    VAO(bool const& generate);
+                    Texture2D();
+                    Texture2D(std::string const& path);
 
                     //## Copy-Constructor ##//
-                    VAO(VAO const& buf);
+                    Texture2D(Texture2D const& tex);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~VAO();
+                    ~Texture2D();
 
                     //## Getter ##//
+                    GLenum const getType() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void generateID() override;
-                    void deleteID() override;
                     void bind() const;
                     void unbind() const;
-                    void access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA) const;
+                    void allocate(bool const& callFilter);
+                    void update(GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const;
+                    void allocateAndFill(bool const& callFilter);
+                    void applyFilter() const;
+                    void access() const;
 
                     //## Access Operator ##//
 
@@ -68,6 +71,7 @@
                     //## Shift Operator ##//
 
                 private:
+                    static GLenum TYPE;
             };
 
         };

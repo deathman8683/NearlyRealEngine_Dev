@@ -33,8 +33,8 @@
                 return TYPE;
             }
 
-            void UVBuffer::access(bool const& enableVAA) {
-                ArrayBuffer::access(TYPE, INDEX, SIZE, enableVAA);
+            GLint const UVBuffer::getIndex() const {
+                return INDEX;
             }
 
         };

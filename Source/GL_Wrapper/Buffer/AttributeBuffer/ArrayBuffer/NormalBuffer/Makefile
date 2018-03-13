@@ -1,6 +1,6 @@
 SRC = NRE_NormalBuffer.cpp
 OBJ = $(OBJDIR)NRE_NormalBuffer.o
-OBJDIR = ../../../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer/ArrayBuffer/NormalBuffer
+OBJDIR = ../../../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer/ArrayBuffer/NormalBuffer/
 
 all : $(TARGET)
 

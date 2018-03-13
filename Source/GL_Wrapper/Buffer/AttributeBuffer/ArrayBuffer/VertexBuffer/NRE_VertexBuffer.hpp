@@ -42,12 +42,14 @@
                     ~VertexBuffer();
 
                     //## Getter ##//
+                    GLint const getTypeSize() const;
                     GLint const getSize() const;
+                    GLenum const getType() const;
+                    GLint const getIndex() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void access(GLenum const& type, bool const& enableVAA);
 
                     //## Access Operator ##//
 

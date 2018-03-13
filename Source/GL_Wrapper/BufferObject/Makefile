@@ -3,11 +3,17 @@ OBJ = $(OBJDIR)NRE_BufferObject.o
 OBJDIR = ../../../obj/Debug/GL_Wrapper/BufferObject/
 
 VBO = VBO
+IBO = IBO
+TEXTURE2D = Texture2D
+SKYBOX = SkyBox
 
 all : $(TARGET) after
 
 after:
 	@(cd $(VBO) && $(MAKE))
+	@(cd $(IBO) && $(MAKE))
+	@(cd $(TEXTURE2D) && $(MAKE))
+	@(cd $(SKYBOX) && $(MAKE))
 
 debug: $(OBJ)
 

@@ -11,10 +11,19 @@
 
                 cMesh->constructMesh(w);
 
+                std::vector<GLvoid*> data;
+                std::cout << "Vertex : " << cMesh->getVPointer() << std::endl;
+                std::cout << "Color : " << cMesh->getCPointer() << std::endl;
+                std::cout << "Normal : " << cMesh->getNPointer() << std::endl;
+                std::cout << "===================" << std::endl;
+                data.push_back(cMesh->getVPointer());
+                data.push_back(cMesh->getCPointer());
+                data.push_back(cMesh->getNPointer());
+
                 if (!getBuffer().isAllocated()) {
-                    buffer.allocateAndFill(sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), GL_STREAM_DRAW, cMesh->getVPointer(), cMesh->getCPointer(), cMesh->getNPointer(), cMesh->getIPointer());
+                    buffer.allocateAndFill(sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), GL_STREAM_DRAW, data, cMesh->getIPointer());
                 } else {
-                    buffer.update(0, sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), cMesh->getVPointer(), cMesh->getCPointer(), cMesh->getNPointer(), cMesh->getIPointer());
+                    buffer.update(0, sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), data, cMesh->getIPointer());
                 }
 
                 delete cMesh;

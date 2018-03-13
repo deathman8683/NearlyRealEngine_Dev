@@ -42,6 +42,8 @@
                     virtual ~AttributeBuffer();
 
                     //## Getter ##//
+                    virtual GLint const getTypeSize() const = 0;
+                    virtual GLenum const getType() const = 0;
 
                     //## Setter ##//
 

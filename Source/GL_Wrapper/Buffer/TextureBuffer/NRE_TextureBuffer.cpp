@@ -36,28 +36,22 @@
                 glBindTexture(target, 0);
             }
 
-            void TextureBuffer::allocate(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLenum const& type, bool const& callFilter) const {
-                bind(target);
-                    glTexImage2D(target, level, internalFormat, w, h, 0, format, type, 0);
-                    if (callFilter) {
-                        applyFilter();
-                    }
-                unbind(target);
+            void TextureBuffer::allocate(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, bool const& callFilter) const {
+                glTexImage2D(target, level, internalFormat, w, h, 0, format, getType(), 0);
+                if (callFilter) {
+                    applyFilter();
+                }
             }
 
-            void TextureBuffer::update(GLenum const& target, GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLenum const& type, GLvoid* const& data) const {
-                bind(target);
-                    glTexSubImage2D(target, level, xOffset, yOffset, w, h, format, type, data);
-                unbind(target);
+            void TextureBuffer::update(GLenum const& target, GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const {
+                glTexSubImage2D(target, level, xOffset, yOffset, w, h, format, getType(), data);
             }
 
-            void TextureBuffer::allocateAndFill(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLenum const& type, GLvoid* const& data, bool const& callFilter) const {
-                bind(target);
-                    glTexImage2D(target, level, internalFormat, w, h, 0, format, type, data);
-                    if (callFilter) {
-                        applyFilter();
-                    }
-                unbind(target);
+            void TextureBuffer::allocateAndFill(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data, bool const& callFilter) const {
+                glTexImage2D(target, level, internalFormat, w, h, 0, format, getType(), data);
+                if (callFilter) {
+                    applyFilter();
+                }
             }
 
             void TextureBuffer::access(GLenum const& target) const {

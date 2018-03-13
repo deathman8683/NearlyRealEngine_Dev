@@ -1,6 +1,6 @@
 SRC = NRE_AttributeBuffer.cpp
 OBJ = $(OBJDIR)NRE_AttributeBuffer.o
-OBJDIR = ../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer
+OBJDIR = ../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer/
 
 ARRAY = ArrayBuffer
 INDEX = IndexBuffer

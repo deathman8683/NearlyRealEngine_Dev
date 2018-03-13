@@ -19,6 +19,14 @@
             IndexBuffer::~IndexBuffer() {
             }
 
+            GLint const IndexBuffer::getTypeSize() const {
+                return TYPESIZE;
+            }
+
+            GLenum const IndexBuffer::getType() const {
+                return TYPE;
+            }
+
             void IndexBuffer::bind() const {
                 AttributeBuffer::bind(GL_ELEMENT_ARRAY_BUFFER);
             }
@@ -38,7 +46,7 @@
                 AttributeBuffer::allocateAndFill(GL_ELEMENT_ARRAY_BUFFER, size, usage, data);
             }
 
-            void IndexBuffer::access() {
+            void IndexBuffer::access() const {
                 bind();
             }
 

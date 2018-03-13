@@ -13,6 +13,7 @@
     #include "../../Generic/Array/NRE_ArrayOperation.hpp"
     #include "../Voxel/Type/NRE_VoxelType.hpp"
     #include "../../GL_Wrapper/VAO/NRE_VAO.hpp"
+    #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../lib/FastNoise/FastNoise.h"
     #include "../../Lighting/NRE_Light.hpp"
@@ -39,7 +40,7 @@
                 private:
                     Voxel **voxel;
                     Maths::Point2D<GLint> coord;
-                    GL::IVBO buffer;
+                    GL::IBO buffer;
                     GL::VAO vao;
                     Physics::AABB<GLint> bounding;
                     bool active;
@@ -64,7 +65,7 @@
                     Voxel* const& getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const;
                     Voxel* const& getVoxel(GLuint const& index) const;
                     Maths::Point2D<GLint> const& getCoord() const;
-                    GL::IVBO const& getBuffer() const;
+                    GL::IBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
                     Physics::AABB<GLint> const& getBounding() const;
                     bool const& isActive() const;
@@ -75,7 +76,7 @@
                     void setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel* const& vox);
                     void setVoxel(GLuint const& index, Voxel* const& vox);
                     void setCoord(Maths::Point2D<GLint> const& p);
-                    void setBuffer(GL::IVBO const& buffer);
+                    void setBuffer(GL::IBO const& buffer);
                     void setVAO(GL::VAO const& vao);
                     void setBounding(Physics::AABB<GLint> const& box);
                     void setActive(bool const& state);

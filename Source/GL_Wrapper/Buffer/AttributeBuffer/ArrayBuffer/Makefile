@@ -1,6 +1,6 @@
 SRC = NRE_ArrayBuffer.cpp
 OBJ = $(OBJDIR)NRE_ArrayBuffer.o
-OBJDIR = ../../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer/ArrayBuffer
+OBJDIR = ../../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer/ArrayBuffer/
 
 COLOR = ColorBuffer
 NORMAL = NormalBuffer

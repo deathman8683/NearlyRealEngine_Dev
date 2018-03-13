@@ -27,6 +27,7 @@
             void ArrayBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) const {
                 AttributeBuffer::allocate(GL_ARRAY_BUFFER, size, usage);
             }
+
             void ArrayBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const {
                 AttributeBuffer::update(GL_ARRAY_BUFFER, offset, size, data);
             }

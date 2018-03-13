@@ -53,7 +53,6 @@
                     void reload();
                     virtual void bind(GLenum const& target) const = 0;
                     virtual void unbind(GLenum const& target) const = 0;
-                    virtual void access() const = 0;
 
                     //## Access Operator ##//
 
@@ -71,6 +70,11 @@
 
                 private:
             };
+
+            inline std::ostream& operator<<(std::ostream &stream, Buffer const& buf) {
+                stream << "(" << buf.getID() << ")";
+                return stream;
+            }
 
         };
     };

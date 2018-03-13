@@ -33,8 +33,8 @@
                 return TYPE;
             }
 
-            void ColorBuffer::access(bool const& enableVAA) {
-                ArrayBuffer::access(TYPE, INDEX, SIZE, enableVAA);
+            GLint const ColorBuffer::getIndex() const {
+                return INDEX;
             }
 
         };

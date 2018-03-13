@@ -11,7 +11,6 @@ all : $(TARGET) after
 after:
 	@(cd $(ATTRIBUTE) && $(MAKE))
 	@(cd $(TEXTURE) && $(MAKE))
-	@(cd $(VAO) && $(MAKE))
 
 debug: $(OBJ)
 

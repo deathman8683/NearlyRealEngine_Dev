@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_TextureBuffer.hpp
-     * @brief Declaration of Engine's Buffer's Object : TextureBuffer
+     * @file NRE_ArrayBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : VAO
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "<Path>/Generic/NRE_Type.hpp"
+    #include "../BufferObject/VBO/NRE_VBO.hpp"
 
     /**
      * @namespace NRE
@@ -16,31 +16,31 @@
      */
     namespace NRE {
         /**
-         * @namespace Buffer
-         * @brief <Module_Desc>
+         * @namespace GL
+         * @brief Engine's OpenGL's Wrapper's Module
          */
-        namespace Buffer {
+        namespace GL {
 
             /**
-             * @class TextureBuffer
-             * @brief Buffer's Object : A particular buffer for texture id
+             * @class VAO
+             * @brief GL's Object : A specialized buffer for VAO managing
              */
-            class TextureBuffer {
+            class VAO {
                 private:
                     GLuint id;
 
                 public:
                     //## Constructor ##//
-                    TextureBuffer();
-                    TextureBuffer(bool const& generate);
+                    VAO();
+                    VAO(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    TextureBuffer(TextureBuffer const& buf);
+                    VAO(VAO const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~TextureBuffer();
+                    virtual ~VAO();
 
                     //## Getter ##//
                     GLuint const& getID() const;
@@ -51,7 +51,9 @@
                     //## Methods ##//
                     void generateID();
                     void deleteID();
-                    void reload();
+                    void bind() const;
+                    void unbind() const;
+                    void access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;
 
                     //## Access Operator ##//
 
@@ -69,6 +71,11 @@
 
                 private:
             };
+
+            inline std::ostream& operator<<(std::ostream &stream, VAO const& arr) {
+                stream << "(" << arr.getID() << ")";
+                return stream;
+            }
 
         };
     };
