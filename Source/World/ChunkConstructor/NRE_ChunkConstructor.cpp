@@ -12,10 +12,6 @@
                 cMesh->constructMesh(w);
 
                 std::vector<GLvoid*> data;
-                std::cout << "Vertex : " << cMesh->getVPointer() << std::endl;
-                std::cout << "Color : " << cMesh->getCPointer() << std::endl;
-                std::cout << "Normal : " << cMesh->getNPointer() << std::endl;
-                std::cout << "===================" << std::endl;
                 data.push_back(cMesh->getVPointer());
                 data.push_back(cMesh->getCPointer());
                 data.push_back(cMesh->getNPointer());

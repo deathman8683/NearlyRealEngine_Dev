@@ -53,10 +53,8 @@
 
             void VBO::allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data) {
                 getAttribute(0)->allocateAndFill(vertexSize * nbVertex * getAttribute(0)->getSize(), usage, data[0]);
-                std::cout << "Vertex : " << data[0] << std::endl;
                 for (GLuint i = 1; i < attributes.size(); i = i + 1) {
                     getAttribute(i)->allocateAndFill(getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), usage, data[i]);
-                    std::cout << "Element " << i << " : " << data[i] << std::endl;
                 }
                 setAllocated(true);
             }
