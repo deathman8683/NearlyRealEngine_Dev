@@ -19,6 +19,10 @@
             VertexBuffer::~VertexBuffer() {
             }
 
+            GLint const VertexBuffer::getSize() const {
+                return SIZE;
+            }
+
             void VertexBuffer::access(GLenum const& type, bool const& enableVAA) {
                 ArrayBuffer::access(type, INDEX, SIZE, enableVAA);
             }

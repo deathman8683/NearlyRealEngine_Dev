@@ -11,7 +11,6 @@
             }
 
             Buffer::~Buffer() {
-                deleteID();
             }
 
             GLuint const& Buffer::getID() const {

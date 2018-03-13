@@ -8,8 +8,8 @@
 
     #pragma once
 
-    #include "../NBO/NRE_NBO.hpp"
-    #include "Buffer/Color/NRE_ColorBuffer.hpp"
+    #include "../NRE_BufferObject.hpp"
+    #include "../../Buffer/AttributeBuffer/ArrayBuffer/VertexBuffer/NRE_VertexBuffer.hpp"
 
     /**
      * @namespace NRE
@@ -24,11 +24,11 @@
 
             /**
              * @class VBO
-             * @brief GL's Object : Specialization of an BufferObject for colored vertex managing
+             * @brief GL's Object : Specialization of an BufferObject for vertex managing
              */
-            class VBO : public NBO {
-                protected:
-                    NRE::Buffer::ColorBuffer color;
+            class VBO : public BufferObject {
+                private:
+                    std::vector<ArrayBuffer*> attributes;
 
                 public:
                     //## Constructor ##//
@@ -44,19 +44,18 @@
                     ~VBO();
 
                     //## Getter ##//
-                    NRE::Buffer::ColorBuffer const& getColorBuffer() const;
+                    std::vector<ArrayBuffer*> const& getAttributes() const;
+                    ArrayBuffer* const& getAttribute(GLuint const& index) const;
 
                     //## Setter ##//
-                    void setColorBuffer(NRE::Buffer::ColorBuffer const& buf);
+                    void setAttributes(std::vector<ArrayBuffer*> const& attr);
+                    void setAttribute(GLuint const& index, ArrayBuffer* const& attr);
 
                     //## Methods ##//
-                    virtual void generateID();
-                    virtual void deleteID();
-                    virtual void reload();
-                    void allocate(size_t const& typeSize, size_t const& nbVertex, GLenum const& usage);
-                    void update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData);
-                    void allocateAndFill(size_t typeSize, size_t const& nbVertex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData);
-                    virtual void access(GLenum const& vertexType, bool const& enableVAA = true) const;
+                    void allocate(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage);
+                    void update(GLintptr const& offset, GLuint const& typeSize, size_t const& nbVertex, std::vector<GLvoid*> const& data);
+                    void allocateAndFill(GLuint typeSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data);
+                    void access(GLenum const& vertexType, bool const& enableVAA = true) const;
 
                     //## Access Operator ##//
 
@@ -74,11 +73,6 @@
 
                 private:
             };
-
-            inline std::ostream& operator<<(std::ostream &stream, VBO const& buf) {
-                stream << "(" << buf.getVertexBuffer() << buf.getColorBuffer() << buf.getNormalBuffer() << ")";
-                return stream;
-            }
 
         };
     };

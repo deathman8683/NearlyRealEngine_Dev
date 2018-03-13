@@ -21,6 +21,18 @@
             ColorBuffer::~ColorBuffer() {
             }
 
+            GLint const ColorBuffer::getTypeSize() const {
+                return TYPESIZE;
+            }
+
+            GLint const ColorBuffer::getSize() const {
+                return SIZE;
+            }
+
+            GLenum const ColorBuffer::getType() const {
+                return TYPE;
+            }
+
             void ColorBuffer::access(bool const& enableVAA) {
                 ArrayBuffer::access(TYPE, INDEX, SIZE, enableVAA);
             }

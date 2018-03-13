@@ -42,6 +42,9 @@
                     ~ColorBuffer();
 
                     //## Getter ##//
+                    GLint const getTypeSize() const;
+                    GLint const getSize() const;
+                    GLenum const getType() const;
 
                     //## Setter ##//
 

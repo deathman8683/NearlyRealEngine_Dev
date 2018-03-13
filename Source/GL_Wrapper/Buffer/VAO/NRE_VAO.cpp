@@ -7,7 +7,7 @@
             VAO::VAO() {
             }
 
-            VAO::VAO(bool const& generate) : {
+            VAO::VAO(bool const& generate) {
                 if (generate) {
                     generateID();
                 }
@@ -17,6 +17,7 @@
             }
 
             VAO::~VAO() {
+                deleteID();
             }
 
             void VAO::generateID() {
@@ -37,7 +38,7 @@
 
             void VAO::access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA) const {
                 bind();
-                    VBO.access(vertexType, enableVAA);
+                    buffer.access(vertexType, enableVAA);
                 unbind();
             }
 

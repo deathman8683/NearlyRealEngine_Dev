@@ -17,6 +17,7 @@
             }
 
             AttributeBuffer::~AttributeBuffer() {
+                deleteID();
             }
 
             void AttributeBuffer::generateID() {
@@ -31,9 +32,9 @@
                 glBindBuffer(target, getID());
             }
 
-            void AttributeBuffer::unbind(GLenum const& target) const [
+            void AttributeBuffer::unbind(GLenum const& target) const {
                 glBindBuffer(target, 0);
-            ]
+            }
 
             void AttributeBuffer::allocate(GLenum const& target, GLsizeiptr const& size, GLenum const& usage) const {
                 bind(target);

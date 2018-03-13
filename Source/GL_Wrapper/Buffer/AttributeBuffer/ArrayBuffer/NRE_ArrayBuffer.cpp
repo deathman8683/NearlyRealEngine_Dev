@@ -25,14 +25,14 @@
             }
 
             void ArrayBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) const {
-                AttributeBuffer::(GL_ARRAY_BUFFER, size, usage);
+                AttributeBuffer::allocate(GL_ARRAY_BUFFER, size, usage);
             }
             void ArrayBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const {
-                AttributeBuffer::(GL_ARRAY_BUFFER, offset, size, data);
+                AttributeBuffer::update(GL_ARRAY_BUFFER, offset, size, data);
             }
 
             void ArrayBuffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const {
-                AttributeBuffer::(GL_ARRAY_BUFFER, size, usage, data);
+                AttributeBuffer::allocateAndFill(GL_ARRAY_BUFFER, size, usage, data);
             }
 
             void ArrayBuffer::access(GLenum const& type, GLint const& index, GLint const& size, bool const& enableVAA) {

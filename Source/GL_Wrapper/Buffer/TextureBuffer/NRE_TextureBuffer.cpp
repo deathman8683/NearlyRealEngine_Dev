@@ -17,6 +17,7 @@
             }
 
             TextureBuffer::~TextureBuffer() {
+                deleteID();
             }
 
             void TextureBuffer::generateID() {
@@ -59,7 +60,7 @@
                 unbind(target);
             }
 
-            void access(GLenum const& target) const {
+            void TextureBuffer::access(GLenum const& target) const {
                 bind(target);
             }
 

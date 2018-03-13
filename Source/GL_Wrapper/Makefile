@@ -1,12 +1,12 @@
+BUFFER = Buffer
 BUFFEROBJECT = BufferObject
-VAO = VAO
 TEXTURE = Texture
 SKYBOX = SkyBox
 
 all : $(TARGET)
 
 debug:
+	@(cd $(BUFFER) && $(MAKE))
 	@(cd $(BUFFEROBJECT) && $(MAKE))
-	@(cd $(VAO) && $(MAKE))
 	@(cd $(TEXTURE) && $(MAKE))
 	@(cd $(SKYBOX) && $(MAKE))

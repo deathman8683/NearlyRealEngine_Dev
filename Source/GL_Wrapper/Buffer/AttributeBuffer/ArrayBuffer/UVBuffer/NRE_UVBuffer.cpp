@@ -21,6 +21,18 @@
             UVBuffer::~UVBuffer() {
             }
 
+            GLint const UVBuffer::getTypeSize() const {
+                return TYPESIZE;
+            }
+
+            GLint const UVBuffer::getSize() const {
+                return SIZE;
+            }
+
+            GLenum const UVBuffer::getType() const {
+                return TYPE;
+            }
+
             void UVBuffer::access(bool const& enableVAA) {
                 ArrayBuffer::access(TYPE, INDEX, SIZE, enableVAA);
             }

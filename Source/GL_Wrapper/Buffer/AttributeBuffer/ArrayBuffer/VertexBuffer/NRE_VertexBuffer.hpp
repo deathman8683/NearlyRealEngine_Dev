@@ -42,6 +42,7 @@
                     ~VertexBuffer();
 
                     //## Getter ##//
+                    GLint const getSize() const;
 
                     //## Setter ##//
 
@@ -64,6 +65,7 @@
 
                 private:
                     static GLint INDEX;
+                    static GLint SIZE;
             };
 
         };

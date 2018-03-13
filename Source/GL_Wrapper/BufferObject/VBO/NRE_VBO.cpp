@@ -7,64 +7,61 @@
             VBO::VBO() {
             }
 
-            VBO::VBO(bool const& generate) : NBO::NBO(generate) {
-                if (generate) {
-                    generateID();
-                }
+            VBO::VBO(bool const& generate) {
+                attributes.push_back(new VertexBuffer(generate));
             }
 
-            VBO::VBO(VBO const& buf) : NBO::NBO(buf), color(buf.getColorBuffer()) {
+            VBO::VBO(VBO const& buf) : attributes(buf.getAttributes()) {
             }
 
             VBO::~VBO() {
-                deleteID();
+                for (ArrayBuffer* attr : attributes) {
+                    delete attr;
+                }
             }
 
-            NRE::Buffer::ColorBuffer const& VBO::getColorBuffer() const {
-                return color;
+            std::vector<ArrayBuffer*> const& VBO::getAttributes() const {
+                return attributes;
             }
 
-            void VBO::setColorBuffer(NRE::Buffer::ColorBuffer const& buf) {
-                color = buf;
+            ArrayBuffer* const& VBO::getAttribute(GLuint const& index) const {
+                return attributes[index];
             }
 
-            void VBO::generateID() {
-                NBO::generateID();
-                color.generateID();
+            void VBO::setAttributes(std::vector<ArrayBuffer*> const& attr) {
+                attributes = attr;
             }
 
-            void VBO::deleteID() {
-                color.deleteID();
-                NBO::deleteID();
+            void VBO::setAttribute(GLuint const& index, ArrayBuffer* const& attr) {
+                attributes[index] = attr;
             }
 
-            void VBO::reload() {
-                NBO::reload();
-                color.reload();
+            void VBO::allocate(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage) {
+                getAttribute(0)->allocate(vertexSize * nbVertex * getAttribute(0)->getSize(), usage);
+                for (ArrayBuffer* attr : attributes) {
+                    attr->allocate(attr->getTypeSize() * nbVertex * attr->getSize(), usage);
+                }
             }
 
-            void VBO::allocate(size_t const& typeSize, size_t const& nbVertex, GLenum const& usage) {
-                color.allocate(NRE::Buffer::ColorBuffer::SIZE * nbVertex * 3, usage);
-                NBO::allocate(typeSize, nbVertex, usage);
+            void VBO::update(GLintptr const& offset, GLuint const& typeSize, size_t const& nbVertex, std::vector<GLvoid*> const& data) {
+                    getAttribute(0)->update(offset, vertexSize * nbVertex * getAttribute(0)->getSize(), data[0]);
+                    for (GLuint i = 1; i < attributes.size(); i = i + 1) {
+                        getAttribute(i)->update(offset, getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), date[i]);
+                    }
             }
 
-            void VBO::update(GLintptr const& offset, size_t const& typeSize, size_t const& nbVertex, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData) {
-                color.update(offset, NRE::Buffer::ColorBuffer::SIZE * nbVertex * 3, cData);
-                NBO::update(offset, typeSize, nbVertex, vData, nData);
-            }
-
-            void VBO::allocateAndFill(size_t typeSize, size_t const& nbVertex, GLenum const& usage, GLvoid* const& vData, GLvoid* const& cData, GLvoid* const& nData) {
-                color.allocateAndFill(NRE::Buffer::ColorBuffer::SIZE * nbVertex * 3, usage, cData);
-                NBO::allocateAndFill(typeSize, nbVertex, usage, vData, nData);
+            void VBO::allocateAndFill(GLuint typeSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data) {
+                    getAttribute(0)->allocateAndFill(vertexSize * nbVertex * getAttribute(0)->getSize(), usage, data[0]);
+                    for (GLuint i = 0; i < attributes.size(); i = i + 1) {
+                        getAttribute(i)->allocateAndFill(getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), usage, date[i]);
+                    }
             }
 
             void VBO::access(GLenum const& vertexType, bool const& enableVAA) const {
-                NBO::access(vertexType, enableVAA);
-                getColorBuffer().bind();
-                    glVertexAttribPointer(1, 3, NRE::Buffer::ColorBuffer::TYPE, GL_FALSE, 0, 0);
-                    if (enableVAA) {
-                        glEnableVertexAttribArray(1);
-                    }
+                getAttribute(0)->access(vertexType, enableVAA);
+                for (GLuint i = 0; i < attributes.size(); i = i + 1) {
+                    getAttribute(i)->access(enableVAA);
+                }
             }
 
         };

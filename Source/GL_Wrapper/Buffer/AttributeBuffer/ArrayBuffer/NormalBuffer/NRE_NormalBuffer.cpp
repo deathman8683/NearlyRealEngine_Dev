@@ -21,6 +21,18 @@
             NormalBuffer::~NormalBuffer() {
             }
 
+            GLint const NormalBuffer::getTypeSize() const {
+                return TYPESIZE;
+            }
+
+            GLint const NormalBuffer::getSize() const {
+                return SIZE;
+            }
+
+            GLenum const NormalBuffer::getType() const {
+                return TYPE;
+            }
+
             void NormalBuffer::access(bool const& enableVAA) {
                 ArrayBuffer::access(TYPE, INDEX, SIZE, enableVAA);
             }

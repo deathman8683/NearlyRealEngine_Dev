@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../NRE_Buffer.hpp"
+    #include "../../BufferObject/VBO/NRE_VBO.hpp"
 
     /**
      * @namespace NRE
