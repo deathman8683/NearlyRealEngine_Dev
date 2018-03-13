@@ -79,7 +79,7 @@
         vec3 linearColor = vec3(0);
 
         for (int i = 0; i < numLights; i = i + 1) {
-            linearColor += applyLight(lights[i], vertex, color, normal, cameraVertex, i);
+            linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraVertex - vertex), i);
         }
 
         if (color == vec3(1.0, 1.0, 1.0)) {

@@ -22,5 +22,5 @@
         vertex = in_Vertex;
         color = in_Color;
         normal = in_Normal;
-        cameraVertex = normalize(cameraV - vertex);
+        cameraVertex = cameraV;
     }
