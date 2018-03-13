@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_Buffer.hpp
-     * @brief Declaration of Engine's GL's Object : Buffer
+     * @file NRE_VertexBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : NormalBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../NRE_ArrayBuffer.hpp"
 
     /**
      * @namespace NRE
@@ -22,38 +22,31 @@
         namespace GL {
 
             /**
-             * @class Buffer
-             * @brief GL's Object : A typical buffer used in BufferObject
+             * @class NormalBuffer
+             * @brief GL's Object : A specialized ArrayBuffer for vertex normal managing
              */
-            class Buffer {
-                protected:
-                    GLuint id;
+            class NormalBuffer : public ArrayBuffer {
+                private:
 
                 public:
                     //## Constructor ##//
-                    Buffer();
+                    NormalBuffer();
+                    NormalBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    Buffer(Buffer const& buf);
+                    NormalBuffer(NormalBuffer const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Buffer();
+                    ~NormalBuffer();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
 
                     //## Methods ##//
-                    virtual void generateID() = 0;
-                    virtual void deleteID() = 0;
-                    void reload();
-                    virtual void bind(GLenum const& target) const = 0;
-                    virtual void unbind(GLenum const& target) const = 0;
-                    virtual void access() const = 0;
+                    void access(bool const& enableVAA);
 
                     //## Access Operator ##//
 
@@ -70,6 +63,10 @@
                     //## Shift Operator ##//
 
                 private:
+                    static GLint INDEX;
+                    static GLenum TYPE;
+                    static GLint TYPESIZE;
+                    static GLint SIZE;
             };
 
         };

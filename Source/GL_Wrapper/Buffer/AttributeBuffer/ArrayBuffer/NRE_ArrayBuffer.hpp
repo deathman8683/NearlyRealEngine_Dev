@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_Buffer.hpp
-     * @brief Declaration of Engine's GL's Object : Buffer
+     * @file NRE_VertexBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : ArrayBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../NRE_AttributeBuffer.hpp"
 
     /**
      * @namespace NRE
@@ -22,38 +22,36 @@
         namespace GL {
 
             /**
-             * @class Buffer
-             * @brief GL's Object : A typical buffer used in BufferObject
+             * @class ArrayBuffer
+             * @brief GL's Object : A specialized AttributeBuffer for vertex array attribute managing
              */
-            class Buffer {
-                protected:
-                    GLuint id;
+            class ArrayBuffer : public AttributeBuffer {
+                private:
 
                 public:
                     //## Constructor ##//
-                    Buffer();
+                    ArrayBuffer();
+                    ArrayBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    Buffer(Buffer const& buf);
+                    ArrayBuffer(ArrayBuffer const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Buffer();
+                    virtual ~ArrayBuffer();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
 
                     //## Methods ##//
-                    virtual void generateID() = 0;
-                    virtual void deleteID() = 0;
-                    void reload();
-                    virtual void bind(GLenum const& target) const = 0;
-                    virtual void unbind(GLenum const& target) const = 0;
-                    virtual void access() const = 0;
+                    void bind() const;
+                    void unbind() const;
+                    void allocate(GLsizeiptr const& size, GLenum const& usage) const;
+                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const;
+                    void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const;
+                    void access(GLenum const& type, GLint const& index, GLint const& size, bool const& enableVAA);
 
                     //## Access Operator ##//
 

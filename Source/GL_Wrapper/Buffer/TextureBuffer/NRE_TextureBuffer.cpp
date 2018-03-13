@@ -59,5 +59,9 @@
                 unbind(target);
             }
 
+            void access(GLenum const& target) const {
+                bind(target);
+            }
+
         };
     };

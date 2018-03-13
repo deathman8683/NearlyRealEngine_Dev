@@ -54,6 +54,7 @@
                     void update(GLenum const& target, GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLenum const& type, GLvoid* const& data) const;
                     void allocateAndFill(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLenum const& type, GLvoid* const& data, bool const& callFilter) const;
                     virtual void applyFilter() const = 0;
+                    void access(GLenum const& target) const;
 
                     //## Access Operator ##//
 

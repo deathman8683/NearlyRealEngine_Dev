@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_Buffer.hpp
-     * @brief Declaration of Engine's GL's Object : Buffer
+     * @file NRE_ArrayBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : VAO
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../NRE_Buffer.hpp"
 
     /**
      * @namespace NRE
@@ -22,38 +22,35 @@
         namespace GL {
 
             /**
-             * @class Buffer
-             * @brief GL's Object : A typical buffer used in BufferObject
+             * @class VAO
+             * @brief GL's Object : A specialized buffer for VAO managing
              */
-            class Buffer {
-                protected:
-                    GLuint id;
+            class VAO : public Buffer {
+                private:
 
                 public:
                     //## Constructor ##//
-                    Buffer();
+                    VAO();
+                    VAO(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    Buffer(Buffer const& buf);
+                    VAO(VAO const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Buffer();
+                    virtual ~VAO();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
 
                     //## Methods ##//
-                    virtual void generateID() = 0;
-                    virtual void deleteID() = 0;
-                    void reload();
-                    virtual void bind(GLenum const& target) const = 0;
-                    virtual void unbind(GLenum const& target) const = 0;
-                    virtual void access() const = 0;
+                    void generateID() override;
+                    void deleteID() override;
+                    void bind() const;
+                    void unbind() const;
+                    void access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA) const;
 
                     //## Access Operator ##//
 

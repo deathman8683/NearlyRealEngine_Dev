@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_ArrayBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : ArrayBuffer
+     * @file NRE_VertexBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : IndexBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NRE_Buffer.hpp"
+    #include "../NRE_AttributeBuffer.hpp"
 
     /**
      * @namespace NRE
@@ -22,34 +22,36 @@
         namespace GL {
 
             /**
-             * @class ArrayBuffer
-             * @brief GL's Object : A specialized buffer for VAO managing
+             * @class IndexBuffer
+             * @brief GL's Object : A specialized AttributeBuffer for vertex index managing
              */
-            class ArrayBuffer : public Buffer {
+            class IndexBuffer : public AttributeBuffer {
                 private:
 
                 public:
                     //## Constructor ##//
-                    ArrayBuffer();
-                    ArrayBuffer(bool const& generate);
+                    IndexBuffer();
+                    IndexBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    ArrayBuffer(ArrayBuffer const& buf);
+                    IndexBuffer(IndexBuffer const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~ArrayBuffer();
+                    virtual ~IndexBuffer();
 
                     //## Getter ##//
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void generateID() override;
-                    void deleteID() override;
                     void bind() const;
                     void unbind() const;
+                    void allocate(GLsizeiptr const& size, GLenum const& usage) const;
+                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const;
+                    void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const;
+                    void access();
 
                     //## Access Operator ##//
 
@@ -66,6 +68,8 @@
                     //## Shift Operator ##//
 
                 private:
+                    static GLenum TYPE;
+                    static GLint TYPESIZE;
             };
 
         };
