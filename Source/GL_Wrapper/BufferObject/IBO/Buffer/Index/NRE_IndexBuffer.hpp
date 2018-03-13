@@ -17,8 +17,8 @@
      */
     namespace NRE {
         /**
-         * @namespace GL
-         * @brief Engine's OpenGL's Wrapper's Module
+         * @namespace Buffer
+         * @brief Engine's OpenGL's Buffer's Module
          */
         namespace Buffer {
 
