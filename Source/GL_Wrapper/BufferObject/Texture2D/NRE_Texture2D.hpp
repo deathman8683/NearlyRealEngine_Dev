@@ -33,6 +33,7 @@
                     //## Constructor ##//
                     Texture2D();
                     Texture2D(std::string const& path);
+                    Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat);
 
                     //## Copy-Constructor ##//
                     Texture2D(Texture2D const& tex);

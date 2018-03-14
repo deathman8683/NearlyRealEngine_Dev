@@ -7,8 +7,11 @@
             Surface::Surface() : item(0), glFormat(0), glInternalFormat(0) {
             }
 
-            Surface::Surface(std::string const& path) : item(0), glFormat(0), glInternalFormat(0) {
+            Surface::Surface(std::string const& path) : item(0), glW(0), glH(0), glFormat(0), glInternalFormat(0) {
                 loadByIMG(path);
+            }
+
+            Surface::Surface(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat) : item(0), glW(w), glH(h), glFormat(glFormat), glInternalFormat(glInternalFormat) {
             }
 
             Surface::Surface(Surface const& s) : item(s.getItem()), glFormat(s.getGLFormat()), glInternalFormat(s.getGLInternalFormat()) {
@@ -24,6 +27,14 @@
 
             SDL_Surface* const& Surface::getItem() const {
                 return item;
+            }
+
+            GLsizei const& Surface::getGLW() const {
+                return glW;
+            }
+
+            GLsizei const& Surface::getGLH() const {
+                return glH;
             }
 
             GLenum const& Surface::getGLFormat() const {
@@ -70,6 +81,14 @@
                 item = s;
             }
 
+            void Surface::setGLW(GLsizei const& w) {
+                glW = w;
+            }
+
+            void Surface::setGLH(GLsizei const& h) {
+                glH = h;
+            }
+
             void Surface::setGLFormat(GLenum const& f) {
                 glFormat = f;
             }
@@ -95,6 +114,9 @@
 
             void Surface::loadByIMG(std::string const& path) {
                 item = IMG_Load(path.c_str());
+
+                setGLW(getW());
+                setGLH(getH());
 
                 flip();
 

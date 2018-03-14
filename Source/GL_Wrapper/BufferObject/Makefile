@@ -6,6 +6,7 @@ VBO = VBO
 IBO = IBO
 TEXTURE2D = Texture2D
 SKYBOX = SkyBox
+FBO = FBO
 
 all : $(TARGET) after
 
@@ -14,6 +15,7 @@ after:
 	@(cd $(IBO) && $(MAKE))
 	@(cd $(TEXTURE2D) && $(MAKE))
 	@(cd $(SKYBOX) && $(MAKE))
+	@(cd $(FBO) && $(MAKE))
 
 debug: $(OBJ)
 

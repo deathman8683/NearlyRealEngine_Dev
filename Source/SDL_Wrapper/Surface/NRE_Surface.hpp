@@ -30,6 +30,8 @@
             class Surface {
                 private:
                     SDL_Surface* item;
+                    GLsizei glW;
+                    GLsizei glH;
                     GLenum glFormat;
                     GLint glInternalFormat;
 
@@ -37,6 +39,7 @@
                     //## Constructor ##//
                     Surface();
                     Surface(std::string const& path);
+                    Surface(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat);
 
                     //## Copy-Constructor ##//
                     Surface(Surface const& s);
@@ -49,6 +52,8 @@
 
                     //## Getter ##//
                     SDL_Surface* const& getItem() const;
+                    GLsizei const& getGLW() const;
+                    GLsizei const& getGLH() const;
                     GLenum const& getGLFormat() const;
                     GLint const& getGLInternalFormat() const;
                     SDL_Rect const& getClipRect() const;
@@ -62,6 +67,8 @@
 
                     //## Setter ##//
                     void setItem(SDL_Surface* const& s);
+                    void setGLW(GLsizei const& w);
+                    void setGLH(GLsizei const& h;
                     void setGLFormat(GLenum const& f);
                     void setGLInternalFormat(GLint const& f);
 

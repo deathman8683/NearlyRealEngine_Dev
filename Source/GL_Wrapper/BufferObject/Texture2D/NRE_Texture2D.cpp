@@ -13,6 +13,10 @@
                 allocateAndFill(true);
             }
 
+            Texture2D::Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat) : TextureBuffer::TextureBuffer(true), SDL::Surface::Surface(w, h, glFormat, glInternalFormat) {
+                allocate(true);
+            }
+
             Texture2D::Texture2D(Texture2D const& tex) : TextureBuffer::TextureBuffer(tex), BufferObject::BufferObject(tex), SDL::Surface::Surface(tex) {
             }
 
@@ -33,20 +37,20 @@
 
             void Texture2D::allocate(bool const& callFilter) {
                 bind();
-                    TextureBuffer::allocate(GL_TEXTURE_2D, 0, getGLInternalFormat(), getW(), getH(), getGLFormat(), callFilter);
+                    TextureBuffer::allocate(GL_TEXTURE_2D, 0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), callFilter);
                 unbind();
                 setAllocated(true);
             }
 
-            void Texture2D::update(GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const {
+            void Texture2D::update(GLint const& xOffset, GLint const& yOffset, GLvoid* const& data) const {
                 bind();
-                    TextureBuffer::update(GL_TEXTURE_2D, 0, xOffset, yOffset, w, h, format, data);
+                    TextureBuffer::update(GL_TEXTURE_2D, 0, xOffset, yOffset, getGLW(), getGLH(), getGLFormat(), data);
                 unbind();
             }
 
             void Texture2D::allocateAndFill(bool const& callFilter) {
                 bind();
-                    TextureBuffer::allocateAndFill(GL_TEXTURE_2D, 0, getGLInternalFormat(), getW(), getH(), getGLFormat(), getPixels(), callFilter);
+                    TextureBuffer::allocateAndFill(GL_TEXTURE_2D, 0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), getPixels(), callFilter);
                 unbind();
                 setAllocated(true);
                 free();
