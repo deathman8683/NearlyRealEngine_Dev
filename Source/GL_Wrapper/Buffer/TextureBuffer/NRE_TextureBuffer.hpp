@@ -50,8 +50,8 @@
                     //## Methods ##//
                     void generateID();
                     void deleteID();
-                    void bind(GLenum const& target) const override;
-                    void unbind(GLenum const& target) const override;
+                    void bind(GLenum const& target) const;
+                    void unbind(GLenum const& target) const;
                     void allocate(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, bool const& callFilter) const;
                     void update(GLenum const& target, GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const;
                     void allocateAndFill(GLenum const& target, GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data, bool const& callFilter) const;

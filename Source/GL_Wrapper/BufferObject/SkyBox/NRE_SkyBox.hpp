@@ -11,7 +11,7 @@
     #include "../../Buffer/TextureBuffer/NRE_TextureBuffer.hpp"
     #include "../../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../../Maths/NRE_Maths.hpp"
-    #include "../../VAO/NRE_VAO.hpp"
+    #include "../../Buffer/VAO/NRE_VAO.hpp"
     #include "../IBO/NRE_IBO.hpp"
 
     /**

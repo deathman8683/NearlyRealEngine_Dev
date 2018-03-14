@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_Buffer.hpp
-     * @brief Declaration of Engine's GL's Object : Buffer
+     * @file NRE_RenderBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : RenderBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../NRE_Buffer.hpp"
 
     /**
      * @namespace NRE
@@ -22,35 +22,36 @@
         namespace GL {
 
             /**
-             * @class Buffer
-             * @brief GL's Object : A typical buffer used in BufferObject
+             * @class RenderBuffer
+             * @brief GL's Object : A specialized buffer for texture managing
              */
-            class Buffer {
-                protected:
-                    GLuint id;
+            class RenderBuffer : public Buffer {
+                private:
 
                 public:
                     //## Constructor ##//
-                    Buffer();
+                    RenderBuffer();
+                    RenderBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    Buffer(Buffer const& buf);
+                    RenderBuffer(RenderBuffer const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Buffer();
+                    virtual ~RenderBuffer();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
 
                     //## Methods ##//
-                    virtual void generateID() = 0;
-                    virtual void deleteID() = 0;
-                    void reload();
+                    void generateID();
+                    void deleteID();
+                    void bind() const;
+                    void unbind() const;
+                    void allocate(GLenum const& internalFormat, GLsizei const& w, GLsizei const& h) const;
+                    void access() const;
 
                     //## Access Operator ##//
 
@@ -68,11 +69,6 @@
 
                 private:
             };
-
-            inline std::ostream& operator<<(std::ostream &stream, Buffer const& buf) {
-                stream << "(" << buf.getID() << ")";
-                return stream;
-            }
 
         };
     };

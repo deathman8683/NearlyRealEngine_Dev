@@ -8,7 +8,8 @@
 
     #pragma once
 
-    #include "../BufferObject/VBO/NRE_VBO.hpp"
+    #include "../NRE_Buffer.hpp"
+    #include "../../BufferObject/VBO/NRE_VBO.hpp"
 
     /**
      * @namespace NRE
@@ -25,9 +26,8 @@
              * @class VAO
              * @brief GL's Object : A specialized buffer for VAO managing
              */
-            class VAO {
+            class VAO : public Buffer {
                 private:
-                    GLuint id;
 
                 public:
                     //## Constructor ##//
@@ -43,14 +43,12 @@
                     virtual ~VAO();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
 
                     //## Methods ##//
-                    void generateID();
-                    void deleteID();
+                    void generateID() override;
+                    void deleteID() override;
                     void bind() const;
                     void unbind() const;
                     void access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;

@@ -4,28 +4,20 @@
     namespace NRE {
         namespace GL {
 
-            VAO::VAO() : id(0) {
+            VAO::VAO() {
             }
 
-            VAO::VAO(bool const& generate) : id(0) {
+            VAO::VAO(bool const& generate) {
                 if (generate) {
                     generateID();
                 }
             }
 
-            VAO::VAO(VAO const& buf) : id(buf.getID()) {
+            VAO::VAO(VAO const& buf) : Buffer::Buffer(buf) {
             }
 
             VAO::~VAO() {
                 deleteID();
-            }
-
-            GLuint const& VAO::getID() const {
-                return id;
-            }
-
-            void VAO::setID(GLuint const& id) {
-                this->id = id;
             }
 
             void VAO::generateID() {

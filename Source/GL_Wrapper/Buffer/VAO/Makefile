@@ -1,6 +1,6 @@
 SRC = NRE_VAO.cpp
 OBJ = $(OBJDIR)NRE_VAO.o
-OBJDIR = ../../../obj/Debug/GL_Wrapper/VAO/
+OBJDIR = ../../../../obj/Debug/GL_Wrapper/Buffer/VAO/
 
 all : $(TARGET)
 
