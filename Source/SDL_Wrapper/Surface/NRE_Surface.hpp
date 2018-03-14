@@ -68,7 +68,7 @@
                     //## Setter ##//
                     void setItem(SDL_Surface* const& s);
                     void setGLW(GLsizei const& w);
-                    void setGLH(GLsizei const& h;
+                    void setGLH(GLsizei const& h);
                     void setGLFormat(GLenum const& f);
                     void setGLInternalFormat(GLint const& f);
 

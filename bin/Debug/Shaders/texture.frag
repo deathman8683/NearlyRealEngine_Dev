@@ -1,28 +1,13 @@
-// Version du GLSL
 
-#version 450 core
+    #version 450 core
 
+    in vec2 UV;
 
-// Entr�e
+    uniform sampler2D texture;
 
-in vec2 UV;
+    out vec4 out_Color;
 
-
-// Uniform
-
-uniform sampler2D texture;
-
-
-// Sortie
-
-out vec4 out_Color;
-
-
-// Fonction main
-
-void main()
-{
-    // Couleur du pixel
-
-    out_Color = texture(texture, UV);
-}
+    void main()
+    {
+        out_Color = texture(texture, UV);
+    }

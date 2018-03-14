@@ -4,15 +4,18 @@
     namespace NRE {
         namespace GL {
 
+            GLenum FBO::DEFAULT_FORMAT = GL_RGBA;
+            GLenum FBO::DEFAULT_INTERNAL_FORMAT = GL_RGBA;
+
             FBO::FBO() {
             }
 
-            FBO::FBO(GLsizei const& w, GLisizei const& h) : FBO::FBO(w, h, 1) {
+            FBO::FBO(GLsizei const& w, GLsizei const& h) : FBO::FBO(w, h, 1) {
             }
 
-            FBO::FBO(GLsizei const& w, GLisizei const& h, GLint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthStencilBuffer(true) {
+            FBO::FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthStencilBuffer(true), size(w, h) {
                 allocateColorBuffer(nbColorBuffer);
-                allocateRenderBuffer
+                allocateRenderBuffer();
             }
 
             FBO::FBO(FBO const& buf) : BufferObject::BufferObject(buf), FrameBuffer::FrameBuffer(buf), colorBuffer(buf.getColorBuffers()), depthStencilBuffer(buf.getDepthStencilBuffer()) {
@@ -33,8 +36,12 @@
                 return colorBuffer[index];
             }
 
-            RenderBuffer const& FBO::FBO::getDepthStencilBuffer() const {
+            RenderBuffer const& FBO::getDepthStencilBuffer() const {
                 return depthStencilBuffer;
+            }
+
+            Maths::Vector2D<GLushort> const& FBO::getSize() const {
+                return size;
             }
 
             void FBO::setColorBuffers(std::vector<Texture2D*> const& buffers) {
@@ -49,14 +56,29 @@
                 depthStencilBuffer = buffer;
             }
 
-            void FBO::allocateColorBuffer(GLint const& nbColorBuffer) {
-                for (GLuint i = 0; i < nbColorBuffer; i = i + 1) {
-                    push_back(new Texture2D())
-                }
+            void FBO::setSize(Maths::Vector2D<GLushort> const& size) {
+                this->size = size;
             }
-            void FBO::allocateRenderBuffer();
-            void FBO::push_back(Texture2D* const& buffer);
-            void FBO::access();
+
+            void FBO::allocateColorBuffer(GLuint const& nbColorBuffer) {
+                bind();
+                    for (GLuint i = 0; i < nbColorBuffer; i = i + 1) {
+                        push_back(new Texture2D(getSize().getX(), getSize().getY(), DEFAULT_FORMAT, DEFAULT_INTERNAL_FORMAT));
+                        attachColorBuffer(GL_COLOR_ATTACHMENT0 + i, *getColorBuffer(i));
+                    }
+                unbind();
+            }
+
+            void FBO::allocateRenderBuffer() {
+                bind();
+                    depthStencilBuffer.allocate(GL_DEPTH24_STENCIL8, getSize().getX(), getSize().getY());
+                    attachRenderBuffer(GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, getDepthStencilBuffer().getID());
+                unbind();
+            }
+
+            void FBO::push_back(Texture2D* const& buffer) {
+                colorBuffer.push_back(buffer);
+            }
 
         };
     };

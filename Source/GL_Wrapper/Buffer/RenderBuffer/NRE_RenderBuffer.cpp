@@ -37,7 +37,9 @@
             }
 
             void RenderBuffer::allocate(GLenum const& internalFormat, GLsizei const& w, GLsizei const& h) const {
-                glRenderbufferStorage(GL_RENDERBUFFER, internalFormat, w, h);
+                bind();
+                    glRenderbufferStorage(GL_RENDERBUFFER, internalFormat, w, h);
+                unbind();
             }
 
             void RenderBuffer::access() const {

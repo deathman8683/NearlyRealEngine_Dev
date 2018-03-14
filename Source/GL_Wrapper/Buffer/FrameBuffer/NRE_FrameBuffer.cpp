@@ -28,24 +28,24 @@
                 glDeleteFramebuffers(1, &id);
             }
 
-            void FrameBuffer::bind(GLenum const& target) const {
-                glBindFramebuffer(target, getID());
+            void FrameBuffer::bind() const {
+                glBindFramebuffer(GL_FRAMEBUFFER, getID());
             }
 
-            void FrameBuffer::unbind(GLenum const& target) const {
-                glBindFramebuffer(target, 0);
+            void FrameBuffer::unbind() const {
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
             }
 
-            void FrameBuffer::attachColorBuffer(GLenum const& target, GLenum const& attachment, Texture2D const& texture) const {
-                glFramebufferTexture2D(target, attachment, GL_TEXTURE_2D, texture.getID(), 0);
+            void FrameBuffer::attachColorBuffer(GLenum const& attachment, Texture2D const& texture) const {
+                glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, texture.getID(), 0);
             }
 
-            void FrameBuffer::attachRenderBuffer(GLenum const& target, GLenum const& attachment, GLenum const& renderBufferTarget, GLuint const& renderBuffer) const {
-                glFramebufferRenderbuffer(target, attachment, renderBufferTarget, renderBuffer);
+            void FrameBuffer::attachRenderBuffer(GLenum const& attachment, GLenum const& renderBufferTarget, GLuint const& renderBuffer) const {
+                glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, renderBufferTarget, renderBuffer);
             }
 
-            void FrameBuffer::access(GLenum const& target) const {
-                bind(target);
+            void FrameBuffer::access() const {
+                bind();
             }
 
         };

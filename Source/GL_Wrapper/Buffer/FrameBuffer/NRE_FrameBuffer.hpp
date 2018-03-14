@@ -48,11 +48,11 @@
                     //## Methods ##//
                     void generateID() override;
                     void deleteID() override;
-                    void bind(GLenum const& target) const;
-                    void unbind(GLenum const& target) const;
-                    void attachColorBuffer(GLenum const& target, GLenum const& attachment, Texture2D const& texture) const;
-                    void attachRenderBuffer(GLenum const& target, GLenum const& attachment, GLenum const& renderBufferTarget, GLuint const& renderBuffer) const;
-                    void access(GLenum const& target) const;
+                    void bind() const;
+                    void unbind() const;
+                    void attachColorBuffer(GLenum const& attachment, Texture2D const& texture) const;
+                    void attachRenderBuffer(GLenum const& attachment, GLenum const& renderBufferTarget, GLuint const& renderBuffer) const;
+                    void access() const;
 
                     //## Access Operator ##//
 

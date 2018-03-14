@@ -52,7 +52,7 @@
                     void bind() const;
                     void unbind() const;
                     void allocate(bool const& callFilter);
-                    void update(GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const;
+                    void update(GLint const& xOffset, GLint const& yOffset, GLvoid* const& data) const;
                     void allocateAndFill(bool const& callFilter);
                     void applyFilter() const;
                     void access() const;
