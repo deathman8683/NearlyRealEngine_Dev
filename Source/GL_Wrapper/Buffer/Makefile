@@ -4,6 +4,8 @@ OBJDIR = ../../../obj/Debug/GL_Wrapper/Buffer/
 
 ATTRIBUTE = AttributeBuffer
 TEXTURE = TextureBuffer
+FRAME = FrameBuffer
+RENDER = RenderBuffer
 VAO = VAO
 
 all : $(TARGET) after
@@ -11,6 +13,8 @@ all : $(TARGET) after
 after:
 	@(cd $(ATTRIBUTE) && $(MAKE))
 	@(cd $(TEXTURE) && $(MAKE))
+	@(cd $(FRAME) && $(MAKE))
+	@(cd $(RENDER) && $(MAKE))
 	@(cd $(VAO) && $(MAKE))
 
 debug: $(OBJ)

@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_RenderBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : RenderBuffer
+     * @file NRE_FrameBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : FrameBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NRE_Buffer.hpp"
+    #include "../../BufferObject/Texture2D/NRE_Texture2D.hpp"
 
     /**
      * @namespace NRE
@@ -22,24 +22,24 @@
         namespace GL {
 
             /**
-             * @class RenderBuffer
-             * @brief GL's Object : A specialized buffer for renderbuffer managing
+             * @class FrameBuffer
+             * @brief GL's Object : A specialized buffer for frame managing
              */
-            class RenderBuffer : public Buffer {
+            class FrameBuffer : public Buffer {
                 private:
 
                 public:
                     //## Constructor ##//
-                    RenderBuffer();
-                    RenderBuffer(bool const& generate);
+                    FrameBuffer();
+                    FrameBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    RenderBuffer(RenderBuffer const& buf);
+                    FrameBuffer(FrameBuffer const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~RenderBuffer();
+                    virtual ~FrameBuffer();
 
                     //## Getter ##//
 
@@ -48,10 +48,11 @@
                     //## Methods ##//
                     void generateID() override;
                     void deleteID() override;
-                    void bind() const;
-                    void unbind() const;
-                    void allocate(GLenum const& internalFormat, GLsizei const& w, GLsizei const& h) const;
-                    void access() const;
+                    void bind(GLenum const& target) const;
+                    void unbind(GLenum const& target) const;
+                    void attachColorBuffer(GLenum const& target, GLenum const& attachment, Texture2D const& texture) const;
+                    void attachRenderBuffer(GLenum const& target, GLenum const& attachment, GLenum const& renderBufferTarget, GLuint const& renderBuffer) const;
+                    void access(GLenum const& target) const;
 
                     //## Access Operator ##//
 
