@@ -34,6 +34,7 @@
                     BufferObject();
 
                     //## Copy-Constructor ##//
+                    BufferObject(BufferObject const& buf);
 
                     //## Convertor ##//
 

@@ -7,6 +7,9 @@
             BufferObject::BufferObject() : allocated(false) {
             }
 
+            BufferObject::BufferObject(BufferObject const& buf) : allocated(buf.isAllocated()) {
+            }
+
             BufferObject::~BufferObject() {
             }
 

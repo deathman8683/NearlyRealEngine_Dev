@@ -18,6 +18,7 @@
                 for (ArrayBuffer* attr : attributes) {
                     delete attr;
                 }
+                attributes.clear();
             }
 
             std::vector<ArrayBuffer*> const& VBO::getAttributes() const {
