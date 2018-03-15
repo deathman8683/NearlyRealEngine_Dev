@@ -261,6 +261,8 @@
                         void rotate(K const& angle, Vector3D<L> const& axis);
                         template <class K, class L, class M, class N>
                         void projection(K const& fov, L const& ratio, M const& zNear, N const& zFar);
+                        template <class K, class L, class M, class N, class O, class P>
+                        void ortho(K const& left, L const& right, M const& bottom, N const& top, O const& zNear, P const& zFar);
                         template <class K, class L, class M>
                         void lookAt(Point3D<K> const& eye, Point3D<L> const& center, Vector3D<M> const& up);
                         T* const value();

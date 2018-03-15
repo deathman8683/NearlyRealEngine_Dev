@@ -9,6 +9,8 @@
     #pragma once
 
     #include "../../GL_Wrapper/BufferObject/FBO/NRE_FBO.hpp"
+    #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
+    #include "../../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
     #include "../Shader/NRE_Shader.hpp"
 
     /**
@@ -31,6 +33,8 @@
                     GL::FBO gBuffer;
                     Maths::Matrix4x4<NREfloat> modelview;
                     Maths::Matrix4x4<NREfloat> projection;
+                    GL::VBO buffer;
+                    GL::VAO vao;
 
                 public:
                     //## Constructor ##//
@@ -49,14 +53,21 @@
                     GL::FBO const& getFrameBuffer() const;
                     Maths::Matrix4x4<NREfloat> const& getModelview() const;
                     Maths::Matrix4x4<NREfloat> const& getProjection() const;
+                    GL::VBO const& getBuffer() const;
+                    GL::VAO const& getVAO() const;
 
                     //## Setter ##//
                     void setFrameBuffer(GL::FBO const& buffer);
                     void setModelview(Maths::Matrix4x4<NREfloat> const& mat);
                     void setProjection(Maths::Matrix4x4<NREfloat> const& mat);
+                    void setBuffer(GL::VBO const& buffer);
+                    void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
                     void render(Shader const& shader);
+                    void startFBO();
+                    void endFBO();
+                    void fillBuffer();
 
                     //## Access Operator ##//
 

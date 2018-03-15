@@ -1,5 +1,5 @@
 
-    #version 450 core
+    #version 450
 
     in vec3 in_Vertex;
     in vec2 in_UV;

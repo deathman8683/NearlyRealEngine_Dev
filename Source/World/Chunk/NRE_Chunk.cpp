@@ -119,7 +119,7 @@
                     glUseProgram(shader.getProgramID());
                         vao.bind();
 
-                            for (unsigned int i = 0; i < light.size(); i = i + 1) {
+                            /*for (unsigned int i = 0; i < light.size(); i = i + 1) {
                                 std::ostringstream index;
                                 index << i;
                                 glUniform4fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPositionValue());
@@ -133,7 +133,11 @@
                             glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
                             glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
                             glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
-                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());
+                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());*/
+
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
 
                             glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 
