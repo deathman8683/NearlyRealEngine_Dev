@@ -10,7 +10,7 @@
 
     int main(int argc, char **argv) {
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
-        Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 0, 0), Maths::Vector3D<NREfloat>(1, 1, 1), Maths::Vector2D<NREfloat>(0, 0), true);
+        Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), Maths::Vector2D<NREfloat>(0, 0), true);
         Camera::FixedCamera cameraFBO(70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(56, -64, 64), Maths::Vector3D<NREfloat>(56, -63, 64), Maths::Vector2D<NREfloat>(-15, 97), true);
 
         World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
@@ -77,10 +77,10 @@
                 camera.setView(modelview);
 
 
-                engineSkybox.render(skyBoxShader, modelview, projection, camera.getEye());
+                /*engineSkybox.render(skyBoxShader, modelview, projection, camera.getEye());
                 engineSkybox.bind();
                     engineWorld.render(lightShader, modelview, projection, camera, engineLighting);
-                engineSkybox.unbind();
+                engineSkybox.unbind();*/
                 glUseProgram(textureShader.getProgramID());
                     vao.bind();
                         fbo.getColorBuffer(0)->bind();
