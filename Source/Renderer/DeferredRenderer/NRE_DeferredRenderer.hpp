@@ -34,18 +34,29 @@
 
                 public:
                     //## Constructor ##//
+                    DeferredRenderer();
+                    DeferredRenderer(Maths::Vector2D<GLushort> const& size);
 
                     //## Copy-Constructor ##//
+                    DeferredRenderer(DeferredRenderer const& renderer);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
+                    ~DeferredRenderer();
 
                     //## Getter ##//
+                    GL::FBO const& getFrameBuffer() const;
+                    Maths::Matrix4x4<NREfloat> const& getModelview() const;
+                    Maths::Matrix4x4<NREfloat> const& getProjection() const;
 
                     //## Setter ##//
+                    void setFrameBuffer(GL::FBO const& buffer);
+                    void setModelview(Maths::Matrix4x4<NREfloat> const& mat);
+                    void setProjection(Maths::Matrix4x4<NREfloat> const& mat);
 
                     //## Methods ##//
+                    void render(Shader const& shader);
 
                     //## Access Operator ##//
 

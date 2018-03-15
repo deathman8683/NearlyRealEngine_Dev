@@ -9,9 +9,9 @@
     using namespace NRE;
 
     int main(int argc, char **argv) {
-        Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
-        Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), Maths::Vector2D<NREfloat>(0, 0), true);
-        Camera::FixedCamera cameraFBO(70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(56, -64, 64), Maths::Vector3D<NREfloat>(56, -63, 64), Maths::Vector2D<NREfloat>(-15, 97), true);
+        Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1920, 1080));
+        Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1920.0 / 1080.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), Maths::Vector2D<NREfloat>(0, 0), true);
+        Camera::FixedCamera cameraFBO(70.0, 1920.0 / 1080.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(56, -64, 64), Maths::Vector3D<NREfloat>(56, -63, 64), Maths::Vector2D<NREfloat>(-15, 97), true);
 
         World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
         engineWorld.constructChunksMesh();
@@ -34,7 +34,7 @@
         camera.computeProjectionMatrix(projection);
         cameraFBO.computeProjectionMatrix(projectionFBO);
 
-        GL::FBO fbo(800, 600);
+        GL::FBO fbo(1920, 1080);
         std::vector<GLvoid*> data;
         GLint vertices[] = {0, 0, 100, 0, 100, 100, 0, 100, 200,
                             0, 100, 200, 0, 0, 200, 0, 0, 100};
@@ -77,11 +77,11 @@
                 camera.setView(modelview);
 
 
-                /*engineSkybox.render(skyBoxShader, modelview, projection, camera.getEye());
+                engineSkybox.render(skyBoxShader, modelview, projection, camera.getEye());
                 engineSkybox.bind();
                     engineWorld.render(lightShader, modelview, projection, camera, engineLighting);
-                engineSkybox.unbind();*/
-                glUseProgram(textureShader.getProgramID());
+                engineSkybox.unbind();
+                /*glUseProgram(textureShader.getProgramID());
                     vao.bind();
                         fbo.getColorBuffer(0)->bind();
 
@@ -92,7 +92,7 @@
 
                         fbo.getColorBuffer(0)->unbind();
                     vao.unbind();
-                glUseProgram(0);
+                glUseProgram(0);*/
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }
