@@ -9,13 +9,13 @@
     uniform mat4 modelview;
 
     out vec3 color;
-    out vec3 normal;
-    out vec3 vertex;
+    //out vec3 normal;
+    //out vec3 vertex;
 
     void main() {
         gl_Position = projection * modelview * vec4(in_Vertex, 1.0);
 
-        normal = in_Normal;
+        //normal = in_Normal;
         color = in_Color;
-        vertex = in_Vertex;
+        //vertex = in_Vertex;
     }

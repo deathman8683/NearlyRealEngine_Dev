@@ -295,9 +295,9 @@
             template <class T>
             template <class K, class L, class M, class N, class O, class P>
             void Matrix4x4<T>::ortho(K const& left, L const& right, M const& bottom, N const& top, O const& zNear, P const& zFar) {
-                setL1(Vector4D<T>(2 / (right - left), 0, 0, -(right + left) / (right - left)));
-                setL2(Vector4D<T>(0, 2 / (top - bottom), 0, -(top + bottom) / (top - bottom)));
-                setL3(Vector4D<T>(0, 0, 2 / (zFar - zNear), -(zFar + zNear) / (zFar - zNear)));
+                setL1(Vector4D<T>(2.0 / (right - left), 0, 0, -((right + left) / (right - left))));
+                setL2(Vector4D<T>(0, 2.0 / (top - bottom), 0, -((top + bottom) / (top - bottom))));
+                setL3(Vector4D<T>(0, 0, -2.0f / (zFar - zNear), -((zFar + zNear) / (zFar - zNear))));
                 setL4(Vector4D<T>(0, 0, 0, 1));
             }
 

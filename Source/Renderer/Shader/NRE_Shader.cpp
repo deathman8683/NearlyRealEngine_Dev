@@ -92,9 +92,11 @@
                 glGetProgramiv(getProgramID(), GL_LINK_STATUS, &linkError);
                 if (linkError != GL_TRUE) {
                     GLint errorSize = 0;
+                    glGetShaderiv(getProgramID(), GL_INFO_LOG_LENGTH, &errorSize);
+
                     char *error = new char[errorSize + 1];
 
-                    glGetShaderInfoLog(getProgramID(), errorSize, &errorSize, error);
+                    glGetShaderInfoLog(getProgramID(), errorSize, NULL, error);
                     error[errorSize] = '\0';
 
                     std::cout << std::string(error) << std::endl;;
@@ -126,13 +128,12 @@
                 GLint compileError(0);
                 glGetShaderiv(shader, GL_COMPILE_STATUS, &compileError);
                 if (compileError != GL_TRUE) {
-                    GLint errorSize(0);
+                    GLint errorSize = 0;
                     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &errorSize);
 
                     char *error = new char[errorSize + 1];
 
                     glGetShaderInfoLog(shader, errorSize, &errorSize, error);
-                    error[errorSize] = '\0';
 
                     std::cout << std::string(error) << std::endl;
 
