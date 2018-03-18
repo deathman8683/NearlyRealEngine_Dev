@@ -1,12 +1,14 @@
 
     #version 450
 
-    in vec3 UV;
+    in vec3 vertex;
 
     uniform samplerCube skyBox;
 
-    out vec4 out_Color;
+    out vec4 [3] fragData;
 
     void main() {
-        out_Color = textureCube(skyBox, UV);
+        fragData[0] = textureCube(skyBox, vertex);
+    	fragData[1] = vec4(vertex, 1.0);
+    	fragData[2] = vec4(0.0, 0.0, 0.0, 0.0);
     }

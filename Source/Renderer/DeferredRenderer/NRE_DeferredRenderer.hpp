@@ -8,9 +8,13 @@
 
     #pragma once
 
+    #include <sstream>
+    #include <fstream>
     #include "../../GL_Wrapper/BufferObject/FBO/NRE_FBO.hpp"
     #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
     #include "../../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
+    #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
+    #include "../../Lighting/NRE_Light.hpp"
     #include "../Shader/NRE_Shader.hpp"
 
     /**
@@ -64,7 +68,7 @@
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
-                    void render(Shader const& shader);
+                    void render(Renderer::Shader const& shader, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light);
                     void startFBO();
                     void endFBO();
                     void fillBuffer();

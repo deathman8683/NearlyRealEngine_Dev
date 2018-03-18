@@ -16,7 +16,6 @@
     #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../lib/FastNoise/FastNoise.h"
-    #include "../../Lighting/NRE_Light.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
 
     /**
@@ -83,7 +82,7 @@
 
                     //## Methods ##//
                     void constructMesh(World* w);
-                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera);
                     void save();
                     void load(World* w);
                     void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);

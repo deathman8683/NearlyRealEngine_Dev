@@ -110,7 +110,7 @@
                 active = state;
             }
 
-            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
+            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera) {
                 NREfloat eye[3] = {camera.getEye().getX(), camera.getEye().getY(), camera.getEye().getZ()};
 
                 setActive(camera.AABBCollision(getBounding()));
@@ -118,22 +118,6 @@
                 if (isActive()) {
                     glUseProgram(shader.getProgramID());
                         vao.bind();
-
-                            /*for (unsigned int i = 0; i < light.size(); i = i + 1) {
-                                std::ostringstream index;
-                                index << i;
-                                glUniform4fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPositionValue());
-                                glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensitiesValue());
-                                glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].coneDirection").c_str()), 1, light.at(i)->getConeDirectionValue());
-                                glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].attenuation").c_str()), 1, light.at(i)->getAttenuationValue());
-                                glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
-                                glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());
-                            }
-
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
-                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
-                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());*/
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
                             glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());

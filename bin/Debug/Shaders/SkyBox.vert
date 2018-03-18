@@ -6,10 +6,10 @@
     uniform mat4 projection;
     uniform mat4 modelview;
 
-    out vec3 UV;
+    out vec3 vertex;
 
     void main() {
         gl_Position = projection * modelview * vec4(in_Vertex, 1.0);
 
-        UV = in_Vertex;
+        vertex = in_Vertex;
     }
