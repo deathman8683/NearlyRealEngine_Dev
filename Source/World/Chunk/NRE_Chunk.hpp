@@ -82,7 +82,7 @@
 
                     //## Methods ##//
                     void constructMesh(World* w);
-                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera);
                     void save();
                     void load(World* w);
                     void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);

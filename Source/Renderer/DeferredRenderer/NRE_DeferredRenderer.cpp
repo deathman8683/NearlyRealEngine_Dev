@@ -42,7 +42,7 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &lightModelView, Maths::Matrix4x4<NREfloat> &cameraModelView, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
                 NREfloat eye[3] = {camera.getEye().getX(), camera.getEye().getY(), camera.getEye().getZ()};
 
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -61,10 +61,6 @@
                         getFrameBuffer().getColorBuffer(2)->bind();
                             glUniform1i(glGetUniformLocation(shader.getProgramID(), "texNormal"), 2);
 
-                        glActiveTexture(GL_TEXTURE3);
-                        getFrameBuffer().getDepthStencilBuffer()->bind();
-                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "texShadow"), 3);
-
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
                             index << i;
@@ -76,17 +72,11 @@
                             glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());
                         }
 
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "lightModelView"), 1, GL_TRUE, lightModelView.value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "cameraModelView"), 1, GL_TRUE, cameraModelView.value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
-
                         glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
                         glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                        glActiveTexture(GL_TEXTURE3);
-                            getFrameBuffer().getDepthStencilBuffer()->unbind();
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(2)->unbind();
                         glActiveTexture(GL_TEXTURE1);
@@ -106,17 +96,6 @@
             }
 
             void DeferredRenderer::endRendering() {
-                getFrameBuffer().unbind();
-            }
-
-            void DeferredRenderer::beginShadow() {
-                getFrameBuffer().bind();
-                    glClear(GL_DEPTH_BUFFER_BIT);
-
-                    glDrawBuffer(GL_NONE);
-            }
-
-            void DeferredRenderer::endShadow() {
                 getFrameBuffer().unbind();
             }
 

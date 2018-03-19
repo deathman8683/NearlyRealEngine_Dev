@@ -4,7 +4,6 @@
     in vec3 in_Vertex;
     in vec2 in_UV;
 
-    uniform vec3 cameraV;
 
     out vec2 uv;
     out vec3 cameraVertex;
@@ -13,5 +12,4 @@
     	gl_Position = vec4(in_Vertex, 1.0);
 
         uv = in_UV;
-        cameraVertex = cameraV;
     }

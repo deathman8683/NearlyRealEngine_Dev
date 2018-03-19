@@ -190,14 +190,13 @@
                 vao.access(buffer, GL_INT, true);
             }
 
-            void SkyBox::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Maths::Point3D<NREfloat> const& eye) {
-                modelview.translate(Maths::Vector3D<NREfloat>(eye));
+            void SkyBox::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Maths::Point3D<NREfloat> const& eye) {
+                MVP.translate(Maths::Vector3D<NREfloat>(eye));
                 glUseProgram(shader.getProgramID());
                     getVAO().bind();
                         bind();
 
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "MVP"), 1, GL_TRUE, MVP.value());
 
                         glDepthMask(GL_FALSE);
                         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -206,7 +205,7 @@
                         unbind();
                     getVAO().unbind();
                 glUseProgram(0);
-                modelview.translate(Maths::Vector3D<NREfloat>(-eye));
+                MVP.translate(Maths::Vector3D<NREfloat>(-eye));
             }
 
         };

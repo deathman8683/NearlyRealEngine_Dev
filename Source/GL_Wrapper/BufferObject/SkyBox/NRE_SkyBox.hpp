@@ -84,7 +84,7 @@
                     void access() const;
                     void free();
                     void fillBuffer();
-                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Maths::Point3D<NREfloat> const& eye);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Maths::Point3D<NREfloat> const& eye);
 
                     //## Access Operator ##//
 

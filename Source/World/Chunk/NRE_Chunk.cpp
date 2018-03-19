@@ -110,7 +110,7 @@
                 active = state;
             }
 
-            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera) {
+            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera) {
                 NREfloat eye[3] = {camera.getEye().getX(), camera.getEye().getY(), camera.getEye().getZ()};
 
                 setActive(camera.AABBCollision(getBounding()));
@@ -119,8 +119,7 @@
                     glUseProgram(shader.getProgramID());
                         vao.bind();
 
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "MVP"), 1, GL_TRUE, MVP.value());
                             glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
 
                             glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
