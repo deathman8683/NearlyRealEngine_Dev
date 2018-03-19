@@ -28,12 +28,13 @@
              */
             class Texture2D : public TextureBuffer, public BufferObject, public SDL::Surface {
                 private:
+                    GLenum type;
 
                 public:
                     //## Constructor ##//
                     Texture2D();
                     Texture2D(std::string const& path);
-                    Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat);
+                    Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t = DEFAULT_TYPE);
 
                     //## Copy-Constructor ##//
                     Texture2D(Texture2D const& tex);
@@ -47,6 +48,7 @@
                     GLenum const getType() const;
 
                     //## Setter ##//
+                    void setType(GLenum const& t);
 
                     //## Methods ##//
                     void bind() const;
@@ -72,7 +74,7 @@
                     //## Shift Operator ##//
 
                 private:
-                    static GLenum TYPE;
+                    static GLenum DEFAULT_TYPE;
             };
 
         };

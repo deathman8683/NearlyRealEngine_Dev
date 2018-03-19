@@ -16,11 +16,14 @@
         engineWorld.constructChunksMesh();
 
         Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
-        Renderer::Shader deferredShader("Shaders/DeferredShading.vert", "Shaders/DeferredShading.frag", true);
+        Renderer::Shader deferredShading("Shaders/DeferredShading.vert", "Shaders/DeferredShading.frag", true);
         Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
+
         std::vector<Light::Light*> engineLighting;
-        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(1, 1, 1), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0, 0.06, 0);
+        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(0.2, 0.2, 0.2), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0, 0.06, 0);
+        Light::Light engineLight2(Maths::Point4D<NREfloat>(0, 0, 80, 1), Maths::Vector3D<NREfloat>(1, 1, 1), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.05, 0.01, 360);
         engineLighting.push_back(&engineLight1);
+        engineLighting.push_back(&engineLight2);
 
         Maths::Matrix4x4<NREfloat> projection, modelview;
 
@@ -31,7 +34,6 @@
         camera.computeProjectionMatrix(projection);
 
         Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(800.0, 600.0));
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         while(!camera.getQuit())
         {
@@ -40,13 +42,15 @@
             camera.update();
 
             engineDeferredRenderer.startFBO();
+                //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                 modelview.setIdentity();
                 camera.setView(modelview);
 
                 engineSkybox.render(skyBoxShader, modelview, projection, camera.getEye());
                 engineSkybox.bind();
-                    engineWorld.render(deferredShader, modelview, projection, camera);
+                    engineWorld.render(deferredShading, modelview, projection, camera);
                 engineSkybox.unbind();
+                //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             engineDeferredRenderer.endFBO();
 
             engineDeferredRenderer.render(deferredRendering, camera, engineLighting);

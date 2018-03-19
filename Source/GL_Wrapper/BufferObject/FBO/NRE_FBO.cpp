@@ -14,8 +14,23 @@
             }
 
             FBO::FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthStencilBuffer(true), size(w, h) {
-                allocateColorBuffer(nbColorBuffer);
+                std::vector<GLenum> format, type;
+                std::vector<GLint> internalFormat;
+                format.push_back(GL_RGBA);
+                format.push_back(GL_RGBA);
+                format.push_back(GL_RGBA);
+                type.push_back(GL_UNSIGNED_BYTE);
+                type.push_back(GL_FLOAT);
+                type.push_back(GL_UNSIGNED_BYTE);
+                internalFormat.push_back(GL_RGBA);
+                internalFormat.push_back(GL_RGBA);
+                internalFormat.push_back(GL_RGBA);
+                allocateColorBuffer(nbColorBuffer, format, internalFormat, type);
                 allocateRenderBuffer();
+
+                if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+                    std::cout << "ERROR" << std::endl;
+                }
             }
 
             FBO::FBO(FBO const& buf) : BufferObject::BufferObject(buf), FrameBuffer::FrameBuffer(buf), colorBuffer(buf.getColorBuffers()), depthStencilBuffer(buf.getDepthStencilBuffer()) {
@@ -60,10 +75,10 @@
                 this->size = size;
             }
 
-            void FBO::allocateColorBuffer(GLuint const& nbColorBuffer) {
+            void FBO::allocateColorBuffer(GLuint const& nbColorBuffer, std::vector<GLenum> const& format, std::vector<GLint> const& internalFormat, std::vector<GLenum> const& type) {
                 bind();
                     for (GLuint i = 0; i < nbColorBuffer; i = i + 1) {
-                        push_back(new Texture2D(getSize().getX(), getSize().getY(), DEFAULT_FORMAT, DEFAULT_INTERNAL_FORMAT));
+                        push_back(new Texture2D(getSize().getX(), getSize().getY(), format[i], internalFormat[i], type[i]));
                         attachColorBuffer(GL_COLOR_ATTACHMENT0 + i, *getColorBuffer(i));
                     }
                 unbind();

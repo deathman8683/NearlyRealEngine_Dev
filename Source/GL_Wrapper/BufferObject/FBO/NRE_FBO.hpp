@@ -61,7 +61,7 @@
                     void setSize(Maths::Vector2D<GLushort> const& size);
 
                     //## Methods ##//
-                    void allocateColorBuffer(GLuint const& nbColorBuffer);
+                    void allocateColorBuffer(GLuint const& nbColorBuffer, std::vector<GLenum> const& format, std::vector<GLint> const& internalFormat, std::vector<GLenum> const& type);
                     void allocateRenderBuffer();
                     void push_back(Texture2D* const& buffer);
                     void access();

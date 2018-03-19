@@ -4,27 +4,31 @@
     namespace NRE {
         namespace GL {
 
-            GLenum Texture2D::TYPE = GL_UNSIGNED_BYTE;
+            GLenum Texture2D::DEFAULT_TYPE = GL_UNSIGNED_BYTE;
 
             Texture2D::Texture2D() {
             }
 
-            Texture2D::Texture2D(std::string const& path) : TextureBuffer::TextureBuffer(true), SDL::Surface::Surface(path) {
+            Texture2D::Texture2D(std::string const& path) : TextureBuffer::TextureBuffer(true), SDL::Surface::Surface(path), type(DEFAULT_TYPE) {
                 allocateAndFill(true);
             }
 
-            Texture2D::Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat) : TextureBuffer::TextureBuffer(true), SDL::Surface::Surface(w, h, glFormat, glInternalFormat) {
+            Texture2D::Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t) : TextureBuffer::TextureBuffer(true), SDL::Surface::Surface(w, h, glFormat, glInternalFormat), type(t) {
                 allocate(true);
             }
 
-            Texture2D::Texture2D(Texture2D const& tex) : TextureBuffer::TextureBuffer(tex), BufferObject::BufferObject(tex), SDL::Surface::Surface(tex) {
+            Texture2D::Texture2D(Texture2D const& tex) : TextureBuffer::TextureBuffer(tex), BufferObject::BufferObject(tex), SDL::Surface::Surface(tex), type(tex.getType()) {
             }
 
             Texture2D::~Texture2D() {
             }
 
             GLenum const Texture2D::getType() const {
-                return TYPE;
+                return type;
+            }
+
+            void Texture2D::setType(GLenum const& t) {
+                type = t;
             }
 
             void Texture2D::bind() const {
