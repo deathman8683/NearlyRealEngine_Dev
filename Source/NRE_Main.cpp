@@ -22,7 +22,7 @@
         std::vector<Light::Light*> engineLighting;
         Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(0., 0., 0.), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.0, 0.0);
         Light::Light engineLight2(Maths::Point4D<NREfloat>(55.0, -62.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, .0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-        Light::Light engineLight3(Maths::Point4D<NREfloat>(61.0, -29.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+        Light::Light engineLight3(Maths::Point4D<NREfloat>(61.0, -29.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 15.0);
         Light::Light engineLight4(Maths::Point4D<NREfloat>(55.0, 0.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, 1.0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
         Light::Light engineLight5(Maths::Point4D<NREfloat>(94.0, -38.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, .0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
         engineLighting.push_back(&engineLight1);
@@ -31,7 +31,7 @@
         engineLighting.push_back(&engineLight4);
         engineLighting.push_back(&engineLight5);
 
-        Maths::Matrix4x4<NREfloat> projection, modelview;
+        Maths::Matrix4x4<NREfloat> projection, modelview, modelviewDR;
 
         Time::Clock engineClock;
 
@@ -47,7 +47,7 @@
 
             camera.update();
 
-            engineDeferredRenderer.startFBO();
+            engineDeferredRenderer.beginRendering();
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                 modelview.setIdentity();
                 camera.setView(modelview);
@@ -57,9 +57,28 @@
                     engineWorld.render(deferredShading, modelview, projection, camera);
                 engineSkybox.unbind();
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            engineDeferredRenderer.endFBO();
+            engineDeferredRenderer.endRendering();
 
-            engineDeferredRenderer.render(deferredRendering, camera, engineLighting);
+            Maths::Point3D<NREfloat> tmp = camera.getEye();
+            camera.setEye(Maths::Point3D<NREfloat>(engineLight3.getPosition().getX(), engineLight3.getPosition().getY(), engineLight3.getPosition().getZ()));
+
+            modelviewDR = modelview;
+
+            engineDeferredRenderer.beginShadow();
+                //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                modelview.setIdentity();
+                camera.setView(modelview);
+
+                engineSkybox.render(skyBoxShader, modelview, projection, camera.getEye());
+                engineSkybox.bind();
+                    engineWorld.render(deferredShading, modelview, projection, camera);
+                engineSkybox.unbind();
+                //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            engineDeferredRenderer.endShadow();
+
+            camera.setEye(tmp);
+
+            engineDeferredRenderer.render(deferredRendering, modelviewDR, projection, camera, engineLighting);
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }

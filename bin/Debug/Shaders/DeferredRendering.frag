@@ -16,6 +16,9 @@
     in vec3 cameraVertex;
     in vec2 uv;
 
+    uniform mat4 projection;
+    uniform mat4 modelview;
+
     uniform sampler2D texDiffuse;
     uniform sampler2D texPosition;
     uniform sampler2D texNormal;
@@ -102,4 +105,6 @@
                 out_Color = vec4(pow(linearColor, gamma), 1.0);
             }
         }
+        /*float c = linearizeDepth(uv);
+        out_Color = vec4(c, c, c, 1.0);*/
     }
