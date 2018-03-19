@@ -61,6 +61,10 @@
                         getFrameBuffer().getColorBuffer(2)->bind();
                             glUniform1i(glGetUniformLocation(shader.getProgramID(), "texNormal"), 2);
 
+                        glActiveTexture(GL_TEXTURE3);
+                        getFrameBuffer().getDepthStencilBuffer()->bind();
+                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "texShadow"), 3);
+
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
                             index << i;
@@ -77,6 +81,8 @@
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
+                        glActiveTexture(GL_TEXTURE3);
+                            getFrameBuffer().getDepthStencilBuffer()->unbind();
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(2)->unbind();
                         glActiveTexture(GL_TEXTURE1);

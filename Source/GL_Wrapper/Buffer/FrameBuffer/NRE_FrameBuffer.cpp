@@ -36,7 +36,7 @@
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
             }
 
-            void FrameBuffer::attachColorBuffer(GLenum const& attachment, Texture2D const& texture) const {
+            void FrameBuffer::attachBuffer(GLenum const& attachment, Texture2D const& texture) const {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, texture.getID(), 0);
             }
 

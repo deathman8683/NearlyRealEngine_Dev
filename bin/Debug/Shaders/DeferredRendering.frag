@@ -19,9 +19,17 @@
     uniform sampler2D texDiffuse;
     uniform sampler2D texPosition;
     uniform sampler2D texNormal;
+    uniform sampler2D texShadow;
     uniform samplerCube skyBox;
 
     out vec4 out_Color;
+
+    float linearizeDepth(in vec2 uv) {
+        float zNear = 0.1;
+        float zFar  = 1000.0;
+        float depth = texture(texShadow, uv).x;
+        return (2.0 * zNear) / (zFar + zNear - depth * (zFar - zNear));
+    }
 
     vec3 applyLight(Light light, vec3 surfacePos, vec3 surfaceColor, vec4 surfaceNormal, vec3 surfaceCamera, float num) {
         vec3 lightVertex;

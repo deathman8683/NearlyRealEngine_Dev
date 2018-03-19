@@ -50,7 +50,7 @@
                     void deleteID() override;
                     void bind() const;
                     void unbind() const;
-                    void attachColorBuffer(GLenum const& attachment, Texture2D const& texture) const;
+                    void attachBuffer(GLenum const& attachment, Texture2D const& texture) const;
                     void attachRenderBuffer(GLenum const& attachment, GLenum const& renderBufferTarget, GLuint const& renderBuffer) const;
                     void access() const;
 

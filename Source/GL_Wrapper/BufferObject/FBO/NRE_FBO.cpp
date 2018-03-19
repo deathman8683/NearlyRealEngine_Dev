@@ -13,7 +13,7 @@
             FBO::FBO(GLsizei const& w, GLsizei const& h) : FBO::FBO(w, h, 1) {
             }
 
-            FBO::FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthStencilBuffer(true), size(w, h) {
+            FBO::FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthStencilBuffer(0), size(w, h) {
                 std::vector<GLenum> format, type;
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
@@ -51,7 +51,7 @@
                 return colorBuffer[index];
             }
 
-            RenderBuffer const& FBO::getDepthStencilBuffer() const {
+            Texture2D* const& FBO::getDepthStencilBuffer() const {
                 return depthStencilBuffer;
             }
 
@@ -67,7 +67,7 @@
                 colorBuffer[index] = buffer;
             }
 
-            void FBO::setDepthStencilBuffer(RenderBuffer const& buffer) {
+            void FBO::setDepthStencilBuffer(Texture2D* const& buffer) {
                 depthStencilBuffer = buffer;
             }
 
@@ -79,15 +79,15 @@
                 bind();
                     for (GLuint i = 0; i < nbColorBuffer; i = i + 1) {
                         push_back(new Texture2D(getSize().getX(), getSize().getY(), format[i], internalFormat[i], type[i]));
-                        attachColorBuffer(GL_COLOR_ATTACHMENT0 + i, *getColorBuffer(i));
+                        attachBuffer(GL_COLOR_ATTACHMENT0 + i, *getColorBuffer(i));
                     }
                 unbind();
             }
 
             void FBO::allocateRenderBuffer() {
                 bind();
-                    depthStencilBuffer.allocate(GL_DEPTH24_STENCIL8, getSize().getX(), getSize().getY());
-                    attachRenderBuffer(GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, getDepthStencilBuffer().getID());
+                    depthStencilBuffer = new Texture2D(getSize().getX(), getSize().getY(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT32F, GL_FLOAT);
+                    attachBuffer(GL_DEPTH_ATTACHMENT, *depthStencilBuffer);
                 unbind();
             }
 
