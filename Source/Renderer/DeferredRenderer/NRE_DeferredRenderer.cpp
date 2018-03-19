@@ -12,7 +12,7 @@
                 fillBuffer();
             }
 
-            DeferredRenderer::DeferredRenderer(DeferredRenderer const& renderer) : gBuffer(renderer.getFrameBuffer()), modelview(renderer.getModelview()), projection(renderer.getProjection()), buffer(renderer.getBuffer()), vao(renderer.getVAO()) {
+            DeferredRenderer::DeferredRenderer(DeferredRenderer const& renderer) : gBuffer(renderer.getFrameBuffer()), buffer(renderer.getBuffer()), vao(renderer.getVAO()) {
             }
 
             DeferredRenderer::~DeferredRenderer() {
@@ -20,14 +20,6 @@
 
             GL::FBO const& DeferredRenderer::getFrameBuffer() const {
                 return gBuffer;
-            }
-
-            Maths::Matrix4x4<NREfloat> const& DeferredRenderer::getModelview() const {
-                return modelview;
-            }
-
-            Maths::Matrix4x4<NREfloat> const& DeferredRenderer::getProjection() const {
-                return projection;
             }
 
             GL::VBO const& DeferredRenderer::getBuffer() const {
@@ -40,14 +32,6 @@
 
             void DeferredRenderer::setFrameBuffer(GL::FBO const& buffer) {
                 gBuffer = buffer;
-            }
-
-            void DeferredRenderer::setModelview(Maths::Matrix4x4<NREfloat> const& mat) {
-                modelview = mat;
-            }
-
-            void DeferredRenderer::setProjection(Maths::Matrix4x4<NREfloat> const& mat) {
-                projection = mat;
             }
 
             void DeferredRenderer::setBuffer(GL::VBO const& buffer) {
@@ -106,9 +90,6 @@
             void DeferredRenderer::startFBO() {
                 getFrameBuffer().bind();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-                    //glActiveTexture(GL_TEXTURE0);
-                    //glEnable(GL_TEXTURE_2D);
 
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
                     glDrawBuffers(3, buffers);

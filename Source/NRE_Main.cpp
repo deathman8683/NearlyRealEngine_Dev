@@ -59,8 +59,6 @@
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             engineDeferredRenderer.endFBO();
 
-            //engineLight2.setPosition(Maths::Point4D<NREfloat>(camera.getEye(), 1.0));
-
             engineDeferredRenderer.render(deferredRendering, camera, engineLighting);
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());

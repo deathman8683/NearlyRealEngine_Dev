@@ -35,8 +35,6 @@
             class DeferredRenderer {
                 private:
                     GL::FBO gBuffer;
-                    Maths::Matrix4x4<NREfloat> modelview;
-                    Maths::Matrix4x4<NREfloat> projection;
                     GL::VBO buffer;
                     GL::VAO vao;
 
@@ -55,15 +53,11 @@
 
                     //## Getter ##//
                     GL::FBO const& getFrameBuffer() const;
-                    Maths::Matrix4x4<NREfloat> const& getModelview() const;
-                    Maths::Matrix4x4<NREfloat> const& getProjection() const;
                     GL::VBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
 
                     //## Setter ##//
                     void setFrameBuffer(GL::FBO const& buffer);
-                    void setModelview(Maths::Matrix4x4<NREfloat> const& mat);
-                    void setProjection(Maths::Matrix4x4<NREfloat> const& mat);
                     void setBuffer(GL::VBO const& buffer);
                     void setVAO(GL::VAO const& vao);
 
