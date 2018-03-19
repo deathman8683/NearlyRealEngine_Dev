@@ -17,7 +17,8 @@
     in vec2 uv;
 
     uniform mat4 projection;
-    uniform mat4 modelview;
+    uniform mat4 cameraModelView;
+    uniform mat4 lightModelView;
 
     uniform sampler2D texDiffuse;
     uniform sampler2D texPosition;
@@ -32,6 +33,13 @@
         float zFar  = 1000.0;
         float depth = texture(texShadow, uv).x;
         return (2.0 * zNear) / (zFar + zNear - depth * (zFar - zNear));
+    }
+
+    float readShadowMap(vec3 pos, Light light) {
+        vec3 position = (inverse(cameraModelView) * lightModelView * vec4(pos, 1.0)).xyz;
+        float d = length(light.position.xyz - position);
+        float depth = texture(texShadow, position.xy * vec2(0.5, 0.5) + vec2(0.5, 0.5)).x;
+        return float(d > depth);
     }
 
     vec3 applyLight(Light light, vec3 surfacePos, vec3 surfaceColor, vec4 surfaceNormal, vec3 surfaceCamera, float num) {
@@ -76,12 +84,14 @@
              specularCoefficient = max(0.0, dot(surfaceCamera, reflect(-lightVertex, surfaceNormal.xyz)));
         }
 
+        float shadow = readShadowMap(surfacePos, light);
+
         vec3 ambient = light.ambientCoefficient * surfaceColor.rgb * light.intensities;
 
-        float diffuseCoefficient = max(0.0, dot(surfaceNormal.xyz, lightVertex));
+        float diffuseCoefficient = max(0.0, dot(surfaceNormal.xyz, lightVertex)) * shadow;
         vec3 diffuse = diffuseCoefficient * surfaceColor.rgb * light.intensities;
 
-        vec3 specular = specularCoefficient * surfaceColor * light.intensities;
+        vec3 specular = specularCoefficient * surfaceColor * light.intensities * shadow;
 
         return ambient + attenuation*(diffuse + specular);
     }
@@ -105,6 +115,4 @@
                 out_Color = vec4(pow(linearColor, gamma), 1.0);
             }
         }
-        /*float c = linearizeDepth(uv);
-        out_Color = vec4(c, c, c, 1.0);*/
     }

@@ -11,7 +11,7 @@
     int main(int argc, char **argv) {
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
         Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), Maths::Vector2D<NREfloat>(0, 0), true);
-
+        Camera::FixedCamera lightCamera(70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(-112.081, -82.3207, 116.702), Maths::Vector3D<NREfloat>(-111.261, -82.0238, 116.213), Maths::Vector2D<NREfloat>(-29.3, -340.101), true);
         World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
         engineWorld.constructChunksMesh();
 
@@ -20,18 +20,18 @@
         Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
 
         std::vector<Light::Light*> engineLighting;
-        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(0., 0., 0.), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.0, 0.0);
+        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(1., 1., 1.), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.0, 0.0);
         Light::Light engineLight2(Maths::Point4D<NREfloat>(55.0, -62.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, .0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
         Light::Light engineLight3(Maths::Point4D<NREfloat>(61.0, -29.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 15.0);
         Light::Light engineLight4(Maths::Point4D<NREfloat>(55.0, 0.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, 1.0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
         Light::Light engineLight5(Maths::Point4D<NREfloat>(94.0, -38.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, .0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
         engineLighting.push_back(&engineLight1);
-        engineLighting.push_back(&engineLight2);
-        engineLighting.push_back(&engineLight3);
-        engineLighting.push_back(&engineLight4);
-        engineLighting.push_back(&engineLight5);
+        //engineLighting.push_back(&engineLight2);
+        //engineLighting.push_back(&engineLight3);
+        //engineLighting.push_back(&engineLight4);
+        //engineLighting.push_back(&engineLight5);
 
-        Maths::Matrix4x4<NREfloat> projection, modelview, modelviewDR;
+        Maths::Matrix4x4<NREfloat> projection, cameraModelView, lightModelView;
 
         Time::Clock engineClock;
 
@@ -49,36 +49,29 @@
 
             engineDeferredRenderer.beginRendering();
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-                modelview.setIdentity();
-                camera.setView(modelview);
+                cameraModelView.setIdentity();
+                camera.setView(cameraModelView);
 
-                engineSkybox.render(skyBoxShader, modelview, projection, camera.getEye());
+                engineSkybox.render(skyBoxShader, cameraModelView, projection, camera.getEye());
                 engineSkybox.bind();
-                    engineWorld.render(deferredShading, modelview, projection, camera);
+                    engineWorld.render(deferredShading, cameraModelView, projection, camera);
                 engineSkybox.unbind();
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             engineDeferredRenderer.endRendering();
 
-            Maths::Point3D<NREfloat> tmp = camera.getEye();
-            camera.setEye(Maths::Point3D<NREfloat>(engineLight3.getPosition().getX(), engineLight3.getPosition().getY(), engineLight3.getPosition().getZ()));
-
-            modelviewDR = modelview;
-
             engineDeferredRenderer.beginShadow();
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-                modelview.setIdentity();
-                camera.setView(modelview);
+                lightModelView.setIdentity();
+                lightCamera.setView(lightModelView);
 
-                engineSkybox.render(skyBoxShader, modelview, projection, camera.getEye());
+                engineSkybox.render(skyBoxShader, lightModelView, projection, lightCamera.getEye());
                 engineSkybox.bind();
-                    engineWorld.render(deferredShading, modelview, projection, camera);
+                    engineWorld.render(deferredShading, lightModelView, projection, lightCamera);
                 engineSkybox.unbind();
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             engineDeferredRenderer.endShadow();
 
-            camera.setEye(tmp);
-
-            engineDeferredRenderer.render(deferredRendering, modelviewDR, projection, camera, engineLighting);
+            engineDeferredRenderer.render(deferredRendering, lightModelView, cameraModelView, projection, camera, engineLighting);
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }

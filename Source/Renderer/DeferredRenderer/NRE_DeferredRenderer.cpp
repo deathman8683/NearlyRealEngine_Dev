@@ -42,7 +42,7 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &lightModelView, Maths::Matrix4x4<NREfloat> &cameraModelView, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
                 NREfloat eye[3] = {camera.getEye().getX(), camera.getEye().getY(), camera.getEye().getZ()};
 
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -75,8 +75,9 @@
                             glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
                             glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());
                         }
-                        
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "modelview"), 1, GL_TRUE, modelview.value());
+
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "lightModelView"), 1, GL_TRUE, lightModelView.value());
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "cameraModelView"), 1, GL_TRUE, cameraModelView.value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "projection"), 1, GL_TRUE, projection.value());
 
                         glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
