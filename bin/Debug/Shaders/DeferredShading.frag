@@ -7,13 +7,12 @@
     in vec3 cameraVertex;
 
     uniform samplerCube skyBox;
-
     out vec4 [3] fragData;
 
     void main() {
         if (color == vec3(1.0, 1.0, 1.0)) {
             fragData[0] = texture(skyBox, -refract(normalize(cameraVertex - vertex), normal, 1.0 / 1.333));
-        	fragData[2] = vec4(normal, -1.0);
+        	fragData[2] = vec4(normal, 0.0);
         } else {
     	    fragData[0] = vec4(color, 1.0);
         	fragData[2] = vec4(normal, 1.0);

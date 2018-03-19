@@ -107,7 +107,7 @@
                 getFrameBuffer().bind();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                    glActiveTexture(GL_TEXTURE0);
+                    //glActiveTexture(GL_TEXTURE0);
                     //glEnable(GL_TEXTURE_2D);
 
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
@@ -119,7 +119,7 @@
             }
 
             void DeferredRenderer::fillBuffer() {
-                GLfloat vData[] = {
+                GLint vData[] = {
                     -1, -1, 0,
                     1, -1, 0,
                     1, 1, 0,
@@ -138,8 +138,8 @@
                 data.push_back(uvData);
 
 
-                buffer.allocateAndFill(sizeof(GLfloat), 6, GL_STREAM_DRAW, data);
-                vao.access(buffer, GL_FLOAT, true);
+                buffer.allocateAndFill(sizeof(GLint), 6, GL_STREAM_DRAW, data);
+                vao.access(buffer, GL_INT, true);
             }
 
         };

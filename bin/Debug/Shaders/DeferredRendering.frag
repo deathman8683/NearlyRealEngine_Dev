@@ -27,7 +27,7 @@
         vec3 lightVertex;
         float attenuation = 1.0;
         float specularCoefficient;
-        if (surfaceNormal.w == -1.0) {
+        if (surfaceNormal.w == 0.0) {
             if (num == 0) {
                 return surfaceColor;
             } else {
@@ -81,13 +81,13 @@
         vec4 normal = texture(texNormal, uv);
         vec3 vertex = texture(texPosition, uv).xyz;
 
-        if (normal.w == 0.0) {
+        if (normal == vec4(1.0, 1.0, 1.0, 1.0)) {
             out_Color = vec4(color, 1.0);
         } else {
             for (int i = 0; i < numLights; i = i + 1) {
                 linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraVertex - vertex), i);
             }
-            if (normal.w == -1.0) {
+            if (normal.w == 0.0) {
                 out_Color = vec4(linearColor, 1.0);
             } else {
                 vec3 gamma = vec3(1.0/2.2);

@@ -10,5 +10,5 @@
     void main() {
         fragData[0] = textureCube(skyBox, vertex);
     	fragData[1] = vec4(vertex, 1.0);
-    	fragData[2] = vec4(0.0, 0.0, 0.0, 0.0);
+    	fragData[2] = vec4(1.0, 1.0, 1.0, 1.0);
     }
