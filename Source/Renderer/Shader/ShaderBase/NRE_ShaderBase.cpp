@@ -52,23 +52,23 @@
 
                 const GLchar* sourceCodeChar = sourceCode.c_str();
 
-                glShaderSource(id, 1, &sourceCodeChar, 0);
+                glShaderSource(getID(), 1, &sourceCodeChar, 0);
 
-                glCompileShader(id);
+                glCompileShader(getID());
 
                 GLint compileError(0);
-                glGetShaderiv(id, GL_COMPILE_STATUS, &compileError);
+                glGetShaderiv(getID(), GL_COMPILE_STATUS, &compileError);
                 if (compileError != GL_TRUE) {
                     GLint errorSize = 0;
-                    glGetShaderiv(id, GL_INFO_LOG_LENGTH, &errorSize);
+                    glGetShaderiv(getID(), GL_INFO_LOG_LENGTH, &errorSize);
 
                     char *error = new char[errorSize + 1];
 
-                    glGetShaderInfoLog(id, errorSize, &errorSize, error);
+                    glGetShaderInfoLog(getID(), errorSize, &errorSize, error);
                     std::string eError(error);
 
                     delete[] error;
-                    glDeleteShader(id);
+                    glDeleteShader(getID());
 
                     throw (Exception::ShaderException(getPath() + " : " + std::string(eError)));
                 }

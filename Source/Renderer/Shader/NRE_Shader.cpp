@@ -75,10 +75,12 @@
                     glGetShaderInfoLog(getID(), errorSize, NULL, error);
                     error[errorSize] = '\0';
 
-                    std::cout << std::string(error) << std::endl;;
+                    std::string eError(error);
 
                     delete[] error;
                     glDeleteProgram(getID());
+
+                    throw (Exception::ShaderException("Linking Error : " + std::string(eError)));
                 }
             }
 
