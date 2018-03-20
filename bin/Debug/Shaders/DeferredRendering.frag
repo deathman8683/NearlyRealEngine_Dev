@@ -17,9 +17,6 @@
 
     uniform vec3 cameraV;
 
-    uniform mat4 DepthBiasMVP;
-    uniform mat4 MVP;
-
     uniform sampler2D texDiffuse;
     uniform sampler2D texPosition;
     uniform sampler2D texNormal;
@@ -33,7 +30,7 @@
         float specularCoefficient;
         if (surfaceNormal.w == 0.0) {
             if (num == 0) {
-                return surfaceColor;
+                return (texture(skyBox, -refract(surfaceCamera, surfaceNormal.xyz, 1.0 / 1.333))).rgb;
             } else {
                 if (light.position.w == 0.0) {
                     lightVertex = normalize(light.position.xyz);
@@ -69,14 +66,14 @@
              specularCoefficient = max(0.0, dot(surfaceCamera, reflect(-lightVertex, surfaceNormal.xyz)));
         }
 
-        vec3 ambient = light.ambientCoefficient * surfaceColor.rgb * light.intensities;
+        vec3 ambient = light.ambientCoefficient * surfaceColor * light.intensities;
 
         float diffuseCoefficient = max(0.0, dot(surfaceNormal.xyz, lightVertex));
-        vec3 diffuse = diffuseCoefficient * surfaceColor.rgb * light.intensities;
+        vec3 diffuse = diffuseCoefficient * surfaceColor * light.intensities;
 
         vec3 specular = specularCoefficient * surfaceColor * light.intensities;
 
-        return ambient + attenuation*(diffuse + specular);
+        return ambient + attenuation * (diffuse + specular);
     }
 
     void main() {

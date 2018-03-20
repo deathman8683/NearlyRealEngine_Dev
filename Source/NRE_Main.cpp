@@ -16,7 +16,7 @@
         engineWorld.constructChunksMesh();
 
         Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
-        Renderer::Shader deferredShading("Shaders/DeferredShading.vert", "Shaders/DeferredShading.frag", true);
+        Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
         Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
 
         std::vector<Light::Light*> engineLighting;
@@ -47,21 +47,21 @@
 
             camera.update();
 
+            modelview.setIdentity();
+            camera.setView(modelview);
+
+            MVP = projection * modelview;
+
             engineDeferredRenderer.beginRendering();
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-                modelview.setIdentity();
-                camera.setView(modelview);
-
-                MVP = projection * modelview;
-
                 engineSkybox.render(skyBoxShader, MVP, camera.getEye());
-                engineSkybox.bind();
-                    engineWorld.render(deferredShading, MVP, camera);
-                engineSkybox.unbind();
+                engineWorld.render(gBufferPass, MVP, camera);
                 //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             engineDeferredRenderer.endRendering();
 
-            engineDeferredRenderer.render(deferredRendering, camera, engineLighting);
+            engineSkybox.bind();
+                engineDeferredRenderer.render(deferredRendering, camera, engineLighting);
+            engineSkybox.unbind();
 
             SDL_GL_SwapWindow(engineScene.getWindow().getItem());
         }

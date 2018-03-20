@@ -7,18 +7,19 @@
 
     uniform mat4 MVP;
 
-    uniform vec3 cameraV;
-
-    out vec3 cameraVertex;
     out vec3 color;
-    out vec3 normal;
+    out vec4 normal;
     out vec3 vertex;
 
     void main() {
         gl_Position = MVP * vec4(in_Vertex, 1.0);
 
-        normal = in_Normal;
+        if (in_Color == vec3(1.0, 1.0, 1.0)) {
+            normal = vec4(in_Normal, 0.0);
+        } else {
+            normal = vec4(in_Normal, 1.0);
+        }
+
         color = in_Color;
         vertex = in_Vertex;
-        cameraVertex = cameraV;
     }

@@ -32,6 +32,7 @@
                     GLint programID;
                     std::string vertexPath;
                     std::string fragmentPath;
+                    std::vector<GLuint> uniform;
 
                 public:
                     //## Constructor ##//
