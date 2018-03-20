@@ -13,7 +13,6 @@
                 FastNoise worldGen;
                 worldGen.SetNoiseType(FastNoise::Perlin);
                 worldGen.SetSeed(DEFAULT_SEED);
-                worldGen.SetFrequency(0.008);
                 generator = worldGen;
 
                 voxelMergingGlobalCache = new bool[Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * NRE::Voxel::FACE_NUM];

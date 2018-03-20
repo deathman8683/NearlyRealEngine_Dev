@@ -21,12 +21,21 @@
 
             enum VoxelType {
                 VOID,
-                GRASS,
-                STONE,
-                SAND,
+                OCEAN,
+                BEACH,
+                SCORCHED,
+                BARE,
+                TUNDRA,
                 SNOW,
-                DIRT,
-                WATER,
+                TEMPERATE_DESERT,
+                SUBTROPICAL_DESERT,
+                SHRUBLAND,
+                TAIGA,
+                GRASSLAND,
+                TEMPERATE_DECIDUOUS_FOREST,
+                TEMPERATE_RAIN_FOREST,
+                TROPICAL_SEASONAL_FOREST,
+                TROPICAL_RAIN_FOREST,
 
                 TYPE_NUM
             };

@@ -1,7 +1,7 @@
 
     /**
      * @file NRE_VoxelType.hpp
-     * @brief Declaration of Engine's Voxel's Object : Grass
+     * @brief Declaration of Engine's Voxel's Object : VoxelType
      * @author Louis ABEL
      * @version 1.0
      */
@@ -43,19 +43,19 @@
             };
 
             /**
-             * @class Grass
+             * @class Ocean
              * @brief Voxel's Object : a grass type voxel
              */
-            class Grass : public World::Voxel {
+            class Ocean : public World::Voxel {
                 public:
                     //## Constructor ##//
-                    Grass();
+                    Ocean();
 
                     //## Copy-Constructor ##//
-                    Grass(Grass const& vox);
+                    Ocean(Ocean const& vox);
 
                     //## Deconstructor ##//
-                    ~Grass();
+                    ~Ocean();
 
                     //## Methods ##//
                     GLint const getType() const override;
@@ -63,19 +63,19 @@
             };
 
             /**
-             * @class Stone
-             * @brief Voxel's Object : a stone type voxel
+             * @class Beach
+             * @brief Voxel's Object : a grass type voxel
              */
-            class Stone : public World::Voxel {
+            class Beach : public World::Voxel {
                 public:
                     //## Constructor ##//
-                    Stone();
+                    Beach();
 
                     //## Copy-Constructor ##//
-                    Stone(Stone const& vox);
+                    Beach(Beach const& vox);
 
                     //## Deconstructor ##//
-                    ~Stone();
+                    ~Beach();
 
                     //## Methods ##//
                     GLint const getType() const override;
@@ -83,19 +83,59 @@
             };
 
             /**
-             * @class Sand
-             * @brief Voxel's Object : a Sand type voxel
+             * @class Scorched
+             * @brief Voxel's Object : a grass type voxel
              */
-            class Sand : public World::Voxel {
+            class Scorched : public World::Voxel {
                 public:
                     //## Constructor ##//
-                    Sand();
+                    Scorched();
 
                     //## Copy-Constructor ##//
-                    Sand(Sand const& vox);
+                    Scorched(Scorched const& vox);
 
                     //## Deconstructor ##//
-                    ~Sand();
+                    ~Scorched();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class Bare
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class Bare : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Bare();
+
+                    //## Copy-Constructor ##//
+                    Bare(Bare const& vox);
+
+                    //## Deconstructor ##//
+                    ~Bare();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class Tundra
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class Tundra : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Tundra();
+
+                    //## Copy-Constructor ##//
+                    Tundra(Tundra const& vox);
+
+                    //## Deconstructor ##//
+                    ~Tundra();
 
                     //## Methods ##//
                     GLint const getType() const override;
@@ -104,7 +144,7 @@
 
             /**
              * @class Snow
-             * @brief Voxel's Object : a Snow type voxel
+             * @brief Voxel's Object : a grass type voxel
              */
             class Snow : public World::Voxel {
                 public:
@@ -123,19 +163,19 @@
             };
 
             /**
-             * @class Dirt
-             * @brief Voxel's Object : a Dirt type voxel
+             * @class TemperateDesert
+             * @brief Voxel's Object : a grass type voxel
              */
-            class Dirt : public World::Voxel {
+            class TemperateDesert : public World::Voxel {
                 public:
                     //## Constructor ##//
-                    Dirt();
+                    TemperateDesert();
 
                     //## Copy-Constructor ##//
-                    Dirt(Dirt const& vox);
+                    TemperateDesert(TemperateDesert const& vox);
 
                     //## Deconstructor ##//
-                    ~Dirt();
+                    ~TemperateDesert();
 
                     //## Methods ##//
                     GLint const getType() const override;
@@ -143,19 +183,159 @@
             };
 
             /**
-             * @class Water
-             * @brief Voxel's Object : a water type voxel
+             * @class SubtropicalDesert
+             * @brief Voxel's Object : a grass type voxel
              */
-            class Water : public World::Voxel {
+            class SubtropicalDesert : public World::Voxel {
                 public:
                     //## Constructor ##//
-                    Water();
+                    SubtropicalDesert();
 
                     //## Copy-Constructor ##//
-                    Water(Water const& vox);
+                    SubtropicalDesert(SubtropicalDesert const& vox);
 
                     //## Deconstructor ##//
-                    ~Water();
+                    ~SubtropicalDesert();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class Shrubland
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class Shrubland : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Shrubland();
+
+                    //## Copy-Constructor ##//
+                    Shrubland(Shrubland const& vox);
+
+                    //## Deconstructor ##//
+                    ~Shrubland();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class Taiga
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class Taiga : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Taiga();
+
+                    //## Copy-Constructor ##//
+                    Taiga(Taiga const& vox);
+
+                    //## Deconstructor ##//
+                    ~Taiga();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class Grassland
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class Grassland : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Grassland();
+
+                    //## Copy-Constructor ##//
+                    Grassland(Grassland const& vox);
+
+                    //## Deconstructor ##//
+                    ~Grassland();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class TemperateDeciduousForest
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class TemperateDeciduousForest : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    TemperateDeciduousForest();
+
+                    //## Copy-Constructor ##//
+                    TemperateDeciduousForest(TemperateDeciduousForest const& vox);
+
+                    //## Deconstructor ##//
+                    ~TemperateDeciduousForest();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class TemperateRainForest
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class TemperateRainForest : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    TemperateRainForest();
+
+                    //## Copy-Constructor ##//
+                    TemperateRainForest(TemperateRainForest const& vox);
+
+                    //## Deconstructor ##//
+                    ~TemperateRainForest();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class TropicalSeasonalForest
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class TropicalSeasonalForest : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    TropicalSeasonalForest();
+
+                    //## Copy-Constructor ##//
+                    TropicalSeasonalForest(TropicalSeasonalForest const& vox);
+
+                    //## Deconstructor ##//
+                    ~TropicalSeasonalForest();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class TropicalRainForest
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class TropicalRainForest : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    TropicalRainForest();
+
+                    //## Copy-Constructor ##//
+                    TropicalRainForest(TropicalRainForest const& vox);
+
+                    //## Deconstructor ##//
+                    ~TropicalRainForest();
 
                     //## Methods ##//
                     GLint const getType() const override;

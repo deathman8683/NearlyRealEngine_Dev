@@ -20,16 +20,16 @@
         Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
 
         std::vector<Light::Light*> engineLighting;
-        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(0.01, 0.02, 0.1), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.0, 0.0);
-        Light::Light engineLight2(Maths::Point4D<NREfloat>(55.0, -62.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, .0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(.8, .8, .8), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.0, 0.0);
+        /*Light::Light engineLight2(Maths::Point4D<NREfloat>(55.0, -62.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, .0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
         Light::Light engineLight3(Maths::Point4D<NREfloat>(61.0, -29.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
         Light::Light engineLight4(Maths::Point4D<NREfloat>(55.0, 0.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, 1.0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-        Light::Light engineLight5(Maths::Point4D<NREfloat>(94.0, -38.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, .0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+        Light::Light engineLight5(Maths::Point4D<NREfloat>(94.0, -38.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, .0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);*/
         engineLighting.push_back(&engineLight1);
-        engineLighting.push_back(&engineLight2);
+        /*engineLighting.push_back(&engineLight2);
         engineLighting.push_back(&engineLight3);
         engineLighting.push_back(&engineLight4);
-        engineLighting.push_back(&engineLight5);
+        engineLighting.push_back(&engineLight5);*/
 
         Maths::Matrix4x4<NREfloat> projection, modelview, MVP;
 

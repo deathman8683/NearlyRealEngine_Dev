@@ -88,11 +88,6 @@
             for (int i = 0; i < numLights; i = i + 1) {
                 linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
             }
-            if (normal.w == 0.0) {
-                out_Color = vec4(linearColor, 1.0);
-            } else {
-                vec3 gamma = vec3(1.0/2.2);
-                out_Color = vec4(pow(linearColor, gamma), 1.0);
-            }
+            out_Color = vec4(linearColor, 1.0);
         }
     }

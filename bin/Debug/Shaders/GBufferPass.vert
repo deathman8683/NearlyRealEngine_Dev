@@ -14,7 +14,7 @@
     void main() {
         gl_Position = MVP * vec4(in_Vertex, 1.0);
 
-        if (in_Color == vec3(1.0, 1.0, 1.0)) {
+        if (in_Color == vec3(68.0 / 255.0, 68.0 / 255.0, 122.0 / 255.0)) {
             normal = vec4(in_Normal, 0.0);
         } else {
             normal = vec4(in_Normal, 1.0);

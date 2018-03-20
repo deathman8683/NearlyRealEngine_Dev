@@ -31,7 +31,7 @@
             }
 
             Chunk::~Chunk() {
-                //save();
+                save();
                 for (GLuint i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
                     delete voxel[i];
                 }
@@ -173,7 +173,7 @@
                 yStr << getCoord().getY();
                 chunkName = "Data/Chunk/c." + xStr.str() + "." + yStr.str() + ".dat";
                 chunkFile.open(chunkName, std::ios::in);
-                /*if (chunkFile.is_open()) {
+                if (chunkFile.is_open()) {
                     GLuint x = 0, y = 0, z = 0;
                     GLuint voxNumber = 0, voxType = 0;
                     std::string line;
@@ -184,11 +184,11 @@
 
                         loadVoxels(x, y, z, voxNumber, voxType);
                     }
-                } else {*/
+                } else {
                     createPerlinTerrain(w);
                     chunkFile.open(chunkName, std::ios::trunc | std::ios::out);
                     chunkFile.close();
-                //}
+                }
             }
 
             void Chunk::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type) {
@@ -200,16 +200,64 @@
                             voxel[index] = new NRE::Voxel::Void;
                             break;
                         }
-                        case (NRE::Voxel::GRASS): {
-                            voxel[index] = new NRE::Voxel::Grass;
+                        case (NRE::Voxel::OCEAN): {
+                            voxel[index] = new NRE::Voxel::Ocean;
                             break;
                         }
-                        case (NRE::Voxel::STONE): {
-                            voxel[index] = new NRE::Voxel::Stone;
+                        case (NRE::Voxel::BEACH): {
+                            voxel[index] = new NRE::Voxel::Beach;
                             break;
                         }
-                        case (NRE::Voxel::WATER): {
-                            voxel[index] = new NRE::Voxel::Water;
+                        case (NRE::Voxel::SCORCHED): {
+                            voxel[index] = new NRE::Voxel::Scorched;
+                            break;
+                        }
+                        case (NRE::Voxel::BARE): {
+                            voxel[index] = new NRE::Voxel::Bare;
+                            break;
+                        }
+                        case (NRE::Voxel::TUNDRA): {
+                            voxel[index] = new NRE::Voxel::Tundra;
+                            break;
+                        }
+                        case (NRE::Voxel::SNOW): {
+                            voxel[index] = new NRE::Voxel::Snow;
+                            break;
+                        }
+                        case (NRE::Voxel::TEMPERATE_DESERT): {
+                            voxel[index] = new NRE::Voxel::TemperateDesert;
+                            break;
+                        }
+                        case (NRE::Voxel::SUBTROPICAL_DESERT): {
+                            voxel[index] = new NRE::Voxel::SubtropicalDesert;
+                            break;
+                        }
+                        case (NRE::Voxel::SHRUBLAND): {
+                            voxel[index] = new NRE::Voxel::Shrubland;
+                            break;
+                        }
+                        case (NRE::Voxel::TAIGA): {
+                            voxel[index] = new NRE::Voxel::Taiga;
+                            break;
+                        }
+                        case (NRE::Voxel::GRASSLAND): {
+                            voxel[index] = new NRE::Voxel::Grassland;
+                            break;
+                        }
+                        case (NRE::Voxel::TEMPERATE_DECIDUOUS_FOREST): {
+                            voxel[index] = new NRE::Voxel::TemperateDeciduousForest;
+                            break;
+                        }
+                        case (NRE::Voxel::TEMPERATE_RAIN_FOREST): {
+                            voxel[index] = new NRE::Voxel::TemperateRainForest;
+                            break;
+                        }
+                        case (NRE::Voxel::TROPICAL_SEASONAL_FOREST): {
+                            voxel[index] = new NRE::Voxel::TropicalSeasonalForest;
+                            break;
+                        }
+                        case (NRE::Voxel::TROPICAL_RAIN_FOREST): {
+                            voxel[index] = new NRE::Voxel::TropicalRainForest;
                             break;
                         }
                         default: {
