@@ -28,14 +28,14 @@
             class ShaderException : public ExceptionHandler {
                 public:
                     //## Constructor ##//
-                    ShaderException();
-                    ShaderException(std::string const& log);
+                    ShaderException() throw();
+                    ShaderException(std::string const& log) throw();
 
                     //## Copy-Constructor ##//
-                    ShaderException(ShaderException const& e);
+                    ShaderException(ShaderException const& e) throw();
 
                     //## Deconstructor ##//
-                    ~ShaderException();
+                    virtual ~ShaderException() throw();
             };
 
         };

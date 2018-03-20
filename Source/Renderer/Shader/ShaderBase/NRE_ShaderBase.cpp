@@ -65,11 +65,12 @@
                     char *error = new char[errorSize + 1];
 
                     glGetShaderInfoLog(id, errorSize, &errorSize, error);
-
-                    std::cout << std::string(error) << std::endl;
+                    std::string eError(error);
 
                     delete[] error;
                     glDeleteShader(id);
+
+                    throw (Exception::ShaderException(getPath() + " : " + std::string(eError)));
                 }
             }
 

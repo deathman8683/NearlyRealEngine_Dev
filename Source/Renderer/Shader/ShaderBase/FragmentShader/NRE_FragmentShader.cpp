@@ -4,7 +4,7 @@
     namespace NRE {
         namespace Renderer {
 
-            FragmentShader::FragmentShader() : ShaderBase::ShaderBase() {
+            FragmentShader::FragmentShader() {
             }
 
             FragmentShader::FragmentShader(std::string const& path) : ShaderBase::ShaderBase(path) {

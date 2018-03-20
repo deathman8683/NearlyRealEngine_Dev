@@ -5,18 +5,20 @@ OBJDIR = ../obj/Debug/
 all : before $(TARGET)
 
 GENERIC = Generic
+EXCEPTION = Exception
+LIB = lib
 SDL_WRAPPER = SDL_Wrapper
 GL_WRAPPER = GL_Wrapper
 TIME = Time
-SUPPORT = Support
 RENDERER = Renderer
 LIGHTING = Lighting
 CAMERA = Camera
 WORLD = World
-LIB = lib
+SUPPORT = Support
 
 before :
 	@(cd $(GENERIC) && $(MAKE))
+	@(cd $(EXCEPTION) && $(MAKE))
 	@(cd $(LIB) && $(MAKE))
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))

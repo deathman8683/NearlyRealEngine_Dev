@@ -4,7 +4,7 @@
     namespace NRE {
         namespace Renderer {
 
-            VertexShader::VertexShader() : ShaderBase::ShaderBase() {
+            VertexShader::VertexShader() {
             }
 
             VertexShader::VertexShader(std::string const& path) : ShaderBase::ShaderBase(path) {
