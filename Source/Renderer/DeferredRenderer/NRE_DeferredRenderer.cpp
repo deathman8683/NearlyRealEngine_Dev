@@ -47,33 +47,33 @@
 
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                glUseProgram(shader.getProgramID());
+                glUseProgram(shader.getID());
                     vao.bind();
                         glActiveTexture(GL_TEXTURE0);
                         getFrameBuffer().getColorBuffer(0)->bind();
-                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "texDiffuse"), 0);
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texDiffuse"), 0);
 
                         glActiveTexture(GL_TEXTURE1);
                         getFrameBuffer().getColorBuffer(1)->bind();
-                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "texPosition"), 1);
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texPosition"), 1);
 
                         glActiveTexture(GL_TEXTURE2);
                         getFrameBuffer().getColorBuffer(2)->bind();
-                            glUniform1i(glGetUniformLocation(shader.getProgramID(), "texNormal"), 2);
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
                             index << i;
-                            glUniform4fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPositionValue());
-                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensitiesValue());
-                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].coneDirection").c_str()), 1, light.at(i)->getConeDirectionValue());
-                            glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].attenuation").c_str()), 1, light.at(i)->getAttenuationValue());
-                            glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
-                            glUniform1fv(glGetUniformLocation(shader.getProgramID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());
+                            glUniform4fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPositionValue());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensitiesValue());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneDirection").c_str()), 1, light.at(i)->getConeDirectionValue());
+                            glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].attenuation").c_str()), 1, light.at(i)->getAttenuationValue());
+                            glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
+                            glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());
                         }
 
-                        glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
-                        glUniform1i(glGetUniformLocation(shader.getProgramID(), "numLights"), light.size());
+                        glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, eye);
+                        glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 

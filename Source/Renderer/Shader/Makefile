@@ -2,9 +2,14 @@ SRC = NRE_Shader.cpp
 OBJ = $(OBJDIR)NRE_Shader.o
 OBJDIR = ../../../obj/Debug/Renderer/Shader/
 
-all : $(TARGET)
+BASE = ShaderBase
 
-debug : $(OBJ)
+all : before $(TARGET)
+
+before:
+	@(cd $(BASE) && $(MAKE))
+
+debug: $(OBJ)
 
 $(OBJDIR)%.o : %.cpp %.hpp
 	@$(CXX) -o $@ -c $< $(CFLAGS) $(INC)

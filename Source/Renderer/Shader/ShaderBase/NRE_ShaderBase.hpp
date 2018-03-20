@@ -1,15 +1,15 @@
 
     /**
-     * @file NRE_Shader.hpp
-     * @brief Declaration of Engine's Renderer's Object : Shader
+     * @file NRE_ShaderBase.hpp
+     * @brief Declaration of Engine's Renderer's Object : ShaderBase
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "ShaderBase/VertexShader/NRE_VertexShader.hpp"
-    #include "ShaderBase/FragmentShader/NRE_FragmentShader.hpp"
+    #include <fstream>
+    #include "../../../Generic/NRE_Type.hpp"
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace
@@ -22,40 +22,38 @@
         namespace Renderer {
 
             /**
-             * @class Shader
-             * @brief Renderer's Object : Manage shader transfer and compiling
+             * @class ShaderBase
+             * @brief Renderer's Object : A base shader for vertex and fragment specialization
              */
-            class Shader {
+            class ShaderBase {
                 private:
                     GLuint id;
-                    VertexShader vShader;
-                    FragmentShader fShader;
+                    std::string path;
 
                 public:
                     //## Constructor ##//
-                    Shader();
-                    Shader(std::string const& vPath, std::string const& fPath, bool const& loadImmediatly = false);
+                    ShaderBase();
+                    ShaderBase(std::string const& path);
 
                     //## Copy-Constructor ##//
-                    Shader(Shader const& s);
+                    ShaderBase(ShaderBase const& s);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Shader();
+                    virtual ~ShaderBase();
 
                     //## Getter ##//
                     GLuint const& getID() const;
-                    VertexShader const& getVertexShader() const;
-                    FragmentShader const& getFragmentShader() const;
+                    std::string const& getPath() const;
+                    virtual GLenum const getType() const = 0;
 
                     //## Setter ##//
                     void setID(GLuint const& id);
-                    void setVertexShader(VertexShader const& s);
-                    void setFragmentShader(FragmentShader const& s);
+                    void setPath(std::string const& path);
 
                     //## Methods ##//
-                    void load();
+                    void compile();
 
                     //## Access Operator ##//
 

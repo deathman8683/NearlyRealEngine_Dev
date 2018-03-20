@@ -116,11 +116,11 @@
                 setActive(camera.AABBCollision(getBounding()));
 
                 if (isActive()) {
-                    glUseProgram(shader.getProgramID());
+                    glUseProgram(shader.getID());
                         vao.bind();
 
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(), "MVP"), 1, GL_TRUE, MVP.value());
-                            glUniform3fv(glGetUniformLocation(shader.getProgramID(), "cameraV"), 1, eye);
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, eye);
 
                             glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 

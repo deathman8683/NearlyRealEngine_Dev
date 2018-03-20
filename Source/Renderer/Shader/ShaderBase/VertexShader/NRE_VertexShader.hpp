@@ -1,15 +1,14 @@
 
     /**
-     * @file NRE_Shader.hpp
-     * @brief Declaration of Engine's Renderer's Object : Shader
+     * @file NRE_VertexShader.hpp
+     * @brief Declaration of Engine's Renderer's Object : VertexShader
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "ShaderBase/VertexShader/NRE_VertexShader.hpp"
-    #include "ShaderBase/FragmentShader/NRE_FragmentShader.hpp"
+    #include "../NRE_ShaderBase.hpp"
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace
@@ -22,40 +21,31 @@
         namespace Renderer {
 
             /**
-             * @class Shader
-             * @brief Renderer's Object : Manage shader transfer and compiling
+             * @class VertexShader
+             * @brief Renderer's Object : Manage VertexShader transfer and compiling
              */
-            class Shader {
+            class VertexShader : public ShaderBase {
                 private:
-                    GLuint id;
-                    VertexShader vShader;
-                    FragmentShader fShader;
 
                 public:
                     //## Constructor ##//
-                    Shader();
-                    Shader(std::string const& vPath, std::string const& fPath, bool const& loadImmediatly = false);
+                    VertexShader();
+                    VertexShader(std::string const& path);
 
                     //## Copy-Constructor ##//
-                    Shader(Shader const& s);
+                    VertexShader(VertexShader const& s);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Shader();
+                    ~VertexShader();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
-                    VertexShader const& getVertexShader() const;
-                    FragmentShader const& getFragmentShader() const;
+                    GLenum const getType() const override;
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
-                    void setVertexShader(VertexShader const& s);
-                    void setFragmentShader(FragmentShader const& s);
 
                     //## Methods ##//
-                    void load();
 
                     //## Access Operator ##//
 
