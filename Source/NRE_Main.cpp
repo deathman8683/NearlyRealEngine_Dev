@@ -11,7 +11,7 @@
     int main(int argc, char **argv) {
         Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
         Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), Maths::Vector2D<NREfloat>(0, 0), true);
-        Camera::FixedCamera lightCamera(70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(-112.081, -82.3207, 116.702), Maths::Vector3D<NREfloat>(-111.261, -82.0238, 116.213), Maths::Vector2D<NREfloat>(-29.3, -340.101), true);
+
         World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
         engineWorld.constructChunksMesh();
 
@@ -20,16 +20,16 @@
         Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
 
         std::vector<Light::Light*> engineLighting;
-        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(.8, .8, .8), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.0, 0.0);
-        /*Light::Light engineLight2(Maths::Point4D<NREfloat>(55.0, -62.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, .0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-        Light::Light engineLight3(Maths::Point4D<NREfloat>(61.0, -29.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-        Light::Light engineLight4(Maths::Point4D<NREfloat>(55.0, 0.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, 1.0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-        Light::Light engineLight5(Maths::Point4D<NREfloat>(94.0, -38.0, 51.0, 1.0), Maths::Vector3D<NREfloat>(.0, .0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);*/
+        Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 80, 0), Maths::Vector3D<NREfloat>(.01, .03, .25), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.0, 0.0);
+        Light::Light engineLight2(Maths::Point4D<NREfloat>(55.0, -62.0, 21.0, 1.0), Maths::Vector3D<NREfloat>(1.0, .0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+        Light::Light engineLight3(Maths::Point4D<NREfloat>(61.0, -29.0, 21.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+        Light::Light engineLight4(Maths::Point4D<NREfloat>(55.0, 0.0, 21.0, 1.0), Maths::Vector3D<NREfloat>(.0, 1.0, .0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+        Light::Light engineLight5(Maths::Point4D<NREfloat>(44.0, -38.0, 21.0, 1.0), Maths::Vector3D<NREfloat>(.0, .0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
         engineLighting.push_back(&engineLight1);
-        /*engineLighting.push_back(&engineLight2);
+        engineLighting.push_back(&engineLight2);
         engineLighting.push_back(&engineLight3);
         engineLighting.push_back(&engineLight4);
-        engineLighting.push_back(&engineLight5);*/
+        engineLighting.push_back(&engineLight5);
 
         Maths::Matrix4x4<NREfloat> projection, modelview, MVP;
 

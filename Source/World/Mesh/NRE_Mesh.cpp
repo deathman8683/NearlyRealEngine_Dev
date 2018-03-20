@@ -439,7 +439,7 @@
             bool Mesh::checkVoxelXNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (x == 0) {
                     if (getTarget()->getCoord().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
-                        return true;
+                        return false;
                     } else {
                         return w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->second->getVoxel(Chunk::SIZE_X - 1, y, z)->getType() == NRE::Voxel::VOID;
                     }
@@ -451,7 +451,7 @@
             bool Mesh::checkVoxelXPositiveFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (x == Chunk::SIZE_X - 1) {
                     if (getTarget()->getCoord().getX() == static_cast <GLint> (w->getHExtent().getX())) {
-                        return true;
+                        return false;
                     } else {
                         return w->getChunk(getTarget()->getCoord().getX() + 1, getTarget()->getCoord().getY())->second->getVoxel(0, y, z)->getType() == NRE::Voxel::VOID;
                     }
@@ -463,7 +463,7 @@
             bool Mesh::checkVoxelYNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (y == 0) {
                     if (getTarget()->getCoord().getY() == -1 * static_cast <GLint> (w->getHExtent().getY())) {
-                        return true;
+                        return false;
                     } else {
                         return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() - 1)->second->getVoxel(x, Chunk::SIZE_Y - 1, z)->getType() == NRE::Voxel::VOID;
                     }
@@ -475,7 +475,7 @@
             bool Mesh::checkVoxelYPositiveFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (y == Chunk::SIZE_Y - 1) {
                     if (getTarget()->getCoord().getY() == static_cast <GLint> (w->getHExtent().getY())) {
-                        return true;
+                        return false;
                     } else {
                         return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() + 1)->second->getVoxel(x, 0, z)->getType() == NRE::Voxel::VOID;
                     }
@@ -486,7 +486,7 @@
 
             bool Mesh::checkVoxelZNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (z == 0) {
-                    return true;
+                    return false;
                 } else {
                     return getTarget()->getVoxel(x, y, z - 1)->getType() == NRE::Voxel::VOID;
                 }
@@ -494,7 +494,7 @@
 
             bool Mesh::checkVoxelZPositiveFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (z == Chunk::SIZE_Z - 1) {
-                    return true;
+                    return false;
                 } else {
                     return getTarget()->getVoxel(x, y, z + 1)->getType() == NRE::Voxel::VOID;
                 }
