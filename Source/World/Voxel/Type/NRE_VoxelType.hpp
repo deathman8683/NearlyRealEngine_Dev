@@ -22,7 +22,7 @@
          */
         namespace Voxel {
 
-        /**
+            /**
              * @class Void
              * @brief Voxel's Object : a void type voxel
              */
@@ -76,6 +76,66 @@
 
                     //## Deconstructor ##//
                     ~Stone();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class Sand
+             * @brief Voxel's Object : a Sand type voxel
+             */
+            class Sand : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Sand();
+
+                    //## Copy-Constructor ##//
+                    Sand(Sand const& vox);
+
+                    //## Deconstructor ##//
+                    ~Sand();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class Snow
+             * @brief Voxel's Object : a Snow type voxel
+             */
+            class Snow : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Snow();
+
+                    //## Copy-Constructor ##//
+                    Snow(Snow const& vox);
+
+                    //## Deconstructor ##//
+                    ~Snow();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
+            /**
+             * @class Dirt
+             * @brief Voxel's Object : a Dirt type voxel
+             */
+            class Dirt : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Dirt();
+
+                    //## Copy-Constructor ##//
+                    Dirt(Dirt const& vox);
+
+                    //## Deconstructor ##//
+                    ~Dirt();
 
                     //## Methods ##//
                     GLint const getType() const override;

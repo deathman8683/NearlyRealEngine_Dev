@@ -55,6 +55,57 @@
                 return Color::RGB(55, 55, 55);
             }
 
+            Sand::Sand() {
+            }
+
+            Sand::Sand(Sand const& vox) : Voxel::Voxel(vox) {
+            }
+
+            Sand::~Sand() {
+            }
+
+            GLint const Sand::getType() const {
+                return VoxelType::SAND;
+            }
+
+            Color::RGB const Sand::getColor() const {
+                return Color::RGB(255, 221, 167);
+            }
+
+            Snow::Snow() {
+            }
+
+            Snow::Snow(Snow const& vox) : Voxel::Voxel(vox) {
+            }
+
+            Snow::~Snow() {
+            }
+
+            GLint const Snow::getType() const {
+                return VoxelType::SNOW;
+            }
+
+            Color::RGB const Snow::getColor() const {
+                return Color::RGB(213, 213, 213);
+            }
+
+            Dirt::Dirt() {
+            }
+
+            Dirt::Dirt(Dirt const& vox) : Voxel::Voxel(vox) {
+            }
+
+            Dirt::~Dirt() {
+            }
+
+            GLint const Dirt::getType() const {
+                return VoxelType::DIRT;
+            }
+
+            Color::RGB const Dirt::getColor() const {
+                return Color::RGB(92, 55, 3);
+            }
+
             Water::Water() {
             }
 

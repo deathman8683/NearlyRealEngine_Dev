@@ -31,7 +31,15 @@
 
                 for (int x = 0; x < static_cast <int> (SIZE_X); x = x + 1) {
                     for (int y = 0; y < static_cast <int> (SIZE_Y); y = y + 1) {
-                        z = static_cast <GLint> (w->getGenerator().GetNoise(x + static_cast <GLint> (SIZE_X) * getCoord().getX(), y + static_cast <GLint> (SIZE_Y) * getCoord().getY()) * static_cast <GLint> (SIZE_Z) / 2 + static_cast <GLint> (SIZE_Z) / 2);
+                        NREfloat nx = x + static_cast <int> (SIZE_X) * getCoord().getX();
+                        NREfloat ny = y + static_cast <int> (SIZE_Y) * getCoord().getY();
+                        NREfloat bias = static_cast <int> (SIZE_Z);
+                        NREfloat noise = w->getGenerator().GetNoise(nx, ny)
+                        +  0.5 * w->getGenerator().GetNoise(2 * nx, 2 * ny)
+                        + 0.25 * w->getGenerator().GetNoise(4 * nx, 4 * ny);
+                        noise = (noise + 1.0) / 2.0;
+                        NREfloat redistributedNoise = std::pow(noise, 2.5);
+                        z = static_cast <GLint> (redistributedNoise * bias);
                         if (z <= 0) {
                             z = 1;
                         }
@@ -39,19 +47,25 @@
                         for (int zPrime = 0; zPrime < z; zPrime = zPrime + 1) {
                             index = getVoxelIndex(x, y, zPrime);
 
-                            if (z - 2 >= 0 && zPrime < z - 2) {
+                            if (z < 25) {
+                                voxel[index] = new NRE::Voxel::Sand;
+                            } else if (z < 40) {
+                                voxel[index] = new NRE::Voxel::Dirt;
+                            } else if (z < 50) {
+                                voxel[index] = new NRE::Voxel::Grass;
+                            } else if (z < 60) {
                                 voxel[index] = new NRE::Voxel::Stone;
                             } else {
-                                voxel[index] = new NRE::Voxel::Grass;
+                                voxel[index] = new NRE::Voxel::Snow;
                             }
                         }
 
-                        if (z <= 50) {
-                            for (int zPrime = static_cast <int> (z); zPrime < 50; zPrime = zPrime + 1) {
+                        if (z <= 20) {
+                            for (int zPrime = static_cast <int> (z); zPrime < 20; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
                                 voxel[index] = new NRE::Voxel::Water;
                             }
-                            for (unsigned int zPrime = 50; zPrime < SIZE_Z; zPrime = zPrime + 1) {
+                            for (unsigned int zPrime = 20; zPrime < SIZE_Z; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
                                 voxel[index] = new NRE::Voxel::Void;
                             }

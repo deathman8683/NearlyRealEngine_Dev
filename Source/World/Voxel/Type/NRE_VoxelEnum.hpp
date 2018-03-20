@@ -23,6 +23,9 @@
                 VOID,
                 GRASS,
                 STONE,
+                SAND,
+                SNOW,
+                DIRT,
                 WATER,
 
                 TYPE_NUM
