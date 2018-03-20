@@ -144,7 +144,7 @@
                         if (currentType == static_cast <GLuint> (getVoxel(x, y, z)->getType())) {
                             currentLineSize = currentLineSize + 1;
                         } else {
-                            chunkFile << currentLineSize << " " << currentType << std::endl;
+                            chunkFile << currentLineSize << " " << currentType << '\n';
                             currentType = getVoxel(x, y, z)->getType();
                             currentLineSize = 1;
                         }
