@@ -35,4 +35,5 @@
     };
 
     #define toRad(x) (x * NRE::Global::PI / 180.0)
+    #define toDeg(x) (x * 180.0 / NRE::Global::PI)
     #define almostEqual(a, b) (std::abs(a - b) < NRE::Global::EPSILON)

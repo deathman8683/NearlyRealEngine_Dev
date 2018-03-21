@@ -13,7 +13,7 @@
             FBO::FBO(GLsizei const& w, GLsizei const& h) : FBO::FBO(w, h, 1) {
             }
 
-            FBO::FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthStencilBuffer(true), size(w, h) {
+            FBO::FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthBuffer(true), size(w, h) {
                 std::vector<GLenum> format, type;
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
@@ -33,7 +33,7 @@
                 }
             }
 
-            FBO::FBO(FBO const& buf) : BufferObject::BufferObject(buf), FrameBuffer::FrameBuffer(buf), colorBuffer(buf.getColorBuffers()), depthStencilBuffer(buf.getDepthStencilBuffer()) {
+            FBO::FBO(FBO const& buf) : BufferObject::BufferObject(buf), FrameBuffer::FrameBuffer(buf), colorBuffer(buf.getColorBuffers()), depthBuffer(buf.getDepthBuffer()) {
             }
 
             FBO::~FBO() {
@@ -51,8 +51,8 @@
                 return colorBuffer[index];
             }
 
-            RenderBuffer const& FBO::getDepthStencilBuffer() const {
-                return depthStencilBuffer;
+            RenderBuffer const& FBO::getDepthBuffer() const {
+                return depthBuffer;
             }
 
             Maths::Vector2D<GLushort> const& FBO::getSize() const {
@@ -67,8 +67,8 @@
                 colorBuffer[index] = buffer;
             }
 
-            void FBO::setDepthStencilBuffer(RenderBuffer const& buffer) {
-                depthStencilBuffer = buffer;
+            void FBO::setDepthBuffer(RenderBuffer const& buffer) {
+                depthBuffer = buffer;
             }
 
             void FBO::setSize(Maths::Vector2D<GLushort> const& size) {
@@ -86,8 +86,8 @@
 
             void FBO::allocateRenderBuffer() {
                 bind();
-                    depthStencilBuffer.allocate(GL_DEPTH_COMPONENT, getSize().getX(), getSize().getY());
-                    attachRenderBuffer(GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthStencilBuffer.getID());
+                    depthBuffer.allocate(GL_DEPTH_COMPONENT, getSize().getX(), getSize().getY());
+                    attachRenderBuffer(GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer.getID());
                 unbind();
             }
 

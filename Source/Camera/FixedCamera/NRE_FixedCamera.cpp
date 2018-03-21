@@ -4,24 +4,17 @@
     namespace NRE {
         namespace Camera {
 
-            NREfloat FixedCamera::MAX_PHI = 89;
-            NREfloat FixedCamera::MIN_PHI = -89;
+            NREfloat FixedCamera::MAX_PHI = 269.9;
+            NREfloat FixedCamera::MIN_PHI = 90.1;
 
             FixedCamera::FixedCamera() {
             }
 
             FixedCamera::FixedCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
-                                     Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle,
-                                     bool const& calculate) : Frustum<NREfloat>::Frustum(fov, ratio, dist), eye(eye), center(center), angle(angle) {
-                if (calculate) {
-                    computeVector();
-                }
-            }
-
-
-            FixedCamera::FixedCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
-                                     Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle,
-                                     Maths::Vector3D<NREfloat> const& up, Maths::Vector3D<NREfloat> const& forward, Maths::Vector3D<NREfloat> const& left) : Frustum<NREfloat>::Frustum(fov, ratio, dist), eye(eye), center(center), up(up), forward(forward), left(left), angle(angle) {
+                                     Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center)
+                                    : Frustum<NREfloat>::Frustum(fov, ratio, dist), eye(eye), center(center) {
+                initAngle();
+                computeVector();
             }
 
             FixedCamera::FixedCamera(FixedCamera const& camera) : eye(camera.getEye()), center(camera.getCenter()),
@@ -83,13 +76,25 @@
                 modelview.lookAt(getEye(), getCenter(), getUp());
             }
 
-            void FixedCamera::computeVector() {
+            void FixedCamera::initAngle() {
+                angle.setX(toDeg(std::atan2((getCenter().getY() - getEye().getY()), (getCenter().getX() - getEye().getX()))));
+                angle.setY(toDeg(std::acos((getCenter().getZ() - getEye().getZ()) / getCenter().distance(getEye()))));
+                if (angle.getX() > 90.0) {
+                    angle.setX(450.0 - angle.getX());
+                } else {
+                    angle.setX(90.0 - angle.getX());
+                }
+            }
+
+            void FixedCamera::computeAngle() {
                 if (getAngle().getX() > MAX_PHI) {
                     angle.setX(MAX_PHI);
                 } else if (getAngle().getX() < MIN_PHI) {
                     angle.setX(MIN_PHI);
                 }
+            }
 
+            void FixedCamera::computeVector() {
                 NREfloat tmp = std::cos(toRad(getAngle().getX()));
                 forward.setX(tmp * std::cos(toRad(getAngle().getY())));
                 forward.setY(tmp * std::sin(toRad(getAngle().getY())));

@@ -4,14 +4,14 @@
     namespace NRE {
         namespace Camera {
 
-            NREfloat MoveableCamera::DEFAULT_SPEED = 0.01;
+            NREfloat MoveableCamera::DEFAULT_SPEED = 3.0;
 
             MoveableCamera::MoveableCamera() : speed(DEFAULT_SPEED) {
             }
 
             MoveableCamera::MoveableCamera(std::string const& kbPath, std::string const& mPath, NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
-                                           Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, Maths::Vector2D<NREfloat> const& angle,
-                                           NREfloat const& speed, bool const& calculate) : FixedCamera::FixedCamera(fov, ratio, dist, eye, center, angle, calculate), Input::Input(kbPath, mPath), speed(speed) {
+                                           Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, NREfloat const& speed)
+                                           : FixedCamera::FixedCamera(fov, ratio, dist, eye, center), Input::Input(kbPath, mPath), speed(speed) {
             }
 
             MoveableCamera::MoveableCamera(FixedCamera const& camera, Input const& in, NREfloat const& speed) : FixedCamera::FixedCamera(camera), Input::Input(in), speed(speed) {
@@ -37,6 +37,9 @@
             void MoveableCamera::update() {
                 Maths::Vector3D<NREfloat> tmp;
                 Input::update(&angle);
+
+                computeAngle();
+                computeVector();
 
                 auto it = Keyboard::getKeyMap().find(SDL_SCANCODE_W);
 
@@ -67,7 +70,6 @@
                 tmp = tmp * getSpeed();
                 setEye(getEye() + tmp);
                 setCenter(getEye() + getForward());
-                computeVector();
             }
 
         };

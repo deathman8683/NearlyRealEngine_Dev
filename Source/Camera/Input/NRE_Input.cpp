@@ -66,7 +66,8 @@
                         }
                         case (SDL_MOUSEMOTION) : {
                             if (cameraAngle) {
-                                *cameraAngle = *cameraAngle - (getMotionRel() * getSensitivity());
+                                cameraAngle->setX(cameraAngle->getX() + getMotionRel().getX() * getSensitivity());
+                                cameraAngle->setY(cameraAngle->getY() - getMotionRel().getY() * getSensitivity());
                             }
                             setCursor(getMotion());
                             break;
