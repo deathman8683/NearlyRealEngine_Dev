@@ -34,32 +34,37 @@
                         NREfloat nx = x + static_cast <int> (SIZE_X) * getCoord().getX();
                         NREfloat ny = y + static_cast <int> (SIZE_Y) * getCoord().getY();
                         NREfloat bias = static_cast <int> (SIZE_Z);
-                        NREfloat noise = w->getGenerator().GetNoise(nx, ny)
-                        +  0.5 * w->getGenerator().GetNoise(2 * nx, 2 * ny);
-                        noise = (noise + 1.0) / 2.0;
-                        NREfloat moisture =  w->getGenerator().GetNoise(nx, ny)
-                            +  0.5 * w->getGenerator().GetNoise(2 * nx, 2 * ny)
-                           +  0.25 * w->getGenerator().GetNoise(4 * nx, 4 * ny)
-                          +  0.125 * w->getGenerator().GetNoise(8 * nx, 8 * ny)
-                          +  0.1 * w->getGenerator().GetNoise(10 * nx, 10 * ny);
-                        moisture = (moisture + 1.0) / 2.0;
-                        NREfloat redistributedNoise = std::pow(noise, 1.85);
-                        z = static_cast <GLint> (redistributedNoise * bias);
+                        NREfloat noise = (1.00 * w->getSoilNoise( 1 * nx,  1 * ny)
+                                        + 0.50 * w->getSoilNoise( 2 * nx,  2 * ny)
+                                        + 0.25 * w->getSoilNoise( 4 * nx,  4 * ny)
+                                        + 0.06 * w->getSoilNoise( 8 * nx,  8 * ny)
+                                        + 0.06 * w->getSoilNoise(16 * nx, 16 * ny)
+                                        + 0.02 * w->getSoilNoise(32 * nx, 32 * ny));
+                        noise = noise / (1.00 + 0.50 + 0.25 + 0.06 + 0.06 + 0.02);
+                        noise = std::pow(noise, 1.0 - (w->getSoilGenerator().GetNoise(nx, ny)));
+                        NREfloat moisture = (1.00 * w->getMoistureNoise( 1 * nx,  1 * ny)
+                                           + 0.75 * w->getMoistureNoise( 2 * nx,  2 * ny)
+                                           + 0.33 * w->getMoistureNoise( 4 * nx,  4 * ny)
+                                           + 0.33 * w->getMoistureNoise( 8 * nx,  8 * ny)
+                                           + 0.33 * w->getMoistureNoise(16 * nx, 16 * ny)
+                                           + 0.50 * w->getMoistureNoise(32 * nx, 32 * ny));
+                        moisture = moisture / (1.00 + 0.75 + 0.33 + 0.33 + 0.33 + 0.50);
+                        z = static_cast <GLint> (noise * bias);
                         if (z <= 0) {
                             z = 1;
                         }
-                        if (z > 128) {
-                            z = 128;
+                        if (z > static_cast <int> (SIZE_Z)) {
+                            z = static_cast <int> (SIZE_Z);
                         }
 
                         for (int zPrime = 0; zPrime < z; zPrime = zPrime + 1) {
                             index = getVoxelIndex(x, y, zPrime);
 
-                            if (redistributedNoise < 0.12) {
+                            if (noise < 0.22) {
                                 voxel[index] = new NRE::Voxel::Ocean;
-                            } else if (redistributedNoise < 0.14) {
+                            } else if (noise < 0.24) {
                                 voxel[index] = new NRE::Voxel::Beach;
-                            } else if (redistributedNoise < 0.3) {
+                            } else if (noise < 0.4) {
                                 if (moisture < 0.16) {
                                     voxel[index] = new NRE::Voxel::SubtropicalDesert;
                                 } else if (moisture < 0.33) {
@@ -69,7 +74,7 @@
                                 } else {
                                     voxel[index] = new NRE::Voxel::TropicalRainForest;
                                 }
-                            } else if (redistributedNoise < 0.6) {
+                            } else if (noise < 0.6) {
                                 if (moisture < 0.16) {
                                     voxel[index] = new NRE::Voxel::TemperateDesert;
                                 } else if (moisture < 0.5) {
@@ -79,7 +84,7 @@
                                 } else {
                                     voxel[index] = new NRE::Voxel::TemperateRainForest;
                                 }
-                            } else if (redistributedNoise < 0.8) {
+                            } else if (noise < 0.8) {
                                 if (moisture < 0.33) {
                                     voxel[index] = new NRE::Voxel::TemperateDesert;
                                 } else if (moisture < 0.66) {
@@ -100,12 +105,12 @@
                             }
                         }
 
-                        if (redistributedNoise < 0.12) {
-                            for (int zPrime = static_cast <int> (z); zPrime < 15; zPrime = zPrime + 1) {
+                        if (noise < 0.22) {
+                            for (int zPrime = static_cast <int> (z); zPrime < 0.22 * SIZE_Z; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
                                 voxel[index] = new NRE::Voxel::Ocean;
                             }
-                            for (unsigned int zPrime = 15; zPrime < SIZE_Z; zPrime = zPrime + 1) {
+                            for (unsigned int zPrime = 0.22 * SIZE_Z; zPrime < SIZE_Z; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
                                 voxel[index] = new NRE::Voxel::Void;
                             }

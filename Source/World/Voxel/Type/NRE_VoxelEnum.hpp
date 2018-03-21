@@ -36,6 +36,7 @@
                 TEMPERATE_RAIN_FOREST,
                 TROPICAL_SEASONAL_FOREST,
                 TROPICAL_RAIN_FOREST,
+                TREE,
 
                 TYPE_NUM
             };

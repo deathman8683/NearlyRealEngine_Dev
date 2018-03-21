@@ -276,5 +276,22 @@
                 return Color::RGB(51, 119, 85);
             }
 
+            Tree::Tree() {
+            }
+
+            Tree::Tree(Tree const& vox) : Voxel::Voxel(vox) {
+            }
+
+            Tree::~Tree() {
+            }
+
+            GLint const Tree::getType() const {
+                return VoxelType::TREE;
+            }
+
+            Color::RGB const Tree::getColor() const {
+                return Color::RGB(65, 18, 1);
+            }
+
         };
     };

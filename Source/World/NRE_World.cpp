@@ -4,16 +4,21 @@
     namespace NRE {
         namespace World {
 
-            int World::DEFAULT_SEED = 6'032'018;
+            int World::DEFAULT_SOIL_SEED = 6'032'018;
+            int World::DEFAULT_MOISTURE_SEED = 21'032'018;
 
             World::World() : World(Maths::Vector2D<GLuint>(0, 0), true) {
             }
 
             World::World(Maths::Vector2D<GLuint> const& size, bool const& loadGenericTerrain) : chunkMap((size.getX() * 2 + 1) * (size.getY() * 2 + 1)), hExtent(size), voxelMergingGlobalCache(0) {
-                FastNoise worldGen;
-                worldGen.SetNoiseType(FastNoise::Perlin);
-                worldGen.SetSeed(DEFAULT_SEED);
-                generator = worldGen;
+                FastNoise worldGen, worldGen2;
+                worldGen.SetNoiseType(FastNoise::Simplex);
+                worldGen.SetSeed(DEFAULT_SOIL_SEED);
+                worldGen.SetFrequency(0.004);
+                worldGen2.SetNoiseType(FastNoise::Simplex);
+                worldGen2.SetSeed(DEFAULT_MOISTURE_SEED);
+                soilGenerator = worldGen;
+                moistureGenerator = worldGen2;
 
                 voxelMergingGlobalCache = new bool[Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * NRE::Voxel::FACE_NUM];
 
@@ -27,7 +32,7 @@
                 }
             }
 
-            World::World(World const& w) : chunkMap(w.getChunkMap()), hExtent(w.getHExtent()), generator(w.getGenerator()), voxelMergingGlobalCache(w.getVoxelMergingGlobalCache()) {
+            World::World(World const& w) : chunkMap(w.getChunkMap()), hExtent(w.getHExtent()), soilGenerator(w.getSoilGenerator()), moistureGenerator(w.getMoistureGenerator()), voxelMergingGlobalCache(w.getVoxelMergingGlobalCache()) {
             }
 
             World::~World() {
@@ -53,8 +58,12 @@
                 return hExtent;
             }
 
-            FastNoise const& World::getGenerator() const {
-                return generator;
+            FastNoise const& World::getSoilGenerator() const {
+                return soilGenerator;
+            }
+
+            FastNoise const& World::getMoistureGenerator() const {
+                return moistureGenerator;
             }
 
             bool* World::getVoxelMergingGlobalCache() const {
@@ -85,8 +94,12 @@
                 hExtent = size;
             }
 
-            void World::setGenerator(FastNoise const& gen) {
-                generator = gen;
+            void World::setSoilGenerator(FastNoise const& gen) {
+                soilGenerator = gen;
+            }
+
+            void World::setMoistureGenerator(FastNoise const& gen) {
+                moistureGenerator = gen;
             }
 
             void World::setVoxelMergingGlobalCache(bool* (&cache)) {
@@ -115,6 +128,14 @@
 
             void World::resetVoxelMergingGlobalCache() {
                 std::fill(voxelMergingGlobalCache, voxelMergingGlobalCache + (Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * NRE::Voxel::FACE_NUM), false);
+            }
+
+            NREfloat const World::getSoilNoise(NREfloat const& x, NREfloat const& y) const {
+                return (getSoilGenerator().GetNoise(x, y) + 1.0) / 2.0;
+            }
+
+            NREfloat const World::getMoistureNoise(NREfloat const& x, NREfloat const& y) const {
+                return (getMoistureGenerator().GetNoise(x, y) + 1.0) / 2.0;
             }
 
             GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face) {

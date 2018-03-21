@@ -31,7 +31,8 @@
                 private:
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> chunkMap;
                     Maths::Vector2D<GLuint> hExtent;
-                    FastNoise generator;
+                    FastNoise soilGenerator;
+                    FastNoise moistureGenerator;
                     bool *voxelMergingGlobalCache;
 
                 public:
@@ -52,7 +53,8 @@
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*>::iterator getChunk(Maths::Point2D<GLint> const& p);
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*>::iterator getChunk(GLint const& x, GLint const& y);
                     Maths::Vector2D<GLuint> const& getHExtent() const;
-                    FastNoise const& getGenerator() const;
+                    FastNoise const& getSoilGenerator() const;
+                    FastNoise const& getMoistureGenerator() const;
                     bool* getVoxelMergingGlobalCache() const;
                     bool const& getVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face) const;
                     bool const& getVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face) const;
@@ -62,7 +64,8 @@
                     void setChunk(Maths::Point2D<GLint> const& p, Chunk* const& chunk);
                     void setChunk(GLint const& x, GLint const& y, Chunk* const& chunk);
                     void setHExtent(Maths::Vector2D<GLuint> const& size);
-                    void setGenerator(FastNoise const& gen);
+                    void setSoilGenerator(FastNoise const& gen);
+                    void setMoistureGenerator(FastNoise const& gen);
                     void setVoxelMergingGlobalCache(bool* (&cache));
                     void setVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face, bool const& state);
                     void setVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face, bool const& state);
@@ -71,6 +74,8 @@
                     void constructChunksMesh();
                     void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera);
                     void resetVoxelMergingGlobalCache();
+                    NREfloat const getSoilNoise(NREfloat const& x, NREfloat const& y) const;
+                    NREfloat const getMoistureNoise(NREfloat const& x, NREfloat const& y) const;
 
                     //## Access Operator ##//
 
@@ -87,7 +92,8 @@
                     //## Shift Operator ##//
 
                 private:
-                    static int DEFAULT_SEED;
+                    static int DEFAULT_SOIL_SEED;
+                    static int DEFAULT_MOISTURE_SEED;
             };
 
             GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face);

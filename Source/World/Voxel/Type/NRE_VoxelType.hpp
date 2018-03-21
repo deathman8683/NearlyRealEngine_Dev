@@ -342,5 +342,25 @@
                     Color::RGB const getColor() const override;
             };
 
+            /**
+             * @class Tree
+             * @brief Voxel's Object : a grass type voxel
+             */
+            class Tree : public World::Voxel {
+                public:
+                    //## Constructor ##//
+                    Tree();
+
+                    //## Copy-Constructor ##//
+                    Tree(Tree const& vox);
+
+                    //## Deconstructor ##//
+                    ~Tree();
+
+                    //## Methods ##//
+                    GLint const getType() const override;
+                    Color::RGB const getColor() const override;
+            };
+
         };
     };
