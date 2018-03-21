@@ -10,8 +10,8 @@
 
     int main(int argc, char **argv) {
         try {
-            Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
-            Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
+            Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
+            Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
             World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
             engineWorld.constructChunksMesh();
@@ -40,7 +40,7 @@
 
             camera.computeProjectionMatrix(projection);
 
-            Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(800.0, 600.0));
+            Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             while(!camera.getQuit())
             {
@@ -55,10 +55,13 @@
 
 
                 engineDeferredRenderer.beginRendering();
-                    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                    auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
                     engineSkybox.render(skyBoxShader, MVP, camera.getEye());
+                    if (it->second.isActive()) {
+                        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                    }
                     engineWorld.render(gBufferPass, MVP, camera);
-                    //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+                    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endRendering();
 
                 engineSkybox.bind();
