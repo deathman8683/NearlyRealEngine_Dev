@@ -86,7 +86,7 @@
                     void save();
                     void load(World* w);
                     void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
-                    void createPerlinTerrain(World* w);
+                    void createProceduralTerrain(World* w);
                     void checkActiveState(Camera::FixedCamera const& camera);
 
                     //## Access Operator ##//

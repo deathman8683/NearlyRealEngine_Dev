@@ -31,7 +31,7 @@
             }
 
             Chunk::~Chunk() {
-                //save();
+                save();
                 for (GLuint i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
                     delete voxel[i];
                 }
@@ -173,7 +173,7 @@
                 yStr << getCoord().getY();
                 chunkName = "Data/Chunk/c." + xStr.str() + "." + yStr.str() + ".dat";
                 chunkFile.open(chunkName, std::ios::in);
-                /*if (chunkFile.is_open()) {
+                if (chunkFile.is_open()) {
                     GLuint x = 0, y = 0, z = 0;
                     GLuint voxNumber = 0, voxType = 0;
                     std::string line;
@@ -184,11 +184,11 @@
 
                         loadVoxels(x, y, z, voxNumber, voxType);
                     }
-                } else {*/
-                    createPerlinTerrain(w);
+                } else {
+                    createProceduralTerrain(w);
                     chunkFile.open(chunkName, std::ios::trunc | std::ios::out);
                     chunkFile.close();
-                //}
+                }
             }
 
             void Chunk::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type) {

@@ -13,7 +13,7 @@
             Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(800, 600));
             Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 800.0 / 600.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), Maths::Vector2D<NREfloat>(0, 0), true);
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(10, 10));
+            World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
             engineWorld.constructChunksMesh();
 
             Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
@@ -36,7 +36,7 @@
 
             Time::Clock engineClock;
 
-            GL::SkyBox engineSkybox("Data/SkyBox/Warm", "png");
+            GL::SkyBox engineSkybox("Data/SkyBox/Night", "png");
 
             camera.computeProjectionMatrix(projection);
 

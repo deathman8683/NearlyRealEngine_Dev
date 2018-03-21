@@ -25,7 +25,7 @@
                 delete cMesh;
             }
 
-            void Chunk::createPerlinTerrain(World* w) {
+            void Chunk::createProceduralTerrain(World* w) {
                 GLint z;
                 GLuint index;
 
