@@ -13,7 +13,7 @@
             Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
+            World::World engineWorld(Maths::Vector2D<GLuint>(25, 25));
             engineWorld.constructChunksMesh();
 
             Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
@@ -21,7 +21,7 @@
             Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
 
             std::vector<Light::Light*> engineLighting;
-            Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 0, 0),         Maths::Vector3D<NREfloat>(0.03, 0.08, 0.25), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.3, 0.0);
+            Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 0, 0),         Maths::Vector3D<NREfloat>(0.6, 0.6, 0.6), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.3, 0.0);
             Light::Light engineLight2(Maths::Point4D<NREfloat>(29.7,  28.0, 30.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight3(Maths::Point4D<NREfloat>(71.6,  41.7, 30.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight4(Maths::Point4D<NREfloat>(60.5, -44.8, 30.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
@@ -36,7 +36,7 @@
 
             Time::Clock engineClock;
 
-            GL::SkyBox engineSkybox("Data/SkyBox/Night", "png");
+            GL::SkyBox engineSkybox("Data/SkyBox/Warm", "png");
 
             camera.computeProjectionMatrix(projection);
 
