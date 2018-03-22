@@ -1,10 +1,8 @@
-SRC = NRE_VoxelType.cpp
-OBJ = $(OBJDIR)NRE_VoxelType.o
-OBJDIR = ../../../../obj/Debug/World/Voxel/Type/
+TYPE = VoxelType
+TYPES = VoxelTypes
 
 all : $(TARGET)
 
-debug : $(OBJ)
-
-$(OBJDIR)%.o : %.cpp %.hpp
-	@$(CXX) -o $@ -c $< $(CFLAGS) $(INC)
+debug:
+	@(cd $(TYPE) && $(MAKE))
+	@(cd $(TYPES) && $(MAKE))

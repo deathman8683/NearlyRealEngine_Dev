@@ -1,7 +1,7 @@
 
     /**
      * @file NRE_PackedVertex.hpp
-     * @brief Declaration of Engine's Voxel's Object : PackedVertex
+     * @brief Declaration of Engine's World's Object : PackedVertex
      * @author Louis ABEL
      * @version 1.0
      */
@@ -19,13 +19,13 @@
     namespace NRE {
         /**
          * @namespace Voxel
-         * @brief Engine's Voxel's Type's Module
+         * @brief Engine's World's Module
          */
-        namespace Voxel {
+        namespace World {
 
             /**
              * @class PackedVertex
-             * @brief Voxel's Object : A vertex with his attributes : Color + Normal
+             * @brief World's Object : A vertex with his attributes : Color + Normal
              */
             class PackedVertex : public Maths::Point3D<GLint>, public Maths::Vector3D<GLbyte>, public Color::RGB {
                 private:
@@ -81,9 +81,9 @@
 
     namespace std {
         template <>
-        class hash<NRE::Voxel::PackedVertex> {
+        class hash<NRE::World::PackedVertex> {
             public:
-                size_t operator()(NRE::Voxel::PackedVertex const& p) const
+                size_t operator()(NRE::World::PackedVertex const& p) const
                 {
                     size_t h1 = p.NRE::Maths::Point3D<GLint>::getX();
                     size_t h2 = p.NRE::Maths::Point3D<GLint>::getY();

@@ -21,7 +21,7 @@
     namespace NRE {
         /**
          * @namespace World
-         * @brief Engine's Voxel's Type's Module
+         * @brief Engine's World's Module
          */
         namespace World {
 
@@ -36,7 +36,7 @@
                     std::vector<GLfloat> cData;
                     std::vector<GLbyte> nData;
                     std::vector<GLuint> iData;
-                    std::unordered_map<NRE::Voxel::PackedVertex, size_t> map;
+                    std::unordered_map<PackedVertex, size_t> map;
 
                 public:
                     //## Constructor ##//
@@ -61,7 +61,7 @@
                     GLfloat* getCPointer();
                     GLbyte* getNPointer();
                     GLuint* getIPointer();
-                    std::unordered_map<NRE::Voxel::PackedVertex, size_t> const& getMap() const;
+                    std::unordered_map<PackedVertex, size_t> const& getMap() const;
 
                     //## Setter ##//
                     void setTarget(Chunk* const& target);
@@ -69,7 +69,7 @@
                     void setCData(std::vector<GLfloat> const& data);
                     void setNData(std::vector<GLbyte> const& data);
                     void setIData(std::vector<GLuint> const& data);
-                    void setMap(std::unordered_map<NRE::Voxel::PackedVertex, size_t> const& map);
+                    void setMap(std::unordered_map<PackedVertex, size_t> const& map);
 
                     //## Methods ##//
                     void addVertex(Maths::Point3D<GLint> const& v);
@@ -80,7 +80,7 @@
                     void addVoxel(World* w, Maths::Point3D<GLuint> const& voxCoord, Maths::Point3D<GLint> const& realCoord, bool const (&face)[6]);
                     void mergeVoxels(World* w, GLuint x, GLuint y, GLuint z, GLint const& type, Maths::Point3D<GLint> (&p)[4], int const& face);
                     void addPackedVertex(Maths::Point3D<GLint> const (&p)[4], Color::RGB const& voxColor, GLuint const& face, size_t const& cCode);
-                    bool const getSimilarVertexIndex(NRE::Voxel::PackedVertex const& packed, std::unordered_map<NRE::Voxel::PackedVertex, size_t> const& map, GLuint &result) const;
+                    bool const getSimilarVertexIndex(PackedVertex const& packed, std::unordered_map<PackedVertex, size_t> const& map, GLuint &result) const;
 
                     //## Access Operator ##//
 

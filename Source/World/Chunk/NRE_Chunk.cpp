@@ -16,14 +16,14 @@
             }
 
             Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), active(true) {
-                voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
+                voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::ColorBuffer(generateID));
                 buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
 
             Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), active(c.isActive()) {
-                voxel = new Voxel*[SIZE_X * SIZE_Y * SIZE_Z];
+                voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
                 buffer.push_back(new GL::ColorBuffer(true));
                 buffer.push_back(new GL::NormalBuffer(true));
@@ -32,25 +32,22 @@
 
             Chunk::~Chunk() {
                 save();
-                for (GLuint i = 0; i < SIZE_X * SIZE_Y * SIZE_Z; i = i + 1) {
-                    delete voxel[i];
-                }
                 delete[] voxel;
             }
 
-            Voxel** const& Chunk::getVoxels() const {
+            Voxel* const& Chunk::getVoxels() const {
                 return voxel;
             }
 
-            Voxel* const& Chunk::getVoxel(Maths::Point3D<GLuint> const& p) const {
+            Voxel const& Chunk::getVoxel(Maths::Point3D<GLuint> const& p) const {
                 return getVoxel(p.getX(), p.getY(), p.getZ());
             }
 
-            Voxel* const& Chunk::getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const {
+            Voxel const& Chunk::getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const {
                 return voxel[getVoxelIndex(x, y, z)];
             }
 
-            Voxel* const& Chunk::getVoxel(GLuint const& index) const {
+            Voxel const& Chunk::getVoxel(GLuint const& index) const {
                 return voxel[index];
             }
 
@@ -74,19 +71,19 @@
                 return active;
             }
 
-            void Chunk::setVoxels(Voxel** const& vox) {
+            void Chunk::setVoxels(Voxel* const& vox) {
                 voxel = vox;
             }
 
-            void Chunk::setVoxel(Maths::Point3D<GLuint> const& p, Voxel* const& vox) {
+            void Chunk::setVoxel(Maths::Point3D<GLuint> const& p, Voxel const& vox) {
                 setVoxel(p.getX(), p.getY(), p.getZ(), vox);
             }
 
-            void Chunk::setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel* const& vox) {
+            void Chunk::setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel const& vox) {
                 voxel[getVoxelIndex(x, y, z)] = vox;
             }
 
-            void Chunk::setVoxel(GLuint const& index, Voxel* const& vox) {
+            void Chunk::setVoxel(GLuint const& index, Voxel const& vox) {
                 voxel[index] = vox;
             }
 
@@ -139,13 +136,13 @@
                 chunkFile.open(chunkName, std::ios::out);
                 if (chunkFile.is_open()) {
                     GLuint x = 0, y = 0, z = 0;
-                    GLuint currentType = getVoxel(x, y, z)->getType(), currentLineSize = 0;
+                    GLuint currentType = getVoxel(x, y, z).getType(), currentLineSize = 0;
                     while (z != SIZE_Z) {
-                        if (currentType == static_cast <GLuint> (getVoxel(x, y, z)->getType())) {
+                        if (currentType == static_cast <GLuint> (getVoxel(x, y, z).getType())) {
                             currentLineSize = currentLineSize + 1;
                         } else {
                             chunkFile << currentLineSize << " " << currentType << '\n';
-                            currentType = getVoxel(x, y, z)->getType();
+                            currentType = getVoxel(x, y, z).getType();
                             currentLineSize = 1;
                         }
 
@@ -195,74 +192,7 @@
                 GLuint index, n = nb;
                 while (n != 0) {
                     index = getVoxelIndex(x, y, z);
-                    switch (type) {
-                        case (NRE::Voxel::VOID): {
-                            voxel[index] = new NRE::Voxel::Void;
-                            break;
-                        }
-                        case (NRE::Voxel::OCEAN): {
-                            voxel[index] = new NRE::Voxel::Ocean;
-                            break;
-                        }
-                        case (NRE::Voxel::BEACH): {
-                            voxel[index] = new NRE::Voxel::Beach;
-                            break;
-                        }
-                        case (NRE::Voxel::SCORCHED): {
-                            voxel[index] = new NRE::Voxel::Scorched;
-                            break;
-                        }
-                        case (NRE::Voxel::BARE): {
-                            voxel[index] = new NRE::Voxel::Bare;
-                            break;
-                        }
-                        case (NRE::Voxel::TUNDRA): {
-                            voxel[index] = new NRE::Voxel::Tundra;
-                            break;
-                        }
-                        case (NRE::Voxel::SNOW): {
-                            voxel[index] = new NRE::Voxel::Snow;
-                            break;
-                        }
-                        case (NRE::Voxel::TEMPERATE_DESERT): {
-                            voxel[index] = new NRE::Voxel::TemperateDesert;
-                            break;
-                        }
-                        case (NRE::Voxel::SUBTROPICAL_DESERT): {
-                            voxel[index] = new NRE::Voxel::SubtropicalDesert;
-                            break;
-                        }
-                        case (NRE::Voxel::SHRUBLAND): {
-                            voxel[index] = new NRE::Voxel::Shrubland;
-                            break;
-                        }
-                        case (NRE::Voxel::TAIGA): {
-                            voxel[index] = new NRE::Voxel::Taiga;
-                            break;
-                        }
-                        case (NRE::Voxel::GRASSLAND): {
-                            voxel[index] = new NRE::Voxel::Grassland;
-                            break;
-                        }
-                        case (NRE::Voxel::TEMPERATE_DECIDUOUS_FOREST): {
-                            voxel[index] = new NRE::Voxel::TemperateDeciduousForest;
-                            break;
-                        }
-                        case (NRE::Voxel::TEMPERATE_RAIN_FOREST): {
-                            voxel[index] = new NRE::Voxel::TemperateRainForest;
-                            break;
-                        }
-                        case (NRE::Voxel::TROPICAL_SEASONAL_FOREST): {
-                            voxel[index] = new NRE::Voxel::TropicalSeasonalForest;
-                            break;
-                        }
-                        case (NRE::Voxel::TROPICAL_RAIN_FOREST): {
-                            voxel[index] = new NRE::Voxel::TropicalRainForest;
-                            break;
-                        }
-                        default: {
-                        }
-                    }
+                    voxel[index].setType(type);
                     x = x + 1;
                     if (x == SIZE_X) {
                         x = 0;

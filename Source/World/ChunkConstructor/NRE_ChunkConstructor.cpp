@@ -61,46 +61,46 @@
                             index = getVoxelIndex(x, y, zPrime);
 
                             if (noise < 0.22) {
-                                voxel[index] = new NRE::Voxel::Ocean;
+                                voxel[index].setType(OCEAN);
                             } else if (noise < 0.24) {
-                                voxel[index] = new NRE::Voxel::Beach;
+                                voxel[index].setType(BEACH);
                             } else if (noise < 0.4) {
                                 if (moisture < 0.16) {
-                                    voxel[index] = new NRE::Voxel::SubtropicalDesert;
+                                    voxel[index].setType(SUBTROPICAL_DESERT);
                                 } else if (moisture < 0.33) {
-                                    voxel[index] = new NRE::Voxel::Grassland;
+                                    voxel[index].setType(GRASSLAND);
                                 } else if (moisture < 0.66) {
-                                    voxel[index] = new NRE::Voxel::TropicalSeasonalForest;
+                                    voxel[index].setType(TROPICAL_SEASONAL_FOREST);
                                 } else {
-                                    voxel[index] = new NRE::Voxel::TropicalRainForest;
+                                    voxel[index].setType(TROPICAL_RAIN_FOREST);
                                 }
                             } else if (noise < 0.6) {
                                 if (moisture < 0.16) {
-                                    voxel[index] = new NRE::Voxel::TemperateDesert;
+                                    voxel[index].setType(TEMPERATE_DESERT);
                                 } else if (moisture < 0.5) {
-                                    voxel[index] = new NRE::Voxel::Grassland;
+                                    voxel[index].setType(GRASSLAND);
                                 } else if (moisture < 0.83) {
-                                    voxel[index] = new NRE::Voxel::TemperateDeciduousForest;
+                                    voxel[index].setType(TEMPERATE_DECIDUOUS_FOREST);
                                 } else {
-                                    voxel[index] = new NRE::Voxel::TemperateRainForest;
+                                    voxel[index].setType(TEMPERATE_RAIN_FOREST);
                                 }
                             } else if (noise < 0.8) {
                                 if (moisture < 0.33) {
-                                    voxel[index] = new NRE::Voxel::TemperateDesert;
+                                    voxel[index].setType(TEMPERATE_DESERT);
                                 } else if (moisture < 0.66) {
-                                    voxel[index] = new NRE::Voxel::Shrubland;
+                                    voxel[index].setType(SHRUBLAND);
                                 } else {
-                                    voxel[index] = new NRE::Voxel::Taiga;
+                                    voxel[index].setType(TAIGA);
                                 }
                             } else {
                                 if (moisture < 0.1) {
-                                    voxel[index] = new NRE::Voxel::Scorched;
+                                    voxel[index].setType(SCORCHED);
                                 } else if (moisture < 0.2) {
-                                    voxel[index] = new NRE::Voxel::Bare;
+                                    voxel[index].setType(BARE);
                                 } else if (moisture < 0.5) {
-                                    voxel[index] = new NRE::Voxel::Tundra;
+                                    voxel[index].setType(TUNDRA);
                                 } else {
-                                    voxel[index] = new NRE::Voxel::Snow;
+                                    voxel[index].setType(SNOW);
                                 }
                             }
                         }
@@ -108,16 +108,16 @@
                         if (noise < 0.22) {
                             for (int zPrime = static_cast <int> (z); zPrime < 0.22 * SIZE_Z; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
-                                voxel[index] = new NRE::Voxel::Ocean;
+                                voxel[index].setType(OCEAN);
                             }
                             for (unsigned int zPrime = 0.22 * SIZE_Z; zPrime < SIZE_Z; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
-                                voxel[index] = new NRE::Voxel::Void;
+                                voxel[index].setType(VOID);
                             }
                         } else {
                             for (unsigned int zPrime = static_cast <unsigned int> (z); zPrime < SIZE_Z; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
-                                voxel[index] = new NRE::Voxel::Void;
+                                voxel[index].setType(VOID);
                             }
                         }
                     }

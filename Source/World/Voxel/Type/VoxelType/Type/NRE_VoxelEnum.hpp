@@ -17,9 +17,9 @@
          * @namespace Voxel
          * @brief Engine's Voxel's Type's Module
          */
-        namespace Voxel {
+        namespace World {
 
-            enum VoxelType {
+            enum VoxelTypeEnum {
                 VOID,
                 OCEAN,
                 BEACH,

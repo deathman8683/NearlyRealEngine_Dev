@@ -11,12 +11,12 @@
     #include <sstream>
     #include <fstream>
     #include "../../Generic/Array/NRE_ArrayOperation.hpp"
-    #include "../Voxel/Type/NRE_VoxelType.hpp"
     #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
     #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../lib/FastNoise/FastNoise.h"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
+    #include "../Voxel/NRE_Voxel.hpp"
 
     /**
      * @namespace NRE
@@ -25,7 +25,7 @@
     namespace NRE {
         /**
          * @namespace World
-         * @brief Engine's Voxel's Type's Module
+         * @brief Engine's World's Module
          */
         namespace World {
 
@@ -37,7 +37,7 @@
              */
             class Chunk {
                 private:
-                    Voxel **voxel;
+                    Voxel *voxel;
                     Maths::Point2D<GLint> coord;
                     GL::IBO buffer;
                     GL::VAO vao;
@@ -59,10 +59,10 @@
                     ~Chunk();
 
                     //## Getter ##//
-                    Voxel** const& getVoxels() const;
-                    Voxel* const& getVoxel(Maths::Point3D<GLuint> const& p) const;
-                    Voxel* const& getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const;
-                    Voxel* const& getVoxel(GLuint const& index) const;
+                    Voxel* const& getVoxels() const;
+                    Voxel const& getVoxel(Maths::Point3D<GLuint> const& p) const;
+                    Voxel const& getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const;
+                    Voxel const& getVoxel(GLuint const& index) const;
                     Maths::Point2D<GLint> const& getCoord() const;
                     GL::IBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
@@ -70,10 +70,10 @@
                     bool const& isActive() const;
 
                     //## Setter ##//
-                    void setVoxels(Voxel** const& vox);
-                    void setVoxel(Maths::Point3D<GLuint> const& p, Voxel* const& vox);
-                    void setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel* const& vox);
-                    void setVoxel(GLuint const& index, Voxel* const& vox);
+                    void setVoxels(Voxel* const& vox);
+                    void setVoxel(Maths::Point3D<GLuint> const& p, Voxel const& vox);
+                    void setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel const& vox);
+                    void setVoxel(GLuint const& index, Voxel const& vox);
                     void setCoord(Maths::Point2D<GLint> const& p);
                     void setBuffer(GL::IBO const& buffer);
                     void setVAO(GL::VAO const& vao);

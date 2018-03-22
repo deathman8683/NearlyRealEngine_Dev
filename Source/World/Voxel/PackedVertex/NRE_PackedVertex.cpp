@@ -2,7 +2,7 @@
     #include "NRE_PackedVertex.hpp"
 
     namespace NRE {
-        namespace Voxel {
+        namespace World {
 
             PackedVertex::PackedVertex() : nCode(0), cCode(0) {
             }

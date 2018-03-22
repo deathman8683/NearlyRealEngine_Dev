@@ -1,20 +1,13 @@
 
-    #include "NRE_VoxelType.hpp"
+    #include "NRE_Type.hpp"
 
     namespace NRE {
-        namespace Voxel {
+        namespace World {
 
             Void::Void() {
             }
 
-            Void::Void(Void const& vox) : Voxel::Voxel(vox) {
-            }
-
             Void::~Void() {
-            }
-
-            GLint const Void::getType() const {
-                return VoxelType::VOID;
             }
 
             Color::RGB const Void::getColor() const {
@@ -24,14 +17,7 @@
             Ocean::Ocean() {
             }
 
-            Ocean::Ocean(Ocean const& vox) : Voxel::Voxel(vox) {
-            }
-
             Ocean::~Ocean() {
-            }
-
-            GLint const Ocean::getType() const {
-                return VoxelType::OCEAN;
             }
 
             Color::RGB const Ocean::getColor() const {
@@ -41,14 +27,7 @@
             Beach::Beach() {
             }
 
-            Beach::Beach(Beach const& vox) : Voxel::Voxel(vox) {
-            }
-
             Beach::~Beach() {
-            }
-
-            GLint const Beach::getType() const {
-                return VoxelType::BEACH;
             }
 
             Color::RGB const Beach::getColor() const {
@@ -58,14 +37,7 @@
             Scorched::Scorched() {
             }
 
-            Scorched::Scorched(Scorched const& vox) : Voxel::Voxel(vox) {
-            }
-
             Scorched::~Scorched() {
-            }
-
-            GLint const Scorched::getType() const {
-                return VoxelType::SCORCHED;
             }
 
             Color::RGB const Scorched::getColor() const {
@@ -75,14 +47,7 @@
             Bare::Bare() {
             }
 
-            Bare::Bare(Bare const& vox) : Voxel::Voxel(vox) {
-            }
-
             Bare::~Bare() {
-            }
-
-            GLint const Bare::getType() const {
-                return VoxelType::BARE;
             }
 
             Color::RGB const Bare::getColor() const {
@@ -92,14 +57,7 @@
             Tundra::Tundra() {
             }
 
-            Tundra::Tundra(Tundra const& vox) : Voxel::Voxel(vox) {
-            }
-
             Tundra::~Tundra() {
-            }
-
-            GLint const Tundra::getType() const {
-                return VoxelType::TUNDRA;
             }
 
             Color::RGB const Tundra::getColor() const {
@@ -109,14 +67,7 @@
             Snow::Snow() {
             }
 
-            Snow::Snow(Snow const& vox) : Voxel::Voxel(vox) {
-            }
-
             Snow::~Snow() {
-            }
-
-            GLint const Snow::getType() const {
-                return VoxelType::SNOW;
             }
 
             Color::RGB const Snow::getColor() const {
@@ -126,14 +77,7 @@
             TemperateDesert::TemperateDesert() {
             }
 
-            TemperateDesert::TemperateDesert(TemperateDesert const& vox) : Voxel::Voxel(vox) {
-            }
-
             TemperateDesert::~TemperateDesert() {
-            }
-
-            GLint const TemperateDesert::getType() const {
-                return VoxelType::TEMPERATE_DESERT;
             }
 
             Color::RGB const TemperateDesert::getColor() const {
@@ -143,14 +87,7 @@
             SubtropicalDesert::SubtropicalDesert() {
             }
 
-            SubtropicalDesert::SubtropicalDesert(SubtropicalDesert const& vox) : Voxel::Voxel(vox) {
-            }
-
             SubtropicalDesert::~SubtropicalDesert() {
-            }
-
-            GLint const SubtropicalDesert::getType() const {
-                return VoxelType::SUBTROPICAL_DESERT;
             }
 
             Color::RGB const SubtropicalDesert::getColor() const {
@@ -160,14 +97,7 @@
             Shrubland::Shrubland() {
             }
 
-            Shrubland::Shrubland(Shrubland const& vox) : Voxel::Voxel(vox) {
-            }
-
             Shrubland::~Shrubland() {
-            }
-
-            GLint const Shrubland::getType() const {
-                return VoxelType::SHRUBLAND;
             }
 
             Color::RGB const Shrubland::getColor() const {
@@ -177,14 +107,7 @@
             Taiga::Taiga() {
             }
 
-            Taiga::Taiga(Taiga const& vox) : Voxel::Voxel(vox) {
-            }
-
             Taiga::~Taiga() {
-            }
-
-            GLint const Taiga::getType() const {
-                return VoxelType::TAIGA;
             }
 
             Color::RGB const Taiga::getColor() const {
@@ -194,14 +117,7 @@
             Grassland::Grassland() {
             }
 
-            Grassland::Grassland(Grassland const& vox) : Voxel::Voxel(vox) {
-            }
-
             Grassland::~Grassland() {
-            }
-
-            GLint const Grassland::getType() const {
-                return VoxelType::GRASSLAND;
             }
 
             Color::RGB const Grassland::getColor() const {
@@ -211,14 +127,7 @@
             TemperateDeciduousForest::TemperateDeciduousForest() {
             }
 
-            TemperateDeciduousForest::TemperateDeciduousForest(TemperateDeciduousForest const& vox) : Voxel::Voxel(vox) {
-            }
-
             TemperateDeciduousForest::~TemperateDeciduousForest() {
-            }
-
-            GLint const TemperateDeciduousForest::getType() const {
-                return VoxelType::TEMPERATE_DECIDUOUS_FOREST;
             }
 
             Color::RGB const TemperateDeciduousForest::getColor() const {
@@ -228,14 +137,7 @@
             TemperateRainForest::TemperateRainForest() {
             }
 
-            TemperateRainForest::TemperateRainForest(TemperateRainForest const& vox) : Voxel::Voxel(vox) {
-            }
-
             TemperateRainForest::~TemperateRainForest() {
-            }
-
-            GLint const TemperateRainForest::getType() const {
-                return VoxelType::TEMPERATE_RAIN_FOREST;
             }
 
             Color::RGB const TemperateRainForest::getColor() const {
@@ -245,14 +147,7 @@
             TropicalSeasonalForest::TropicalSeasonalForest() {
             }
 
-            TropicalSeasonalForest::TropicalSeasonalForest(TropicalSeasonalForest const& vox) : Voxel::Voxel(vox) {
-            }
-
             TropicalSeasonalForest::~TropicalSeasonalForest() {
-            }
-
-            GLint const TropicalSeasonalForest::getType() const {
-                return VoxelType::TROPICAL_SEASONAL_FOREST;
             }
 
             Color::RGB const TropicalSeasonalForest::getColor() const {
@@ -262,14 +157,7 @@
             TropicalRainForest::TropicalRainForest() {
             }
 
-            TropicalRainForest::TropicalRainForest(TropicalRainForest const& vox) : Voxel::Voxel(vox) {
-            }
-
             TropicalRainForest::~TropicalRainForest() {
-            }
-
-            GLint const TropicalRainForest::getType() const {
-                return VoxelType::TROPICAL_RAIN_FOREST;
             }
 
             Color::RGB const TropicalRainForest::getColor() const {

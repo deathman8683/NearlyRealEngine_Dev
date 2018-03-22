@@ -19,7 +19,7 @@
     namespace NRE {
         /**
          * @namespace World
-         * @brief Engine's Voxel's Type's Module
+         * @brief Engine's World's Module
          */
         namespace World {
 

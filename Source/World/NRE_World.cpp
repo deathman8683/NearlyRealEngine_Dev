@@ -20,7 +20,7 @@
                 soilGenerator = worldGen;
                 moistureGenerator = worldGen2;
 
-                voxelMergingGlobalCache = new bool[Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * NRE::Voxel::FACE_NUM];
+                voxelMergingGlobalCache = new bool[Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * FACE_NUM];
 
                 for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
@@ -127,7 +127,7 @@
             }
 
             void World::resetVoxelMergingGlobalCache() {
-                std::fill(voxelMergingGlobalCache, voxelMergingGlobalCache + (Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * NRE::Voxel::FACE_NUM), false);
+                std::fill(voxelMergingGlobalCache, voxelMergingGlobalCache + (Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * FACE_NUM), false);
             }
 
             NREfloat const World::getSoilNoise(NREfloat const& x, NREfloat const& y) const {
@@ -139,7 +139,7 @@
             }
 
             GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face) {
-                return Array::get1DIndexFrom4D(x, y, z, face, Maths::Vector4D<GLuint>(Chunk::SIZE, NRE::Voxel::FACE_NUM));
+                return Array::get1DIndexFrom4D(x, y, z, face, Maths::Vector4D<GLuint>(Chunk::SIZE, FACE_NUM));
             }
 
         };

@@ -81,5 +81,7 @@
             std::cout << e.what() << std::endl;
         }
 
+        World::VoxelTypes::free();
+
         return 0;
     }

@@ -8,8 +8,7 @@
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
-    #include "../../Renderer/Color/NRE_Color.hpp"
+    #include "Type/VoxelTypes/NRE_VoxelTypes.hpp"
 
     /**
      * @namespace NRE
@@ -28,10 +27,12 @@
              */
             class Voxel {
                 protected:
+                    GLubyte type;
 
                 public:
                     //## Constructor ##//
                     Voxel();
+                    Voxel(GLubyte const& type);
 
                     //## Copy-Constructor ##//
                     Voxel(Voxel const& vox);
@@ -39,16 +40,17 @@
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Voxel();
+                    ~Voxel();
 
                     //## Getter ##//
+                    GLubyte const& getType() const;
+                    Color::RGB const getColor() const;
 
                     //## Setter ##//
+                    void setType(GLubyte const& type);
 
                     //## Methods ##//
                     size_t getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf);
-                    virtual GLint const getType() const = 0;
-                    virtual Color::RGB const getColor() const = 0;
 
                     //## Access Operator ##//
 

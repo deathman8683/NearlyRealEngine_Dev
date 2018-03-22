@@ -7,13 +7,28 @@
             int Voxel::NB_VERTICES = 3 * 8;
             size_t Voxel::NB_INDEX = 36;
 
-            Voxel::Voxel() {
+            Voxel::Voxel() : Voxel(VOID) {
             }
 
-            Voxel::Voxel(Voxel const& vox) {
+            Voxel::Voxel(GLubyte const& type) : type(type) {
+            }
+
+            Voxel::Voxel(Voxel const& vox) : type(vox.getType()) {
             }
 
             Voxel::~Voxel() {
+            }
+
+            GLubyte const& Voxel::getType() const {
+                return type;
+            }
+
+            Color::RGB const Voxel::getColor() const {
+                return VoxelTypes::getVoxelType(getType())->getColor();
+            }
+
+            void Voxel::setType(GLubyte const& type) {
+                this->type = type;
             }
 
             size_t Voxel::getVertices(GLint* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf) {

@@ -5,9 +5,9 @@ OBJDIR = ../../../obj/Debug/World/Voxel/
 TYPE = Type
 PACKED = PackedVertex
 
-all : $(TARGET) after
+all : before $(TARGET)
 
-after:
+before:
 	@(cd $(TYPE) && $(MAKE))
 	@(cd $(PACKED) && $(MAKE))
 

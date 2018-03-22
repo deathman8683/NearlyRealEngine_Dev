@@ -52,7 +52,7 @@
                 return &iData.front();
             }
 
-            std::unordered_map<NRE::Voxel::PackedVertex, size_t> const& Mesh::getMap() const {
+            std::unordered_map<PackedVertex, size_t> const& Mesh::getMap() const {
                 return map;
             }
 
@@ -76,7 +76,7 @@
                 iData = data;
             }
 
-            void Mesh::setMap(std::unordered_map<NRE::Voxel::PackedVertex, size_t> const& map) {
+            void Mesh::setMap(std::unordered_map<PackedVertex, size_t> const& map) {
                 this->map = map;
             }
 
@@ -104,7 +104,7 @@
 
             void Mesh::constructMesh(World* w) {
                 GLuint index;
-                bool face[NRE::Voxel::FACE_NUM];
+                bool face[FACE_NUM];
 
                 w->resetVoxelMergingGlobalCache();
 
@@ -112,13 +112,13 @@
                     for (unsigned int y = 0; y < Chunk::SIZE_Y; y = y + 1) {
                         for (unsigned int z = 0; z < Chunk::SIZE_Z; z = z + 1) {
                             index = getVoxelIndex(x, y, z);
-                            if (getTarget()->getVoxel(index)->getType() != NRE::Voxel::VOID) {
-                                face[NRE::Voxel::XNegative] = checkVoxelXNegativeFace(w, x, y, z);
-                                face[NRE::Voxel::XPositive] = checkVoxelXPositiveFace(w, x, y, z);
-                                face[NRE::Voxel::YNegative] = checkVoxelYNegativeFace(w, x, y, z);
-                                face[NRE::Voxel::YPositive] = checkVoxelYPositiveFace(w, x, y, z);
-                                face[NRE::Voxel::ZNegative] = checkVoxelZNegativeFace(w, x, y, z);
-                                face[NRE::Voxel::ZPositive] = checkVoxelZPositiveFace(w, x, y, z);
+                            if (getTarget()->getVoxel(index).getType() != VOID) {
+                                face[XNegative] = checkVoxelXNegativeFace(w, x, y, z);
+                                face[XPositive] = checkVoxelXPositiveFace(w, x, y, z);
+                                face[YNegative] = checkVoxelYNegativeFace(w, x, y, z);
+                                face[YPositive] = checkVoxelYPositiveFace(w, x, y, z);
+                                face[ZNegative] = checkVoxelZNegativeFace(w, x, y, z);
+                                face[ZPositive] = checkVoxelZPositiveFace(w, x, y, z);
 
                                 addVoxel(w, Maths::Point3D<GLuint>(x, y, z), Maths::Point3D<GLint>(x + target->getCoord().getX() * Chunk::SIZE_X, y + target->getCoord().getY() * Chunk::SIZE_Y, z), face);
                             }
@@ -129,78 +129,78 @@
 
             void Mesh::addVoxel(World* w, Maths::Point3D<GLuint> const& voxCoord, Maths::Point3D<GLint> const& realCoord, bool const (&face)[6]) {
                 Maths::Point3D<GLint> p[4];
-                Color::RGB voxColor = getTarget()->getVoxel(voxCoord)->getColor();
+                Color::RGB voxColor = getTarget()->getVoxel(voxCoord).getColor();
 
-                if (face[NRE::Voxel::XNegative]) {
-                    if (!w->getVoxelMergingFace(voxCoord, NRE::Voxel::XNegative)) {
+                if (face[XNegative]) {
+                    if (!w->getVoxelMergingFace(voxCoord, XNegative)) {
 
                         p[0] = {realCoord.getX(), realCoord.getY(), realCoord.getZ()};
                         p[1] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ()};
                         p[2] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + 1};
                         p[3] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ() + 1};
 
-                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord)->getType(), p, NRE::Voxel::XNegative);
-                        addPackedVertex(p, voxColor, NRE::Voxel::XNegative, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
+                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, XNegative);
+                        addPackedVertex(p, voxColor, XNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
-                if (face[NRE::Voxel::YNegative]) {
-                    if (!w->getVoxelMergingFace(voxCoord, NRE::Voxel::YNegative)) {
+                if (face[YNegative]) {
+                    if (!w->getVoxelMergingFace(voxCoord, YNegative)) {
                         p[0] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ()};
                         p[1] = {realCoord.getX(), realCoord.getY(), realCoord.getZ()};
                         p[2] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ() + 1};
                         p[3] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + 1};
 
-                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord)->getType(), p, NRE::Voxel::YNegative);
-                        addPackedVertex(p, voxColor, NRE::Voxel::YNegative, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
+                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, YNegative);
+                        addPackedVertex(p, voxColor, YNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
-                if (face[NRE::Voxel::ZNegative]) {
-                    if (!w->getVoxelMergingFace(voxCoord, NRE::Voxel::ZNegative)) {
+                if (face[ZNegative]) {
+                    if (!w->getVoxelMergingFace(voxCoord, ZNegative)) {
                         p[0] = {realCoord.getX(), realCoord.getY(), realCoord.getZ()};
                         p[1] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ()};
                         p[2] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ()};
                         p[3] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ()};
 
-                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord)->getType(), p, NRE::Voxel::ZNegative);
-                        addPackedVertex(p, voxColor, NRE::Voxel::ZNegative, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
+                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, ZNegative);
+                        addPackedVertex(p, voxColor, ZNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
-                if (face[NRE::Voxel::XPositive]) {
-                    if (!w->getVoxelMergingFace(voxCoord, NRE::Voxel::XPositive)) {
+                if (face[XPositive]) {
+                    if (!w->getVoxelMergingFace(voxCoord, XPositive)) {
                         p[0] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ()};
                         p[1] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ()};
                         p[2] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ() + 1};
                         p[3] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ() + 1};
 
-                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord)->getType(), p, NRE::Voxel::XPositive);
-                        addPackedVertex(p, voxColor, NRE::Voxel::XPositive, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
+                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, XPositive);
+                        addPackedVertex(p, voxColor, XPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
-                if (face[NRE::Voxel::YPositive]) {
-                    if (!w->getVoxelMergingFace(voxCoord, NRE::Voxel::YPositive)) {
+                if (face[YPositive]) {
+                    if (!w->getVoxelMergingFace(voxCoord, YPositive)) {
                         p[0] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ()};
                         p[1] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ()};
                         p[2] = {realCoord.getX(),  realCoord.getY() + 1, realCoord.getZ() + 1};
                         p[3] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ() + 1};
 
-                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord)->getType(), p, NRE::Voxel::YPositive);
-                        addPackedVertex(p, voxColor, NRE::Voxel::YPositive, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
+                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, YPositive);
+                        addPackedVertex(p, voxColor, YPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
-                if (face[NRE::Voxel::ZPositive]) {
-                    if (!w->getVoxelMergingFace(voxCoord, NRE::Voxel::ZPositive)) {
+                if (face[ZPositive]) {
+                    if (!w->getVoxelMergingFace(voxCoord, ZPositive)) {
                         p[0] = {realCoord.getX() + 1, realCoord.getY(), realCoord.getZ() + 1};
                         p[1] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + 1};
                         p[2] = {realCoord.getX() + 1, realCoord.getY() + 1, realCoord.getZ() + 1};
                         p[3] = {realCoord.getX(), realCoord.getY() + 1, realCoord.getZ() + 1};
 
-                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord)->getType(), p, NRE::Voxel::ZPositive);
-                        addPackedVertex(p, voxColor, NRE::Voxel::ZPositive, static_cast <size_t> (target->getVoxel(voxCoord)->getType()));
+                        mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, ZPositive);
+                        addPackedVertex(p, voxColor, ZPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
             }
@@ -217,14 +217,14 @@
                 auto getAxe2 = &Maths::Point3D<GLint>::getZ;
                 auto checkFace = &Mesh::checkVoxelXNegativeFace;
 
-                if (face == NRE::Voxel::XNegative || face == NRE::Voxel::XPositive) {
+                if (face == XNegative || face == XPositive) {
                     axe1 = &y, axe2 = &z; axe1Cpy = y;
                     limit1 = Chunk::SIZE_Y; limit2 = Chunk::SIZE_Z;
                     setAxe1 = &Maths::Point3D<GLint>::setY<GLint>;
                     setAxe2 = &Maths::Point3D<GLint>::setZ<GLint>;
                     getAxe1 = &Maths::Point3D<GLint>::getY;
                     getAxe2 = &Maths::Point3D<GLint>::getZ;
-                    if (face == NRE::Voxel::XNegative) {
+                    if (face == XNegative) {
                        p1 = &p[1]; p2 = &p[3], p3 = &p[2]; p4 = &p[3];
                        checkFace = &Mesh::checkVoxelXNegativeFace;
                     } else {
@@ -232,14 +232,14 @@
                        checkFace = &Mesh::checkVoxelXPositiveFace;
                     }
                 }
-                if (face == NRE::Voxel::YNegative || face == NRE::Voxel::YPositive) {
+                if (face == YNegative || face == YPositive) {
                     axe1 = &x; axe2 = &z; axe1Cpy = x;
                     limit1 = Chunk::SIZE_X; limit2 = Chunk::SIZE_Z;
                     setAxe1 = &Maths::Point3D<GLint>::setX<GLint>;
                     setAxe2 = &Maths::Point3D<GLint>::setZ<GLint>;
                     getAxe1 = &Maths::Point3D<GLint>::getX;
                     getAxe2 = &Maths::Point3D<GLint>::getZ;
-                    if (face == NRE::Voxel::YNegative) {
+                    if (face == YNegative) {
                         p1 = &p[0]; p2 = &p[2], p3 = &p[2]; p4 = &p[3];
                         checkFace = &Mesh::checkVoxelYNegativeFace;
                     } else {
@@ -247,14 +247,14 @@
                         checkFace = &Mesh::checkVoxelYPositiveFace;
                     }
                 }
-                if (face == NRE::Voxel::ZNegative || face == NRE::Voxel::ZPositive) {
+                if (face == ZNegative || face == ZPositive) {
                     axe1 = &x, axe2 = &y; axe1Cpy = x;
                     limit1 = Chunk::SIZE_X; limit2 = Chunk::SIZE_Y;
                     setAxe1 = &Maths::Point3D<GLint>::setX<GLint>;
                     setAxe2 = &Maths::Point3D<GLint>::setY<GLint>;
                     getAxe1 = &Maths::Point3D<GLint>::getX;
                     getAxe2 = &Maths::Point3D<GLint>::getY;
-                    if (face == NRE::Voxel::ZNegative) {
+                    if (face == ZNegative) {
                        p1 = &p[1]; p2 = &p[3], p3 = &p[2]; p4 = &p[3];
                        checkFace = &Mesh::checkVoxelZNegativeFace;
                     } else {
@@ -272,7 +272,7 @@
                     index = getVoxelIndex(x, y, z);
                     if ((this->*checkFace)(w, x, y, z)
                      && !w->getVoxelMergingFace(x, y, z, face)
-                     && getTarget()->getVoxel(index)->getType() == type) {
+                     && getTarget()->getVoxel(index).getType() == type) {
                          (p1->*setAxe1)((p1->*getAxe1)() + 1);
                          (p2->*setAxe1)((p2->*getAxe1)() + 1);
                          w->setVoxelMergingFace(x, y, z, face, true);
@@ -295,7 +295,7 @@
                         index = getVoxelIndex(x, y, z);
                         if ((this->*checkFace)(w, x, y, z)
                          && !w->getVoxelMergingFace(x, y, z, face)
-                         && getTarget()->getVoxel(index)->getType() == type) {
+                         && getTarget()->getVoxel(index).getType() == type) {
                             axe2Size = axe2Size + 1;
                             *axe1 = *axe1 + 1;
                         } else {
@@ -334,27 +334,27 @@
                 bool found;
 
                 switch (face) {
-                    case (NRE::Voxel::XNegative) : {
+                    case (XNegative) : {
                         n = {-1, 0, 0};
                         break;
                     }
-                    case (NRE::Voxel::YNegative) : {
+                    case (YNegative) : {
                         n = {0, -1, 0};
                         break;
                     }
-                    case (NRE::Voxel::ZNegative) : {
+                    case (ZNegative) : {
                         n = {0, 0, -1};
                         break;
                     }
-                    case (NRE::Voxel::XPositive) : {
+                    case (XPositive) : {
                         n = {1, 0, 0};
                         break;
                     }
-                    case (NRE::Voxel::YPositive) : {
+                    case (YPositive) : {
                         n = {0, 1, 0};
                         break;
                     }
-                    case (NRE::Voxel::ZPositive) : {
+                    case (ZPositive) : {
                         n = {0, 0, 1};
                         break;
                     }
@@ -362,7 +362,7 @@
                     }
                 }
 
-                NRE::Voxel::PackedVertex packed(p[2], n, voxColor, static_cast <size_t> (face), cCode);
+                PackedVertex packed(p[2], n, voxColor, static_cast <size_t> (face), cCode);
                 found = getSimilarVertexIndex(packed, map, idx0);
 
                 if (found) {
@@ -426,7 +426,7 @@
                 iData.push_back(idx1);
             }
 
-            bool const Mesh::getSimilarVertexIndex(NRE::Voxel::PackedVertex const& packed, std::unordered_map<NRE::Voxel::PackedVertex, size_t> const& map, GLuint &result) const {
+            bool const Mesh::getSimilarVertexIndex(PackedVertex const& packed, std::unordered_map<PackedVertex, size_t> const& map, GLuint &result) const {
                 auto it = map.find(packed);
                 if (it == map.end()) {
                     return false;
@@ -441,10 +441,10 @@
                     if (getTarget()->getCoord().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->second->getVoxel(Chunk::SIZE_X - 1, y, z)->getType() == NRE::Voxel::VOID;
+                        return w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->second->getVoxel(Chunk::SIZE_X - 1, y, z).getType() == VOID;
                     }
                 } else {
-                    return getTarget()->getVoxel(x - 1, y, z)->getType() == NRE::Voxel::VOID;
+                    return getTarget()->getVoxel(x - 1, y, z).getType() == VOID;
                 }
             }
 
@@ -453,10 +453,10 @@
                     if (getTarget()->getCoord().getX() == static_cast <GLint> (w->getHExtent().getX())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX() + 1, getTarget()->getCoord().getY())->second->getVoxel(0, y, z)->getType() == NRE::Voxel::VOID;
+                        return w->getChunk(getTarget()->getCoord().getX() + 1, getTarget()->getCoord().getY())->second->getVoxel(0, y, z).getType() == VOID;
                     }
                 } else {
-                    return getTarget()->getVoxel(x + 1, y, z)->getType() == NRE::Voxel::VOID;
+                    return getTarget()->getVoxel(x + 1, y, z).getType() == VOID;
                 }
             }
 
@@ -465,10 +465,10 @@
                     if (getTarget()->getCoord().getY() == -1 * static_cast <GLint> (w->getHExtent().getY())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() - 1)->second->getVoxel(x, Chunk::SIZE_Y - 1, z)->getType() == NRE::Voxel::VOID;
+                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() - 1)->second->getVoxel(x, Chunk::SIZE_Y - 1, z).getType() == VOID;
                     }
                 } else {
-                    return getTarget()->getVoxel(x, y - 1, z)->getType() == NRE::Voxel::VOID;
+                    return getTarget()->getVoxel(x, y - 1, z).getType() == VOID;
                 }
             }
 
@@ -477,10 +477,10 @@
                     if (getTarget()->getCoord().getY() == static_cast <GLint> (w->getHExtent().getY())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() + 1)->second->getVoxel(x, 0, z)->getType() == NRE::Voxel::VOID;
+                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() + 1)->second->getVoxel(x, 0, z).getType() == VOID;
                     }
                 } else {
-                    return getTarget()->getVoxel(x, y + 1, z)->getType() == NRE::Voxel::VOID;
+                    return getTarget()->getVoxel(x, y + 1, z).getType() == VOID;
                 }
             }
 
@@ -488,7 +488,7 @@
                 if (z == 0) {
                     return true;
                 } else {
-                    return getTarget()->getVoxel(x, y, z - 1)->getType() == NRE::Voxel::VOID;
+                    return getTarget()->getVoxel(x, y, z - 1).getType() == VOID;
                 }
             }
 
@@ -496,7 +496,7 @@
                 if (z == Chunk::SIZE_Z - 1) {
                     return true;
                 } else {
-                    return getTarget()->getVoxel(x, y, z + 1)->getType() == NRE::Voxel::VOID;
+                    return getTarget()->getVoxel(x, y, z + 1).getType() == VOID;
                 }
             }
 
