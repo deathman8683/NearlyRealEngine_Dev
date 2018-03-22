@@ -46,11 +46,11 @@
                 return chunkMap;
             }
 
-            std::unordered_map<Maths::Point2D<GLint>, Chunk*>::iterator World::getChunk(Maths::Point2D<GLint> const& p) {
-                return chunkMap.find(p);
+            Chunk* const& World::getChunk(Maths::Point2D<GLint> const& p) {
+                return chunkMap.find(p)->second;
             }
 
-            std::unordered_map<Maths::Point2D<GLint>, Chunk*>::iterator World::getChunk(GLint const& x, GLint const& y) {
+            Chunk* const& World::getChunk(GLint const& x, GLint const& y) {
                 return getChunk(Maths::Point2D<GLint>(x, y));
             }
 
@@ -121,7 +121,6 @@
 
             void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera) {
                 for (const auto &it : chunkMap) {
-
                     it.second->render(shader, MVP, camera);
                 }
             }

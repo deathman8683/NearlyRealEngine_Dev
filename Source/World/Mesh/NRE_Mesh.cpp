@@ -441,7 +441,7 @@
                     if (getTarget()->getCoord().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->second->getVoxel(Chunk::SIZE_X - 1, y, z).getType() == VOID;
+                        return w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->getVoxel(Chunk::SIZE_X - 1, y, z).getType() == VOID;
                     }
                 } else {
                     return getTarget()->getVoxel(x - 1, y, z).getType() == VOID;
@@ -453,7 +453,7 @@
                     if (getTarget()->getCoord().getX() == static_cast <GLint> (w->getHExtent().getX())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX() + 1, getTarget()->getCoord().getY())->second->getVoxel(0, y, z).getType() == VOID;
+                        return w->getChunk(getTarget()->getCoord().getX() + 1, getTarget()->getCoord().getY())->getVoxel(0, y, z).getType() == VOID;
                     }
                 } else {
                     return getTarget()->getVoxel(x + 1, y, z).getType() == VOID;
@@ -465,7 +465,7 @@
                     if (getTarget()->getCoord().getY() == -1 * static_cast <GLint> (w->getHExtent().getY())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() - 1)->second->getVoxel(x, Chunk::SIZE_Y - 1, z).getType() == VOID;
+                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() - 1)->getVoxel(x, Chunk::SIZE_Y - 1, z).getType() == VOID;
                     }
                 } else {
                     return getTarget()->getVoxel(x, y - 1, z).getType() == VOID;
@@ -477,7 +477,7 @@
                     if (getTarget()->getCoord().getY() == static_cast <GLint> (w->getHExtent().getY())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() + 1)->second->getVoxel(x, 0, z).getType() == VOID;
+                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() + 1)->getVoxel(x, 0, z).getType() == VOID;
                     }
                 } else {
                     return getTarget()->getVoxel(x, y + 1, z).getType() == VOID;
