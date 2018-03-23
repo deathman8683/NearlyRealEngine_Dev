@@ -141,7 +141,7 @@
                         if (currentType == static_cast <GLuint> (getVoxel(x, y, z).getType())) {
                             currentLineSize = currentLineSize + 1;
                         } else {
-                            chunkFile << currentLineSize << " " << currentType << '\n';
+                            chunkFile << currentLineSize << ' ' << currentType << ' ';
                             currentType = getVoxel(x, y, z).getType();
                             currentLineSize = 1;
                         }
@@ -157,7 +157,7 @@
                         }
                     }
 
-                    chunkFile << currentLineSize << " " << currentType;
+                    chunkFile << currentLineSize << ' ' << currentType;
                     chunkFile.close();
                 }
             }
@@ -171,12 +171,11 @@
                 chunkName = "Data/Chunk/c." + xStr.str() + "." + yStr.str() + ".dat";
                 chunkFile.open(chunkName, std::ios::in);
                 if (chunkFile.is_open()) {
-                    GLuint x = 0, y = 0, z = 0;
-                    GLuint voxNumber = 0, voxType = 0;
                     std::string line;
-                    while (!chunkFile.eof()) {
-                        std::getline(chunkFile, line);
-                        std::istringstream parser(line);
+                    std::getline(chunkFile, line);
+                    GLuint voxNumber, voxType, x = 0, y = 0, z = 0;
+                    std::istringstream parser(line);
+                    while (parser.rdbuf()->in_avail() > 0) {
                         parser >> voxNumber >> voxType;
 
                         loadVoxels(x, y, z, voxNumber, voxType);

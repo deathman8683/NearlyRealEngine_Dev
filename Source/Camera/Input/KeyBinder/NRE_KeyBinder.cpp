@@ -45,10 +45,10 @@
                 if (binderFile.is_open()) {
                     for (unsigned int i = 0; i < getKeyMap().size() - 1; i = i + 1) {
                         auto it = getKeyMap().find(i);
-                        binderFile << it->second.getCode() << " " << it->second.isSwitch() << '\n';
+                        binderFile << it->second.getCode() << ' ' << it->second.isSwitch() << ' ';
                     }
                     auto it = getKeyMap().find(getKeyMap().size() - 1);
-                    binderFile << it->second.getCode() << " " << it->second.isSwitch();
+                    binderFile << it->second.getCode() << ' ' << it->second.isSwitch();
                 }
             }
 
@@ -57,12 +57,10 @@
                 binderFile.open(path, std::ios::in);
                 if (binderFile.is_open()) {
                     std::string line;
-                    unsigned int lineCounter = 0;
-                    while (!binderFile.eof()) {
-                        unsigned int code, isSwitch;
-
-                        std::getline(binderFile, line);
-                        std::istringstream parser(line);
+                    std::getline(binderFile, line);
+                    GLuint code, isSwitch, lineCounter = 0;
+                    std::istringstream parser(line);
+                    while (parser.rdbuf()->in_avail() > 0) {
                         parser >> code >> isSwitch;
 
                         insert(lineCounter, Key(code, false, isSwitch));

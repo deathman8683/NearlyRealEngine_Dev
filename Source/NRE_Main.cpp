@@ -13,7 +13,10 @@
             Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
+            double time = SDL_GetTicks();
             World::World engineWorld(Maths::Vector2D<GLuint>(5, 5));
+            time = SDL_GetTicks() - time;
+            std::cout << time << std::endl;
             engineWorld.constructChunksMesh();
 
             Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
