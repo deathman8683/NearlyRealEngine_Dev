@@ -8,6 +8,8 @@
             GLuint Chunk::SIZE_Y = 16;
             GLuint Chunk::SIZE_Z = 128;
             Maths::Vector3D<GLuint> Chunk::SIZE = Maths::Vector3D<GLuint>(SIZE_X, SIZE_Y, SIZE_Z);
+            GLuint Chunk::SECTOR_SIZE = 4096;
+            GLuint Chunk::LOOKUP_SIZE = 1024;
 
             Chunk::Chunk() : voxel(0) {
             }
@@ -127,21 +129,48 @@
             }
 
             void Chunk::save() {
-                std::ofstream chunkFile;
+                std::fstream chunkFile;
                 std::ostringstream xStr, yStr;
                 std::string chunkName;
-                xStr << getCoord().getX();
-                yStr << getCoord().getY();
-                chunkName = "Data/Chunk/c." + xStr.str() + "." + yStr.str() + ".dat";
-                chunkFile.open(chunkName, std::ios::out);
+                if (getCoord().getX() < 0) {
+                    xStr << (getCoord().getX() / 16) -1;
+                } else {
+                    xStr << (getCoord().getX() / 16);
+                }
+                if (getCoord().getY() < 0) {
+                    yStr << (getCoord().getY() / 16) -1;
+                } else {
+                    yStr << (getCoord().getY() / 16);
+                }
+                chunkName = "Data/Region/r." + xStr.str() + "." + yStr.str() + ".dat";
+                chunkFile.open(chunkName, std::ios::in | std::ios::out | std::ios::binary);
                 if (chunkFile.is_open()) {
+                    GLuint xOff, yOff;
+                    if (getCoord().getX() < 0) {
+                        xOff = (-(getCoord().getX() + 1) % 16) * 16;
+                    } else {
+                        xOff = (getCoord().getX() % 16) * 16;
+                    }
+                    if (getCoord().getY() < 0) {
+                        yOff = (-(getCoord().getY() + 1) % 16);
+                    } else {
+                        yOff = (getCoord().getY() % 16);
+                    }
+                    size_t fileOffset = 4 * (xOff + yOff);
+                    chunkFile.seekg(fileOffset, chunkFile.beg);
+                    GLuint offset = 0, size = 0;
+                    chunkFile.read(reinterpret_cast<char*> (&offset), 3);
+                    chunkFile.read(reinterpret_cast<char*> (&size), 1);
+
                     GLuint x = 0, y = 0, z = 0;
+                    std::stringstream data;
                     GLuint currentType = getVoxel(x, y, z).getType(), currentLineSize = 0;
                     while (z != SIZE_Z) {
                         if (currentType == static_cast <GLuint> (getVoxel(x, y, z).getType())) {
                             currentLineSize = currentLineSize + 1;
                         } else {
-                            chunkFile << currentLineSize << ' ' << currentType << ' ';
+                            data.write(reinterpret_cast<char*> (&currentLineSize), 2);
+                            data.write(reinterpret_cast<char*> (&currentType), 1);
                             currentType = getVoxel(x, y, z).getType();
                             currentLineSize = 1;
                         }
@@ -156,33 +185,102 @@
                             }
                         }
                     }
+                    data.write(reinterpret_cast<char*> (&currentLineSize), 2);
+                    data.write(reinterpret_cast<char*> (&currentType), 1);
+                    GLuint dataSize = data.tellp();
 
-                    chunkFile << currentLineSize << ' ' << currentType;
-                    chunkFile.close();
+                    if (offset == 0 && size == 0) {
+                        chunkFile.seekg(0, chunkFile.end);
+                        GLuint endOffset = chunkFile.tellp();
+                        chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
+                        chunkFile << data.rdbuf();
+
+                        chunkFile.seekg(fileOffset, chunkFile.beg);
+                        GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize + 4)) / SECTOR_SIZE);
+                        GLuint chunkOffset = std::ceil((static_cast <NREfloat> (endOffset - LOOKUP_SIZE)) / SECTOR_SIZE);
+                        chunkFile.write(reinterpret_cast<char*> (&chunkOffset), 3);
+                        chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
+                        chunkFile.close();
+                    } else {
+                        chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
+                        chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
+                        chunkFile << data.rdbuf();
+
+                        chunkFile.seekg(fileOffset + 3, chunkFile.beg);
+                        GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize + 4)) / SECTOR_SIZE);
+                        chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
+                        chunkFile.close();
+                    }
                 }
             }
 
-            void Chunk::load(World * w) {
-                std::ifstream chunkFile;
+            void Chunk::load(World* w) {
+                std::fstream chunkFile;
                 std::ostringstream xStr, yStr;
                 std::string chunkName;
-                xStr << getCoord().getX();
-                yStr << getCoord().getY();
-                chunkName = "Data/Chunk/c." + xStr.str() + "." + yStr.str() + ".dat";
-                chunkFile.open(chunkName, std::ios::in);
+                if (getCoord().getX() < 0) {
+                    xStr << (getCoord().getX() / 16) -1;
+                } else {
+                    xStr << (getCoord().getX() / 16);
+                }
+                if (getCoord().getY() < 0) {
+                    yStr << (getCoord().getY() / 16) -1;
+                } else {
+                    yStr << (getCoord().getY() / 16);
+                }
+                chunkName = "Data/Region/r." + xStr.str() + "." + yStr.str() + ".dat";
+                chunkFile.open(chunkName, std::ios::in | std::ios::out | std::ios::binary);
                 if (chunkFile.is_open()) {
-                    std::string line;
-                    std::getline(chunkFile, line);
-                    GLuint voxNumber, voxType, x = 0, y = 0, z = 0;
-                    std::istringstream parser(line);
-                    while (parser.rdbuf()->in_avail() > 0) {
-                        parser >> voxNumber >> voxType;
+                    GLuint xOff, yOff;
+                    if (getCoord().getX() < 0) {
+                        xOff = (-(getCoord().getX() + 1) % 16) * 16;
+                    } else {
+                        xOff = (getCoord().getX() % 16) * 16;
+                    }
+                    if (getCoord().getY() < 0) {
+                        yOff = (-(getCoord().getY() + 1) % 16);
+                    } else {
+                        yOff = (getCoord().getY() % 16);
+                    }
+                    size_t fileOffset = 4 * (xOff + yOff);
+                    chunkFile.seekg(fileOffset, chunkFile.beg);
+                    GLuint offset = 0, size = 0;
+                    chunkFile.read(reinterpret_cast<char*> (&offset), 3);
+                    chunkFile.read(reinterpret_cast<char*> (&size), 1);
 
-                        loadVoxels(x, y, z, voxNumber, voxType);
+                    if (offset == 0 && size == 0) {
+                        createProceduralTerrain(w);
+                    } else {
+                        chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
+                        GLuint dataSize = 0;
+                        chunkFile.read(reinterpret_cast<char*> (&dataSize), 4);
+
+                        std::vector<char> buffer(dataSize);
+                        chunkFile.read(&buffer[0], dataSize);
+                        std::stringstream data;
+                        data.rdbuf()->pubsetbuf(&buffer[0], dataSize);
+
+                        GLuint voxNumber, voxType, x = 0, y = 0, z = 0;
+                        while (dataSize > 0) {
+                            data.read(reinterpret_cast<char*> (&voxNumber), 2);
+                            data.read(reinterpret_cast<char*> (&voxType), 1);
+                            dataSize = dataSize - 3;
+
+                            loadVoxels(x, y, z, voxNumber, voxType);
+                        }
                     }
                 } else {
                     createProceduralTerrain(w);
                     chunkFile.open(chunkName, std::ios::trunc | std::ios::out);
+                    std::stringstream table;
+                    GLuint offset = 0, size = 0;
+                    for (GLuint x = 0; x < 16; x = x + 1) {
+                        for (GLuint y = 0; y < 16; y = y + 1) {
+                            table.write(reinterpret_cast<char*> (&offset), 3);
+                            table.write(reinterpret_cast<char*> (&size), 1);
+                        }
+                    }
+                    chunkFile << table.rdbuf();
                     chunkFile.close();
                 }
             }

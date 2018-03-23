@@ -108,6 +108,8 @@
                     static GLuint SIZE_Y;
                     static GLuint SIZE_Z;
                     static Maths::Vector3D<GLuint> SIZE;
+                    static GLuint SECTOR_SIZE;
+                    static GLuint LOOKUP_SIZE;
             };
 
             inline std::ostream& operator<<(std::ostream &stream, Chunk const& c) {
