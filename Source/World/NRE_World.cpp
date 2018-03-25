@@ -189,9 +189,14 @@
                 } else {
                     coord.setY((chunk.getCoord().getY() / 16));
                 }
+                std::cout << coord << std::endl;
                 if (saveRegionMap.count(coord) == 0) {
+                    std::cout << "Constructor" << std::endl;
+                    std::cout << chunk.getCoord() << std::endl;
                     saveRegionMap[chunk.getCoord()] = new Region(chunk);
                 } else {
+                    std::cout << "Add" << std::endl;
+                    std::cout << chunk.getCoord() << std::endl;
                     auto it = saveRegionMap.find(coord);
                     it->second->add(chunk);
                 }
