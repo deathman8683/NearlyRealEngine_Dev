@@ -7,10 +7,10 @@
             int World::DEFAULT_SOIL_SEED = 6'032'018;
             int World::DEFAULT_MOISTURE_SEED = 21'032'018;
 
-            World::World() : World(Maths::Vector2D<GLuint>(0, 0), true) {
+            World::World() : World(Maths::Vector2D<GLuint>(0, 0), Maths::Vector2D<GLint>(0, 0)) {
             }
 
-            World::World(Maths::Vector2D<GLuint> const& size, bool const& loadGenericTerrain) : chunkMap((size.getX() * 2 + 1) * (size.getY() * 2 + 1)), hExtent(size), voxelMergingGlobalCache(0) {
+            World::World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift) : chunkMap((hExtent.getX() * 2 + 1) * (hExtent.getY() * 2 + 1)), hExtent(hExtent), shift(shift), voxelMergingGlobalCache(0) {
                 FastNoise worldGen, worldGen2;
                 worldGen.SetNoiseType(FastNoise::Simplex);
                 worldGen.SetSeed(DEFAULT_SOIL_SEED);
@@ -24,13 +24,13 @@
 
                 for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
-                        Maths::Point2D<GLint> tmp(x, y);
+                        Maths::Point2D<GLint> tmp(x + getShift().getX(), y + getShift().getY());
                         chunkMap[tmp] = new Chunk(tmp, true);
                     }
                 }
             }
 
-            World::World(World const& w) : chunkMap(w.getChunkMap()), loadRegionMap(w.getLoadRegionMap()), saveRegionMap(w.getSaveRegionMap()), constructionStack(w.getConstructionStack()), hExtent(w.getHExtent()), soilGenerator(w.getSoilGenerator()), moistureGenerator(w.getMoistureGenerator()), voxelMergingGlobalCache(w.getVoxelMergingGlobalCache()) {
+            World::World(World const& w) : chunkMap(w.getChunkMap()), loadRegionMap(w.getLoadRegionMap()), saveRegionMap(w.getSaveRegionMap()), constructionStack(w.getConstructionStack()), hExtent(w.getHExtent()), shift(w.getShift()), soilGenerator(w.getSoilGenerator()), moistureGenerator(w.getMoistureGenerator()), voxelMergingGlobalCache(w.getVoxelMergingGlobalCache()) {
             }
 
             World::~World() {
@@ -70,6 +70,10 @@
 
             Maths::Vector2D<GLuint> const& World::getHExtent() const {
                 return hExtent;
+            }
+
+            Maths::Vector2D<GLint> const& World::getShift() const {
+                return shift;
             }
 
             FastNoise const& World::getSoilGenerator() const {
@@ -118,6 +122,10 @@
 
             void World::setHExtent(Maths::Vector2D<GLuint> const& size) {
                 hExtent = size;
+            }
+
+            void World::setShift(Maths::Vector2D<GLint> const& size) {
+                shift = size;
             }
 
             void World::setSoilGenerator(FastNoise const& gen) {

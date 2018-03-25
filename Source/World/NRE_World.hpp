@@ -34,6 +34,7 @@
                     std::unordered_map<Maths::Point2D<GLint>, Region*> saveRegionMap;
                     std::stack<Chunk*> constructionStack;
                     Maths::Vector2D<GLuint> hExtent;
+                    Maths::Vector2D<GLint> shift;
                     FastNoise soilGenerator;
                     FastNoise moistureGenerator;
                     bool *voxelMergingGlobalCache;
@@ -41,7 +42,7 @@
                 public:
                     //## Constructor ##//
                     World();
-                    World(Maths::Vector2D<GLuint> const& size, bool const& loadGenericTerrain = true);
+                    World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift);
 
                     //## Copy-Constructor ##//
                     World(World const& w);
@@ -59,6 +60,7 @@
                     Chunk* const& getChunk(Maths::Point2D<GLint> const& p);
                     Chunk* const& getChunk(GLint const& x, GLint const& y);
                     Maths::Vector2D<GLuint> const& getHExtent() const;
+                    Maths::Vector2D<GLint> const& getShift() const;
                     FastNoise const& getSoilGenerator() const;
                     FastNoise const& getMoistureGenerator() const;
                     bool* getVoxelMergingGlobalCache() const;
@@ -73,6 +75,7 @@
                     void setChunk(Maths::Point2D<GLint> const& p, Chunk* const& chunk);
                     void setChunk(GLint const& x, GLint const& y, Chunk* const& chunk);
                     void setHExtent(Maths::Vector2D<GLuint> const& size);
+                    void setShift(Maths::Vector2D<GLint> const& size);
                     void setSoilGenerator(FastNoise const& gen);
                     void setMoistureGenerator(FastNoise const& gen);
                     void setVoxelMergingGlobalCache(bool* (&cache));

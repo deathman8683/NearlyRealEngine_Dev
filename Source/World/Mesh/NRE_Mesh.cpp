@@ -438,7 +438,7 @@
 
             bool Mesh::checkVoxelXNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (x == 0) {
-                    if (getTarget()->getCoord().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
+                    if (getTarget()->getCoord().getX() - w->getShift().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
                         return true;
                     } else {
                         return w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->getVoxel(Chunk::SIZE_X - 1, y, z).getType() == VOID;
@@ -450,7 +450,7 @@
 
             bool Mesh::checkVoxelXPositiveFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (x == Chunk::SIZE_X - 1) {
-                    if (getTarget()->getCoord().getX() == static_cast <GLint> (w->getHExtent().getX())) {
+                    if (getTarget()->getCoord().getX() - w->getShift().getX() == static_cast <GLint> (w->getHExtent().getX())) {
                         return true;
                     } else {
                         return w->getChunk(getTarget()->getCoord().getX() + 1, getTarget()->getCoord().getY())->getVoxel(0, y, z).getType() == VOID;
@@ -462,7 +462,7 @@
 
             bool Mesh::checkVoxelYNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (y == 0) {
-                    if (getTarget()->getCoord().getY() == -1 * static_cast <GLint> (w->getHExtent().getY())) {
+                    if (getTarget()->getCoord().getY() - w->getShift().getY() == -1 * static_cast <GLint> (w->getHExtent().getY())) {
                         return true;
                     } else {
                         return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() - 1)->getVoxel(x, Chunk::SIZE_Y - 1, z).getType() == VOID;
@@ -474,7 +474,7 @@
 
             bool Mesh::checkVoxelYPositiveFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (y == Chunk::SIZE_Y - 1) {
-                    if (getTarget()->getCoord().getY() == static_cast <GLint> (w->getHExtent().getY())) {
+                    if (getTarget()->getCoord().getY() - w->getShift().getY() == static_cast <GLint> (w->getHExtent().getY())) {
                         return true;
                     } else {
                         return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() + 1)->getVoxel(x, 0, z).getType() == VOID;
