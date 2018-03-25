@@ -10,20 +10,20 @@
             Region::Region(std::string const& path) : path(path) {
             }
 
-            Region::Region(Chunk &chunk) {
+            Region::Region(Chunk *chunk) {
                 std::ostringstream xStr, yStr;
-                if (chunk.getCoord().getX() < 0) {
-                    xStr << (chunk.getCoord().getX() / 16) -1;
+                if (chunk->getCoord().getX() < 0) {
+                    xStr << (chunk->getCoord().getX() / 16) -1;
                 } else {
-                    xStr << (chunk.getCoord().getX() / 16);
+                    xStr << (chunk->getCoord().getX() / 16);
                 }
-                if (chunk.getCoord().getY() < 0) {
-                    yStr << (chunk.getCoord().getY() / 16) -1;
+                if (chunk->getCoord().getY() < 0) {
+                    yStr << (chunk->getCoord().getY() / 16) -1;
                 } else {
-                    yStr << (chunk.getCoord().getY() / 16);
+                    yStr << (chunk->getCoord().getY() / 16);
                 }
                 path = "Data/Region/r." + xStr.str() + "." + yStr.str() + ".dat";
-                this->chunk.push(&chunk);
+                this->chunk.push(chunk);
             }
 
             Region::Region(Region const& reg) : path(reg.getPath()), chunk(reg.getChunk()) {
@@ -75,6 +75,7 @@
                 size_t limit = getChunk().size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
                     chunk.top()->load(chunkFile, w);
+                    chunk.top()->setLoaded(true);
                     chunk.pop();
                 }
                 chunkFile.close();
@@ -93,8 +94,8 @@
                 chunkFile << table.rdbuf();
             }
 
-            void Region::add(Chunk &chunk) {
-                this->chunk.push(&chunk);
+            void Region::add(Chunk *chunk) {
+                this->chunk.push(chunk);
             }
 
         };

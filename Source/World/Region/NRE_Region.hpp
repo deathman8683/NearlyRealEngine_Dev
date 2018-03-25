@@ -37,7 +37,7 @@
                     //## Constructor ##//
                     Region();
                     Region(std::string const& path);
-                    Region(Chunk &chunk);
+                    Region(Chunk *chunk);
 
                     //## Copy-Constructor ##//
                     Region(Region const& reg);
@@ -60,7 +60,7 @@
                     void save();
                     void load(World* w);
                     void createTable(std::fstream &chunkFile);
-                    void add(Chunk &chunk);
+                    void add(Chunk *chunk);
 
                     //## Access Operator ##//
 

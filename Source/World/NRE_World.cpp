@@ -26,19 +26,17 @@
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
                         Maths::Point2D<GLint> tmp(x, y);
                         chunkMap[tmp] = new Chunk(tmp, true);
-                        addChunkToLoadRegion(*getChunk(tmp));
                     }
                 }
-                emptyLoadRegionMap();
             }
 
-            World::World(World const& w) : chunkMap(w.getChunkMap()), loadRegionMap(w.getLoadRegionMap()), saveRegionMap(w.getSaveRegionMap()), hExtent(w.getHExtent()), soilGenerator(w.getSoilGenerator()), moistureGenerator(w.getMoistureGenerator()), voxelMergingGlobalCache(w.getVoxelMergingGlobalCache()) {
+            World::World(World const& w) : chunkMap(w.getChunkMap()), loadRegionMap(w.getLoadRegionMap()), saveRegionMap(w.getSaveRegionMap()), constructionStack(w.getConstructionStack()), hExtent(w.getHExtent()), soilGenerator(w.getSoilGenerator()), moistureGenerator(w.getMoistureGenerator()), voxelMergingGlobalCache(w.getVoxelMergingGlobalCache()) {
             }
 
             World::~World() {
                 delete[] voxelMergingGlobalCache;
-                for (const auto &it : chunkMap) {
-                    addChunkToSaveRegion(*(it.second));
+                for (auto &it : chunkMap) {
+                    addChunkToSaveRegion(it.second);
                 }
                 emptySaveRegionMap();
                 for (const auto &it : chunkMap) {
@@ -56,6 +54,10 @@
 
             std::unordered_map<Maths::Point2D<GLint>, Region*> const& World::getSaveRegionMap() const {
                 return saveRegionMap;
+            }
+
+            std::stack<Chunk*> const& World::getConstructionStack() const {
+                return constructionStack;
             }
 
             Chunk* const& World::getChunk(Maths::Point2D<GLint> const& p) {
@@ -102,6 +104,10 @@
                 saveRegionMap = map;
             }
 
+            void World::setConstructionStack(std::stack<Chunk*> const& stack) {
+                constructionStack = stack;
+            }
+
             void World::setChunk(Maths::Point2D<GLint> const& p, Chunk* const& chunk) {
                 chunkMap[p] = chunk;
             }
@@ -140,9 +146,19 @@
             }
 
             void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera) {
-                for (const auto &it : chunkMap) {
-                    it.second->render(shader, MVP, camera);
+                for (auto &it : chunkMap) {
+                    if (!it.second->isLoaded()) {
+                        addChunkToLoadRegion(it.second);
+                    }
+                    if (!it.second->isConstructed()) {
+                        addChunkToConstruction(it.second);
+                    }
+                    if (it.second->isLoaded() && it.second->isConstructed()) {
+                        it.second->render(shader, MVP, camera);
+                    }
                 }
+                emptyLoadRegionMap();
+                emptyConstructionStack();
             }
 
             void World::resetVoxelMergingGlobalCache() {
@@ -157,37 +173,37 @@
                 return (getMoistureGenerator().GetNoise(x, y) + 1.0) / 2.0;
             }
 
-            void World::addChunkToLoadRegion(Chunk &chunk) {
+            void World::addChunkToLoadRegion(Chunk *chunk) {
                 Maths::Point2D<GLint> coord;
-                if (chunk.getCoord().getX() < 0) {
-                    coord.setX((chunk.getCoord().getX() / 16) -1);
+                if (chunk->getCoord().getX() < 0) {
+                    coord.setX((chunk->getCoord().getX() / 16) -1);
                 } else {
-                    coord.setX((chunk.getCoord().getX() / 16));
+                    coord.setX((chunk->getCoord().getX() / 16));
                 }
-                if (chunk.getCoord().getY() < 0) {
-                    coord.setY((chunk.getCoord().getY() / 16) -1);
+                if (chunk->getCoord().getY() < 0) {
+                    coord.setY((chunk->getCoord().getY() / 16) -1);
                 } else {
-                    coord.setY((chunk.getCoord().getY() / 16));
+                    coord.setY((chunk->getCoord().getY() / 16));
                 }
                 if (loadRegionMap.count(coord) == 0) {
-                    loadRegionMap[chunk.getCoord()] = new Region(chunk);
+                    loadRegionMap[chunk->getCoord()] = new Region(chunk);
                 } else {
                     auto it = loadRegionMap.find(coord);
                     it->second->add(chunk);
                 }
             }
 
-            void World::addChunkToSaveRegion(Chunk &chunk) {
+            void World::addChunkToSaveRegion(Chunk *chunk) {
                 Maths::Point2D<GLint> coord;
-                if (chunk.getCoord().getX() < 0) {
-                    coord.setX((chunk.getCoord().getX() / 16) -1);
+                if (chunk->getCoord().getX() < 0) {
+                    coord.setX((chunk->getCoord().getX() / 16) -1);
                 } else {
-                    coord.setX((chunk.getCoord().getX() / 16));
+                    coord.setX((chunk->getCoord().getX() / 16));
                 }
-                if (chunk.getCoord().getY() < 0) {
-                    coord.setY((chunk.getCoord().getY() / 16) -1);
+                if (chunk->getCoord().getY() < 0) {
+                    coord.setY((chunk->getCoord().getY() / 16) -1);
                 } else {
-                    coord.setY((chunk.getCoord().getY() / 16));
+                    coord.setY((chunk->getCoord().getY() / 16));
                 }
                 if (saveRegionMap.count(coord) == 0) {
                     saveRegionMap[coord] = new Region(chunk);
@@ -195,6 +211,10 @@
                     auto it = saveRegionMap.find(coord);
                     it->second->add(chunk);
                 }
+            }
+
+            void World::addChunkToConstruction(Chunk *chunk) {
+                constructionStack.push(chunk);
             }
 
             void World::emptyLoadRegionMap() {
@@ -215,6 +235,15 @@
                     delete it.second;
                 }
                 saveRegionMap.erase(saveRegionMap.begin(), saveRegionMap.end());
+            }
+
+            void World::emptyConstructionStack() {
+                size_t limit = constructionStack.size();
+                for (GLuint i = 0; i < limit; i = i + 1) {
+                    constructionStack.top()->constructMesh(this);
+                    constructionStack.top()->setConstructed(true);
+                    constructionStack.pop();
+                }
             }
 
             GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face) {

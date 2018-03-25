@@ -32,6 +32,7 @@
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> chunkMap;
                     std::unordered_map<Maths::Point2D<GLint>, Region*> loadRegionMap;
                     std::unordered_map<Maths::Point2D<GLint>, Region*> saveRegionMap;
+                    std::stack<Chunk*> constructionStack;
                     Maths::Vector2D<GLuint> hExtent;
                     FastNoise soilGenerator;
                     FastNoise moistureGenerator;
@@ -54,6 +55,7 @@
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& getChunkMap() const;
                     std::unordered_map<Maths::Point2D<GLint>, Region*> const& getLoadRegionMap() const;
                     std::unordered_map<Maths::Point2D<GLint>, Region*> const& getSaveRegionMap() const;
+                    std::stack<Chunk*> const& getConstructionStack() const;
                     Chunk* const& getChunk(Maths::Point2D<GLint> const& p);
                     Chunk* const& getChunk(GLint const& x, GLint const& y);
                     Maths::Vector2D<GLuint> const& getHExtent() const;
@@ -67,6 +69,7 @@
                     void setChunkMap(std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& map);
                     void setLoadRegionMap(std::unordered_map<Maths::Point2D<GLint>, Region*> const& map);
                     void setSaveRegionMap(std::unordered_map<Maths::Point2D<GLint>, Region*> const& map);
+                    void setConstructionStack(std::stack<Chunk*> const& stack);
                     void setChunk(Maths::Point2D<GLint> const& p, Chunk* const& chunk);
                     void setChunk(GLint const& x, GLint const& y, Chunk* const& chunk);
                     void setHExtent(Maths::Vector2D<GLuint> const& size);
@@ -82,10 +85,12 @@
                     void resetVoxelMergingGlobalCache();
                     NREfloat const getSoilNoise(NREfloat const& x, NREfloat const& y) const;
                     NREfloat const getMoistureNoise(NREfloat const& x, NREfloat const& y) const;
-                    void addChunkToLoadRegion(Chunk &chunk);
-                    void addChunkToSaveRegion(Chunk &chunk);
+                    void addChunkToLoadRegion(Chunk *chunk);
+                    void addChunkToSaveRegion(Chunk *chunk);
+                    void addChunkToConstruction(Chunk *chunk);
                     void emptyLoadRegionMap();
                     void emptySaveRegionMap();
+                    void emptyConstructionStack();
 
                     //## Access Operator ##//
 

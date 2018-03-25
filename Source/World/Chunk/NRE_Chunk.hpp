@@ -43,6 +43,8 @@
                     GL::VAO vao;
                     Physics::AABB<GLint> bounding;
                     bool active;
+                    bool loaded;
+                    bool constructed;
 
                 public:
                     //## Constructor ##//
@@ -68,6 +70,8 @@
                     GL::VAO const& getVAO() const;
                     Physics::AABB<GLint> const& getBounding() const;
                     bool const& isActive() const;
+                    bool const& isLoaded() const;
+                    bool const& isConstructed() const;
 
                     //## Setter ##//
                     void setVoxels(Voxel* const& vox);
@@ -79,6 +83,8 @@
                     void setVAO(GL::VAO const& vao);
                     void setBounding(Physics::AABB<GLint> const& box);
                     void setActive(bool const& state);
+                    void setLoaded(bool const& state);
+                    void setConstructed(bool const& state);
 
                     //## Methods ##//
                     void constructMesh(World* w);

@@ -17,14 +17,14 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0, 0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), active(true) {
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), active(true), loaded(false), constructed(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::ColorBuffer(generateID));
                 buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), active(c.isActive()) {
+            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
                 buffer.push_back(new GL::ColorBuffer(true));
@@ -72,6 +72,14 @@
                 return active;
             }
 
+            bool const& Chunk::isLoaded() const {
+                return loaded;
+            }
+
+            bool const& Chunk::isConstructed() const {
+                return constructed;
+            }
+
             void Chunk::setVoxels(Voxel* const& vox) {
                 voxel = vox;
             }
@@ -106,6 +114,14 @@
 
             void Chunk::setActive(bool const& state) {
                 active = state;
+            }
+
+            void Chunk::setLoaded(bool const& state) {
+                loaded = state;
+            }
+
+            void Chunk::setConstructed(bool const& state) {
+                constructed = state;
             }
 
             void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera) {
