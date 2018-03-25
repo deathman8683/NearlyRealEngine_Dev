@@ -60,48 +60,52 @@
                         for (int zPrime = 0; zPrime < z; zPrime = zPrime + 1) {
                             index = getVoxelIndex(x, y, zPrime);
 
-                            if (noise < 0.22) {
-                                voxel[index].setType(OCEAN);
-                            } else if (noise < 0.24) {
-                                voxel[index].setType(BEACH);
-                            } else if (noise < 0.4) {
-                                if (moisture < 0.16) {
-                                    voxel[index].setType(SUBTROPICAL_DESERT);
-                                } else if (moisture < 0.33) {
-                                    voxel[index].setType(GRASSLAND);
-                                } else if (moisture < 0.66) {
-                                    voxel[index].setType(TROPICAL_SEASONAL_FOREST);
+                            if (z - 4 >= 0 && zPrime >= z - 4) {
+                                if (noise < 0.22) {
+                                    voxel[index].setType(OCEAN);
+                                } else if (noise < 0.24) {
+                                    voxel[index].setType(BEACH);
+                                } else if (noise < 0.4) {
+                                    if (moisture < 0.16) {
+                                        voxel[index].setType(SUBTROPICAL_DESERT);
+                                    } else if (moisture < 0.33) {
+                                        voxel[index].setType(GRASSLAND);
+                                    } else if (moisture < 0.66) {
+                                        voxel[index].setType(TROPICAL_SEASONAL_FOREST);
+                                    } else {
+                                        voxel[index].setType(TROPICAL_RAIN_FOREST);
+                                    }
+                                } else if (noise < 0.6) {
+                                    if (moisture < 0.16) {
+                                        voxel[index].setType(TEMPERATE_DESERT);
+                                    } else if (moisture < 0.5) {
+                                        voxel[index].setType(GRASSLAND);
+                                    } else if (moisture < 0.83) {
+                                        voxel[index].setType(TEMPERATE_DECIDUOUS_FOREST);
+                                    } else {
+                                        voxel[index].setType(TEMPERATE_RAIN_FOREST);
+                                    }
+                                } else if (noise < 0.8) {
+                                    if (moisture < 0.33) {
+                                        voxel[index].setType(TEMPERATE_DESERT);
+                                    } else if (moisture < 0.66) {
+                                        voxel[index].setType(SHRUBLAND);
+                                    } else {
+                                        voxel[index].setType(TAIGA);
+                                    }
                                 } else {
-                                    voxel[index].setType(TROPICAL_RAIN_FOREST);
-                                }
-                            } else if (noise < 0.6) {
-                                if (moisture < 0.16) {
-                                    voxel[index].setType(TEMPERATE_DESERT);
-                                } else if (moisture < 0.5) {
-                                    voxel[index].setType(GRASSLAND);
-                                } else if (moisture < 0.83) {
-                                    voxel[index].setType(TEMPERATE_DECIDUOUS_FOREST);
-                                } else {
-                                    voxel[index].setType(TEMPERATE_RAIN_FOREST);
-                                }
-                            } else if (noise < 0.8) {
-                                if (moisture < 0.33) {
-                                    voxel[index].setType(TEMPERATE_DESERT);
-                                } else if (moisture < 0.66) {
-                                    voxel[index].setType(SHRUBLAND);
-                                } else {
-                                    voxel[index].setType(TAIGA);
+                                    if (moisture < 0.1) {
+                                        voxel[index].setType(SCORCHED);
+                                    } else if (moisture < 0.2) {
+                                        voxel[index].setType(BARE);
+                                    } else if (moisture < 0.5) {
+                                        voxel[index].setType(TUNDRA);
+                                    } else {
+                                        voxel[index].setType(SNOW);
+                                    }
                                 }
                             } else {
-                                if (moisture < 0.1) {
-                                    voxel[index].setType(SCORCHED);
-                                } else if (moisture < 0.2) {
-                                    voxel[index].setType(BARE);
-                                } else if (moisture < 0.5) {
-                                    voxel[index].setType(TUNDRA);
-                                } else {
-                                    voxel[index].setType(SNOW);
-                                }
+                                voxel[index].setType(SCORCHED);
                             }
                         }
 
