@@ -4,6 +4,7 @@ OBJDIR = ../../obj/Debug/World/
 
 VOXEL = Voxel
 CHUNK = Chunk
+REGION = Region
 MESH = Mesh
 CONSTRUCTOR = ChunkConstructor
 
@@ -12,6 +13,7 @@ all : before $(TARGET) after
 before:
 	@(cd $(VOXEL) && $(MAKE))
 	@(cd $(CHUNK) && $(MAKE))
+	@(cd $(REGION) && $(MAKE))
 	@(cd $(MESH) && $(MAKE))
 
 after:

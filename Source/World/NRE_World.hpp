@@ -10,7 +10,7 @@
 
     #include <algorithm>
     #include <unordered_map>
-    #include "Chunk/NRE_Chunk.hpp"
+    #include "Region/NRE_Region.hpp"
 
     /**
      * @namespace NRE
@@ -30,6 +30,8 @@
             class World {
                 private:
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> chunkMap;
+                    std::unordered_map<Maths::Point2D<GLint>, Region*> loadRegionMap;
+                    std::unordered_map<Maths::Point2D<GLint>, Region*> saveRegionMap;
                     Maths::Vector2D<GLuint> hExtent;
                     FastNoise soilGenerator;
                     FastNoise moistureGenerator;
@@ -50,6 +52,8 @@
 
                     //## Getter ##//
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& getChunkMap() const;
+                    std::unordered_map<Maths::Point2D<GLint>, Region*> const& getLoadRegionMap() const;
+                    std::unordered_map<Maths::Point2D<GLint>, Region*> const& getSaveRegionMap() const;
                     Chunk* const& getChunk(Maths::Point2D<GLint> const& p);
                     Chunk* const& getChunk(GLint const& x, GLint const& y);
                     Maths::Vector2D<GLuint> const& getHExtent() const;
@@ -61,6 +65,8 @@
 
                     //## Setter ##//
                     void setChunkMap(std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& map);
+                    void setLoadRegionMap(std::unordered_map<Maths::Point2D<GLint>, Region*> const& map);
+                    void setSaveRegionMap(std::unordered_map<Maths::Point2D<GLint>, Region*> const& map);
                     void setChunk(Maths::Point2D<GLint> const& p, Chunk* const& chunk);
                     void setChunk(GLint const& x, GLint const& y, Chunk* const& chunk);
                     void setHExtent(Maths::Vector2D<GLuint> const& size);
@@ -76,6 +82,10 @@
                     void resetVoxelMergingGlobalCache();
                     NREfloat const getSoilNoise(NREfloat const& x, NREfloat const& y) const;
                     NREfloat const getMoistureNoise(NREfloat const& x, NREfloat const& y) const;
+                    void addChunkToLoadRegion(Chunk &chunk);
+                    void addChunkToSaveRegion(Chunk &chunk);
+                    void emptyLoadRegionMap();
+                    void emptySaveRegionMap();
 
                     //## Access Operator ##//
 

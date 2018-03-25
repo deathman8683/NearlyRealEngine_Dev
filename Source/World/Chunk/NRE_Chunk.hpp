@@ -84,7 +84,9 @@
                     void constructMesh(World* w);
                     void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera);
                     void save();
+                    void save(std::fstream &chunkFile);
                     void load(World* w);
+                    void load(std::fstream &chunkFile, World* w);
                     void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
                     void createProceduralTerrain(World* w);
                     void checkActiveState(Camera::FixedCamera const& camera);
