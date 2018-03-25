@@ -179,25 +179,24 @@
                     dataSize = dataSize + 4;
                     chunkFile << data.rdbuf();
                     size_t paddingSize = std::ceil((static_cast <NREfloat> (dataSize)) / SECTOR_SIZE) * SECTOR_SIZE - dataSize;
-                    char padding[paddingSize] = {0};
-
-                    chunkFile.write(padding, paddingSize);
+                    if (paddingSize > 0) {
+                        char padding[paddingSize] = {0};
+                        chunkFile.write(padding, paddingSize);
+                    }
 
                     chunkFile.seekg(fileOffset, chunkFile.beg);
-                    GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize + 4)) / SECTOR_SIZE);
+                    GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize)) / SECTOR_SIZE);
                     GLuint chunkOffset = std::ceil((static_cast <NREfloat> (endOffset - LOOKUP_SIZE)) / SECTOR_SIZE);
                     chunkFile.write(reinterpret_cast<char*> (&chunkOffset), 3);
                     chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
-                    chunkFile.close();
                 } else {
                     chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
                     chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
                     chunkFile << data.rdbuf();
 
                     chunkFile.seekg(fileOffset + 3, chunkFile.beg);
-                    GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize + 4)) / SECTOR_SIZE);
+                    GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize)) / SECTOR_SIZE);
                     chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
-                    chunkFile.close();
                 }
             }
 
