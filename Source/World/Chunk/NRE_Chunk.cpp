@@ -33,7 +33,6 @@
             }
 
             Chunk::~Chunk() {
-                save();
                 delete[] voxel;
             }
 
