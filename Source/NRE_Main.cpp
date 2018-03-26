@@ -13,7 +13,7 @@
             Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(0, 0), Maths::Vector2D<GLint>(5, 0));
+            World::World engineWorld(Maths::Vector2D<GLuint>(10, 10), Maths::Vector2D<GLint>(0, 0));
 
             Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
             Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
@@ -65,17 +65,17 @@
 
                 /*auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
                 if (it2->second.isActive()) {
-                    engineWorld.setShift(Maths::Vector2D<GLint>(engineWorld.getShift().getX(), engineWorld.getShift().getY() + 1));
-                }
-                auto it3 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_G);
+                    engineWorld.shiftChunks(Maths::Vector2D<GLint>(1, 0));
+                }*/
+                /*auto it3 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_G);
                 if (it3->second.isActive()) {
                     engineWorld.setShift(Maths::Vector2D<GLint>(engineWorld.getShift().getX() - 1, engineWorld.getShift().getY()));
-                }
-                auto it4 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_H);
+                }*/
+                /*auto it4 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_H);
                 if (it4->second.isActive()) {
-                    engineWorld.setShift(Maths::Vector2D<GLint>(engineWorld.getShift().getX(), engineWorld.getShift().getY() - 1));
-                }
-                auto it5 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_T);
+                    engineWorld.shiftChunks(Maths::Vector2D<GLint>(-1, 0));
+                }*/
+                /*auto it5 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_T);
                 if (it5->second.isActive()) {
                     engineWorld.setShift(Maths::Vector2D<GLint>(engineWorld.getShift().getX() + 1, engineWorld.getShift().getY()));
                 }*/

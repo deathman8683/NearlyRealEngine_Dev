@@ -254,6 +254,43 @@
                 }
             }
 
+            void World::shiftChunks(Maths::Vector2D<GLint> shiftSize) {
+                if (shiftSize.getX() > 0) {
+                    while (shiftSize.getX() > 0) {
+                        for (GLint y = -(getHExtent().getY() + getShift().getY()); y <= static_cast <GLint> (getHExtent().getY() + getShift().getY()); y = y + 1) {
+                            Maths::Point2D<GLint> coord(-(getHExtent().getX()) + getShift().getX(), y);
+                            Maths::Point2D<GLint> tmp = coord;
+                            tmp.setX(getHExtent().getX() + getShift().getX() + 1);
+                            getChunk(coord)->setLoaded(false);
+                            getChunk(coord)->setConstructed(false);
+                            getChunk(coord)->setCoord(tmp);
+                            Chunk* adr = getChunk(coord);
+                            chunkMap.erase(coord);
+                            chunkMap[tmp] = adr;
+                        }
+                        shift.setX(getShift().getX() + 1);
+                        shiftSize.setX(shiftSize.getX() - 1);
+                    }
+                }
+                if (shiftSize.getX()  < 0) {
+                    while (shiftSize.getX() < 0) {
+                        for (GLint y = -(getHExtent().getY() + getShift().getY()); y <= static_cast <GLint> (getHExtent().getY() + getShift().getY()); y = y + 1) {
+                            Maths::Point2D<GLint> coord(getHExtent().getX() + getShift().getX(), y);
+                            Maths::Point2D<GLint> tmp = coord;
+                            tmp.setX(getHExtent().getX() + getShift().getX() - 1);
+                            getChunk(coord)->setLoaded(false);
+                            getChunk(coord)->setConstructed(false);
+                            getChunk(coord)->setCoord(tmp);
+                            Chunk* adr = getChunk(coord);
+                            chunkMap.erase(coord);
+                            chunkMap[tmp] = adr;
+                        }
+                        shift.setX(getShift().getX() - 1);
+                        shiftSize.setX(shiftSize.getX() + 1);
+                    }
+                }
+            }
+
             GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face) {
                 return Array::get1DIndexFrom4D(x, y, z, face, Maths::Vector4D<GLuint>(Chunk::SIZE, FACE_NUM));
             }
