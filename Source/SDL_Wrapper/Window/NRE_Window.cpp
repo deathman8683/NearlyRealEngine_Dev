@@ -71,7 +71,7 @@
             }
 
             void Window::setSize(Maths::Vector2D<int> const& size) {
-                SDL_SetWindowSize(item, size.getX(), size.getY());
+                SDL_SetWindowSize(item, size.getW(), size.getH());
             }
 
             void Window::setCoord(Maths::Point2D<int> const& coord) {
@@ -79,15 +79,15 @@
             }
 
             void Window::setMinSize(Maths::Vector2D<int> const& minSize) {
-                SDL_SetWindowMinimumSize(item, minSize.getX(), minSize.getY());
+                SDL_SetWindowMinimumSize(item, minSize.getW(), minSize.getH());
             }
 
             void Window::setMaxSize(Maths::Vector2D<int> const& maxSize) {
-                SDL_SetWindowMaximumSize(item, maxSize.getX(), maxSize.getY());
+                SDL_SetWindowMaximumSize(item, maxSize.getW(), maxSize.getH());
             }
 
             void Window::createWindow(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags) {
-                item = SDL_CreateWindow(title.c_str(), coord.getX(), coord.getY(), size.getX(), size.getY(), flags);
+                item = SDL_CreateWindow(title.c_str(), coord.getX(), coord.getY(), size.getW(), size.getH(), flags);
             }
 
 

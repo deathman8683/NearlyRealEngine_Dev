@@ -28,9 +28,9 @@
              */
             class Light {
                 private:
-                    NREfloat position[4];
-                    NREfloat intensities[3];
-                    NREfloat coneDirection[3];
+                    Maths::Point4D<NREfloat> position;
+                    Maths::Vector3D<NREfloat> intensities;
+                    Maths::Vector3D<NREfloat> coneDirection;
                     NREfloat attenuation;
                     NREfloat ambientCoeff;
                     NREfloat coneAngle;
@@ -49,15 +49,12 @@
                     ~Light();
 
                     //## Getter ##//
-                    Maths::Point4D<NREfloat> getPosition() const;
-                    Maths::Vector3D<NREfloat> getIntensities() const;
-                    Maths::Vector3D<NREfloat> getConeDirection() const;
+                    Maths::Point4D<NREfloat> const& getPosition() const;
+                    Maths::Vector3D<NREfloat> const& getIntensities() const;
+                    Maths::Vector3D<NREfloat> const& getConeDirection() const;
                     NREfloat const& getAttenuation() const;
                     NREfloat const& getAmbientCoeff() const;
                     NREfloat const& getConeAngle() const;
-                    NREfloat* const getPositionValue();
-                    NREfloat* const getIntensitiesValue();
-                    NREfloat* const getConeDirectionValue();
                     NREfloat* const getAttenuationValue();
                     NREfloat* const getAmbientCoeffValue();
                     NREfloat* const getConeAngleValue();

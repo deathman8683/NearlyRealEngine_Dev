@@ -7,7 +7,7 @@
             DeferredRenderer::DeferredRenderer() {
             }
 
-            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : gBuffer(size.getX(), size.getY(), 3), buffer(true), vao(true) {
+            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : gBuffer(size.getW(), size.getH(), 3), buffer(true), vao(true) {
                 buffer.push_back(new GL::UVBuffer(true));
                 fillBuffer();
             }
@@ -62,9 +62,9 @@
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
                             index << i;
-                            glUniform4fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPositionValue());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensitiesValue());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneDirection").c_str()), 1, light.at(i)->getConeDirectionValue());
+                            glUniform4fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPosition().value());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensities().value());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneDirection").c_str()), 1, light.at(i)->getConeDirection().value());
                             glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].attenuation").c_str()), 1, light.at(i)->getAttenuationValue());
                             glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
                             glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());

@@ -78,7 +78,7 @@
             void FBO::allocateColorBuffer(GLuint const& nbColorBuffer, std::vector<GLenum> const& format, std::vector<GLint> const& internalFormat, std::vector<GLenum> const& type) {
                 bind();
                     for (GLuint i = 0; i < nbColorBuffer; i = i + 1) {
-                        push_back(new Texture2D(getSize().getX(), getSize().getY(), format[i], internalFormat[i], type[i]));
+                        push_back(new Texture2D(getSize().getW(), getSize().getH(), format[i], internalFormat[i], type[i]));
                         attachBuffer(GL_COLOR_ATTACHMENT0 + i, *getColorBuffer(i));
                     }
                 unbind();
@@ -86,7 +86,7 @@
 
             void FBO::allocateRenderBuffer() {
                 bind();
-                    depthBuffer.allocate(GL_DEPTH_COMPONENT, getSize().getX(), getSize().getY());
+                    depthBuffer.allocate(GL_DEPTH_COMPONENT, getSize().getW(), getSize().getH());
                     attachRenderBuffer(GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer.getID());
                 unbind();
             }
