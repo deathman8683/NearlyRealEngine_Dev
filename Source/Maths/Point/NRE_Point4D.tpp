@@ -3,36 +3,36 @@
         namespace Maths {
 
             template <class T>
-            Point4D<T>::Point4D() : w(DEFAULT_W) {
+            Point4D<T>::Point4D() : Point4D(DEFAULT_X, DEFAULT_Y, DEFAULT_Z, DEFAULT_W) {
             }
 
             template <class T>
             template <class K, class L, class M, class N>
-            Point4D<T>::Point4D(K const& x, L const& y, M const& z, N const& w) : Point3D<T>::Point3D(x, y, z), w(w) {
+            Point4D<T>::Point4D(K const& x, L const& y, M const& z, N const& w) : data{x, y, z, w} {
             }
 
             template <class T>
             template <class K>
-            Point4D<T>::Point4D(Point3D<K> const& p, T const& w) : Point3D<T>::Point3D(p), w(w) {
+            Point4D<T>::Point4D(Point3D<K> const& p, T const& w) : data{p.getX(), p.getY(), p.getZ(), w} {
             }
 
             template <class T>
             template <class K, class L>
-            Point4D<T>::Point4D(Point4D<K> const& p, Vector4D<L> const& u) : Point3D<T>::Point3D(p, u), w(p.getW() + u.getW()) {
+            Point4D<T>::Point4D(Point4D<K> const& p, Vector4D<L> const& u) : data{p.getX() + u.getX(), p.getY() + u.getY(), p.getZ() + u .getZ(), p.getW() + u.getW()} {
             }
 
             template <class T>
-            Point4D<T>::Point4D(Point4D const& p) : Point3D<T>::Point3D(p), w(p.getW()) {
-            }
-
-            template <class T>
-            template <class K>
-            Point4D<T>::Point4D(Point4D<K> const& p) : Point3D<T>::Point3D(p), w(p.getW()) {
+            Point4D<T>::Point4D(Point4D const& p) : data{p.getX(), p.getY(), p.getZ(), p.getW()} {
             }
 
             template <class T>
             template <class K>
-            Point4D<T>::Point4D(Vector4D<K> const& u) : Point3D<T>::Point3D(u), w(u.getW()) {
+            Point4D<T>::Point4D(Point4D<K> const& p) : data{p.getX(), p.getY(), p.getZ(), p.getW()} {
+            }
+
+            template <class T>
+            template <class K>
+            Point4D<T>::Point4D(Vector4D<K> const& u) : data{u.getX(), u.getY(), u.getZ(), u.getW()} {
             }
 
             template <class T>
@@ -40,28 +40,59 @@
             }
 
             template <class T>
+            T const& Point4D<T>::getX() const {
+                return data[0];
+            }
+
+            template <class T>
+            T const& Point4D<T>::getY() const {
+                return data[1];
+            }
+
+            template <class T>
+            T const& Point4D<T>::getZ() const {
+                return data[2];
+            }
+
+            template <class T>
             T const& Point4D<T>::getW() const {
-                return w;
+                return data[3];
+            }
+
+            template <class T>
+            template <class K>
+            void Point4D<T>::setX(K const& x) {
+                data[0] = x;
+            }
+
+            template <class T>
+            template <class K>
+            void Point4D<T>::setY(K const& y) {
+                data[1] = y;
+            }
+
+            template <class T>
+            template <class K>
+            void Point4D<T>::setZ(K const& s) {
+                data[2] = z;
             }
 
             template <class T>
             template <class K>
             void Point4D<T>::setW(K const& w) {
-                this->w = w;
+                data[3] = w;
             }
 
             template <class T>
             template <class K, class L, class M, class N>
             void Point4D<T>::setCoord(K const& x, L const& y, M const& z, N const& w) {
-                Point3D<T>::setCoord(x, y, z);
-                setW(w);
+                setX(x);    setY(y);    setZ(z);    setW(w);
             }
 
             template <class T>
             template <class K, class L>
             void Point4D<T>::setCoord(Point3D<K> const& p, L const& w) {
-                Point3D<T>::setCoord(p.getX(), p.getY(), p.getZ());
-                setW(w);
+                setX(p.getX()); setY(p.getY()); setZ(p.getZ()); setW(w);
             }
 
             template <class T>
@@ -71,14 +102,19 @@
 
             template <class T>
             NREfloat Point4D<T>::distanceSquared(Point4D<T> const& p) const {
+                NREfloat xLenght = p.getX() - getX();
+                NREfloat yLenght = p.getY() - getY();
+                NREfloat zLenght = p.getZ() - getZ();
                 NREfloat wLenght = p.getW() - getW();
-                return Point3D<T>::distanceSquared(p) + wLenght * wLenght;
+                return xLenght * xLenght + yLenght * yLenght + zLenght * zLenght + wLenght * wLenght;
             }
 
             template <class T>
             template <class K>
             Point4D<T>& Point4D<T>::operator+=(Vector4D<K> const& u) {
-                Point3D<T>::operator+=(u);
+                setX(getX() + u.getX());
+                setY(getY() + u.getY());
+                setZ(getZ() + u.getZ());
                 setW(getW() + u.getW());
                 return *this;
             }
@@ -86,7 +122,9 @@
             template <class T>
             template <class K>
             Point4D<T>& Point4D<T>::operator-=(Vector4D<K> const& u) {
-                Point3D<T>::operator-=(u);
+                setX(getX() - u.getX());
+                setY(getY() - u.getY());
+                setZ(getZ() - u.getZ());
                 setW(getW() - u.getW());
                 return *this;
             }
@@ -113,20 +151,20 @@
 
             template <class T>
             Point4D<T> Point4D<T>::operator-() const {
-                Point3D<T> tmp(Point3D<T>::operator-(), -getW());
+                Point3D<T> tmp(-getX(), -getY(), -getZ(), -getW());
                 return tmp;
             }
 
             template <class T>
             template <class K>
             bool Point4D<T>::operator==(Point4D<K> const& p) const {
-                return Point3D<T>::operator==(p) && getW() == p.getW();
+                return getX() == p.getX() && getY() == p.getY() && getZ() == p.getZ() && getW() == p.getW();
             }
 
             template <>
             template <class K>
             bool Point4D<NREfloat>::operator==(Point4D<K> const& p) const {
-                return Point3D<NREfloat>::operator==(p) && almostEqual(getW(), p.getW());
+                return almostEqual(getX(), p.getX()) && almostEqual(getY(), p.getY()) && almostEqual(getZ(), p.getZ()) && almostEqual(getW(), p.getW());
             }
 
             template <class T>

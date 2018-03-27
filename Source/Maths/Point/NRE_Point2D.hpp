@@ -30,8 +30,7 @@
             template <class T>
             class Point2D {
                 private:
-                    T x;    /**< The abscissa of this */
-                    T y;    /**< The ordinate of this */
+                    T data[2];
 
                 public:
                     //## Constructor ##//

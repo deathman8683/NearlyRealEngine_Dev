@@ -7,58 +7,58 @@
             }
 
             template <class T>
-            Point2D<T>::Point2D(T const& x, T const& y) : x(x), y(y) {
+            Point2D<T>::Point2D(T const& x, T const& y) : data{x, y} {
             }
 
             template <class T>
             template <class K, class L>
-            Point2D<T>::Point2D(Point2D<K> const& p, Vector2D<L> const& u) : x(p.getX() + u.getX()), y(p.getY() + u.getY()) {
+            Point2D<T>::Point2D(Point2D<K> const& p, Vector2D<L> const& u) : data{p.getX() + u.getX(), p.getY() + u.getY()} {
             }
 
             template <class T>
-            Point2D<T>::Point2D(Point2D const& p) : x(p.x), y(p.y) {
-            }
-
-            template <class T>
-            template <class K>
-            Point2D<T>::Point2D(Point2D<K> const& p) : x(p.getX()), y(p.getY()) {
+            Point2D<T>::Point2D(Point2D const& p) : data{p.getX(), p.getY()} {
             }
 
             template <class T>
             template <class K>
-            Point2D<T>::Point2D(Vector2D<K> const& u) : x(u.getX()), y(u.getY()) {
+            Point2D<T>::Point2D(Point2D<K> const& p) : data{p.getX(), p.getY()} {
             }
 
             template <class T>
-            Point2D<T>::~Point2D(){
+            template <class K>
+            Point2D<T>::Point2D(Vector2D<K> const& u) : data{u.getX(), u.getY()} {
+            }
+
+            template <class T>
+            Point2D<T>::~Point2D() {
             }
 
             template <class T>
             T const& Point2D<T>::getX() const {
-                return x;
+                return data[0];
             }
 
             template <class T>
             T const& Point2D<T>::getY() const {
-                return y;
+                return data[1];
             }
 
             template <class T>
             template <class K>
             void Point2D<T>::setX(K const& x) {
-                this->x = x;
+                data[0] = x;
             }
 
             template <class T>
             template <class K>
             void Point2D<T>::setY(K const& y) {
-                this->y = y;
+                data[1] = y;
             }
 
             template <class T>
             template <class K, class L>
             void Point2D<T>::setCoord(K const& x, L const& y) {
-                setX(x); setY(y);
+                setX(x);    setY(y);
             }
 
             template <class T>

@@ -29,9 +29,9 @@
              * @brief Maths's Object : Cartesian 3D Generic Point
              */
             template <class T>
-            class Point3D : public Point2D<T> {
+            class Point3D : {
                 private:
-                    T z;    /**< The applicate of this */
+                    T data[3];
 
                 public:
                     //## Constructor ##//
@@ -98,6 +98,8 @@
                         virtual ~Point3D();
 
                     //## Getter ##//
+                        T const& getX() const;
+                        T const& getY() const;
                         /**
                          * @brief Z getter
                          * Return the z attribute
@@ -106,6 +108,11 @@
                         T const& getZ() const;
 
                     //## Setter ##//
+
+                        template <class K>
+                        void setX(K const& x);
+                        template <class K>
+                        void setY(K const& y);
                         /**
                          * @brief Z setter
                          * Change the z value
@@ -138,14 +145,14 @@
                          * @param p : Point3D<T>, the point to measure the distance with this
                          * @return NREfloat, the computed distance
                          */
-                        NREfloat distance(Point3D<T> const& p = {Point2D<T>::DEFAULT_X, Point2D<T>::DEFAULT_Y, DEFAULT_Z}) const;
+                        NREfloat distance(Point3D<T> const& p = {DEFAULT_X, DEFAULT_Y, DEFAULT_Z}) const;
                         /**
                          * @brief DistanceSquared getter
                          * Compute the squared distance between this and p, by default p is the default point
                          * @param p : Point3D<T>, the point to measure the squared distance with this
                          * @return NREfloat, the computed squared distance
                          */
-                        NREfloat distanceSquared(Point3D<T> const& p = {Point2D<T>::DEFAULT_X, Point2D<T>::DEFAULT_Y, DEFAULT_Z}) const;
+                        NREfloat distanceSquared(Point3D<T> const& p = {DEFAULT_X, DEFAULT_Y, DEFAULT_Z}) const;
 
                     //## Access Operator ##//
 
@@ -250,9 +257,15 @@
                     //## Shift Operator ##//
 
                 protected:
+                    static int DEFAULT_X;  /**< The default abscissa */
+                    static int DEFAULT_Y;  /**< The default ordinate */
                     static int DEFAULT_Z;  /**< The default applicate */
             };
 
+            template <class T>
+            int Point3D<T>::DEFAULT_X = 0.;
+            template <class T>
+            int Point3D<T>::DEFAULT_Y = 0.;
             template <class T>
             int Point3D<T>::DEFAULT_Z = 0.;
 
@@ -268,7 +281,7 @@
                  stream << "(" << p.getX() << "," << p.getY() << "," << p.getZ() << ")";
                  return stream;
              }
-             
+
         };
     };
 

@@ -28,9 +28,9 @@
              * @brief Maths's Object : Homogeneous 3D Generic Point
              */
             template <class T>
-            class Point4D : public Point3D<T> {
+            class Point4D {
                 private:
-                    T w;    /**< The homogeneous coordinate of this */
+                    T data[4];
 
                 public:
                     //## Constructor ##//
@@ -98,6 +98,9 @@
                         ~Point4D();
 
                     //## Getter ##//
+                        T const& getX() const;
+                        T const& getY() const;
+                        T const& getZ() const;
                         /**
                          * @brief W getter
                          * Return the w attribute
@@ -106,13 +109,19 @@
                         T const& getW() const;
 
                     //## Setter ##//
+                        template <class K>
+                        void setX(K const& x);
+                        template <class K>
+                        void setY(K const& y);
+                        template <class K>
+                        void setZ(K const& z);
                         /**
                          * @brief W setter
                          * Change the w value
                          * @param w : K, the new w value
                          */
                         template <class K>
-                        void setW(K const& z);
+                        void setW(K const& w);
                         /**
                          * @brief X, y, z and w setter
                          * Change x, y, z and w values
@@ -139,14 +148,14 @@
                          * @param p : Point4D<T>, the point to measure the distance with this
                          * @return NREfloat, the computed distance
                          */
-                        NREfloat distance(Point4D<T> const& p = {Point2D<T>::DEFAULT_X, Point2D<T>::DEFAULT_Y, Point3D<T>::DEFAULT_Z, DEFAULT_W}) const;
+                        NREfloat distance(Point4D<T> const& p = {DEFAULT_X, DEFAULT_Y, DEFAULT_Z, DEFAULT_W}) const;
                         /**
                          * @brief DistanceSquared getter
                          * Compute the squared distance between this and p, by default p is the default point
                          * @param p : Point4D<T>, the point to measure the squared distance with this
                          * @return NREfloat, the computed squared distance
                          */
-                        NREfloat distanceSquared(Point4D<T> const& p = {Point2D<T>::DEFAULT_X, Point2D<T>::DEFAULT_Y, Point2D<T>::DEFAULT_Z, DEFAULT_W}) const;
+                        NREfloat distanceSquared(Point4D<T> const& p = {DEFAULT_X, DEFAULT_Y, DEFAULT_Z, DEFAULT_W}) const;
 
                     //## Access Operator ##//
 
@@ -251,9 +260,18 @@
                     //## Shift Operator ##//
 
                 protected:
+                    static int DEFAULT_X;  /**< The default abscissa */
+                    static int DEFAULT_Y;  /**< The default ordinate */
+                    static int DEFAULT_Z;  /**< The default applicate */
                     static int DEFAULT_W;  /**< The default homogeneous coordinate */
             };
 
+            template <class T>
+            int Point4D<T>::DEFAULT_X = 0.;
+            template <class T>
+            int Point4D<T>::DEFAULT_Y = 0.;
+            template <class T>
+            int Point4D<T>::DEFAULT_Z = 0.;
             template <class T>
             int Point4D<T>::DEFAULT_W = 0.;
 
