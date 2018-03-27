@@ -28,7 +28,7 @@
              * @brief Maths's Object : Cartesian 3D Generic Vector
              */
             template <class T>
-            class Vector3D : {
+            class Vector3D {
                 private:
                     T data[3];
 

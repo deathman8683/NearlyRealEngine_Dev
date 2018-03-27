@@ -8,31 +8,31 @@
 
             template <class T>
             template <class K, class L, class M, class N>
-            Vector4D<T>::Vector4D(K const& x, L const& y, M const& z, N const& w) : data{x, y, z, w} {
+            Vector4D<T>::Vector4D(K const& x, L const& y, M const& z, N const& w) : data{static_cast <T> (x), static_cast <T> (y), static_cast <T> (z), static_cast <T> (w)} {
             }
 
             template <class T>
             template <class K>
-            Vector4D<T>::Vector4D(Vector3D<K> const& u, T const& w) : data{u.getX(), u.getY(), u.getZ(), w} {
+            Vector4D<T>::Vector4D(Vector3D<K> const& u, T const& w) : Vector4D(u.getX(), u.getY(), u.getZ(), w} {
             }
 
             template <class T>
             template <class K, class L>
-            Vector4D<T>::Vector4D(Point4D<K> const& a, Point4D<L> const& b) : data{b.getX() - a.getX(), b.getY() - a.getY(), b.getZ() - a.getZ(), b.getW() - a.getW()} {
+            Vector4D<T>::Vector4D(Point4D<K> const& a, Point4D<L> const& b) : Vector4D(b.getX() - a.getX(), b.getY() - a.getY(), b.getZ() - a.getZ(), b.getW() - a.getW()) {
             }
 
             template <class T>
-            Vector4D<T>::Vector4D(Vector4D const& u) : data{u.getX(), u.getY(), u.getZ(), u.getW()} {
-            }
-
-            template <class T>
-            template <class K>
-            Vector4D<T>::Vector4D(Vector4D<K> const& u) : data{u.getX(), u.getY(), u.getZ(), u.getW()} {
+            Vector4D<T>::Vector4D(Vector4D const& u) : Vector4D(u.getX(), u.getY(), u.getZ(), u.getW()) {
             }
 
             template <class T>
             template <class K>
-            Vector4D<T>::Vector4D(Point4D<K> const& p) : data{p.getX(), p.getY(), p.getZ(), p.getW()} {
+            Vector4D<T>::Vector4D(Vector4D<K> const& u) : Vector4D(u.getX(), u.getY(), u.getZ(), u.getW()) {
+            }
+
+            template <class T>
+            template <class K>
+            Vector4D<T>::Vector4D(Point4D<K> const& p) : Vector4D(p.getX(), p.getY(), p.getZ(), p.getW()) {
             }
 
             template <class T>

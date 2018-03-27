@@ -28,7 +28,7 @@
              * @brief Maths's Object : Homogeneous 3D Generic Vector
              */
             template <class T>
-            class Vector4D : {
+            class Vector4D {
                 private:
                     T data[4];
 

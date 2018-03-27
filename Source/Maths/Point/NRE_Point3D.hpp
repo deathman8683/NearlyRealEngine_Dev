@@ -29,7 +29,7 @@
              * @brief Maths's Object : Cartesian 3D Generic Point
              */
             template <class T>
-            class Point3D : {
+            class Point3D {
                 private:
                     T data[3];
 

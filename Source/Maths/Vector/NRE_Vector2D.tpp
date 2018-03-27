@@ -7,26 +7,26 @@
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(T const& x, T const& y) : data{x, y} {
+            Vector2D<T>::Vector2D(T const& x, T const& y) : data{static_cast <T> (x), static_cast <T> (y)} {
             }
 
             template <class T>
             template <class K, class L>
-            Vector2D<T>::Vector2D(Point2D<K> const& a, Point2D<L> const& b) : data{b.getX() - a.getX(), b.getY() - a.getY()} {
+            Vector2D<T>::Vector2D(Point2D<K> const& a, Point2D<L> const& b) : Vector2D(b.getX() - a.getX(), b.getY() - a.getY()) {
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(Vector2D const& u) : data{u.getX(), u.getY()} {
-            }
-
-            template <class T>
-            template <class K>
-            Vector2D<T>::Vector2D(Vector2D<K> const& u) : data{u.getX(), u.getY()} {
+            Vector2D<T>::Vector2D(Vector2D const& u) : Vector2D(u.getX(), u.getY()} {
             }
 
             template <class T>
             template <class K>
-            Vector2D<T>::Vector2D(Point2D<K> const& p) : data{p.getX(), p.getY()} {
+            Vector2D<T>::Vector2D(Vector2D<K> const& u) : Vector2D(u.getX(), u.getY()) {
+            }
+
+            template <class T>
+            template <class K>
+            Vector2D<T>::Vector2D(Point2D<K> const& p) : Vector2D(p.getX(), p.getY()) {
             }
 
             template <class T>

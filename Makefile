@@ -99,6 +99,7 @@ clean :
 	@mkdir obj/Debug/World
 	@mkdir obj/Debug/World/Mesh
 	@mkdir obj/Debug/World/Chunk
+	@mkdir obj/Debug/World/Region
 	@mkdir obj/Debug/World/ChunkConstructor
 	@mkdir obj/Debug/World/Voxel
 	@mkdir obj/Debug/World/Voxel/Type

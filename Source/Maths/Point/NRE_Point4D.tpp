@@ -8,31 +8,31 @@
 
             template <class T>
             template <class K, class L, class M, class N>
-            Point4D<T>::Point4D(K const& x, L const& y, M const& z, N const& w) : data{x, y, z, w} {
+            Point4D<T>::Point4D(K const& x, L const& y, M const& z, N const& w) : data{static_cast <T> (x), static_cast <T> (y), static_cast <T> (z), static_cast <T> (w)} {
             }
 
             template <class T>
             template <class K>
-            Point4D<T>::Point4D(Point3D<K> const& p, T const& w) : data{p.getX(), p.getY(), p.getZ(), w} {
+            Point4D<T>::Point4D(Point3D<K> const& p, T const& w) : Point4D(p.getX(), p.getY(), p.getZ(), w) {
             }
 
             template <class T>
             template <class K, class L>
-            Point4D<T>::Point4D(Point4D<K> const& p, Vector4D<L> const& u) : data{p.getX() + u.getX(), p.getY() + u.getY(), p.getZ() + u .getZ(), p.getW() + u.getW()} {
+            Point4D<T>::Point4D(Point4D<K> const& p, Vector4D<L> const& u) : Point4D(p.getX() + u.getX(), p.getY() + u.getY(), p.getZ() + u .getZ(), p.getW() + u.getW()) {
             }
 
             template <class T>
-            Point4D<T>::Point4D(Point4D const& p) : data{p.getX(), p.getY(), p.getZ(), p.getW()} {
-            }
-
-            template <class T>
-            template <class K>
-            Point4D<T>::Point4D(Point4D<K> const& p) : data{p.getX(), p.getY(), p.getZ(), p.getW()} {
+            Point4D<T>::Point4D(Point4D const& p) : Point4D(p.getX(), p.getY(), p.getZ(), p.getW()) {
             }
 
             template <class T>
             template <class K>
-            Point4D<T>::Point4D(Vector4D<K> const& u) : data{u.getX(), u.getY(), u.getZ(), u.getW()} {
+            Point4D<T>::Point4D(Point4D<K> const& p) : Point4D(p.getX(), p.getY(), p.getZ(), p.getW()) {
+            }
+
+            template <class T>
+            template <class K>
+            Point4D<T>::Point4D(Vector4D<K> const& u) : Point4D(u.getX(), u.getY(), u.getZ(), u.getW()) {
             }
 
             template <class T>
@@ -73,7 +73,7 @@
 
             template <class T>
             template <class K>
-            void Point4D<T>::setZ(K const& s) {
+            void Point4D<T>::setZ(K const& z) {
                 data[2] = z;
             }
 

@@ -8,31 +8,31 @@
 
             template <class T>
             template <class K, class L, class M>
-            Vector3D<T>::Vector3D(K const& x, L const& y, M const& z) : data{x, y, z} {
+            Vector3D<T>::Vector3D(K const& x, L const& y, M const& z) : data{static_cast <T> (x), static_cast <T> (y), static_cast <T> (z)} {
             }
 
             template <class T>
             template <class K>
-            Vector3D<T>::Vector3D(Vector2D<K> const& u, T const& z) : data{u.getX(), u.getY(), z} {
+            Vector3D<T>::Vector3D(Vector2D<K> const& u, T const& z) : Vector3D(u.getX(), u.getY(), z) {
             }
 
             template <class T>
             template <class K, class L>
-            Vector3D<T>::Vector3D(Point3D<K> const& a, Point3D<L> const& b) : data{b.getX() - a.getX(), b.getY() - a.getY(), b.getZ() - a.getZ()} {
+            Vector3D<T>::Vector3D(Point3D<K> const& a, Point3D<L> const& b) : Vector3D(b.getX() - a.getX(), b.getY() - a.getY(), b.getZ() - a.getZ()) {
             }
 
             template <class T>
-            Vector3D<T>::Vector3D(Vector3D const& u) : data{u.getX(), u.getY(), u.getZ()} {
-            }
-
-            template <class T>
-            template <class K>
-            Vector3D<T>::Vector3D(Vector3D<K> const& u) : data{u.getX(), u.getY(), u.getZ()} {
+            Vector3D<T>::Vector3D(Vector3D const& u) : Vector3D(u.getX(), u.getY(), u.getZ()) {
             }
 
             template <class T>
             template <class K>
-            Vector3D<T>::Vector3D(Point3D<K> const& p) : data{p.getX(), p.getY(), p.getZ()} {
+            Vector3D<T>::Vector3D(Vector3D<K> const& u) : Vector3D(u.getX(), u.getY(), u.getZ()) {
+            }
+
+            template <class T>
+            template <class K>
+            Vector3D<T>::Vector3D(Point3D<K> const& p) : Vector3D(p.getX(), p.getY(), p.getZ()) {
             }
 
             template <class T>
