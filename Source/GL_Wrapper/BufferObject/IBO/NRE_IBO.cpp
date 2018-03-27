@@ -32,6 +32,11 @@
                 nb = n;
             }
 
+            void IBO::reload() {
+                index.reload();
+                VBO::reload();
+            }
+
             void IBO::allocate(GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage) {
                 getIndexBuffer().allocate(nbIndex * index.getTypeSize(), usage);
                 VBO::allocate(vertexSize, nbVertex, usage);

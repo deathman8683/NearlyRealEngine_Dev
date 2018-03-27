@@ -37,6 +37,13 @@
                 attributes[index] = attr;
             }
 
+            void VBO::reload() {
+                for (GLuint i = 0; i < attributes.size(); i = i + 1) {
+                    getAttribute(i)->reload();
+                }
+                setAllocated(false);
+            }
+
             void VBO::allocate(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage) {
                 getAttribute(0)->allocate(vertexSize * nbVertex * getAttribute(0)->getSize(), usage);
                 for (GLuint i = 1; i < attributes.size(); i = i + 1) {

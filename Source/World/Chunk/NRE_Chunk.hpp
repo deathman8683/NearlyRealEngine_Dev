@@ -94,6 +94,7 @@
                     void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
                     void createProceduralTerrain(World* w);
                     void checkActiveState(Camera::FixedCamera const& camera);
+                    void reload();
 
                     //## Access Operator ##//
 

@@ -55,6 +55,7 @@
                     void setAttribute(GLuint const& index, ArrayBuffer* const& attr);
 
                     //## Methods ##//
+                    void reload();
                     void allocate(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage);
                     void update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data);
                     void allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data);

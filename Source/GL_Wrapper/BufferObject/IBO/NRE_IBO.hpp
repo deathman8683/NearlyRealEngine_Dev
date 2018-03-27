@@ -53,6 +53,7 @@
                     void setNb(GLuint const& n);
 
                     //## Methods ##//
+                    void reload();
                     void allocate(GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage);
                     void update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, std::vector<GLvoid*> const& data, GLvoid* const& iData);
                     void allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage, std::vector<GLvoid*> const& data, GLvoid* const& iData);

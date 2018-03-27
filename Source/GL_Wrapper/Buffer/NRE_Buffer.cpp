@@ -22,8 +22,8 @@
             }
 
             void Buffer::reload() {
-                generateID();
                 deleteID();
+                generateID();
             }
 
         };

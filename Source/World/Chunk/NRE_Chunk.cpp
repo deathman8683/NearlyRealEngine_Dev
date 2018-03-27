@@ -273,6 +273,14 @@
                 }
             }
 
+            void Chunk::reload() {
+                setLoaded(false);
+                setConstructed(false);
+                buffer.reload();
+                vao.access(getBuffer(), GL_INT);
+                bounding.setCenter(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2);
+            }
+
             GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) {
                 return Array::get1DIndexFrom3D(x, y, z, Chunk::SIZE);
             }
