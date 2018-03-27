@@ -274,14 +274,14 @@
                          * @param index : unsigned int, tell which line to return
                          * @return T*, the matrix's line
                          */
-                        T* operator[](unsigned int const& index);
+                        Vector4D<T>& operator[](unsigned int const& index);
                         /**
                          * @brief Read Access Operator []
                          * Return the index's line from the matrix
                          * @param index : unsigned int, tell which line to return
                          * @return T*, the matrix's line
                          */
-                        const T* operator[](unsigned int const& index) const;
+                        const Vector4D<T>& operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
                         /**

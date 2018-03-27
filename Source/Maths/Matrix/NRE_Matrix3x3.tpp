@@ -174,11 +174,11 @@
             }
 
             template <class T>
-            Vector3D<T>* Matrix3x3<T>::operator[](unsigned int const& index) {
+            Vector3D<T>& Matrix3x3<T>::operator[](unsigned int const& index) {
                 return data[index];
             }
             template <class T>
-            const Vector3D<T>* Matrix3x3<T>::operator[](unsigned int const& index) const {
+            const Vector3D<T>& Matrix3x3<T>::operator[](unsigned int const& index) const {
                 return data[index];
             }
 
@@ -211,7 +211,7 @@
 
             template <class T>
             template <class K>
-            Matrix2x2<T>& Matrix2x2<T>::operator*=(K const& k) {
+            Matrix3x3<T>& Matrix3x3<T>::operator*=(K const& k) {
                 for(unsigned int i = 0; i < 3; i = i + 1) {
                     data[i] = data[i] * k;
                 }

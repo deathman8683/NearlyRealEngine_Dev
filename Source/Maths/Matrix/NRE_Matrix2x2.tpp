@@ -132,11 +132,11 @@
             }
 
             template <class T>
-            Vector2D<T>* Matrix2x2<T>::operator[](unsigned int const& index) {
+            Vector2D<T>& Matrix2x2<T>::operator[](unsigned int const& index) {
                 return data[index];
             }
             template <class T>
-            const Vector2D<T>* Matrix2x2<T>::operator[](unsigned int const& index) const {
+            const Vector2D<T>& Matrix2x2<T>::operator[](unsigned int const& index) const {
                 return data[index];
             }
 

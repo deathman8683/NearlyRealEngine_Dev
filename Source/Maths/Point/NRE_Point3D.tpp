@@ -18,7 +18,7 @@
 
             template <class T>
             template <class K, class L>
-            Point3D<T>::Point3D(Point3D<K> const& p, Vector3D<L> const& u) : Point3D({p.getX() + u.getX(), p.getY() + u.getY(), p.getZ() + u.getZ()) {
+            Point3D<T>::Point3D(Point3D<K> const& p, Vector3D<L> const& u) : Point3D(p.getX() + u.getX(), p.getY() + u.getY(), p.getZ() + u.getZ()) {
             }
 
             template <class T>

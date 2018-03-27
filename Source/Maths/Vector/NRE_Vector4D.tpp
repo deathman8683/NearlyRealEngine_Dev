@@ -13,7 +13,7 @@
 
             template <class T>
             template <class K>
-            Vector4D<T>::Vector4D(Vector3D<K> const& u, T const& w) : Vector4D(u.getX(), u.getY(), u.getZ(), w} {
+            Vector4D<T>::Vector4D(Vector3D<K> const& u, T const& w) : Vector4D(u.getX(), u.getY(), u.getZ(), w) {
             }
 
             template <class T>
@@ -108,6 +108,16 @@
             template <class T>
             void Vector4D<T>::normalize() {
                 *this = *this / norm();
+            }
+
+            template <class T>
+            T& Vector4D<T>::operator[](unsigned int const& index) {
+                return data[index];
+            }
+
+            template <class T>
+            const T& Vector4D<T>::operator[](unsigned int const& index) const {
+                return data[index];
             }
 
             template <class T>

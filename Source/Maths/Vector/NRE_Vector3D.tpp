@@ -100,6 +100,16 @@
             }
 
             template <class T>
+            T& Vector3D<T>::operator[](unsigned int const& index) {
+                return data[index];
+            }
+
+            template <class T>
+            const T& Vector3D<T>::operator[](unsigned int const& index) const {
+                return data[index];
+            }
+
+            template <class T>
             template <class K>
             Vector3D<T>& Vector3D<T>::operator+=(Vector3D<K> const& u) {
                 setX(getX() + u.getX());

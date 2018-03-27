@@ -303,11 +303,11 @@
             }
 
             template <class T>
-            T* Matrix4x4<T>::operator[](unsigned int const& index) {
+            Vector4D<T>& Matrix4x4<T>::operator[](unsigned int const& index) {
                 return data[index];
             }
             template <class T>
-            const T* Matrix4x4<T>::operator[](unsigned int const& index) const {
+            const Vector4D<T>& Matrix4x4<T>::operator[](unsigned int const& index) const {
                 return data[index];
             }
 

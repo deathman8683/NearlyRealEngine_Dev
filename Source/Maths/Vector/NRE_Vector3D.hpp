@@ -157,6 +157,8 @@
                         void normalize();
 
                     //## Access Operator ##//
+                        T& operator[](unsigned int const& index);
+                        const T& operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
 

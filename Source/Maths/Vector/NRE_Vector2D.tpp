@@ -16,7 +16,7 @@
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(Vector2D const& u) : Vector2D(u.getX(), u.getY()} {
+            Vector2D<T>::Vector2D(Vector2D const& u) : Vector2D(u.getX(), u.getY()) {
             }
 
             template <class T>
@@ -83,6 +83,16 @@
                 T tmpCos = std::cos(angle); T tmpSin = std::sin(angle);
                 setX(tmpX * tmpCos - tmpY * tmpSin);
                 setY(tmpX * tmpSin + tmpY * tmpCos);
+            }
+
+            template <class T>
+            T& Vector2D<T>::operator[](unsigned int const& index) {
+                return data[index];
+            }
+
+            template <class T>
+            const T& Vector2D<T>::operator[](unsigned int const& index) const {
+                return data[index];
             }
 
             template <class T>
