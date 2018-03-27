@@ -107,6 +107,10 @@
                          * @return T, the w value
                          */
                         T const& getW() const;
+                        T const& getR() const;
+                        T const& getG() const;
+                        T const& getB() const;
+                        T const& getA() const;
 
                     //## Setter ##//
                         template <class K>
@@ -122,6 +126,14 @@
                          */
                         template <class K>
                         void setW(K const& w);
+                        template <class K>
+                        void setR(K const& r);
+                        template <class K>
+                        void setG(K const& g);
+                        template <class K>
+                        void setB(K const& b);
+                        template <class K>
+                        void setA(K const& a);
                         /**
                          * @brief X, y, z and w setter
                          * Change x, y, z and w values
@@ -140,6 +152,8 @@
                          */
                         template <class K, class L>
                         void setCoord(Vector3D<K> const& u, L const& w);
+                        template <class K, class L, class M, class N>
+                        void setIntensities(K const& r, L const& g, M const& b, N const& a);
 
                     //## Methods ##//
                         /**

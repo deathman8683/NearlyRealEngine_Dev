@@ -99,6 +99,8 @@
                          * @return T, the Y value
                          */
                         T const& getY() const;
+                        T const& getW() const;
+                        T const& getH() const;
 
                     //## Setter ##//
                         /**
@@ -115,6 +117,10 @@
                          */
                         template <class K>
                         void setY(K const& y);
+                        template <class K>
+                        void setW(K const& w);
+                        template <class K>
+                        void setH(K const& h);
                         /**
                          * @brief X and Y setter
                          * Change both x and y values
@@ -123,6 +129,8 @@
                          */
                         template <class K, class L>
                         void setCoord(K const& x, L const& y);
+                        template <class K, class L>
+                        void setSize(K const& w, L const& h);
 
                     //## Methods ##//
                         /**

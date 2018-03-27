@@ -60,6 +60,26 @@
             }
 
             template <class T>
+            T const& Vector4D<T>::getR() const {
+                return data[0];
+            }
+
+            template <class T>
+            T const& Vector4D<T>::getG() const {
+                return data[1];
+            }
+
+            template <class T>
+            T const& Vector4D<T>::getB() const {
+                return data[2];
+            }
+
+            template <class T>
+            T const& Vector4D<T>::getA() const {
+                return data[3];
+            }
+
+            template <class T>
             template <class K>
             void Vector4D<T>::setX(K const& x) {
                 data[0] = x;
@@ -84,6 +104,30 @@
             }
 
             template <class T>
+            template <class K>
+            void Vector4D<T>::setR(K const& r) {
+                data[0] = r;
+            }
+
+            template <class T>
+            template <class K>
+            void Vector4D<T>::setG(K const& g) {
+                data[1] = g;
+            }
+
+            template <class T>
+            template <class K>
+            void Vector4D<T>::setB(K const& b) {
+                data[2] = b;
+            }
+
+            template <class T>
+            template <class K>
+            void Vector4D<T>::setA(K const& a) {
+                data[3] = a;
+            }
+
+            template <class T>
             template <class K, class L, class M, class N>
             void Vector4D<T>::setCoord(K const& x, L const& y, M const& z, N const& w) {
                 setX(x);    setY(y);    setZ(z);    setW(w);
@@ -93,6 +137,12 @@
             template <class K, class L>
             void Vector4D<T>::setCoord(Vector3D<K> const& u, L const& w) {
                 setX(u.getX());    setY(u.getY());    setZ(u.getZ());    setW(w);
+            }
+
+            template <class T>
+            template <class K, class L, class M, class N>
+            void Vector4D<T>::setIntensities(K const& r, L const& g, M const& b, N const& a) {
+                setR(r);    setG(g);    setB(b);    setA(a);
             }
 
             template <class T>

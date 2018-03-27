@@ -4,48 +4,38 @@
     namespace NRE {
         namespace Color {
 
+            GLubyte RGBA::DEFAULT_R = 0;
+            GLubyte RGBA::DEFAULT_G = 0;
+            GLubyte RGBA::DEFAULT_B = 0;
             GLubyte RGBA::DEFAULT_A = 0;
 
-            RGBA::RGBA() : a(DEFAULT_A) {
+            RGBA::RGBA() : RGBA(DEFAULT_R, DEFAULT_G, DEFAULT_B, DEFAULT_A) {
             }
 
-            RGBA::RGBA(GLubyte const& r, GLubyte const& g, GLubyte const& b, GLubyte const& a) : RGB::RGB(r, g, b), a(a) {
+            RGBA::RGBA(GLubyte const& r, GLubyte const& g, GLubyte const& b, GLubyte const& a) : Maths::Vector4D<GLubyte>::Vector4D(r, g, b, a) {
             }
 
-            RGBA::RGBA(RGB const& color, GLubyte const& a) : RGB::RGB(color), a(a) {
+            RGBA::RGBA(RGB const& color, GLubyte const& a) : Maths::Vector4D<GLubyte>::Vector4D(color, a) {
             }
 
-            RGBA::RGBA(RGBA const& color) : RGB::RGB(color), a(color.getA()) {
+            RGBA::RGBA(RGBA const& color) : Maths::Vector4D<GLubyte>::Vector4D(color) {
             }
 
             RGBA::~RGBA() {
             }
 
-            GLubyte const& RGBA::getA() const {
-                return a;
-            }
-
-            void RGBA::setA(GLubyte const& value) {
-                a = value;
-            }
-
-            NREfloat RGBA::distance(RGBA const& c) const {
-                return std::sqrt(distanceSquared(c));
-            }
-
-            NREfloat RGBA::distanceSquared(RGBA const& c) const {
-                NREfloat aLenght = c.getA() - getA();
-                return RGB::distanceSquared(c) + aLenght * aLenght;
-            }
-
             RGBA& RGBA::operator+=(RGBA const& c) {
-                RGB::operator+=(c);
+                setR(static_cast <GLubyte> (static_cast <NREfloat> (getR()) * 0.5 + static_cast <NREfloat> (c.getR()) * 0.5));
+                setG(static_cast <GLubyte> (static_cast <NREfloat> (getG()) * 0.5 + static_cast <NREfloat> (c.getG()) * 0.5));
+                setB(static_cast <GLubyte> (static_cast <NREfloat> (getB()) * 0.5 + static_cast <NREfloat> (c.getB()) * 0.5));
                 setA(static_cast <GLubyte> (static_cast <NREfloat> (getA()) * 0.5 + static_cast <NREfloat> (c.getA()) * 0.5));
                 return *this;
             }
 
             RGBA& RGBA::operator-=(RGBA const& c) {
-                RGB::operator-=(c);
+                setR(static_cast <GLubyte> (static_cast <NREfloat> (getR()) * 0.5 - static_cast <NREfloat> (c.getR()) * 0.5));
+                setG(static_cast <GLubyte> (static_cast <NREfloat> (getG()) * 0.5 - static_cast <NREfloat> (c.getG()) * 0.5));
+                setB(static_cast <GLubyte> (static_cast <NREfloat> (getB()) * 0.5 - static_cast <NREfloat> (c.getB()) * 0.5));
                 setA(static_cast <GLubyte> (static_cast <NREfloat> (getA()) * 0.5 - static_cast <NREfloat> (c.getA()) * 0.5));
                 return *this;
             }
@@ -61,31 +51,7 @@
             }
 
             RGBA RGBA::operator-() {
-                return RGBA(RGB::operator-(), 255 - getA());
-            }
-
-            bool RGBA::operator==(RGBA const& c) {
-                return RGB::operator==(c) && getA() == c.getA();
-            }
-
-            bool RGBA::operator!=(RGBA const& c) {
-                return !(*this == c);
-            }
-
-            bool RGBA::operator<(RGBA const& c) {
-                return distanceSquared() < c.distanceSquared();
-            }
-
-            bool RGBA::operator>(RGBA const& c) {
-                return distanceSquared() > c.distanceSquared();
-            }
-
-            bool RGBA::operator<=(RGBA const& c) {
-                return distanceSquared() <= c.distanceSquared();
-            }
-
-            bool RGBA::operator>=(RGBA const& c) {
-                return distanceSquared() >= c.distanceSquared();
+                return RGBA(255 - getR(), 255 - getG(), 255 - getB(), 255 - getA());
             }
 
         };

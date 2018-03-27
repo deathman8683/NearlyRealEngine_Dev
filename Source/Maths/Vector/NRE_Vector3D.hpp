@@ -105,6 +105,9 @@
                          * @return T, the z value
                          */
                         T const& getZ() const;
+                        T const& getR() const;
+                        T const& getG() const;
+                        T const& getB() const;
 
                     //## Setter ##//
 
@@ -119,6 +122,12 @@
                          */
                         template <class K>
                         void setZ(K const& z);
+                        template <class K>
+                        void setR(K const& r);
+                        template <class K>
+                        void setG(K const& g);
+                        template <class K>
+                        void setB(K const& b);
                         /**
                          * @brief X, y and z setter
                          * Change x, y and z values
@@ -136,6 +145,8 @@
                          */
                         template <class K, class L>
                         void setCoord(Vector2D<K> const& u, L const& z);
+                        template <class K, class L, class M>
+                        void setIntensities(K const& r, L const& g, M const& b);
 
                     //## Methods ##//
                         /**

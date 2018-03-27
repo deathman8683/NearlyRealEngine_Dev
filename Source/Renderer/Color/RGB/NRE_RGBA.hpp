@@ -8,7 +8,6 @@
 
     #pragma once
 
-    #include "../../../Generic/NRE_Type.hpp"
     #include "NRE_RGB.hpp"
 
     /**
@@ -28,7 +27,7 @@
              * @class RGBA
              * @brief Color's Object : RGBA color system : Red - Green - Blue - Alpha
              */
-            class RGBA : public RGB {
+            class RGBA : public Maths::Vector4D<GLubyte> {
                 private:
                     GLubyte a;
 
@@ -48,14 +47,10 @@
                     ~RGBA();
 
                     //## Getter ##//
-                    GLubyte const& getA() const;
 
                     //## Setter ##//
-                    void setA(GLubyte const& value);
 
                     //## Methods ##//
-                    NREfloat distance(RGBA const& c = {RGB::DEFAULT_R, RGB::DEFAULT_G, RGB::DEFAULT_B, DEFAULT_A}) const;
-                    NREfloat distanceSquared(RGBA const& c = {RGB::DEFAULT_R, RGB::DEFAULT_G, RGB::DEFAULT_B, DEFAULT_A}) const;
 
                     //## Access Operator ##//
 
@@ -71,25 +66,17 @@
                     RGBA operator-();
 
                     //## Comparison Operator ##//
-                    bool operator==(RGBA const& c);
-                    bool operator!=(RGBA const& c);
-                    bool operator<(RGBA const& c);
-                    bool operator>(RGBA const& c);
-                    bool operator<=(RGBA const& c);
-                    bool operator>=(RGBA const& c);
 
                     //## BitWise Operator ##//
 
                     //## Shift Operator ##//
 
                 private:
+                    static GLubyte DEFAULT_R;
+                    static GLubyte DEFAULT_G;
+                    static GLubyte DEFAULT_B;
                     static GLubyte DEFAULT_A;
             };
-
-            inline std::ostream& operator<<(std::ostream &stream, RGBA const& c) {
-                stream << "(" << static_cast <GLuint> (c.getR()) << "," << static_cast <GLuint> (c.getG()) << "," << static_cast <GLuint> (c.getB()) << "," << static_cast <GLuint> (c.getA()) << ")";
-                return stream;
-            }
 
         };
     };

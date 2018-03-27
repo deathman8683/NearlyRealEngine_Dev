@@ -4,7 +4,7 @@
     namespace NRE {
         namespace Color {
 
-            RGB::RGB(HSL const& color) : r(DEFAULT_R), g(DEFAULT_G), b(DEFAULT_B) {
+            RGB::RGB(HSL const& color) : RGB(DEFAULT_R, DEFAULT_G, DEFAULT_B) {
                 NREfloat c = (1 - std::abs(2 * color.getL() - 1 * color.getS()));
                 NREfloat x = c * (1 - std::abs((color.getH() / 60) % 2 - 1));
                 NREfloat m = color.getL() - c / 2;
@@ -42,7 +42,7 @@
                 setB(static_cast <GLubyte>((bPrime + m) * 255));
             }
 
-            RGBA::RGBA(HSLA const& color) : RGB::RGB(color), a(static_cast <GLubyte> (color.getA() * 255)) {
+            RGBA::RGBA(HSLA const& color) : RGBA(RGB(color), static_cast <GLubyte> (color.getA() * 255)) {
             }
 
             HSL::HSL(RGB const& color) : h(DEFAULT_H), s(DEFAULT_S), l(DEFAULT_L)  {
@@ -89,7 +89,7 @@
                 return -RGB(*this);
             }
 
-            HSLA::HSLA(RGBA const& color) : HSL::HSL(color), a(static_cast <NREfloat> (color.getA()) / 255.0) {
+            HSLA::HSLA(RGBA const& color) : HSL::HSL(RGB(color.getR(), color.getG(), color.getB())), a(static_cast <NREfloat> (color.getA()) / 255.0) {
             }
 
         };

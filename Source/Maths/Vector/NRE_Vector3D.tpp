@@ -55,6 +55,21 @@
             }
 
             template <class T>
+            T const& Vector3D<T>::getR() const {
+                return data[0];
+            }
+
+            template <class T>
+            T const& Vector3D<T>::getG() const {
+                return data[1];
+            }
+
+            template <class T>
+            T const& Vector3D<T>::getB() const {
+                return data[2];
+            }
+
+            template <class T>
             template <class K>
             void Vector3D<T>::setX(K const& x) {
                 data[0] = x;
@@ -73,6 +88,24 @@
             }
 
             template <class T>
+            template <class K>
+            void Vector3D<T>::setR(K const& r) {
+                data[0] = r;
+            }
+
+            template <class T>
+            template <class K>
+            void Vector3D<T>::setG(K const& g) {
+                data[1] = g;
+            }
+
+            template <class T>
+            template <class K>
+            void Vector3D<T>::setB(K const& b) {
+                data[2] = b;
+            }
+
+            template <class T>
             template <class K, class L, class M>
             void Vector3D<T>::setCoord(K const& x, L const& y, M const& z) {
                 setX(x);    setY(y);    setZ(z);
@@ -82,6 +115,12 @@
             template <class K, class L>
             void Vector3D<T>::setCoord(Vector2D<K> const& u, L const& z) {
                 setX(u.getX());    setY(u.getY());    setZ(z);
+            }
+
+            template <class T>
+            template <class K, class L, class M>
+            void Vector3D<T>::setIntensities(K const& r, L const& g, M const& b) {
+                setR(r);    setG(g);    setB(b);
             }
 
             template <class T>

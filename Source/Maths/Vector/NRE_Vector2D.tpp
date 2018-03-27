@@ -44,6 +44,16 @@
             }
 
             template <class T>
+            T const& Vector2D<T>::getW() const {
+                return data[0];
+            }
+
+            template <class T>
+            T const& Vector2D<T>::getH() const {
+                return data[1];
+            }
+
+            template <class T>
             template <class K>
             void Vector2D<T>::setX(K const& x) {
                 data[0] = x;
@@ -56,9 +66,27 @@
             }
 
             template <class T>
+            template <class K>
+            void Vector2D<T>::setW(K const& w) {
+                data[0] = w;
+            }
+
+            template <class T>
+            template <class K>
+            void Vector2D<T>::setH(K const& h) {
+                data[1] = h;
+            }
+
+            template <class T>
             template <class K, class L>
             void Vector2D<T>::setCoord(K const& x, L const& y) {
                 setX(x);    setY(y);
+            }
+
+            template <class T>
+            template <class K, class L>
+            void Vector2D<T>::setSize(K const& w, L const& h) {
+                setW(w);    setH(h);
             }
 
             template <class T>

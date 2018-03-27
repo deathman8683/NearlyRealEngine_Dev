@@ -11,48 +11,13 @@
             RGB::RGB() : RGB(DEFAULT_R, DEFAULT_G ,DEFAULT_B) {
             }
 
-            RGB::RGB(GLubyte const& r, GLubyte const& g, GLubyte const& b) : r(r), g(g), b(b) {
+            RGB::RGB(GLubyte const& r, GLubyte const& g, GLubyte const& b) : Maths::Vector3D<GLubyte>::Vector3D(r, g, b) {
             }
 
-            RGB::RGB(RGB const& color) : r(color.getR()), g(color.getG()), b(color.getB()) {
+            RGB::RGB(RGB const& color) : Maths::Vector3D<GLubyte>::Vector3D(color) {
             }
 
             RGB::~RGB() {
-            }
-
-            GLubyte const& RGB::getR() const {
-                return r;
-            }
-
-            GLubyte const& RGB::getG() const {
-                return g;
-            }
-
-            GLubyte const& RGB::getB() const {
-                return b;
-            }
-
-            void RGB::setR(GLubyte const& value) {
-                r = value;
-            }
-
-            void RGB::setG(GLubyte const& value) {
-                g = value;
-            }
-
-            void RGB::setB(GLubyte const& value) {
-                b = value;
-            }
-
-            NREfloat RGB::distance(RGB const& c) const {
-                return std::sqrt(distanceSquared(c));
-            }
-
-            NREfloat RGB::distanceSquared(RGB const& c) const {
-                NREfloat rLenght = c.getR() - getR();
-                NREfloat gLenght = c.getG() - getG();
-                NREfloat bLenght = c.getB() - getB();
-                return rLenght * rLenght + gLenght * gLenght + bLenght * bLenght;
             }
 
             RGB& RGB::operator+=(RGB const& c) {
@@ -81,30 +46,6 @@
 
             RGB RGB::operator-() {
                 return RGB(255 - getR(), 255 - getG(), 255 - getB());
-            }
-
-            bool RGB::operator==(RGB const& c) {
-                return getR() == c.getR() && getG() == c.getG() && getB() == c.getB();
-            }
-
-            bool RGB::operator!=(RGB const& c) {
-                return !(*this == c);
-            }
-
-            bool RGB::operator<(RGB const& c) {
-                return distanceSquared() < c.distanceSquared();
-            }
-
-            bool RGB::operator>(RGB const& c) {
-                return distanceSquared() > c.distanceSquared();
-            }
-
-            bool RGB::operator<=(RGB const& c) {
-                return distanceSquared() <= c.distanceSquared();
-            }
-
-            bool RGB::operator>=(RGB const& c) {
-                return distanceSquared() >= c.distanceSquared();
             }
 
         };

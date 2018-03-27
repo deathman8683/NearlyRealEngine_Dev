@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../../../Generic/NRE_Type.hpp"
+    #include "../../../Maths/NRE_Maths.hpp"
 
     /**
      * @namespace NRE
@@ -27,11 +28,8 @@
              * @class RGB
              * @brief Color's Object : RGB color system : Red - Green - Blue
              */
-            class RGB {
+            class RGB : public Maths::Vector3D<GLubyte> {
                 protected:
-                    GLubyte r;
-                    GLubyte g;
-                    GLubyte b;
 
                 public:
                     //## Constructor ##//
@@ -45,21 +43,13 @@
                     RGB(HSL const& color);
 
                     //## Deconstructor ##//
-                    virtual ~RGB();
+                    ~RGB();
 
                     //## Getter ##//
-                    GLubyte const& getR() const;
-                    GLubyte const& getG() const;
-                    GLubyte const& getB() const;
 
                     //## Setter ##//
-                    void setR(GLubyte const& value);
-                    void setG(GLubyte const& value);
-                    void setB(GLubyte const& value);
 
                     //## Methods ##//
-                    NREfloat distance(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
-                    NREfloat distanceSquared(RGB const& c = {DEFAULT_R, DEFAULT_G, DEFAULT_B}) const;
 
                     //## Access Operator ##//
 
@@ -75,12 +65,6 @@
                     RGB operator-();
 
                     //## Comparison Operator ##//
-                    bool operator==(RGB const& c);
-                    bool operator!=(RGB const& c);
-                    bool operator<(RGB const& c);
-                    bool operator>(RGB const& c);
-                    bool operator<=(RGB const& c);
-                    bool operator>=(RGB const& c);
 
                     //## BitWise Operator ##//
 
@@ -92,10 +76,5 @@
                     static GLubyte DEFAULT_B;
             };
 
-            inline std::ostream& operator<<(std::ostream &stream, RGB const& c) {
-                stream << "(" << static_cast <GLuint> (c.getR()) << "," << static_cast <GLuint> (c.getG()) << "," << static_cast <GLuint> (c.getB()) << ")";
-                return stream;
-            }
-            
         };
     };
