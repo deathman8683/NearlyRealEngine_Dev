@@ -3,36 +3,36 @@
         namespace Maths {
 
             template <class T>
-            Vector3D<T>::Vector3D() : z(DEFAULT_Z) {
+            Vector3D<T>::Vector3D() : Vector3D(DEFAULT_X, DEFAULT_Y, DEFAULT_Z) {
             }
 
             template <class T>
             template <class K, class L, class M>
-            Vector3D<T>::Vector3D(K const& x, L const& y, M const& z) : Vector2D<T>::Vector2D(x, y), z(z) {
+            Vector3D<T>::Vector3D(K const& x, L const& y, M const& z) : data{x, y, z} {
             }
 
             template <class T>
             template <class K>
-            Vector3D<T>::Vector3D(Vector2D<K> const& u, T const& z) : Vector2D<T>::Vector2D(u), z(z) {
+            Vector3D<T>::Vector3D(Vector2D<K> const& u, T const& z) : data{u.getX(), u.getY(), z} {
             }
 
             template <class T>
             template <class K, class L>
-            Vector3D<T>::Vector3D(Point3D<K> const& a, Point3D<L> const& b) : Vector2D<T>::Vector2D(a, b), z(b.getZ() - a.getZ()) {
+            Vector3D<T>::Vector3D(Point3D<K> const& a, Point3D<L> const& b) : data{b.getX() - a.getX(), b.getY() - a.getY(), b.getZ() - a.getZ()} {
             }
 
             template <class T>
-            Vector3D<T>::Vector3D(Vector3D const& u) : Vector2D<T>::Vector2D(u), z(u.getZ()) {
-            }
-
-            template <class T>
-            template <class K>
-            Vector3D<T>::Vector3D(Vector3D<K> const& u) : Vector2D<T>::Vector2D(u), z(u.getZ()) {
+            Vector3D<T>::Vector3D(Vector3D const& u) : data{u.getX(), u.getY(), u.getZ()} {
             }
 
             template <class T>
             template <class K>
-            Vector3D<T>::Vector3D(Point3D<K> const& p) : Vector2D<T>::Vector2D(p), z(p.getZ()) {
+            Vector3D<T>::Vector3D(Vector3D<K> const& u) : data{u.getX(), u.getY(), u.getZ()} {
+            }
+
+            template <class T>
+            template <class K>
+            Vector3D<T>::Vector3D(Point3D<K> const& p) : data{p.getX(), p.getY(), p.getZ()} {
             }
 
             template <class T>
@@ -40,28 +40,48 @@
             }
 
             template <class T>
+            T const& Vector3D<T>::getX() const {
+                return data[0];
+            }
+
+            template <class T>
+            T const& Vector3D<T>::getY() const {
+                return data[1];
+            }
+
+            template <class T>
             T const& Vector3D<T>::getZ() const {
-                return z;
+                return data[2];
+            }
+
+            template <class T>
+            template <class K>
+            void Vector3D<T>::setX(K const& x) {
+                data[0] = x;
+            }
+
+            template <class T>
+            template <class K>
+            void Vector3D<T>::setY(K const& y) {
+                data[1] = y;
             }
 
             template <class T>
             template <class K>
             void Vector3D<T>::setZ(K const& z) {
-                this->z = z;
+                data[2] = z;
             }
 
             template <class T>
             template <class K, class L, class M>
             void Vector3D<T>::setCoord(K const& x, L const& y, M const& z) {
-                Vector2D<T>::setCoord(x, y);
-                setZ(z);
+                setX(x);    setY(y);    setZ(z);
             }
 
             template <class T>
             template <class K, class L>
             void Vector3D<T>::setCoord(Vector2D<K> const& u, L const& z) {
-                Vector2D<T>::setCoord(u.getX(), u.getY());
-                setZ(z);
+                setX(u.getX());    setY(u.getY());    setZ(z);
             }
 
             template <class T>
@@ -71,7 +91,7 @@
 
             template <class T>
             NREfloat Vector3D<T>::normSquared() const {
-                return Vector2D<T>::normSquared() + getZ() * getZ();
+                return getX() * getX() + getY() * getY() + getZ() * getZ();
             }
 
             template <class T>
@@ -82,7 +102,8 @@
             template <class T>
             template <class K>
             Vector3D<T>& Vector3D<T>::operator+=(Vector3D<K> const& u) {
-                Vector2D<T>::operator+=(u);
+                setX(getX() + u.getX());
+                setY(getY() + u.getY());
                 setZ(getZ() + u.getZ());
                 return *this;
             }
@@ -90,7 +111,8 @@
             template <class T>
             template <class K>
             Vector3D<T>& Vector3D<T>::operator-=(Vector3D<K> const& u) {
-                Vector2D<T>::operator-=(u);
+                setX(getX() - u.getX());
+                setY(getY() - u.getY());
                 setZ(getZ() - u.getZ());
                 return *this;
             }
@@ -98,7 +120,8 @@
             template <class T>
             template <class K>
             Vector3D<T>& Vector3D<T>::operator*=(K const& k) {
-                Vector2D<T>::operator*=(k);
+                setX(getX() * k);
+                setY(getY() * k);
                 setZ(getZ() * k);
                 return *this;
             }
@@ -106,7 +129,8 @@
             template <class T>
             template <class K>
             Vector3D<T>& Vector3D<T>::operator/=(K const& k) {
-                Vector2D<T>::operator/=(k);
+                setX(getX() / k);
+                setY(getY() / k);
                 setZ(getZ() / k);
                 return *this;
             }
@@ -114,7 +138,7 @@
             template <class T>
             template <class K>
             NREfloat Vector3D<T>::operator|=(Vector3D<K> const& u) const {
-                return Vector2D<T>::operator|=(u) + getZ() * u.getZ();
+                return getX() * u.getX() + getY() * u.getY() + getZ() * u.getZ();
             }
 
             template <class T>
@@ -164,13 +188,13 @@
             template <class T>
             template <class K>
             bool Vector3D<T>::operator==(Vector3D<K> const& u) const {
-                return Vector2D<T>::operator==(u) && getZ() == u.getZ();
+                return getX() == u.getX() && getY() == u.getY() && getZ() == u.getZ();
             }
 
             template <>
             template <class K>
             bool Vector3D<NREfloat>::operator==(Vector3D<K> const& u) const {
-                return Vector2D<NREfloat>::operator==(u) && almostEqual(getZ(), u.getZ());
+                return almostEqual(getX(), u.getX()) && almostEqual(getY(), u.getY()) && almostEqual(getZ(), u.getZ());
             }
 
             template <class T>

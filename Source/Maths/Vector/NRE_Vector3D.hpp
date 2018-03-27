@@ -28,9 +28,9 @@
              * @brief Maths's Object : Cartesian 3D Generic Vector
              */
             template <class T>
-            class Vector3D : public Vector2D<T> {
+            class Vector3D : {
                 private:
-                    T z;     /**< The z axis translation */
+                    T data[3];
 
                 public:
                     //## Constructor ##//
@@ -97,6 +97,8 @@
                         virtual ~Vector3D();
 
                     //## Getter ##//
+                        T const& getX() const;
+                        T const& getY() const;
                         /**
                          * @brief Z getter
                          * Return the z attribute
@@ -105,6 +107,11 @@
                         T const& getZ() const;
 
                     //## Setter ##//
+
+                        template <class K>
+                        void setX(K const& x);
+                        template <class K>
+                        void setY(K const& y);
                         /**
                          * @brief Z setter
                          * Change the z value
@@ -315,9 +322,15 @@
                     //## Shift Operator ##//
 
                 protected:
+                    static int DEFAULT_X;  /**< The default x axis translation */
+                    static int DEFAULT_Y;  /**< The default y axis translation */
                     static int DEFAULT_Z;  /**< The default z axis translation */
             };
 
+            template <class T>
+            int Vector3D<T>::DEFAULT_X = 0.;
+            template <class T>
+            int Vector3D<T>::DEFAULT_Y = 0.;
             template <class T>
             int Vector3D<T>::DEFAULT_Z = 0.;
 
@@ -333,7 +346,7 @@
                  stream << "(" << u.getX() << "," << u.getY() << "," << u.getZ() << ")";
                  return stream;
              }
-             
+
         };
     };
 

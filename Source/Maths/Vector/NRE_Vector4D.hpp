@@ -28,9 +28,9 @@
              * @brief Maths's Object : Homogeneous 3D Generic Vector
              */
             template <class T>
-            class Vector4D : public Vector3D<T> {
+            class Vector4D : {
                 private:
-                    T w;     /**< The w axis (homogeneous) translation */
+                    T data[4];
 
                 public:
                     //## Constructor ##//
@@ -98,6 +98,9 @@
                         ~Vector4D();
 
                     //## Getter ##//
+                        T const& getX() const;
+                        T const& getY() const;
+                        T const& getZ() const;
                         /**
                          * @brief W getter
                          * Return the w attribute
@@ -106,6 +109,12 @@
                         T const& getW() const;
 
                     //## Setter ##//
+                        template <class K>
+                        void setX(K const& x);
+                        template <class K>
+                        void setY(K const& y);
+                        template <class K>
+                        void setZ(K const& z);
                         /**
                          * @brief W setter
                          * Change the w value
@@ -301,9 +310,18 @@
                     //## Shift Operator ##//
 
                 protected:
+                    static int DEFAULT_X;  /**< The default x axis translation */
+                    static int DEFAULT_Y;  /**< The default y axis translation */
+                    static int DEFAULT_Z;  /**< The default z axis translation */
                     static int DEFAULT_W;  /**< The default w axis translation */
             };
 
+            template <class T>
+            int Vector4D<T>::DEFAULT_X = 0.;
+            template <class T>
+            int Vector4D<T>::DEFAULT_Y = 0.;
+            template <class T>
+            int Vector4D<T>::DEFAULT_Z = 0.;
             template <class T>
             int Vector4D<T>::DEFAULT_W = 0.;
 

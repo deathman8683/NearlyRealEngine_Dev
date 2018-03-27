@@ -30,8 +30,7 @@
             template <class T>
             class Vector2D {
                 private:
-                    T x;    /**< The x axis translation */
-                    T y;    /**< The y axis translation */
+                    T data[2];
 
                 public:
                     //## Constructor ##//
@@ -322,7 +321,7 @@
                  stream << "(" << u.getX() << "," << u.getY() << ")";
                  return stream;
              }
-             
+
         };
     };
 
