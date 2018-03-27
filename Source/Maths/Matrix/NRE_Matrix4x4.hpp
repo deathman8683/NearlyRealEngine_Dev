@@ -265,7 +265,7 @@
                         void ortho(K const& left, L const& right, M const& bottom, N const& top, O const& zNear, P const& zFar);
                         template <class K, class L, class M>
                         void lookAt(Point3D<K> const& eye, Point3D<L> const& center, Vector3D<M> const& up);
-                        T* const value();
+                        const T* const value() const;
 
                     //## Access Operator ##//
                         /**

@@ -132,7 +132,7 @@
             }
 
             template <class T>
-            T* const Matrix2x2<T>::value() {
+            const T* const Matrix2x2<T>::value() const {
                 return &data[0][0];
             }
 

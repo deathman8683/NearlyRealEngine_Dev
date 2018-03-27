@@ -86,7 +86,7 @@
             }
 
             template <class T>
-            T* const Vector2D<T>::value() {
+            const T* const Vector2D<T>::value() const {
                 return &data[0];
             }
 

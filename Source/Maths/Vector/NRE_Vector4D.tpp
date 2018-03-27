@@ -111,7 +111,7 @@
             }
 
             template <class T>
-            T* const Vector4D<T>::value() {
+            const T* const Vector4D<T>::value() const {
                 return &data[0];
             }
 

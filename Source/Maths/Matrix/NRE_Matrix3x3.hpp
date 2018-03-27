@@ -220,7 +220,7 @@
                          */
                         template <class K>
                         void scale(Vector2D<K> const& u);
-                        T* const value();
+                        const T* const value() const;
 
                     //## Access Operator ##//
                         /**

@@ -98,7 +98,7 @@
             }
 
             template <class T>
-            T* const Point3D<T>::value() {
+            const T* const Point3D<T>::value() const {
                 return &data[0];
             }
 

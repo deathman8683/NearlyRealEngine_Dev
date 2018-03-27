@@ -110,7 +110,7 @@
             }
 
             template <class T>
-            T* const Point4D<T>::value() {
+            const T* const Point4D<T>::value() const {
                 return &data[0];
             }
 

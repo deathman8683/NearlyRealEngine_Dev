@@ -100,7 +100,7 @@
             }
 
             template <class T>
-            T* const Vector3D<T>::value() {
+            const T* const Vector3D<T>::value() const {
                 return &data[0];
             }
 

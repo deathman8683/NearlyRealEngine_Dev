@@ -184,7 +184,7 @@
                          */
                         template <class K>
                         void scale(K const& u);
-                        T* const value();
+                        const T* const value() const;
 
                     //## Access Operator ##//
                         /**

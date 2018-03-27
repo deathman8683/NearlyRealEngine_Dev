@@ -298,7 +298,7 @@
             }
 
             template <class T>
-            T* const Matrix4x4<T>::value() {
+            const T* const Matrix4x4<T>::value() const {
                 return &data[0][0];
             }
 

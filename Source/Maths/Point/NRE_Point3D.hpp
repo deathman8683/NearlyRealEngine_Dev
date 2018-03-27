@@ -153,7 +153,7 @@
                          * @return NREfloat, the computed squared distance
                          */
                         NREfloat distanceSquared(Point3D<T> const& p = {DEFAULT_X, DEFAULT_Y, DEFAULT_Z}) const;
-                        T* const value();
+                        const T* const value() const;
 
                     //## Access Operator ##//
 

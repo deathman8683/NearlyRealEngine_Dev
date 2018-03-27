@@ -139,7 +139,7 @@
                          * @return NREfloat, the computed squared distance
                          */
                         NREfloat distanceSquared(Point2D<T> const& p = {DEFAULT_X, DEFAULT_Y}) const;
-                        T* const value();
+                        const T* const value() const;
 
                     //## Access Operator ##//
 

@@ -149,7 +149,7 @@
                          */
                         template <class K>
                         void rotate(K const& theta);
-                        T* const value();
+                        const T* const value() const;
 
                     //## Access Operator ##//
                         T& operator[](unsigned int const& index);
