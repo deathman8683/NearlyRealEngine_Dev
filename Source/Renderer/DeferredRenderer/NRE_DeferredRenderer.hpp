@@ -62,9 +62,11 @@
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
-                    void render(Renderer::Shader const& shader, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Vector3D<NREfloat> (&kernel)[128], Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light);
                     void beginRendering();
                     void endRendering();
+                    void beginShadow();
+                    void endShadow();
                     void fillBuffer();
 
                     //## Access Operator ##//
