@@ -86,6 +86,11 @@
             }
 
             template <class T>
+            T* const Vector2D<T>::value() {
+                return &data[0];
+            }
+
+            template <class T>
             T& Vector2D<T>::operator[](unsigned int const& index) {
                 return data[index];
             }

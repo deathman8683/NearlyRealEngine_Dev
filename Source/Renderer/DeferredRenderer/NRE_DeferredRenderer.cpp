@@ -43,8 +43,6 @@
             }
 
             void DeferredRenderer::render(Renderer::Shader const& shader, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
-                NREfloat eye[3] = {camera.getEye().getX(), camera.getEye().getY(), camera.getEye().getZ()};
-
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glUseProgram(shader.getID());
@@ -72,7 +70,7 @@
                             glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());
                         }
 
-                        glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, eye);
+                        glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
                         glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);

@@ -84,7 +84,7 @@
                          * @brief Deconstructor
                          * Deconstruct a 2D point
                          */
-                        virtual ~Point2D();
+                        ~Point2D();
 
                         //## Getter ##//
                         /**
@@ -139,6 +139,7 @@
                          * @return NREfloat, the computed squared distance
                          */
                         NREfloat distanceSquared(Point2D<T> const& p = {DEFAULT_X, DEFAULT_Y}) const;
+                        T* const value();
 
                     //## Access Operator ##//
 

@@ -100,6 +100,11 @@
             }
 
             template <class T>
+            T* const Vector3D<T>::value() {
+                return &data[0];
+            }
+
+            template <class T>
             T& Vector3D<T>::operator[](unsigned int const& index) {
                 return data[index];
             }

@@ -159,6 +159,7 @@
                          * Normalize the vector, doesn't check if the vector's norm is null
                          */
                         void normalize();
+                        T* const value();
 
                     //## Access Operator ##//
                         T& operator[](unsigned int const& index);

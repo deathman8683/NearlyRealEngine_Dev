@@ -125,8 +125,6 @@
             }
 
             void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera) {
-                NREfloat eye[3] = {camera.getEye().getX(), camera.getEye().getY(), camera.getEye().getZ()};
-
                 setActive(camera.AABBCollision(getBounding()));
 
                 if (isActive()) {
@@ -134,7 +132,7 @@
                         vao.bind();
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, eye);
+                            glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
 
                             glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 

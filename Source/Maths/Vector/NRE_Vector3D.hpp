@@ -94,7 +94,7 @@
                          * @brief Deconstructor
                          * Deconstruct a 3D vector
                          */
-                        virtual ~Vector3D();
+                        ~Vector3D();
 
                     //## Getter ##//
                         T const& getX() const;
@@ -155,6 +155,7 @@
                          * Normalize the vector, doesn't check if the vector's norm is null
                          */
                         void normalize();
+                        T* const value();
 
                     //## Access Operator ##//
                         T& operator[](unsigned int const& index);

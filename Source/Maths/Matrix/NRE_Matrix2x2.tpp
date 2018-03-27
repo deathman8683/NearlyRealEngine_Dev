@@ -132,6 +132,11 @@
             }
 
             template <class T>
+            T* const Matrix2x2<T>::value() {
+                return &data[0][0];
+            }
+
+            template <class T>
             Vector2D<T>& Matrix2x2<T>::operator[](unsigned int const& index) {
                 return data[index];
             }

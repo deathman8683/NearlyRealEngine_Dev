@@ -110,6 +110,11 @@
             }
 
             template <class T>
+            T* const Point4D<T>::value() {
+                return &data[0];
+            }
+
+            template <class T>
             template <class K>
             Point4D<T>& Point4D<T>::operator+=(Vector4D<K> const& u) {
                 setX(getX() + u.getX());

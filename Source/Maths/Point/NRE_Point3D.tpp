@@ -98,6 +98,11 @@
             }
 
             template <class T>
+            T* const Point3D<T>::value() {
+                return &data[0];
+            }
+
+            template <class T>
             template <class K>
             Point3D<T>& Point3D<T>::operator+=(Vector3D<K> const& u) {
                 setX(getX() + u.getX());

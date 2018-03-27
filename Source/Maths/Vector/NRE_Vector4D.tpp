@@ -111,6 +111,11 @@
             }
 
             template <class T>
+            T* const Vector4D<T>::value() {
+                return &data[0];
+            }
+
+            template <class T>
             T& Vector4D<T>::operator[](unsigned int const& index) {
                 return data[index];
             }

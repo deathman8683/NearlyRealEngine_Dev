@@ -84,7 +84,7 @@
                          * @brief Deconstructor
                          * Deconstruct a 2D vector
                          */
-                        virtual ~Vector2D();
+                        ~Vector2D();
 
                     //## Getter ##//
                         /**
@@ -149,6 +149,7 @@
                          */
                         template <class K>
                         void rotate(K const& theta);
+                        T* const value();
 
                     //## Access Operator ##//
                         T& operator[](unsigned int const& index);

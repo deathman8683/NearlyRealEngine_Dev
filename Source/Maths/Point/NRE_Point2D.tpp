@@ -74,6 +74,11 @@
             }
 
             template <class T>
+            T* const Point2D<T>::value() {
+                return &data[0];
+            }
+
+            template <class T>
             template <class K>
             Point2D<T>& Point2D<T>::operator+=(Vector2D<K> const& u) {
                 setX(getX() + u.getX());
