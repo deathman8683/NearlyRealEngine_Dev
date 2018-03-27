@@ -85,11 +85,11 @@
             public:
                 size_t operator()(NRE::World::PackedVertex const& p) const
                 {
-                    size_t h1 = p.NRE::Maths::Point3D<GLint>::getX();
-                    size_t h2 = p.NRE::Maths::Point3D<GLint>::getY();
-                    size_t h3 = p.NRE::Maths::Point3D<GLint>::getZ();
-
-                    size_t hV = h3 * 100'000'000 + h2 * 1'000'000 + h1 * 10'000 + p.getNCode() * 1'000 + p.getCCode();
+                    size_t hV = p.NRE::Maths::Point3D<GLint>::getZ() * 100'000'000
+                              + p.NRE::Maths::Point3D<GLint>::getY() * 1'000'000
+                              + p.NRE::Maths::Point3D<GLint>::getX() * 10'000
+                              + p.getNCode() * 1'000
+                              + p.getCCode();
                     return hV;
                 }
         };
