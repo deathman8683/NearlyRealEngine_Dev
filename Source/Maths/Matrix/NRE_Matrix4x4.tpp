@@ -15,29 +15,20 @@
             Matrix4x4<T>::Matrix4x4(A const& a, B const& b, C const& c, D const& d,
                                     E const& e, F const& f, G const& g, H const& h,
                                     I const& i, J const& j, K const& k, L const& l,
-                                    M const& m, N const& n, O const& o, P const& p) {
-                data[0][0] = a; data[0][1] = b; data[0][2] = c; data[0][3] = d;
-                data[1][0] = e; data[1][1] = f; data[1][2] = g; data[1][3] = h;
-                data[2][0] = i; data[2][1] = j; data[2][2] = k; data[2][3] = l;
-                data[3][0] = m; data[3][1] = n; data[3][2] = o; data[3][3] = p;
+                                    M const& m, N const& n, O const& o, P const& p)
+                                    : data{{a, b, c, d}, {e, f, g, h}, {i, j, k, l}, {m, n, o, p}} {
             }
 
             template <class T>
             template <class K, class L, class M, class N>
-            Matrix4x4<T>::Matrix4x4(Vector4D<K> const& l1, Vector4D<L> const& l2, Vector4D<M> const& l3, Vector4D<N> const& l4) {
-                setL1(l1);
-                setL2(l2);
-                setL3(l3);
-                setL4(l4);
+            Matrix4x4<T>::Matrix4x4(Vector4D<K> const& l1, Vector4D<L> const& l2, Vector4D<M> const& l3, Vector4D<N> const& l4)
+                                    : data{l1, l2, l3, l4} {
             }
 
             template <class T>
             template <class K, class L, class M, class N>
-            Matrix4x4<T>::Matrix4x4(Point4D<K> const& l1, Point4D<L> const& l2, Point4D<M> const& l3, Point4D<N> const& l4) {
-                setL1(Vector4D<K>(l1));
-                setL2(Vector4D<L>(l2));
-                setL3(Vector4D<M>(l3));
-                setL4(Vector4D<N>(l4));
+            Matrix4x4<T>::Matrix4x4(Point4D<K> const& l1, Point4D<L> const& l2, Point4D<M> const& l3, Point4D<N> const& l4)
+                                    : data{l1, l2, l3, l4} {
             }
 
             template <class T>
@@ -56,23 +47,23 @@
             }
 
             template <class T>
-            Vector4D<T> Matrix4x4<T>::getL1() const {
-                return Vector4D<T>(data[0][0], data[0][1], data[0][2], data[0][3]);
+            Vector4D<T> const& Matrix4x4<T>::getL1() const {
+                return data[0];
             }
 
             template <class T>
-            Vector4D<T> Matrix4x4<T>::getL2() const {
-                return Vector4D<T>(data[1][0], data[1][1], data[1][2], data[1][3]);
+            Vector4D<T> const& Matrix4x4<T>::getL2() const {
+                return data[1];
             }
 
             template <class T>
-            Vector4D<T> Matrix4x4<T>::getL3() const {
-                return Vector4D<T>(data[2][0], data[2][1], data[2][2], data[2][3]);
+            Vector4D<T> const& Matrix4x4<T>::getL3() const {
+                return data[2];
             }
 
             template <class T>
-            Vector4D<T> Matrix4x4<T>::getL4() const {
-                return Vector4D<T>(data[3][0], data[3][1], data[3][2], data[3][3]);
+            Vector4D<T> const& Matrix4x4<T>::getL4() const {
+                return data[3];
             }
 
             template <class T>
@@ -110,37 +101,25 @@
             template <class T>
             template <class K>
             void Matrix4x4<T>::setL1(Vector4D<K> const& l1) {
-                data[0][0] = l1.getX();
-                data[0][1] = l1.getY();
-                data[0][2] = l1.getZ();
-                data[0][3] = l1.getW();
+                data[0] = l1;
             }
 
             template <class T>
             template <class K>
             void Matrix4x4<T>::setL2(Vector4D<K> const& l2) {
-                data[1][0] = l2.getX();
-                data[1][1] = l2.getY();
-                data[1][2] = l2.getZ();
-                data[1][3] = l2.getW();
+                data[1] = l2;
             }
 
             template <class T>
             template <class K>
             void Matrix4x4<T>::setL3(Vector4D<K> const& l3) {
-                data[2][0] = l3.getX();
-                data[2][1] = l3.getY();
-                data[2][2] = l3.getZ();
-                data[2][3] = l3.getW();
+                data[2] = l3;
             }
 
             template <class T>
             template <class K>
             void Matrix4x4<T>::setL4(Vector4D<K> const& l4) {
-                data[3][0] = l4.getX();
-                data[3][1] = l4.getY();
-                data[3][2] = l4.getZ();
-                data[3][3] = l4.getW();
+                data[3] = l4;
             }
 
             template <class T>
@@ -336,9 +315,7 @@
             template <class K>
             Matrix4x4<T>& Matrix4x4<T>::operator=(Matrix4x4<K> const& m) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
-                    for(unsigned int j = 0; j < 4; j = j + 1) {
-                        data[i][j] = m[i][j];
-                    }
+                    data[i] = m[i];
                 }
                 return *this;
             }
@@ -347,9 +324,7 @@
             template <class K>
             Matrix4x4<T>& Matrix4x4<T>::operator+=(Matrix4x4<K> const& m) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
-                    for(unsigned int j = 0; j < 4; j = j + 1) {
-                        data[i][j] = data[i][j] + m[i][j];
-                    }
+                    data[i] = data[i] + m[i];
                 }
                 return *this;
             }
@@ -358,9 +333,7 @@
             template <class K>
             Matrix4x4<T>& Matrix4x4<T>::operator-=(Matrix4x4<K> const& m) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
-                    for(unsigned int j = 0; j < 4; j = j + 1) {
-                        data[i][j] = data[i][j] - m[i][j];
-                    }
+                    data[i] = data[i] - m[i];
                 }
                 return *this;
             }
@@ -369,9 +342,7 @@
             template <class K>
             Matrix4x4<T>& Matrix4x4<T>::operator*=(K const& k) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
-                    for(unsigned int j = 0; j < 4; j = j + 1) {
-                        data[i][j] = data[i][j] * k;
-                    }
+                    data[i] = data[i] * k;
                 }
                 return *this;
             }
@@ -392,9 +363,7 @@
             template <class K>
             Matrix4x4<T>& Matrix4x4<T>::operator/=(K const& k) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
-                    for(unsigned int j = 0; j < 4; j = j + 1) {
-                        data[i][j] = data[i][j] / k;
-                    }
+                    data[i] = data[i] / k;
                 }
                 return *this;
             }

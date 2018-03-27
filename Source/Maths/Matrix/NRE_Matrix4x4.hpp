@@ -31,7 +31,7 @@
             template <class T>
             class Matrix4x4 {
                 private:
-                    T data[4][4];   /**< Matrix's data */
+                    Vector4D<T> data[4];   /**< Matrix's data */
 
                 public:
                     //## Constructor ##//
@@ -119,25 +119,25 @@
                          * Return the matrix's first line as a 4D vector
                          * @return Vector4D<T>, the matrix's first line
                          */
-                        Vector4D<T> getL1() const;
+                        Vector4D<T> const& getL1() const;
                         /**
                          * @brief Second line getter
                          * Return the matrix's second line as a 4D vector
                          * @return Vector4D<T>, the matrix's second line
                          */
-                        Vector4D<T> getL2() const;
+                        Vector4D<T> const& getL2() const;
                         /**
                          * @brief Third line getter
                          * Return the matrix's third line as a 4D vector
                          * @return Vector4D<T>, the matrix's third line
                          */
-                        Vector4D<T> getL3() const;
+                        Vector4D<T> const& getL3() const;
                         /**
                          * @brief Fourth line getter
                          * Return the matrix's fourth line as a 4D vector
                          * @return Vector4D<T>, the matrix's fourth line
                          */
-                        Vector4D<T> getL4() const;
+                        Vector4D<T> const& getL4() const;
                         /**
                          * @brief First column getter
                          * Return the matrix's first column as a 4D vector

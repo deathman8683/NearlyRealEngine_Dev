@@ -31,7 +31,7 @@
             template <class T>
             class Matrix3x3 {
                 private:
-                    T data[3][3];   /**< Matrix's data */
+                    Vector3D<T> data[3];   /**< Matrix's data */
 
                 public:
                     //## Constructor ##//
@@ -108,19 +108,19 @@
                          * Return the matrix's first line as a 3D vector
                          * @return Vector3D<T>, the matrix's first line
                          */
-                        Vector3D<T> getL1() const;
+                        Vector3D<T> const& getL1() const;
                         /**
                          * @brief Second line getter
                          * Return the matrix's second line as a 3D vector
                          * @return Vector3D<T>, the matrix's second line
                          */
-                        Vector3D<T> getL2() const;
+                        Vector3D<T> const& getL2() const;
                         /**
                          * @brief Third line getter
                          * Return the matrix's third line as a 3D vector
                          * @return Vector3D<T>, the matrix's third line
                          */
-                        Vector3D<T> getL3() const;
+                        Vector3D<T> const& getL3() const;
                         /**
                          * @brief First column getter
                          * Return the matrix's first column as a 3D vector
@@ -228,14 +228,14 @@
                          * @param index : unsigned int, tell which line to return
                          * @return T*, the matrix's line
                          */
-                        T* operator[](unsigned int const& index);
+                        Vector3D<T>* operator[](unsigned int const& index);
                         /**
                          * @brief Read Access Operator []
                          * Return the index's line from the matrix
                          * @param index : unsigned int, tell which line to return
                          * @return T*, the matrix's line
                          */
-                        const T* operator[](unsigned int const& index) const;
+                        const Vector3D<T>* operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
                         /**

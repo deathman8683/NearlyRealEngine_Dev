@@ -13,26 +13,17 @@
                       class Q, class R, class S>
             Matrix3x3<T>::Matrix3x3(K const& a, L const& b, M const& c,
                                     N const& d, O const& e, P const& f,
-                                    Q const& g, R const& h, S const& i) {
-                data[0][0] = a; data[0][1] = b; data[0][2] = c;
-                data[1][0] = d; data[1][1] = e; data[1][2] = f;
-                data[2][0] = g; data[2][1] = h; data[2][2] = i;
+                                    Q const& g, R const& h, S const& i) : data{{a, b, c}, {d, e, f}, {g, h, i}} {
             }
 
             template <class T>
             template <class K, class L, class M>
-            Matrix3x3<T>::Matrix3x3(Vector3D<K> const& l1, Vector3D<L> const& l2, Vector3D<M> const& l3) {
-                setL1(l1);
-                setL2(l2);
-                setL3(l3);
+            Matrix3x3<T>::Matrix3x3(Vector3D<K> const& l1, Vector3D<L> const& l2, Vector3D<M> const& l3) : data{l1, l2, l3} {
             }
 
             template <class T>
             template <class K, class L, class M>
-            Matrix3x3<T>::Matrix3x3(Point3D<K> const& l1, Point3D<L> const& l2, Point3D<M> const& l3) {
-                setL1(Vector3D<K>(l1));
-                setL2(Vector3D<L>(l2));
-                setL3(Vector3D<M>(l3));
+            Matrix3x3<T>::Matrix3x3(Point3D<K> const& l1, Point3D<L> const& l2, Point3D<M> const& l3) : data{l1, l2, l3} {
             }
 
             template <class T>
@@ -51,18 +42,18 @@
             }
 
             template <class T>
-            Vector3D<T> Matrix3x3<T>::getL1() const {
-                return Vector3D<T>(data[0][0], data[0][1], data[0][2]);
+            Vector3D<T> const& Matrix3x3<T>::getL1() const {
+                return data[0];
             }
 
             template <class T>
-            Vector3D<T> Matrix3x3<T>::getL2() const {
-                return Vector3D<T>(data[1][0], data[1][1], data[1][2]);
+            Vector3D<T> const& Matrix3x3<T>::getL2() const {
+                return data[1];
             }
 
             template <class T>
-            Vector3D<T> Matrix3x3<T>::getL3() const {
-                return Vector3D<T>(data[2][0], data[2][1], data[2][2]);
+            Vector3D<T> const& Matrix3x3<T>::getL3() const {
+                return data[2];
             }
 
             template <class T>
@@ -89,25 +80,19 @@
             template <class T>
             template <class K>
             void Matrix3x3<T>::setL1(Vector3D<K> const& l1) {
-                data[0][0] = l1.getX();
-                data[0][1] = l1.getY();
-                data[0][2] = l1.getZ();
+                data[0] = l1;
             }
 
             template <class T>
             template <class K>
             void Matrix3x3<T>::setL2(Vector3D<K> const& l2) {
-                data[1][0] = l2.getX();
-                data[1][1] = l2.getY();
-                data[1][2] = l2.getZ();
+                data[1] = l2;
             }
 
             template <class T>
             template <class K>
             void Matrix3x3<T>::setL3(Vector3D<K> const& l3) {
-                data[2][0] = l3.getX();
-                data[2][1] = l3.getY();
-                data[2][2] = l3.getZ();
+                data[2] = l3;
             }
 
             template <class T>
@@ -189,11 +174,11 @@
             }
 
             template <class T>
-            T* Matrix3x3<T>::operator[](unsigned int const& index) {
+            Vector3D<T>* Matrix3x3<T>::operator[](unsigned int const& index) {
                 return data[index];
             }
             template <class T>
-            const T* Matrix3x3<T>::operator[](unsigned int const& index) const {
+            const Vector3D<T>* Matrix3x3<T>::operator[](unsigned int const& index) const {
                 return data[index];
             }
 
@@ -201,9 +186,7 @@
             template <class K>
             Matrix3x3<T>& Matrix3x3<T>::operator=(Matrix3x3<K> const& m) {
                 for(unsigned int i = 0; i < 3; i = i + 1) {
-                    for(unsigned int j = 0; j < 3; j = j + 1) {
-                        data[i][j] = m[i][j];
-                    }
+                    data[i] = m[i];
                 }
                 return *this;
             }
@@ -212,9 +195,7 @@
             template <class K>
             Matrix3x3<T>& Matrix3x3<T>::operator+=(Matrix3x3<K> const& m) {
                 for(unsigned int i = 0; i < 3; i = i + 1) {
-                    for(unsigned int j = 0; j < 3; j = j + 1) {
-                        data[i][j] = data[i][j] + m[i][j];
-                    }
+                    data[i] = data[i] + m[i];
                 }
                 return *this;
             }
@@ -223,20 +204,16 @@
             template <class K>
             Matrix3x3<T>& Matrix3x3<T>::operator-=(Matrix3x3<K> const& m) {
                 for(unsigned int i = 0; i < 3; i = i + 1) {
-                    for(unsigned int j = 0; j < 3; j = j + 1) {
-                        data[i][j] = data[i][j] - m[i][j];
-                    }
+                    data[i] = data[i] - m[i];
                 }
                 return *this;
             }
 
             template <class T>
             template <class K>
-            Matrix3x3<T>& Matrix3x3<T>::operator*=(K const& k) {
+            Matrix2x2<T>& Matrix2x2<T>::operator*=(K const& k) {
                 for(unsigned int i = 0; i < 3; i = i + 1) {
-                    for(unsigned int j = 0; j < 3; j = j + 1) {
-                        data[i][j] = data[i][j] * k;
-                    }
+                    data[i] = data[i] * k;
                 }
                 return *this;
             }
@@ -256,9 +233,7 @@
             template <class K>
             Matrix3x3<T>& Matrix3x3<T>::operator/=(K const& k) {
                 for(unsigned int i = 0; i < 3; i = i + 1) {
-                    for(unsigned int j = 0; j < 3; j = j + 1) {
-                        data[i][j] = data[i][j] / k;
-                    }
+                    data[i] = data[i] / k;
                 }
                 return *this;
             }

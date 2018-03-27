@@ -31,7 +31,7 @@
              template <class T>
             class Matrix2x2 {
                 private:
-                    T data[2][2];   /**< Matrix's data */
+                    Vector2D<T> data[2];   /**< Matrix's data */
 
                 public:
                     //## Constructor ##//
@@ -98,13 +98,13 @@
                          * Return the matrix's first line as a 2D vector
                          * @return Vector2D<T>, the matrix's first line
                          */
-                        Vector2D<T> getL1() const;
+                        Vector2D<T> const& getL1() const;
                         /**
                          * @brief Second line getter
                          * Return the matrix's second line as a 2D vector
                          * @return Vector2D<T>, the matrix's second line
                          */
-                        Vector2D<T> getL2() const;
+                        Vector2D<T> const& getL2() const;
                         /**
                          * @brief First column getter
                          * Return the matrix's first column as a 2D vector
@@ -192,14 +192,14 @@
                          * @param index : unsigned int, tell which line to return
                          * @return T*, the matrix's line
                          */
-                        T* operator[](unsigned int const& index);
+                        Vector2D<T>* operator[](unsigned int const& index);
                         /**
                          * @brief Read Access Operator []
                          * Return the index's line from the matrix
                          * @param index : unsigned int, tell which line to return
                          * @return T*, the matrix's line
                          */
-                        const T* operator[](unsigned int const& index) const;
+                        const Vector2D<T>* operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
                         /**

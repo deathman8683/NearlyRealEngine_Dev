@@ -10,23 +10,17 @@
             template <class T>
             template <class K, class L, class M, class N>
             Matrix2x2<T>::Matrix2x2(K const& a, L const& b,
-                                    M const& c, N const& d) {
-                data[0][0] = a; data[0][1] = b;
-                data[1][0] = c; data[1][1] = d;
+                                    M const& c, N const& d) : data{{a, b}, {c, d}} {
             }
 
             template <class T>
             template <class K, class L>
-            Matrix2x2<T>::Matrix2x2(Vector2D<K> const& l1, Vector2D<L> const& l2) {
-                setL1(l1);
-                setL2(l2);
+            Matrix2x2<T>::Matrix2x2(Vector2D<K> const& l1, Vector2D<L> const& l2) : data{l1, l2} {
             }
 
             template <class T>
             template <class K, class L>
-            Matrix2x2<T>::Matrix2x2(Point2D<K> const& l1, Point2D<L> const& l2) {
-                setL1(Vector2D<K>(l1));
-                setL2(Vector2D<L>(l2));
+            Matrix2x2<T>::Matrix2x2(Point2D<K> const& l1, Point2D<L> const& l2) : data{l1, l2} {
             }
 
             template <class T>
@@ -45,13 +39,13 @@
             }
 
             template <class T>
-            Vector2D<T> Matrix2x2<T>::getL1() const {
-                return Vector2D<T>(data[0][0], data[0][1]);
+            Vector2D<T> const& Matrix2x2<T>::getL1() const {
+                return data[0];
             }
 
             template <class T>
-            Vector2D<T> Matrix2x2<T>::getL2() const {
-                return Vector2D<T>(data[1][0], data[1][1]);
+            Vector2D<T> const& Matrix2x2<T>::getL2() const {
+                return data[1];
             }
 
             template <class T>
@@ -72,15 +66,13 @@
             template <class T>
             template <class K>
             void Matrix2x2<T>::setL1(Vector2D<K> const& l1) {
-                data[0][0] = l1.getX();
-                data[0][1] = l1.getY();
+                data[0] = l1;
             }
 
             template <class T>
             template <class K>
             void Matrix2x2<T>::setL2(Vector2D<K> const& l2) {
-                data[1][0] = l2.getX();
-                data[1][1] = l2.getY();
+                data[1] = l2;
             }
 
             template <class T>
@@ -140,11 +132,11 @@
             }
 
             template <class T>
-            T* Matrix2x2<T>::operator[](unsigned int const& index) {
+            Vector2D<T>* Matrix2x2<T>::operator[](unsigned int const& index) {
                 return data[index];
             }
             template <class T>
-            const T* Matrix2x2<T>::operator[](unsigned int const& index) const {
+            const Vector2D<T>* Matrix2x2<T>::operator[](unsigned int const& index) const {
                 return data[index];
             }
 
@@ -152,9 +144,7 @@
             template <class K>
             Matrix2x2<T>& Matrix2x2<T>::operator=(Matrix2x2<K> const& m) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
-                    for(unsigned int j = 0; j < 2; j = j + 1) {
-                        data[i][j] = m[i][j];
-                    }
+                    data[i] = m[i];
                 }
                 return *this;
             }
@@ -163,9 +153,7 @@
             template <class K>
             Matrix2x2<T>& Matrix2x2<T>::operator+=(Matrix2x2<K> const& m) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
-                    for(unsigned int j = 0; j < 2; j = j + 1) {
-                        data[i][j] = data[i][j] + m[i][j];
-                    }
+                    data[i] = data[i] + m[i];
                 }
                 return *this;
             }
@@ -174,9 +162,7 @@
             template <class K>
             Matrix2x2<T>& Matrix2x2<T>::operator-=(Matrix2x2<K> const& m) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
-                    for(unsigned int j = 0; j < 2; j = j + 1) {
-                        data[i][j] = data[i][j] - m[i][j];
-                    }
+                    data[i] = data[i] - m[i];
                 }
                 return *this;
             }
@@ -185,9 +171,7 @@
             template <class K>
             Matrix2x2<T>& Matrix2x2<T>::operator*=(K const& k) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
-                    for(unsigned int j = 0; j < 2; j = j + 1) {
-                        data[i][j] = data[i][j] * k;
-                    }
+                    data[i] = data[i] * k;
                 }
                 return *this;
             }
@@ -206,9 +190,7 @@
             template <class K>
             Matrix2x2<T>& Matrix2x2<T>::operator/=(K const& k) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
-                    for(unsigned int j = 0; j < 2; j = j + 1) {
-                        data[i][j] = data[i][j] / k;
-                    }
+                    data[i] = data[i] / k;
                 }
                 return *this;
             }
