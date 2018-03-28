@@ -31,7 +31,7 @@
             class FBO : public BufferObject, public FrameBuffer {
                 private:
                     std::vector<Texture2D*> colorBuffer;
-                    Texture2D* depthBuffer;
+                    RenderBuffer depthBuffer;
                     Maths::Vector2D<GLushort> size;
 
                 public:
@@ -51,13 +51,13 @@
                     //## Getter ##//
                     std::vector<Texture2D*> const& getColorBuffers() const;
                     Texture2D* const& getColorBuffer(GLuint const& index) const;
-                    Texture2D* const& getDepthBuffer() const;
+                    RenderBuffer const& getDepthBuffer() const;
                     Maths::Vector2D<GLushort> const& getSize() const;
 
                     //## Setter ##//
                     void setColorBuffers(std::vector<Texture2D*> const& buffers);
                     void setColorBuffer(GLuint const& index, Texture2D* const&& buffer);
-                    void setDepthBuffer(Texture2D* const& buffer);
+                    void setDepthBuffer(RenderBuffer const& buffer);
                     void setSize(Maths::Vector2D<GLushort> const& size);
 
                     //## Methods ##//
