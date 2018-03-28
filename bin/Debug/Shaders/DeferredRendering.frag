@@ -26,6 +26,13 @@
 
     out vec4 out_Color;
 
+    /*float linearizeDepth(in vec2 uv) {
+        float zNear = 0.1;
+        float zFar  = 300.0;
+        float depth = texture(texDepth, uv).x;
+        return (2.0 * zNear) / (zFar + zNear - depth * (zFar - zNear));
+    }*/
+
     vec3 applyLight(Light light, vec3 surfacePos, vec3 surfaceColor, vec4 surfaceNormal, vec3 surfaceCamera, float num) {
         vec3 lightVertex;
         float attenuation = 1.0;
@@ -92,6 +99,7 @@
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
                 }
                 out_Color = vec4(linearColor, 1.0) * texture(texSSAO, uv).x;
+                //out_Color = texture(texSSAO, uv);
             } else {
                 for (int i = 0; i < numLights; i = i + 1) {
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);

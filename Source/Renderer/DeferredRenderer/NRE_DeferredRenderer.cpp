@@ -151,17 +151,17 @@
                     glUseProgram(shader.getID());
                         vao.bind();
 
-                            glActiveTexture(GL_TEXTURE1);
+                            glActiveTexture(GL_TEXTURE0);
                             getFrameBuffer().getColorBuffer(1)->bind();
-                                glUniform1i(glGetUniformLocation(shader.getID(), "texPosition"), 1);
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texPosition"), 0);
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
                             glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 128, ssao.getKernel()[0].value());
-                            glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 1.5f);
+                            glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 0.08);
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                            glActiveTexture(GL_TEXTURE1);
+                            glActiveTexture(GL_TEXTURE0);
                                 getFrameBuffer().getColorBuffer(1)->unbind();
                         vao.unbind();
                     glUseProgram(0);

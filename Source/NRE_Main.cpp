@@ -57,6 +57,9 @@
                 engineDeferredRenderer.startGBufferPass();
                     auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
                     engineSkybox.render(skyBoxShader, MVP, camera.getEye());
+
+                    glClear(GL_DEPTH_BUFFER_BIT);
+
                     if (it->second.isActive()) {
                         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
@@ -66,7 +69,7 @@
 
                 engineDeferredRenderer.SSAOPass(ssaoPass, MVP);
 
-                engineDeferredRenderer.BlurPass(blurPass);
+                //engineDeferredRenderer.BlurPass(blurPass);
 
                 /*auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
                 if (it2->second.isActive()) {

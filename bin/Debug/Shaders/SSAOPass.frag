@@ -7,7 +7,7 @@
     uniform sampler2D texPosition;
 
     uniform float gSampleRad;
-    const int MAX_KERNEL_SIZE = 32;
+    const int MAX_KERNEL_SIZE = 128;
     uniform vec3 gKernel[MAX_KERNEL_SIZE];
 
     out vec4 fragData;
@@ -15,24 +15,21 @@
     void main() {
         vec3 vertex = texture(texPosition, uv).xyz;
 
-        float AO = 0.0;
-
+        float occlusion = 0.0;
         for (int i = 0; i < MAX_KERNEL_SIZE; i = i + 1) {
-            vec3 samplePos = vertex + gKernel[i];
-            vec4 offset = vec4(samplePos, 1.0);
+            vec3 sampleV = vertex + gKernel[i];
+
+            vec4 offset = vec4(sampleV, 1.0);
             offset = MVP * offset;
             offset.xy /= offset.w;
             offset.xy = offset.xy * 0.5 + vec2(0.5);
 
             float sampleDepth = texture(texPosition, offset.xy).z;
 
-            if (abs(vertex.z - sampleDepth) < gSampleRad) {
-                AO += step(sampleDepth, samplePos.z);
-            }
+            float rangeCheck = smoothstep(0.0, 1.0, gSampleRad / abs(vertex.z - sampleDepth));
+            occlusion += (sampleDepth >= sampleV.z + 0.04 ? 1.0 : 0.0) * rangeCheck;
         }
 
-        AO = 1.0 - AO / 128.0;
-        AO = pow(AO, 2.0);
-
-        fragData = vec4(AO);
+        occlusion = 1.0 - (occlusion / MAX_KERNEL_SIZE);
+        fragData = vec4(occlusion);
     }

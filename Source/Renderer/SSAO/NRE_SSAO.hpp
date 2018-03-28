@@ -8,8 +8,10 @@
 
     #pragma once
 
+    #include <random>
     #include "../../Generic/NRE_Type.hpp"
     #include "../../Maths/NRE_Maths.hpp"
+    #include "../../GL_Wrapper/BufferObject/Texture2D/NRE_Texture2D.hpp"
 
     /**
      * @namespace NRE
@@ -29,6 +31,7 @@
             class SSAO {
                 private:
                     Maths::Vector3D<NREfloat> *kernel;
+                    GL::Texture2D* noise;
 
                 public:
                     //## Constructor ##//
@@ -44,12 +47,16 @@
 
                     //## Getter ##//
                     Maths::Vector3D<NREfloat>* const& getKernel() const;
+                    GL::Texture2D* const& getNoise() const;
 
                     //## Setter ##//
                     void setKernel(Maths::Vector3D<NREfloat>* const& kern);
+                    void setNoise(GL::Texture2D* const& tex);
 
                     //## Methods ##//
                     void generateKernel();
+                    void generateNoise();
+                    NREfloat lerp(NREfloat const& a, NREfloat const& b, NREfloat const& f) const;
 
                     //## Access Operator ##//
 
@@ -67,6 +74,7 @@
 
                 private:
                     static GLuint KERNEL_SIZE;
+                    static GLuint NOISE_SIZE;
             };
 
         };
