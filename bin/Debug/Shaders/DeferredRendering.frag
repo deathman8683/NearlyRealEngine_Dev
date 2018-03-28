@@ -23,11 +23,12 @@
     uniform sampler2D texNormal;
     uniform sampler2D texDepth;
     uniform samplerCube skyBox;
+    uniform float type;
 
     uniform mat4 projection;
 
     uniform float gSampleRad;
-    const int MAX_KERNEL_SIZE = 32;
+    const int MAX_KERNEL_SIZE = 64;
     uniform vec3 gKernel[MAX_KERNEL_SIZE];
 
     out vec4 out_Color;
@@ -60,7 +61,7 @@
 
         AO = 1.0 - AO / 128.0;
         AO = pow(AO, 2.0);
-        
+
         return AO;
     }
 
@@ -125,11 +126,16 @@
         if (normal == vec4(1.0, 1.0, 1.0, 1.0)) {
             out_Color = vec4(color, 1.0);
         } else {
-            float c = SSAO(pos);
-            out_Color = vec4(c, c, c, 1.0);
-            /*for (int i = 0; i < numLights; i = i + 1) {
-                linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
+            if (type == 1.0) {
+                for (int i = 0; i < numLights; i = i + 1) {
+                    linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
+                }
+                out_Color = vec4(linearColor, 1.0) * SSAO(pos);
+            } else {
+                for (int i = 0; i < numLights; i = i + 1) {
+                    linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
+                }
+                out_Color = vec4(linearColor, 1.0);
             }
-            out_Color = vec4(linearColor, 1.0) * c;*/
         }
     }

@@ -42,7 +42,7 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Vector3D<NREfloat> (&kernel)[128], Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Vector3D<NREfloat> (&kernel)[128], bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glUseProgram(shader.getID());
@@ -78,6 +78,11 @@
                         glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
                         glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
                         glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 1.5f);
+
+                        float t = type;
+
+
+                        glUniform1f(glGetUniformLocation(shader.getID(), "type"), t);
 
 
 
