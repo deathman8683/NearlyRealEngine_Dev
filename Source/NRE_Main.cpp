@@ -41,6 +41,21 @@
 
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
+            Maths::Vector3D<NREfloat> kernel[128];
+
+            for (GLuint i = 0 ; i < 128 ; i++ ) {
+                float scale = (float)i / (float)(128);
+                Maths::Vector3D<NREfloat> v;
+                v.setX(2.0f * (float)rand()/RAND_MAX - 1.0f);
+                v.setY(2.0f * (float)rand()/RAND_MAX - 1.0f);
+                v.setZ(2.0f * (float)rand()/RAND_MAX - 1.0f);
+                // Use an acceleration function so more points are
+                // located closer to the origin
+                v *= (0.1f + 0.9f * scale * scale);
+
+                kernel[i] = v;
+            }
+
             while(!camera.getQuit())
             {
                 engineClock.updateTimestep(1000.0 / 60.0);
@@ -52,7 +67,6 @@
 
                 MVP = projection * modelview;
 
-
                 engineDeferredRenderer.beginRendering();
                     auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
                     engineSkybox.render(skyBoxShader, MVP, camera.getEye());
@@ -63,7 +77,7 @@
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endRendering();
 
-                auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
+                /*auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
                 if (it2->second.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(1, 0));
                 }
@@ -78,10 +92,10 @@
                 auto it5 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_T);
                 if (it5->second.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
-                }
+                }*/
 
                 engineSkybox.bind();
-                    engineDeferredRenderer.render(deferredRendering, camera, engineLighting);
+                    engineDeferredRenderer.render(deferredRendering, projection, kernel, camera, engineLighting);
                 engineSkybox.unbind();
 
                 SDL_GL_SwapWindow(engineScene.getWindow().getItem());

@@ -13,7 +13,7 @@
             FBO::FBO(GLsizei const& w, GLsizei const& h) : FBO::FBO(w, h, 1) {
             }
 
-            FBO::FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthBuffer(true), size(w, h) {
+            FBO::FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer) : FrameBuffer::FrameBuffer(true), depthBuffer(0), size(w, h) {
                 std::vector<GLenum> format, type;
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
@@ -51,7 +51,7 @@
                 return colorBuffer[index];
             }
 
-            RenderBuffer const& FBO::getDepthBuffer() const {
+            Texture2D* const& FBO::getDepthBuffer() const {
                 return depthBuffer;
             }
 
@@ -67,7 +67,7 @@
                 colorBuffer[index] = buffer;
             }
 
-            void FBO::setDepthBuffer(RenderBuffer const& buffer) {
+            void FBO::setDepthBuffer(Texture2D* const& buffer) {
                 depthBuffer = buffer;
             }
 
@@ -86,8 +86,8 @@
 
             void FBO::allocateRenderBuffer() {
                 bind();
-                    depthBuffer.allocate(GL_DEPTH_COMPONENT, getSize().getW(), getSize().getH());
-                    attachRenderBuffer(GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer.getID());
+                    depthBuffer = new Texture2D(getSize().getW(), getSize().getH(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT32F, GL_FLOAT);
+                    attachBuffer(GL_DEPTH_ATTACHMENT, *depthBuffer);
                 unbind();
             }
 
