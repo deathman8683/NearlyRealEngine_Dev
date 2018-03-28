@@ -38,6 +38,7 @@
                     //## Constructor ##//
                     FBO();
                     FBO(GLsizei const& w, GLsizei const& h);
+                    FBO(GLsizei const& w, GLsizei const& h, GLuint const& nbColorBuffer);
 
                     //## Copy-Constructor ##//
                     FBO(FBO const& buf);

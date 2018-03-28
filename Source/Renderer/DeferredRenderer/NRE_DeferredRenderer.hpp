@@ -13,11 +13,9 @@
     #include "../../GL_Wrapper/BufferObject/FBO/NRE_FBO.hpp"
     #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
     #include "../../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
-    #include "../../GL_Wrapper/BufferObject/SkyBox/NRE_SkyBox.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
     #include "../../Lighting/NRE_Light.hpp"
     #include "../Shader/NRE_Shader.hpp"
-    #include "../SSAO/NRE_SSAO.hpp"
 
     /**
      * @namespace NRE
@@ -37,7 +35,6 @@
             class DeferredRenderer {
                 private:
                     GL::FBO gBuffer;
-                    SSAO ssao;
                     GL::VBO buffer;
                     GL::VAO vao;
 
@@ -56,22 +53,20 @@
 
                     //## Getter ##//
                     GL::FBO const& getFrameBuffer() const;
-                    SSAO const& getSSAO() const;
                     GL::VBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
 
                     //## Setter ##//
                     void setFrameBuffer(GL::FBO const& buffer);
-                    void setSSAO(SSAO const& ssao);
                     void setBuffer(GL::VBO const& buffer);
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
-                    void render(Renderer::Shader const& shader, bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox);
-                    void startGBufferPass();
-                    void endGBufferPass();
-                    void SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP);
-                    void BlurPass(Renderer::Shader const& shader);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Vector3D<NREfloat> (&kernel)[128], bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light);
+                    void beginRendering();
+                    void endRendering();
+                    void beginShadow();
+                    void endShadow();
                     void fillBuffer();
 
                     //## Access Operator ##//
