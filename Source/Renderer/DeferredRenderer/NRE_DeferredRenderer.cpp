@@ -7,12 +7,33 @@
             DeferredRenderer::DeferredRenderer() {
             }
 
-            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : gBuffer(size.getW(), size.getH(), 3), buffer(true), vao(true) {
+            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : gBuffer(size.getW(), size.getH()), buffer(true), vao(true) {
+                std::vector<GLenum> format, type;
+                std::vector<GLint> internalFormat;
+                format.push_back(GL_RGBA);
+                format.push_back(GL_RGBA);
+                format.push_back(GL_RGBA);
+                format.push_back(GL_RGBA);
+                type.push_back(GL_UNSIGNED_BYTE);
+                type.push_back(GL_FLOAT);
+                type.push_back(GL_UNSIGNED_BYTE);
+                type.push_back(GL_UNSIGNED_BYTE);
+                internalFormat.push_back(GL_RGBA);
+                internalFormat.push_back(GL_RGBA32F);
+                internalFormat.push_back(GL_RGBA);
+                internalFormat.push_back(GL_RGBA);
+                gBuffer.allocateColorBuffer(4, format, internalFormat, type);
+                gBuffer.allocateRenderBuffer();
+
+                if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+                    std::cout << "ERROR" << std::endl;
+                }
+
                 buffer.push_back(new GL::UVBuffer(true));
                 fillBuffer();
             }
 
-            DeferredRenderer::DeferredRenderer(DeferredRenderer const& renderer) : gBuffer(renderer.getFrameBuffer()), buffer(renderer.getBuffer()), vao(renderer.getVAO()) {
+            DeferredRenderer::DeferredRenderer(DeferredRenderer const& renderer) : gBuffer(renderer.getFrameBuffer()), ssao(renderer.getSSAO()), buffer(renderer.getBuffer()), vao(renderer.getVAO()) {
             }
 
             DeferredRenderer::~DeferredRenderer() {
@@ -20,6 +41,10 @@
 
             GL::FBO const& DeferredRenderer::getFrameBuffer() const {
                 return gBuffer;
+            }
+
+            SSAO const& DeferredRenderer::getSSAO() const {
+                return ssao;
             }
 
             GL::VBO const& DeferredRenderer::getBuffer() const {
@@ -34,6 +59,10 @@
                 gBuffer = buffer;
             }
 
+            void DeferredRenderer::setSSAO(SSAO const& ssao) {
+                this->ssao = ssao;
+            }
+
             void DeferredRenderer::setBuffer(GL::VBO const& buffer) {
                 this->buffer = buffer;
             }
@@ -42,7 +71,7 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Vector3D<NREfloat> (&kernel)[128], bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glUseProgram(shader.getID());
@@ -60,8 +89,12 @@
                             glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
 
                         glActiveTexture(GL_TEXTURE3);
-                        getFrameBuffer().getDepthBuffer()->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texDepth"), 3);
+                        getFrameBuffer().getColorBuffer(3)->bind();
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texSSAO"), 3);
+
+                        glActiveTexture(GL_TEXTURE4);
+                        skyBox.bind();
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texSkyBox"), 4);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
@@ -75,24 +108,18 @@
                         }
 
                         glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
                         glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
-                        glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 1.5f);
 
                         float t = type;
 
-
                         glUniform1f(glGetUniformLocation(shader.getID(), "type"), t);
-
-
-
-
-                        glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 128, (const GLfloat*)&kernel[0]);
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
+                        glActiveTexture(GL_TEXTURE4);
+                            skyBox.unbind();
                         glActiveTexture(GL_TEXTURE3);
-                            getFrameBuffer().getDepthBuffer()->unbind();
+                            getFrameBuffer().getColorBuffer(3)->unbind();
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(2)->unbind();
                         glActiveTexture(GL_TEXTURE1);
@@ -103,7 +130,7 @@
                 glUseProgram(0);
             }
 
-            void DeferredRenderer::beginRendering() {
+            void DeferredRenderer::startGBufferPass() {
                 getFrameBuffer().bind();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -111,18 +138,55 @@
                     glDrawBuffers(3, buffers);
             }
 
-            void DeferredRenderer::endRendering() {
+            void DeferredRenderer::endGBufferPass() {
                 getFrameBuffer().unbind();
             }
 
-            void DeferredRenderer::beginShadow() {
+            void DeferredRenderer::SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP) {
                 getFrameBuffer().bind();
-                    glClear(GL_DEPTH_BUFFER_BIT);
 
-                    glDrawBuffer(GL_NONE);
+                    GLenum buffers[] = {GL_COLOR_ATTACHMENT3};
+                    glDrawBuffers(1, buffers);
+
+                    glUseProgram(shader.getID());
+                        vao.bind();
+
+                            glActiveTexture(GL_TEXTURE1);
+                            getFrameBuffer().getColorBuffer(1)->bind();
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texPosition"), 1);
+
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 128, ssao.getKernel()[0].value());
+                            glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 1.5f);
+
+                            glDrawArrays(GL_TRIANGLES, 0, 6);
+
+                            glActiveTexture(GL_TEXTURE1);
+                                getFrameBuffer().getColorBuffer(1)->unbind();
+                        vao.unbind();
+                    glUseProgram(0);
+                getFrameBuffer().unbind();
             }
 
-            void DeferredRenderer::endShadow() {
+            void DeferredRenderer::BlurPass(Renderer::Shader const& shader) {
+                getFrameBuffer().bind();
+
+                    GLenum buffers[] = {GL_COLOR_ATTACHMENT3};
+                    glDrawBuffers(1, buffers);
+
+                    glUseProgram(shader.getID());
+                        vao.bind();
+
+                            glActiveTexture(GL_TEXTURE3);
+                            getFrameBuffer().getColorBuffer(3)->bind();
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texSSAO"), 3);
+
+                            glDrawArrays(GL_TRIANGLES, 0, 6);
+
+                            glActiveTexture(GL_TEXTURE3);
+                                getFrameBuffer().getColorBuffer(3)->unbind();
+                        vao.unbind();
+                    glUseProgram(0);
                 getFrameBuffer().unbind();
             }
 
