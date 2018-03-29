@@ -7,17 +7,14 @@
             GLuint SSAO::KERNEL_SIZE = 32;
             GLuint SSAO::NOISE_SIZE = 4;
 
-            SSAO::SSAO() : SSAO(1920.0 / 1080.0, 70.0) {
-            }
-
-            SSAO::SSAO(NREfloat const& ratio, NREfloat const& tanHalfFOV) : kernel(0), noise(0), ratio(ratio), tanHalfFOV(tanHalfFOV) {
+            SSAO::SSAO() : kernel(0), noise(0) {
                kernel = new Maths::Vector3D<NREfloat>[KERNEL_SIZE];
                noise = new GL::Texture2D(NOISE_SIZE, NOISE_SIZE, GL_RGBA, GL_RGBA32F, GL_FLOAT);
                generateKernel();
                generateNoise();
             }
 
-            SSAO::SSAO(SSAO const& ao) : kernel(ao.getKernel()), noise(ao.getNoise()), ratio(ao.getRatio()), tanHalfFOV(ao.getTanHalfFOV()) {
+            SSAO::SSAO(SSAO const& ao) : kernel(ao.getKernel()), noise(ao.getNoise()) {
             }
 
             SSAO::~SSAO() {
@@ -32,28 +29,12 @@
                 return noise;
             }
 
-            NREfloat const& SSAO::getRatio() const {
-                return ratio;
-            }
-
-            NREfloat const& SSAO::getTanHalfFOV() const {
-                return tanHalfFOV;
-            }
-
             void SSAO::setKernel(Maths::Vector3D<NREfloat>* const& kern) {
                 kernel = kern;
             }
 
             void SSAO::setNoise(GL::Texture2D* const& tex) {
                 noise = tex;
-            }
-
-            void SSAO::setRatio(NREfloat const& value) {
-                ratio = value;
-            }
-
-            void SSAO::setTanHalfFOV(NREfloat const& value) {
-                tanHalfFOV = value;
             }
 
             void SSAO::generateKernel() {

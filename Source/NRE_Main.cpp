@@ -41,7 +41,7 @@
 
             camera.computeProjectionMatrix(projection);
 
-            Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0), 1280.0 / 720.0, 70.0);
+            Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             while(!camera.getQuit())
             {

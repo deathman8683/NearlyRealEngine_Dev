@@ -44,7 +44,7 @@
                 public:
                     //## Constructor ##//
                     DeferredRenderer();
-                    DeferredRenderer(Maths::Vector2D<GLushort> const& size, NREfloat const& ratio, NREfloat const& fov);
+                    DeferredRenderer(Maths::Vector2D<GLushort> const& size);
 
                     //## Copy-Constructor ##//
                     DeferredRenderer(DeferredRenderer const& renderer);

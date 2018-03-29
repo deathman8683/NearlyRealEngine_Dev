@@ -41,15 +41,13 @@
         return result / (4.0 * 4.0);
     }
 
-    vec3 WorldPosFromDepth(float depth) {
-        float z = depth * 2.0 - 1.0;
+    vec4 WorldPosFromDepth(vec2 tc) {
+        float z = texture(texDepth, tc).x * 2.0 - 1.0;
 
-        vec4 clipSpacePosition = vec4(uv * 2.0 - 1.0, z, 1.0);
+        vec4 clipSpacePosition = vec4(tc * 2.0 - 1.0, z, 1.0);
         vec4 viewSpacePosition = invProjection * clipSpacePosition;
 
-        viewSpacePosition /= viewSpacePosition.w;
-
-        return viewSpacePosition.xyz;
+        return viewSpacePosition /= viewSpacePosition.w;
     }
 
     vec3 applyLight(Light light, vec3 surfacePos, vec3 surfaceColor, vec4 surfaceNormal, vec3 surfaceCamera, float num) {
@@ -108,27 +106,19 @@
         vec3 linearColor = vec3(0);
         vec3 color = texture(texDiffuse, uv).rgb;
         vec4 normal = texture(texNormal, uv);
-        vec3 vertex = (invModelview * vec4(WorldPosFromDepth(texture(texDepth, uv).x), 1.0)).xyz;
+        vec3 vertex = (invModelview * WorldPosFromDepth(uv)).xyz;
 
         if (normal == vec4(1.0, 1.0, 1.0, 1.0)) {
             out_Color = vec4(color, 1.0);
         } else {
             if (type == 1.0) {
-                for (int i = 0; i < numLights; i = i + 1) {
-                    linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
-                }
-                out_Color = texture(texSSAO, uv);
-                //float c = computeBlur(uv);
-                //out_Color = vec4(c, c, c, 1.0);
-                //out_Color = texture(texSSAO, uv);
+                float c = computeBlur(uv);
+                out_Color = vec4(c, c, c, 1.0);
             } else {
                 for (int i = 0; i < numLights; i = i + 1) {
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
                 }
                 out_Color = vec4(linearColor, 1.0);
-                //out_Color = texture(texDiffuse, uv);
-                //float c = computeBlur(uv);
-                //out_Color = vec4(c, c, c, 1.0);
             }
         }
     }

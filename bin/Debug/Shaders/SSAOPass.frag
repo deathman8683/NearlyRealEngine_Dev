@@ -24,21 +24,17 @@
         return (2.0 * zNear) / (zFar + zNear - depth * (zFar - zNear));
     }
 
-    vec3 WorldPosFromDepth(float depth) {
-        float z = depth * 2.0 - 1.0;
+    vec4 WorldPosFromDepth(vec2 tc) {
+        float z = texture(texDepth, tc).x * 2.0 - 1.0;
 
-        vec4 clipSpacePosition = vec4(uv * 2.0 - 1.0, z, 1.0);
+        vec4 clipSpacePosition = vec4(tc * 2.0 - 1.0, z, 1.0);
         vec4 viewSpacePosition = invProjection * clipSpacePosition;
 
-        viewSpacePosition /= viewSpacePosition.w;
-
-        //vec4 worldSpacePosition = invModelview * viewSpacePosition;
-
-        return viewSpacePosition.xyz;
+        return viewSpacePosition /= viewSpacePosition.w;
     }
 
     void main() {
-        vec3 vertex = WorldPosFromDepth(texture(texDepth, uv).x);
+        vec3 vertex = WorldPosFromDepth(uv).xyz;
 
         vec3 normal = texture(texNormal, uv).xyz;
         vec3 noise = texture(texNoise, uv * noiseOffset).xyz;
@@ -58,16 +54,11 @@
             offset.xy /= offset.w;
             offset.xy = offset.xy * 0.5 + 0.5;
 
-            float sampleDepth = WorldPosFromDepth(texture(texDepth, offset.xy).x).z;
+            float sampleDepth = WorldPosFromDepth(offset.xy).z;
 
-            //float rangeCheck = smoothstep(0.0, 1.0, gSampleRad / abs((MVP * vec4(vertex, 1.0)).z - sampleDepth));
-            //occlusion += (sampleDepth >= sampleV.z ? 1.0 : 0.0);
             occlusion += step(sampleDepth, sampleV.z);
         }
 
         occlusion = occlusion / float(MAX_KERNEL_SIZE);
         fragData = vec4(occlusion);
-        //float c = linearizeDepth(uv);
-        //fragData = vec4(c, c, c, 1.0);
-        //fragData = vec4(offset.xyz, 1.0);
     }

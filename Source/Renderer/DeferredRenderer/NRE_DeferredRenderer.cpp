@@ -7,7 +7,7 @@
             DeferredRenderer::DeferredRenderer() {
             }
 
-            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size, NREfloat const& ratio, NREfloat const& fov) : gBuffer(size.getW(), size.getH()), ssao(ratio, std::tan(fov / 2.0)), buffer(true), vao(true) {
+            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : gBuffer(size.getW(), size.getH()), buffer(true), vao(true) {
                 std::vector<GLenum> format, type;
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
@@ -163,7 +163,7 @@
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invProjection"), 1, GL_TRUE, invProjection.value());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 64, ssao.getKernel()[0].value());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 32, ssao.getKernel()[0].value());
                             glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 0.5);
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
