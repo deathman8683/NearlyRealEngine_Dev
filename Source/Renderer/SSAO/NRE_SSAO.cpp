@@ -9,7 +9,7 @@
 
             SSAO::SSAO() : kernel(0), noise(0) {
                 kernel = new Maths::Vector3D<NREfloat>[KERNEL_SIZE];
-                noise = new GL::Texture2D(NOISE_SIZE, NOISE_SIZE, GL_RGBA, GL_FLOAT, GL_RGBA16F);
+                noise = new GL::Texture2D(NOISE_SIZE, NOISE_SIZE, GL_RGBA, GL_RGBA16F, GL_FLOAT);
                 generateKernel();
                 generateNoise();
             }
@@ -66,6 +66,7 @@
                         rFloat(generator) * 2.0 - 1.0,
                         0.0
                     );
+                    ssaoNoise[i].normalize();
                 }
 
                 noise->update(0, 0, &ssaoNoise[0]);

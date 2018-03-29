@@ -154,6 +154,12 @@
                             glActiveTexture(GL_TEXTURE0);
                             getFrameBuffer().getColorBuffer(1)->bind();
                                 glUniform1i(glGetUniformLocation(shader.getID(), "texPosition"), 0);
+                            glActiveTexture(GL_TEXTURE1);
+                            getFrameBuffer().getColorBuffer(2)->bind();
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 1);
+                            glActiveTexture(GL_TEXTURE2);
+                            getSSAO().getNoise()->bind();
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texNoise"), 2);
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
                             glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 128, ssao.getKernel()[0].value());
@@ -161,6 +167,10 @@
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
 
+                            glActiveTexture(GL_TEXTURE2);
+                                getSSAO().getNoise()->unbind();
+                            glActiveTexture(GL_TEXTURE2);
+                                getFrameBuffer().getColorBuffer(2)->unbind();
                             glActiveTexture(GL_TEXTURE0);
                                 getFrameBuffer().getColorBuffer(1)->unbind();
                         vao.unbind();
