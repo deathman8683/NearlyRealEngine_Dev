@@ -66,7 +66,7 @@
 
             void FBO::allocateRenderBuffer() {
                 bind();
-                    depthBuffer = new Texture2D(getSize().getW(), getSize().getH(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE);
+                    depthBuffer = new Texture2D(getSize().getW(), getSize().getH(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT32F, GL_FLOAT);
                     attachBuffer(GL_DEPTH_ATTACHMENT, *depthBuffer);
                 unbind();
             }

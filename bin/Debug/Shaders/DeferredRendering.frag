@@ -24,14 +24,26 @@
     uniform samplerCube texSkyBox;
     uniform float type;
 
+    float offset[4] = float[](-1.5, -0.5, 0.5, 1.5);
+
     out vec4 out_Color;
 
-    /*float linearizeDepth(in vec2 uv) {
-        float zNear = 0.1;
-        float zFar  = 300.0;
-        float depth = texture(texDepth, uv).x;
-        return (2.0 * zNear) / (zFar + zNear - depth * (zFar - zNear));
-    }*/
+    float computeBlur(vec2 uv) {
+        float color = 0.0;
+
+        for (int i = 0; i < 4; i = i + 1) {
+            for (int j = 0; j < 4; j = j + 1) {
+                vec2 tc = uv;
+                tc.x = uv.x + offset[j] / textureSize(texSSAO, 0).x;
+                tc.y = uv.y + offset[i] / textureSize(texSSAO, 0).y;
+                color += texture(texSSAO, tc).x;
+            }
+        }
+
+        color /= 16.0;
+
+        return color.x;
+    }
 
     vec3 applyLight(Light light, vec3 surfacePos, vec3 surfaceColor, vec4 surfaceNormal, vec3 surfaceCamera, float num) {
         vec3 lightVertex;
@@ -95,16 +107,20 @@
             out_Color = vec4(color, 1.0);
         } else {
             if (type == 1.0) {
-                for (int i = 0; i < numLights; i = i + 1) {
+                /*for (int i = 0; i < numLights; i = i + 1) {
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
                 }
-                out_Color = vec4(linearColor, 1.0) * texture(texSSAO, uv).x;
-                //out_Color = texture(texSSAO, uv);
+                out_Color = vec4(linearColor, 1.0);*/
+                //float c = computeBlur(uv);
+                //out_Color = vec4(c, c, c, 1.0);
+                out_Color = texture(texSSAO, uv);
             } else {
                 for (int i = 0; i < numLights; i = i + 1) {
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
                 }
-                out_Color = vec4(linearColor, 1.0);
+                out_Color = vec4(linearColor, 1.0) * computeBlur(uv);
+                //float c = computeBlur(uv);
+                //out_Color = vec4(c, c, c, 1.0);
             }
         }
     }

@@ -16,11 +16,11 @@
                 format.push_back(GL_RGBA);
                 type.push_back(GL_UNSIGNED_BYTE);
                 type.push_back(GL_FLOAT);
-                type.push_back(GL_UNSIGNED_BYTE);
+                type.push_back(GL_FLOAT);
                 type.push_back(GL_UNSIGNED_BYTE);
                 internalFormat.push_back(GL_RGBA);
                 internalFormat.push_back(GL_RGBA32F);
-                internalFormat.push_back(GL_RGBA);
+                internalFormat.push_back(GL_RGBA32F);
                 internalFormat.push_back(GL_RGBA);
                 gBuffer.allocateColorBuffer(4, format, internalFormat, type);
                 gBuffer.allocateRenderBuffer();
@@ -119,7 +119,7 @@
                         glActiveTexture(GL_TEXTURE4);
                             skyBox.unbind();
                         glActiveTexture(GL_TEXTURE3);
-                            getFrameBuffer().getColorBuffer(3)->unbind();
+                            getFrameBuffer().getColorBuffer(4)->unbind();
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(2)->unbind();
                         glActiveTexture(GL_TEXTURE1);
@@ -160,13 +160,18 @@
                             glActiveTexture(GL_TEXTURE2);
                             getSSAO().getNoise()->bind();
                                 glUniform1i(glGetUniformLocation(shader.getID(), "texNoise"), 2);
+                            glActiveTexture(GL_TEXTURE3);
+                            getFrameBuffer().getDepthBuffer()->bind();
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texDepth"), 3);
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
                             glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 128, ssao.getKernel()[0].value());
-                            glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 0.08);
+                            glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 0.5);
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
 
+                            glActiveTexture(GL_TEXTURE3);
+                                getFrameBuffer().getDepthBuffer()->unbind();
                             glActiveTexture(GL_TEXTURE2);
                                 getSSAO().getNoise()->unbind();
                             glActiveTexture(GL_TEXTURE2);
@@ -181,7 +186,7 @@
             void DeferredRenderer::BlurPass(Renderer::Shader const& shader) {
                 getFrameBuffer().bind();
 
-                    GLenum buffers[] = {GL_COLOR_ATTACHMENT3};
+                    GLenum buffers[] = {GL_COLOR_ATTACHMENT4};
                     glDrawBuffers(1, buffers);
 
                     glUseProgram(shader.getID());
