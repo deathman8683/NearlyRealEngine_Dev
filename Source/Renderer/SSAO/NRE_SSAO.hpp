@@ -32,13 +32,10 @@
                 private:
                     Maths::Vector3D<NREfloat> *kernel;
                     GL::Texture2D* noise;
-                    NREfloat ratio;
-                    NREfloat tanHalfFOV;
 
                 public:
                     //## Constructor ##//
                     SSAO();
-                    SSAO(NREfloat const& ratio, NREfloat const& tanHalfFOV);
 
                     //## Copy-Constructor ##//
                     SSAO(SSAO const& ao);
@@ -51,14 +48,10 @@
                     //## Getter ##//
                     Maths::Vector3D<NREfloat>* const& getKernel() const;
                     GL::Texture2D* const& getNoise() const;
-                    NREfloat const& getRatio() const;
-                    NREfloat const& getTanHalfFOV() const;
 
                     //## Setter ##//
                     void setKernel(Maths::Vector3D<NREfloat>* const& kern);
                     void setNoise(GL::Texture2D* const& tex);
-                    void setRatio(NREfloat const& value);
-                    void setTanHalfFOV(NREfloat const& value);
 
                     //## Methods ##//
                     void generateKernel();

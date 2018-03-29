@@ -13,7 +13,7 @@
             Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
+            World::World engineWorld(Maths::Vector2D<GLuint>(10, 10), Maths::Vector2D<GLint>(0, 0));
 
             Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
             Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
@@ -22,18 +22,18 @@
             Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
 
             std::vector<Light::Light*> engineLighting;
-            Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 0, 0),         Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.1, 0.3, 0.0);
+            Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 0, 0, 0),         Maths::Vector3D<NREfloat>(0.6, 0.6, 0.6), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.3, 0.0);
             Light::Light engineLight2(Maths::Point4D<NREfloat>(29.7,  28.0, 30.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight3(Maths::Point4D<NREfloat>(71.6,  41.7, 30.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight4(Maths::Point4D<NREfloat>(60.5, -44.8, 30.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight5(Maths::Point4D<NREfloat>(50.0, -4.8,  30.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             engineLighting.push_back(&engineLight1);
             engineLighting.push_back(&engineLight2);
-            //engineLighting.push_back(&engineLight3);
-            //engineLighting.push_back(&engineLight4);
-            //engineLighting.push_back(&engineLight5);
+            engineLighting.push_back(&engineLight3);
+            engineLighting.push_back(&engineLight4);
+            engineLighting.push_back(&engineLight5);
 
-            Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, MVP;
+            Maths::Matrix4x4<NREfloat> projection, modelview, MVP;
 
             Time::Clock engineClock;
 
@@ -41,7 +41,7 @@
 
             camera.computeProjectionMatrix(projection);
 
-            Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0), 1280.0 / 720.0, 70.0);
+            Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             while(!camera.getQuit())
             {
@@ -58,7 +58,7 @@
                     auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
                     engineSkybox.render(skyBoxShader, MVP, camera.getEye());
 
-                    //glClear(GL_DEPTH_BUFFER_BIT);
+                    glClear(GL_DEPTH_BUFFER_BIT);
 
                     if (it->second.isActive()) {
                         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -67,12 +67,7 @@
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endGBufferPass();
 
-                invProjection = projection;
-                invProjection.inverse();
-                invModelview = modelview;
-                invModelview.inverse();
-
-                engineDeferredRenderer.SSAOPass(ssaoPass, projection, invProjection);
+                engineDeferredRenderer.SSAOPass(ssaoPass, projection);
 
                 //engineDeferredRenderer.BlurPass(blurPass);
 
@@ -93,7 +88,7 @@
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
                 }*/
 
-                engineDeferredRenderer.render(deferredRendering, invModelview, invProjection, it->second.isActive(), camera, engineLighting, engineSkybox);
+                engineDeferredRenderer.render(deferredRendering, modelview, projection, it->second.isActive(), camera, engineLighting, engineSkybox);
 
                 SDL_GL_SwapWindow(engineScene.getWindow().getItem());
             }
