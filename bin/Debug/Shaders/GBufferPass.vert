@@ -10,7 +10,6 @@
 
     out vec3 color;
     out vec4 normal;
-    out vec3 vertex;
 
     void main() {
         vec4 vertexMV = modelview * vec4(in_Vertex, 1.0);
@@ -23,5 +22,4 @@
         }
 
         color = in_Color;
-        vertex = vertexMV.xyz;
     }

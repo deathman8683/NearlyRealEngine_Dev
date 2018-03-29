@@ -16,11 +16,11 @@
     in vec2 uv;
 
     uniform vec3 cameraV;
-    uniform mat4 modelview;
-    uniform mat4 projection;
+    uniform mat4 invModelview;
+    uniform mat4 invProjection;
 
     uniform sampler2D texDiffuse;
-    uniform sampler2D texPosition;
+    uniform sampler2D texDepth;
     uniform sampler2D texNormal;
     uniform sampler2D texSSAO;
     uniform samplerCube texSkyBox;
@@ -39,6 +39,17 @@
         }
 
         return result / (4.0 * 4.0);
+    }
+
+    vec3 WorldPosFromDepth(float depth) {
+        float z = depth * 2.0 - 1.0;
+
+        vec4 clipSpacePosition = vec4(uv * 2.0 - 1.0, z, 1.0);
+        vec4 viewSpacePosition = invProjection * clipSpacePosition;
+
+        viewSpacePosition /= viewSpacePosition.w;
+
+        return viewSpacePosition.xyz;
     }
 
     vec3 applyLight(Light light, vec3 surfacePos, vec3 surfaceColor, vec4 surfaceNormal, vec3 surfaceCamera, float num) {
@@ -97,7 +108,7 @@
         vec3 linearColor = vec3(0);
         vec3 color = texture(texDiffuse, uv).rgb;
         vec4 normal = texture(texNormal, uv);
-        vec3 vertex = (inverse(modelview) * texture(texPosition, uv)).xyz;
+        vec3 vertex = (invModelview * vec4(WorldPosFromDepth(texture(texDepth, uv).x), 1.0)).xyz;
 
         if (normal == vec4(1.0, 1.0, 1.0, 1.0)) {
             out_Color = vec4(color, 1.0);
@@ -106,7 +117,7 @@
                 for (int i = 0; i < numLights; i = i + 1) {
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
                 }
-                out_Color = texture(texDiffuse, uv) * computeBlur(uv);
+                out_Color = texture(texSSAO, uv);
                 //float c = computeBlur(uv);
                 //out_Color = vec4(c, c, c, 1.0);
                 //out_Color = texture(texSSAO, uv);
