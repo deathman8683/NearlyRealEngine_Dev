@@ -19,22 +19,21 @@
     uniform mat4 invModelview;
     uniform mat4 invProjection;
 
-    uniform sampler2D texDiffuse;
     uniform sampler2D texDepth;
+    uniform sampler2D texDiffuse;
     uniform sampler2D texNormal;
-    uniform sampler2D texSSAO;
     uniform samplerCube texSkyBox;
     uniform float type;
 
     out vec4 out_Color;
 
     float computeBlur(vec2 uv) {
-        vec2 texelSize = 1.0 / vec2(textureSize(texSSAO, 0));
+        vec2 texelSize = 1.0 / vec2(textureSize(texDiffuse, 0));
         float result = 0.0;
         for (int x = -2; x < 2; x = x + 1) {
             for (int y = -2; y < 2; y = y + 1) {
                 vec2 offset = vec2(float(x), float(y)) * texelSize;
-                result += texture(texSSAO, uv + offset).r;
+                result += texture(texDiffuse, uv + offset).a;
             }
         }
 

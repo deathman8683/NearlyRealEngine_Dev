@@ -12,14 +12,11 @@
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
                 format.push_back(GL_RGBA);
-                format.push_back(GL_RGBA);
-                type.push_back(GL_UNSIGNED_BYTE);
                 type.push_back(GL_UNSIGNED_BYTE);
                 type.push_back(GL_UNSIGNED_BYTE);
                 internalFormat.push_back(GL_RGBA);
                 internalFormat.push_back(GL_RGBA);
-                internalFormat.push_back(GL_RGBA);
-                gBuffer.allocateColorBuffer(3, format, internalFormat, type);
+                gBuffer.allocateColorBuffer(2, format, internalFormat, type);
                 gBuffer.allocateRenderBuffer();
 
                 if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
@@ -68,30 +65,24 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glUseProgram(shader.getID());
                     vao.bind();
+
                         glActiveTexture(GL_TEXTURE0);
-                        getFrameBuffer().getColorBuffer(0)->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texDiffuse"), 0);
-
-                        glActiveTexture(GL_TEXTURE1);
-                        getFrameBuffer().getColorBuffer(1)->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 1);
-
-                        glActiveTexture(GL_TEXTURE2);
-                        getFrameBuffer().getColorBuffer(2)->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texSSAO"), 2);
-
-                        glActiveTexture(GL_TEXTURE3);
                         getFrameBuffer().getDepthBuffer()->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texDepth"), 3);
-
-                        glActiveTexture(GL_TEXTURE4);
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texDepth"), 0);
+                        glActiveTexture(GL_TEXTURE1);
+                        getFrameBuffer().getColorBuffer(0)->bind();
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texDiffuse"), 1);
+                        glActiveTexture(GL_TEXTURE2);
+                        getFrameBuffer().getColorBuffer(1)->bind();
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
+                        glActiveTexture(GL_TEXTURE3);
                         skyBox.bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texSkyBox"), 4);
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texSkyBox"), 3);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
@@ -109,22 +100,16 @@
                         glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invProjection"), 1, GL_TRUE, invProjection.value());
                         glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
 
-                        float t = type;
-
-                        glUniform1f(glGetUniformLocation(shader.getID(), "type"), t);
-
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                        glActiveTexture(GL_TEXTURE4);
-                            skyBox.unbind();
                         glActiveTexture(GL_TEXTURE3);
-                            getFrameBuffer().getDepthBuffer()->unbind();
+                            skyBox.unbind();
                         glActiveTexture(GL_TEXTURE2);
-                            getFrameBuffer().getColorBuffer(2)->unbind();
-                        glActiveTexture(GL_TEXTURE1);
                             getFrameBuffer().getColorBuffer(1)->unbind();
-                        glActiveTexture(GL_TEXTURE0);
+                        glActiveTexture(GL_TEXTURE1);
                             getFrameBuffer().getColorBuffer(0)->unbind();
+                        glActiveTexture(GL_TEXTURE0);
+                            getFrameBuffer().getDepthBuffer()->unbind();
                     vao.unbind();
                 glUseProgram(0);
             }
@@ -144,8 +129,9 @@
             void DeferredRenderer::SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection) {
                 getFrameBuffer().bind();
                     glDepthMask(false);
+                    glColorMask(false, false, false, true);
 
-                    GLenum buffers[] = {GL_COLOR_ATTACHMENT2};
+                    GLenum buffers[] = {GL_COLOR_ATTACHMENT0};
                     glDrawBuffers(1, buffers);
 
                     glUseProgram(shader.getID());
@@ -155,11 +141,14 @@
                             getFrameBuffer().getDepthBuffer()->bind();
                                 glUniform1i(glGetUniformLocation(shader.getID(), "texDepth"), 0);
                             glActiveTexture(GL_TEXTURE1);
-                            getFrameBuffer().getColorBuffer(1)->bind();
-                                glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 1);
+                            getFrameBuffer().getColorBuffer(0)->bind();
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texDiffuse"), 1);
                             glActiveTexture(GL_TEXTURE2);
+                            getFrameBuffer().getColorBuffer(1)->bind();
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
+                            glActiveTexture(GL_TEXTURE3);
                             getSSAO().getNoise()->bind();
-                                glUniform1i(glGetUniformLocation(shader.getID(), "texNoise"), 2);
+                                glUniform1i(glGetUniformLocation(shader.getID(), "texNoise"), 3);
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invProjection"), 1, GL_TRUE, invProjection.value());
@@ -168,14 +157,17 @@
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                            glActiveTexture(GL_TEXTURE2);
+                            glActiveTexture(GL_TEXTURE3);
                                 getSSAO().getNoise()->unbind();
                             glActiveTexture(GL_TEXTURE2);
-                                getFrameBuffer().getColorBuffer(2)->unbind();
+                                getFrameBuffer().getColorBuffer(1)->unbind();
+                            glActiveTexture(GL_TEXTURE1);
+                                getFrameBuffer().getColorBuffer(0)->unbind();
                             glActiveTexture(GL_TEXTURE0);
                                 getFrameBuffer().getDepthBuffer()->unbind();
                         vao.unbind();
                     glUseProgram(0);
+                    glColorMask(true, true, true, true);
                     glDepthMask(true);
                 getFrameBuffer().unbind();
             }

@@ -29,9 +29,9 @@
             Light::Light engineLight5(Maths::Point4D<NREfloat>(50.0, -4.8,  30.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             engineLighting.push_back(&engineLight1);
             engineLighting.push_back(&engineLight2);
-            //engineLighting.push_back(&engineLight3);
-            //engineLighting.push_back(&engineLight4);
-            //engineLighting.push_back(&engineLight5);
+            engineLighting.push_back(&engineLight3);
+            engineLighting.push_back(&engineLight4);
+            engineLighting.push_back(&engineLight5);
 
             Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, MVP;
 
@@ -74,8 +74,6 @@
 
                 engineDeferredRenderer.SSAOPass(ssaoPass, projection, invProjection);
 
-                //engineDeferredRenderer.BlurPass(blurPass);
-
                 /*auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
                 if (it2->second.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(1, 0));
@@ -93,7 +91,7 @@
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
                 }*/
 
-                engineDeferredRenderer.render(deferredRendering, invModelview, invProjection, it->second.isActive(), camera, engineLighting, engineSkybox);
+                engineDeferredRenderer.render(deferredRendering, invModelview, invProjection, camera, engineLighting, engineSkybox);
 
                 SDL_GL_SwapWindow(engineScene.getWindow().getItem());
             }
