@@ -70,8 +70,9 @@
                         attenuation = 0.0;
                     }
                 }
+                vec3 halfwayDir = normalize(lightVertex + surfaceCamera);
 
-                 specularCoefficient = pow(max(0.0, dot(surfaceCamera, reflect(-lightVertex, surfaceNormal.xyz))), 100);
+                specularCoefficient = pow(max(0.0, dot(surfaceNormal.xyz, halfwayDir)), 100);
             }
         } else {
             if (light.position.w == 0.0) {
@@ -87,8 +88,9 @@
                     attenuation = 0.0;
                 }
             }
+            vec3 halfwayDir = normalize(lightVertex + surfaceCamera);
 
-             specularCoefficient = max(0.0, dot(surfaceCamera, reflect(-lightVertex, surfaceNormal.xyz)));
+            specularCoefficient = max(0.0, dot(surfaceNormal.xyz, halfwayDir));
         }
 
         vec3 ambient = light.ambientCoefficient * surfaceColor * light.intensities * computeBlur(uv);
