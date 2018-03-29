@@ -16,6 +16,8 @@
     in vec2 uv;
 
     uniform vec3 cameraV;
+    uniform mat4 modelview;
+    uniform mat4 projection;
 
     uniform sampler2D texDiffuse;
     uniform sampler2D texPosition;
@@ -24,25 +26,19 @@
     uniform samplerCube texSkyBox;
     uniform float type;
 
-    float offset[4] = float[](-1.5, -0.5, 0.5, 1.5);
-
     out vec4 out_Color;
 
     float computeBlur(vec2 uv) {
-        float color = 0.0;
-
-        for (int i = 0; i < 4; i = i + 1) {
-            for (int j = 0; j < 4; j = j + 1) {
-                vec2 tc = uv;
-                tc.x = uv.x + offset[j] / textureSize(texSSAO, 0).x;
-                tc.y = uv.y + offset[i] / textureSize(texSSAO, 0).y;
-                color += texture(texSSAO, tc).x;
+        vec2 texelSize = 1.0 / vec2(textureSize(texSSAO, 0));
+        float result = 0.0;
+        for (int x = -2; x < 2; x = x + 1) {
+            for (int y = -2; y < 2; y = y + 1) {
+                vec2 offset = vec2(float(x), float(y)) * texelSize;
+                result += texture(texSSAO, uv + offset).r;
             }
         }
 
-        color /= 16.0;
-
-        return color.x;
+        return result / (4.0 * 4.0);
     }
 
     vec3 applyLight(Light light, vec3 surfacePos, vec3 surfaceColor, vec4 surfaceNormal, vec3 surfaceCamera, float num) {
@@ -87,7 +83,7 @@
              specularCoefficient = max(0.0, dot(surfaceCamera, reflect(-lightVertex, surfaceNormal.xyz)));
         }
 
-        vec3 ambient = light.ambientCoefficient * surfaceColor * light.intensities;
+        vec3 ambient = light.ambientCoefficient * surfaceColor * light.intensities * computeBlur(uv);
 
         float diffuseCoefficient = max(0.0, dot(surfaceNormal.xyz, lightVertex));
         vec3 diffuse = diffuseCoefficient * surfaceColor * light.intensities;
@@ -101,24 +97,25 @@
         vec3 linearColor = vec3(0);
         vec3 color = texture(texDiffuse, uv).rgb;
         vec4 normal = texture(texNormal, uv);
-        vec3 vertex = texture(texPosition, uv).xyz;
+        vec3 vertex = (inverse(modelview) * texture(texPosition, uv)).xyz;
 
         if (normal == vec4(1.0, 1.0, 1.0, 1.0)) {
             out_Color = vec4(color, 1.0);
         } else {
             if (type == 1.0) {
-                /*for (int i = 0; i < numLights; i = i + 1) {
+                for (int i = 0; i < numLights; i = i + 1) {
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
                 }
-                out_Color = vec4(linearColor, 1.0);*/
+                out_Color = texture(texDiffuse, uv) * computeBlur(uv);
                 //float c = computeBlur(uv);
                 //out_Color = vec4(c, c, c, 1.0);
-                out_Color = texture(texSSAO, uv);
+                //out_Color = texture(texSSAO, uv);
             } else {
                 for (int i = 0; i < numLights; i = i + 1) {
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
                 }
-                out_Color = vec4(linearColor, 1.0) * computeBlur(uv);
+                out_Color = vec4(linearColor, 1.0);
+                //out_Color = texture(texDiffuse, uv);
                 //float c = computeBlur(uv);
                 //out_Color = vec4(c, c, c, 1.0);
             }

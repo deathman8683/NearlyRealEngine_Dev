@@ -153,7 +153,7 @@
                 }
             }
 
-            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Camera::FixedCamera const& camera) {
+            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera) {
                 for (auto &it : chunkMap) {
                     if (!it.second->isLoaded()) {
                         addChunkToLoadRegion(it.second);
@@ -162,7 +162,7 @@
                         addChunkToConstruction(it.second);
                     }
                     if (it.second->isLoaded() && it.second->isConstructed()) {
-                        it.second->render(shader, MVP, camera);
+                        it.second->render(shader, modelview, projection, camera);
                     }
                 }
                 emptyLoadRegionMap();

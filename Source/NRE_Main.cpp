@@ -63,11 +63,11 @@
                     if (it->second.isActive()) {
                         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
-                    engineWorld.render(gBufferPass, MVP, camera);
+                    engineWorld.render(gBufferPass, modelview, projection, camera);
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endGBufferPass();
 
-                engineDeferredRenderer.SSAOPass(ssaoPass, MVP);
+                engineDeferredRenderer.SSAOPass(ssaoPass, projection);
 
                 //engineDeferredRenderer.BlurPass(blurPass);
 
@@ -88,7 +88,7 @@
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
                 }*/
 
-                engineDeferredRenderer.render(deferredRendering, it->second.isActive(), camera, engineLighting, engineSkybox);
+                engineDeferredRenderer.render(deferredRendering, modelview, projection, it->second.isActive(), camera, engineLighting, engineSkybox);
 
                 SDL_GL_SwapWindow(engineScene.getWindow().getItem());
             }

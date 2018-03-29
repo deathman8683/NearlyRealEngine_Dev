@@ -71,7 +71,7 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glUseProgram(shader.getID());
@@ -108,6 +108,8 @@
                         }
 
                         glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "modelview"), 1, GL_TRUE, modelview.value());
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
                         glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
 
                         float t = type;
@@ -119,7 +121,7 @@
                         glActiveTexture(GL_TEXTURE4);
                             skyBox.unbind();
                         glActiveTexture(GL_TEXTURE3);
-                            getFrameBuffer().getColorBuffer(4)->unbind();
+                            getFrameBuffer().getColorBuffer(3)->bind();
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(2)->unbind();
                         glActiveTexture(GL_TEXTURE1);
@@ -142,7 +144,7 @@
                 getFrameBuffer().unbind();
             }
 
-            void DeferredRenderer::SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP) {
+            void DeferredRenderer::SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection) {
                 getFrameBuffer().bind();
 
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT3};
@@ -160,18 +162,13 @@
                             glActiveTexture(GL_TEXTURE2);
                             getSSAO().getNoise()->bind();
                                 glUniform1i(glGetUniformLocation(shader.getID(), "texNoise"), 2);
-                            glActiveTexture(GL_TEXTURE3);
-                            getFrameBuffer().getDepthBuffer()->bind();
-                                glUniform1i(glGetUniformLocation(shader.getID(), "texDepth"), 3);
 
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 128, ssao.getKernel()[0].value());
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 64, ssao.getKernel()[0].value());
                             glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 0.5);
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                            glActiveTexture(GL_TEXTURE3);
-                                getFrameBuffer().getDepthBuffer()->unbind();
                             glActiveTexture(GL_TEXTURE2);
                                 getSSAO().getNoise()->unbind();
                             glActiveTexture(GL_TEXTURE2);

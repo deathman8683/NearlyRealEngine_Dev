@@ -67,10 +67,10 @@
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
-                    void render(Renderer::Shader const& shader, bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, bool const& type, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox);
                     void startGBufferPass();
                     void endGBufferPass();
-                    void SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP);
+                    void SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection);
                     void BlurPass(Renderer::Shader const& shader);
                     void fillBuffer();
 

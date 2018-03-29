@@ -4,12 +4,12 @@
     namespace NRE {
         namespace Renderer {
 
-            GLuint SSAO::KERNEL_SIZE = 128;
+            GLuint SSAO::KERNEL_SIZE = 64;
             GLuint SSAO::NOISE_SIZE = 4;
 
             SSAO::SSAO() : kernel(0), noise(0) {
                 kernel = new Maths::Vector3D<NREfloat>[KERNEL_SIZE];
-                noise = new GL::Texture2D(NOISE_SIZE, NOISE_SIZE, GL_RGBA, GL_RGBA16F, GL_FLOAT);
+                noise = new GL::Texture2D(NOISE_SIZE, NOISE_SIZE, GL_RGBA, GL_RGBA32F, GL_FLOAT);
                 generateKernel();
                 generateNoise();
             }
@@ -47,8 +47,8 @@
                         rFloat(generator) * 2.0 - 1.0,
                         rFloat(generator)
                     );
-                    kernel[i].normalize();
                     kernel[i] = kernel[i] * rFloat(generator);
+                    kernel[i].normalize();
                     NREfloat scale = static_cast <NREfloat> (i) / static_cast <NREfloat> (KERNEL_SIZE);
                     scale = lerp(0.1, 1.0, scale * scale);
                     kernel[i] = kernel[i] * scale;

@@ -5,14 +5,16 @@
     in vec3 in_Color;
     in vec3 in_Normal;
 
-    uniform mat4 MVP;
+    uniform mat4 modelview;
+    uniform mat4 projection;
 
     out vec3 color;
     out vec4 normal;
     out vec3 vertex;
 
     void main() {
-        gl_Position = MVP * vec4(in_Vertex, 1.0);
+        vec4 vertexMV = modelview * vec4(in_Vertex, 1.0);
+        gl_Position = projection * vertexMV;
 
         if (in_Color == vec3(68.0 / 255.0, 68.0 / 255.0, 122.0 / 255.0)) {
             normal = vec4(in_Normal, 0.0);
@@ -21,5 +23,5 @@
         }
 
         color = in_Color;
-        vertex = in_Vertex;
+        vertex = vertexMV.xyz;
     }
