@@ -13,7 +13,7 @@
             Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 1000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
+            World::World engineWorld(Maths::Vector2D<GLuint>(2, 2), Maths::Vector2D<GLint>(0, 0));
 
             Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
             Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
@@ -58,10 +58,8 @@
                     auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
                     engineSkybox.render(skyBoxShader, MVP, camera.getEye());
 
-                    //glClear(GL_DEPTH_BUFFER_BIT);
-
                     if (it->second.isActive()) {
-                        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
                     engineWorld.render(gBufferPass, modelview, projection, camera);
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -74,7 +72,7 @@
 
                 engineDeferredRenderer.SSAOPass(ssaoPass, projection, invProjection);
 
-                /*auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
+                auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
                 if (it2->second.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(1, 0));
                 }
@@ -89,7 +87,7 @@
                 auto it5 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_T);
                 if (it5->second.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
-                }*/
+                }
 
                 engineDeferredRenderer.render(deferredRendering, invModelview, invProjection, camera, engineLighting, engineSkybox);
 

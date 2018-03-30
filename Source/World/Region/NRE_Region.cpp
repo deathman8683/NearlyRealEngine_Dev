@@ -23,7 +23,7 @@
                     yStr << (chunk->getCoord().getY() / 16);
                 }
                 path = "Data/Region/r." + xStr.str() + "." + yStr.str() + ".dat";
-                this->chunk.push(chunk);
+                this->chunk.push(std::pair<Maths::Point2D<GLint>, Chunk*>(chunk->getCoord(), chunk));
             }
 
             Region::Region(Region const& reg) : path(reg.getPath()), chunk(reg.getChunk()) {
@@ -36,7 +36,7 @@
                 return path;
             }
 
-            std::stack<Chunk*> const& Region::getChunk() const {
+            std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> const& Region::getChunk() const {
                 return chunk;
             }
 
@@ -44,7 +44,7 @@
                 this->path = path;
             }
 
-            void Region::setChunk(std::stack<Chunk*> const& chunk) {
+            void Region::setChunk(std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> const& chunk) {
                 this->chunk = chunk;
             }
 
@@ -60,7 +60,10 @@
                 }
                 size_t limit = getChunk().size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
-                    chunk.top()->save(chunkFile);
+                    Maths::Point2D<GLint> tmp = chunk.top().second->getCoord();
+                    chunk.top().second->setCoord(chunk.top().first);
+                    chunk.top().second->save(chunkFile);
+                    chunk.top().second->setCoord(tmp);
                     chunk.pop();
                 }
                 chunkFile.close();
@@ -74,8 +77,8 @@
                 }
                 size_t limit = getChunk().size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
-                    chunk.top()->load(chunkFile, w);
-                    chunk.top()->setLoaded(true);
+                    chunk.top().second->load(chunkFile, w);
+                    chunk.top().second->setLoaded(true);
                     chunk.pop();
                 }
                 chunkFile.close();
@@ -95,7 +98,11 @@
             }
 
             void Region::add(Chunk *chunk) {
-                this->chunk.push(chunk);
+                add(chunk, chunk->getCoord());
+            }
+
+            void Region::add(Chunk *chunk, Maths::Point2D<GLint> const& coord) {
+                this->chunk.push(std::pair<Maths::Point2D<GLint>, Chunk*>(coord, chunk));
             }
 
         };

@@ -31,7 +31,7 @@
             class Region {
                 private:
                     std::string path;
-                    std::stack<Chunk*> chunk;
+                    std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> chunk;
 
                 public:
                     //## Constructor ##//
@@ -49,11 +49,11 @@
 
                     //## Getter ##//
                     std::string const& getPath() const;
-                    std::stack<Chunk*> const& getChunk() const;
+                    std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> const& getChunk() const;
 
                     //## Setter ##//
                     void setPath(std::string const& path);
-                    void setChunk(std::stack<Chunk*> const& chunk);
+                    void setChunk(std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> const& chunk);
 
                     //## Methods ##//
                     bool isEmpty() const;
@@ -61,6 +61,7 @@
                     void load(World* w);
                     void createTable(std::fstream &chunkFile);
                     void add(Chunk *chunk);
+                    void add(Chunk *chunk, Maths::Point2D<GLint> const& coord);
 
                     //## Access Operator ##//
 

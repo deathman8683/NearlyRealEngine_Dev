@@ -90,6 +90,7 @@
                     NREfloat const getMoistureNoise(NREfloat const& x, NREfloat const& y) const;
                     void addChunkToLoadRegion(Chunk *chunk);
                     void addChunkToSaveRegion(Chunk *chunk);
+                    void addChunkToSaveRegion(Chunk *chunk, Maths::Point2D<GLint> const& coord);
                     void addChunkToConstruction(Chunk *chunk);
                     void emptyLoadRegionMap();
                     void emptySaveRegionMap();

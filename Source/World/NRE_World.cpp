@@ -202,22 +202,26 @@
             }
 
             void World::addChunkToSaveRegion(Chunk *chunk) {
-                Maths::Point2D<GLint> coord;
+                addChunkToSaveRegion(chunk, chunk->getCoord());
+            }
+
+            void World::addChunkToSaveRegion(Chunk *chunk, Maths::Point2D<GLint> const& coord) {
+                Maths::Point2D<GLint> regionCoord;
                 if (chunk->getCoord().getX() < 0) {
-                    coord.setX((chunk->getCoord().getX() / 16) -1);
+                    regionCoord.setX((chunk->getCoord().getX() / 16) -1);
                 } else {
-                    coord.setX((chunk->getCoord().getX() / 16));
+                    regionCoord.setX((chunk->getCoord().getX() / 16));
                 }
                 if (chunk->getCoord().getY() < 0) {
-                    coord.setY((chunk->getCoord().getY() / 16) -1);
+                    regionCoord.setY((chunk->getCoord().getY() / 16) -1);
                 } else {
-                    coord.setY((chunk->getCoord().getY() / 16));
+                    regionCoord.setY((chunk->getCoord().getY() / 16));
                 }
-                if (saveRegionMap.count(coord) == 0) {
-                    saveRegionMap[coord] = new Region(chunk);
+                if (saveRegionMap.count(regionCoord) == 0) {
+                    saveRegionMap[regionCoord] = new Region(chunk);
                 } else {
-                    auto it = saveRegionMap.find(coord);
-                    it->second->add(chunk);
+                    auto it = saveRegionMap.find(regionCoord);
+                    it->second->add(chunk, coord);
                 }
             }
 
@@ -261,8 +265,7 @@
                             Maths::Point2D<GLint> coord(-(getHExtent().getX()) + getShift().getX(), y + getShift().getY());
                             Maths::Point2D<GLint> tmp = coord;
                             tmp.setX(getHExtent().getX() + getShift().getX() + 1);
-                            addChunkToSaveRegion(getChunk(coord));
-                            emptySaveRegionMap();
+                            addChunkToSaveRegion(getChunk(coord), coord);
                             getChunk(coord)->setCoord(tmp);
                             getChunk(coord)->reload();
                             Chunk* adr = getChunk(coord);
@@ -273,14 +276,14 @@
                         shiftSize.setX(shiftSize.getX() - 1);
                     }
                 }
+                emptySaveRegionMap();
                 if (shiftSize.getX()  < 0) {
                     while (shiftSize.getX() < 0) {
                         for (GLint y = -getHExtent().getY(); y <= static_cast <GLint> (getHExtent().getY()); y = y + 1) {
                             Maths::Point2D<GLint> coord(getHExtent().getX() + getShift().getX(), y + getShift().getY());
                             Maths::Point2D<GLint> tmp = coord;
                             tmp.setX(-(getHExtent().getX() - getShift().getX() + 1));
-                            addChunkToSaveRegion(getChunk(coord));
-                            emptySaveRegionMap();
+                            addChunkToSaveRegion(getChunk(coord), coord);
                             getChunk(coord)->setCoord(tmp);
                             getChunk(coord)->reload();
                             Chunk* adr = getChunk(coord);
@@ -291,14 +294,14 @@
                         shiftSize.setX(shiftSize.getX() + 1);
                     }
                 }
+                emptySaveRegionMap();
                 if (shiftSize.getY() > 0) {
                     while (shiftSize.getY() > 0) {
                         for (GLint x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                             Maths::Point2D<GLint> coord(x + getShift().getX(), -(getHExtent().getY()) + getShift().getY());
                             Maths::Point2D<GLint> tmp = coord;
                             tmp.setY(getHExtent().getY() + getShift().getY() + 1);
-                            addChunkToSaveRegion(getChunk(coord));
-                            emptySaveRegionMap();
+                            addChunkToSaveRegion(getChunk(coord), coord);
                             getChunk(coord)->setCoord(tmp);
                             getChunk(coord)->reload();
                             Chunk* adr = getChunk(coord);
@@ -309,14 +312,14 @@
                         shiftSize.setY(shiftSize.getY() - 1);
                     }
                 }
+                emptySaveRegionMap();
                 if (shiftSize.getY() < 0) {
                     while (shiftSize.getY() < 0) {
                         for (GLint x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                             Maths::Point2D<GLint> coord(x  + getShift().getX(), getHExtent().getY() + getShift().getY());
                             Maths::Point2D<GLint> tmp = coord;
                             tmp.setY(-(getHExtent().getY() - getShift().getY() + 1));
-                            addChunkToSaveRegion(getChunk(coord));
-                            emptySaveRegionMap();
+                            addChunkToSaveRegion(getChunk(coord), coord);
                             getChunk(coord)->setCoord(tmp);
                             getChunk(coord)->reload();
                             Chunk* adr = getChunk(coord);
@@ -327,6 +330,7 @@
                         shiftSize.setY(shiftSize.getY() + 1);
                     }
                 }
+                emptySaveRegionMap();
             }
 
             GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face) {
