@@ -1,5 +1,7 @@
 # NearlyRealEngine - 0.1 - Developpment branch
 
+![WallPaper](https://github.com/AbelDoc/NearlyRealEngine_Dev/blob/master/WallPaper.png)
+
 ## Available features currently :
 ### World Generation/Managment
 * **Fast voxel mesh construction**
@@ -111,6 +113,7 @@ A simple time module with several class to manage date, timestep, application cl
 ## Stress Test
 
 Memory taken for 51x51 world (80m+ voxels) : ~500Mo
+
 Performance (limited to 60fps) *tested with 5 light source and all effect feature* :
 * Average 60fps
 * Worst case (all the world in the view frustum) : 20fps
