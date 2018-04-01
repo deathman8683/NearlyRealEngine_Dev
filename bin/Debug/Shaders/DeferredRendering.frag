@@ -25,7 +25,6 @@
     uniform sampler2D texNormal;
     uniform sampler2D texShadow;
     uniform samplerCube texSkyBox;
-    uniform float type;
 
     out vec4 out_Color;
 
@@ -42,7 +41,7 @@
         return result / (4.0 * 4.0);
     }
 
-    float computeShadow(vec3 vertex) {
+    float computeShadow(vec3 vertex, vec3 lightDir, vec3 normal) {
         vec4 vertexLS = lightModelview * vec4(vertex, 1.0);
         vertexLS = inverse(invProjection) * vertexLS;
         vec3 projCoords = vertexLS.xyz / vertexLS.w;
@@ -51,7 +50,7 @@
         float closestDepth = texture(texShadow, projCoords.xy).r;
         float currentDepth = projCoords.z;
 
-        float bias = 0.000001;
+        float bias = 0.00001;
         float shadow = 0.0;
         vec2 texelSize = 1.0 / textureSize(texShadow, 0);
         if (projCoords.z <= 1.0) {
@@ -83,7 +82,7 @@
         float specularCoefficient;
         if (surfaceNormal.w == 0.0) {
             if (num == 0) {
-                return (texture(texSkyBox, -refract(surfaceCamera, surfaceNormal.xyz, 1.0 / 1.333))).rgb;
+                return (texture(texSkyBox, -refract(surfaceCamera, surfaceNormal.xyz, 1.0 / 1.333))).rgb - 0.5 * (1.0 - computeShadow(surfacePos, normalize(light.position.xyz - surfacePos), surfaceNormal.xyz));
             } else {
                 if (light.position.w == 0.0) {
                     lightVertex = normalize(light.position.xyz);
@@ -100,7 +99,7 @@
                 }
                 vec3 halfwayDir = normalize(lightVertex + surfaceCamera);
 
-                specularCoefficient = pow(max(0.0, dot(surfaceNormal.xyz, halfwayDir)), 100);
+                specularCoefficient = pow(max(0.0, dot(surfaceNormal.xyz, halfwayDir)), 128);
             }
         } else {
             if (light.position.w == 0.0) {
@@ -118,17 +117,25 @@
             }
             vec3 halfwayDir = normalize(lightVertex + surfaceCamera);
 
-            specularCoefficient = max(0.0, dot(surfaceNormal.xyz, halfwayDir));
+            specularCoefficient = pow(max(0.0, dot(surfaceNormal.xyz, halfwayDir)), 16);
         }
 
-        vec3 ambient = light.ambientCoefficient * surfaceColor * light.intensities * computeBlur(uv);
+        vec3 ambient = light.ambientCoefficient * light.intensities * computeBlur(uv);
 
         float diffuseCoefficient = max(0.0, dot(surfaceNormal.xyz, lightVertex));
-        vec3 diffuse = diffuseCoefficient * surfaceColor * light.intensities;
+        vec3 diffuse = diffuseCoefficient * light.intensities;
 
-        vec3 specular = specularCoefficient * surfaceColor * light.intensities;
+        vec3 specular = 0.5 * specularCoefficient * light.intensities;
 
-        return (ambient + attenuation * computeShadow(surfacePos)) * (diffuse + specular);
+        ambient *= attenuation;
+        diffuse *= attenuation;
+        specular *= attenuation;
+
+        if (num == 0) {
+            return (ambient + computeShadow(surfacePos, normalize(light.position.xyz - surfacePos), surfaceNormal.xyz) * (diffuse + specular)) * surfaceColor;
+        } else {
+            return (ambient + diffuse + specular) * surfaceColor;
+        }
     }
 
     void main() {
@@ -140,14 +147,9 @@
         if (normal == vec4(1.0, 1.0, 1.0, 1.0)) {
             out_Color = vec4(color, 1.0);
         } else {
-            if (type == 1.0) {
-                float c = computeBlur(uv);
-                out_Color = vec4(c, c, c, 1.0);
-            } else {
-                for (int i = 0; i < 1; i = i + 1) {
-                    linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
-                }
-                out_Color = vec4(linearColor, 1.0);
+            for (int i = 0; i < numLights; i = i + 1) {
+                linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
             }
+            out_Color = vec4(linearColor, 1.0);
         }
     }

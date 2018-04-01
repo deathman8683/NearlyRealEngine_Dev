@@ -335,27 +335,27 @@
 
                 switch (face) {
                     case (XNegative) : {
-                        n = {-1, 0, 0};
+                        n = {-1.0, 0, 0};
                         break;
                     }
                     case (YNegative) : {
-                        n = {0, -1, 0};
+                        n = {0, -1.0, 0};
                         break;
                     }
                     case (ZNegative) : {
-                        n = {0, 0, -1};
+                        n = {0, 0, -1.0};
                         break;
                     }
                     case (XPositive) : {
-                        n = {1, 0, 0};
+                        n = {1.0, 0, 0};
                         break;
                     }
                     case (YPositive) : {
-                        n = {0, 1, 0};
+                        n = {0, 1.0, 0};
                         break;
                     }
                     case (ZPositive) : {
-                        n = {0, 0, 1};
+                        n = {0, 0, 1.0};
                         break;
                     }
                     default : {

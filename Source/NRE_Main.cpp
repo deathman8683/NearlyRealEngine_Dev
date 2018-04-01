@@ -23,7 +23,7 @@
             Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
 
             std::vector<Light::Light*> engineLighting;
-            Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 250, 300, 0),         Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.3, 0.0);
+            Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 250, 300, 0),         Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.01, 0.0);
             Light::Light engineLight2(Maths::Point4D<NREfloat>(29.7,  28.0, 30.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight3(Maths::Point4D<NREfloat>(71.6,  41.7, 30.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight4(Maths::Point4D<NREfloat>(60.5, -44.8, 30.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
@@ -53,12 +53,12 @@
                 camera.update();
                 camera.update();
 
-                angle += 0.001;
+                angle += 0.002;
                 if (angle >= 360) {
                     angle = 0.0;
                 }
 
-                shadowView.setEye(Maths::Vector3D<NREfloat>(8, sin(angle) * 512, cos(angle) * 512));
+                shadowView.setEye(Maths::Vector3D<NREfloat>(8, sin(angle) * 256, cos(angle) * 256));
                 shadowView.computeAngle();
                 shadowView.computeVector();
 

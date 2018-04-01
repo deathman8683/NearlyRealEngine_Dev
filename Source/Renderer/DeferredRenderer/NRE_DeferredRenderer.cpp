@@ -13,13 +13,19 @@
                 format.push_back(GL_RGBA);
                 format.push_back(GL_RGBA);
                 type.push_back(GL_UNSIGNED_BYTE);
-                type.push_back(GL_UNSIGNED_BYTE);
+                type.push_back(GL_FLOAT);
                 internalFormat.push_back(GL_RGBA);
                 internalFormat.push_back(GL_RGBA);
                 gBuffer.allocateColorBuffer(2, format, internalFormat, type);
                 gBuffer.allocateRenderBuffer();
 
                 shadowMap.allocateRenderBuffer();
+                shadowMap.getDepthBuffer()->bind();
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+                    float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+                    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+                shadowMap.getDepthBuffer()->unbind();
 
                 gBuffer.bind();
                 if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
