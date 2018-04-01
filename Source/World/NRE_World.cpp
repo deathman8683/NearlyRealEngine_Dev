@@ -153,7 +153,7 @@
                 }
             }
 
-            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera) {
+            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
                 for (auto &it : chunkMap) {
                     if (!it.second->isLoaded()) {
                         addChunkToLoadRegion(it.second);

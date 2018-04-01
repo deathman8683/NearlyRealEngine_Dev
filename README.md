@@ -39,8 +39,10 @@ While the player / camera move, the world load/save dynamicly chunk around it.
     * *Depth buffer Reconstruction*
 
     Deferred Rendering can be expensive while storing position/normal/diffuse component into the gBuffer, so the engine only use 2 texture :
+
         * The first for diffuse and SSAO component
         * The second for normal
+
     With the combination of a high precision depth buffer, position are being reconstructed.
     * *Water reflection*
 

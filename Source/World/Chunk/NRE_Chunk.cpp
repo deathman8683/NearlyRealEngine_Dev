@@ -124,8 +124,12 @@
                 constructed = state;
             }
 
-            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera const& camera) {
-                setActive(camera.AABBCollision(getBounding()));
+            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
+                if (camera != 0) {
+                    setActive(camera->AABBCollision(getBounding()));
+                } else {
+                    setActive(true);
+                }
 
                 if (isActive()) {
                     glUseProgram(shader.getID());
@@ -133,7 +137,9 @@
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "modelview"), 1, GL_TRUE, modelview.value());
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
+                            if (camera != 0) {
+                                glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera->getEye().value());
+                            }
 
                             glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 

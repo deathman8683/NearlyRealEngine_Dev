@@ -18,10 +18,12 @@
     uniform vec3 cameraV;
     uniform mat4 invModelview;
     uniform mat4 invProjection;
+    uniform mat4 lightModelview;
 
     uniform sampler2D texDepth;
     uniform sampler2D texDiffuse;
     uniform sampler2D texNormal;
+    uniform sampler2D texShadow;
     uniform samplerCube texSkyBox;
     uniform float type;
 
@@ -39,6 +41,32 @@
 
         return result / (4.0 * 4.0);
     }
+
+    float computeShadow(vec3 vertex) {
+        vec4 vertexLS = lightModelview * vec4(vertex, 1.0);
+        vertexLS = inverse(invProjection) * vertexLS;
+        vec3 projCoords = vertexLS.xyz / vertexLS.w;
+        projCoords = projCoords * 0.5 + 0.5;
+
+        float closestDepth = texture(texShadow, projCoords.xy).r;
+        float currentDepth = projCoords.z;
+
+        float bias = 0.000001;
+        float shadow = 0.0;
+        vec2 texelSize = 1.0 / textureSize(texShadow, 0);
+        if (projCoords.z <= 1.0) {
+            for(int x = -2; x < 2; x = x + 1) {
+                for(int y = -2; y < 2; y = y + 1) {
+                    vec2 offset = vec2(float(x), float(y)) * texelSize;
+                    float pcfDepth = texture(texShadow, projCoords.xy + offset).r;
+                    shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+                }
+            }
+            shadow = shadow / (4.0 * 4.0);
+        }
+
+        return 1.0 - shadow;
+}
 
     vec4 WorldPosFromDepth(vec2 tc) {
         float z = texture(texDepth, tc).x * 2.0 - 1.0;
@@ -100,7 +128,7 @@
 
         vec3 specular = specularCoefficient * surfaceColor * light.intensities;
 
-        return ambient + attenuation * (diffuse + specular);
+        return (ambient + attenuation * computeShadow(surfacePos)) * (diffuse + specular);
     }
 
     void main() {
@@ -116,7 +144,7 @@
                 float c = computeBlur(uv);
                 out_Color = vec4(c, c, c, 1.0);
             } else {
-                for (int i = 0; i < numLights; i = i + 1) {
+                for (int i = 0; i < 1; i = i + 1) {
                     linearColor += applyLight(lights[i], vertex, color, normal, normalize(cameraV - vertex), i);
                 }
                 out_Color = vec4(linearColor, 1.0);

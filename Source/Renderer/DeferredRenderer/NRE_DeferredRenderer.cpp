@@ -7,7 +7,7 @@
             DeferredRenderer::DeferredRenderer() {
             }
 
-            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : gBuffer(size.getW(), size.getH()), buffer(true), vao(true) {
+            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : gBuffer(size.getW(), size.getH()), shadowMap(size.getW(), size.getH()), buffer(true), vao(true) {
                 std::vector<GLenum> format, type;
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
@@ -19,15 +19,24 @@
                 gBuffer.allocateColorBuffer(2, format, internalFormat, type);
                 gBuffer.allocateRenderBuffer();
 
+                shadowMap.allocateRenderBuffer();
+
+                gBuffer.bind();
                 if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
                     std::cout << "ERROR" << std::endl;
                 }
+                gBuffer.unbind();
+                shadowMap.bind();
+                if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+                    std::cout << "ERROR" << std::endl;
+                }
+                shadowMap.unbind();
 
                 buffer.push_back(new GL::UVBuffer(true));
                 fillBuffer();
             }
 
-            DeferredRenderer::DeferredRenderer(DeferredRenderer const& renderer) : gBuffer(renderer.getFrameBuffer()), ssao(renderer.getSSAO()), buffer(renderer.getBuffer()), vao(renderer.getVAO()) {
+            DeferredRenderer::DeferredRenderer(DeferredRenderer const& renderer) : gBuffer(renderer.getFrameBuffer()), shadowMap(renderer.getShadowMap()), ssao(renderer.getSSAO()), buffer(renderer.getBuffer()), vao(renderer.getVAO()) {
             }
 
             DeferredRenderer::~DeferredRenderer() {
@@ -35,6 +44,10 @@
 
             GL::FBO const& DeferredRenderer::getFrameBuffer() const {
                 return gBuffer;
+            }
+
+            GL::FBO const& DeferredRenderer::getShadowMap() const {
+                return shadowMap;
             }
 
             SSAO const& DeferredRenderer::getSSAO() const {
@@ -53,6 +66,10 @@
                 gBuffer = buffer;
             }
 
+            void DeferredRenderer::setShadowMap(GL::FBO const& buffer) {
+                shadowMap = buffer;
+            }
+
             void DeferredRenderer::setSSAO(SSAO const& ssao) {
                 this->ssao = ssao;
             }
@@ -65,7 +82,7 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &lightModelview, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glUseProgram(shader.getID());
@@ -81,8 +98,11 @@
                         getFrameBuffer().getColorBuffer(1)->bind();
                             glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
                         glActiveTexture(GL_TEXTURE3);
+                        getShadowMap().getDepthBuffer()->bind();
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texShadow"), 3);
+                        glActiveTexture(GL_TEXTURE4);
                         skyBox.bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texSkyBox"), 3);
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texSkyBox"), 4);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
@@ -98,12 +118,15 @@
                         glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invModelview"), 1, GL_TRUE, invModelview.value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invProjection"), 1, GL_TRUE, invProjection.value());
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "lightModelview"), 1, GL_TRUE, lightModelview.value());
                         glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                        glActiveTexture(GL_TEXTURE3);
+                        glActiveTexture(GL_TEXTURE4);
                             skyBox.unbind();
+                        glActiveTexture(GL_TEXTURE3);
+                            getShadowMap().getDepthBuffer()->unbind();
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(1)->unbind();
                         glActiveTexture(GL_TEXTURE1);
@@ -170,6 +193,18 @@
                     glColorMask(true, true, true, true);
                     glDepthMask(true);
                 getFrameBuffer().unbind();
+            }
+
+            void DeferredRenderer::startShadowPass() {
+                getShadowMap().bind();
+                    glClear(GL_DEPTH_BUFFER_BIT);
+
+                    GLenum buffers[] = {GL_NONE};
+                    glDrawBuffers(1, buffers);
+            }
+
+            void DeferredRenderer::endShadowPass() {
+                getShadowMap().unbind();
             }
 
             void DeferredRenderer::fillBuffer() {

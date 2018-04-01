@@ -37,6 +37,7 @@
             class DeferredRenderer {
                 private:
                     GL::FBO gBuffer;
+                    GL::FBO shadowMap;
                     SSAO ssao;
                     GL::VBO buffer;
                     GL::VAO vao;
@@ -56,21 +57,25 @@
 
                     //## Getter ##//
                     GL::FBO const& getFrameBuffer() const;
+                    GL::FBO const& getShadowMap() const;
                     SSAO const& getSSAO() const;
                     GL::VBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
 
                     //## Setter ##//
                     void setFrameBuffer(GL::FBO const& buffer);
+                    void setShadowMap(GL::FBO const& buffer);
                     void setSSAO(SSAO const& ssao);
                     void setBuffer(GL::VBO const& buffer);
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
-                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &lightModelview, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox);
                     void startGBufferPass();
                     void endGBufferPass();
                     void SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection);
+                    void startShadowPass();
+                    void endShadowPass();
                     void fillBuffer();
 
                     //## Access Operator ##//
