@@ -54,14 +54,14 @@
         float shadow = 0.0;
         vec2 texelSize = 1.0 / textureSize(texShadow, 0);
         if (projCoords.z <= 1.0) {
-            for(int x = -2; x < 2; x = x + 1) {
-                for(int y = -2; y < 2; y = y + 1) {
+            for(int x = -1; x < 1; x = x + 1) {
+                for(int y = -1; y < 1; y = y + 1) {
                     vec2 offset = vec2(float(x), float(y)) * texelSize;
                     float pcfDepth = texture(texShadow, projCoords.xy + offset).r;
                     shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
                 }
             }
-            shadow = shadow / (4.0 * 4.0);
+            shadow = shadow / (2.0 * 2.0);
         }
 
         return 1.0 - shadow;

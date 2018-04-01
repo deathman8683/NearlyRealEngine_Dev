@@ -58,7 +58,8 @@
                     angle = 0.0;
                 }
 
-                shadowView.setEye(Maths::Vector3D<NREfloat>(8, sin(angle) * 256, cos(angle) * 256));
+                shadowView.setEye(Maths::Point3D<NREfloat>(8, sin(angle) * 256, cos(angle) * 256));
+                engineLight1.setPosition(Maths::Point4D<NREfloat>(shadowView.getEye(), 0.0));
                 shadowView.computeAngle();
                 shadowView.computeVector();
 

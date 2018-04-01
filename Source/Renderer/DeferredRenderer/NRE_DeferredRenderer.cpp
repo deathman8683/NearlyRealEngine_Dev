@@ -15,7 +15,7 @@
                 type.push_back(GL_UNSIGNED_BYTE);
                 type.push_back(GL_FLOAT);
                 internalFormat.push_back(GL_RGBA);
-                internalFormat.push_back(GL_RGBA);
+                internalFormat.push_back(GL_RGBA16F);
                 gBuffer.allocateColorBuffer(2, format, internalFormat, type);
                 gBuffer.allocateRenderBuffer();
 
