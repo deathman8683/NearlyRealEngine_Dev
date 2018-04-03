@@ -101,6 +101,20 @@
 
                 auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
                 if (it2->second.isActive()) {
+                    for (auto c : engineWorld.getChunkMap()) {
+                        c.second->setLoD(c.second->getLoD() * 2);
+                        c.second->reload();
+                    }
+                }
+                auto it3 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_G);
+                if (it3->second.isActive()) {
+                    for (auto c : engineWorld.getChunkMap()) {
+                        c.second->setLoD(c.second->getLoD() / 2);
+                        c.second->reload();
+                    }
+                }
+                /*auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
+                if (it2->second.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(1, 0));
                 }
                 auto it3 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_G);
@@ -114,7 +128,7 @@
                 auto it5 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_T);
                 if (it5->second.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
-                }
+                }*/
 
                 engineDeferredRenderer.render(deferredRendering, invModelview, invProjection, lightModelview, camera, engineLighting, engineSkybox);
 

@@ -14,17 +14,17 @@
             Chunk::Chunk() : voxel(0) {
             }
 
-            Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0, 0), generateID) {
+            Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0, 0), 1, generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), active(true), loaded(false), constructed(false) {
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLuint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD), active(true), loaded(false), constructed(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::ColorBuffer(generateID));
                 buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()) {
+            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()), active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
                 buffer.push_back(new GL::ColorBuffer(true));
@@ -66,6 +66,10 @@
 
             Physics::AABB<GLint> const& Chunk::getBounding() const {
                 return bounding;
+            }
+
+            GLuint const& Chunk::getLoD() const {
+                return loD;
             }
 
             bool const& Chunk::isActive() const {
@@ -110,6 +114,10 @@
 
             void Chunk::setBounding(Physics::AABB<GLint> const& box) {
                 bounding = box;
+            }
+
+            void Chunk::setLoD(GLuint const& value) {
+                loD = value;
             }
 
             void Chunk::setActive(bool const& state) {

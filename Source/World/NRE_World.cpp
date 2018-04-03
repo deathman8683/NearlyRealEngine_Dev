@@ -25,7 +25,7 @@
                 for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
                         Maths::Point2D<GLint> tmp(x + getShift().getX(), y + getShift().getY());
-                        chunkMap[tmp] = new Chunk(tmp, true);
+                        chunkMap[tmp] = new Chunk(tmp, 1, true);
                     }
                 }
             }
