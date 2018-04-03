@@ -147,26 +147,28 @@
                 voxelMergingGlobalCache[getVoxelCacheIndex(x, y, z, face)] = state;
             }
 
-            void World::constructChunksMesh() {
-                for (const auto &it : chunkMap) {
-                    it.second->constructMesh(this);
-                }
-            }
-
             void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
                 for (auto &it : chunkMap) {
                     if (!it.second->isLoaded()) {
-                        addChunkToLoadRegion(it.second);
+                        if (!it.second->isLoading()) {
+                            addChunkToLoadRegion(it.second);
+                        }
                     }
-                    if (!it.second->isConstructed()) {
-                        addChunkToConstruction(it.second);
+                    if (it.second->isLoaded() && !it.second->isConstructed()) {
+                        if (!it.second->isConstructing()) {
+                            addChunkToConstruction(it.second);
+                        }
                     }
                     if (it.second->isLoaded() && it.second->isConstructed()) {
                         it.second->render(shader, modelview, projection, camera);
                     }
                 }
-                emptyLoadRegionMap();
-                emptyConstructionStack();
+            }
+
+            void World::update() {
+                updateLoadRegionMap();
+                updateConstructionStack();
+                emptySaveRegionMap();
             }
 
             void World::resetVoxelMergingGlobalCache() {
@@ -182,6 +184,7 @@
             }
 
             void World::addChunkToLoadRegion(Chunk *chunk) {
+                chunk->setLoading(true);
                 Maths::Point2D<GLint> coord;
                 if (chunk->getCoord().getX() < 0) {
                     coord.setX((chunk->getCoord().getX() / 16) -1);
@@ -226,35 +229,52 @@
             }
 
             void World::addChunkToConstruction(Chunk *chunk) {
+                chunk->setConstructing(true);
                 constructionStack.push(chunk);
             }
 
+            void World::updateLoadRegionMap() {
+                if (!loadRegionMap.empty()) {
+                    auto it = loadRegionMap.begin();
+                    it->second->load(this);
+                    delete it->second;
+                    loadRegionMap.erase(loadRegionMap.begin());
+                }
+            }
+
+            void World::updateSaveRegionMap() {
+                if (!saveRegionMap.empty()) {
+                    auto it = saveRegionMap.begin();
+                    it->second->save();
+                    delete it->second;
+                    saveRegionMap.erase(saveRegionMap.begin());
+                }
+            }
+
+            void World::updateConstructionStack() {
+                if (!constructionStack.empty()) {
+                    constructionStack.top()->constructMesh(this);
+                    constructionStack.top()->setConstructed(true);
+                    constructionStack.top()->setConstructing(false);
+                    constructionStack.pop();
+                }
+            }
+
             void World::emptyLoadRegionMap() {
-                for (auto &it : loadRegionMap) {
-                    it.second->load(this);
+                while (!loadRegionMap.empty()) {
+                    updateLoadRegionMap();
                 }
-                for (auto &it : loadRegionMap) {
-                    delete it.second;
-                }
-                loadRegionMap.erase(loadRegionMap.begin(), loadRegionMap.end());
             }
 
             void World::emptySaveRegionMap() {
-                for (auto &it : saveRegionMap) {
-                    it.second->save();
+                while (!saveRegionMap.empty()) {
+                    updateSaveRegionMap();
                 }
-                for (auto &it : saveRegionMap) {
-                    delete it.second;
-                }
-                saveRegionMap.erase(saveRegionMap.begin(), saveRegionMap.end());
             }
 
             void World::emptyConstructionStack() {
-                size_t limit = constructionStack.size();
-                for (GLuint i = 0; i < limit; i = i + 1) {
-                    constructionStack.top()->constructMesh(this);
-                    constructionStack.top()->setConstructed(true);
-                    constructionStack.pop();
+                while (!constructionStack.empty()) {
+                    updateConstructionStack();
                 }
             }
 

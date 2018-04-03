@@ -78,7 +78,6 @@
                 size_t limit = getChunk().size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
                     chunk.top().second->load(chunkFile, w);
-                    chunk.top().second->setLoaded(true);
                     chunk.pop();
                 }
                 chunkFile.close();

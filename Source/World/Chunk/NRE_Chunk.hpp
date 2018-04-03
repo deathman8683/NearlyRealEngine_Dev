@@ -46,6 +46,8 @@
                     bool active;
                     bool loaded;
                     bool constructed;
+                    bool loading;
+                    bool constructing;
 
                 public:
                     //## Constructor ##//
@@ -74,6 +76,8 @@
                     bool const& isActive() const;
                     bool const& isLoaded() const;
                     bool const& isConstructed() const;
+                    bool const& isLoading() const;
+                    bool const& isConstructing() const;
 
                     //## Setter ##//
                     void setVoxels(Voxel* const& vox);
@@ -88,6 +92,8 @@
                     void setActive(bool const& state);
                     void setLoaded(bool const& state);
                     void setConstructed(bool const& state);
+                    void setLoading(bool const& state);
+                    void setConstructing(bool const& state);
 
                     //## Methods ##//
                     void constructMesh(World* w);

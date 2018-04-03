@@ -17,14 +17,14 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0, 0), 1, generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLuint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD), active(true), loaded(false), constructed(false) {
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLuint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD), active(true), loaded(false), constructed(false), loading(false), constructing(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::ColorBuffer(generateID));
                 buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()), active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()) {
+            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()), active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()), loading(c.isLoading()), constructing(c.isConstructing()) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
                 buffer.push_back(new GL::ColorBuffer(true));
@@ -84,6 +84,14 @@
                 return constructed;
             }
 
+            bool const& Chunk::isLoading() const {
+                return loading;
+            }
+
+            bool const& Chunk::isConstructing() const {
+                return constructing;
+            }
+
             void Chunk::setVoxels(Voxel* const& vox) {
                 voxel = vox;
             }
@@ -130,6 +138,14 @@
 
             void Chunk::setConstructed(bool const& state) {
                 constructed = state;
+            }
+
+            void Chunk::setLoading(bool const& state) {
+                loading = state;
+            }
+
+            void Chunk::setConstructing(bool const& state) {
+                constructing = state;
             }
 
             void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
@@ -268,6 +284,8 @@
                         loadVoxels(x, y, z, voxNumber, voxType);
                     }
                 }
+                setLoaded(true);
+                setLoading(false);
             }
 
             void Chunk::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type) {
@@ -290,7 +308,9 @@
 
             void Chunk::reload() {
                 setLoaded(false);
+                setLoading(false);
                 setConstructed(false);
+                setConstructing(false);
                 buffer.reload();
                 vao.access(getBuffer(), GL_INT);
                 bounding.setCenter(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2);

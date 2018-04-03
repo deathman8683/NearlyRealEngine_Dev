@@ -83,8 +83,8 @@
                     void setVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face, bool const& state);
 
                     //## Methods ##//
-                    void constructChunksMesh();
                     void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera = 0);
+                    void update();
                     void resetVoxelMergingGlobalCache();
                     NREfloat const getSoilNoise(NREfloat const& x, NREfloat const& y) const;
                     NREfloat const getMoistureNoise(NREfloat const& x, NREfloat const& y) const;
@@ -92,6 +92,9 @@
                     void addChunkToSaveRegion(Chunk *chunk);
                     void addChunkToSaveRegion(Chunk *chunk, Maths::Point2D<GLint> const& coord);
                     void addChunkToConstruction(Chunk *chunk);
+                    void updateLoadRegionMap();
+                    void updateSaveRegionMap();
+                    void updateConstructionStack();
                     void emptyLoadRegionMap();
                     void emptySaveRegionMap();
                     void emptyConstructionStack();
