@@ -45,10 +45,18 @@
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             double angle = 0.0;
+            double nbFrames = 0;
 
             while(!camera.getQuit())
             {
-                engineClock.updateTimestep(1000.0 / 60.0);
+                engineClock.updateActualTime();
+                nbFrames = nbFrames + 1;
+
+                if (engineClock.getActualTime() - engineClock.getLastTime() >= 1000.0) {
+                    std::cout << 1000.0 / nbFrames << "ms / frame" << std::endl;
+                    nbFrames = 0;
+                    engineClock.setLastTime(engineClock.getLastTime() + 1000.0);
+                }
 
                 camera.update();
 
