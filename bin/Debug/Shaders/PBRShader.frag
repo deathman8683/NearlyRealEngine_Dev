@@ -2,6 +2,7 @@
     #version 450
 
     #define MAX_LIGHTS 10
+    #define MAX_LIGHTS 32
 
     uniform int numLights;
     uniform struct Light {
@@ -13,9 +14,21 @@
        float coneAngle;
     } lights[MAX_LIGHTS];
 
+    uniform int numMaterial;
+    uniform struct Material {
+        vec3 albedo;
+        float metallic;
+        float roughness;
+    } materials[MAX_MATERIAL];
+
     in vec2 uv;
-    in vec3 vertex;
-    in vec3 normal;
+
+    uniform mat4 invModelview;
+    uniform mat4 invProjection;
+
+    uniform sampler2D texDepth;
+    uniform sampler2D texDiffuse;
+    uniform sampler2D texNormal;
 
     uniform vec3 cameraV;
 
@@ -64,7 +77,18 @@
         return ggx1 * ggx2;
     }
 
+    vec4 WorldPosFromDepth(vec2 tc) {
+        float z = texture(texDepth, tc).x * 2.0 - 1.0;
+
+        vec4 clipSpacePosition = vec4(tc * 2.0 - 1.0, z, 1.0);
+        vec4 viewSpacePosition = invProjection * clipSpacePosition;
+
+        return viewSpacePosition /= viewSpacePosition.w;
+    }
+
     void main() {
+        vec3 vertex = (invModelview * WorldPosFromDepth(uv)).xyz;
+        vec3 normal = texture(texNormal, uv).xyz;
         vec3 N = normalize(normal);
         vec3 V = normalize(cameraV - vertex);
 
