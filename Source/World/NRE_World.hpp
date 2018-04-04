@@ -98,6 +98,9 @@
                     void emptyLoadRegionMap();
                     void emptySaveRegionMap();
                     void emptyConstructionStack();
+                    void flushLoadRegionMap();
+                    void flushSaveRegionMap();
+                    void flushConstructionStack();
                     void shiftChunks(Maths::Vector2D<GLint> shiftSize);
 
                     //## Access Operator ##//

@@ -278,6 +278,29 @@
                 }
             }
 
+
+            void World::flushLoadRegionMap() {
+                while (!loadRegionMap.empty()) {
+                    auto it = loadRegionMap.begin();
+                    delete it->second;
+                    loadRegionMap.erase(loadRegionMap.begin());
+                }
+            }
+
+            void World::flushSaveRegionMap() {
+                while (!saveRegionMap.empty()) {
+                    auto it = saveRegionMap.begin();
+                    delete it->second;
+                    saveRegionMap.erase(saveRegionMap.begin());
+                }
+            }
+
+            void World::flushConstructionStack() {
+                while (!constructionStack.empty()) {
+                    constructionStack.pop();
+                }
+            }
+
             void World::shiftChunks(Maths::Vector2D<GLint> shiftSize) {
                 if (shiftSize.getX() > 0) {
                     while (shiftSize.getX() > 0) {
