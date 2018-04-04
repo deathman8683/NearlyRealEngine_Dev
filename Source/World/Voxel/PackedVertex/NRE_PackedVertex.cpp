@@ -7,10 +7,10 @@
             PackedVertex::PackedVertex() : nCode(0), cCode(0) {
             }
 
-            PackedVertex::PackedVertex(Maths::Point3D<GLint> const& p, Maths::Vector3D<GLbyte> const& n, Color::RGB const& c, size_t const& nCode, size_t const& cCode) : Maths::Point3D<GLint>(p), Maths::Vector3D<GLbyte>(n), Color::RGB(c), nCode(nCode), cCode(cCode) {
+            PackedVertex::PackedVertex(Maths::Point3D<GLint> const& p, Maths::Vector3D<GLbyte> const& n, size_t const& nCode, size_t const& cCode) : Maths::Point3D<GLint>(p), Maths::Vector3D<GLbyte>(n), nCode(nCode), cCode(cCode) {
             }
 
-            PackedVertex::PackedVertex(PackedVertex const& p) : Maths::Point3D<GLint>(p), Maths::Vector3D<GLbyte>(p), Color::RGB(p), nCode(p.getNCode()), cCode(p.getCCode()) {
+            PackedVertex::PackedVertex(PackedVertex const& p) : Maths::Point3D<GLint>(p), Maths::Vector3D<GLbyte>(p), nCode(p.getNCode()), cCode(p.getCCode()) {
             }
 
             PackedVertex::~PackedVertex() {

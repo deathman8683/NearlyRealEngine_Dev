@@ -12,6 +12,7 @@
     #include "../../Buffer/AttributeBuffer/ArrayBuffer/VertexBuffer/NRE_VertexBuffer.hpp"
     #include "../../Buffer/AttributeBuffer/ArrayBuffer/ColorBuffer/NRE_ColorBuffer.hpp"
     #include "../../Buffer/AttributeBuffer/ArrayBuffer/NormalBuffer/NRE_NormalBuffer.hpp"
+    #include "../../Buffer/AttributeBuffer/ArrayBuffer/MaterialBuffer/NRE_MaterialBuffer.hpp"
     #include "../../Buffer/AttributeBuffer/ArrayBuffer/UVBuffer/NRE_UVBuffer.hpp"
 
     /**

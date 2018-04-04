@@ -88,7 +88,8 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &lightModelview, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &lightModelview, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
+
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glUseProgram(shader.getID());
@@ -103,12 +104,6 @@
                         glActiveTexture(GL_TEXTURE2);
                         getFrameBuffer().getColorBuffer(1)->bind();
                             glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
-                        glActiveTexture(GL_TEXTURE3);
-                        getShadowMap().getDepthBuffer()->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texShadow"), 3);
-                        glActiveTexture(GL_TEXTURE4);
-                        skyBox.bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texSkyBox"), 4);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
@@ -121,18 +116,22 @@
                             glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());
                         }
 
+
+                        for (unsigned int i = 0; i < World::VoxelTypes::getSize(); i = i + 1) {
+                            std::ostringstream index;
+                            index << i;
+                            glUniform3fv(glGetUniformLocation(shader.getID(), ("materials[" + index.str() + "].albedo").c_str()), 1, World::VoxelTypes::getMaterial(i).getAlbedo().value());
+                            glUniform1fv(glGetUniformLocation(shader.getID(), ("materials[" + index.str() + "].metallic").c_str()), 1, World::VoxelTypes::getMaterial(i).getMetallicValue());
+                            glUniform1fv(glGetUniformLocation(shader.getID(), ("materials[" + index.str() + "].roughness").c_str()), 1, World::VoxelTypes::getMaterial(i).getRoughnessValue());
+                        }
+
                         glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invModelview"), 1, GL_TRUE, invModelview.value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invProjection"), 1, GL_TRUE, invProjection.value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "lightModelview"), 1, GL_TRUE, lightModelview.value());
                         glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                        glActiveTexture(GL_TEXTURE4);
-                            skyBox.unbind();
-                        glActiveTexture(GL_TEXTURE3);
-                            getShadowMap().getDepthBuffer()->unbind();
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(1)->unbind();
                         glActiveTexture(GL_TEXTURE1);
@@ -145,6 +144,7 @@
 
             void DeferredRenderer::startGBufferPass() {
                 getFrameBuffer().bind();
+                    glClearColor(0.0, 0.0, 0.0, 1.0);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};

@@ -35,35 +35,31 @@
     }
 
     void main() {
-        vec4 normal = texture(texNormal, uv);
-        if (normal != vec4(1.0, 1.0, 1.0, 1.0)) {
-            vec3 vertex = WorldPosFromDepth(uv).xyz;
+        vec3 normal = texture(texNormal, uv).xyz;
+        vec3 vertex = WorldPosFromDepth(uv).xyz;
 
-            vec3 noise = texture(texNoise, uv * noiseOffset).xyz;
+        vec3 noise = texture(texNoise, uv * noiseOffset).xyz;
 
-            vec3 tangent = normalize(noise - normal.xyz * dot(noise, normal.xyz));
-            vec3 bitangent = cross(normal.xyz, tangent);
+        vec3 tangent = normalize(noise - normal * dot(noise, normal));
+        vec3 bitangent = cross(normal, tangent);
 
-            mat3 TBN = mat3(tangent, bitangent, normal.xyz);
+        mat3 TBN = mat3(tangent, bitangent, normal);
 
-            float occlusion = 0.0;
-            for (int i = 0; i < MAX_KERNEL_SIZE; i = i + 1) {
-                vec3 sampleV = TBN * gKernel[i];
-                sampleV = vertex + sampleV * gSampleRad;
+        float occlusion = 0.0;
+        for (int i = 0; i < MAX_KERNEL_SIZE; i = i + 1) {
+            vec3 sampleV = TBN * gKernel[i];
+            sampleV = vertex + sampleV * gSampleRad;
 
-                vec4 offset = vec4(sampleV, 1.0);
-                offset = projection * offset;
-                offset.xy /= offset.w;
-                offset.xy = offset.xy * 0.5 + 0.5;
+            vec4 offset = vec4(sampleV, 1.0);
+            offset = projection * offset;
+            offset.xy /= offset.w;
+            offset.xy = offset.xy * 0.5 + 0.5;
 
-                float sampleDepth = WorldPosFromDepth(offset.xy).z;
+            float sampleDepth = WorldPosFromDepth(offset.xy).z;
 
-                occlusion += step(sampleDepth, sampleV.z);
-            }
-
-            occlusion = occlusion / float(MAX_KERNEL_SIZE);
-            fragData = vec4(occlusion);
-        } else {
-            fragData = vec4(1.0);
+            occlusion += step(sampleDepth, sampleV.z);
         }
+
+        occlusion = occlusion / float(MAX_KERNEL_SIZE);
+        fragData = vec4(occlusion);
     }

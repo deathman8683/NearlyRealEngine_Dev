@@ -33,7 +33,7 @@
                 private:
                     Chunk* target;
                     std::vector<GLint> vData;
-                    std::vector<GLfloat> cData;
+                    std::vector<GLfloat> mData;
                     std::vector<GLbyte> nData;
                     std::vector<GLuint> iData;
                     std::unordered_map<PackedVertex, size_t> map;
@@ -54,11 +54,11 @@
                     //## Getter ##//
                     Chunk* const& getTarget() const;
                     std::vector<GLint> const& getVData() const;
-                    std::vector<GLfloat> const& getCData() const;
+                    std::vector<GLfloat> const& getMData() const;
                     std::vector<GLbyte> const& getNData() const;
                     std::vector<GLuint> const& getIData() const;
                     GLint* getVPointer();
-                    GLfloat* getCPointer();
+                    GLfloat* getMPointer();
                     GLbyte* getNPointer();
                     GLuint* getIPointer();
                     std::unordered_map<PackedVertex, size_t> const& getMap() const;
@@ -66,20 +66,20 @@
                     //## Setter ##//
                     void setTarget(Chunk* const& target);
                     void setVData(std::vector<GLint> const& data);
-                    void setCData(std::vector<GLfloat> const& data);
+                    void setMData(std::vector<GLfloat> const& data);
                     void setNData(std::vector<GLbyte> const& data);
                     void setIData(std::vector<GLuint> const& data);
                     void setMap(std::unordered_map<PackedVertex, size_t> const& map);
 
                     //## Methods ##//
                     void addVertex(Maths::Point3D<GLint> const& v);
-                    void addColor(Color::RGB const& c);
+                    void addMaterialID(GLubyte const& id);
                     void addNormal(Maths::Vector3D<GLbyte> const& n);
                     void addIndex(GLuint const& index);
                     void constructMesh(World* w);
                     void addVoxel(World* w, Maths::Point3D<GLuint> const& voxCoord, Maths::Point3D<GLint> const& realCoord, bool const (&face)[6]);
                     void mergeVoxels(World* w, GLuint x, GLuint y, GLuint z, GLint const& type, Maths::Point3D<GLint> (&p)[4], int const& face);
-                    void addPackedVertex(Maths::Point3D<GLint> const (&p)[4], Color::RGB const& voxColor, GLuint const& face, size_t const& cCode);
+                    void addPackedVertex(Maths::Point3D<GLint> const (&p)[4], GLuint const& face, size_t const& cCode);
                     bool const getSimilarVertexIndex(PackedVertex const& packed, std::unordered_map<PackedVertex, size_t> const& map, GLuint &result) const;
 
                     //## Access Operator ##//

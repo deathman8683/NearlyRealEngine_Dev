@@ -19,7 +19,7 @@
             }
 
             Renderer::Material const Void::getMaterial() const {
-                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.0);
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.1);
             }
 
             Ocean::Ocean() {
@@ -37,7 +37,7 @@
             }
 
             Renderer::Material const Ocean::getMaterial() const {
-                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.0);
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.1);
             }
 
             Beach::Beach() {

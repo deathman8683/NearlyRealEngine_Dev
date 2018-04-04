@@ -19,7 +19,7 @@
 
             Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLuint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD), active(true), loaded(false), constructed(false), loading(false), constructing(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
-                buffer.push_back(new GL::ColorBuffer(generateID));
+                buffer.push_back(new GL::MaterialBuffer(generateID));
                 buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
@@ -27,7 +27,7 @@
             Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()), active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()), loading(c.isLoading()), constructing(c.isConstructing()) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
-                buffer.push_back(new GL::ColorBuffer(true));
+                buffer.push_back(new GL::MaterialBuffer(true));
                 buffer.push_back(new GL::NormalBuffer(true));
                 vao.access(getBuffer(), GL_INT);
             }

@@ -27,7 +27,7 @@
              * @class PackedVertex
              * @brief World's Object : A vertex with his attributes : Color + Normal
              */
-            class PackedVertex : public Maths::Point3D<GLint>, public Maths::Vector3D<GLbyte>, public Color::RGB {
+            class PackedVertex : public Maths::Point3D<GLint>, public Maths::Vector3D<GLbyte> {
                 private:
                     size_t nCode;
                     size_t cCode;
@@ -35,7 +35,7 @@
                 public:
                     //## Constructor ##//
                     PackedVertex();
-                    PackedVertex(Maths::Point3D<GLint> const& p, Maths::Vector3D<GLbyte> const& n, Color::RGB const& c, size_t const& nCode, size_t const& cCode);
+                    PackedVertex(Maths::Point3D<GLint> const& p, Maths::Vector3D<GLbyte> const& n, size_t const& nCode, size_t const& cCode);
 
                     //## Copy-Constructor ##//
                     PackedVertex(PackedVertex const& p);

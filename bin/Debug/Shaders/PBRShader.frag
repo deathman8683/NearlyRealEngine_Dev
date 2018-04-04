@@ -2,7 +2,7 @@
     #version 450
 
     #define MAX_LIGHTS 10
-    #define MAX_LIGHTS 32
+    #define MAX_MATERIAL 32
 
     uniform int numLights;
     uniform struct Light {
@@ -14,7 +14,6 @@
        float coneAngle;
     } lights[MAX_LIGHTS];
 
-    uniform int numMaterial;
     uniform struct Material {
         vec3 albedo;
         float metallic;
@@ -33,11 +32,6 @@
     uniform vec3 cameraV;
 
     const float PI = 3.14159265359;
-
-    uniform vec3  albedo;
-    uniform float metallic;
-    uniform float roughness;
-    uniform float ao;
 
     out vec4 out_Color;
 
@@ -86,32 +80,49 @@
         return viewSpacePosition /= viewSpacePosition.w;
     }
 
+    float computeBlur(vec2 uv) {
+        vec2 texelSize = 1.0 / vec2(textureSize(texDiffuse, 0));
+        float result = 0.0;
+        for (int x = -2; x < 2; x = x + 1) {
+            for (int y = -2; y < 2; y = y + 1) {
+                vec2 offset = vec2(float(x), float(y)) * texelSize;
+                result += texture(texDiffuse, uv + offset).a;
+            }
+        }
+
+        return result / (4.0 * 4.0);
+    }
+
     void main() {
         vec3 vertex = (invModelview * WorldPosFromDepth(uv)).xyz;
         vec3 normal = texture(texNormal, uv).xyz;
+        int id = int(texture(texNormal, uv).w);
         vec3 N = normalize(normal);
         vec3 V = normalize(cameraV - vertex);
 
         vec3 F0 = vec3(0.04);
-        F0 = mix(F0, albedo, metallic);
+        vec3 albedo = materials[id].albedo;
+        albedo.x = pow(albedo.x, 2.2);
+        albedo.y = pow(albedo.y, 2.2);
+        albedo.z = pow(albedo.z, 2.2);
+        F0 = mix(F0, albedo, materials[id].metallic);
 
         vec3 Lo = vec3(0.0);
-        for (int i = 0; i < 4; i = i + 1) {
-
+        for (int i = 0; i < numLights; i = i + 1) {
             vec3 L = normalize(lights[i].position.xyz - vertex);
             vec3 H = normalize(V + L);
 
-            float distance = lenght(lights[i].position.xyz - vertex);
-            float attenuation = 1.0 / (distance * distance);
+            float distance = length(lights[i].position.xyz - vertex);
+            float attenuation = 1.0;
             vec3 radiance = lights[i].intensities * attenuation;
 
-            float NDF = distributionGGX(N, H, roughness);
-            float G = geometrySmith(N, V, L, roughness);
+            float NDF = distributionGGX(N, H, materials[id].roughness);
+            float G = geometrySmith(N, V, L, materials[id].roughness);
             vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
 
             vec3 kS = F;
             vec3 kD = vec3(1.0) - kS;
-            kD *= 1.0 - metallic;
+            kD *= 1.0 - materials[id].metallic;
 
             vec3 numerator = NDF * G * F;
             float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
@@ -122,7 +133,7 @@
             Lo += (kD * albedo / PI + specular) * radiance * NdotL;
         }
 
-        vec3 ambient = vec3(0.03) * albedo * ao;
+        vec3 ambient = vec3(0.03) * albedo * computeBlur(uv);
         vec3 color = ambient + Lo;
 
         color = color / (color + vec3(1.0));

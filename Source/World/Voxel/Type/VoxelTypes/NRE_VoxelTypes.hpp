@@ -30,8 +30,9 @@
                     //## Getter ##//
                     static VoxelType** getVoxelTypes();
                     static Renderer::Material* getMaterialTypes();
+                    static GLuint const& getSize();
                     static VoxelType* getVoxelType(GLubyte const& type);
-                    static Renderer::Material const& getMaterial(GLubyte const& type);
+                    static Renderer::Material& getMaterial(GLubyte const& type);
 
                     //## Methods ##//
                     static void init();
@@ -40,6 +41,8 @@
                 private:
                     static VoxelType **voxelTypes;
                     static Renderer::Material *materialTypes;
+                public:
+                    static GLuint size;
             };
 
         };

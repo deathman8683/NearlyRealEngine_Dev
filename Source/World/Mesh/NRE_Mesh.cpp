@@ -10,7 +10,7 @@
             Mesh::Mesh(Chunk* const& target) : target(target) {
             }
 
-            Mesh::Mesh(Mesh const& mesh) : target(mesh.getTarget()), vData(mesh.getVData()), cData(mesh.getCData()), nData(mesh.getNData()), iData(mesh.getIData()), map(mesh.getMap()) {
+            Mesh::Mesh(Mesh const& mesh) : target(mesh.getTarget()), vData(mesh.getVData()), mData(mesh.getMData()), nData(mesh.getNData()), iData(mesh.getIData()), map(mesh.getMap()) {
             }
 
             Mesh::~Mesh() {
@@ -24,8 +24,8 @@
                 return vData;
             }
 
-            std::vector<GLfloat> const& Mesh::getCData() const {
-                return cData;
+            std::vector<GLfloat> const& Mesh::getMData() const {
+                return mData;
             }
 
             std::vector<GLbyte> const& Mesh::getNData() const {
@@ -40,8 +40,8 @@
                 return &vData.front();
             }
 
-            GLfloat* Mesh::getCPointer() {
-                return &cData.front();
+            GLfloat* Mesh::getMPointer() {
+                return &mData.front();
             }
 
             GLbyte* Mesh::getNPointer() {
@@ -64,8 +64,8 @@
                 vData = data;
             }
 
-            void Mesh::setCData(std::vector<GLfloat> const& data) {
-                cData = data;
+            void Mesh::setMData(std::vector<GLfloat> const& data) {
+                mData = data;
             }
 
             void Mesh::setNData(std::vector<GLbyte> const& data) {
@@ -86,10 +86,8 @@
                 vData.push_back(v.getZ());
             }
 
-            void Mesh::addColor(Color::RGB const& c) {
-                cData.push_back(static_cast <NREfloat> (c.getR()) / 255.0);
-                cData.push_back(static_cast <NREfloat> (c.getG()) / 255.0);
-                cData.push_back(static_cast <NREfloat> (c.getB()) / 255.0);
+            void Mesh::addMaterialID(GLubyte const& id) {
+                mData.push_back(static_cast <NREfloat> (id));
             }
 
             void Mesh::addNormal(Maths::Vector3D<GLbyte> const& n) {
@@ -129,7 +127,6 @@
 
             void Mesh::addVoxel(World* w, Maths::Point3D<GLuint> const& voxCoord, Maths::Point3D<GLint> const& realCoord, bool const (&face)[6]) {
                 Maths::Point3D<GLint> p[4];
-                Color::RGB voxColor = getTarget()->getVoxel(voxCoord).getColor();
 
                 if (face[XNegative]) {
                     if (!w->getVoxelMergingFace(voxCoord, XNegative)) {
@@ -140,7 +137,7 @@
                         p[3] = {realCoord.getX(), realCoord.getY() + getTarget()->getLoD(), realCoord.getZ() + getTarget()->getLoD()};
 
                         mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, XNegative);
-                        addPackedVertex(p, voxColor, XNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
+                        addPackedVertex(p, XNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
@@ -152,7 +149,7 @@
                         p[3] = {realCoord.getX(), realCoord.getY(), realCoord.getZ() + getTarget()->getLoD()};
 
                         mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, YNegative);
-                        addPackedVertex(p, voxColor, YNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
+                        addPackedVertex(p, YNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
@@ -164,7 +161,7 @@
                         p[3] = {realCoord.getX() + getTarget()->getLoD(), realCoord.getY() + getTarget()->getLoD(), realCoord.getZ()};
 
                         mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, ZNegative);
-                        addPackedVertex(p, voxColor, ZNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
+                        addPackedVertex(p, ZNegative, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
@@ -176,7 +173,7 @@
                         p[3] = {realCoord.getX() + getTarget()->getLoD(), realCoord.getY(), realCoord.getZ() + getTarget()->getLoD()};
 
                         mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, XPositive);
-                        addPackedVertex(p, voxColor, XPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
+                        addPackedVertex(p, XPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
@@ -188,7 +185,7 @@
                         p[3] = {realCoord.getX() + getTarget()->getLoD(), realCoord.getY() + getTarget()->getLoD(), realCoord.getZ() + getTarget()->getLoD()};
 
                         mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, YPositive);
-                        addPackedVertex(p, voxColor, YPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
+                        addPackedVertex(p, YPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
 
@@ -200,7 +197,7 @@
                         p[3] = {realCoord.getX(), realCoord.getY() + getTarget()->getLoD(), realCoord.getZ() + getTarget()->getLoD()};
 
                         mergeVoxels(w, voxCoord.getX(), voxCoord.getY(), voxCoord.getZ(), getTarget()->getVoxel(voxCoord).getType(), p, ZPositive);
-                        addPackedVertex(p, voxColor, ZPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
+                        addPackedVertex(p, ZPositive, static_cast <size_t> (target->getVoxel(voxCoord).getType()));
                     }
                 }
             }
@@ -328,7 +325,7 @@
                 }
             }
 
-            void Mesh::addPackedVertex(Maths::Point3D<GLint> const (&p)[4], Color::RGB const& voxColor, GLuint const& face, size_t const& cCode) {
+            void Mesh::addPackedVertex(Maths::Point3D<GLint> const (&p)[4], GLuint const& face, size_t const& cCode) {
                 Maths::Vector3D<GLbyte> n;
                 GLuint idx0, idx1, idx2, nIdx;
                 bool found;
@@ -362,7 +359,7 @@
                     }
                 }
 
-                PackedVertex packed(p[2], n, voxColor, static_cast <size_t> (face), cCode);
+                PackedVertex packed(p[2], n, static_cast <size_t> (face), cCode);
                 found = getSimilarVertexIndex(packed, map, idx0);
 
                 if (found) {
@@ -371,14 +368,14 @@
                 } else {
                     addVertex(p[2]);
                     addNormal(n);
-                    addColor(voxColor);
+                    addMaterialID(cCode);
                     nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
                     addIndex(nIdx);
                     map[packed] = nIdx;
                     idx1 = nIdx;
                 }
 
-                packed = {p[1], n, voxColor, static_cast <size_t> (face), cCode};
+                packed = {p[1], n, static_cast <size_t> (face), cCode};
                 found = getSimilarVertexIndex(packed, map, idx0);
 
                 if (found) {
@@ -387,14 +384,14 @@
                 } else {
                     addVertex(p[1]);
                     addNormal(n);
-                    addColor(voxColor);
+                    addMaterialID(cCode);
                     nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
                     addIndex(nIdx);
                     map[packed] = nIdx;
                     idx2 = nIdx;
                 }
 
-                packed = {p[0], n, voxColor, static_cast <size_t> (face), cCode};
+                packed = {p[0], n, static_cast <size_t> (face), cCode};
                 found = getSimilarVertexIndex(packed, map, idx0);
 
                 if (found) {
@@ -402,13 +399,13 @@
                 } else {
                     addVertex(p[0]);
                     addNormal(n);
-                    addColor(voxColor);
+                    addMaterialID(cCode);
                     nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
                     addIndex(nIdx);
                     map[packed] = nIdx;
                 }
 
-                packed = {p[3], n, voxColor, static_cast <size_t> (face), cCode};
+                packed = {p[3], n, static_cast <size_t> (face), cCode};
                 found = getSimilarVertexIndex(packed, map, idx0);
 
                 if (found) {
@@ -416,7 +413,7 @@
                 } else {
                     addVertex(p[3]);
                     addNormal(n);
-                    addColor(voxColor);
+                    addMaterialID(cCode);
                     nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
                     addIndex(nIdx);
                     map[packed] = nIdx;

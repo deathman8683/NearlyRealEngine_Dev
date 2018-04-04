@@ -13,7 +13,7 @@
 
                 std::vector<GLvoid*> data;
                 data.push_back(cMesh->getVPointer());
-                data.push_back(cMesh->getCPointer());
+                data.push_back(cMesh->getMPointer());
                 data.push_back(cMesh->getNPointer());
 
                 if (!getBuffer().isAllocated()) {

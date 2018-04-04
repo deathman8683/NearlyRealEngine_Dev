@@ -6,6 +6,7 @@
 
             VoxelType** VoxelTypes::voxelTypes = 0;
             Renderer::Material* VoxelTypes::materialTypes = 0;
+            GLuint VoxelTypes::size = 0;
 
             VoxelType** VoxelTypes::getVoxelTypes() {
                 if (voxelTypes == 0) {
@@ -23,11 +24,19 @@
                 return materialTypes;
             }
 
+            GLuint const& VoxelTypes::getSize() {
+                if (size == 0) {
+                    init();
+                }
+
+                return size;
+            }
+
             VoxelType* VoxelTypes::getVoxelType(GLubyte const& type) {
                 return getVoxelTypes()[type];
             }
 
-            Renderer::Material const& VoxelTypes::getMaterial(GLubyte const& type) {
+            Renderer::Material& VoxelTypes::getMaterial(GLubyte const& type) {
                 return getMaterialTypes()[type];
             }
 
@@ -54,6 +63,8 @@
                 for (int i = 0; i < TYPE_NUM; i = i + 1) {
                     materialTypes[i] = voxelTypes[i]->getMaterial();
                 }
+
+                size = TYPE_NUM;
             }
 
             void VoxelTypes::free() {
@@ -61,6 +72,7 @@
                 delete[] materialTypes;
                 voxelTypes = 0;
                 materialTypes = 0;
+                size = 0;
             }
 
         };

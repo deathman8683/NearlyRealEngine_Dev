@@ -20,15 +20,15 @@
             Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
             Renderer::Shader ssaoPass("Shaders/SSAOPass.vert", "Shaders/SSAOPass.frag", true);
             Renderer::Shader shadowPass("Shaders/ShadowPass.vert", "Shaders/ShadowPass.frag", true);
-            Renderer::Shader deferredRendering("Shaders/DeferredRendering.vert", "Shaders/DeferredRendering.frag", true);
+            Renderer::Shader pbrShader("Shaders/PBRShader.vert", "Shaders/PBRShader.frag", true);
 
             std::vector<Light::Light*> engineLighting;
             Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 250, 300, 0),         Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.1, 0.0);
-            Light::Light engineLight2(Maths::Point4D<NREfloat>(29.7,  28.0, 30.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-            Light::Light engineLight3(Maths::Point4D<NREfloat>(71.6,  41.7, 30.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-            Light::Light engineLight4(Maths::Point4D<NREfloat>(60.5, -44.8, 30.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-            Light::Light engineLight5(Maths::Point4D<NREfloat>(50.0, -4.8,  30.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-            engineLighting.push_back(&engineLight1);
+            Light::Light engineLight2(Maths::Point4D<NREfloat>(29.7,  28.0, 29.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+            Light::Light engineLight3(Maths::Point4D<NREfloat>(71.6,  41.7, 29.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+            Light::Light engineLight4(Maths::Point4D<NREfloat>(60.5, -44.8, 29.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+            Light::Light engineLight5(Maths::Point4D<NREfloat>(50.0, -4.8,  29.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+            //engineLighting.push_back(&engineLight1);
             engineLighting.push_back(&engineLight2);
             engineLighting.push_back(&engineLight3);
             engineLighting.push_back(&engineLight4);
@@ -80,7 +80,6 @@
 
                 engineDeferredRenderer.startGBufferPass();
                     auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
-                    engineSkybox.render(skyBoxShader, MVP, camera.getEye());
 
                     if (it->second.isActive()) {
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -89,9 +88,9 @@
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endGBufferPass();
 
-                engineDeferredRenderer.startShadowPass();
+                /*engineDeferredRenderer.startShadowPass();
                     engineWorld.render(shadowPass, lightModelview, projection);
-                engineDeferredRenderer.endShadowPass();
+                engineDeferredRenderer.endShadowPass();*/
 
                 invProjection = projection;
                 invProjection.inverse();
@@ -134,7 +133,7 @@
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
                 }
 
-                engineDeferredRenderer.render(deferredRendering, invModelview, invProjection, lightModelview, camera, engineLighting, engineSkybox);
+                engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, camera, engineLighting);
 
                 engineWorld.update();
 

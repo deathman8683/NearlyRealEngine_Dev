@@ -61,6 +61,7 @@
                 glBindAttribLocation(getID(), 1, "in_Color");
                 glBindAttribLocation(getID(), 2, "in_Normal");
                 glBindAttribLocation(getID(), 3, "in_UV");
+                glBindAttribLocation(getID(), 4, "in_Material");
 
                 glLinkProgram(getID());
 
