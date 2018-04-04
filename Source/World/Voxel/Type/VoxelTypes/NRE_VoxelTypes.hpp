@@ -28,14 +28,18 @@
             class VoxelTypes {
                 public:
                     //## Getter ##//
-                    static VoxelType** getTypes();
+                    static VoxelType** getVoxelTypes();
+                    static Renderer::Material* getMaterialTypes();
                     static VoxelType* getVoxelType(GLubyte const& type);
+                    static Renderer::Material const& getMaterial(GLubyte const& type);
 
                     //## Methods ##//
+                    static void init();
                     static void free();
 
                 private:
-                    static VoxelType **types;
+                    static VoxelType **voxelTypes;
+                    static Renderer::Material *materialTypes;
             };
 
         };

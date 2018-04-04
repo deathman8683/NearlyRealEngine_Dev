@@ -18,6 +18,10 @@
                 return false;
             }
 
+            Renderer::Material const Void::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.0);
+            }
+
             Ocean::Ocean() {
             }
 
@@ -30,6 +34,10 @@
 
             bool const Ocean::isSolid() const {
                 return true;
+            }
+
+            Renderer::Material const Ocean::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.0);
             }
 
             Beach::Beach() {
@@ -46,6 +54,10 @@
                 return true;
             }
 
+            Renderer::Material const Beach::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.9);
+            }
+
             Scorched::Scorched() {
             }
 
@@ -58,6 +70,10 @@
 
             bool const Scorched::isSolid() const {
                 return true;
+            }
+
+            Renderer::Material const Scorched::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
             }
 
             Bare::Bare() {
@@ -74,6 +90,10 @@
                 return true;
             }
 
+            Renderer::Material const Bare::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
+            }
+
             Tundra::Tundra() {
             }
 
@@ -86,6 +106,10 @@
 
             bool const Tundra::isSolid() const {
                 return true;
+            }
+
+            Renderer::Material const Tundra::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
             }
 
             Snow::Snow() {
@@ -102,6 +126,10 @@
                 return true;
             }
 
+            Renderer::Material const Snow::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
+            }
+
             TemperateDesert::TemperateDesert() {
             }
 
@@ -114,6 +142,10 @@
 
             bool const TemperateDesert::isSolid() const {
                 return true;
+            }
+
+            Renderer::Material const TemperateDesert::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.9);
             }
 
             SubtropicalDesert::SubtropicalDesert() {
@@ -130,6 +162,10 @@
                 return true;
             }
 
+            Renderer::Material const SubtropicalDesert::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.9);
+            }
+
             Shrubland::Shrubland() {
             }
 
@@ -142,6 +178,10 @@
 
             bool const Shrubland::isSolid() const {
                 return true;
+            }
+
+            Renderer::Material const Shrubland::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
             }
 
             Taiga::Taiga() {
@@ -158,6 +198,10 @@
                 return true;
             }
 
+            Renderer::Material const Taiga::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
+            }
+
             Grassland::Grassland() {
             }
 
@@ -170,6 +214,10 @@
 
             bool const Grassland::isSolid() const {
                 return true;
+            }
+
+            Renderer::Material const Grassland::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
             }
 
             TemperateDeciduousForest::TemperateDeciduousForest() {
@@ -186,6 +234,10 @@
                 return true;
             }
 
+            Renderer::Material const TemperateDeciduousForest::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
+            }
+
             TemperateRainForest::TemperateRainForest() {
             }
 
@@ -198,6 +250,10 @@
 
             bool const TemperateRainForest::isSolid() const {
                 return true;
+            }
+
+            Renderer::Material const TemperateRainForest::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
             }
 
             TropicalSeasonalForest::TropicalSeasonalForest() {
@@ -214,6 +270,10 @@
                 return true;
             }
 
+            Renderer::Material const TropicalSeasonalForest::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
+            }
+
             TropicalRainForest::TropicalRainForest() {
             }
 
@@ -226,6 +286,10 @@
 
             bool const TropicalRainForest::isSolid() const {
                 return true;
+            }
+
+            Renderer::Material const TropicalRainForest::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(getColor()) / 255.0, 0.0, 0.8);
             }
 
         };

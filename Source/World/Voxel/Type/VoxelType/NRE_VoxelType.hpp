@@ -8,6 +8,7 @@
 
     #pragma once
 
+    #include "../../../../Renderer/Material/NRE_Material.hpp"
     #include "../../../../Renderer/Color/NRE_Color.hpp"
 
     /**
@@ -36,6 +37,7 @@
                     //## Getter ##//
                     virtual Color::RGB const getColor() const = 0;
                     virtual bool const isSolid() const = 0;
+                    virtual Renderer::Material const getMaterial() const = 0;
             };
 
         };

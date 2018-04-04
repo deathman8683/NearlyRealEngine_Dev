@@ -37,6 +37,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -54,6 +55,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -71,6 +73,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -88,6 +91,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -105,6 +109,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -122,6 +127,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -139,6 +145,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -156,6 +163,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -173,6 +181,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -190,6 +199,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -207,6 +217,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -224,6 +235,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -241,6 +253,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -258,6 +271,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -275,6 +289,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -292,6 +307,7 @@
                     //## Getter ##//
                     Color::RGB const getColor() const;
                     bool const isSolid() const;
+                    Renderer::Material const getMaterial() const;
             };
 
         };

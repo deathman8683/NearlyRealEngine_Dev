@@ -4,39 +4,63 @@
     namespace NRE {
         namespace World {
 
-            VoxelType** VoxelTypes::types = 0;
+            VoxelType** VoxelTypes::voxelTypes = 0;
+            Renderer::Material* VoxelTypes::materialTypes = 0;
 
-            VoxelType** VoxelTypes::getTypes() {
-                if (types == 0) {
-                    types = new VoxelType*[TYPE_NUM];
-                    types[VOID] = new Void();
-                    types[OCEAN] = new Ocean();
-                    types[BEACH] = new Beach();
-                    types[SCORCHED] = new Scorched();
-                    types[BARE] = new Bare();
-                    types[TUNDRA] = new Tundra();
-                    types[SNOW] = new Snow();
-                    types[TEMPERATE_DESERT] = new TemperateDesert();
-                    types[SUBTROPICAL_DESERT] = new SubtropicalDesert();
-                    types[SHRUBLAND] = new Shrubland();
-                    types[TAIGA] = new Taiga();
-                    types[GRASSLAND] = new Grassland();
-                    types[TEMPERATE_DECIDUOUS_FOREST] = new TemperateDeciduousForest();
-                    types[TEMPERATE_RAIN_FOREST] = new TemperateRainForest();
-                    types[TROPICAL_SEASONAL_FOREST] = new TropicalSeasonalForest();
-                    types[TROPICAL_RAIN_FOREST] = new TropicalRainForest();
+            VoxelType** VoxelTypes::getVoxelTypes() {
+                if (voxelTypes == 0) {
+                    init();
                 }
 
-                return types;
+                return voxelTypes;
+            }
+
+            Renderer::Material* VoxelTypes::getMaterialTypes() {
+                if (materialTypes == 0) {
+                    init();
+                }
+
+                return materialTypes;
             }
 
             VoxelType* VoxelTypes::getVoxelType(GLubyte const& type) {
-                return getTypes()[type];
+                return getVoxelTypes()[type];
+            }
+
+            Renderer::Material const& VoxelTypes::getMaterial(GLubyte const& type) {
+                return getMaterialTypes()[type];
+            }
+
+            void VoxelTypes::init() {
+                voxelTypes = new VoxelType*[TYPE_NUM];
+                voxelTypes[VOID] = new Void();
+                voxelTypes[OCEAN] = new Ocean();
+                voxelTypes[BEACH] = new Beach();
+                voxelTypes[SCORCHED] = new Scorched();
+                voxelTypes[BARE] = new Bare();
+                voxelTypes[TUNDRA] = new Tundra();
+                voxelTypes[SNOW] = new Snow();
+                voxelTypes[TEMPERATE_DESERT] = new TemperateDesert();
+                voxelTypes[SUBTROPICAL_DESERT] = new SubtropicalDesert();
+                voxelTypes[SHRUBLAND] = new Shrubland();
+                voxelTypes[TAIGA] = new Taiga();
+                voxelTypes[GRASSLAND] = new Grassland();
+                voxelTypes[TEMPERATE_DECIDUOUS_FOREST] = new TemperateDeciduousForest();
+                voxelTypes[TEMPERATE_RAIN_FOREST] = new TemperateRainForest();
+                voxelTypes[TROPICAL_SEASONAL_FOREST] = new TropicalSeasonalForest();
+                voxelTypes[TROPICAL_RAIN_FOREST] = new TropicalRainForest();
+
+                materialTypes = new Renderer::Material[TYPE_NUM];
+                for (int i = 0; i < TYPE_NUM; i = i + 1) {
+                    materialTypes[i] = voxelTypes[i]->getMaterial();
+                }
             }
 
             void VoxelTypes::free() {
-                delete[] types;
-                types = 0;
+                delete[] voxelTypes;
+                delete[] materialTypes;
+                voxelTypes = 0;
+                materialTypes = 0;
             }
 
         };

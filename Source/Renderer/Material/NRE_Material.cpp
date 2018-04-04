@@ -48,5 +48,13 @@
                 roughness = value;
             }
 
+            Material& Material::operator=(Material const& mat) {
+                albedo = mat.getAlbedo();
+                metallic = mat.getMetallic();
+                roughness = mat.getRoughness();
+
+                return *this;
+            }
+
         };
     };

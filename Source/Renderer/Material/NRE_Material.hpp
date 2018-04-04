@@ -62,6 +62,7 @@
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                    Material& operator=(Material const& mat);
 
                     //## Shortcut Operator ##//
 
