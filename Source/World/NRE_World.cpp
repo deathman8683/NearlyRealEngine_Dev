@@ -166,7 +166,7 @@
             }
 
             void World::update() {
-                updateLoadRegionMap();
+                emptyLoadRegionMap();
                 updateConstructionStack();
                 emptySaveRegionMap();
             }
