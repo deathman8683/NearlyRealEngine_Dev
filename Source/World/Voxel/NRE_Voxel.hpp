@@ -45,6 +45,7 @@
                     //## Getter ##//
                     GLubyte const& getType() const;
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
 
                     //## Setter ##//
                     void setType(GLubyte const& type);

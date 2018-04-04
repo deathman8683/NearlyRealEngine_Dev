@@ -36,6 +36,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -52,6 +53,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -68,6 +70,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -84,6 +87,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -100,6 +104,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -116,6 +121,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -132,6 +138,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -148,6 +155,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -164,6 +172,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -180,6 +189,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -196,6 +206,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -212,6 +223,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -228,6 +240,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -244,6 +257,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -260,6 +274,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
             /**
@@ -276,6 +291,7 @@
 
                     //## Getter ##//
                     Color::RGB const getColor() const;
+                    bool const isSolid() const;
             };
 
         };

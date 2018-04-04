@@ -35,6 +35,7 @@
 
                     //## Getter ##//
                     virtual Color::RGB const getColor() const = 0;
+                    virtual bool const isSolid() const = 0;
             };
 
         };

@@ -27,6 +27,10 @@
                 return VoxelTypes::getVoxelType(getType())->getColor();
             }
 
+            bool const Voxel::isSolid() const {
+                return VoxelTypes::getVoxelType(getType())->isSolid();
+            }
+
             void Voxel::setType(GLubyte const& type) {
                 this->type = type;
             }
