@@ -44,15 +44,11 @@
                     //## Getter ##//
                     GLint const getTypeSize() const;
                     GLenum const getType() const;
+                    GLenum const getTarget() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void bind() const;
-                    void unbind() const;
-                    void allocate(GLsizeiptr const& size, GLenum const& usage) const;
-                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const;
-                    void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const;
                     void access() const;
 
                     //## Access Operator ##//

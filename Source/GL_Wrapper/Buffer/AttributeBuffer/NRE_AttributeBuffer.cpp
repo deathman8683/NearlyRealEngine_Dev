@@ -28,30 +28,30 @@
                 glDeleteBuffers(1, &id);
             }
 
-            void AttributeBuffer::bind(GLenum const& target) const {
-                glBindBuffer(target, getID());
+            void AttributeBuffer::bind() const {
+                glBindBuffer(getTarget(), getID());
             }
 
-            void AttributeBuffer::unbind(GLenum const& target) const {
-                glBindBuffer(target, 0);
+            void AttributeBuffer::unbind() const {
+                glBindBuffer(getTarget(), 0);
             }
 
-            void AttributeBuffer::allocate(GLenum const& target, GLsizeiptr const& size, GLenum const& usage) const {
-                bind(target);
-                    glBufferData(target, size, 0, usage);
-                unbind(target);
+            void AttributeBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) const {
+                bind();
+                    glBufferData(getTarget(), size, 0, usage);
+                unbind();
             }
 
-            void AttributeBuffer::update(GLenum const& target, GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const {
-                bind(target);
-                    glBufferSubData(target, offset, size, data);
-                unbind(target);
+            void AttributeBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const {
+                bind();
+                    glBufferSubData(getTarget(), offset, size, data);
+                unbind();
             }
 
-            void AttributeBuffer::allocateAndFill(GLenum const& target, GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const {
-                bind(target);
-                    glBufferData(target, size, data, usage);
-                unbind(target);
+            void AttributeBuffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const {
+                bind();
+                    glBufferData(getTarget(), size, data, usage);
+                unbind();
             }
 
         };

@@ -16,24 +16,8 @@
             ArrayBuffer::~ArrayBuffer() {
             }
 
-            void ArrayBuffer::bind() const {
-                AttributeBuffer::bind(GL_ARRAY_BUFFER);
-            }
-
-            void ArrayBuffer::unbind() const {
-                AttributeBuffer::unbind(GL_ARRAY_BUFFER);
-            }
-
-            void ArrayBuffer::allocate(GLsizeiptr const& size, GLenum const& usage) const {
-                AttributeBuffer::allocate(GL_ARRAY_BUFFER, size, usage);
-            }
-
-            void ArrayBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const {
-                AttributeBuffer::update(GL_ARRAY_BUFFER, offset, size, data);
-            }
-
-            void ArrayBuffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const {
-                AttributeBuffer::allocateAndFill(GL_ARRAY_BUFFER, size, usage, data);
+            GLenum const ArrayBuffer::getTarget() const {
+                return GL_ARRAY_BUFFER;
             }
 
             void ArrayBuffer::access(GLenum const& type, GLint const& index, GLint const& size, bool const& enableVAA) {

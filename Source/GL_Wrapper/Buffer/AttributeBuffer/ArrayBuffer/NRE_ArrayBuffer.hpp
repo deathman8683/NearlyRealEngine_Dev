@@ -44,15 +44,11 @@
                     //## Getter ##//
                     virtual GLint const getSize() const = 0;
                     virtual GLint const getIndex() const = 0;
+                    GLenum const getTarget() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void bind() const;
-                    void unbind() const;
-                    void allocate(GLsizeiptr const& size, GLenum const& usage) const;
-                    void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const;
-                    void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const;
                     void access(GLenum const& type, GLint const& index, GLint const& size, bool const& enableVAA);
 
                     //## Access Operator ##//
