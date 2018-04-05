@@ -10,6 +10,7 @@
 
     #include "../NRE_BufferObject.hpp"
     #include "../../Buffer/TextureBuffer/NRE_TextureBuffer.hpp"
+    #include "../../Buffer/DepthBuffer/NRE_DepthBuffer.hpp"
 
     /**
      * @namespace NRE
@@ -26,7 +27,7 @@
              * @class Texture2D
              * @brief GL's Object : A simple 2D Texture
              */
-            class Texture2D : public TextureBuffer, public BufferObject, public SDL::Surface {
+            class Texture2D : public TextureBuffer, public BufferObject, public SDL::Surface, public DepthBuffer {
                 private:
                     GLenum type;
 
@@ -52,10 +53,13 @@
                     void setType(GLenum const& t);
 
                     //## Methods ##//
+                    void bind() const;
+                    void unbind() const;
                     void allocate(bool const& callFilter);
                     void update(GLint const& xOffset, GLint const& yOffset, GLvoid* const& data) const;
                     void allocateAndFill(bool const& callFilter);
                     void applyFilter() const;
+                    void attach(GLenum const& attachment) const;
 
                     //## Access Operator ##//
 

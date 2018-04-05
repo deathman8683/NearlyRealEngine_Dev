@@ -35,6 +35,14 @@
                 type = t;
             }
 
+            void Texture2D::bind() const {
+                TextureBuffer::bind();
+            }
+
+            void Texture2D::unbind() const {
+                TextureBuffer::unbind();
+            }
+
             void Texture2D::allocate(bool const& callFilter) {
                 TextureBuffer::allocate(0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), callFilter);
                 setAllocated(true);
@@ -55,6 +63,10 @@
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            }
+
+            void Texture2D::attach(GLenum const& attachment) const {
+                glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, getID(), 0);
             }
 
         };

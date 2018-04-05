@@ -46,5 +46,9 @@
                 bind();
             }
 
+            void RenderBuffer::attach(GLenum const& attachment) const {
+                glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, GL_RENDERBUFFER, getID());
+            }
+
         };
     };

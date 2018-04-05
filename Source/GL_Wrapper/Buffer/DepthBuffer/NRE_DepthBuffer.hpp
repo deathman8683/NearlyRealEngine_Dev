@@ -1,15 +1,14 @@
 
     /**
-     * @file NRE_RenderBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : RenderBuffer
+     * @file NRE_DepthBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : DepthBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NRE_Buffer.hpp"
-    #include "../DepthBuffer/NRE_DepthBuffer.hpp"
+    #include "../../../Generic/NRE_Type.hpp"
 
     /**
      * @namespace NRE
@@ -23,37 +22,30 @@
         namespace GL {
 
             /**
-             * @class RenderBuffer
-             * @brief GL's Object : A specialized buffer for renderbuffer managing
+             * @class DepthBuffer
+             * @brief GL's Object : An interface for DepthBuffer specialization used in FBO
              */
-            class RenderBuffer : public Buffer, public DepthBuffer {
+            class DepthBuffer {
                 private:
 
                 public:
                     //## Constructor ##//
-                    RenderBuffer();
-                    RenderBuffer(bool const& generate);
+                    DepthBuffer();
 
                     //## Copy-Constructor ##//
-                    RenderBuffer(RenderBuffer const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~RenderBuffer();
 
                     //## Getter ##//
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void generateID() override;
-                    void deleteID() override;
-                    void bind() const;
-                    void unbind() const;
-                    void allocate(GLenum const& internalFormat, GLsizei const& w, GLsizei const& h) const;
-                    void access() const;
-                    void attach(GLenum const& attachment) const;
+                    virtual void bind() const = 0;
+                    virtual void unbind() const = 0;
+                    virtual void attach(GLenum const& attachment) const = 0;
 
                     //## Access Operator ##//
 
