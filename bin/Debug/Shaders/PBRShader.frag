@@ -72,7 +72,11 @@
     }
 
     vec4 WorldPosFromDepth(vec2 tc) {
-        float z = texture(texDepth, tc).x * 2.0 - 1.0;
+        float z = texture(texDepth, tc).x;
+        if (z == 0.0) {
+            return vec4(0.0, 0.0, 0.0, 0.0);
+        }
+        z = z * 2.0 - 1.0;
 
         vec4 clipSpacePosition = vec4(tc * 2.0 - 1.0, z, 1.0);
         vec4 viewSpacePosition = invProjection * clipSpacePosition;
@@ -96,44 +100,52 @@
     void main() {
         vec3 vertex = (invModelview * WorldPosFromDepth(uv)).xyz;
         vec3 normal = texture(texNormal, uv).xyz;
-        int id = int(texture(texNormal, uv).w);
-        vec3 N = normalize(normal);
-        vec3 V = normalize(cameraV - vertex);
+        if (vertex != vec3(0.0, 0.0, 0.0)) {
+            int id = int(texture(texNormal, uv).w);
+            vec3 N = normalize(normal);
+            vec3 V = normalize(cameraV - vertex);
 
-        vec3 F0 = vec3(0.04);
-        F0 = mix(F0, materials[id].albedo, materials[id].metallic);
+            vec3 F0 = vec3(0.04);
+            F0 = mix(F0, materials[id].albedo, materials[id].metallic);
 
-        vec3 Lo = vec3(0.0);
-        for (int i = 0; i < numLights; i = i + 1) {
-            vec3 L = normalize(lights[i].position.xyz - vertex);
-            vec3 H = normalize(V + L);
+            vec3 Lo = vec3(0.0);
+            for (int i = 0; i < numLights; i = i + 1) {
+                vec3 L = normalize(lights[i].position.xyz - vertex);
+                vec3 H = normalize(V + L);
 
-            float distance = length(lights[i].position.xyz - vertex);
-            float attenuation = 1.0;
-            vec3 radiance = lights[i].intensities * attenuation;
+                float distance = length(lights[i].position.xyz - vertex);
+                float attenuation = 1.0;
+                vec3 radiance = lights[i].intensities * attenuation;
 
-            float NDF = distributionGGX(N, H, materials[id].roughness);
-            float G = geometrySmith(N, V, L, materials[id].roughness);
-            vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
+                float NDF = distributionGGX(N, H, materials[id].roughness);
+                float G = geometrySmith(N, V, L, materials[id].roughness);
+                vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
 
-            vec3 kS = F;
-            vec3 kD = vec3(1.0) - kS;
-            kD *= 1.0 - materials[id].metallic;
+                vec3 kS = F;
+                vec3 kD = vec3(1.0) - kS;
+                kD *= 1.0 - materials[id].metallic;
 
-            vec3 numerator = NDF * G * F;
-            float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
-            vec3 specular = numerator / max(denominator, 0.001);
+                vec3 numerator = NDF * G * F;
+                float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
+                vec3 specular = numerator / max(denominator, 0.001);
 
 
-            float NdotL = max(dot(N, L), 0.0);
-            Lo += (kD * materials[id].albedo / PI + specular) * radiance * NdotL;
-        }
+                float NdotL = max(dot(N, L), 0.0);
+                Lo += (kD * materials[id].albedo / PI + specular) * radiance * NdotL;
+            }
 
-        vec3 ambient = vec3(0.03) * materials[id].albedo * computeBlur(uv);
-        vec3 color = ambient + Lo;
+            vec3 ambient = vec3(0.03) * materials[id].albedo * computeBlur(uv);
+            vec3 color = ambient + Lo;
 
-        color = color / (color + vec3(1.0));
-        color = pow(color, vec3(1.0/2.2));
+            color = color / (color + vec3(1.0));
+            color = pow(color, vec3(1.0/2.2));
 
-        out_Color = vec4(color, 1.0);
+            out_Color = vec4(color, 1.0);
+        } else {
+            out_Color = vec4(texture(texDiffuse, uv).rgb, 1.0);
+        }*/
+
+        float c = computeBlur(uv);
+        out_Color = vec4(c, c, c, 1.0);
+
     }
