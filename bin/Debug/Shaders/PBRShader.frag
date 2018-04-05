@@ -101,11 +101,7 @@
         vec3 V = normalize(cameraV - vertex);
 
         vec3 F0 = vec3(0.04);
-        vec3 albedo = materials[id].albedo;
-        albedo.x = pow(albedo.x, 2.2);
-        albedo.y = pow(albedo.y, 2.2);
-        albedo.z = pow(albedo.z, 2.2);
-        F0 = mix(F0, albedo, materials[id].metallic);
+        F0 = mix(F0, materials[id].albedo, materials[id].metallic);
 
         vec3 Lo = vec3(0.0);
         for (int i = 0; i < numLights; i = i + 1) {
@@ -130,10 +126,10 @@
 
 
             float NdotL = max(dot(N, L), 0.0);
-            Lo += (kD * albedo / PI + specular) * radiance * NdotL;
+            Lo += (kD * materials[id].albedo / PI + specular) * radiance * NdotL;
         }
 
-        vec3 ambient = vec3(0.03) * albedo * computeBlur(uv);
+        vec3 ambient = vec3(0.03) * materials[id].albedo * computeBlur(uv);
         vec3 color = ambient + Lo;
 
         color = color / (color + vec3(1.0));
