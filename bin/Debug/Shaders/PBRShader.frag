@@ -24,10 +24,12 @@
 
     uniform mat4 invModelview;
     uniform mat4 invProjection;
+    uniform mat4 lightModelview;
 
     uniform sampler2D texDepth;
     uniform sampler2D texDiffuse;
     uniform sampler2D texNormal;
+    uniform sampler2D texShadow;
     uniform samplerCube irradianceMap;
 
     uniform vec3 cameraV;
@@ -94,6 +96,32 @@
         return result / (4.0 * 4.0);
     }
 
+    float computeShadow(vec3 vertex, vec3 lightDir, vec3 normal) {
+        vec4 vertexLS = lightModelview * vec4(vertex, 1.0);
+        vertexLS = inverse(invProjection) * vertexLS;
+        vec3 projCoords = vertexLS.xyz / vertexLS.w;
+        projCoords = projCoords * 0.5 + 0.5;
+
+        float closestDepth = texture(texShadow, projCoords.xy).r;
+        float currentDepth = projCoords.z;
+
+        float bias = 0.00001;
+        float shadow = 0.0;
+        vec2 texelSize = 1.0 / textureSize(texShadow, 0);
+        if (projCoords.z <= 1.0) {
+            for(int x = -1; x < 1; x = x + 1) {
+                for(int y = -1; y < 1; y = y + 1) {
+                    vec2 offset = vec2(float(x), float(y)) * texelSize;
+                    float pcfDepth = texture(texShadow, projCoords.xy + offset).r;
+                    shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+                }
+            }
+            shadow = shadow / (2.0 * 2.0);
+        }
+
+        return 1.0 - shadow;
+    }
+
     void main() {
         vec3 vertex = (invModelview * WorldPosFromDepth(uv)).xyz;
         vec3 normal = texture(texNormal, uv).xyz;
@@ -137,7 +165,7 @@
             vec3 diffuse = irradiance * materials[id].albedo;
             vec3 ambient = (kD * diffuse) * computeBlur(uv);
 
-            vec3 color = ambient + Lo;
+            vec3 color = (ambient + Lo);
 
             color = color / (color + vec3(1.0));
             color = pow(color, vec3(1.0/2.2));

@@ -105,8 +105,11 @@
                         getFrameBuffer().getColorBuffer(1)->bind();
                             glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
                         glActiveTexture(GL_TEXTURE3);
+                        getShadowMap().getDepthBuffer()->bind();
+                            glUniform1i(glGetUniformLocation(shader.getID(), "texShadow"), 3);
+                        glActiveTexture(GL_TEXTURE4);
                             glBindTexture(GL_TEXTURE_CUBE_MAP, skyBox.irradianceMap);
-                            glUniform1i(glGetUniformLocation(shader.getID(), "irradianceMap"), 3);
+                            glUniform1i(glGetUniformLocation(shader.getID(), "irradianceMap"), 4);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
@@ -131,12 +134,15 @@
                         glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invModelview"), 1, GL_TRUE, invModelview.value());
                         glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invProjection"), 1, GL_TRUE, invProjection.value());
+                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "lightModelview"), 1, GL_TRUE, lightModelview.value());
                         glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                        glActiveTexture(GL_TEXTURE3);
+                        glActiveTexture(GL_TEXTURE4);
                             glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+                        glActiveTexture(GL_TEXTURE3);
+                            getShadowMap().getDepthBuffer()->unbind();
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(1)->unbind();
                         glActiveTexture(GL_TEXTURE1);
