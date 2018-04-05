@@ -9,7 +9,7 @@
         namespace GL {
 
             GLenum SkyBox::TYPE = GL_FLOAT;
-            GLuint SkyBox::SIZE = 512;
+            GLuint SkyBox::SIZE = 2048;
 
             SkyBox::SkyBox() {
             }
@@ -151,7 +151,7 @@
 
                 glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
                 glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
-                glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 1024, 1024);
+                glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, SIZE, SIZE);
                 glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
 
 
