@@ -31,6 +31,8 @@
     uniform sampler2D texNormal;
     uniform sampler2D texShadow;
     uniform samplerCube irradianceMap;
+    uniform samplerCube prefilterMap;
+    uniform sampler2D brdfLUT;
 
     uniform vec3 cameraV;
 
@@ -40,6 +42,10 @@
 
     vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness) {
         return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
+    }
+
+    vec3 fresnelSchlick(float cosTheta, vec3 F0) {
+        return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
     }
 
     float distributionGGX(vec3 N, vec3 H, float roughness) {
@@ -129,6 +135,7 @@
             int id = int(texture(texNormal, uv).w);
             vec3 N = normalize(normal);
             vec3 V = normalize(cameraV - vertex);
+            vec3 R = reflect(-V, N);
 
             vec3 F0 = vec3(0.04);
             F0 = mix(F0, materials[id].albedo, materials[id].metallic);
@@ -144,7 +151,7 @@
 
                 float NDF = distributionGGX(N, H, materials[id].roughness);
                 float G = geometrySmith(N, V, L, materials[id].roughness);
-                vec3 F = fresnelSchlickRoughness(max(dot(H, V), 0.0), F0, materials[id].roughness);
+                vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
 
                 vec3 kS = F;
                 vec3 kD = vec3(1.0) - kS;
@@ -159,11 +166,21 @@
                 Lo += (kD * materials[id].albedo / PI + specular) * radiance * NdotL;
             }
 
-            vec3 kS = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, materials[id].roughness);
+            vec3 F = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, materials[id].roughness);
+
+            vec3 kS = F;
             vec3 kD = 1.0 - kS;
+            kD *= 1.0 - materials[id].metallic;
+
             vec3 irradiance = texture(irradianceMap, N).rgb;
             vec3 diffuse = irradiance * materials[id].albedo;
-            vec3 ambient = (kD * diffuse) * computeBlur(uv);
+
+            const float MAX_REFLECTION_LOD = 4.0;
+            vec3 prefilteredColor = textureLod(prefilterMap, R, materials[id].roughness * MAX_REFLECTION_LOD).rgb;
+            vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), materials[id].roughness)).rg;
+            vec3 specular = prefilteredColor * (F * brdf.x + brdf.y);
+
+            vec3 ambient = (kD * diffuse + specular) * computeBlur(uv);
 
             vec3 color = (ambient + Lo);
 

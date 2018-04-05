@@ -11,13 +11,13 @@
             EnvironmentMap::EnvironmentMap() {
             }
 
-            EnvironmentMap::EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader) : buffer(true), vao(true) {
+            EnvironmentMap::EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader) : brdfLUT(SIZE, SIZE, GL_RG, GL_RG16F, GL_FLOAT), buffer(true), vao(true) {
                 fillBuffer();
                 allocate();
-                capture(path, captureShader, irradianceShader, prefilterShader);
+                capture(path, captureShader, irradianceShader, prefilterShader, BRDFShader);
             }
 
-            EnvironmentMap::EnvironmentMap(EnvironmentMap const& map) : map(map.getMap()), irradianceMap(map.getIrradianceMap()), prefilterMap(map.getPrefilterMap()), buffer(true), vao(true) {
+            EnvironmentMap::EnvironmentMap(EnvironmentMap const& map) : map(map.getMap()), irradianceMap(map.getIrradianceMap()), prefilterMap(map.getPrefilterMap()), brdfLUT(map.getBRDFLUT()), buffer(true), vao(true) {
                 fillBuffer();
             }
 
@@ -34,6 +34,10 @@
 
             GL::SkyBox const& EnvironmentMap::getPrefilterMap() const {
                 return prefilterMap;
+            }
+
+            GL::Texture2D const& EnvironmentMap::getBRDFLUT() const {
+                return brdfLUT;
             }
 
             GL::IBO const& EnvironmentMap::getBuffer() const {
@@ -56,6 +60,10 @@
                 prefilterMap = map;
             }
 
+            void EnvironmentMap::setBRDFLUT(GL::Texture2D const& tex) {
+                brdfLUT = tex;
+            }
+
             void EnvironmentMap::setBuffer(GL::IBO const& buf) {
                 buffer = buf;
             }
@@ -67,7 +75,7 @@
             void EnvironmentMap::allocate() {
                 map.allocate(SIZE, SIZE, true);
                 irradianceMap.allocate(32, 32, true);
-                prefilterMap.allocate(128, 128, false);
+                prefilterMap.allocate(512, 512, false);
                 prefilterMap.bind();
                     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
                     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -107,7 +115,7 @@
                 vao.access(buffer, GL_INT, true);
             }
 
-            void EnvironmentMap::capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader) {
+            void EnvironmentMap::capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader) {
                 GL::Texture2D cubeMap;
 
                 cubeMap.setType(GL_FLOAT);
@@ -185,6 +193,13 @@
                     capture.unbind();
                 glUseProgram(0);
 
+                modelviews[0].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
+                modelviews[1].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
+                modelviews[2].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
+                modelviews[3].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
+                modelviews[4].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
+                modelviews[5].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
+
                 glUseProgram(prefilterShader.getID());
                     glUniform1i(glGetUniformLocation(prefilterShader.getID(), "skyBox"), 0);
                     glUniformMatrix4fv(glGetUniformLocation(prefilterShader.getID(), "projection"), 1, GL_TRUE, projection.value());
@@ -193,8 +208,8 @@
                     capture.bind();
                     GLuint maxMipLevels = 5;
                     for (GLuint mip = 0; mip < maxMipLevels; mip = mip + 1) {
-                        GLuint mipWidth = 128 * std::pow(0.5, mip);
-                        GLuint mipHeight = 128 * std::pow(0.5, mip);
+                        GLuint mipWidth = 512 * std::pow(0.5, mip);
+                        GLuint mipHeight = 512 * std::pow(0.5, mip);
                         tmp->allocate(GL_DEPTH_COMPONENT24, mipWidth, mipHeight);
 
                         glViewport(0, 0, mipWidth, mipHeight);
@@ -214,6 +229,18 @@
                     }
                     capture.unbind();
                 glUseProgram(0);
+
+                capture.bind();
+                    tmp->allocate(GL_DEPTH_COMPONENT24, SIZE, SIZE);
+                    capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, brdfLUT.getID());
+
+                    glViewport(0, 0, SIZE, SIZE);
+                    glUseProgram(BRDFShader.getID());
+                        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+                        renderQuad(BRDFShader);
+                    glUseProgram(0);
+                capture.unbind();
             }
 
             void EnvironmentMap::render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview) {
@@ -221,15 +248,49 @@
                 glDepthFunc(GL_LEQUAL);
                 glUseProgram(shader.getID());
                     getVAO().bind();
-                            prefilterMap.bind();
+                            map.bind();
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
                             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-                            prefilterMap.unbind();
+                            map.unbind();
                     getVAO().unbind();
                glUseProgram(0);
                glDepthFunc(GL_LESS);
+            }
+
+            void EnvironmentMap::renderQuad(Shader const& BRDFShader) {
+                GLint vData[12] = {
+                    -1, 1, 0,
+                    -1, -1, 0,
+                    1, 1, 0,
+                    1, -1, 0
+                };
+
+                GLshort uvData[8] = {
+                    0, 1,
+                    0, 0,
+                    1, 1,
+                    1, 0
+                };
+
+                std::vector<GLvoid*> data;
+                data.push_back(vData);
+                data.push_back(uvData);
+
+                GL::VBO quadVBO(true);
+                quadVBO.push_back(new GL::UVBuffer(true));
+
+                quadVBO.allocateAndFill(sizeof(GLint), 12, GL_STATIC_DRAW, data);
+
+                GL::VAO quadVAO(true);
+                quadVAO.access(quadVBO, GL_INT, true);
+
+                glUseProgram(BRDFShader.getID());
+                    quadVAO.bind();
+                        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+                    quadVAO.unbind();
+               glUseProgram(0);
             }
 
         };

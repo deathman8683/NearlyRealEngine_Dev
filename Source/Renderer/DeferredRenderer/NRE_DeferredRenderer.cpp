@@ -107,6 +107,12 @@
                         glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().bind();
                             glUniform1i(glGetUniformLocation(shader.getID(), "irradianceMap"), 4);
+                        glActiveTexture(GL_TEXTURE5);
+                        skyBox.getPrefilterMap().bind();
+                            glUniform1i(glGetUniformLocation(shader.getID(), "prefilterMap"), 5);
+                        glActiveTexture(GL_TEXTURE6);
+                        skyBox.getBRDFLUT().bind();
+                            glUniform1i(glGetUniformLocation(shader.getID(), "brdfLUT"), 6);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
@@ -136,6 +142,10 @@
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
+                        glActiveTexture(GL_TEXTURE6);
+                            skyBox.getBRDFLUT().unbind();
+                        glActiveTexture(GL_TEXTURE5);
+                            skyBox.getPrefilterMap().unbind();
                         glActiveTexture(GL_TEXTURE4);
                             skyBox.getIrradianceMap().unbind();
                         glActiveTexture(GL_TEXTURE3);

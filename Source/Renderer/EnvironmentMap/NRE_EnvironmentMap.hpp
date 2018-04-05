@@ -35,13 +35,14 @@
                     GL::SkyBox map;
                     GL::SkyBox irradianceMap;
                     GL::SkyBox prefilterMap;
+                    GL::Texture2D brdfLUT;
                     GL::IBO buffer;
                     GL::VAO vao;
 
                 public:
                     //## Constructor ##//
                     EnvironmentMap();
-                    EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader);
+                    EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
 
                     //## Copy-Constructor ##//
                     EnvironmentMap(EnvironmentMap const& map);
@@ -55,6 +56,7 @@
                     GL::SkyBox const& getMap() const;
                     GL::SkyBox const& getIrradianceMap() const;
                     GL::SkyBox const& getPrefilterMap() const;
+                    GL::Texture2D const& getBRDFLUT() const;
                     GL::IBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
 
@@ -62,14 +64,16 @@
                     void setMap(GL::SkyBox const& map);
                     void setIrradianceMap(GL::SkyBox const& map);
                     void setPrefilterMap(GL::SkyBox const& map);
+                    void setBRDFLUT(GL::Texture2D const& tex);
                     void setBuffer(GL::IBO const& buf);
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
                     void allocate();
                     void fillBuffer();
-                    void capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader);
+                    void capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
                     void render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
+                    void renderQuad(Shader const& BRDFShader);
 
                     //## Access Operator ##//
 
