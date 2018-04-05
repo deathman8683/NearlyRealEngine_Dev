@@ -3,7 +3,6 @@
     #include "Camera/NRE_MoveableCamera.hpp"
     #include "World/NRE_World.hpp"
     #include "Time/Clock/NRE_Clock.hpp"
-    #include "GL_Wrapper/BufferObject/SkyBox/NRE_SkyBox.hpp"
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
     using namespace NRE;
@@ -38,7 +37,7 @@
 
             Time::Clock engineClock;
 
-            GL::SkyBox engineSkybox("Data/SkyBox/Warm", "png");
+            GL::SkyBox engineSkybox("Data/SkyBox/MilkyWay.hdr");
 
             camera.computeProjectionMatrix(projection);
 
@@ -80,6 +79,7 @@
 
                 engineDeferredRenderer.startGBufferPass();
                     auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
+                    engineSkybox.render(skyBoxShader, MVP, camera.getEye());
 
                     if (it->second.isActive()) {
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

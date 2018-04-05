@@ -6,7 +6,7 @@
 
             GLenum Texture2D::DEFAULT_TYPE = GL_UNSIGNED_BYTE;
 
-            Texture2D::Texture2D() {
+            Texture2D::Texture2D() : TextureBuffer::TextureBuffer(true), type(DEFAULT_TYPE) {
             }
 
             Texture2D::Texture2D(std::string const& path) : TextureBuffer::TextureBuffer(true), SDL::Surface::Surface(path), type(DEFAULT_TYPE) {

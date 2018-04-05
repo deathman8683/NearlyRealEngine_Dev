@@ -4,7 +4,7 @@ export LD = g++.exe
 export CFLAGS = -Wall -std=c++14
 export LDFLAGS = -lopengl32 -lglu32
 
-export INC = -I"C:\lib\TDM-GCC-64\include" -I"C:\lib\Glew\include" -I"C:\lib\GLM" -I"C:\lib\SDL2-2.0.8\x86_64-w64-mingw32\include"
+export INC = -I"C:\lib\TDM-GCC-64\include" -I"C:\lib\Glew\include" -I"C:\lib\GLM" -I"C:\lib\SDL2-2.0.8\x86_64-w64-mingw32\include" -I"C:\lib\STB"
 export LIBDIR = -L"C:\lib\TDM-GCC-64\lib" -L"C:\lib\Glew\lib" -L"C:\lib\SDL2-2.0.8\x86_64-w64-mingw32\lib"
 export LIB = "C:\lib\TDM-GCC-64\x86_64-w64-mingw32\lib\libmingw32.a" "C:\lib\Glew\lib\libglew32.dll.a" "C:\lib\SDL2-2.0.8\x86_64-w64-mingw32\lib\libSDL2main.a" "C:\lib\SDL2-2.0.8\x86_64-w64-mingw32\lib\libSDL2.dll.a" "C:\lib\SDL2-2.0.8\x86_64-w64-mingw32\lib\libSDL2_image.dll.a"
 
