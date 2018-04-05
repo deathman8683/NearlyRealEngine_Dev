@@ -17,24 +17,21 @@
                 internalFormat.push_back(GL_RGBA);
                 internalFormat.push_back(GL_RGBA16F);
                 gBuffer.allocateColorBuffer(2, format, internalFormat, type);
-                gBuffer.allocateRenderBuffer();
+                gBuffer.setDepthBuffer(new GL::Texture2D(gBuffer.getSize().getW(), gBuffer.getSize().getH(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT32F, GL_FLOAT));
+                gBuffer.attachDepthBuffer(GL_DEPTH_ATTACHMENT);
 
-                shadowMap.allocateRenderBuffer();
-                shadowMap.getDepthBuffer()->bind();
-                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-                    float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-                    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-                shadowMap.getDepthBuffer()->unbind();
+                shadowMap.setDepthBuffer(new GL::RenderBuffer(GL_DEPTH_COMPONENT32F, shadowMap.getSize().getW(), shadowMap.getSize().getH(), true));
+                shadowMap.attachDepthBuffer(GL_DEPTH_ATTACHMENT);
+                shadowMap.getDepthBuffer()->clampToBorder(Maths::Vector4D<NREfloat>(1.0, 1.0, 1.0, 1.0));
 
                 gBuffer.bind();
                 if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-                    std::cout << "ERROR" << std::endl;
+                    std::cout << "ERROR 1" << std::endl;
                 }
                 gBuffer.unbind();
                 shadowMap.bind();
                 if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-                    std::cout << "ERROR" << std::endl;
+                    std::cout << "ERROR 2" << std::endl;
                 }
                 shadowMap.unbind();
 

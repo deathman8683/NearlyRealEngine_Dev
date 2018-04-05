@@ -50,6 +50,7 @@
             double nbFrames = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
+
             while(!camera.getQuit())
             {
                 engineClock.updateActualTime();

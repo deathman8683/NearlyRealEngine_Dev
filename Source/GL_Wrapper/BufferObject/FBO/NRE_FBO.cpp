@@ -21,6 +21,7 @@
                     delete buf;
                 }
                 colorBuffer.clear();
+                delete depthBuffer;
             }
 
             std::vector<Texture2D*> const& FBO::getColorBuffers() const {
@@ -31,7 +32,7 @@
                 return colorBuffer[index];
             }
 
-            Texture2D* const& FBO::getDepthBuffer() const {
+            DepthBuffer* const& FBO::getDepthBuffer() const {
                 return depthBuffer;
             }
 
@@ -47,7 +48,7 @@
                 colorBuffer[index] = buffer;
             }
 
-            void FBO::setDepthBuffer(Texture2D* const& buffer) {
+            void FBO::setDepthBuffer(DepthBuffer* const& buffer) {
                 depthBuffer = buffer;
             }
 
@@ -64,10 +65,9 @@
                 unbind();
             }
 
-            void FBO::allocateRenderBuffer() {
+            void FBO::attachDepthBuffer(GLenum const& attachment) const {
                 bind();
-                    depthBuffer = new Texture2D(getSize().getW(), getSize().getH(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT32F, GL_FLOAT);
-                    attachBuffer(GL_DEPTH_ATTACHMENT, *depthBuffer);
+                    depthBuffer->attach(attachment);
                 unbind();
             }
 

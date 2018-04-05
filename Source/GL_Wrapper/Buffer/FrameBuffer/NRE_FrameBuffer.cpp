@@ -40,10 +40,6 @@
                 glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, texture.getID(), 0);
             }
 
-            void FrameBuffer::attachRenderBuffer(GLenum const& attachment, GLenum const& renderBufferTarget, GLuint const& renderBuffer) const {
-                glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, renderBufferTarget, renderBuffer);
-            }
-
             void FrameBuffer::access() const {
                 bind();
             }

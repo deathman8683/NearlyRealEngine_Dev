@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../../../Generic/NRE_Type.hpp"
+    #include "../../../Maths/NRE_Maths.hpp"
 
     /**
      * @namespace NRE
@@ -37,6 +38,7 @@
                     //## Convertor ##//
 
                     //## Deconstructor ##//
+                    virtual ~DepthBuffer();
 
                     //## Getter ##//
 
@@ -46,6 +48,7 @@
                     virtual void bind() const = 0;
                     virtual void unbind() const = 0;
                     virtual void attach(GLenum const& attachment) const = 0;
+                    void clampToBorder(Maths::Vector4D<NREfloat> const& borderColor) const;
 
                     //## Access Operator ##//
 

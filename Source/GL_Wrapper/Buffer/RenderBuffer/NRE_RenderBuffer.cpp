@@ -7,9 +7,10 @@
             RenderBuffer::RenderBuffer() {
             }
 
-            RenderBuffer::RenderBuffer(bool const& generate) {
+            RenderBuffer::RenderBuffer(GLenum const& internalFormat, GLsizei const& w, GLsizei const& h, bool const& generate) {
                 if (generate) {
                     generateID();
+                    allocate(internalFormat, w, h);
                 }
             }
 

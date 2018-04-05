@@ -32,7 +32,7 @@
                 public:
                     //## Constructor ##//
                     RenderBuffer();
-                    RenderBuffer(bool const& generate);
+                    RenderBuffer(GLenum const& internalFormat, GLsizei const& w, GLsizei const& h, bool const& generate);
 
                     //## Copy-Constructor ##//
                     RenderBuffer(RenderBuffer const& buf);

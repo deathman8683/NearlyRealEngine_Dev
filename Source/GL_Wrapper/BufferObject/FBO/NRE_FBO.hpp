@@ -9,8 +9,8 @@
     #pragma once
 
     #include "../../../Maths/NRE_Maths.hpp"
-    #include "../Texture2D/NRE_Texture2D.hpp"
     #include "../../Buffer/FrameBuffer/NRE_FrameBuffer.hpp"
+    #include "../../Buffer/DepthBuffer/NRE_DepthBuffer.hpp"
     #include "../../Buffer/RenderBuffer/NRE_RenderBuffer.hpp"
 
     /**
@@ -31,7 +31,7 @@
             class FBO : public BufferObject, public FrameBuffer {
                 private:
                     std::vector<Texture2D*> colorBuffer;
-                    Texture2D* depthBuffer;
+                    DepthBuffer* depthBuffer;
                     Maths::Vector2D<GLushort> size;
 
                 public:
@@ -50,18 +50,18 @@
                     //## Getter ##//
                     std::vector<Texture2D*> const& getColorBuffers() const;
                     Texture2D* const& getColorBuffer(GLuint const& index) const;
-                    Texture2D* const& getDepthBuffer() const;
+                    DepthBuffer* const& getDepthBuffer() const;
                     Maths::Vector2D<GLushort> const& getSize() const;
 
                     //## Setter ##//
                     void setColorBuffers(std::vector<Texture2D*> const& buffers);
                     void setColorBuffer(GLuint const& index, Texture2D* const&& buffer);
-                    void setDepthBuffer(Texture2D* const& buffer);
+                    void setDepthBuffer(DepthBuffer* const& buffer);
                     void setSize(Maths::Vector2D<GLushort> const& size);
 
                     //## Methods ##//
                     void allocateColorBuffer(GLuint const& nbColorBuffer, std::vector<GLenum> const& format, std::vector<GLint> const& internalFormat, std::vector<GLenum> const& type);
-                    void allocateRenderBuffer();
+                    void attachDepthBuffer(GLenum const& attachment) const;
                     void push_back(Texture2D* const& buffer);
                     void access();
 

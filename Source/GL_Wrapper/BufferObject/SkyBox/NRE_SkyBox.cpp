@@ -9,7 +9,7 @@
         namespace GL {
 
             GLenum SkyBox::TYPE = GL_FLOAT;
-            GLuint SkyBox::SIZE = 2048;
+            GLuint SkyBox::SIZE = 128;
 
             SkyBox::SkyBox() {
             }
@@ -130,15 +130,10 @@
             }
 
             void SkyBox::captureCubeMap(Renderer::Shader const& captureShader, Renderer::Shader const& irradianceShader) {
-                unsigned int captureFBO, captureRBO;
-                glGenFramebuffers(1, &captureFBO);
-                glGenRenderbuffers(1, &captureRBO);
-
-                glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
-                glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
-                glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, SIZE, SIZE);
-                glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
-
+                FBO capture(SIZE, SIZE);
+                RenderBuffer* tmp = new RenderBuffer(GL_DEPTH_COMPONENT24, capture.getSize().getW(), capture.getSize().getH(), true);
+                capture.setDepthBuffer(tmp);
+                capture.attachDepthBuffer(GL_DEPTH_ATTACHMENT);
 
                 Maths::Matrix4x4<NREfloat> projection;
                 projection.projection(70.0, 1.0, 0.1, 10.0);
@@ -157,7 +152,7 @@
                     cubeMap->bind();
 
                     glViewport(0, 0, SIZE, SIZE);
-                    glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+                    capture.bind();
                         for (GLuint i = 0; i < 6; i = i + 1) {
                             glUniformMatrix4fv(glGetUniformLocation(captureShader.getID(), "modelview"), 1, GL_TRUE, modelviews[i].value());
                             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, getID(), 0);
@@ -168,12 +163,12 @@
                                     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
                             getVAO().unbind();
                         }
-                    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+                    capture.unbind();
                 glUseProgram(0);
 
-                glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
-                glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
-                glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 32, 32);
+                capture.bind();
+                    tmp->allocate(GL_DEPTH_COMPONENT24, 32, 32);
+                capture.unbind();
 
                 glUseProgram(irradianceShader.getID());
                     glUniform1i(glGetUniformLocation(irradianceShader.getID(), "skyBox"), 0);
@@ -181,7 +176,7 @@
                     bind();
 
                     glViewport(0, 0, 32, 32);
-                    glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+                    capture.bind();
                         for (GLuint i = 0; i < 6; i = i + 1) {
                             glUniformMatrix4fv(glGetUniformLocation(irradianceShader.getID(), "modelview"), 1, GL_TRUE, modelviews[i].value());
                             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap, 0);
@@ -192,7 +187,7 @@
                                     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
                             getVAO().unbind();
                         }
-                    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+                    capture.unbind();
                 glUseProgram(0);
             }
 
