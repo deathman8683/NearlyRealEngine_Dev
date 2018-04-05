@@ -38,6 +38,11 @@
             }
 
             template <class T>
+            template <class K>
+            Matrix3x3<T>::Matrix3x3(Matrix4x4<K> const& m) : data{Vector3D<T>(m.getL1()), Vector3D<T>(m.getL2()), Vector3D<T>(m.getL3())} {
+            }
+
+            template <class T>
             Matrix3x3<T>::~Matrix3x3() {
             }
 

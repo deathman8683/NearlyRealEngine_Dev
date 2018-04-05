@@ -23,6 +23,7 @@
 
             template<class> class Point3D;
             template<class> class Vector3D;
+            template<class> class Matrix4x4;
 
             /**
              * @class Matrix3x3
@@ -94,6 +95,8 @@
                          */
                         template <class K>
                         Matrix3x3(Matrix3x3<K> const& m);
+                        template <class K>
+                        Matrix3x3(Matrix4x4<K> const& m);
 
                     //## Deconstructor ##//
                         /**

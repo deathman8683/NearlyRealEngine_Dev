@@ -6,6 +6,6 @@
     out vec4 [2] fragData;
 
     void main() {
-	    fragData[0] = vec4(0.0);
+	    fragData[0] = vec4(1.0);
         fragData[1] = normal;
     }

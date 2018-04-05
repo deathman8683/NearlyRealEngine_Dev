@@ -105,6 +105,8 @@
                          */
                         template <class K>
                         Matrix4x4(Matrix4x4<K> const& m);
+                        template <class K>
+                        Matrix4x4(Matrix3x3<K> const& m);
 
                     //## Deconstructor ##//
                         /**

@@ -11,7 +11,5 @@
     void main() {
         vertex = in_Vertex;
 
-        mat4 rotView = mat4(mat3(modelview));
-        vec4 clipPos = projection * rotView * vec4(in_Vertex, 1.0);
-        gl_Position = clipPos.xyzw;
+        gl_Position = modelview * vec4(in_Vertex, 1.0);
     }

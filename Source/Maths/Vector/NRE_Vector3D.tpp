@@ -36,6 +36,11 @@
             }
 
             template <class T>
+            template <class K>
+            Vector3D<T>::Vector3D(Vector4D<K> const& u) : Vector3D(u.getX(), u.getY(), u.getZ()) {
+            }
+
+            template <class T>
             Vector3D<T>::~Vector3D() {
             }
 

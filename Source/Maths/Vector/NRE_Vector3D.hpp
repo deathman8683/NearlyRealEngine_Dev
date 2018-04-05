@@ -22,6 +22,7 @@
         namespace Maths {
 
             template<class> class Point3D;
+            template<class> class Vector4D;
 
             /**
              * @class Vector3D
@@ -88,6 +89,8 @@
                          */
                         template <class K>
                         Vector3D(Point3D<K> const& p);
+                        template <class K>
+                        Vector3D(Vector4D<K> const& u);
 
                     //## Deconstructor ##//
                         /**

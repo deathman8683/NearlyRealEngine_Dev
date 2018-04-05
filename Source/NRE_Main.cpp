@@ -20,6 +20,8 @@
             Renderer::Shader ssaoPass("Shaders/SSAOPass.vert", "Shaders/SSAOPass.frag", true);
             Renderer::Shader shadowPass("Shaders/ShadowPass.vert", "Shaders/ShadowPass.frag", true);
             Renderer::Shader pbrShader("Shaders/PBRShader.vert", "Shaders/PBRShader.frag", true);
+            Renderer::Shader captureShader("Shaders/CaptureShader.vert", "Shaders/CaptureShader.frag", true);
+            Renderer::Shader irradianceShader("Shaders/IrradianceShader.vert", "Shaders/IrradianceShader.frag", true);
 
             std::vector<Light::Light*> engineLighting;
             Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 250, 300, 0),         Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.1, 0.0);
@@ -33,11 +35,12 @@
             engineLighting.push_back(&engineLight4);
             engineLighting.push_back(&engineLight5);
 
-            Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, MVP, lightModelview;
+            Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, lightModelview;
 
             Time::Clock engineClock;
 
-            GL::SkyBox engineSkybox("Data/SkyBox/MilkyWay.hdr");
+            GL::SkyBox engineSkybox("Data/SkyBox/Milkyway.hdr");
+            engineSkybox.captureCubeMap(captureShader, irradianceShader);
 
             camera.computeProjectionMatrix(projection);
 
@@ -46,6 +49,7 @@
             double angle = 0.0;
             double nbFrames = 0;
 
+            glViewport(0, 0, 1280.0, 720.0);
             while(!camera.getQuit())
             {
                 engineClock.updateActualTime();
@@ -75,16 +79,14 @@
                 camera.setView(modelview);
                 shadowView.setView(lightModelview);
 
-                MVP = projection * modelview;
-
                 engineDeferredRenderer.startGBufferPass();
                     auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
-                    engineSkybox.render(skyBoxShader, MVP, camera.getEye());
 
                     if (it->second.isActive()) {
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
                     engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    engineSkybox.render(skyBoxShader, projection, modelview);
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endGBufferPass();
 
@@ -133,7 +135,7 @@
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
                 }
 
-                engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, camera, engineLighting);
+                engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, camera, engineLighting, engineSkybox);
 
                 engineWorld.update();
 

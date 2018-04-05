@@ -28,6 +28,7 @@
     uniform sampler2D texDepth;
     uniform sampler2D texDiffuse;
     uniform sampler2D texNormal;
+    uniform samplerCube irradianceMap;
 
     uniform vec3 cameraV;
 
@@ -35,8 +36,8 @@
 
     out vec4 out_Color;
 
-    vec3 fresnelSchlick(float cosTheta, vec3 F0) {
-        return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
+    vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness) {
+        return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
     }
 
     float distributionGGX(vec3 N, vec3 H, float roughness) {
@@ -72,11 +73,7 @@
     }
 
     vec4 WorldPosFromDepth(vec2 tc) {
-        float z = texture(texDepth, tc).x;
-        if (z == 0.0) {
-            return vec4(0.0, 0.0, 0.0, 0.0);
-        }
-        z = z * 2.0 - 1.0;
+        float z = texture(texDepth, tc).x * 2.0 - 1.0;
 
         vec4 clipSpacePosition = vec4(tc * 2.0 - 1.0, z, 1.0);
         vec4 viewSpacePosition = invProjection * clipSpacePosition;
@@ -100,7 +97,7 @@
     void main() {
         vec3 vertex = (invModelview * WorldPosFromDepth(uv)).xyz;
         vec3 normal = texture(texNormal, uv).xyz;
-        if (vertex != vec3(0.0, 0.0, 0.0)) {
+        if (normal != vec3(0.0, 0.0, 0.0)) {
             int id = int(texture(texNormal, uv).w);
             vec3 N = normalize(normal);
             vec3 V = normalize(cameraV - vertex);
@@ -119,7 +116,7 @@
 
                 float NDF = distributionGGX(N, H, materials[id].roughness);
                 float G = geometrySmith(N, V, L, materials[id].roughness);
-                vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
+                vec3 F = fresnelSchlickRoughness(max(dot(H, V), 0.0), F0, materials[id].roughness);
 
                 vec3 kS = F;
                 vec3 kD = vec3(1.0) - kS;
@@ -134,7 +131,12 @@
                 Lo += (kD * materials[id].albedo / PI + specular) * radiance * NdotL;
             }
 
-            vec3 ambient = vec3(0.03) * materials[id].albedo * computeBlur(uv);
+            vec3 kS = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, materials[id].roughness);
+            vec3 kD = 1.0 - kS;
+            vec3 irradiance = texture(irradianceMap, N).rgb;
+            vec3 diffuse = irradiance * materials[id].albedo;
+            vec3 ambient = (kD * diffuse) * computeBlur(uv);
+
             vec3 color = ambient + Lo;
 
             color = color / (color + vec3(1.0));
@@ -143,9 +145,6 @@
             out_Color = vec4(color, 1.0);
         } else {
             out_Color = vec4(texture(texDiffuse, uv).rgb, 1.0);
-        }*/
-
-        float c = computeBlur(uv);
-        out_Color = vec4(c, c, c, 1.0);
+        }
 
     }

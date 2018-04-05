@@ -1,18 +1,21 @@
 
     #include "NRE_SkyBox.hpp"
 
+    #define STB_IMAGE_IMPLEMENTATION
+
     #include <stb_image.h>
 
     namespace NRE {
         namespace GL {
 
             GLenum SkyBox::TYPE = GL_FLOAT;
-            GLuint SkyBox::SIZE = 1024;
+            GLuint SkyBox::SIZE = 512;
 
             SkyBox::SkyBox() {
             }
 
-            SkyBox::SkyBox(std::string const& path) : TextureBuffer::TextureBuffer(true), capture(SIZE, SIZE), cubeMap(0), buffer(true), vao(true) {
+            SkyBox::SkyBox(std::string const& path) : TextureBuffer::TextureBuffer(true), cubeMap(0), irradianceMap(0), buffer(true), vao(true) {
+                glGenTextures(1, &irradianceMap);
                 allocate(true);
                 cubeMap = new Texture2D();
 
@@ -29,18 +32,7 @@
                 cubeMap->unbind();
                 cubeMap->setAllocated(true);
 
-                std::vector<GLenum> format, type;
-                std::vector<GLint> internalFormat;
-                format.push_back(GL_RGBA);
-                type.push_back(GL_FLOAT);
-                internalFormat.push_back(GL_RGBA16F);
-                capture.allocateColorBuffer(1, format, internalFormat, type);
-                capture.allocateRenderBuffer();
-                capture.bind();
-                if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-                    std::cout << "ERROR" << std::endl;
-                }
-                capture.unbind();
+                stbi_image_free(data);
                 fillBuffer();
             }
 
@@ -49,10 +41,6 @@
 
             SkyBox::~SkyBox() {
                 delete cubeMap;
-            }
-
-            FBO const& SkyBox::getCapture() const {
-                return capture;
             }
 
             Texture2D* const& SkyBox::getCubeMap() const {
@@ -69,10 +57,6 @@
 
             GLenum const SkyBox::getType() const {
                 return TYPE;
-            }
-
-            void SkyBox::setCapture(FBO const& buf) {
-                capture = buf;
             }
 
             void SkyBox::setCubeMap(Texture2D* const& t) {
@@ -97,13 +81,26 @@
 
             void SkyBox::allocate(bool const& callFilter) {
                 bind();
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGBA16F, SIZE, SIZE, GL_RGBA, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGBA16F, SIZE, SIZE, GL_RGBA, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGBA16F, SIZE, SIZE, GL_RGBA, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGBA16F, SIZE, SIZE, GL_RGBA, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGBA16F, SIZE, SIZE, GL_RGBA, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGBA16F, SIZE, SIZE, GL_RGBA, callFilter);
+                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
+                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
+                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
+                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
+                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
+                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, callFilter);
                 unbind();
+                glBindTexture(GL_TEXTURE_CUBE_MAP, irradianceMap);
+                    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, 0);
+                    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, 0);
+                    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, 0);
+                    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, 0);
+                    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, 0);
+                    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, 0);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+                glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
                 setAllocated(true);
             }
 
@@ -132,12 +129,12 @@
                 };
 
                 GLuint iData[36] = {
-                    2, 1, 0, 1, 2, 3,
-                    4, 5, 6, 7, 6, 5,
-                    0, 1, 7, 6, 7, 1,
-                    5, 3, 2, 3, 5, 4,
-                    3, 6, 1, 6, 3, 4,
-                    0, 7, 2, 5, 2, 7
+                    2, 0, 7, 7, 5, 2,
+                    1, 0, 2, 2, 3, 1,
+                    7, 6, 4, 4, 5, 7,
+                    1, 3, 4, 4, 6, 1,
+                    2, 5, 4, 4, 3, 2,
+                    0, 1, 7, 7, 1, 6,
                 };
 
                 std::vector<GLvoid*> data;
@@ -147,27 +144,38 @@
                 vao.access(buffer, GL_INT, true);
             }
 
-            void SkyBox::captureCubeMap(Renderer::Shader const& shader) {
+            void SkyBox::captureCubeMap(Renderer::Shader const& captureShader, Renderer::Shader const& irradianceShader) {
+                unsigned int captureFBO, captureRBO;
+                glGenFramebuffers(1, &captureFBO);
+                glGenRenderbuffers(1, &captureRBO);
+
+                glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+                glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+                glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 1024, 1024);
+                glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
+
+
                 Maths::Matrix4x4<NREfloat> projection;
-                projection.projection(90.0, 1.0, 0.1, 10.0);
+                projection.projection(70.0, 1.0, 0.1, 10.0);
 
                 Maths::Matrix4x4<NREfloat> modelviews[6];
-                modelviews[1].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>(1.0,  0.0,  0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0));
-                modelviews[2].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>(-1.0, 0.0,  0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0));
-                modelviews[3].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>(0.0,  1.0,  0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0));
-                modelviews[4].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>(0.0, -1.0,  0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0));
-                modelviews[5].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>(0.0,  0.0,  1.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
-                modelviews[6].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>(0.0,  0.0, -1.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
+                modelviews[0].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>( 1.0,  0.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
+                modelviews[1].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>(-1.0,  0.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
+                modelviews[2].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>( 0.0,  0.0,  -1.0), Maths::Vector3D<NREfloat>(0.0,  1.0,  0.0));
+                modelviews[3].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>( 0.0,  0.0,  1.0), Maths::Vector3D<NREfloat>(0.0, -1.0,  0.0));
+                modelviews[4].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>( 0.0,  1.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
+                modelviews[5].lookAt(Maths::Point3D<NREfloat>(0.0, 0.0, 0.0), Maths::Point3D<NREfloat>( 0.0, -1.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
 
-                glUseProgram(shader.getID());
-                    glUniform1i(glGetUniformLocation(shader.getID(), "skyBox"), 0);
-                    glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
+                glUseProgram(captureShader.getID());
+                    glUniform1i(glGetUniformLocation(captureShader.getID(), "skyBox"), 0);
+                    glUniformMatrix4fv(glGetUniformLocation(captureShader.getID(), "projection"), 1, GL_TRUE, projection.value());
                     cubeMap->bind();
 
-                    capture.bind();
+                    glViewport(0, 0, SIZE, SIZE);
+                    glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "modelviews"), 1, GL_TRUE, modelviews[i].value());
-                            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_NEGATIVE_X + i, getID(), 0);
+                            glUniformMatrix4fv(glGetUniformLocation(captureShader.getID(), "modelview"), 1, GL_TRUE, modelviews[i].value());
+                            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, getID(), 0);
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -175,25 +183,48 @@
                                     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
                             getVAO().unbind();
                         }
-                    capture.unbind();
+                    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+                glUseProgram(0);
+
+                glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+                glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+                glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 32, 32);
+
+                glUseProgram(irradianceShader.getID());
+                    glUniform1i(glGetUniformLocation(irradianceShader.getID(), "skyBox"), 0);
+                    glUniformMatrix4fv(glGetUniformLocation(irradianceShader.getID(), "projection"), 1, GL_TRUE, projection.value());
+                    bind();
+
+                    glViewport(0, 0, 32, 32);
+                    glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+                        for (GLuint i = 0; i < 6; i = i + 1) {
+                            glUniformMatrix4fv(glGetUniformLocation(irradianceShader.getID(), "modelview"), 1, GL_TRUE, modelviews[i].value());
+                            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap, 0);
+
+                            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+                            getVAO().bind();
+                                    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+                            getVAO().unbind();
+                        }
+                    glBindFramebuffer(GL_FRAMEBUFFER, 0);
                 glUseProgram(0);
             }
 
-            void SkyBox::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Maths::Point3D<NREfloat> const& eye) {
-                MVP.translate(Maths::Vector3D<NREfloat>(eye));
+            void SkyBox::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview) {
+                Maths::Matrix4x4<NREfloat> MVP = projection * Maths::Matrix4x4<NREfloat>(Maths::Matrix3x3<NREfloat>(modelview));
+                glDepthFunc(GL_LEQUAL);
                 glUseProgram(shader.getID());
                     getVAO().bind();
-                        bind();
+                            bind();
 
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
-                        glDepthMask(GL_FALSE);
-                        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-                        glDepthMask(GL_TRUE);
+                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
+                            glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-                        unbind();
+                            unbind();
                     getVAO().unbind();
                glUseProgram(0);
-               MVP.translate(Maths::Vector3D<NREfloat>(-eye));
+               glDepthFunc(GL_LESS);
             }
 
         };

@@ -88,7 +88,7 @@
                 this->vao = vao;
             }
 
-            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &lightModelview, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light) {
+            void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &lightModelview, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox) {
 
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -104,6 +104,9 @@
                         glActiveTexture(GL_TEXTURE2);
                         getFrameBuffer().getColorBuffer(1)->bind();
                             glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
+                        glActiveTexture(GL_TEXTURE3);
+                            glBindTexture(GL_TEXTURE_CUBE_MAP, skyBox.irradianceMap);
+                            glUniform1i(glGetUniformLocation(shader.getID(), "irradianceMap"), 3);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
@@ -132,6 +135,8 @@
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
+                        glActiveTexture(GL_TEXTURE3);
+                            glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
                         glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(1)->unbind();
                         glActiveTexture(GL_TEXTURE1);

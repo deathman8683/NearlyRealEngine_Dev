@@ -32,10 +32,13 @@
              */
             class SkyBox : public TextureBuffer, public BufferObject {
                 private:
-                    FBO capture;
                     Texture2D* cubeMap;
+                public:
+                    GLuint irradianceMap;
+                private:
                     IBO buffer;
                     VAO vao;
+
 
                 public:
                     //## Constructor ##//
@@ -51,14 +54,12 @@
                     ~SkyBox();
 
                     //## Getter ##//
-                    FBO const& getCapture() const;
                     Texture2D* const& getCubeMap() const;
                     IBO const& getBuffer() const;
                     VAO const& getVAO() const;
                     GLenum const getType() const;
 
                     //## Setter ##//
-                    void setCapture(FBO const& buf);
                     void setCubeMap(Texture2D* const& t);
                     void setBuffer(IBO const& buf);
                     void setVAO(VAO const& vao);
@@ -70,8 +71,8 @@
                     void applyFilter() const;
                     void access() const;
                     void fillBuffer();
-                    void captureCubeMap(Renderer::Shader const& shader);
-                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &MVP, Maths::Point3D<NREfloat> const& eye);
+                    void captureCubeMap(Renderer::Shader const& captureShader, Renderer::Shader const& irradianceShader);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
 
                     //## Access Operator ##//
 
