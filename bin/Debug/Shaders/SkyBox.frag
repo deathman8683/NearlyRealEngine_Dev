@@ -8,7 +8,7 @@
     out vec4 [2] fragData;
 
     void main() {
-        vec3 envColor = texture(skyBox, vertex).rgb;
+        vec3 envColor = textureLod(skyBox, vertex, 0).rgb;
 
         //envColor = envColor / (envColor + vec3(1.0));
         //envColor = pow(envColor, vec3(1.0 / 2.2));

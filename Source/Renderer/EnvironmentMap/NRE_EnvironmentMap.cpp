@@ -11,13 +11,13 @@
             EnvironmentMap::EnvironmentMap() {
             }
 
-            EnvironmentMap::EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader) : buffer(true), vao(true) {
+            EnvironmentMap::EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader) : buffer(true), vao(true) {
                 fillBuffer();
                 allocate();
-                capture(path, captureShader, irradianceShader);
+                capture(path, captureShader, irradianceShader, prefilterShader);
             }
 
-            EnvironmentMap::EnvironmentMap(EnvironmentMap const& map) : map(map.getMap()), irradianceMap(map.getIrradienceMap()), buffer(true), vao(true) {
+            EnvironmentMap::EnvironmentMap(EnvironmentMap const& map) : map(map.getMap()), irradianceMap(map.getIrradianceMap()), prefilterMap(map.getPrefilterMap()), buffer(true), vao(true) {
                 fillBuffer();
             }
 
@@ -28,8 +28,12 @@
                 return map;
             }
 
-            GL::SkyBox const& EnvironmentMap::getIrradienceMap() const {
+            GL::SkyBox const& EnvironmentMap::getIrradianceMap() const {
                 return irradianceMap;
+            }
+
+            GL::SkyBox const& EnvironmentMap::getPrefilterMap() const {
+                return prefilterMap;
             }
 
             GL::IBO const& EnvironmentMap::getBuffer() const {
@@ -44,8 +48,12 @@
                 this->map = map;
             }
 
-            void EnvironmentMap::setIrradience(GL::SkyBox const& map) {
+            void EnvironmentMap::setIrradianceMap(GL::SkyBox const& map) {
                 irradianceMap = map;
+            }
+
+            void EnvironmentMap::setPrefilterMap(GL::SkyBox const& map) {
+                prefilterMap = map;
             }
 
             void EnvironmentMap::setBuffer(GL::IBO const& buf) {
@@ -59,6 +67,16 @@
             void EnvironmentMap::allocate() {
                 map.allocate(SIZE, SIZE, true);
                 irradianceMap.allocate(32, 32, true);
+                prefilterMap.allocate(128, 128, false);
+                prefilterMap.bind();
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+                    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+                    glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+                prefilterMap.unbind();
             }
 
             void EnvironmentMap::fillBuffer() {
@@ -89,7 +107,7 @@
                 vao.access(buffer, GL_INT, true);
             }
 
-            void EnvironmentMap::capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader) {
+            void EnvironmentMap::capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader) {
                 GL::Texture2D cubeMap;
 
                 cubeMap.setType(GL_FLOAT);
@@ -166,6 +184,36 @@
                         }
                     capture.unbind();
                 glUseProgram(0);
+
+                glUseProgram(prefilterShader.getID());
+                    glUniform1i(glGetUniformLocation(prefilterShader.getID(), "skyBox"), 0);
+                    glUniformMatrix4fv(glGetUniformLocation(prefilterShader.getID(), "projection"), 1, GL_TRUE, projection.value());
+                    map.bind();
+
+                    capture.bind();
+                    GLuint maxMipLevels = 5;
+                    for (GLuint mip = 0; mip < maxMipLevels; mip = mip + 1) {
+                        GLuint mipWidth = 128 * std::pow(0.5, mip);
+                        GLuint mipHeight = 128 * std::pow(0.5, mip);
+                        tmp->allocate(GL_DEPTH_COMPONENT24, mipWidth, mipHeight);
+
+                        glViewport(0, 0, mipWidth, mipHeight);
+
+                        float roughness = (float)mip / (float)(maxMipLevels - 1);
+                        glUniform1f(glGetUniformLocation(prefilterShader.getID(), "roughness"), roughness);
+                        for (GLuint i = 0; i < 6; i = i + 1) {
+                            glUniformMatrix4fv(glGetUniformLocation(prefilterShader.getID(), "modelview"), 1, GL_TRUE, modelviews[i].value());
+                            capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, prefilterMap.getID(), mip);
+
+                            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+                            getVAO().bind();
+                                    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+                            getVAO().unbind();
+                        }
+                    }
+                    capture.unbind();
+                glUseProgram(0);
             }
 
             void EnvironmentMap::render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview) {
@@ -173,12 +221,12 @@
                 glDepthFunc(GL_LEQUAL);
                 glUseProgram(shader.getID());
                     getVAO().bind();
-                            map.bind();
+                            prefilterMap.bind();
 
                             glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
                             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-                            map.unbind();
+                            prefilterMap.unbind();
                     getVAO().unbind();
                glUseProgram(0);
                glDepthFunc(GL_LESS);

@@ -50,7 +50,7 @@
                     void deleteID() override;
                     void bind() const;
                     void unbind() const;
-                    void attachBuffer(GLenum const& attachment, GLenum const& target, GLuint const& id) const;
+                    void attachBuffer(GLenum const& attachment, GLenum const& target, GLuint const& id, GLint const& level = 0) const;
                     void access() const;
 
                     //## Access Operator ##//

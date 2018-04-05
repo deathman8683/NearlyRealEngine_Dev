@@ -34,13 +34,14 @@
                 private:
                     GL::SkyBox map;
                     GL::SkyBox irradianceMap;
+                    GL::SkyBox prefilterMap;
                     GL::IBO buffer;
                     GL::VAO vao;
 
                 public:
                     //## Constructor ##//
                     EnvironmentMap();
-                    EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader);
+                    EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader);
 
                     //## Copy-Constructor ##//
                     EnvironmentMap(EnvironmentMap const& map);
@@ -52,20 +53,22 @@
 
                     //## Getter ##//
                     GL::SkyBox const& getMap() const;
-                    GL::SkyBox const& getIrradienceMap() const;
+                    GL::SkyBox const& getIrradianceMap() const;
+                    GL::SkyBox const& getPrefilterMap() const;
                     GL::IBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
 
                     //## Setter ##//
                     void setMap(GL::SkyBox const& map);
-                    void setIrradience(GL::SkyBox const& map);
+                    void setIrradianceMap(GL::SkyBox const& map);
+                    void setPrefilterMap(GL::SkyBox const& map);
                     void setBuffer(GL::IBO const& buf);
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
                     void allocate();
                     void fillBuffer();
-                    void capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader);
+                    void capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader);
                     void render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
 
                     //## Access Operator ##//

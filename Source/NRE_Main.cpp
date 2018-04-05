@@ -22,6 +22,7 @@
             Renderer::Shader pbrShader("Shaders/PBRShader.vert", "Shaders/PBRShader.frag", true);
             Renderer::Shader captureShader("Shaders/CaptureShader.vert", "Shaders/CaptureShader.frag", true);
             Renderer::Shader irradianceShader("Shaders/IrradianceShader.vert", "Shaders/IrradianceShader.frag", true);
+            Renderer::Shader prefilterShader("Shaders/PrefilterShader.vert", "Shaders/PrefilterShader.frag", true);
 
             std::vector<Light::Light*> engineLighting;
             Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 250, 300, 0),         Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.1, 0.0);
@@ -39,7 +40,7 @@
 
             Time::Clock engineClock;
 
-            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Moon.hdr", captureShader, irradianceShader);
+            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Moon.hdr", captureShader, irradianceShader, prefilterShader);
 
             camera.computeProjectionMatrix(projection);
 
@@ -63,7 +64,7 @@
 
                 camera.update();
 
-                angle += 1;
+                angle += 3;
                 if (angle >= 360) {
                     angle = 0.0;
                     Maths::Vector3D<NREfloat> tmp((rand() % 255) / 255.0, (rand() % 255) / 255.0, (rand() % 255) / 255.0);
