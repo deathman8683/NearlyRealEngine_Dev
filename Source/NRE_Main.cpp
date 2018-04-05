@@ -39,8 +39,7 @@
 
             Time::Clock engineClock;
 
-            GL::SkyBox engineSkybox("Data/SkyBox/Moon.hdr");
-            engineSkybox.captureCubeMap(captureShader, irradianceShader);
+            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Moon.hdr", captureShader, irradianceShader);
 
             camera.computeProjectionMatrix(projection);
 

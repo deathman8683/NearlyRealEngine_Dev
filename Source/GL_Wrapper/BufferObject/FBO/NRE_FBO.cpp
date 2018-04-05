@@ -60,7 +60,7 @@
                 bind();
                     for (GLuint i = 0; i < nbColorBuffer; i = i + 1) {
                         push_back(new Texture2D(getSize().getW(), getSize().getH(), format[i], internalFormat[i], type[i]));
-                        attachBuffer(GL_COLOR_ATTACHMENT0 + i, *getColorBuffer(i));
+                        colorBuffer.at(i)->attach(GL_COLOR_ATTACHMENT0 + i);
                     }
                 unbind();
             }

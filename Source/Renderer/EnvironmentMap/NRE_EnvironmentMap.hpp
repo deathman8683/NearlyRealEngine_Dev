@@ -83,6 +83,7 @@
                     //## Shift Operator ##//
 
                 private:
+                    static GLuint SIZE;
             };
 
         };

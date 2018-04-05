@@ -10,14 +10,10 @@
 
     #include <sstream>
     #include <fstream>
-    #include "../../GL_Wrapper/BufferObject/FBO/NRE_FBO.hpp"
-    #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
-    #include "../../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
-    #include "../../GL_Wrapper/BufferObject/SkyBox/NRE_SkyBox.hpp"
+    #include "../EnvironmentMap/NRE_EnvironmentMap.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
     #include "../../Lighting/NRE_Light.hpp"
     #include "../../World/NRE_World.hpp"
-    #include "../Shader/NRE_Shader.hpp"
     #include "../SSAO/NRE_SSAO.hpp"
 
     /**
@@ -71,7 +67,7 @@
                     void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
-                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &lightModelview, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, GL::SkyBox const& skyBox);
+                    void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &lightModelview, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, EnvironmentMap const& skyBox);
                     void startGBufferPass();
                     void endGBufferPass();
                     void SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection);

@@ -36,8 +36,8 @@
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
             }
 
-            void FrameBuffer::attachBuffer(GLenum const& attachment, Texture2D const& texture) const {
-                glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, texture.getID(), 0);
+            void FrameBuffer::attachBuffer(GLenum const& attachment, GLenum const& target, GLuint const& id) const {
+                glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, target, id, 0);
             }
 
             void FrameBuffer::access() const {

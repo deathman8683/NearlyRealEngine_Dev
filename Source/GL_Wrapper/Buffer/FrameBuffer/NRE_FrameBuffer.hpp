@@ -50,7 +50,7 @@
                     void deleteID() override;
                     void bind() const;
                     void unbind() const;
-                    void attachBuffer(GLenum const& attachment, Texture2D const& texture) const;
+                    void attachBuffer(GLenum const& attachment, GLenum const& target, GLuint const& id) const;
                     void access() const;
 
                     //## Access Operator ##//
