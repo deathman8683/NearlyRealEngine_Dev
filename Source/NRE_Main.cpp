@@ -30,9 +30,9 @@
             Light::Light engineLight4(Maths::Point4D<NREfloat>(60.5, -44.8, 29.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight5(Maths::Point4D<NREfloat>(50.0, -4.8,  29.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             //engineLighting.push_back(&engineLight1);
-            engineLighting.push_back(&engineLight2);
-            engineLighting.push_back(&engineLight3);
-            engineLighting.push_back(&engineLight4);
+            //engineLighting.push_back(&engineLight2);
+            //engineLighting.push_back(&engineLight3);
+            //engineLighting.push_back(&engineLight4);
             engineLighting.push_back(&engineLight5);
 
             Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, lightModelview;
@@ -63,9 +63,12 @@
 
                 camera.update();
 
-                angle += 0.0003;
+                angle += 1;
                 if (angle >= 360) {
                     angle = 0.0;
+                    Maths::Vector3D<NREfloat> tmp((rand() % 255) / 255.0, (rand() % 255) / 255.0, (rand() % 255) / 255.0);
+                    tmp.normalize();
+                    engineLight5.setIntensities(tmp);
                 }
 
                 shadowView.setEye(Maths::Point3D<NREfloat>(8 + engineWorld.getShift().getX() * 16, sin(angle) * 256 + engineWorld.getShift().getY() * 16, cos(angle) * 256));
