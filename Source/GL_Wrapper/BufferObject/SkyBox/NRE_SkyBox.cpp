@@ -14,7 +14,7 @@
             SkyBox::SkyBox() {
             }
 
-            SkyBox::SkyBox(std::string const& path) : TextureBuffer::TextureBuffer(true), cubeMap(0), irradianceMap(0), buffer(true), vao(true) {
+            SkyBox::SkyBox(std::string const& path) : CubeMap::CubeMap(true), cubeMap(0), irradianceMap(0), buffer(true), vao(true) {
                 glGenTextures(1, &irradianceMap);
                 allocate(true);
                 cubeMap = new Texture2D();
@@ -28,7 +28,7 @@
                 cubeMap->setGLW(w);
                 cubeMap->setGLH(h);
                 cubeMap->bind();
-                    cubeMap->TextureBuffer::allocateAndFill(GL_TEXTURE_2D, 0, cubeMap->getGLInternalFormat(), cubeMap->getGLW(), cubeMap->getGLH(), cubeMap->getGLFormat(), data, true);
+                    cubeMap->TextureBuffer::allocateAndFill(0, cubeMap->getGLInternalFormat(), cubeMap->getGLW(), cubeMap->getGLH(), cubeMap->getGLFormat(), data, true);
                 cubeMap->unbind();
                 cubeMap->setAllocated(true);
 
@@ -36,7 +36,7 @@
                 fillBuffer();
             }
 
-            SkyBox::SkyBox(SkyBox const& sb) : TextureBuffer::TextureBuffer(sb), BufferObject::BufferObject(sb), cubeMap(sb.getCubeMap()), buffer(true), vao(true) {
+            SkyBox::SkyBox(SkyBox const& sb) : CubeMap::CubeMap(sb), BufferObject::BufferObject(sb), cubeMap(sb.getCubeMap()), buffer(true), vao(true) {
             }
 
             SkyBox::~SkyBox() {
@@ -59,6 +59,10 @@
                 return TYPE;
             }
 
+            GLenum const SkyBox::getTarget() const {
+                return GL_TEXTURE_CUBE_MAP;
+            }
+
             void SkyBox::setCubeMap(Texture2D* const& t) {
                 cubeMap = t;
             }
@@ -71,23 +75,8 @@
                 this->vao = vao;
             }
 
-            void SkyBox::bind() const {
-                TextureBuffer::bind(GL_TEXTURE_CUBE_MAP);
-            }
-
-            void SkyBox::unbind() const {
-                TextureBuffer::unbind(GL_TEXTURE_CUBE_MAP);
-            }
-
             void SkyBox::allocate(bool const& callFilter) {
-                bind();
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, false);
-                    TextureBuffer::allocate(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGB16F, SIZE, SIZE, GL_RGB, callFilter);
-                unbind();
+                CubeMap::allocate(0, GL_RGB16F, SIZE, SIZE, GL_RGB, callFilter);
                 glBindTexture(GL_TEXTURE_CUBE_MAP, irradianceMap);
                     glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, 0);
                     glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, 0);
@@ -110,10 +99,6 @@
                 glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
                 glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
                 glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-            }
-
-            void SkyBox::access() const {
-                TextureBuffer::access(GL_TEXTURE_CUBE_MAP);
             }
 
             void SkyBox::fillBuffer() {

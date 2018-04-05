@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_TextureBuffer.hpp
-     * @brief Declaration of Engine's GL's Object : TextureBuffer
+     * @file NRE_CubeMap.hpp
+     * @brief Declaration of Engine's GL's Object : CubeMap
      * @author Louis ABEL
      * @version 1.0
      */
@@ -9,7 +9,6 @@
     #pragma once
 
     #include "../NRE_Buffer.hpp"
-    #include "../../../SDL_Wrapper/Surface/NRE_Surface.hpp"
 
     /**
      * @namespace NRE
@@ -23,28 +22,27 @@
         namespace GL {
 
             /**
-             * @class TextureBuffer
-             * @brief GL's Object : A specialized buffer for texture managing
+             * @class CubeMap
+             * @brief GL's Object : A specialized buffer for cubemap managing
              */
-            class TextureBuffer : public Buffer {
+            class CubeMap : public Buffer {
                 private:
 
                 public:
                     //## Constructor ##//
-                    TextureBuffer();
-                    TextureBuffer(bool const& generate);
+                    CubeMap();
+                    CubeMap(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    TextureBuffer(TextureBuffer const& buf);
+                    CubeMap(CubeMap const& buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~TextureBuffer();
+                    virtual ~CubeMap();
 
                     //## Getter ##//
                     virtual GLenum const getType() const = 0;
-                    virtual GLenum const getTarget() const = 0;
 
                     //## Setter ##//
 
@@ -54,8 +52,8 @@
                     void bind() const;
                     void unbind() const;
                     void allocate(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, bool const& callFilter) const;
-                    void update(GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const;
-                    void allocateAndFill(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data, bool const& callFilter) const;
+                    void update(GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, std::vector<GLvoid*> const& data) const;
+                    void allocateAndFill(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, std::vector<GLvoid*> const& data, bool const& callFilter) const;
                     virtual void applyFilter() const = 0;
                     void access() const;
 

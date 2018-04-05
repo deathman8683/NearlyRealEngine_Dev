@@ -46,18 +46,16 @@
 
                     //## Getter ##//
                     GLenum const getType() const;
+                    GLenum const getTarget() const;
 
                     //## Setter ##//
                     void setType(GLenum const& t);
 
                     //## Methods ##//
-                    void bind() const;
-                    void unbind() const;
                     void allocate(bool const& callFilter);
                     void update(GLint const& xOffset, GLint const& yOffset, GLvoid* const& data) const;
                     void allocateAndFill(bool const& callFilter);
                     void applyFilter() const;
-                    void access() const;
 
                     //## Access Operator ##//
 

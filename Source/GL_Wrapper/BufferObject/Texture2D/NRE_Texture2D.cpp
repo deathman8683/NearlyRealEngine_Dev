@@ -27,35 +27,25 @@
                 return type;
             }
 
+            GLenum const Texture2D::getTarget() const {
+                return GL_TEXTURE_2D;
+            }
+
             void Texture2D::setType(GLenum const& t) {
                 type = t;
             }
 
-            void Texture2D::bind() const {
-                TextureBuffer::bind(GL_TEXTURE_2D);
-            }
-
-            void Texture2D::unbind() const {
-                TextureBuffer::unbind(GL_TEXTURE_2D);
-            }
-
             void Texture2D::allocate(bool const& callFilter) {
-                bind();
-                    TextureBuffer::allocate(GL_TEXTURE_2D, 0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), callFilter);
-                unbind();
+                TextureBuffer::allocate(0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), callFilter);
                 setAllocated(true);
             }
 
             void Texture2D::update(GLint const& xOffset, GLint const& yOffset, GLvoid* const& data) const {
-                bind();
-                    TextureBuffer::update(GL_TEXTURE_2D, 0, xOffset, yOffset, getGLW(), getGLH(), getGLFormat(), data);
-                unbind();
+                TextureBuffer::update(0, xOffset, yOffset, getGLW(), getGLH(), getGLFormat(), data);
             }
 
             void Texture2D::allocateAndFill(bool const& callFilter) {
-                bind();
-                    TextureBuffer::allocateAndFill(GL_TEXTURE_2D, 0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), getPixels(), callFilter);
-                unbind();
+                TextureBuffer::allocateAndFill(0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), getPixels(), callFilter);
                 setAllocated(true);
                 free();
             }
@@ -65,10 +55,6 @@
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            }
-
-            void Texture2D::access() const {
-                TextureBuffer::access(GL_TEXTURE_2D);
             }
 
         };

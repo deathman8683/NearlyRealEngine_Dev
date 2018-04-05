@@ -4,6 +4,7 @@ OBJDIR = ../../../obj/Debug/GL_Wrapper/Buffer/
 
 ATTRIBUTE = AttributeBuffer
 TEXTURE = TextureBuffer
+CUBEMAP = CubeMap
 FRAME = FrameBuffer
 RENDER = RenderBuffer
 VAO = VAO
@@ -13,6 +14,7 @@ all : $(TARGET) after
 after:
 	@(cd $(ATTRIBUTE) && $(MAKE))
 	@(cd $(TEXTURE) && $(MAKE))
+	@(cd $(CUBEMAP) && $(MAKE))
 	@(cd $(FRAME) && $(MAKE))
 	@(cd $(RENDER) && $(MAKE))
 	@(cd $(VAO) && $(MAKE))
