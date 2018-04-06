@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "../NRE_Light.hpp"
+    #include "../SpotLight/NRE_SpotLight.hpp"
 
     /**
      * @namespace NRE
@@ -25,7 +25,7 @@
              * @class DirectionnalLight
              * @brief Light's Object : A specialized version of Light to manage directionnal light
              */
-            class DirectionnalLight : public Light {
+            class DirectionnalLight : public SpotLight {
                 private:
 
                 public:

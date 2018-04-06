@@ -46,7 +46,7 @@
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Light();
+                    virtual ~Light();
 
                     //## Getter ##//
                     Maths::Point4D<NREfloat> const& getPosition() const;

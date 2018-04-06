@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_PointLight.hpp
-     * @brief Declaration of Engine's Light's Object : PointLight
+     * @file NRE_SpotLight.hpp
+     * @brief Declaration of Engine's Light's Object : SpotLight
      * @author Louis ABEL
      * @version 1.0
      */
@@ -22,24 +22,24 @@
         namespace Light {
 
             /**
-             * @class PointLight
-             * @brief Light's Object : A specialized version of Light to manage point light
+             * @class SpotLight
+             * @brief Light's Object : A specialized version of light to manage spot light
              */
-            class PointLight : public Light {
+            class SpotLight : public Light {
                 private:
 
                 public:
                     //## Constructor ##//
-                    PointLight();
-                    PointLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, NREfloat const& attenuation);
+                    SpotLight();
+                    SpotLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction, NREfloat const& ambientCoeff, NREfloat const& angle);
 
                     //## Copy-Constructor ##//
-                    PointLight(PointLight const& l);
+                    SpotLight(SpotLight const& l);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~PointLight();
+                    virtual ~SpotLight();
 
                     //## Getter ##//
 
