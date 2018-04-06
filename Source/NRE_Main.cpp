@@ -26,11 +26,11 @@
             Renderer::Shader brdfShader("Shaders/BRDFShader.vert", "Shaders/BRDFShader.frag", true);
 
             std::vector<Light::Light*> engineLight;
-            Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 250, 300, 0),         Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.1, 0.0);
-            Light::Light engineLight2(Maths::Point4D<NREfloat>(29.7,  28.0, 29.0, 1.0), Maths::Vector3D<NREfloat>(10.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-            Light::Light engineLight3(Maths::Point4D<NREfloat>(71.6,  41.7, 29.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 10.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-            Light::Light engineLight4(Maths::Point4D<NREfloat>(60.5, -44.8, 29.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 10.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-            Light::Light engineLight5(Maths::Point4D<NREfloat>(50.0, -4.8,  29.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
+            //Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 250, 300),Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1);
+            Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), 0.001);
+            Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), 0.001);
+            Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), 0.001);
+            Light::PointLight engineLight5(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), 0.001);
             //engineLight.push_back(&engineLight1);
             engineLight.push_back(&engineLight2);
             engineLight.push_back(&engineLight3);
@@ -73,11 +73,11 @@
                     engineLight5.setIntensities(tmp);
                 }
 
-                shadowView.setEye(Maths::Point3D<NREfloat>(8 + engineWorld.getShift().getX() * 16, sin(angle) * 256 + engineWorld.getShift().getY() * 16, cos(angle) * 256));
+                /*shadowView.setEye(Maths::Point3D<NREfloat>(8 + engineWorld.getShift().getX() * 16, sin(angle) * 256 + engineWorld.getShift().getY() * 16, cos(angle) * 256));
                 shadowView.setCenter(Maths::Point3D<NREfloat>(8 + engineWorld.getShift().getX() * 16, 8 + engineWorld.getShift().getY() * 16, 64));
                 engineLight1.setPosition(Maths::Point4D<NREfloat>(shadowView.getEye(), 0.0));
                 shadowView.computeAngle();
-                shadowView.computeVector();
+                shadowView.computeVector();*/
 
                 modelview.setIdentity();
                 lightModelview.setIdentity();
