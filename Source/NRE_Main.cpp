@@ -37,7 +37,7 @@
             engineLight.push_back(&engineLight4);
             engineLight.push_back(&engineLight5);
 
-            Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, lightModelview;
+            Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, lightModelview, rotation;
 
             Time::Clock engineClock;
 
@@ -65,13 +65,17 @@
 
                 camera.update();
 
-                angle += 3;
+                angle += 0.03;
                 if (angle >= 360) {
                     angle = 0.0;
                     Maths::Vector3D<NREfloat> tmp((rand() % 255) / 255.0, (rand() % 255) / 255.0, (rand() % 255) / 255.0);
                     tmp.normalize();
                     engineLight5.setIntensities(tmp);
                 }
+                rotation.setIdentity();
+                
+                rotation.rotate(angle, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
+                rotation.rotate(angle / 2, Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0));
 
                 /*shadowView.setEye(Maths::Point3D<NREfloat>(8 + engineWorld.getShift().getX() * 16, sin(angle) * 256 + engineWorld.getShift().getY() * 16, cos(angle) * 256));
                 shadowView.setCenter(Maths::Point3D<NREfloat>(8 + engineWorld.getShift().getX() * 16, 8 + engineWorld.getShift().getY() * 16, 64));
@@ -91,7 +95,11 @@
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
                     engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    modelview.rotate(angle, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
+                    modelview.rotate(angle / 2, Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0));
                     engineSkybox.render(skyBoxShader, projection, modelview);
+                    modelview.rotate(angle / 2, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
+                    modelview.rotate(angle, Maths::Vector3D<NREfloat>(0.0, -1.0, 0.0));
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endGBufferPass();
 
@@ -140,7 +148,7 @@
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
                 }
 
-                engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, camera, engineLight, engineSkybox);
+                engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, rotation, camera, engineLight, engineSkybox);
 
                 engineWorld.update();
 

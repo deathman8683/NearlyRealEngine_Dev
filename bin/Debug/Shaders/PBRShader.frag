@@ -25,6 +25,7 @@
     uniform mat4 invModelview;
     uniform mat4 invProjection;
     uniform mat4 lightModelview;
+    uniform mat4 rotation;
 
     uniform sampler2D texDepth;
     uniform sampler2D texDiffuse;
@@ -136,6 +137,7 @@
             vec3 N = normalize(normal);
             vec3 V = normalize(cameraV - vertex);
             vec3 R = reflect(-V, N);
+            R = (rotation * vec4(R, 1.0)).xyz;
 
             vec3 F0 = vec3(0.04);
             F0 = mix(F0, materials[id].albedo, materials[id].metallic);
