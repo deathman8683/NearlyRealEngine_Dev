@@ -73,7 +73,7 @@
                     engineLight5.setIntensities(tmp);
                 }
                 rotation.setIdentity();
-                
+
                 rotation.rotate(angle, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
                 rotation.rotate(angle / 2, Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0));
 
@@ -95,11 +95,10 @@
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
                     engineWorld.render(gBufferPass, modelview, projection, &camera);
-                    modelview.rotate(angle, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
-                    modelview.rotate(angle / 2, Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0));
+                    Maths::Matrix4x4<NREfloat> tmp(modelview);
+                    modelview = modelview * rotation;
                     engineSkybox.render(skyBoxShader, projection, modelview);
-                    modelview.rotate(angle / 2, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
-                    modelview.rotate(angle, Maths::Vector3D<NREfloat>(0.0, -1.0, 0.0));
+                    modelview = tmp;
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endGBufferPass();
 
