@@ -134,7 +134,7 @@
             int id = int(texture(texNormal, uv).w);
             vec3 N = normalize(normal);
             vec3 V = normalize(cameraV - vertex);
-            vec3 R = reflect(-V, N);
+            vec3 R = reflect(V, N);
             R = (rotation * vec4(R, 1.0)).xyz;
 
             vec3 F0 = vec3(0.04);
@@ -180,7 +180,7 @@
             vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), materials[id].roughness)).rg;
             vec3 specular = prefilteredColor * (F * brdf.x + brdf.y);
 
-            vec3 ambient = (kD * diffuse + specular) * computeBlur(uv);
+            vec3 ambient = (kD * computeBlur(uv) * diffuse + specular);
 
             vec3 color = (ambient + Lo);
 

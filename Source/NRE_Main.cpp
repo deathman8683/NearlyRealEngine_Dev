@@ -41,7 +41,7 @@
 
             Time::Clock engineClock;
 
-            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Sky.hdr", captureShader, irradianceShader, prefilterShader, brdfShader);
+            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Space_2K.hdr", captureShader, irradianceShader, prefilterShader, brdfShader);
 
             camera.computeProjectionMatrix(projection);
 
