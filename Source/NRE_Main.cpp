@@ -25,17 +25,17 @@
             Renderer::Shader prefilterShader("Shaders/PrefilterShader.vert", "Shaders/PrefilterShader.frag", true);
             Renderer::Shader brdfShader("Shaders/BRDFShader.vert", "Shaders/BRDFShader.frag", true);
 
-            std::vector<Light::Light*> engineLighting;
+            std::vector<Light::Light*> engineLight;
             Light::Light engineLight1(Maths::Point4D<NREfloat>(0, 250, 300, 0),         Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 0.0), 0.0, 0.1, 0.0);
             Light::Light engineLight2(Maths::Point4D<NREfloat>(29.7,  28.0, 29.0, 1.0), Maths::Vector3D<NREfloat>(10.0, 0.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight3(Maths::Point4D<NREfloat>(71.6,  41.7, 29.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 10.0, 0.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight4(Maths::Point4D<NREfloat>(60.5, -44.8, 29.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 10.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
             Light::Light engineLight5(Maths::Point4D<NREfloat>(50.0, -4.8,  29.0, 1.0), Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.001, 0.0, 360.0);
-            //engineLighting.push_back(&engineLight1);
-            engineLighting.push_back(&engineLight2);
-            engineLighting.push_back(&engineLight3);
-            engineLighting.push_back(&engineLight4);
-            engineLighting.push_back(&engineLight5);
+            //engineLight.push_back(&engineLight1);
+            engineLight.push_back(&engineLight2);
+            engineLight.push_back(&engineLight3);
+            engineLight.push_back(&engineLight4);
+            engineLight.push_back(&engineLight5);
 
             Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, lightModelview;
 
@@ -140,7 +140,7 @@
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
                 }
 
-                engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, camera, engineLighting, engineSkybox);
+                engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, camera, engineLight, engineSkybox);
 
                 engineWorld.update();
 

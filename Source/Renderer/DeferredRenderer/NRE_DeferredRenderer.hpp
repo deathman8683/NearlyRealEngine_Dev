@@ -12,7 +12,7 @@
     #include <fstream>
     #include "../EnvironmentMap/NRE_EnvironmentMap.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
-    #include "../../Lighting/NRE_Light.hpp"
+    #include "../../Light/NRE_Light.hpp"
     #include "../../World/NRE_World.hpp"
     #include "../SSAO/NRE_SSAO.hpp"
 

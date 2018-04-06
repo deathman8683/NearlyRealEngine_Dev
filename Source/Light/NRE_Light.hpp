@@ -18,13 +18,13 @@
     namespace NRE {
         /**
          * @namespace Light
-         * @brief <Module_Desc>
+         * @brief Engine's Light Module
          */
         namespace Light {
 
             /**
              * @class Light
-             * @brief Light's Object : <Class_Desc>
+             * @brief Light's Object : A typical light
              */
             class Light {
                 private:
