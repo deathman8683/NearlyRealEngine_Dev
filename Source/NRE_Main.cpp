@@ -27,10 +27,10 @@
 
             std::vector<Light::Light*> engineLight;
             //Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 250, 300),Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1);
-            Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0), 0.001);
-            Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0), 0.001);
-            Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0), 0.001);
-            Light::PointLight engineLight5(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(5.0, 1.0, 1.0), 0.001);
+            Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0));
+            Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
+            Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0));
+            Light::PointLight engineLight5(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(5.0, 1.0, 1.0));
             //engineLight.push_back(&engineLight1);
             engineLight.push_back(&engineLight2);
             engineLight.push_back(&engineLight3);
@@ -48,20 +48,12 @@
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             double angle = 0.0;
-            double nbFrames = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
 
             while(!camera.getQuit())
             {
-                engineClock.updateActualTime();
-                nbFrames = nbFrames + 1;
-
-                if (engineClock.getActualTime() - engineClock.getLastTime() >= 1000.0) {
-                    std::cout << 1000.0 / nbFrames << "ms / frame" << std::endl;
-                    nbFrames = 0;
-                    engineClock.setLastTime(engineClock.getLastTime() + 1000.0);
-                }
+                engineClock.updateTimestep(1000.0 / 60.0);
 
                 camera.update();
 

@@ -31,7 +31,7 @@
                 public:
                     //## Constructor ##//
                     DirectionnalLight();
-                    DirectionnalLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction, NREfloat const& ambientCoeff);
+                    DirectionnalLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction);
 
                     //## Copy-Constructor ##//
                     DirectionnalLight(DirectionnalLight const& l);

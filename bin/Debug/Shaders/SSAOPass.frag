@@ -62,6 +62,7 @@
             }
 
             occlusion = occlusion / float(MAX_KERNEL_SIZE);
+            occlusion = pow(occlusion, 2.0);
             fragData = vec4(occlusion);
         } else {
             fragData = vec4(0.0, 0.0, 0.0, 0.0);

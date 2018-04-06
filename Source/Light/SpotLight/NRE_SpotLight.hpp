@@ -31,7 +31,7 @@
                 public:
                     //## Constructor ##//
                     SpotLight();
-                    SpotLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction, NREfloat const& ambientCoeff, NREfloat const& angle);
+                    SpotLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction, NREfloat const& angle);
 
                     //## Copy-Constructor ##//
                     SpotLight(SpotLight const& l);

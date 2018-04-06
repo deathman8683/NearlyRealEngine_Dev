@@ -119,10 +119,8 @@
                             index << i;
                             glUniform4fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPosition().value());
                             glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensities().value());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneDirection").c_str()), 1, light.at(i)->getConeDirection().value());
-                            glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].attenuation").c_str()), 1, light.at(i)->getAttenuationValue());
-                            glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].ambientCoefficient").c_str()), 1, light.at(i)->getAmbientCoeffValue());
-                            glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].coneAngle").c_str()), 1, light.at(i)->getConeAngleValue());
+                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].direction").c_str()), 1, light.at(i)->getDirection().value());
+                            glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].angle").c_str()), 1, light.at(i)->getAngleValue());
                         }
 
 

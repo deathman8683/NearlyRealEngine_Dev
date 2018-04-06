@@ -31,7 +31,7 @@
                 public:
                     //## Constructor ##//
                     PointLight();
-                    PointLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, NREfloat const& attenuation);
+                    PointLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color);
 
                     //## Copy-Constructor ##//
                     PointLight(PointLight const& l);

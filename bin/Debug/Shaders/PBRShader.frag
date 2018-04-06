@@ -8,10 +8,8 @@
     uniform struct Light {
        vec4 position;
        vec3 intensities;
-       vec3 coneDirection;
-       float attenuation;
-       float ambientCoefficient;
-       float coneAngle;
+       vec3 direction;
+       float angle;
     } lights[MAX_LIGHTS];
 
     uniform struct Material {
