@@ -7,7 +7,11 @@
             }
 
             template <class T>
-            Point2D<T>::Point2D(T const& x, T const& y) : data{static_cast <T> (x), static_cast <T> (y)} {
+            Point2D<T>::Point2D(T const& x, T const& y) : data{x, y} {
+            }
+
+            template <class T>
+            Point2D<T>::Point2D(T const& value) : Point2D(value, value) {
             }
 
             template <class T>

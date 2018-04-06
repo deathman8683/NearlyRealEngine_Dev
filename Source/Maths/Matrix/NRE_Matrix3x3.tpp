@@ -17,6 +17,10 @@
             }
 
             template <class T>
+            Matrix3x3<T>::Matrix3x3(T const& value) : Matrix3x3(value, value, value, value, value, value, value, value, value) {
+            }
+
+            template <class T>
             template <class K, class L, class M>
             Matrix3x3<T>::Matrix3x3(Vector3D<K> const& l1, Vector3D<L> const& l2, Vector3D<M> const& l3) : data{l1, l2, l3} {
             }

@@ -49,6 +49,7 @@
                          */
                         template <class K, class L, class M, class N>
                         Vector4D(K const& x, L const& y, M const& z, N const& w);
+                        Vector4D(T const& value);
                         /**
                          * @brief Constructor
                          * Initialize a 4D vector with 3D generic-type vector and w

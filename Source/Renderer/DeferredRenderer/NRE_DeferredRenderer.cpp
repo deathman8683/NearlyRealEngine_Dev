@@ -22,7 +22,7 @@
 
                 shadowMap.setDepthBuffer(new GL::RenderBuffer(GL_DEPTH_COMPONENT32F, shadowMap.getSize().getW(), shadowMap.getSize().getH(), true));
                 shadowMap.attachDepthBuffer(GL_DEPTH_ATTACHMENT);
-                shadowMap.getDepthBuffer()->clampToBorder(Maths::Vector4D<NREfloat>(1.0, 1.0, 1.0, 1.0));
+                shadowMap.getDepthBuffer()->clampToBorder(Maths::Vector4D<NREfloat>(1.0));
 
                 gBuffer.bind();
                 if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
@@ -162,7 +162,6 @@
 
             void DeferredRenderer::startGBufferPass() {
                 getFrameBuffer().bind();
-                    glClearColor(0.0, 0.0, 0.0, 1.0);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};

@@ -12,6 +12,10 @@
             }
 
             template <class T>
+            Point3D<T>::Point3D(T const& value) : Point3D(value, value, value) {
+            }
+
+            template <class T>
             template <class K>
             Point3D<T>::Point3D(Point2D<K> const& p, T const& z) : Point3D(p.getX(), p.getY(), z) {
             }

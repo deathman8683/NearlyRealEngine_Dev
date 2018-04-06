@@ -51,6 +51,7 @@
                         template <class K, class L, class M, class N>
                         Matrix2x2(K const& a, L const& b,
                                   M const& c, N const& d);
+                        Matrix2x2(T const& value);
                         /**
                          * @brief Constructor
                          * Initialize the matrix's value with two 2D generic-type vector as line

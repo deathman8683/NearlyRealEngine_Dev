@@ -60,6 +60,7 @@
                         Matrix3x3(K const& a, L const& b, M const& c,
                                   N const& d, O const& e, P const& f,
                                   Q const& g, R const& h, S const& i);
+                        Matrix3x3(T const& value);
                         /**
                          * @brief Constructor
                          * Initialize the matrix's value with three 3D generic-type vector as line

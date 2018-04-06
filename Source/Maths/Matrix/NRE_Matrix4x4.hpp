@@ -68,6 +68,7 @@
                                   E const& e, F const& f, G const& g, H const& h,
                                   I const& i, J const& j, K const& k, L const& l,
                                   M const& m, N const& n, O const& o, P const& p);
+                        Matrix4x4(T const& value);
                         /**
                          * @brief Constructor
                          * Initialize the matrix's value with three 4D generic-type vector as line

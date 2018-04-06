@@ -14,6 +14,10 @@
             }
 
             template <class T>
+            Matrix2x2<T>::Matrix2x2(T const& value) : Matrix2x2(value, value, value, value) {
+            }
+
+            template <class T>
             template <class K, class L>
             Matrix2x2<T>::Matrix2x2(Vector2D<K> const& l1, Vector2D<L> const& l2) : data{l1, l2} {
             }

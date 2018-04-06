@@ -7,7 +7,11 @@
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(T const& x, T const& y) : data{static_cast <T> (x), static_cast <T> (y)} {
+            Vector2D<T>::Vector2D(T const& x, T const& y) : data{x, y} {
+            }
+
+            template <class T>
+            Vector2D<T>::Vector2D(T const& value) : Vector2D(value, value) {
             }
 
             template <class T>

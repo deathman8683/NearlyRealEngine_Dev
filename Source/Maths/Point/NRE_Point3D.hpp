@@ -49,6 +49,7 @@
                          */
                         template <class K, class L, class M>
                         Point3D(K const& x, L const& y, M const& z);
+                        Point3D(T const& value);
                         /**
                          * @brief Constructor
                          * Initialize a 3D point with a base 2D point and z

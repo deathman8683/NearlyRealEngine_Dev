@@ -49,6 +49,7 @@
                          */
                         template <class K, class L, class M>
                         Vector3D(K const& x, L const& y, M const& z);
+                        Vector3D(T const& value);
                         /**
                          * @brief Constructor
                          * Initialize a 3D vector with 2D generic-type vector and z

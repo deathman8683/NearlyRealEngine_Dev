@@ -46,6 +46,7 @@
                          * @param y : T, the y coordinate
                          */
                         Point2D(T const& x, T const& y);
+                        Point2D(T const& value);
                         /**
                          * @brief Constructor
                          * Convert a 2D generic-type point and a translation 2D generic-type vector into a 2D T point

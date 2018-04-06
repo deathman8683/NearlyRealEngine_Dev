@@ -49,6 +49,7 @@
                          */
                         template <class K, class L, class M, class N>
                         Point4D(K const& x, L const& y, M const& z, N const& w);
+                        Point4D(T const& value);
                         /**
                          * @brief Constructor
                          * Initialize a 4D point with a base 3D point and w

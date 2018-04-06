@@ -12,6 +12,10 @@
             }
 
             template <class T>
+            Point4D<T>::Point4D(T const& value) : Point4D(value, value, value, value) {
+            }
+
+            template <class T>
             template <class K>
             Point4D<T>::Point4D(Point3D<K> const& p, T const& w) : Point4D(p.getX(), p.getY(), p.getZ(), w) {
             }

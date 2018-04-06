@@ -20,6 +20,13 @@
             }
 
             template <class T>
+            Matrix4x4<T>::Matrix4x4(T const& value) : Matrix4x4(value, value, value, value,
+                                                                value, value, value, value,
+                                                                value, value, value, value,
+                                                                value, value, value, value) {
+            }
+
+            template <class T>
             template <class K, class L, class M, class N>
             Matrix4x4<T>::Matrix4x4(Vector4D<K> const& l1, Vector4D<L> const& l2, Vector4D<M> const& l3, Vector4D<N> const& l4)
                                     : data{l1, l2, l3, l4} {

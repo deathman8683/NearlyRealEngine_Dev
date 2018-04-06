@@ -12,6 +12,10 @@
             }
 
             template <class T>
+            Vector3D<T>::Vector3D(T const& value) : Vector3D(value, value, value) {
+            }
+
+            template <class T>
             template <class K>
             Vector3D<T>::Vector3D(Vector2D<K> const& u, T const& z) : Vector3D(u.getX(), u.getY(), z) {
             }
