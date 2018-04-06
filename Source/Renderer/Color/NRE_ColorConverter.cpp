@@ -5,41 +5,81 @@
         namespace Color {
 
             RGB::RGB(HSL const& color) : RGB(DEFAULT_R, DEFAULT_G, DEFAULT_B) {
-                NREfloat c = (1 - std::abs(2 * color.getL() - 1 * color.getS()));
-                NREfloat x = c * (1 - std::abs((color.getH() / 60) % 2 - 1));
-                NREfloat m = color.getL() - c / 2;
-
-                NREfloat rPrime, gPrime, bPrime;
-
-                if (color.getH() >= 0 && color.getH() < 60) {
-                    rPrime = c;
-                    gPrime = x;
-                    bPrime = 0;
-                } else if (color.getH() >= 60 && color.getH() < 120) {
-                    rPrime = x;
-                    gPrime = c;
-                    bPrime = 0;
-                } else if (color.getH() >= 120 && color.getH() < 180) {
-                    rPrime = 0;
-                    gPrime = c;
-                    bPrime = x;
-                } else if (color.getH() >= 180 && color.getH() < 240) {
-                    rPrime = 0;
-                    gPrime = c;
-                    bPrime = c;
-                } else if (color.getH() >= 240 && color.getH() < 300) {
-                    rPrime = x;
-                    gPrime = 0;
-                    bPrime = c;
+                if (almostEqual(color.getS(), 0.0)) {
+                    NREfloat value = std::round(color.getL() * 255.0);
+                    setR(value);
+                    setG(value);
+                    setB(value);
                 } else {
-                    rPrime = c;
-                    gPrime = 0;
-                    bPrime = x;
-                }
+                    NREfloat tmpL;
+                    if (color.getL() <= 0.5) {
+                        tmpL = color.getL() * (1.0 + color.getS());
+                    } else {
+                        tmpL = color.getL() + color.getS() - color.getL() * color.getS();
+                    }
 
-                setR(static_cast <GLubyte>((rPrime + m) * 255));
-                setG(static_cast <GLubyte>((gPrime + m) * 255));
-                setB(static_cast <GLubyte>((bPrime + m) * 255));
+                    NREfloat tmpS = 2 * color.getL() - tmpL;
+                    NREfloat cH = color.getH() / 360.0;
+
+                    NREfloat rPrime, gPrime, bPrime;
+
+                    rPrime = cH + 0.333;
+                    gPrime = cH;
+                    bPrime = cH - 0.333;
+
+                    if (rPrime < 0.0) {
+                        rPrime = rPrime + 1.0;
+                    }
+                    if (rPrime > 1.0) {
+                        rPrime = rPrime - 1.0;
+                    }
+                    if (gPrime < 0.0) {
+                        gPrime = gPrime + 1.0;
+                    }
+                    if (gPrime > 1.0) {
+                        gPrime = gPrime - 1.0;
+                    }
+                    if (bPrime < 0.0) {
+                        bPrime = bPrime + 1.0;
+                    }
+                    if (bPrime > 1.0) {
+                        bPrime = bPrime - 1.0;
+                    }
+
+                    if (6 * rPrime < 1.0) {
+                        rPrime = tmpS + (tmpL - tmpS) * 6 * rPrime;
+                    } else if (2 * rPrime < 1.0) {
+                        rPrime = tmpL;
+                    } else if (3 * rPrime < 2.0) {
+                        rPrime = tmpS + (tmpL - tmpS) * (0.666 - rPrime) * 6;
+                    } else {
+                        rPrime = tmpS;
+                    }
+
+                    if (6 * gPrime < 1.0) {
+                        gPrime = tmpS + (tmpL - tmpS) * 6 * gPrime;
+                    } else if (2 * gPrime < 1.0) {
+                        gPrime = tmpL;
+                    } else if (3 * gPrime < 2.0) {
+                        gPrime = tmpS + (tmpL - tmpS) * (0.666 - gPrime) * 6;
+                    } else {
+                        gPrime = tmpS;
+                    }
+
+                    if (6 * bPrime < 1.0) {
+                        bPrime = tmpS + (tmpL - tmpS) * 6 * bPrime;
+                    } else if (2 * bPrime < 1.0) {
+                        bPrime = tmpL;
+                    } else if (3 * bPrime < 2.0) {
+                        bPrime = tmpS + (tmpL - tmpS) * (0.666 - bPrime) * 6;
+                    } else {
+                        bPrime = tmpS;
+                    }
+
+                    setR(static_cast <GLubyte> (std::round(rPrime * 255.0)));
+                    setG(static_cast <GLubyte> (std::round(gPrime * 255.0)));
+                    setB(static_cast <GLubyte> (std::round(bPrime * 255.0)));
+                }
             }
 
             RGBA::RGBA(HSLA const& color) : RGBA(RGB(color), static_cast <GLubyte> (color.getA() * 255)) {

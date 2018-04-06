@@ -27,10 +27,10 @@
 
             std::vector<Light::Light*> engineLight;
             //Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 250, 300),Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1);
-            Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0));
-            Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
-            Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 1.0));
-            Light::PointLight engineLight5(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(5.0, 1.0, 1.0));
+            Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(400.0, 0.0, 0.0));
+            Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 400.0, 0.0));
+            Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 400.0));
+            Light::PointLight engineLight5(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0));
             //engineLight.push_back(&engineLight1);
             engineLight.push_back(&engineLight2);
             engineLight.push_back(&engineLight3);
@@ -41,13 +41,14 @@
 
             Time::Clock engineClock;
 
-            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Moon.hdr", captureShader, irradianceShader, prefilterShader, brdfShader);
+            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Sky.hdr", captureShader, irradianceShader, prefilterShader, brdfShader);
 
             camera.computeProjectionMatrix(projection);
 
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
-            double angle = 0.0;
+            int angle = 0;
+            double skyboxAngle = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
 
@@ -57,17 +58,23 @@
 
                 camera.update();
 
-                angle += 0.03;
-                if (angle >= 360) {
-                    angle = 0.0;
-                    Maths::Vector3D<NREfloat> tmp((rand() % 255) / 255.0, (rand() % 255) / 255.0, (rand() % 255) / 255.0);
-                    tmp.normalize();
-                    engineLight5.setIntensities(tmp);
+                angle += 1;
+                angle %= 360;
+                skyboxAngle += 0.01;
+                if (skyboxAngle >= 360) {
+                    skyboxAngle = 0.0;
                 }
                 rotation.setIdentity();
 
-                rotation.rotate(angle, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
-                rotation.rotate(angle / 2, Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0));
+                Color::HSL color(angle, 1.0, 0.5);
+                Color::RGB colorRGB(color);
+                Maths::Vector3D<NREfloat> tmpColor((static_cast <NREfloat> (colorRGB.getR() / 255.0)) * 4000.0,
+                                                   (static_cast <NREfloat> (colorRGB.getG() / 255.0)) * 4000.0,
+                                                   (static_cast <NREfloat> (colorRGB.getB() / 255.0)) * 4000.0);
+                engineLight5.setIntensities(tmpColor);
+
+                rotation.rotate(skyboxAngle, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
+                rotation.rotate(skyboxAngle, Maths::Vector3D<NREfloat>(1.0, 0.0, 0.0));
 
                 /*shadowView.setEye(Maths::Point3D<NREfloat>(8 + engineWorld.getShift().getX() * 16, sin(angle) * 256 + engineWorld.getShift().getY() * 16, cos(angle) * 256));
                 shadowView.setCenter(Maths::Point3D<NREfloat>(8 + engineWorld.getShift().getX() * 16, 8 + engineWorld.getShift().getY() * 16, 64));
@@ -84,14 +91,15 @@
                     auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
 
                     if (it->second.isActive()) {
-                        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                        tmpColor.setG(tmpColor.getR());
+                        tmpColor.setB(tmpColor.getR());
+                       engineLight5.setIntensities(tmpColor);
                     }
                     engineWorld.render(gBufferPass, modelview, projection, &camera);
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(skyBoxShader, projection, modelview);
                     modelview = tmp;
-                    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                 engineDeferredRenderer.endGBufferPass();
 
                 /*engineDeferredRenderer.startShadowPass();
