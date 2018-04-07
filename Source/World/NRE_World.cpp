@@ -165,9 +165,11 @@
                 }
             }
 
-            void World::update() {
+            void World::update(GLuint const& loadLimit) {
                 emptyLoadRegionMap();
-                updateConstructionStack();
+                for (GLuint i = 0; i < loadLimit; i = i + 1) {
+                    updateConstructionStack();
+                }
                 emptySaveRegionMap();
             }
 

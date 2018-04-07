@@ -84,7 +84,7 @@
 
                     //## Methods ##//
                     void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera = 0);
-                    void update();
+                    void update(GLuint const& loadLimit);
                     void resetVoxelMergingGlobalCache();
                     NREfloat const getSoilNoise(NREfloat const& x, NREfloat const& y) const;
                     NREfloat const getMoistureNoise(NREfloat const& x, NREfloat const& y) const;
