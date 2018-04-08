@@ -13,7 +13,7 @@
             Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
             Camera::FixedCamera shadowView(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(8, 256, 256), Maths::Vector3D<NREfloat>(8, 8, 64));
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
+            World::World engineWorld(Maths::Vector2D<GLuint>(25, 25), Maths::Vector2D<GLint>(0, 0));
 
             Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
             Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
@@ -48,6 +48,7 @@
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             int angle = 0;
+            int nbFrames = 0;
             double skyboxAngle = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
@@ -56,7 +57,14 @@
 
             while(!camera.getQuit())
             {
-                engineClock.updateTimestep(1000.0 / 60.0);
+                engineClock.updateActualTime();
+                nbFrames = nbFrames + 1;
+
+                if (engineClock.getActualTime() - engineClock.getLastTime() >= 1000.0) {
+                    std::cout << 1000.0 / nbFrames << "ms / frame" << std::endl;
+                    nbFrames = 0;
+                    engineClock.setLastTime(engineClock.getLastTime() + 1000.0);
+                }
 
                 //std::cout << camera.getEye() << std::endl;
 
@@ -92,13 +100,6 @@
                 shadowView.setView(lightModelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    Camera::Key& lightSwitch = camera.Keyboard::getKey(SDL_SCANCODE_E);
-
-                    if (lightSwitch.isActive()) {
-                        tmpColor.setG(tmpColor.getR());
-                        tmpColor.setB(tmpColor.getR());
-                       engineLight5.setIntensities(tmpColor);
-                    }
                     engineWorld.render(gBufferPass, modelview, projection, &camera);
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
@@ -117,39 +118,22 @@
 
                 engineDeferredRenderer.SSAOPass(ssaoPass, projection, invProjection);
 
-                /*auto it0 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_L);
-                if (it0->second.isActive()) {
-                    engineWorld.flushConstructionStack();
-                    for (auto c : engineWorld.getChunkMap()) {
-                        c.second->setLoD(c.second->getLoD() * 2);
-                        c.second->reload();
-                    }
-                }
-                auto it1 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_O);
-                if (it1->second.isActive()) {
-                    engineWorld.flushConstructionStack();
-                    for (auto c : engineWorld.getChunkMap()) {
-                        c.second->setLoD(c.second->getLoD() / 2);
-                        c.second->reload();
-                    }
-                }
-
-                auto it2 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_F);
-                if (it2->second.isActive()) {
+                Camera::Key& it2 = camera.Keyboard::getKey(SDL_SCANCODE_F);
+                if (it2.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(1, 0));
                 }
-                auto it3 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_G);
-                if (it3->second.isActive()) {
+                Camera::Key& it3 = camera.Keyboard::getKey(SDL_SCANCODE_G);
+                if (it3.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, -1));
                 }
-                auto it4 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_H);
-                if (it4->second.isActive()) {
+                Camera::Key& it4 = camera.Keyboard::getKey(SDL_SCANCODE_H);
+                if (it4.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(-1, 0));
                 }
-                auto it5 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_T);
-                if (it5->second.isActive()) {
+                Camera::Key& it5 = camera.Keyboard::getKey(SDL_SCANCODE_T);
+                if (it5.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
-                }*/
+                }
 
                 engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, rotation, camera, engineLight, engineSkybox);
 

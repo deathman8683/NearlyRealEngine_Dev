@@ -158,7 +158,7 @@
                 modified = state;
             }
 
-            void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
+            void Chunk::renderAlone(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
                 if (camera != 0) {
                     setActive(camera->AABBCollision(getBounding()));
                 } else {
@@ -180,6 +180,12 @@
                         vao.unbind();
                     glUseProgram(0);
                 }
+            }
+
+            void Chunk::render() {
+                vao.bind();
+                    glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
+                vao.unbind();
             }
 
             void Chunk::save(std::fstream &chunkFile) {
