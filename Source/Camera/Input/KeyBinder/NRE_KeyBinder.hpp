@@ -20,10 +20,10 @@
      */
     namespace NRE {
         /**
-         * @namespace Input
-         * @brief Engine's Input Module
+         * @namespace Camera
+         * @brief Engine's Camera Module
          */
-        namespace Input {
+        namespace Camera {
 
             /**
              * @class KeyBinder
@@ -84,6 +84,6 @@
                 }
                 return stream;
             }
-            
+
         };
     };

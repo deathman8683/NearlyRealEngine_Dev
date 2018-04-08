@@ -27,7 +27,7 @@
              * @class MoveableCamera
              * @brief Camera's Object : An advanced camera linked to input system
              */
-            class MoveableCamera : public FixedCamera, public Input::Input {
+            class MoveableCamera : public FixedCamera, public Input {
                 private:
                     NREfloat speed;
 

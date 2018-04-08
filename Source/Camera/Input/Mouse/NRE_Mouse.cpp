@@ -2,7 +2,7 @@
     #include "NRE_Mouse.hpp"
 
     namespace NRE {
-        namespace Input {
+        namespace Camera {
 
             unsigned int Mouse::NUM_BUTTONS = SDL_BUTTON_X2 + 1;
             NREfloat Mouse::DEFAULT_SENSITIVITY = 0.1;

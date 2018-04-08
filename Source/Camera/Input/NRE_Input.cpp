@@ -2,7 +2,7 @@
     #include "NRE_Input.hpp"
 
     namespace NRE {
-        namespace Input {
+        namespace Camera {
 
             Input::Input() {
             }

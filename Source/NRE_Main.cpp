@@ -47,6 +47,14 @@
 
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
+            Maths::Matrix4x4<NREfloat> tmp(projection);
+            std::cout << tmp << std::endl;
+
+            Command<Maths::Matrix4x4<NREfloat>> test(&tmp, &Maths::Matrix4x4<NREfloat>::setIdentity);
+            test.execute();
+
+            std::cout << tmp << std::endl;
+
             int angle = 0;
             double skyboxAngle = 0;
 

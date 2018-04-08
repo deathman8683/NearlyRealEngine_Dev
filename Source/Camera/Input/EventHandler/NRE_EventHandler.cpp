@@ -2,7 +2,7 @@
     #include "NRE_EventHandler.hpp"
 
     namespace NRE {
-        namespace Input {
+        namespace Camera {
 
             EventHandler::EventHandler() : quit(false) {
             }

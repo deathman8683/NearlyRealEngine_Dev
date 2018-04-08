@@ -16,10 +16,10 @@
      */
     namespace NRE {
         /**
-         * @namespace Input
-         * @brief Engine's Input Module
+         * @namespace Camera
+         * @brief Engine's Camera Module
          */
-        namespace Input {
+        namespace Camera {
 
             /**
              * @class Key
@@ -77,6 +77,6 @@
                 stream << "(" << k.getCode() << "," << k.isActive() << "," << k.isSwitch() << ")";
                 return stream;
             }
-            
+
         };
     };

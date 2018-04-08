@@ -21,7 +21,7 @@
     #include <GL/glew.h>
     #include <SDL2/SDL.h>
     #include <SDL2/SDL_image.h>
-
+    #include "Command/NRE_Command.hpp"
 
     //typedef GLdouble NREfloat;
     typedef GLfloat NREfloat;

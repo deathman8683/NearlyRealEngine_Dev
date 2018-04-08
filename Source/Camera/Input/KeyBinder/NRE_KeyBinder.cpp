@@ -2,7 +2,7 @@
     #include "NRE_KeyBinder.hpp"
 
     namespace NRE {
-        namespace Input {
+        namespace Camera {
 
             KeyBinder::KeyBinder() {
             }

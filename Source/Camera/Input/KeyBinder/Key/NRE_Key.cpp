@@ -2,7 +2,7 @@
     #include "NRE_Key.hpp"
 
     namespace NRE {
-        namespace Input {
+        namespace Camera {
 
             Key::Key() : Key(0, false, false) {
             }
