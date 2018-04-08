@@ -48,6 +48,7 @@
                     bool constructed;
                     bool loading;
                     bool constructing;
+                    bool modified;
 
                 public:
                     //## Constructor ##//
@@ -78,6 +79,7 @@
                     bool const& isConstructed() const;
                     bool const& isLoading() const;
                     bool const& isConstructing() const;
+                    bool const& isModfied() const;
 
                     //## Setter ##//
                     void setVoxels(Voxel* const& vox);
@@ -94,6 +96,7 @@
                     void setConstructed(bool const& state);
                     void setLoading(bool const& state);
                     void setConstructing(bool const& state);
+                    void setModified(bool const& state);
 
                     //## Methods ##//
                     void constructMesh(World* w);
@@ -104,6 +107,7 @@
                     void createProceduralTerrain(World* w);
                     void checkActiveState(Camera::FixedCamera const& camera);
                     void reload();
+                    void writeCompressedData(std::stringstream &data);
 
                     //## Access Operator ##//
 

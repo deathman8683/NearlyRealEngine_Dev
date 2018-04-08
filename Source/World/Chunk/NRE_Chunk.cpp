@@ -17,14 +17,16 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), 1, generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLuint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD), active(true), loaded(false), constructed(false), loading(false), constructing(false) {
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLuint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD),
+                                                                                                          active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::MaterialBuffer(generateID));
                 buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()), active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()), loading(c.isLoading()), constructing(c.isConstructing()) {
+            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()),
+                                           active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()), loading(c.isLoading()), constructing(c.isConstructing()), modified(c.isModfied()) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
                 buffer.push_back(new GL::MaterialBuffer(true));
@@ -92,6 +94,10 @@
                 return constructing;
             }
 
+            bool const& Chunk::isModfied() const {
+                return modified;
+            }
+
             void Chunk::setVoxels(Voxel* const& vox) {
                 voxel = vox;
             }
@@ -148,6 +154,10 @@
                 constructing = state;
             }
 
+            void Chunk::setModified(bool const& state) {
+                modified = state;
+            }
+
             void Chunk::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
                 if (camera != 0) {
                     setActive(camera->AABBCollision(getBounding()));
@@ -190,34 +200,10 @@
                 chunkFile.read(reinterpret_cast<char*> (&offset), 3);
                 chunkFile.read(reinterpret_cast<char*> (&size), 1);
 
-                GLuint x = 0, y = 0, z = 0;
-                std::stringstream data;
-                GLuint currentType = getVoxel(x, y, z).getType(), currentLineSize = 0;
-                while (z != SIZE_Z) {
-                    if (currentType == static_cast <GLuint> (getVoxel(x, y, z).getType())) {
-                        currentLineSize = currentLineSize + 1;
-                    } else {
-                        data.write(reinterpret_cast<char*> (&currentLineSize), 2);
-                        data.write(reinterpret_cast<char*> (&currentType), 1);
-                        currentType = getVoxel(x, y, z).getType();
-                        currentLineSize = 1;
-                    }
-
-                    x = x + 1;
-                    if (x == SIZE_X) {
-                        x = 0;
-                        y = y + 1;
-                        if (y == SIZE_Y) {
-                            y = 0;
-                            z = z + 1;
-                        }
-                    }
-                }
-                data.write(reinterpret_cast<char*> (&currentLineSize), 2);
-                data.write(reinterpret_cast<char*> (&currentType), 1);
-                GLuint dataSize = data.tellp();
-
                 if (offset == 0 && size == 0) {
+                    std::stringstream data;
+                    writeCompressedData(data);
+                    GLuint dataSize = data.tellp();
                     chunkFile.seekg(0, chunkFile.end);
                     GLuint endOffset = chunkFile.tellp();
                     chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
@@ -235,13 +221,18 @@
                     chunkFile.write(reinterpret_cast<char*> (&chunkOffset), 3);
                     chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
                 } else {
-                    chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
-                    chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
-                    chunkFile << data.rdbuf();
+                    if (isModfied()) {
+                        std::stringstream data;
+                        writeCompressedData(data);
+                        GLuint dataSize = data.tellp();
+                        chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
+                        chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
+                        chunkFile << data.rdbuf();
 
-                    chunkFile.seekg(fileOffset + 3, chunkFile.beg);
-                    GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize)) / SECTOR_SIZE);
-                    chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
+                        chunkFile.seekg(fileOffset + 3, chunkFile.beg);
+                        GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize)) / SECTOR_SIZE);
+                        chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
+                    }
                 }
             }
 
@@ -314,6 +305,33 @@
                 buffer.reload();
                 vao.access(getBuffer(), GL_INT);
                 bounding.setCenter(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2);
+            }
+
+            void Chunk::writeCompressedData(std::stringstream &data) {
+                GLuint x = 0, y = 0, z = 0;
+                GLuint currentType = getVoxel(x, y, z).getType(), currentLineSize = 0;
+                while (z != SIZE_Z) {
+                    if (currentType == static_cast <GLuint> (getVoxel(x, y, z).getType())) {
+                        currentLineSize = currentLineSize + 1;
+                    } else {
+                        data.write(reinterpret_cast<char*> (&currentLineSize), 2);
+                        data.write(reinterpret_cast<char*> (&currentType), 1);
+                        currentType = getVoxel(x, y, z).getType();
+                        currentLineSize = 1;
+                    }
+
+                    x = x + 1;
+                    if (x == SIZE_X) {
+                        x = 0;
+                        y = y + 1;
+                        if (y == SIZE_Y) {
+                            y = 0;
+                            z = z + 1;
+                        }
+                    }
+                }
+                data.write(reinterpret_cast<char*> (&currentLineSize), 2);
+                data.write(reinterpret_cast<char*> (&currentType), 1);
             }
 
             GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) {
