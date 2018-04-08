@@ -14,19 +14,28 @@
                 load(path);
             }
 
-            KeyBinder::KeyBinder(KeyBinder const& map) : keyMap(map.getKeyMap()) {
+            KeyBinder::KeyBinder(KeyBinder const& map) : keyMap(map.getKeyMap()), activeKeys(map.getActiveKeys()) {
             }
 
             KeyBinder::~KeyBinder() {
                 keyMap.erase(keyMap.begin(), keyMap.end());
+                activeKeys.erase(activeKeys.begin(), activeKeys.end());
             }
 
             std::unordered_map<unsigned int, Key> const& KeyBinder::getKeyMap() const {
                 return keyMap;
             }
 
+            std::unordered_map<unsigned int, Key*> const& KeyBinder::getActiveKeys() const {
+                return activeKeys;
+            }
+
             void KeyBinder::setKeyMap(std::unordered_map<unsigned int, Key> const& map) {
                 keyMap = map;
+            }
+
+            void KeyBinder::setActiveKeys(std::unordered_map<unsigned int, Key*> const& keys) {
+                activeKeys = keys;
             }
 
             void KeyBinder::insert(unsigned int const& code, Key const& k) {
@@ -63,9 +72,38 @@
                     while (parser.rdbuf()->in_avail() > 0) {
                         parser >> code >> isSwitch;
 
-                        insert(lineCounter, Key(code, false, isSwitch));
+                        insert(lineCounter, Key(code, false, isSwitch, 0));
                         lineCounter = lineCounter + 1;
                     }
+                }
+            }
+
+            void KeyBinder::keyDown(unsigned int const& code) {
+                Key& tmp = keyMap.at(code);
+                if (tmp.isSwitch()) {
+                    tmp.setActive(!tmp.isActive());
+                    if (tmp.isActive()) {
+                        activeKeys.insert({code, &tmp});
+                    } else {
+                        activeKeys.erase(code);
+                    }
+                } else {
+                    activeKeys.insert({code, &tmp});
+                    tmp.setActive(true);
+                }
+            }
+
+            void KeyBinder::keyUp(unsigned int const& code) {
+                Key& tmp = keyMap.at(code);
+                if (!tmp.isSwitch()) {
+                    activeKeys.erase(code);
+                    tmp.setActive(false);
+                }
+            }
+
+            void KeyBinder::execute() {
+                for (auto& it : activeKeys) {
+                    it.second->execute();
                 }
             }
 

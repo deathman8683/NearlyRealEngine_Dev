@@ -32,6 +32,7 @@
             class KeyBinder {
                 protected:
                     std::unordered_map<unsigned int, Key> keyMap;
+                    std::unordered_map<unsigned int, Key*> activeKeys;
 
                 public:
                     //## Constructor ##//
@@ -49,15 +50,20 @@
 
                     //## Getter ##//
                     std::unordered_map<unsigned int, Key> const& getKeyMap() const;
+                    std::unordered_map<unsigned int, Key*> const& getActiveKeys() const;
 
                     //## Setter ##//
                     void setKeyMap(std::unordered_map<unsigned int, Key> const& map);
+                    void setActiveKeys(std::unordered_map<unsigned int, Key*> const& keys);
 
                     //## Methods ##//
                     void insert(unsigned int const& code, Key const& k);
                     void swap(unsigned int const& first, unsigned int const& second);
                     void save(std::string const& path);
                     void load(std::string const& path);
+                    void keyDown(unsigned int const& code);
+                    void keyUp(unsigned int const& code);
+                    void execute();
 
                     //## Access Operator ##//
                     std::unordered_map<unsigned int, Key>::iterator operator[](unsigned int const& code);

@@ -55,6 +55,14 @@
 
                     //## Methods ##//
                     void update();
+                    void bindKey();
+                    void moveFront();
+                    void moveBack();
+                    void moveDown();
+                    void moveUp();
+                    void moveLeft();
+                    void moveRight();
+                    void moveCenter();
 
                     //## Access Operator ##//
 

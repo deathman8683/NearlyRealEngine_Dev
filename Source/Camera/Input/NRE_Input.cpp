@@ -27,41 +27,20 @@
                             break;
                         }
                         case (SDL_KEYDOWN) : {
-                            Key& it = Keyboard::keyMap.at(getKeyScancode());
-                            Key& tmp = Keyboard::keyMap.at(it.getCode());
-                            if (tmp.isSwitch()) {
-                                tmp.setActive(!tmp.isActive());
-                            } else {
-                                tmp.setActive(true);
-                            }
+                            Keyboard::keyDown(getKeyScancode());
                             break;
                         }
                         case (SDL_KEYUP) : {
-                            Key& it = Keyboard::keyMap.at(getKeyScancode());
-                            Key& tmp = Keyboard::keyMap.at(it.getCode());
-                            if (!tmp.isSwitch()) {
-                                tmp.setActive(false);
-                            }
+                            Keyboard::keyUp(getKeyScancode());
                             break;
                         }
                         case (SDL_MOUSEBUTTONDOWN) : {
-                            Key& it = Mouse::keyMap.at(getMouseButton());
-                            Key& tmp = Mouse::keyMap.at(it.getCode());
-                            if (tmp.isSwitch()) {
-                                tmp.setActive(!tmp.isActive());
-                            } else {
-                                tmp.setActive(true);
-                            }
+                            Mouse::keyDown(getKeyScancode());
                             setClick(getMouseClick());
                             break;
                         }
                         case (SDL_MOUSEBUTTONUP) : {
-                            Key& it = Mouse::keyMap.at(getMouseButton());
-                            Key& tmp = Mouse::keyMap.at(it.getCode());
-                            tmp = Mouse::keyMap.at(tmp.getCode());
-                            if (!tmp.isSwitch()) {
-                                tmp.setActive(false);
-                            }
+                            Mouse::keyUp(getKeyScancode());
                             break;
                         }
                         case (SDL_MOUSEMOTION) : {
@@ -73,11 +52,11 @@
                             break;
                         }
                         default: {
-
                         }
                     }
                 }
+                Keyboard::execute();
+                Mouse::execute();
             }
-
         };
     };

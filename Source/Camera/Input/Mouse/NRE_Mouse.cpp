@@ -9,7 +9,7 @@
 
             Mouse::Mouse() : KeyBinder::KeyBinder(NUM_BUTTONS), sensitivity(DEFAULT_SENSITIVITY) {
                 for (unsigned int i = 0; i < NUM_BUTTONS; i = i + 1) {
-                    insert(i, Key(i, false, false));
+                    insert(i, Key(i, false, false, 0));
                 }
             }
 
@@ -18,7 +18,7 @@
 
             Mouse::Mouse(Maths::Point2D<unsigned short int> const& click, Maths::Point2D<unsigned short int> const& cursor, NREfloat const& sensitivity) : KeyBinder::KeyBinder(NUM_BUTTONS), click(click), cursor(cursor), sensitivity(sensitivity) {
                 for (unsigned int i = 0; i < NUM_BUTTONS; i = i + 1) {
-                    insert(i, Key(i, false, false));
+                    insert(i, Key(i, false, false, 0));
                 }
             }
 
