@@ -10,7 +10,7 @@
     int main(int argc, char **argv) {
         try {
             Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
-            Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
+            Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
             Camera::FixedCamera shadowView(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(8, 256, 256), Maths::Vector3D<NREfloat>(8, 8, 64));
 
             World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
@@ -47,18 +47,12 @@
 
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
-            Maths::Matrix4x4<NREfloat> tmp(projection);
-            std::cout << tmp << std::endl;
-
-            Command<Maths::Matrix4x4<NREfloat>> test(&tmp, &Maths::Matrix4x4<NREfloat>::setIdentity);
-            test.execute();
-
-            std::cout << tmp << std::endl;
-
             int angle = 0;
             double skyboxAngle = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
+
+            camera.Keyboard::getKey(SDL_SCANCODE_E).setSwitch(true);
 
             while(!camera.getQuit())
             {
@@ -98,9 +92,9 @@
                 shadowView.setView(lightModelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    auto it = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_E);
+                    Camera::Key& lightSwitch = camera.Keyboard::getKey(SDL_SCANCODE_E);
 
-                    if (it->second.isActive()) {
+                    if (lightSwitch.isActive()) {
                         tmpColor.setG(tmpColor.getR());
                         tmpColor.setB(tmpColor.getR());
                        engineLight5.setIntensities(tmpColor);
@@ -123,7 +117,7 @@
 
                 engineDeferredRenderer.SSAOPass(ssaoPass, projection, invProjection);
 
-                auto it0 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_L);
+                /*auto it0 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_L);
                 if (it0->second.isActive()) {
                     engineWorld.flushConstructionStack();
                     for (auto c : engineWorld.getChunkMap()) {
@@ -155,7 +149,7 @@
                 auto it5 = camera.Keyboard::getKeyMap().find(SDL_SCANCODE_T);
                 if (it5->second.isActive()) {
                     engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
-                }
+                }*/
 
                 engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, rotation, camera, engineLight, engineSkybox);
 
@@ -163,9 +157,6 @@
 
                 SDL_GL_SwapWindow(engineScene.getWindow().getItem());
             }
-
-            camera.Keyboard::save("kBinder.cfg");
-            camera.Mouse::save("mBinder.cfg");
         }
         catch (Exception::ExceptionHandler const& e) {
             std::cout << e.what() << std::endl;

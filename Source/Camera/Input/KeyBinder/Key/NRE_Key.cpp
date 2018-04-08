@@ -4,25 +4,17 @@
     namespace NRE {
         namespace Camera {
 
-            Key::Key() : Key(0, false, false, 0) {
-                std::cout << "Key C" << std::endl;
+            Key::Key() : Key(false, false, 0) {
             }
 
-            Key::Key(unsigned int const& code, bool const& active, bool const& switchKey, BaseCommand* cmd) : code(code), active(active), switchKey(switchKey), action(cmd) {
-                std::cout << "Key C" << std::endl;
+            Key::Key(bool const& active, bool const& switchKey, BaseCommand* cmd) : active(active), switchKey(switchKey), action(cmd) {
             }
 
-            Key::Key(Key const& k) : code(k.getCode()), active(k.isActive()), switchKey(k.isSwitch()), action(k.getAction()) {
-                std::cout << "Key C" << std::endl;
+            Key::Key(Key const& k) : active(k.isActive()), switchKey(k.isSwitch()), action(k.getAction()) {
             }
 
             Key::~Key() {
-                std::cout << "Key D" << std::endl;
                 delete action;
-            }
-
-            unsigned int const& Key::getCode() const {
-                return code;
             }
 
             bool const& Key::isActive() const {
@@ -35,10 +27,6 @@
 
             BaseCommand* const Key::getAction() const {
                 return action;
-            }
-
-            void Key::setCode(unsigned int const& code) {
-                this->code = code;
             }
 
             void Key::setActive(bool const& state) {

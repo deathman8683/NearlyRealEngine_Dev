@@ -38,7 +38,6 @@
                     //## Constructor ##//
                     KeyBinder();
                     KeyBinder(size_t const& n);
-                    KeyBinder(size_t const& n, std::string const& path);
 
                     //## Copy-Constructor ##//
                     KeyBinder(KeyBinder const& map);
@@ -49,8 +48,8 @@
                     virtual ~KeyBinder();
 
                     //## Getter ##//
-                    std::unordered_map<unsigned int, Key> const& getKeyMap() const;
-                    std::unordered_map<unsigned int, Key*> const& getActiveKeys() const;
+                    Key& getKey(unsigned int const& code);
+                    Key const& getKey(unsigned int const& code) const;
 
                     //## Setter ##//
                     void setKeyMap(std::unordered_map<unsigned int, Key> const& map);
@@ -59,11 +58,10 @@
                     //## Methods ##//
                     void insert(unsigned int const& code, Key const& k);
                     void swap(unsigned int const& first, unsigned int const& second);
-                    void save(std::string const& path);
-                    void load(std::string const& path);
                     void keyDown(unsigned int const& code);
                     void keyUp(unsigned int const& code);
                     void execute();
+                    size_t const size() const;
 
                     //## Access Operator ##//
                     std::unordered_map<unsigned int, Key>::iterator operator[](unsigned int const& code);
@@ -84,9 +82,8 @@
             };
 
             inline std::ostream& operator<<(std::ostream &stream, KeyBinder const& map) {
-                for (unsigned int i = 0; i != map.getKeyMap().size(); i = i + 1) {
-                    auto it = map.getKeyMap().find(i);
-                    stream << "(" << it->first << " | " << it->second << ")" << std::endl;
+                for (unsigned int i = 0; i != map.size(); i = i + 1) {
+                    stream << "(" << i << " | " << map.getKey(i) << ")" << std::endl;
                 }
                 return stream;
             }

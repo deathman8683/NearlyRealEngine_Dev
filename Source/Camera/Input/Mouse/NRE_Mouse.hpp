@@ -36,7 +36,6 @@
                 public:
                     //## Constructor ##//
                     Mouse();
-                    Mouse(std::string const& path);
                     Mouse(Maths::Point2D<unsigned short int> const& click, Maths::Point2D<unsigned short int> const& cursor, NREfloat const& sensitivity);
 
                     //## Copy-Constructor ##//

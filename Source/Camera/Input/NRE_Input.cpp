@@ -7,9 +7,6 @@
             Input::Input() {
             }
 
-            Input::Input(std::string const& kbPath, std::string const& mPath) : Keyboard::Keyboard(kbPath), Mouse::Mouse(mPath) {
-            }
-
             Input::Input(Keyboard const& kb, Mouse const& m, EventHandler const& e) : Keyboard::Keyboard(kb), Mouse::Mouse(m), EventHandler::EventHandler(e) {
             }
 

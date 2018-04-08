@@ -9,9 +9,9 @@
             MoveableCamera::MoveableCamera() : speed(DEFAULT_SPEED) {
             }
 
-            MoveableCamera::MoveableCamera(std::string const& kbPath, std::string const& mPath, NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
+            MoveableCamera::MoveableCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
                                            Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, NREfloat const& speed)
-                                           : FixedCamera::FixedCamera(fov, ratio, dist, eye, center), Input::Input(kbPath, mPath), speed(speed) {
+                                           : FixedCamera::FixedCamera(fov, ratio, dist, eye, center), speed(speed) {
                 bindKey();
             }
 

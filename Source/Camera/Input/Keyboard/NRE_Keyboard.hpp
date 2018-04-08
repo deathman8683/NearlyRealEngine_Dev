@@ -32,7 +32,6 @@
                 public:
                     //## Constructor ##//
                     Keyboard();
-                    Keyboard(std::string const& path);
 
                     //## Copy-Constructor ##//
                     Keyboard(Keyboard const& kb);

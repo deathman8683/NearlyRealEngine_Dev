@@ -27,7 +27,6 @@
              */
             class Key {
                 private:
-                    unsigned int code;
                     bool active;
                     bool switchKey;
                     BaseCommand* action;
@@ -35,7 +34,7 @@
                 public:
                     //## Constructor ##//
                     Key();
-                    Key(unsigned int const& code, bool const& active, bool const& switchKey, BaseCommand* cmd);
+                    Key(bool const& active, bool const& switchKey, BaseCommand* cmd);
 
                     //## Copy-Constructor ##//
                     Key(Key const& k);
@@ -46,13 +45,11 @@
                     ~Key();
 
                     //## Getter ##//
-                    unsigned int const& getCode() const;
                     bool const& isActive() const;
                     bool const& isSwitch() const;
                     BaseCommand* const getAction() const;
 
                     //## Setter ##//
-                    void setCode(unsigned int const& code);
                     void setActive(bool const& state);
                     void setSwitch(bool const& state);
                     void setAction(BaseCommand* cmd);
@@ -78,7 +75,7 @@
             };
 
             inline std::ostream& operator<<(std::ostream &stream, Key const& k) {
-                stream << "(" << k.getCode() << "," << k.isActive() << "," << k.isSwitch() << ")";
+                stream << "(" << "," << k.isActive() << "," << k.isSwitch() << ")";
                 return stream;
             }
 

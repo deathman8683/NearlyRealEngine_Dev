@@ -34,7 +34,6 @@
                 public:
                     //## Constructor ##//
                     Input();
-                    Input(std::string const& kbPath, std::string const& mPath);
                     Input(Keyboard const& kb, Mouse const& m, EventHandler const& e);
 
                     //## Copy-Constructor ##//
