@@ -36,7 +36,7 @@
                 return path;
             }
 
-            std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> const& Region::getChunk() const {
+            std::queue<std::pair<Maths::Point2D<GLint>, Chunk*>> const& Region::getChunk() const {
                 return chunk;
             }
 
@@ -44,7 +44,7 @@
                 this->path = path;
             }
 
-            void Region::setChunk(std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> const& chunk) {
+            void Region::setChunk(std::queue<std::pair<Maths::Point2D<GLint>, Chunk*>> const& chunk) {
                 this->chunk = chunk;
             }
 
@@ -60,10 +60,10 @@
                 }
                 size_t limit = getChunk().size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
-                    Maths::Point2D<GLint> tmp = chunk.top().second->getCoord();
-                    chunk.top().second->setCoord(chunk.top().first);
-                    chunk.top().second->save(chunkFile);
-                    chunk.top().second->setCoord(tmp);
+                    Maths::Point2D<GLint> tmp = chunk.front().second->getCoord();
+                    chunk.front().second->setCoord(chunk.front().first);
+                    chunk.front().second->save(chunkFile);
+                    chunk.front().second->setCoord(tmp);
                     chunk.pop();
                 }
                 chunkFile.close();
@@ -77,7 +77,7 @@
                 }
                 size_t limit = getChunk().size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
-                    chunk.top().second->load(chunkFile, w);
+                    chunk.front().second->load(chunkFile, w);
                     chunk.pop();
                 }
                 chunkFile.close();

@@ -56,7 +56,7 @@
                 return saveRegionMap;
             }
 
-            std::stack<Chunk*> const& World::getConstructionStack() const {
+            std::queue<Chunk*> const& World::getConstructionStack() const {
                 return constructionStack;
             }
 
@@ -108,8 +108,8 @@
                 saveRegionMap = map;
             }
 
-            void World::setConstructionStack(std::stack<Chunk*> const& stack) {
-                constructionStack = stack;
+            void World::setConstructionStack(std::queue<Chunk*> const& queue) {
+                constructionStack = queue;
             }
 
             void World::setChunk(Maths::Point2D<GLint> const& p, Chunk* const& chunk) {
@@ -255,9 +255,9 @@
 
             void World::updateConstructionStack() {
                 if (!constructionStack.empty()) {
-                    constructionStack.top()->constructMesh(this);
-                    constructionStack.top()->setConstructed(true);
-                    constructionStack.top()->setConstructing(false);
+                    constructionStack.front()->constructMesh(this);
+                    constructionStack.front()->setConstructed(true);
+                    constructionStack.front()->setConstructing(false);
                     constructionStack.pop();
                 }
             }

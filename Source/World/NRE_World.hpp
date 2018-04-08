@@ -32,7 +32,7 @@
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> chunkMap;
                     std::unordered_map<Maths::Point2D<GLint>, Region*> loadRegionMap;
                     std::unordered_map<Maths::Point2D<GLint>, Region*> saveRegionMap;
-                    std::stack<Chunk*> constructionStack;
+                    std::queue<Chunk*> constructionStack;
                     Maths::Vector2D<GLuint> hExtent;
                     Maths::Vector2D<GLint> shift;
                     FastNoise soilGenerator;
@@ -56,7 +56,7 @@
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& getChunkMap() const;
                     std::unordered_map<Maths::Point2D<GLint>, Region*> const& getLoadRegionMap() const;
                     std::unordered_map<Maths::Point2D<GLint>, Region*> const& getSaveRegionMap() const;
-                    std::stack<Chunk*> const& getConstructionStack() const;
+                    std::queue<Chunk*> const& getConstructionStack() const;
                     Chunk* const& getChunk(Maths::Point2D<GLint> const& p);
                     Chunk* const& getChunk(GLint const& x, GLint const& y);
                     Maths::Vector2D<GLuint> const& getHExtent() const;
@@ -71,7 +71,7 @@
                     void setChunkMap(std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& map);
                     void setLoadRegionMap(std::unordered_map<Maths::Point2D<GLint>, Region*> const& map);
                     void setSaveRegionMap(std::unordered_map<Maths::Point2D<GLint>, Region*> const& map);
-                    void setConstructionStack(std::stack<Chunk*> const& stack);
+                    void setConstructionStack(std::queue<Chunk*> const& queue);
                     void setChunk(Maths::Point2D<GLint> const& p, Chunk* const& chunk);
                     void setChunk(GLint const& x, GLint const& y, Chunk* const& chunk);
                     void setHExtent(Maths::Vector2D<GLuint> const& size);

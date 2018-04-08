@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include <stack>
+    #include <queue>
     #include "../Chunk/NRE_Chunk.hpp"
 
     /**
@@ -31,7 +31,7 @@
             class Region {
                 private:
                     std::string path;
-                    std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> chunk;
+                    std::queue<std::pair<Maths::Point2D<GLint>, Chunk*>> chunk;
 
                 public:
                     //## Constructor ##//
@@ -49,11 +49,11 @@
 
                     //## Getter ##//
                     std::string const& getPath() const;
-                    std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> const& getChunk() const;
+                    std::queue<std::pair<Maths::Point2D<GLint>, Chunk*>> const& getChunk() const;
 
                     //## Setter ##//
                     void setPath(std::string const& path);
-                    void setChunk(std::stack<std::pair<Maths::Point2D<GLint>, Chunk*>> const& chunk);
+                    void setChunk(std::queue<std::pair<Maths::Point2D<GLint>, Chunk*>> const& chunk);
 
                     //## Methods ##//
                     bool isEmpty() const;
