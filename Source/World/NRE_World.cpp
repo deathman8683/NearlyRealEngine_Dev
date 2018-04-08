@@ -187,21 +187,21 @@
 
             void World::addChunkToLoadRegion(Chunk *chunk) {
                 chunk->setLoading(true);
-                Maths::Point2D<GLint> coord;
+                Maths::Point2D<GLint> regionCoord;
                 if (chunk->getCoord().getX() < 0) {
-                    coord.setX((chunk->getCoord().getX() / 16) -1);
+                    regionCoord.setX((chunk->getCoord().getX() / 16) - 1);
                 } else {
-                    coord.setX((chunk->getCoord().getX() / 16));
+                    regionCoord.setX((chunk->getCoord().getX() / 16));
                 }
                 if (chunk->getCoord().getY() < 0) {
-                    coord.setY((chunk->getCoord().getY() / 16) -1);
+                    regionCoord.setY((chunk->getCoord().getY() / 16) - 1);
                 } else {
-                    coord.setY((chunk->getCoord().getY() / 16));
+                    regionCoord.setY((chunk->getCoord().getY() / 16));
                 }
-                if (loadRegionMap.count(coord) == 0) {
-                    loadRegionMap[chunk->getCoord()] = new Region(chunk);
+                if (loadRegionMap.count(regionCoord) == 0) {
+                    loadRegionMap[regionCoord] = new Region(chunk);
                 } else {
-                    auto it = loadRegionMap.find(coord);
+                    auto it = loadRegionMap.find(regionCoord);
                     it->second->add(chunk);
                 }
             }
@@ -213,12 +213,12 @@
             void World::addChunkToSaveRegion(Chunk *chunk, Maths::Point2D<GLint> const& coord) {
                 Maths::Point2D<GLint> regionCoord;
                 if (chunk->getCoord().getX() < 0) {
-                    regionCoord.setX((chunk->getCoord().getX() / 16) -1);
+                    regionCoord.setX((chunk->getCoord().getX() / 16) - 1);
                 } else {
                     regionCoord.setX((chunk->getCoord().getX() / 16));
                 }
                 if (chunk->getCoord().getY() < 0) {
-                    regionCoord.setY((chunk->getCoord().getY() / 16) -1);
+                    regionCoord.setY((chunk->getCoord().getY() / 16) - 1);
                 } else {
                     regionCoord.setY((chunk->getCoord().getY() / 16));
                 }

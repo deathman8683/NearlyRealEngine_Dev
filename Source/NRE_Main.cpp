@@ -13,7 +13,7 @@
             Camera::MoveableCamera camera("kBinder.cfg", "mBinder.cfg", 70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
             Camera::FixedCamera shadowView(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(8, 256, 256), Maths::Vector3D<NREfloat>(8, 8, 64));
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(25, 25), Maths::Vector2D<GLint>(0, 0));
+            World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
 
             Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
             Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
@@ -55,6 +55,8 @@
             while(!camera.getQuit())
             {
                 engineClock.updateTimestep(1000.0 / 60.0);
+
+                //std::cout << camera.getEye() << std::endl;
 
                 camera.update();
 
@@ -149,7 +151,7 @@
 
                 engineDeferredRenderer.render(pbrShader, invModelview, invProjection, lightModelview, rotation, camera, engineLight, engineSkybox);
 
-                engineWorld.update(5);
+                engineWorld.update(2);
 
                 SDL_GL_SwapWindow(engineScene.getWindow().getItem());
             }
