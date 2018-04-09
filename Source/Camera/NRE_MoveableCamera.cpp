@@ -38,6 +38,7 @@
             }
 
             void MoveableCamera::update() {
+                setModified(false);
                 computeAngle();
                 computeVector();
                 Input::update(&angle);
@@ -55,26 +56,32 @@
 
             void MoveableCamera::moveFront() {
                 setEye(getEye() + (getForward() * getSpeed()));
+                setModified(true);
             }
 
             void MoveableCamera::moveBack() {
                 setEye(getEye() - (getForward() * getSpeed()));
+                setModified(true);
             }
 
             void MoveableCamera::moveLeft() {
                 setEye(getEye() + (getLeft() * getSpeed()));
+                setModified(true);
             }
 
             void MoveableCamera::moveRight() {
                 setEye(getEye() - (getLeft() * getSpeed()));
+                setModified(true);
             }
 
             void MoveableCamera::moveUp() {
                 setEye(getEye() + (getUp() * getSpeed()));
+                setModified(true);
             }
 
             void MoveableCamera::moveDown() {
                 setEye(getEye() - (getUp() * getSpeed()));
+                setModified(true);
             }
 
             void MoveableCamera::moveCenter() {

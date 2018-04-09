@@ -54,6 +54,7 @@
             glViewport(0, 0, 1280.0, 720.0);
 
             camera.Keyboard::getKey(SDL_SCANCODE_E).setSwitch(true);
+            camera.Keyboard::getKey(SDL_SCANCODE_R).setSwitch(true);
 
             while(!camera.getQuit())
             {
@@ -65,8 +66,6 @@
                     nbFrames = 0;
                     engineClock.setLastTime(engineClock.getLastTime() + 1000.0);
                 }
-
-                //std::cout << camera.getEye() << std::endl;
 
                 camera.update();
 
@@ -100,7 +99,12 @@
                 shadowView.setView(lightModelview);
 
                 engineDeferredRenderer.startGBufferPass();
+                    Camera::Key& it1 = camera.Keyboard::getKey(SDL_SCANCODE_E);
+                    if (it1.isActive()) {
+                        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                    }
                     engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(skyBoxShader, projection, modelview);

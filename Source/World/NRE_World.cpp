@@ -156,23 +156,26 @@
                     }
                     for (auto &it : chunkMap) {
                         if (camera != 0) {
-                            it.second->setActive(camera->AABBCollision(it.second->getBounding()));
+                            if (camera->isModified()) {
+                                it.second->setActive(camera->AABBCollision(it.second->getBounding()));
+                            }
                         } else {
                             it.second->setActive(true);
                         }
-                        
-                        if (!it.second->isLoaded()) {
-                            if (!it.second->isLoading()) {
-                                addChunkToLoadRegion(it.second);
+                        if (it.second->isActive()) {
+                            if (!it.second->isLoaded()) {
+                                if (!it.second->isLoading()) {
+                                    addChunkToLoadRegion(it.second);
+                                }
                             }
-                        }
-                        if (it.second->isLoaded() && !it.second->isConstructed()) {
-                            if (!it.second->isConstructing()) {
-                                addChunkToConstruction(it.second);
+                            if (it.second->isLoaded() && !it.second->isConstructed()) {
+                                if (!it.second->isConstructing()) {
+                                    addChunkToConstruction(it.second);
+                                }
                             }
-                        }
-                        if (it.second->isLoaded() && it.second->isConstructed()) {
-                            it.second->render();
+                            if (it.second->isLoaded() && it.second->isConstructed()) {
+                                it.second->render();
+                            }
                         }
                     }
                 glUseProgram(0);

@@ -12,13 +12,13 @@
 
             FixedCamera::FixedCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
                                      Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center)
-                                    : Frustum<NREfloat>::Frustum(fov, ratio, dist), eye(eye), center(center) {
+                                    : Frustum<NREfloat>::Frustum(fov, ratio, dist), eye(eye), center(center), modified(false) {
                 initAngle();
                 computeVector();
             }
 
             FixedCamera::FixedCamera(FixedCamera const& camera) : eye(camera.getEye()), center(camera.getCenter()),
-                                                                  up(camera.getUp()), forward(camera.getForward()), left(camera.getLeft()), angle(camera.getAngle()) {
+                                                                  up(camera.getUp()), forward(camera.getForward()), left(camera.getLeft()), angle(camera.getAngle()), modified(camera.isModified()) {
             }
 
             FixedCamera::~FixedCamera() {
@@ -48,6 +48,10 @@
                 return angle;
             }
 
+            bool const& FixedCamera::isModified() const {
+                return modified;
+            }
+
             void FixedCamera::setEye(Maths::Point3D<NREfloat> const& p) {
                 eye = p;
             }
@@ -74,6 +78,10 @@
 
             void FixedCamera::setView(Maths::Matrix4x4<NREfloat>& modelview) const {
                 modelview.lookAt(getEye(), getCenter(), getUp());
+            }
+
+            void FixedCamera::setModified(bool const& state) {
+                modified = state;
             }
 
             void FixedCamera::initAngle() {
