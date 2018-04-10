@@ -88,6 +88,9 @@
 
             void Window::createWindow(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags) {
                 item = SDL_CreateWindow(title.c_str(), coord.getX(), coord.getY(), size.getW(), size.getH(), flags);
+                if (item == NULL) {
+                    throw (Exception::SDLException(std::string(SDL_GetError())));
+                }
             }
 
 

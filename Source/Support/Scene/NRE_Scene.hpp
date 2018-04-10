@@ -11,6 +11,7 @@
     #include "../../Generic/NRE_Type.hpp"
     #include "../Viewport/NRE_Viewport.hpp"
     #include "../../SDL_Wrapper/Window/NRE_Window.hpp"
+    #include "../../Exception/SupportException/NRE_SupportException.hpp"
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace

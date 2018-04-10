@@ -11,6 +11,7 @@
     #include <string>
     #include "../../Generic/NRE_Type.hpp"
     #include "../../Maths/NRE_Maths.hpp"
+    #include "../../Exception/SDLException/NRE_SDLException.hpp"
 
     /**
      * @namespace NRE

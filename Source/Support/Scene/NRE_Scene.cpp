@@ -14,7 +14,10 @@
             }
 
             Scene::Scene(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord) : context(0) {
-                SDL_Init(SDL_INIT_FLAGS);
+                int err = SDL_Init(SDL_INIT_FLAGS);
+                if (err != 0) {
+                    throw (Exception::SupportException(std::string(SDL_GetError())));
+                }
 
                 window.createWindow(title, coord, size, DEFAULT_FLAGS);
                 init();
@@ -75,10 +78,16 @@
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
                 context = SDL_GL_CreateContext(getWindow().getItem());
+                if (context == NULL) {
+                    throw (Exception::SDLException(std::string(SDL_GetError())));
+                }
             }
 
             void Scene::initGL() {
-                glewInit();
+                GLenum err = glewInit();
+                if (err != GLEW_OK) {
+                    throw (Exception::SupportException(std::string(reinterpret_cast <const char*> (glewGetErrorString(err)))));
+                }
             }
 
         };
