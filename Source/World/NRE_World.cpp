@@ -160,7 +160,7 @@
                         } else {
                             it.second->setActive(true);
                         }
-                        
+
                         if (!it.second->isLoaded()) {
                             if (!it.second->isLoading()) {
                                 addChunkToLoadRegion(it.second);

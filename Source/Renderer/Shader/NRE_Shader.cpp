@@ -33,7 +33,7 @@
             }
 
             GLint const Shader::getLocation(std::string const& var) {
-                glGetUniformLocation(getID(), var);
+                return glGetUniformLocation(getID(), var.c_str());
             }
 
             void Shader::setID(GLuint const& id) {
