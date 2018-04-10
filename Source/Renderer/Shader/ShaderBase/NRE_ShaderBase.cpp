@@ -34,6 +34,10 @@
             }
 
             void ShaderBase::compile() {
+                if (path.empty()) {
+                    throw (Exception::ShaderException("No path selected"));
+                }
+
                 if (glIsShader(getID()) == GL_TRUE) {
                     glDeleteShader(getID());
                 }
@@ -73,7 +77,6 @@
                     throw (Exception::ShaderException(getPath() + " : " + std::string(eError)));
                 }
             }
-
 
         };
     };

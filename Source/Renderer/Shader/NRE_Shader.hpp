@@ -48,6 +48,7 @@
                     GLuint const& getID() const;
                     VertexShader const& getVertexShader() const;
                     FragmentShader const& getFragmentShader() const;
+                    GLint const getLocation(std::string const& var);
 
                     //## Setter ##//
                     void setID(GLuint const& id);
@@ -55,7 +56,10 @@
                     void setFragmentShader(FragmentShader const& s);
 
                     //## Methods ##//
+                    void bind();
+                    void unbind();
                     void load();
+                    void use(GLint const& i);
 
                     //## Access Operator ##//
 

@@ -32,6 +32,10 @@
                 return fShader;
             }
 
+            GLint const Shader::getLocation(std::string const& var) {
+                glGetUniformLocation(getID(), var);
+            }
+
             void Shader::setID(GLuint const& id) {
                 this->id = id;
             }
@@ -42,6 +46,14 @@
 
             void Shader::setFragmentShader(FragmentShader const& s) {
                 fShader = s;
+            }
+
+            void Shader::bind() {
+                glUseProgram(getID());
+            }
+
+            void Shader::unbind() {
+                glUseProgram(0);
             }
 
             void Shader::load() {
