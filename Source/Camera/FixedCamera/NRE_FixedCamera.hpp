@@ -34,7 +34,6 @@
                     Maths::Vector3D<NREfloat> forward;
                     Maths::Vector3D<NREfloat> left;
                     Maths::Vector2D<NREfloat> angle;
-                    bool modified;
 
                 public:
                     //## Constructor ##//
@@ -57,7 +56,6 @@
                     Maths::Vector3D<NREfloat> const& getForward() const;
                     Maths::Vector3D<NREfloat> const& getLeft() const;
                     Maths::Vector2D<NREfloat> const& getAngle() const;
-                    bool const& isModified() const;
 
                     //## Setter ##//
                     void setEye(Maths::Point3D<NREfloat> const& p);
@@ -66,7 +64,6 @@
                     void setForward(Maths::Vector3D<NREfloat> const& u);
                     void setLeft(Maths::Vector3D<NREfloat> const& u);
                     void setAngle(Maths::Vector2D<NREfloat> const& u);
-                    void setModified(bool const& state);
 
                     //## Methods ##//
                     void setView(Maths::Matrix4x4<NREfloat>& modelview) const;
