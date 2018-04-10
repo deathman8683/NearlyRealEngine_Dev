@@ -32,12 +32,16 @@
                             break;
                         }
                         case (SDL_MOUSEBUTTONDOWN) : {
-                            Mouse::keyDown(getKeyScancode());
-                            setClick(getMouseClick());
+                            if (getMouseWhich() != SDL_TOUCH_MOUSEID) {
+                                Mouse::keyDown(getMouseButton());
+                                setClick(getMouseClick());
+                            }
                             break;
                         }
                         case (SDL_MOUSEBUTTONUP) : {
-                            Mouse::keyUp(getKeyScancode());
+                            if (getMouseWhich() != SDL_TOUCH_MOUSEID) {
+                                Mouse::keyUp(getMouseButton());
+                            }
                             break;
                         }
                         case (SDL_MOUSEMOTION) : {

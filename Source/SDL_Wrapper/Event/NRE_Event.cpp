@@ -48,6 +48,10 @@
                 return Maths::Vector2D<NREfloat>(getItem().motion.yrel, getItem().motion.xrel);
             }
 
+            Uint32 const& Event::getMouseWhich() const {
+                return getItem().button.which;
+            }
+
             void Event::setItem(SDL_Event const& e) {
                 item = e;
             }

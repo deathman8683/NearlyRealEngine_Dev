@@ -52,6 +52,7 @@
                     Maths::Point2D<unsigned short int> const getMouseClick() const;
                     Maths::Point2D<unsigned short int> const getMotion() const;
                     Maths::Vector2D<NREfloat> const getMotionRel() const;
+                    Uint32 const& getMouseWhich() const;
 
                     //## Setter ##//
                     void setItem(SDL_Event const& e);
