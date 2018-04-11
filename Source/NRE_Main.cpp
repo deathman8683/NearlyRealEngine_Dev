@@ -5,7 +5,10 @@
     #include "Time/Clock/NRE_Clock.hpp"
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
+    #include "Maths/Base/2D/NRE_Base2D.hpp"
+
     using namespace NRE;
+    using namespace Maths;
 
     int main(int argc, char **argv) {
         try {

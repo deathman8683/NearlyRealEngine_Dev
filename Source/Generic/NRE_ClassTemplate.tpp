@@ -33,6 +33,8 @@
 
                     //## Copy-Constructor ##//
 
+                    //## Move-Constructor ##//
+
                     //## Convertor ##//
 
                     //## Deconstructor ##//
