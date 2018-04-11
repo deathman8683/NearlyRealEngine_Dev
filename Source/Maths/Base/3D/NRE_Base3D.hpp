@@ -43,29 +43,26 @@
                     Base3D(Base3D && base);
 
                     //## Convertor ##//
-                    Base3D(Base2D<T> const& )
+                    Base3D(Base2D<T> const& base);
+                    Base3D(Base2D<T> const& base, T const& z);
 
                     //## Deconstructor ##//
                     virtual ~Base3D();
 
                     //## Getter ##//
-                    T const& getX() const;
-                    T const& getY() const;
+                    T const& getZ() const;
 
                     //## Setter ##//
                     template <class K>
-                    void setX(K const& x);
-                    template <class K>
-                    void setY(K const& y);
+                    void setZ(K const& z);
+                    template <class K, class L, class M>
+                    void setCoord(K const& x, L const& y, M const& z);
                     template <class K, class L>
-                    void setCoord(K const& x, L const& y);
+                    void setCoord(Base2D<K> const& base, L const& z);
 
                     //## Methods ##//
-                    const T* const value() const;
 
                     //## Access Operator ##//
-                    T& operator[](GLuint const& index);
-                    const T& operator[](GLuint const& index) const;
 
                     //## Assignment Operator ##//
                     Base3D<T>& operator=(Base3D<T> const& base);
@@ -93,18 +90,15 @@
                     //## Shift Operator ##//
 
                 protected:
-                    static int DEFAULT_X;
-                    static int DEFAULT_Y;
+                    static int DEFAULT_Z;
             };
 
             template <class T>
-            int Base3D<T>::DEFAULT_X = 0;
-            template <class T>
-            int Base3D<T>::DEFAULT_Y = 0;
+            int Base3D<T>::DEFAULT_Z = 0;
 
             template <class T>
             inline std::ostream& operator<<(std::ostream& stream, Base3D<T> const& base) {
-                stream << '(' << base.getX() << ',' << base.getY() << ')';
+                stream << '(' << base.getX() << ',' << base.getY() << ',' << base.getZ() << ')';
                 return stream;
             }
 
