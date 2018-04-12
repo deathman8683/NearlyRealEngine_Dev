@@ -7,13 +7,11 @@
             }
 
             template <class T>
-            template <class K, class L>
-            Plane<T>::Plane(Vector3D<K> const& n, Point3D<L> const& p) : n(n), p(p) {
+            Plane<T>::Plane(Vector3D<T> const& n, Point3D<T> const& p) : n(n), p(p) {
             }
 
             template <class T>
-            template <class K, class L, class M>
-            Plane<T>::Plane(Point3D<K> const& p1, Point3D<L> const& p2, Point3D<M> const& p3) {
+            Plane<T>::Plane(Point3D<T> const& p1, Point3D<T> const& p2, Point3D<T> const& p3) {
                 computeNormalFrom3Point(p1, p2, p3);
             }
 
@@ -41,38 +39,34 @@
             }
 
             template <class T>
-            template <class K>
-            void Plane<T>::setNormal(Vector3D<K> const& u) {
+            void Plane<T>::setNormal(Vector3D<T> const& u) {
                 n = u;
             }
 
             template <class T>
-            template <class K>
-            void Plane<T>::setPoint(Point3D<K> const& p) {
+            void Plane<T>::setPoint(Point3D<T> const& p) {
                 this->p = p;
             }
 
             template <class T>
-            template <class K, class L>
-            void Plane<T>::setNormalAndPoint(Vector3D<K> const& u, Point3D<L> const& p) {
+            void Plane<T>::setNormalAndPoint(Vector3D<T> const& u, Point3D<T> const& p) {
                 setNormal(u);
                 setPoint(p);
             }
 
             template <class T>
-            template <class K, class L, class M>
-            void Plane<T>::computeNormalFrom3Point(Point3D<K> const& p1, Point3D<L> const& p2, Point3D<M> const& p3) {
+            void Plane<T>::computeNormalFrom3Point(Point3D<T> const& p1, Point3D<T> const& p2, Point3D<T> const& p3) {
                 Vector3D<T> v, u;
                 v = p2 - p1;
                 u = p3 - p1;
-                setNormal((v ^ u).normalize());
+                setNormal(v ^ u);
+                n.normalize();
             }
 
             template <class T>
-            template <class K>
-            NREfloat Plane<T>::distance(Point3D<K> const& p) const {
-                T D = (-getNormal()) | Vector3D<T>(getPoint());
-                return (getNormal() | Vector3D<T>(p)) + D;
+            NREfloat const Plane<T>::distance(Point3D<T> const& p) const {
+                T D = (-getNormal()) | getPoint();
+                return (getNormal() | p) + D;
             }
 
         };

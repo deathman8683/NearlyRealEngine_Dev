@@ -41,10 +41,8 @@
                 public:
                     //## Constructor ##//
                     AABB();
-                    template <class K, class L>
-                    AABB(Maths::Point3D<K> const& p, Maths::Vector3D<L> const& u);
-                    template <class K, class L>
-                    AABB(Maths::Point3D<K> const& p1, Maths::Point3D<L> const& p2);
+                    AABB(Maths::Point3D<T> const& p, Maths::Vector3D<T> const& u);
+                    AABB(Maths::Point3D<T> const& p1, Maths::Point3D<T> const& p2);
 
                     //## Copy-Constructor ##//
                     AABB(AABB const& box);
@@ -61,18 +59,13 @@
                     Maths::Vector3D<T> const& getHExtent() const;
                     Maths::Point3D<T> const getMin() const;
                     Maths::Point3D<T> const getMax() const;
-                    template <class K>
-                    Maths::Point3D<T> const getPVertex(Maths::Vector3D<K> const& n) const;
-                    template <class K>
-                    Maths::Point3D<T> const getNVertex(Maths::Vector3D<K> const& n) const;
-                    template <class K>
-                    void getCorner(Maths::Point3D<K> *&corner) const;
+                    Maths::Point3D<T> const getPVertex(Maths::Vector3D<T> const& n) const;
+                    Maths::Point3D<T> const getNVertex(Maths::Vector3D<T> const& n) const;
+                    void getCorner(Maths::Point3D<T> *&corner) const;
 
                     //## Setter ##//
-                    template <class K>
-                    void setCenter(Maths::Point3D<K> const& p);
-                    template <class K>
-                    void setHExtent(Maths::Vector3D<K> const& u);
+                    void setCenter(Maths::Point3D<T> const& p);
+                    void setHExtent(Maths::Vector3D<T> const& u);
 
                     //## Methods ##//
 

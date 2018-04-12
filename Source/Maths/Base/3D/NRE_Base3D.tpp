@@ -105,6 +105,19 @@
             }
 
             template <class T>
+            NREfloat const Base3D<T>::operator|=(Base3D<T> const& base) const {
+                return this->getX() * base.getX() + this->getY() * base.getY() + this->getZ() * base.getZ();
+            }
+
+            template <class T>
+            Base3D<T>& Base3D<T>::operator^=(Base3D<T> const& base) {
+                setCoord(this->getY() * base.getZ() - this->getZ() * base.getY(),
+                         this->getZ() * base.getX() - this->getX() * base.getZ(),
+                         this->getX() * base.getY() - this->getY() * base.getX());
+                return *this;
+            }
+
+            template <class T>
             Base3D<T> Base3D<T>::operator+(Base3D<T> const& base) const {
                 Base3D<T> tmp(*this);
                 return tmp += base;
@@ -132,6 +145,17 @@
             Base3D<T> Base3D<T>::operator/(T const& k) const {
                 Base3D<T> tmp(*this);
                 return tmp /= k;
+            }
+
+            template <class T>
+            NREfloat const Base3D<T>::operator|(Base3D<T> const& u) const {
+                return *this |= u;
+            }
+
+            template <class T>
+            Base3D<T> Base3D<T>::operator^(Base3D<T> const& base) const {
+                Base3D<T> tmp(*this);
+                return tmp ^= base;
             }
 
             template <class T>

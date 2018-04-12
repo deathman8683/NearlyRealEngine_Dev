@@ -68,6 +68,10 @@
 
                 //std::cout << camera.getEye() << std::endl;
 
+                std::cout << camera.getEye() << std::endl;
+                std::cout << modelview << std::endl;
+                std::cout << projection << std::endl;
+
                 camera.update();
 
                 colorAngle = colorAngle + 1;

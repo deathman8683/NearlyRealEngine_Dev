@@ -105,6 +105,11 @@
             }
 
             template <class T>
+            NREfloat const Base4D<T>::operator|=(Base4D<T> const& base) const {
+                return this->getX() * base.getX() + this->getY() * base.getY() + this->getZ() * base.getZ() + this->getW() * base.getW();
+            }
+
+            template <class T>
             Base4D<T> Base4D<T>::operator+(Base4D<T> const& base) const {
                 Base4D<T> tmp(*this);
                 return tmp += base;
@@ -132,6 +137,11 @@
             Base4D<T> Base4D<T>::operator/(T const& k) const {
                 Base4D<T> tmp(*this);
                 return tmp /= k;
+            }
+
+            template <class T>
+            NREfloat const Base4D<T>::operator|(Base4D<T> const& base) const {
+                return *this |= base;
             }
 
             template <class T>

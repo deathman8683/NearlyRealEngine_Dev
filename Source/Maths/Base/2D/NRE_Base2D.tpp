@@ -24,7 +24,7 @@
 
             template <class T>
             template <class K>
-            Base2D<T>::Base2D(Base2D<K> const& base) : Base2D(static_cast <T> (base.getY()), static_cast <T> (base.getY())) {
+            Base2D<T>::Base2D(Base2D<K> const& base) : Base2D(static_cast <T> (base.getX()), static_cast <T> (base.getY())) {
             }
 
             template <class T>
@@ -117,6 +117,11 @@
             }
 
             template <class T>
+            NREfloat const Base2D<T>::operator|=(Base2D<T> const& base) const {
+                return getX() * base.getX() + getY() * base.getY();
+            }
+
+            template <class T>
             Base2D<T> Base2D<T>::operator+(Base2D<T> const& base) const {
                 Base2D<T> tmp(*this);
                 return tmp += base;
@@ -144,6 +149,11 @@
             Base2D<T> Base2D<T>::operator/(T const& k) const {
                 Base2D<T> tmp(*this);
                 return tmp /= k;
+            }
+
+            template <class T>
+            NREfloat const Base2D<T>::operator|(Base2D<T> const& base) const {
+                return *this |= base;
             }
 
             template <class T>
