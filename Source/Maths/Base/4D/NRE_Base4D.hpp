@@ -43,6 +43,8 @@
                     Base4D(Base4D && base);
 
                     //## Convertor ##//
+                    template <class K>
+                    Base4D(Base4D<K> const& base);
                     Base4D(Base3D<T> const& base);
                     Base4D(Base3D<T> const& base, T const& w);
 

@@ -43,6 +43,8 @@
                     Base3D(Base3D && base);
 
                     //## Convertor ##//
+                    template <class K>
+                    Base3D(Base3D<K> const& base);
                     Base3D(Base2D<T> const& base);
                     Base3D(Base2D<T> const& base, T const& z);
 

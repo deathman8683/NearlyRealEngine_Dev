@@ -23,6 +23,11 @@
             }
 
             template <class T>
+            template <class K>
+            Base3D<T>::Base3D(Base3D<K> const& base) : Base2D<T>::Base2D(base), z(static_cast <T> (base.getZ())) {
+            }
+
+            template <class T>
             Base3D<T>::Base3D(Base2D<T> const& base) : Base3D(base, DEFAULT_Z) {
             }
 
@@ -132,11 +137,6 @@
             template <class T>
             bool const Base3D<T>::operator==(Base3D<T> const& base) const {
                 return Base2D<T>::operator==(base) && getZ() == base.getZ();
-            }
-
-            template <>
-            bool const Base3D<NREfloat>::operator==(Base3D<NREfloat> const& base) const {
-                return Base2D<NREfloat>::operator==(base) && almostEqual(getZ(), base.getZ());
             }
 
             template <class T>

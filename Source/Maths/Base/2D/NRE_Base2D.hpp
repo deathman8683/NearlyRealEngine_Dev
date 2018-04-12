@@ -44,6 +44,8 @@
                     Base2D(Base2D && base);
 
                     //## Convertor ##//
+                    template <class K>
+                    Base2D(Base2D<K> const& base);
 
                     //## Deconstructor ##//
                     virtual ~Base2D();

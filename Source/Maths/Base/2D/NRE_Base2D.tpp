@@ -15,11 +15,16 @@
             }
 
             template <class T>
-            Base2D<T>::Base2D(Base2D const& base) : Base2D(base.x, base.y) {
+            Base2D<T>::Base2D(Base2D const& base) : Base2D(base.getX(), base.getY()) {
             }
 
             template <class T>
-            Base2D<T>::Base2D(Base2D && base) : Base2D(std::move(base.x), std::move(base.y)) {
+            Base2D<T>::Base2D(Base2D && base) : Base2D(std::move(base.getX()), std::move(base.getY())) {
+            }
+
+            template <class T>
+            template <class K>
+            Base2D<T>::Base2D(Base2D<K> const& base) : Base2D(static_cast <T> (base.getY()), static_cast <T> (base.getY())) {
             }
 
             template <class T>
@@ -61,12 +66,12 @@
 
             template <class T>
             T& Base2D<T>::operator[](GLuint const& index) {
-                return *(value() + index);
+                return *(&x + index);
             }
 
             template <class T>
             const T& Base2D<T>::operator[](GLuint const& index) const {
-                return *(value() + index);
+                return *(&x + index);
             }
 
             template <class T>
@@ -144,11 +149,6 @@
             template <class T>
             bool const Base2D<T>::operator==(Base2D<T> const& base) const {
                 return getX() == base.getX() && getY() == base.getY();
-            }
-
-            template <>
-            bool const Base2D<NREfloat>::operator==(Base2D<NREfloat> const& base) const {
-                return almostEqual(getX(), base.getX()) && almostEqual(getY(), base.getY());
             }
 
             template <class T>
