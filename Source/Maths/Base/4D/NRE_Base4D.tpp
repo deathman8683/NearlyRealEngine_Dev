@@ -1,4 +1,4 @@
-
+W
     namespace NRE {
         namespace Maths {
 
@@ -19,7 +19,7 @@
             }
 
             template <class T>
-            Base4D<T>::Base4D(Base4D && base) : Base3D<T>::Base3D(base), w(std::move(base.w)) {
+            Base4D<T>::Base4D(Base4D && base) : Base3D<T>::Base3D(base), z(std::move(base.w)) {
             }
 
             template <class T>
@@ -132,6 +132,11 @@
             template <class T>
             bool const Base4D<T>::operator==(Base4D<T> const& base) const {
                 return Base3D<T>::operator==(base) && getW() == base.getW();
+            }
+
+            template <>
+            bool const Base4D<NREfloat>::operator==(Base4D<NREfloat> const& base) const {
+                return Base3D<NREfloat>::operator==(base) && almostEqual(getW(), base.getZ());
             }
 
             template <class T>
