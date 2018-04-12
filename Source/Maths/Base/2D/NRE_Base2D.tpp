@@ -146,11 +146,6 @@
                 return getX() == base.getX() && getY() == base.getY();
             }
 
-            template <>
-            bool const Base2D<NREfloat>::operator==(Base2D<NREfloat> const& base) const {
-                return almostEqual(getX(), base.getX()) && almostEqual(getY(), base.getY());
-            }
-
             template <class T>
             bool const Base2D<T>::operator!=(Base2D<T> const& base) const {
                 return !(*this == base);

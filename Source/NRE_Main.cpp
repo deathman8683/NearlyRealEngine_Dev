@@ -4,14 +4,12 @@
     #include "World/NRE_World.hpp"
     #include "Time/Clock/NRE_Clock.hpp"
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
-
-    #include "Maths/Base/3D/NRE_Base3D.hpp"
-
+    
     using namespace NRE;
     using namespace Maths;
 
     int main(int argc, char **argv) {
-        try {
+        /*try {
             Support::Scene engineScene("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
@@ -138,6 +136,18 @@
         }
 
         World::VoxelTypes::free();
+        */
+        Base2D<int> base(5);
+        Point2D<int> tmp0, tmp1(1, 1), tmp2(3), tmp3(Base2D<int>(4)), tmp4(base), tmp5(tmp0), tmp6(Point2D<int>(7));
+
+        std::cout << base << std::endl;
+        std::cout << tmp0 << std::endl;
+        std::cout << tmp1 << std::endl;
+        std::cout << tmp2 << std::endl;
+        std::cout << tmp3 << std::endl;
+        std::cout << tmp4 << std::endl;
+        std::cout << tmp5 << std::endl;
+        std::cout << tmp6 << std::endl;
 
         return 0;
     }

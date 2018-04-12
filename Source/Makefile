@@ -7,6 +7,7 @@ all : before $(TARGET)
 GENERIC = Generic
 EXCEPTION = Exception
 LIB = lib
+MATHS = Maths
 SDL_WRAPPER = SDL_Wrapper
 GL_WRAPPER = GL_Wrapper
 TIME = Time
@@ -20,6 +21,7 @@ before :
 	@(cd $(GENERIC) && $(MAKE))
 	@(cd $(EXCEPTION) && $(MAKE))
 	@(cd $(LIB) && $(MAKE))
+	@(cd $(MATHS) && $(MAKE))
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))
 	@(cd $(TIME) && $(MAKE))
