@@ -3,28 +3,34 @@
         namespace Maths {
 
             template <class T>
-            Vector2D<T>::Vector2D() {
+            Vector2D<T>::Vector2D() : Vector2D(DEFAULT_X, DEFAULT_Y) {
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(T const& x, T const& y) : Base2D<T>::Base2D(x, y) {
+            Vector2D<T>::Vector2D(T const& x, T const& y) : data{x, y} {
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(T const& value) : Base2D<T>::Base2D(value) {
+            Vector2D<T>::Vector2D(T const& value) : Vector2D(value, value) {
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(Vector2D const& u) : Base2D<T>::Base2D(u) {
+            template <class K, class L>
+            Vector2D<T>::Vector2D(Point2D<K> const& a, Point2D<L> const& b) : Vector2D(b.getX() - a.getX(), b.getY() - a.getY()) {
             }
 
             template <class T>
-            Vector2D<T>::Vector2D(Vector2D && u) : Base2D<T>::Base2D(u) {
+            Vector2D<T>::Vector2D(Vector2D const& u) : Vector2D(u.getX(), u.getY()) {
             }
 
             template <class T>
             template <class K>
-            Vector2D<T>::Vector2D(Base2D<K> const& u) : Base2D<T>::Base2D(u) {
+            Vector2D<T>::Vector2D(Vector2D<K> const& u) : Vector2D(u.getX(), u.getY()) {
+            }
+
+            template <class T>
+            template <class K>
+            Vector2D<T>::Vector2D(Point2D<K> const& p) : Vector2D(p.getX(), p.getY()) {
             }
 
             template <class T>
@@ -32,25 +38,53 @@
             }
 
             template <class T>
+            T const& Vector2D<T>::getX() const {
+                return data[0];
+            }
+
+            template <class T>
+            T const& Vector2D<T>::getY() const {
+                return data[1];
+            }
+
+            template <class T>
             T const& Vector2D<T>::getW() const {
-                return this->x;
+                return data[0];
             }
 
             template <class T>
             T const& Vector2D<T>::getH() const {
-                return this->y;
+                return data[1];
+            }
+
+            template <class T>
+            template <class K>
+            void Vector2D<T>::setX(K const& x) {
+                data[0] = x;
+            }
+
+            template <class T>
+            template <class K>
+            void Vector2D<T>::setY(K const& y) {
+                data[1] = y;
             }
 
             template <class T>
             template <class K>
             void Vector2D<T>::setW(K const& w) {
-                this->x = static_cast <T> (w);
+                data[0] = w;
             }
 
             template <class T>
             template <class K>
             void Vector2D<T>::setH(K const& h) {
-                this->y = static_cast <T> (h);
+                data[1] = h;
+            }
+
+            template <class T>
+            template <class K, class L>
+            void Vector2D<T>::setCoord(K const& x, L const& y) {
+                setX(x);    setY(y);
             }
 
             template <class T>
@@ -66,7 +100,7 @@
 
             template <class T>
             NREfloat Vector2D<T>::normSquared() const {
-                return this->getX() * this->getX() + this->getY() * this->getY();
+                return getX() * getX() + getY() * getY();
             }
 
             template <class T>
@@ -75,35 +109,147 @@
             }
 
             template <class T>
-            Vector2D<T>& Vector2D<T>::operator=(Vector2D<T> const& u) {
-                Base2D<T>::operator=(u);
+            template <class K>
+            void Vector2D<T>::rotate(K const& theta) {
+                T tmpX = getX(); T tmpY = getY(); T angle = toRad(theta);
+                T tmpCos = std::cos(angle); T tmpSin = std::sin(angle);
+                setX(tmpX * tmpCos - tmpY * tmpSin);
+                setY(tmpX * tmpSin + tmpY * tmpCos);
+            }
+
+            template <class T>
+            const T* const Vector2D<T>::value() const {
+                return &data[0];
+            }
+
+            template <class T>
+            T& Vector2D<T>::operator[](unsigned int const& index) {
+                return data[index];
+            }
+
+            template <class T>
+            const T& Vector2D<T>::operator[](unsigned int const& index) const {
+                return data[index];
+            }
+
+            template <class T>
+            template <class K>
+            Vector2D<T>& Vector2D<T>::operator+=(Vector2D<K> const& u) {
+                setX(getX() + u.getX());
+                setY(getY() + u.getY());
                 return *this;
             }
 
             template <class T>
-            Vector2D<T>& Vector2D<T>::operator=(Vector2D<T> && u) {
-                Base2D<T>::operator=(u);
+            template <class K>
+            Vector2D<T>& Vector2D<T>::operator-=(Vector2D<K> const& u) {
+                setX(getX() - u.getX());
+                setY(getY() - u.getY());
                 return *this;
             }
 
             template <class T>
-            bool const Vector2D<T>::operator<(Vector2D<T> const& u) const {
+            template <class K>
+            Vector2D<T>& Vector2D<T>::operator*=(K const& k) {
+                setX(getX() * k);
+                setY(getY() * k);
+                return *this;
+            }
+
+            template <class T>
+            template <class K>
+            Vector2D<T>& Vector2D<T>::operator/=(K const& k) {
+                setX(getX() / k);
+                setY(getY() / k);
+                return *this;
+            }
+
+            template <class T>
+            template <class K>
+            NREfloat Vector2D<T>::operator|=(Vector2D<K> const& u) const {
+                return getX() * u.getX() + getY() * u.getY();
+            }
+
+            template <class T>
+            template <class K>
+            Vector2D<T> Vector2D<T>::operator+(Vector2D<K> const& u) const {
+                Vector2D<T> tmp(*this);
+                return tmp += u;
+            }
+
+            template <class T>
+            template <class K>
+            Vector2D<T> Vector2D<T>::operator-(Vector2D<K> const& u) const {
+                Vector2D<T> tmp(*this);
+                return tmp -= u;
+            }
+
+            template <class T>
+            Vector2D<T> Vector2D<T>::operator-() const {
+                Vector2D<T> tmp(-getX(), -getY());
+                return tmp;
+            }
+
+            template <class T>
+            template <class K>
+            Vector2D<T> Vector2D<T>::operator*(K const& k) const {
+                Vector2D<T> tmp(*this);
+                return tmp *= k;
+            }
+
+            template <class T>
+            template <class K>
+            Vector2D<T> Vector2D<T>::operator/(K const& k) const {
+                Vector2D<T> tmp(*this);
+                return tmp /= k;
+            }
+
+            template <class T>
+            template <class K>
+            bool Vector2D<T>::operator==(Vector2D<K> const& u) const {
+                return getX() == u.getX() && getY() == u.getY();
+            }
+
+            template <>
+            template <class K>
+            bool Vector2D<NREfloat>::operator==(Vector2D<K> const& u) const {
+                return almostEqual(getX(), u.getX()) && almostEqual(getY(), u.getY());
+            }
+
+            template <class T>
+            template <class K>
+            bool Vector2D<T>::operator!=(Vector2D<K> const& u) const {
+                return !(*this == u);
+            }
+
+            template <class T>
+            template <class K>
+            bool Vector2D<T>::operator<(Vector2D<K> const& u) const {
                 return normSquared() < u.normSquared();
             }
 
             template <class T>
-            bool const Vector2D<T>::operator>(Vector2D<T> const& u) const {
+            template <class K>
+            bool Vector2D<T>::operator>(Vector2D<K> const& u) const {
                 return normSquared() > u.normSquared();
             }
 
             template <class T>
-            bool const Vector2D<T>::operator<=(Vector2D<T> const& u) const {
+            template <class K>
+            bool Vector2D<T>::operator<=(Vector2D<K> const& u) const {
                 return normSquared() <= u.normSquared();
             }
 
             template <class T>
-            bool const Vector2D<T>::operator>=(Vector2D<T> const& u) const {
+            template <class K>
+            bool Vector2D<T>::operator>=(Vector2D<K> const& u) const {
                 return normSquared() >= u.normSquared();
+            }
+
+            template <class T>
+            template <class K>
+            NREfloat Vector2D<T>::operator|(Vector2D<K> const& u) const {
+                return *this |= u;
             }
 
         };

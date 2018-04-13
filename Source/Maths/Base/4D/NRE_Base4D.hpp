@@ -75,7 +75,6 @@
                     Base4D<T>& operator-=(Base4D<T> const& base);
                     Base4D<T>& operator*=(T const& k);
                     Base4D<T>& operator/=(T const& k);
-                    NREfloat const operator|=(Base4D<T> const& base) const;
 
                     //## Arithmetic Operator ##//
                     Base4D<T> operator+(Base4D<T> const& base) const;
@@ -83,7 +82,6 @@
                     Base4D<T> operator-() const;
                     Base4D<T> operator*(T const& k) const;
                     Base4D<T> operator/(T const& k) const;
-                    NREfloat const operator|(Base4D<T> const& base) const;
 
                     //## Comparison Operator ##//
                     bool const operator==(Base4D<T> const& base) const;

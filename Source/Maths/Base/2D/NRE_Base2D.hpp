@@ -33,64 +33,62 @@
 
                 public:
                     //## Constructor ##//
-                        Base2D();
-                        Base2D(T const& x, T const& y);
-                        Base2D(T const& value);
+                    Base2D();
+                    Base2D(T const& x, T const& y);
+                    Base2D(T const& value);
 
                     //## Copy-Constructor ##//
-                        Base2D(Base2D const& base);
+                    Base2D(Base2D const& base);
 
                     //## Move-Constructor ##//
-                        Base2D(Base2D && base);
+                    Base2D(Base2D && base);
 
                     //## Convertor ##//
-                        template <class K>
-                        Base2D(Base2D<K> const& base);
+                    template <class K>
+                    Base2D(Base2D<K> const& base);
 
                     //## Deconstructor ##//
-                        virtual ~Base2D();
+                    virtual ~Base2D();
 
                     //## Getter ##//
-                        T const& getX() const;
-                        T const& getY() const;
+                    T const& getX() const;
+                    T const& getY() const;
 
                     //## Setter ##//
-                        template <class K>
-                        void setX(K const& x);
-                        template <class K>
-                        void setY(K const& y);
-                        template <class K, class L>
-                        void setCoord(K const& x, L const& y);
+                    template <class K>
+                    void setX(K const& x);
+                    template <class K>
+                    void setY(K const& y);
+                    template <class K, class L>
+                    void setCoord(K const& x, L const& y);
 
                     //## Methods ##//
-                        const T* const value() const;
+                    const T* const value() const;
 
                     //## Access Operator ##//
-                        T& operator[](GLuint const& index);
-                        const T& operator[](GLuint const& index) const;
+                    T& operator[](GLuint const& index);
+                    const T& operator[](GLuint const& index) const;
 
                     //## Assignment Operator ##//
-                        Base2D<T>& operator=(Base2D<T> const& base);
-                        Base2D<T>& operator=(Base2D<T> && base);
+                    Base2D<T>& operator=(Base2D<T> const& base);
+                    Base2D<T>& operator=(Base2D<T> && base);
 
                     //## Shortcut Operator ##//
-                        Base2D<T>& operator+=(Base2D<T> const& base);
-                        Base2D<T>& operator-=(Base2D<T> const& base);
-                        Base2D<T>& operator*=(T const& k);
-                        Base2D<T>& operator/=(T const& k);
-                        NREfloat const operator|=(Base2D<T> const& base) const;
+                    Base2D<T>& operator+=(Base2D<T> const& base);
+                    Base2D<T>& operator-=(Base2D<T> const& base);
+                    Base2D<T>& operator*=(T const& k);
+                    Base2D<T>& operator/=(T const& k);
 
                     //## Arithmetic Operator ##//
-                        Base2D<T> operator+(Base2D<T> const& base) const;
-                        Base2D<T> operator-(Base2D<T> const& base) const;
-                        Base2D<T> operator-() const;
-                        Base2D<T> operator*(T const& k) const;
-                        Base2D<T> operator/(T const& k) const;
-                        NREfloat const operator|(Base2D<T> const& base) const;
+                    Base2D<T> operator+(Base2D<T> const& base) const;
+                    Base2D<T> operator-(Base2D<T> const& base) const;
+                    Base2D<T> operator-() const;
+                    Base2D<T> operator*(T const& k) const;
+                    Base2D<T> operator/(T const& k) const;
 
                     //## Comparison Operator ##//
-                        bool const operator==(Base2D<T> const& base) const;
-                        bool const operator!=(Base2D<T> const& base) const;
+                    bool const operator==(Base2D<T> const& base) const;
+                    bool const operator!=(Base2D<T> const& base) const;
 
                     //## BitWise Operator ##//
 

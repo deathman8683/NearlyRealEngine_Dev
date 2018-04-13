@@ -75,8 +75,6 @@
                     Base3D<T>& operator-=(Base3D<T> const& base);
                     Base3D<T>& operator*=(T const& k);
                     Base3D<T>& operator/=(T const& k);
-                    NREfloat const operator|=(Base3D<T> const& base) const;
-                    Base3D<T>& operator^=(Base3D<T> const& base);
 
                     //## Arithmetic Operator ##//
                     Base3D<T> operator+(Base3D<T> const& base) const;
@@ -84,8 +82,6 @@
                     Base3D<T> operator-() const;
                     Base3D<T> operator*(T const& k) const;
                     Base3D<T> operator/(T const& k) const;
-                    NREfloat const operator|(Base3D<T> const& base) const;
-                    Base3D<T> operator^(Base3D<T> const& base) const;
 
                     //## Comparison Operator ##//
                     bool const operator==(Base3D<T> const& base) const;

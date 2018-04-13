@@ -36,8 +36,10 @@
                 public:
                     //## Constructor ##//
                     Plane();
-                    Plane(Vector3D<T> const& n, Point3D<T> const& p);
-                    Plane(Point3D<T> const& p1, Point3D<T> const& p2, Point3D<T> const& p3);
+                    template <class K, class L>
+                    Plane(Vector3D<K> const& n, Point3D<L> const& p);
+                    template <class K, class L, class M>
+                    Plane(Point3D<K> const& p1, Point3D<L> const& p2, Point3D<M> const& p3);
 
                     //## Copy-Constructor ##//
                     Plane(Plane const& p);
@@ -54,13 +56,18 @@
                     Point3D<T> const& getPoint() const;
 
                     //## Setter ##//
-                    void setNormal(Vector3D<T> const& u);
-                    void setPoint(Point3D<T> const& p);
-                    void setNormalAndPoint(Vector3D<T> const& u, Point3D<T> const& p);
+                    template <class K>
+                    void setNormal(Vector3D<K> const& u);
+                    template <class K>
+                    void setPoint(Point3D<K> const& p);
+                    template <class K, class L>
+                    void setNormalAndPoint(Vector3D<K> const& u, Point3D<L> const& p);
 
                     //## Methods ##//
-                    void computeNormalFrom3Point(Point3D<T> const& p1, Point3D<T> const& p2, Point3D<T> const& p3);
-                    NREfloat const distance(Point3D<T> const& p) const;
+                    template <class K, class L, class M>
+                    void computeNormalFrom3Point(Point3D<K> const& p1, Point3D<L> const& p2, Point3D<M> const& p3);
+                    template <class K>
+                    NREfloat distance(Point3D<K> const& p) const;
 
                     //## Access Operator ##//
 

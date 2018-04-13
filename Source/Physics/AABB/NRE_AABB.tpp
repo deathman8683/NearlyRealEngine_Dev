@@ -7,11 +7,13 @@
             }
 
             template <class T>
-            AABB<T>::AABB(Maths::Point3D<T> const& p, Maths::Vector3D<T> const& u) : center(p), hExtent(u) {
+            template <class K, class L>
+            AABB<T>::AABB(Maths::Point3D<K> const& p, Maths::Vector3D<L> const& u) : center(p), hExtent(u) {
             }
 
             template <class T>
-            AABB<T>::AABB(Maths::Point3D<T> const& p1, Maths::Point3D<T> const& p2) {
+            template <class K, class L>
+            AABB<T>::AABB(Maths::Point3D<K> const& p1, Maths::Point3D<L> const& p2) {
                 setHExtent((p2 - p1) / 2);
                 setCenter(p1 + getHExtent());
             }
@@ -50,7 +52,8 @@
             }
 
             template <class T>
-            Maths::Point3D<T> const AABB<T>::getPVertex(Maths::Vector3D<T> const& n) const {
+            template <class K>
+            Maths::Point3D<T> const AABB<T>::getPVertex(Maths::Vector3D<K> const& n) const {
                 Maths::Point3D<T> p(getMin());
                 Maths::Point3D<T> pMax(getMax());
 
@@ -67,7 +70,8 @@
                 return p;
             }
             template <class T>
-            Maths::Point3D<T> const AABB<T>::getNVertex(Maths::Vector3D<T> const& n) const {
+            template <class K>
+            Maths::Point3D<T> const AABB<T>::getNVertex(Maths::Vector3D<K> const& n) const {
                 Maths::Point3D<T> p(getMax());
                 Maths::Point3D<T> pMin(getMin());
 
@@ -85,7 +89,8 @@
             }
 
             template <class T>
-            void AABB<T>::getCorner(Maths::Point3D<T> *&corner) const {
+            template <class K>
+            void AABB<T>::getCorner(Maths::Point3D<K> *&corner) const {
                 corner[0] = getMin();
                 corner[1] = corner[0]; corner[1].setX(getCenter().getX() + getHExtent().getX());
                 corner[2] = corner[0]; corner[2].setY(getCenter().getY() + getHExtent().getY());
@@ -97,12 +102,14 @@
             }
 
             template <class T>
-            void AABB<T>::setCenter(Maths::Point3D<T> const& p) {
+            template <class K>
+            void AABB<T>::setCenter(Maths::Point3D<K> const& p) {
                 center = p;
             }
 
             template <class T>
-            void AABB<T>::setHExtent(Maths::Vector3D<T> const& u) {
+            template <class K>
+            void AABB<T>::setHExtent(Maths::Vector3D<K> const& u) {
                 hExtent = u;
             }
 
