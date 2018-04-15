@@ -30,19 +30,19 @@
                     if (rPrime < 0.0) {
                         rPrime = rPrime + 1.0;
                     }
-                    if (rPrime > 1.0) {
+                    if (rPrime >= 1.0) {
                         rPrime = rPrime - 1.0;
                     }
                     if (gPrime < 0.0) {
                         gPrime = gPrime + 1.0;
                     }
-                    if (gPrime > 1.0) {
+                    if (gPrime >= 1.0) {
                         gPrime = gPrime - 1.0;
                     }
                     if (bPrime < 0.0) {
                         bPrime = bPrime + 1.0;
                     }
-                    if (bPrime > 1.0) {
+                    if (bPrime >= 1.0) {
                         bPrime = bPrime - 1.0;
                     }
 

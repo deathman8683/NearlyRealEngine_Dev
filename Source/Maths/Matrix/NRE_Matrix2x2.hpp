@@ -40,42 +40,17 @@
                           * Default constructor, iniatlize a 2x2 identity matrix
                           */
                         Matrix2x2();
-                        /**
-                         * @brief Constructor
-                         * Initialize the matrix's value with 4 generic-type parameters
-                         * @param a : K, the l1-c1 value
-                         * @param b : L, the l1-c2 value
-                         * @param c : M, the l2-c1 value
-                         * @param d : N, the l2-c2 value
-                         */
-                        template <class K, class L, class M, class N>
-                        Matrix2x2(K const& a, L const& b,
-                                  M const& c, N const& d);
+                        Matrix2x2(T const& a, T const& b,
+                                  T const& c, T const& d);
                         Matrix2x2(T const& value);
-                        /**
-                         * @brief Constructor
-                         * Initialize the matrix's value with two 2D generic-type vector as line
-                         * @param l1 : Vector2D<K>, the matrix's first line
-                         * @param l2 : Vector2D<L>, the matrix's second line
-                         */
-                        template <class K, class L>
-                        Matrix2x2(Vector2D<K> const& l1, Vector2D<L> const& l2);
-                        /**
-                         * @brief Constructor
-                         * Initialize the matrix's value with two 2D generic-type point as line
-                         * @param l1 : Point2D<K>, the matrix's first line
-                         * @param l2 : Point2D<L>, the matrix's second line
-                         */
-                        template <class K, class L>
-                        Matrix2x2(Point2D<K> const& l1, Point2D<L> const& l2);
+                        Matrix2x2(Vector2D<T> const& l1, Vector2D<T> const& l2);
+                        Matrix2x2(Point2D<T> const& l1, Point2D<T> const& l2);
 
                     //## Copy-Constructor ##//
-                        /**
-                         * @brief Copy-Constructor
-                         * Construct a copy of m
-                         * @param m : Matrix2x2<T>, the matrix to copy
-                         */
                         Matrix2x2(Matrix2x2 const& m);
+
+                    //## Move-Constructor ##//
+                        Matrix2x2(Matrix2x2 && m);
 
                     //## Convertor ##//
                         /**
@@ -171,20 +146,8 @@
                          * Inverse the current matrix, set it to identity if the determinant is null
                          */
                         void inverse();
-                        /**
-                         * @brief Translate the matrix
-                         * Apply a translation to the matrix with a generic-type factor u
-                         * @param u : K, the translation factor
-                         */
-                        template <class K>
-                        void translate(K const& u);
-                        /**
-                         * @brief Scale the matrix
-                         * Apply a scale transformation to the matrix with a generic-type factor u
-                         * @param u : K, the scale factor
-                         */
-                        template <class K>
-                        void scale(K const& u);
+                        void translate(T const& u);
+                        void scale(T const& u);
                         const T* const value() const;
 
                     //## Access Operator ##//
@@ -204,139 +167,29 @@
                         const Vector2D<T>& operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
-                        /**
-                         * @brief Assignment Operator =
-                         * Copy a generic-type matrix into this
-                         * @param m : Matrix2x2<K>, the matrix to copy
-                         */
-                        template <class K>
-                        Matrix2x2<T>& operator=(Matrix2x2<K> const& m);
+                        Matrix2x2<T>& operator=(Matrix2x2<T> const& m);
+                        Matrix2x2<T>& operator=(Matrix2x2<T> && m);
 
                     //## Shortcut Operator ##//
-                        /**
-                         * @brief Shortcut Operator +=
-                         * Compute the addition between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to add into this
-                         * @return Matrix2x2<T>, this after the addition
-                         */
-                        template <class K>
-                        Matrix2x2<T>& operator+=(Matrix2x2<K> const& m);
-                        /**
-                         * @brief Shortcut Operator -=
-                         * Compute the substraction between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to substract into this
-                         * @return Matrix2x2<T>, this after the substraction
-                         */
-                        template <class K>
-                        Matrix2x2<T>& operator-=(Matrix2x2<K> const& m);
-                        /**
-                         * @brief Shortcut Operator *=
-                         * Compute the multiplication between this and a generic-type factor
-                         * @param k : K, the multiplication factor
-                         * @return Matrix2x2<T>, this after the multiplication by k
-                         */
-                        template <class K>
-                        Matrix2x2<T>& operator*=(K const& k);
-                        /**
-                         * @brief Shortcut Operator *=
-                         * Compute the multiplication between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to multiply into this
-                         * @return Matrix2x2<T>, this after the multiplication by m
-                         */
-                        template <class K>
-                        Matrix2x2<T>& operator*=(Matrix2x2<K> const& m);
-                        /**
-                         * @brief Shortcut Operator /=
-                         * Compute the division between this and a generic-type factor
-                         * @param k : K, the division factor
-                         * @return Matrix2x2<T>, this after the division by k
-                         */
-                        template <class K>
-                        Matrix2x2<T>& operator/=(K const& k);
-                        /**
-                         * @brief Shortcut Operator *=
-                         * Compute the multiplication between this and the inverse of a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to inverse and multiplicate into this
-                         * @return Matrix2x2<T>, this after the multiplication by 1/m
-                         */
-                        template <class K>
-                        Matrix2x2<T>& operator/=(Matrix2x2<K> const& m);
+                        Matrix2x2<T>& operator+=(Matrix2x2<T> const& m);
+                        Matrix2x2<T>& operator-=(Matrix2x2<T> const& m);
+                        Matrix2x2<T>& operator*=(T const& k);
+                        Matrix2x2<T>& operator*=(Matrix2x2<T> const& m);
+                        Matrix2x2<T>& operator/=(T const& k);
+                        Matrix2x2<T>& operator/=(Matrix2x2<T> const& m);
 
                     //## Arithmetic Operator ##//
-                        /**
-                         * @brief Arithmetic Operator +
-                         * Compute the addition between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to add to this
-                         * @return Matrix2x2<T>, a new matrix with this added to m
-                         */
-                        template <class K>
-                        Matrix2x2<T> operator+(Matrix2x2<K> const& m) const;
-                        /**
-                         * @brief Arithmetic Operator -
-                         * Compute the substract between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to substract to this
-                         * @return Matrix2x2<T>, a new matrix with this substracted to m
-                         */
-                        template <class K>
-                        Matrix2x2<T> operator-(Matrix2x2<K> const& m) const;
-                        /**
-                         * @brief Arithmetic Operator *
-                         * Compute the multiplication between this and a generic-type factor
-                         * @param k : K, the multiplication factor
-                         * @return Matrix2x2<T>, a new matrix result of the multiplication of this and k
-                         */
-                        template <class K>
-                        Matrix2x2<T> operator*(K const& k) const;
-                        /**
-                         * @brief Arithmetic Operator *
-                         * Compute the multiplication between this and a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to multiply to this
-                         * @return Matrix2x2<T>, a new matrix with this multiplied to m
-                         */
-                        template <class K>
-                        Matrix2x2<T> operator*(Matrix2x2<K> const& m) const;
-                        /**
-                         * @brief Arithmetic Operator *
-                         * Compute the transformation of a 2D generic-type vector by this
-                         * @param u : Vector2D<K>, the vector to transform by this
-                         * @return Vector2D<K>, the transformed vector
-                         */
-                        template <class K>
-                        Vector2D<K> operator*(Vector2D<K> const& u) const;
-                        /**
-                         * @brief Arithmetic Operator /
-                         * Compute the division between this and a generic-type factor
-                         * @param k : K, the division factor
-                         * @return Matrix2x2<T>, a new matrix result of the division of this and k
-                         */
-                        template <class K>
-                        Matrix2x2<T> operator/(K const& k) const;
-                        /**
-                         * @brief Arithmetic Operator /
-                         * Compute the multiplication between this and the inverse of a 2x2 generic-type matrix
-                         * @param m : Matrix2x2<K>, the matrix to inverse and multiply to this
-                         * @return Matrix2x2<T>, a new matrix with this multiplied to 1/m
-                         */
-                        template <class K>
-                        Matrix2x2<T> operator/(Matrix2x2<K> const& m) const;
+                        Matrix2x2<T> operator+(Matrix2x2<T> const& m) const;
+                        Matrix2x2<T> operator-(Matrix2x2<T> const& m) const;
+                        Matrix2x2<T> operator*(T const& k) const;
+                        Matrix2x2<T> operator*(Matrix2x2<T> const& m) const;
+                        Vector2D<T> operator*(Vector2D<T> const& u) const;
+                        Matrix2x2<T> operator/(T const& k) const;
+                        Matrix2x2<T> operator/(Matrix2x2<T> const& m) const;
 
                     //## Comparison Operator ##//
-                        /**
-                         * @brief Comparison Operator ==
-                         * Compare if this and a 2x2 generic-type matrix are equal, based on vector == comparison
-                         * @param m : Matrix2x2<K>, the matrix to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator==(Matrix2x2<K> const& m) const;
-                        /**
-                         * @brief Comparison Operator ==
-                         * Compare if this and a 2x2 generic-type matrix aren't equal, based on the negation of the == test
-                         * @param m : Matrix2x2<K>, the matrix to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator!=(Matrix2x2<K> const& m) const;
+                        bool operator==(Matrix2x2<T> const& m) const;
+                        bool operator!=(Matrix2x2<T> const& m) const;
 
                     //## BitWise Operator ##//
 

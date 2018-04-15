@@ -8,9 +8,8 @@
             }
 
             template <class T>
-            template <class K, class L, class M, class N>
-            Matrix2x2<T>::Matrix2x2(K const& a, L const& b,
-                                    M const& c, N const& d) : data{{a, b}, {c, d}} {
+            Matrix2x2<T>::Matrix2x2(T const& a, T const& b,
+                                    T const& c, T const& d) : data{{a, b}, {c, d}} {
             }
 
             template <class T>
@@ -18,24 +17,24 @@
             }
 
             template <class T>
-            template <class K, class L>
-            Matrix2x2<T>::Matrix2x2(Vector2D<K> const& l1, Vector2D<L> const& l2) : data{l1, l2} {
+            Matrix2x2<T>::Matrix2x2(Vector2D<T> const& l1, Vector2D<T> const& l2) : data{l1, l2} {
             }
 
             template <class T>
-            template <class K, class L>
-            Matrix2x2<T>::Matrix2x2(Point2D<K> const& l1, Point2D<L> const& l2) : data{l1, l2} {
+            Matrix2x2<T>::Matrix2x2(Point2D<T> const& l1, Point2D<T> const& l2) : data{l1, l2} {
             }
 
             template <class T>
-            Matrix2x2<T>::Matrix2x2(Matrix2x2 const& m) {
-                *this = m;
+            Matrix2x2<T>::Matrix2x2(Matrix2x2 const& m) : data{m.getL1(), m.getL2()} {
+            }
+
+            template <class T>
+            Matrix2x2<T>::Matrix2x2(Matrix2x2 && m) : data{std::move(m.getL1()), std::move(m.getL2())} {
             }
 
             template <class T>
             template <class K>
-            Matrix2x2<T>::Matrix2x2(Matrix2x2<K> const& m) {
-                *this = m;
+            Matrix2x2<T>::Matrix2x2(Matrix2x2<K> const& m) : data{static_cast <Vector2D<T>> (m.getL1()), static_cast <Vector2D<T>> (m.getL2())} {
             }
 
             template <class T>
@@ -124,20 +123,18 @@
             }
 
             template <class T>
-            template <class K>
-            void Matrix2x2<T>::translate(K const& u) {
+            void Matrix2x2<T>::translate(T const& u) {
                 setC2(getC1() * u + getC2());
             }
 
             template <class T>
-            template <class K>
-            void Matrix2x2<T>::scale(K const& u) {
+            void Matrix2x2<T>::scale(T const& u) {
                 setC1(getC1() * u);
             }
 
             template <class T>
             const T* const Matrix2x2<T>::value() const {
-                return &data[0][0];
+                return data[0].value();
             }
 
             template <class T>
@@ -150,8 +147,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T>& Matrix2x2<T>::operator=(Matrix2x2<K> const& m) {
+            Matrix2x2<T>& Matrix2x2<T>::operator=(Matrix2x2<T> const& m) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
                     data[i] = m[i];
                 }
@@ -159,8 +155,15 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T>& Matrix2x2<T>::operator+=(Matrix2x2<K> const& m) {
+            Matrix2x2<T>& Matrix2x2<T>::operator=(Matrix2x2<T> && m) {
+                for(unsigned int i = 0; i < 2; i = i + 1) {
+                    data[i] = std::move(m[i]);
+                }
+                return *this;
+            }
+
+            template <class T>
+            Matrix2x2<T>& Matrix2x2<T>::operator+=(Matrix2x2<T> const& m) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
                     data[i] = data[i] + m[i];
                 }
@@ -168,8 +171,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T>& Matrix2x2<T>::operator-=(Matrix2x2<K> const& m) {
+            Matrix2x2<T>& Matrix2x2<T>::operator-=(Matrix2x2<T> const& m) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
                     data[i] = data[i] - m[i];
                 }
@@ -177,8 +179,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T>& Matrix2x2<T>::operator*=(K const& k) {
+            Matrix2x2<T>& Matrix2x2<T>::operator*=(T const& k) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
                     data[i] = data[i] * k;
                 }
@@ -186,8 +187,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T>& Matrix2x2<T>::operator*=(Matrix2x2<K> const& m) {
+            Matrix2x2<T>& Matrix2x2<T>::operator*=(Matrix2x2<T> const& m) {
                 Matrix2x2<T> tmp(*this);
                 tmp[0][0] = getL1() | m.getC1(); tmp[0][1] = getL1() | m.getC2();
                 tmp[1][0] = getL2() | m.getC1(); tmp[1][1] = getL2() | m.getC2();
@@ -196,8 +196,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T>& Matrix2x2<T>::operator/=(K const& k) {
+            Matrix2x2<T>& Matrix2x2<T>::operator/=(T const& k) {
                 for(unsigned int i = 0; i < 2; i = i + 1) {
                     data[i] = data[i] / k;
                 }
@@ -205,69 +204,59 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T>& Matrix2x2<T>::operator/=(Matrix2x2<K> const& m) {
-                Matrix2x2<K> tmp(m); tmp.inverse();
+            Matrix2x2<T>& Matrix2x2<T>::operator/=(Matrix2x2<T> const& m) {
+                Matrix2x2<T> tmp(m); tmp.inverse();
                 return *this *= tmp;
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator+(Matrix2x2<K> const& m) const {
+            Matrix2x2<T> Matrix2x2<T>::operator+(Matrix2x2<T> const& m) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp += m;
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator-(Matrix2x2<K> const& m) const {
+            Matrix2x2<T> Matrix2x2<T>::operator-(Matrix2x2<T> const& m) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp -= m;
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator*(K const& k)  const {
+            Matrix2x2<T> Matrix2x2<T>::operator*(T const& k)  const {
                 Matrix2x2<T> tmp(*this);
                 return tmp *= k;
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator*(Matrix2x2<K> const& m) const {
+            Matrix2x2<T> Matrix2x2<T>::operator*(Matrix2x2<T> const& m) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp *= m;
             }
 
             template <class T>
-            template <class K>
-            Vector2D<K> Matrix2x2<T>::operator*(Vector2D<K> const& u) const {
-                return Vector2D<K>(u | getL1(), u | getL2());
+            Vector2D<T> Matrix2x2<T>::operator*(Vector2D<T> const& u) const {
+                return Vector2D<T>(u | getL1(), u | getL2());
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator/(K const& k) const {
+            Matrix2x2<T> Matrix2x2<T>::operator/(T const& k) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp /= k;
             }
 
             template <class T>
-            template <class K>
-            Matrix2x2<T> Matrix2x2<T>::operator/(Matrix2x2<K> const& m) const {
+            Matrix2x2<T> Matrix2x2<T>::operator/(Matrix2x2<T> const& m) const {
                 Matrix2x2<T> tmp(*this);
                 return tmp /= m;
             }
 
             template <class T>
-            template <class K>
-            bool Matrix2x2<T>::operator==(Matrix2x2<K> const& m) const {
+            bool Matrix2x2<T>::operator==(Matrix2x2<T> const& m) const {
                 return getL1() == m.getL1() && getL2() == m.getL2();
             }
 
             template <class T>
-            template <class K>
-            bool Matrix2x2<T>::operator!=(Matrix2x2<K> const& m) const {
+            bool Matrix2x2<T>::operator!=(Matrix2x2<T> const& m) const {
                 return !(*this == m);
             }
 
