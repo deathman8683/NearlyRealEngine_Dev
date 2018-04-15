@@ -3,40 +3,45 @@
         namespace Maths {
 
             template <class T>
-            Point3D<T>::Point3D() : Point3D(DEFAULT_X, DEFAULT_Y, DEFAULT_Z) {
+            Point3D<T>::Point3D() : z(DEFAULT_Z) {
             }
 
             template <class T>
-            template <class K, class L, class M>
-            Point3D<T>::Point3D(K const& x, L const& y, M const& z) : data{static_cast <T> (x), static_cast <T> (y), static_cast <T> (z)} {
+            Point3D<T>::Point3D(T const& x, T const& y, T const& z) : Point2D<T>::Point2D(x, y), z(z) {
             }
 
             template <class T>
-            Point3D<T>::Point3D(T const& value) : Point3D(value, value, value) {
+            Point3D<T>::Point3D(T const& value) : Point2D<T>::Point2D(value), z(value) {
             }
 
             template <class T>
-            template <class K>
-            Point3D<T>::Point3D(Point2D<K> const& p, T const& z) : Point3D(p.getX(), p.getY(), z) {
+            Point3D<T>::Point3D(Point3D<T> const& p, Vector3D<T> const& u) : Point2D<T>::Point2D(p, u), z(p.getZ() + u.getZ()) {
             }
 
             template <class T>
-            template <class K, class L>
-            Point3D<T>::Point3D(Point3D<K> const& p, Vector3D<L> const& u) : Point3D(p.getX() + u.getX(), p.getY() + u.getY(), p.getZ() + u.getZ()) {
+            Point3D<T>::Point3D(Point3D const& p) : Point2D<T>::Point2D(p), z(p.getZ()) {
             }
 
             template <class T>
-            Point3D<T>::Point3D(Point3D const& p) : Point3D(p.getX(), p.getY(), p.getZ()) {
-            }
-
-            template <class T>
-            template <class K>
-            Point3D<T>::Point3D(Point3D<K> const& p) : Point3D(p.getX(), p.getY(), p.getZ()) {
+            Point3D<T>::Point3D(Point3D && p) : Point2D<T>::Point2D(p), z(std::move(p.getZ())) {
             }
 
             template <class T>
             template <class K>
-            Point3D<T>::Point3D(Vector3D<K> const& u) : Point3D(u.getX(), u.getY(), u.getZ()) {
+            Point3D<T>::Point3D(Point3D<K> const& p) : Point2D<T>::Point2D(p), z(static_cast <T> (p.getZ())) {
+            }
+
+            template <class T>
+            template <class K>
+            Point3D<T>::Point3D(Vector3D<K> const& u) : Point2D<T>::Point2D(u.getX(), u.getY()), z(static_cast <T> (u.getZ())) {
+            }
+
+            template <class T>
+            Point3D<T>::Point3D(Point2D<T> const& p) : Point3D(p, DEFAULT_Z) {
+            }
+
+            template <class T>
+            Point3D<T>::Point3D(Point2D<T> const& p, T const& z) : Point2D<T>::Point2D(p), z(z) {
             }
 
             template <class T>
@@ -44,151 +49,131 @@
             }
 
             template <class T>
-            T const& Point3D<T>::getX() const {
-                return data[0];
-            }
-
-            template <class T>
-            T const& Point3D<T>::getY() const {
-                return data[1];
-            }
-
-            template <class T>
             T const& Point3D<T>::getZ() const {
-                return data[2];
-            }
-
-            template <class T>
-            template <class K>
-            void Point3D<T>::setX(K const& x) {
-                data[0] = x;
-            }
-
-            template <class T>
-            template <class K>
-            void Point3D<T>::setY(K const& y) {
-                data[1] = y;
+                return z;
             }
 
             template <class T>
             template <class K>
             void Point3D<T>::setZ(K const& z) {
-                data[2] = z;
+                this->z = static_cast <T> (z);
             }
 
             template <class T>
             template <class K, class L, class M>
             void Point3D<T>::setCoord(K const& x, L const& y, M const& z) {
-                setX(x);    setY(y);    setZ(z);
+                Point2D<T>::setCoord(x, y);    setZ(z);
             }
 
             template <class T>
             template <class K, class L>
             void Point3D<T>::setCoord(Point2D<K> const& p, L const& z) {
-                setX(p.getX()); setY(p.getY()); setZ(z);
+                Point2D<T>::setCoord(p.getX(), p.getY());    setZ(z);
             }
 
             template <class T>
-            NREfloat Point3D<T>::distance(Point3D<T> const& p) const {
+            NREfloat const Point3D<T>::distance(Point3D<T> const& p) const {
                 return std::sqrt(distanceSquared(p));
             }
 
             template <class T>
-            NREfloat Point3D<T>::distanceSquared(Point3D<T> const& p) const {
-                NREfloat xLenght = p.getX() - getX();
-                NREfloat yLenght = p.getY() - getY();
-                NREfloat zLenght = p.getZ() - getZ();
+            NREfloat const Point3D<T>::distanceSquared(Point3D<T> const& p) const {
+                NREfloat xLenght = p.getX() - this->getX();
+                NREfloat yLenght = p.getY() - this->getY();
+                NREfloat zLenght = p.getZ() - this->getZ();
                 return xLenght * xLenght + yLenght * yLenght + zLenght * zLenght;
             }
 
             template <class T>
-            const T* const Point3D<T>::value() const {
-                return &data[0];
-            }
-
-            template <class T>
-            template <class K>
-            Point3D<T>& Point3D<T>::operator+=(Vector3D<K> const& u) {
-                setX(getX() + u.getX());
-                setY(getY() + u.getY());
-                setZ(getZ() + u.getZ());
+            Point3D<T>& Point3D<T>::operator=(Point3D<T> const& base) {
+                this->x = base.getX();
+                this->y = base.getY();
+                this->z = base.getZ();
                 return *this;
             }
 
             template <class T>
-            template <class K>
-            Point3D<T>& Point3D<T>::operator-=(Vector3D<K> const& u) {
-                setX(getX() - u.getX());
-                setY(getY() - u.getY());
-                setZ(getZ() - u.getZ());
+            Point3D<T>& Point3D<T>::operator=(Point3D<T> && base) {
+                this->x = std::move(base.getX());
+                this->y = std::move(base.getY());
+                this->z = std::move(base.getZ());
                 return *this;
             }
 
             template <class T>
-            template <class K>
-            Point3D<T> Point3D<T>::operator+(Vector3D<K> const& u) const {
+            Point3D<T>& Point3D<T>::operator+=(Vector3D<T> const& u) {
+                this->setX(this->getX() + u.getX());
+                this->setY(this->getY() + u.getY());
+                this->setZ(this->getZ() + u.getZ());
+                return *this;
+            }
+
+            template <class T>
+            Point3D<T>& Point3D<T>::operator-=(Vector3D<T> const& u) {
+                this->setX(this->getX() - u.getX());
+                this->setY(this->getY() - u.getY());
+                this->setZ(this->getZ() - u.getZ());
+                return *this;
+            }
+
+            template <class T>
+            Point3D<T> Point3D<T>::operator+(Vector3D<T> const& u) const {
                 Point3D<T> tmp(*this);
                 return tmp += u;
             }
 
             template <class T>
-            template <class K>
-            Point3D<T> Point3D<T>::operator-(Vector3D<K> const& u) const {
+            Point3D<T> Point3D<T>::operator-(Vector3D<T> const& u) const {
                 Point3D<T> tmp(*this);
                 return tmp -= u;
             }
 
             template <class T>
-            template <class K>
-            Vector3D<T> Point3D<T>::operator-(Point3D<K> const& p) const {
+            Vector3D<T> Point3D<T>::operator-(Point3D<T> const& p) const {
                 return Vector3D<T>(*this, p);
             }
 
             template <class T>
             Point3D<T> Point3D<T>::operator-() const {
-                Point3D<T> tmp(-getX(), -getY(), -getZ());
+                Point3D<T> tmp(-this->getX(), -this->getY(), -this->getZ());
                 return tmp;
             }
 
             template <class T>
             template <class K>
-            bool Point3D<T>::operator==(Point3D<K> const& p) const {
-                return getX() == p.getX() && getY() == p.getY() && getZ() == p.getZ();
+            bool const Point3D<T>::operator==(Point3D<K> const& p) const {
+                return this->getX() == p.getX() && this->getY() == p.getY() && this->getZ() == p.getZ();
             }
 
             template <>
             template <class K>
-            bool Point3D<NREfloat>::operator==(Point3D<K> const& p) const {
-                return almostEqual(getX(), p.getX()) && almostEqual(getY(), p.getY()) && almostEqual(getZ(), p.getZ());
+            bool const Point3D<NREfloat>::operator==(Point3D<K> const& p) const {
+                return almostEqual(this->getX(), p.getX()) && almostEqual(this->getY(), p.getY()) && almostEqual(this->getZ(), p.getZ());
             }
 
             template <class T>
             template <class K>
-            bool Point3D<T>::operator!=(Point3D<K> const& p) const {
+            bool const Point3D<T>::operator!=(Point3D<K> const& p) const {
                 return !(*this == p);
             }
 
             template <class T>
-            template <class K>
-            bool Point3D<T>::operator<(Point3D<K> const& p) const {
+            bool const Point3D<T>::operator<(Point3D<T> const& p) const {
                 return distanceSquared() < p.distanceSquared();
             }
 
             template <class T>
-            template <class K>
-            bool Point3D<T>::operator>(Point3D<K> const& p) const {
+            bool const Point3D<T>::operator>(Point3D<T> const& p) const {
                 return distanceSquared() > p.distanceSquared();
             }
 
             template <class T>
-            template <class K>
-            bool Point3D<T>::operator<=(Point3D<K> const& p) const {
+            bool const Point3D<T>::operator<=(Point3D<T> const& p) const {
                 return distanceSquared() <= p.distanceSquared();
             }
 
             template <class T>
-            template <class K>
-            bool Point3D<T>::operator>=(Point3D<K> const& p) const {
+            bool const Point3D<T>::operator>=(Point3D<T> const& p) const {
                 return distanceSquared() >= p.distanceSquared();
             }
 
