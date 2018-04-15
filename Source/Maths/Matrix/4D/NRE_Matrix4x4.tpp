@@ -8,14 +8,10 @@
             }
 
             template <class T>
-            template <class A, class B, class C, class D,
-                     class E, class F, class G, class H,
-                     class I, class J, class K, class L,
-                     class M, class N, class O, class P>
-            Matrix4x4<T>::Matrix4x4(A const& a, B const& b, C const& c, D const& d,
-                                    E const& e, F const& f, G const& g, H const& h,
-                                    I const& i, J const& j, K const& k, L const& l,
-                                    M const& m, N const& n, O const& o, P const& p)
+            Matrix4x4<T>::Matrix4x4(T const& a, T const& b, T const& c, T const& d,
+                                    T const& e, T const& f, T const& g, T const& h,
+                                    T const& i, T const& j, T const& k, T const& l,
+                                    T const& m, T const& n, T const& o, T const& p)
                                     : data{{a, b, c, d}, {e, f, g, h}, {i, j, k, l}, {m, n, o, p}} {
             }
 
@@ -27,26 +23,26 @@
             }
 
             template <class T>
-            template <class K, class L, class M, class N>
-            Matrix4x4<T>::Matrix4x4(Vector4D<K> const& l1, Vector4D<L> const& l2, Vector4D<M> const& l3, Vector4D<N> const& l4)
+            Matrix4x4<T>::Matrix4x4(Vector4D<T> const& l1, Vector4D<T> const& l2, Vector4D<T> const& l3, Vector4D<T> const& l4)
                                     : data{l1, l2, l3, l4} {
             }
 
             template <class T>
-            template <class K, class L, class M, class N>
-            Matrix4x4<T>::Matrix4x4(Point4D<K> const& l1, Point4D<L> const& l2, Point4D<M> const& l3, Point4D<N> const& l4)
+            Matrix4x4<T>::Matrix4x4(Point4D<T> const& l1, Point4D<T> const& l2, Point4D<T> const& l3, Point4D<T> const& l4)
                                     : data{l1, l2, l3, l4} {
             }
 
             template <class T>
-            Matrix4x4<T>::Matrix4x4(Matrix4x4 const& m) {
-                *this = m;
+            Matrix4x4<T>::Matrix4x4(Matrix4x4 const& m) : data{m.getL1(), m.getL2(), m.getL3(), m.getL4()} {
+            }
+
+            template <class T>
+            Matrix4x4<T>::Matrix4x4(Matrix4x4 && m) : data{std::move(m.getL1()), std::move(m.getL2()), std::move(m.getL3()), std::move(m.getL4())} {
             }
 
             template <class T>
             template <class K>
-            Matrix4x4<T>::Matrix4x4(Matrix4x4<K> const& m) {
-                *this = m;
+            Matrix4x4<T>::Matrix4x4(Matrix4x4<K> const& m) : data{static_cast <Vector4D<T>> (m.getL1()), static_cast <Vector4D<T>> (m.getL2()), static_cast <Vector4D<T>> (m.getL3()), static_cast <Vector4D<T>> (m.getL4())} {
             }
 
             template <class T>
@@ -99,7 +95,7 @@
             }
 
             template <class T>
-            NREfloat Matrix4x4<T>::getDeterminant() const {
+            NREfloat const Matrix4x4<T>::getDeterminant() const {
                 return (data[0][0] * data[1][1] * data[2][2] * data[3][3]) + (data[0][0] * data[1][2] * data[2][3] * data[3][1]) + (data[0][0] * data[1][3] * data[2][1] * data[3][2])
                      + (data[0][1] * data[1][0] * data[2][3] * data[3][2]) + (data[0][1] * data[1][2] * data[2][0] * data[3][3]) + (data[0][1] * data[1][3] * data[2][2] * data[3][0])
                      + (data[0][2] * data[1][0] * data[2][1] * data[3][3]) + (data[0][2] * data[1][1] * data[2][3] * data[3][0]) + (data[0][2] * data[1][3] * data[2][0] * data[3][1])
@@ -111,32 +107,27 @@
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::setL1(Vector4D<K> const& l1) {
+            void Matrix4x4<T>::setL1(Vector4D<T> const& l1) {
                 data[0] = l1;
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::setL2(Vector4D<K> const& l2) {
+            void Matrix4x4<T>::setL2(Vector4D<T> const& l2) {
                 data[1] = l2;
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::setL3(Vector4D<K> const& l3) {
+            void Matrix4x4<T>::setL3(Vector4D<T> const& l3) {
                 data[2] = l3;
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::setL4(Vector4D<K> const& l4) {
+            void Matrix4x4<T>::setL4(Vector4D<T> const& l4) {
                 data[3] = l4;
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::setC1(Vector4D<K> const& c1) {
+            void Matrix4x4<T>::setC1(Vector4D<T> const& c1) {
                 data[0][0] = c1.getX();
                 data[1][0] = c1.getY();
                 data[2][0] = c1.getZ();
@@ -144,8 +135,7 @@
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::setC2(Vector4D<K> const& c2) {
+            void Matrix4x4<T>::setC2(Vector4D<T> const& c2) {
                 data[0][1] = c2.getX();
                 data[1][1] = c2.getY();
                 data[2][1] = c2.getZ();
@@ -153,8 +143,7 @@
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::setC3(Vector4D<K> const& c3) {
+            void Matrix4x4<T>::setC3(Vector4D<T> const& c3) {
                 data[0][2] = c3.getX();
                 data[1][2] = c3.getY();
                 data[2][2] = c3.getZ();
@@ -162,8 +151,7 @@
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::setC4(Vector4D<K> const& c4) {
+            void Matrix4x4<T>::setC4(Vector4D<T> const& c4) {
                 data[0][3] = c4.getX();
                 data[1][3] = c4.getY();
                 data[2][3] = c4.getZ();
@@ -243,22 +231,19 @@
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::translate(Vector3D<K> const& u) {
+            void Matrix4x4<T>::translate(Vector3D<T> const& u) {
                 setC4(getC1() * u.getX() + getC2() * u.getY() + getC3() * u.getZ() + getC4());
             }
 
             template <class T>
-            template <class K>
-            void Matrix4x4<T>::scale(Vector3D<K> const& u) {
+            void Matrix4x4<T>::scale(Vector3D<T> const& u) {
                 setC1(getC1() * u.getX());
                 setC2(getC2() * u.getY());
                 setC3(getC3() * u.getZ());
             }
 
             template <class T>
-            template <class K, class L>
-            void Matrix4x4<T>::rotate(K const& angle, Vector3D<L> const& axis) {
+            void Matrix4x4<T>::rotate(T const& angle, Vector3D<T> const& axis) {
                 NREfloat c = cos(toRad(angle));
                 NREfloat s = sin(toRad(angle));
 
@@ -274,8 +259,7 @@
             }
 
             template <class T>
-            template <class K, class L, class M, class N>
-            void Matrix4x4<T>::projection(K const& fov, L const& ratio, M const& zNear, N const& zFar) {
+            void Matrix4x4<T>::projection(T const& fov, T const& ratio, T const& zNear, T const& zFar) {
                 T f = tan(fov / 2.0);
                 setL1(Vector4D<T>(1.0 / (ratio * f), 0, 0, 0));
                 setL2(Vector4D<T>(0, 1.0 / f, 0, 0));
@@ -284,8 +268,7 @@
             }
 
             template <class T>
-            template <class K, class L, class M, class N, class O, class P>
-            void Matrix4x4<T>::ortho(K const& left, L const& right, M const& bottom, N const& top, O const& zNear, P const& zFar) {
+            void Matrix4x4<T>::ortho(T const& left, T const& right, T const& bottom, T const& top, T const& zNear, T const& zFar) {
                 setL1(Vector4D<T>(2.0 / (right - left), 0, 0, -((right + left) / (right - left))));
                 setL2(Vector4D<T>(0, 2.0 / (top - bottom), 0, -((top + bottom) / (top - bottom))));
                 setL3(Vector4D<T>(0, 0, -2.0 / (zFar - zNear), -((zFar + zNear) / (zFar - zNear))));
@@ -293,8 +276,7 @@
             }
 
             template <class T>
-            template <class K, class L, class M>
-            void Matrix4x4<T>::lookAt(Point3D<K> const& eye, Point3D<L> const& center, Vector3D<M> const& up) {
+            void Matrix4x4<T>::lookAt(Point3D<T> const& eye, Point3D<T> const& center, Vector3D<T> const& up) {
                 Vector3D<T> f = eye - center;
                 f.normalize();
                 Vector3D<T> s = f ^ up;
@@ -311,7 +293,7 @@
 
             template <class T>
             const T* const Matrix4x4<T>::value() const {
-                return &data[0][0];
+                return data[0].value();
             }
 
             template <class T>
@@ -324,8 +306,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T>& Matrix4x4<T>::operator=(Matrix4x4<K> const& m) {
+            Matrix4x4<T>& Matrix4x4<T>::operator=(Matrix4x4<T> const& m) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
                     data[i] = m[i];
                 }
@@ -333,8 +314,15 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T>& Matrix4x4<T>::operator+=(Matrix4x4<K> const& m) {
+            Matrix4x4<T>& Matrix4x4<T>::operator=(Matrix4x4<T> && m) {
+                for(unsigned int i = 0; i < 4; i = i + 1) {
+                    data[i] = std::move(m[i]);
+                }
+                return *this;
+            }
+
+            template <class T>
+            Matrix4x4<T>& Matrix4x4<T>::operator+=(Matrix4x4<T> const& m) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
                     data[i] = data[i] + m[i];
                 }
@@ -342,8 +330,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T>& Matrix4x4<T>::operator-=(Matrix4x4<K> const& m) {
+            Matrix4x4<T>& Matrix4x4<T>::operator-=(Matrix4x4<T> const& m) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
                     data[i] = data[i] - m[i];
                 }
@@ -351,8 +338,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T>& Matrix4x4<T>::operator*=(K const& k) {
+            Matrix4x4<T>& Matrix4x4<T>::operator*=(T const& k) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
                     data[i] = data[i] * k;
                 }
@@ -360,8 +346,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T>& Matrix4x4<T>::operator*=(Matrix4x4<K> const& m) {
+            Matrix4x4<T>& Matrix4x4<T>::operator*=(Matrix4x4<T> const& m) {
                 Matrix4x4<T> tmp(*this);
                 tmp[0][0] = getL1() | m.getC1(); tmp[0][1] = getL1() | m.getC2(); tmp[0][2] = getL1() | m.getC3(); tmp[0][3] = getL1() | m.getC4();
                 tmp[1][0] = getL2() | m.getC1(); tmp[1][1] = getL2() | m.getC2(); tmp[1][2] = getL2() | m.getC3(); tmp[1][3] = getL2() | m.getC4();
@@ -372,8 +357,7 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T>& Matrix4x4<T>::operator/=(K const& k) {
+            Matrix4x4<T>& Matrix4x4<T>::operator/=(T const& k) {
                 for(unsigned int i = 0; i < 4; i = i + 1) {
                     data[i] = data[i] / k;
                 }
@@ -381,69 +365,59 @@
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T>& Matrix4x4<T>::operator/=(Matrix4x4<K> const& m) {
-                Matrix4x4<K> tmp(m); tmp.inverse();
+            Matrix4x4<T>& Matrix4x4<T>::operator/=(Matrix4x4<T> const& m) {
+                Matrix4x4<T> tmp(m); tmp.inverse();
                 return *this *= tmp;
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator+(Matrix4x4<K> const& m) const {
+            Matrix4x4<T> Matrix4x4<T>::operator+(Matrix4x4<T> const& m) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp += m;
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator-(Matrix4x4<K> const& m) const {
+            Matrix4x4<T> Matrix4x4<T>::operator-(Matrix4x4<T> const& m) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp -= m;
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator*(K const& k)  const {
+            Matrix4x4<T> Matrix4x4<T>::operator*(T const& k)  const {
                 Matrix4x4<T> tmp(*this);
                 return tmp *= k;
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator*(Matrix4x4<K> const& m) const {
+            Matrix4x4<T> Matrix4x4<T>::operator*(Matrix4x4<T> const& m) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp *= m;
             }
 
             template <class T>
-            template <class K>
-            Vector4D<K> Matrix4x4<T>::operator*(Vector4D<K> const& u) const {
-                return Vector4D<K>(u | getL1(), u | getL2(), u | getL3(), u | getL4());
+            Vector4D<T> Matrix4x4<T>::operator*(Vector4D<T> const& u) const {
+                return Vector4D<T>(u | getL1(), u | getL2(), u | getL3(), u | getL4());
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator/(K const& k) const {
+            Matrix4x4<T> Matrix4x4<T>::operator/(T const& k) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp /= k;
             }
 
             template <class T>
-            template <class K>
-            Matrix4x4<T> Matrix4x4<T>::operator/(Matrix4x4<K> const& m) const {
+            Matrix4x4<T> Matrix4x4<T>::operator/(Matrix4x4<T> const& m) const {
                 Matrix4x4<T> tmp(*this);
                 return tmp /= m;
             }
 
             template <class T>
-            template <class K>
-            bool Matrix4x4<T>::operator==(Matrix4x4<K> const& m) const {
+            bool Matrix4x4<T>::operator==(Matrix4x4<T> const& m) const {
                 return getL1() == m.getL1() && getL2() == m.getL2() && getL3() == m.getL3() && getL4() == m.getL4();
             }
 
             template <class T>
-            template <class K>
-            bool Matrix4x4<T>::operator!=(Matrix4x4<K> const& m) const {
+            bool Matrix4x4<T>::operator!=(Matrix4x4<T> const& m) const {
                 return !(*this == m);
             }
 

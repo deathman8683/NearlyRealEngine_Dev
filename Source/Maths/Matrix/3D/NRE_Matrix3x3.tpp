@@ -173,7 +173,7 @@
 
             template <class T>
             const T* const Matrix3x3<T>::value() const {
-                return &data[0][0];
+                return data[0].value();
             }
 
             template <class T>
