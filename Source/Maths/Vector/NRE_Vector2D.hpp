@@ -30,134 +30,55 @@
             template <class T>
             class Vector2D {
                 private:
-                    T data[2];
+                    T x;
+                    T y;
 
                 public:
                     //## Constructor ##//
-                        /**
-                         * @brief Constructor
-                         * Default constructor, iniatlize a 2D vector with default translation
-                         */
                         Vector2D();
-                        /**
-                         * @brief Constructor
-                         * Initialize a 2D vector with x and y
-                         * @param x : T, the x translation
-                         * @param y : T, the y translation
-                         */
                         Vector2D(T const& x, T const& y);
                         Vector2D(T const& value);
-                        /**
-                         * @brief Constructor
-                         * Convert two 2D generic-type point into a 2D T vector
-                         * @param a : Point2D<K>, the vector's start point
-                         * @param b : Point2D<L>, the vector's end point
-                         */
-                        template <class K, class L>
-                        Vector2D(Point2D<K> const& a, Point2D<L> const& b);
+                        Vector2D(Point2D<T> const& a, Point2D<T> const& b);
 
                     //## Copy-Constructor ##//
-                        /**
-                         * @brief Copy-Constructor
-                         * Construct a copy of u
-                         * @param u : Vector2D<T>, the vector to copy
-                         */
                         Vector2D(Vector2D const& u);
 
+                    //## Move-Constructor ##//
+                        Vector2D(Vector2D && u);
+
                     //## Convertor ##//
-                        /**
-                         * @brief Convertor
-                         * Convert a 2D generic-type vector into a 2D T vector
-                         * @param u : Vector2D<K>, the vector to convert
-                         */
                         template <class K>
                         Vector2D(Vector2D<K> const& u);
-                        /**
-                         * @brief Convertor
-                         * Convert a 2D generic-type point into a 2D T vector
-                         * @param p : Point2D<K>, the point to convert
-                         */
                         template <class K>
                         Vector2D(Point2D<K> const& p);
 
                     //## Deconstructor ##//
-                        /**
-                         * @brief Deconstructor
-                         * Deconstruct a 2D vector
-                         */
                         ~Vector2D();
 
                     //## Getter ##//
-                        /**
-                         * @brief X getter
-                         * Return the x attribute
-                         * @return T, the x value
-                         */
                         T const& getX() const;
-                        /**
-                         * @brief Y getter
-                         * Return the y attribute
-                         * @return T, the Y value
-                         */
                         T const& getY() const;
                         T const& getW() const;
                         T const& getH() const;
 
                     //## Setter ##//
-                        /**
-                         * @brief X setter
-                         * Change the x value
-                         * @param x : K, the new x value
-                         */
                         template <class K>
                         void setX(K const& x);
-                        /**
-                         * @brief Y setter
-                         * Change the y value
-                         * @param y : K, the new y value
-                         */
                         template <class K>
                         void setY(K const& y);
                         template <class K>
                         void setW(K const& w);
                         template <class K>
                         void setH(K const& h);
-                        /**
-                         * @brief X and Y setter
-                         * Change both x and y values
-                         * @param x : K, the new x value
-                         * @param y : L, the new y value
-                         */
                         template <class K, class L>
                         void setCoord(K const& x, L const& y);
                         template <class K, class L>
                         void setSize(K const& w, L const& h);
 
                     //## Methods ##//
-                        /**
-                         * @brief Norm getter
-                         * Compute the vector's norm
-                         * @return NREfloat, the computed norm
-                         */
-                        NREfloat norm() const;
-                        /**
-                         * @brief NormSquared getter
-                         * Compute the vector's squared norm
-                         * @return NREfloat, the computed squared norm
-                         */
-                        NREfloat normSquared() const;
-                        /**
-                         * @brief Normlization
-                         * Normalize the vector, doesn't check if the vector's norm is null
-                         */
+                        NREfloat const norm() const;
+                        NREfloat const normSquared() const;
                         void normalize();
-                        /**
-                         * @brief 2D rotation
-                         * Rotate the vector by a given generic-type theta
-                         * @param theta : K, the rotation's angle
-                         */
-                        template <class K>
-                        void rotate(K const& theta);
                         const T* const value() const;
 
                     //## Access Operator ##//
@@ -165,150 +86,37 @@
                         const T& operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
+                        Vector2D<T>& operator=(Vector2D<T> const& base);
+                        Vector2D<T>& operator=(Vector2D<T> && base);
 
                     //## Shortcut Operator ##//
-                        /**
-                         * @brief Shortcut Operator +=
-                         * Compute the addition between this and a 2D generic-type vector
-                         * @param u : Vector2D<K>, the vector to add into this
-                         * @return Vector2D<T>, this with the u added
-                         */
-                        template <class K>
-                        Vector2D<T>& operator+=(Vector2D<K> const& u);
-                        /**
-                         * @brief Shortcut Operator -=
-                         * Compute the substraction between this and a 2D generic-type vector
-                         * @param u : Vector2D<K>, the vector to substract into this
-                         * @return Vector2D<T>, this with the u substracted
-                         */
-                        template <class K>
-                        Vector2D<T>& operator-=(Vector2D<K> const& u);
-                        /**
-                         * @brief Shortcut Operator *=
-                         * Compute the multiplication of this by a generic-type factor k
-                         * @param k : K, the multiplication factor
-                         * @return Vector2D<T>, this multiplied by k
-                         */
-                        template <class K>
-                        Vector2D<T>& operator*=(K const& k);
-                        /**
-                         * @brief Shortcut Operator /=
-                         * Compute the division of this by a generic-type factor k
-                         * @param k : K, the division factor
-                         * @return Vector2D<T>, this divided by k
-                         */
-                        template <class K>
-                        Vector2D<T>& operator/=(K const& k);
-                        /**
-                         * @brief Shortcut Operator |=
-                         * Compute the scalar product between this and a 2D generic-type vector
-                         * @param u : Vector2D<K>, the second vector for the scalar product
-                         * @return NREfloat, the computed scalar product of this and u
-                         */
-                        template <class K>
-                        NREfloat operator|=(Vector2D<K> const& u) const;
+                        Vector2D<T>& operator+=(Vector2D<T> const& u);
+                        Vector2D<T>& operator-=(Vector2D<T> const& u);
+                        Vector2D<T>& operator*=(T const& k);
+                        Vector2D<T>& operator/=(T const& k);
+                        NREfloat const operator|=(Vector2D<T> const& u) const;
 
                     //## Arithmetic Operator ##//
-                        /**
-                         * @brief Arithmetic Operator +
-                         * Compute the addition between this and a 2D generic-type vector
-                         * @param u : Vector2D<K>, the vector to add into this
-                         * @return Vector2D<T>, a new vector result of the addition of this and u
-                         */
-                        template <class K>
-                        Vector2D<T> operator+(Vector2D<K> const& u) const;
-                        /**
-                         * @brief Arithmetic Operator -
-                         * Compute the substraction between this and a 2D generic-type vector
-                         * @param u : Vector2D<K>, the vector to substract into this
-                         * @return Vector2D<T>, a new vector result of the substraction of this and u
-                         */
-                        template <class K>
-                        Vector2D<T> operator-(Vector2D<K> const& u) const;
-                        /**
-                         * @brief Negate Operator -
-                         * Compute the negate of this
-                         * @return Vector2D<T>, a new vector, the negate vector of this
-                         */
+                        Vector2D<T> operator+(Vector2D<T> const& u) const;
+                        Vector2D<T> operator-(Vector2D<T> const& u) const;
                         Vector2D<T> operator-() const;
-                        /**
-                         * @brief Arithmetic Operator *
-                         * Compute the multiplication between this and a generic-type factor k
-                         * @param k : K, the multiplication factor
-                         * @return Vector2D<T>, a new vector result of the multiplication of this with k
-                         */
-                        template <class K>
-                        Vector2D<T> operator*(K const& k) const;
-                        /**
-                         * @brief Arithmetic Operator /
-                         * Compute the division between this and a generic-type factor k
-                         * @param k : K, the division factor
-                         * @return Vector2D<T>, a new vector result of the divison of this with k
-                         */
-                        template <class K>
-                        Vector2D<T> operator/(K const& k) const;
+                        Vector2D<T> operator*(T const& k) const;
+                        Vector2D<T> operator/(T const& k) const;
+                        NREfloat const operator|(Vector2D<T> const& u) const;
 
                     //## Comparison Operator ##//
-                        /**
-                         * @brief Comparison Operator ==
-                         * Compare if this and a 2D generic-type vector are equal, based on built-in == comparison for T-type
-                         * @param u : Vector2D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
                         template <class K>
-                        bool operator==(Vector2D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator !=
-                         * Compare if this and a 2D generic-type vector aren't equal, based of the negation of the == test
-                         * @param u : Vector2D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
+                        bool const operator==(Vector2D<K> const& u) const;
                         template <class K>
-                        bool operator!=(Vector2D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator <
-                         * Compare if this is inferior than a 2D generic-type vector, based on norm comparison
-                         * @param u : Vector2D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator<(Vector2D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator >
-                         * Compare if this is superior than a 2D generic-type vector, based on norm comparison
-                         * @param u : Vector2D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator>(Vector2D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator <=
-                         * Compare if this is inferior or equal than a 2D generic-type vector, based on norm comparison
-                         * @param u : Vector2D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator<=(Vector2D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator >=
-                         * Compare if this is superior or equal than a 2D generic-type vector, based on norm comparison
-                         * @param u : Vector2D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator>=(Vector2D<K> const& u) const;
+                        bool const operator!=(Vector2D<K> const& u) const;
+                        bool const operator<(Vector2D<T> const& u) const;
+                        bool const operator>(Vector2D<T> const& u) const;
+                        bool const operator<=(Vector2D<T> const& u) const;
+                        bool const operator>=(Vector2D<T> const& u) const;
 
                     //## BitWise Operator ##//
-                        /**
-                         * @brief BitWise Operator |
-                         * Compute the scalar product between this and a 2D generic-type vector
-                         * @param u : Vector2D<K>, the second vector for the scalar product
-                         * @return NREfloat, the computed scalar product between this and u
-                         */
-                        template <class K>
-                        NREfloat operator|(Vector2D<K> const& u) const;
 
-                    //## Shift (Usually for printing methods) Operator ##//
+                    //## Shift Operator ##//
 
 
                 protected:
