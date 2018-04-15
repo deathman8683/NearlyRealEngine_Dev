@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "NRE_Vector3D.hpp"
 
     /**
      * @namespace NRE
@@ -29,101 +29,43 @@
              * @brief Maths's Object : Cartesian 3D Generic Vector
              */
             template <class T>
-            class Vector3D {
-                private:
-                    T data[3];
+            class Vector3D : public Vector2D<T> {
+                protected:
+                    T z;
 
                 public:
                     //## Constructor ##//
-                        /**
-                         * @brief Constructor
-                         * Default constructor, iniatlize a 3D vector with default translation
-                         */
                         Vector3D();
-                        /**
-                         * @brief Constructor
-                         * Initialize a 3D vector with x, y and z
-                         * @param x : K, the x translation
-                         * @param y : L, the y translation
-                         * @param z : M, the z translation
-                         */
-                        template <class K, class L, class M>
-                        Vector3D(K const& x, L const& y, M const& z);
+                        Vector3D(T const& x, T const& y, T const& z);
                         Vector3D(T const& value);
-                        /**
-                         * @brief Constructor
-                         * Initialize a 3D vector with 2D generic-type vector and z
-                         * @param u : Vector2D<K>, the base vector
-                         * @param z : T, the z translation
-                         */
-                        template <class K>
-                        Vector3D(Vector2D<K> const& u, T const& z);
-                        /**
-                         * @brief Constructor
-                         * Convert two 3D generic-type point into a 3D T vector
-                         * @param a : Point3D<K>, the vector's start point
-                         * @param b : Point3D<L>, the vector's end point
-                         */
-                        template <class K, class L>
-                        Vector3D(Point3D<K> const& a, Point3D<L> const& b);
+                        Vector3D(Point3D<T> const& a, Point3D<T> const& b);
 
                     //## Copy-Constructor ##//
-                        /**
-                         * @brief Copy-Constructor
-                         * Construct a copy of u
-                         * @param u : Vector3D<T>, the vector to copy
-                         */
                         Vector3D(Vector3D const& u);
 
+                    //## Move-Constructor ##//
+                        Vector3D(Vector3D && u);
+
                     //## Convertor ##//
-                        /**
-                         * @brief Convertor
-                         * Convert a 3D generic-type vector into a 3D T vector
-                         * @param u : Vector3D<K>, the vector to convert
-                         */
                         template <class K>
                         Vector3D(Vector3D<K> const& u);
-                        /**
-                         * @brief Convertor
-                         * Convert a 3D generic-type point into a 3D T vector
-                         * @param p : Point3D<K>, the point to convert
-                         */
                         template <class K>
                         Vector3D(Point3D<K> const& p);
                         template <class K>
                         Vector3D(Vector4D<K> const& u);
+                        Vector3D(Vector2D<T> const& u);
+                        Vector3D(Vector2D<T> const& u, T const& z);
 
                     //## Deconstructor ##//
-                        /**
-                         * @brief Deconstructor
-                         * Deconstruct a 3D vector
-                         */
                         ~Vector3D();
 
                     //## Getter ##//
-                        T const& getX() const;
-                        T const& getY() const;
-                        /**
-                         * @brief Z getter
-                         * Return the z attribute
-                         * @return T, the z value
-                         */
                         T const& getZ() const;
                         T const& getR() const;
                         T const& getG() const;
                         T const& getB() const;
 
                     //## Setter ##//
-
-                        template <class K>
-                        void setX(K const& x);
-                        template <class K>
-                        void setY(K const& y);
-                        /**
-                         * @brief Z setter
-                         * Change the z value
-                         * @param z : K, the new z value
-                         */
                         template <class K>
                         void setZ(K const& z);
                         template <class K>
@@ -132,223 +74,60 @@
                         void setG(K const& g);
                         template <class K>
                         void setB(K const& b);
-                        /**
-                         * @brief X, y and z setter
-                         * Change x, y and z values
-                         * @param x : K, the new x value
-                         * @param y : L, the new y value
-                         * @param z : M, the new z value
-                         */
                         template <class K, class L, class M>
                         void setCoord(K const& x, L const& y, M const& z);
-                        /**
-                         * @brief X, y and z setter
-                         * Change x, y values from a base 2D vector and z value
-                         * @param u : Vector2D<K>, the base vector for x and y values
-                         * @param z : L, the new z value
-                         */
                         template <class K, class L>
                         void setCoord(Vector2D<K> const& u, L const& z);
                         template <class K, class L, class M>
                         void setIntensities(K const& r, L const& g, M const& b);
 
                     //## Methods ##//
-                        /**
-                         * @brief Norm getter
-                         * Compute the vector's norm
-                         * @return NREfloat, the computed norm
-                         */
-                        NREfloat norm() const;
-                        /**
-                         * @brief NormSquared getter
-                         * Compute the vector's squared norm
-                         * @return NREfloat, the computed squared norm
-                         */
-                        NREfloat normSquared() const;
-                        /**
-                         * @brief Normlization
-                         * Normalize the vector, doesn't check if the vector's norm is null
-                         */
+                        NREfloat const norm() const;
+                        NREfloat const normSquared() const;
                         void normalize();
-                        const T* const value() const;
 
                     //## Access Operator ##//
-                        T& operator[](unsigned int const& index);
-                        const T& operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
+                        Vector3D<T>& operator=(Vector3D<T> const& base);
+                        Vector3D<T>& operator=(Vector3D<T> && base);
 
                     //## Shortcut Operator ##//
-                        /**
-                        * @brief Shortcut Operator +=
-                        * Compute the addition between this and a 3D generic-type vector
-                        * @param u : Vector3D<K>, the vector to add into this
-                        * @return Vector3D<T>, this with the u added
-                        */
-                        template <class K>
-                        Vector3D<T>& operator+=(Vector3D<K> const& u);
-                        /**
-                        * @brief Shortcut Operator -=
-                        * Compute the substraction between this and a 3D generic-type vector
-                        * @param u : Vector3D<K>, the vector to substract into this
-                        * @return Vector3D<T>, this with the u substracted
-                        */
-                        template <class K>
-                        Vector3D<T>& operator-=(Vector3D<K> const& u);
-                        /**
-                        * @brief Shortcut Operator *=
-                        * Compute the multiplication of this by a generic-type factor k
-                        * @param k : K, the multiplication factor
-                        * @return Vector3D<T>, this multiplied by k
-                        */
-                        template <class K>
-                        Vector3D<T>& operator*=(K const& k);
-                        /**
-                        * @brief Shortcut Operator /=
-                        * Compute the division of this by a generic-type factor k
-                        * @param k : K, the division factor
-                        * @return Vector3D<T>, this divided by k
-                        */
-                        template <class K>
-                        Vector3D<T>& operator/=(K const& k);
-                        /**
-                        * @brief Shortcut Operator |=
-                        * Compute the scalar product between this and a 3D generic-type vector
-                        * @param u : Vector3D<K>, the second vector for the scalar product
-                        * @return NREfloat, the computed scalar product of this and u
-                        */
-                        template <class K>
-                        NREfloat operator|=(Vector3D<K> const& u) const;
-                        /**
-                         * @brief Shortcut Operator ^=
-                         * Compute the vectorial product between this and a 3D generic-type vector
-                         * @param u : Vector3D<K>, the second vector for the vectorial product
-                         * @return Vector3D<T>, the computed vector via vectorial product
-                         */
-                        template <class K>
-                        Vector3D<T>& operator^=(Vector3D<K> const& u);
+                        Vector3D<T>& operator+=(Vector3D<T> const& u);
+                        Vector3D<T>& operator-=(Vector3D<T> const& u);
+                        Vector3D<T>& operator*=(T const& k);
+                        Vector3D<T>& operator/=(T const& k);
+                        NREfloat const operator|=(Vector3D<T> const& u) const;
+                        Vector3D<T>& operator^=(Vector3D<T> const& u);
 
                     //## Arithmetic Operator ##//
-                        /**
-                        * @brief Arithmetic Operator +
-                        * Compute the addition between this and a 3D generic-type vector
-                        * @param u : Vector3D<K>, the vector to add into this
-                        * @return Vector3D<T>, a new vector result of the addition of this and u
-                        */
-                        template <class K>
-                        Vector3D<T> operator+(Vector3D<K> const& u) const;
-                        /**
-                        * @brief Arithmetic Operator -
-                        * Compute the substraction between this and a 3D generic-type vector
-                        * @param u : Vector3D<K>, the vector to substract into this
-                        * @return Vector3D<T>, a new vector result of the substraction of this and u
-                        */
-                        template <class K>
-                        Vector3D<T> operator-(Vector3D<K> const& u) const;
-                        /**
-                        * @brief Negate Operator -
-                        * Compute the negate of this
-                        * @return Vector3D<T>, a new vector, the negate vector of this
-                        */
+                        Vector3D<T> operator+(Vector3D<T> const& u) const;
+                        Vector3D<T> operator-(Vector3D<T> const& u) const;
                         Vector3D<T> operator-() const;
-                        /**
-                        * @brief Arithmetic Operator *
-                        * Compute the multiplication between this and a generic-type factor k
-                        * @param k : K, the multiplication factor
-                        * @return Vector3D<T>, a new vector result of the multiplication of this with k
-                        */
-                        template <class K>
-                        Vector3D<T> operator*(K const& k) const;
-                        /**
-                        * @brief Arithmetic Operator /
-                        * Compute the division between this and a generic-type factor k
-                        * @param k : K, the division factor
-                        * @return Vector3D<T>, a new vector result of the divison of this with k
-                        */
-                        template <class K>
-                        Vector3D<T> operator/(K const& k) const;
+                        Vector3D<T> operator*(T const& k) const;
+                        Vector3D<T> operator/(T const& k) const;
+                        NREfloat const operator|(Vector3D<T> const& u) const;
+                        Vector3D<T> operator^(Vector3D<T> const& u) const;
 
                     //## Comparison Operator ##//
-                        /**
-                         * @brief Comparison Operator ==
-                         * Compare if this and a 3D generic-type vector are equal, based on built-in == comparison for T-type
-                         * @param u : Vector3D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
                         template <class K>
-                        bool operator==(Vector3D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator !=
-                         * Compare if this and a 3D generic-type vector aren't equal, based of the negation of the == test
-                         * @param u : Vector3D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
+                        bool const operator==(Vector3D<K> const& u) const;
                         template <class K>
-                        bool operator!=(Vector3D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator <
-                         * Compare if this is inferior than a 3D generic-type vector, based on norm comparison
-                         * @param u : Vector3D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator<(Vector3D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator >
-                         * Compare if this is superior than a 3D generic-type vector, based on norm comparison
-                         * @param u : Vector3D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator>(Vector3D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator <=
-                         * Compare if this is inferior or equal than a 3D generic-type vector, based on norm comparison
-                         * @param u : Vector3D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator<=(Vector3D<K> const& u) const;
-                        /**
-                         * @brief Comparison Operator >=
-                         * Compare if this is superior or equal than a 3D generic-type vector, based on norm comparison
-                         * @param u : Vector3D<K>, the vector to test
-                         * @return bool, the test's result
-                         */
-                        template <class K>
-                        bool operator>=(Vector3D<K> const& u) const;
+                        bool const operator!=(Vector3D<K> const& u) const;
+                        bool const operator<(Vector3D<T> const& u) const;
+                        bool const operator>(Vector3D<T> const& u) const;
+                        bool const operator<=(Vector3D<T> const& u) const;
+                        bool const operator>=(Vector3D<T> const& u) const;
 
                     //## BitWise Operator ##//
-                        /**
-                         * @brief BitWise Operator |
-                         * Compute the scalar product between this and a 3D generic-type vector
-                         * @param u : Vector3D<K>, the second vector for the scalar product
-                         * @return NREfloat, the computed scalar product between this and u
-                         */
-                        template <class K>
-                        NREfloat operator|(Vector3D<K> const& u) const;
-                        /**
-                         * @brief BitWise Operator ^
-                         * Compute the vectorial product between this and a 3D generic-type vector
-                         * @param u : Vector3D<K>, the second vector for the vectorial product
-                         * @return Vector3D<T>, the computed vector via vectorial product
-                         */
-                        template <class K>
-                        Vector3D<T> operator^(Vector3D<K> const& u) const;
 
 
                     //## Shift Operator ##//
 
                 protected:
-                    static int DEFAULT_X;  /**< The default x axis translation */
-                    static int DEFAULT_Y;  /**< The default y axis translation */
                     static int DEFAULT_Z;  /**< The default z axis translation */
             };
 
-            template <class T>
-            int Vector3D<T>::DEFAULT_X = 0.;
-            template <class T>
-            int Vector3D<T>::DEFAULT_Y = 0.;
             template <class T>
             int Vector3D<T>::DEFAULT_Z = 0.;
 

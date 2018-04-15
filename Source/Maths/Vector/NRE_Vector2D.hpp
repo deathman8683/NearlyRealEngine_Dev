@@ -29,7 +29,7 @@
              */
             template <class T>
             class Vector2D {
-                private:
+                protected:
                     T x;
                     T y;
 

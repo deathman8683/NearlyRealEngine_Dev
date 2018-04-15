@@ -63,25 +63,25 @@
             template <class T>
             template <class K>
             void Vector2D<T>::setX(K const& x) {
-                this->x = x;
+                this->x = static_cast <T> (x);
             }
 
             template <class T>
             template <class K>
             void Vector2D<T>::setY(K const& y) {
-                this->y = y;
+                this->y = static_cast <T> (y);
             }
 
             template <class T>
             template <class K>
             void Vector2D<T>::setW(K const& w) {
-                this->x = w;
+                this->x = static_cast <T> (w);
             }
 
             template <class T>
             template <class K>
             void Vector2D<T>::setH(K const& h) {
-                this->y = h;
+                this->y = static_cast <T> (h);
             }
 
             template <class T>
