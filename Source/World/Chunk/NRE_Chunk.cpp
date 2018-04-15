@@ -17,7 +17,7 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), 1, generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLuint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD),
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD),
                                                                                                           active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::MaterialBuffer(generateID));
@@ -70,7 +70,7 @@
                 return bounding;
             }
 
-            GLuint const& Chunk::getLoD() const {
+            GLint const& Chunk::getLoD() const {
                 return loD;
             }
 
@@ -130,7 +130,7 @@
                 bounding = box;
             }
 
-            void Chunk::setLoD(GLuint const& value) {
+            void Chunk::setLoD(GLint const& value) {
                 loD = value;
             }
 
