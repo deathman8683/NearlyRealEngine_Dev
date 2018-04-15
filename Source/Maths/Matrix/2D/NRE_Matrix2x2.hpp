@@ -6,9 +6,9 @@
      * @version 1.0
      */
 
-     #pragma once
+    #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../../../Generic/NRE_Type.hpp"
 
     /**
      * @namespace NRE
@@ -98,7 +98,7 @@
                          * Compute the matrix's determinant
                          * @return NREfloat, the computed determinant
                          */
-                        NREfloat getDeterminant() const;
+                        NREfloat const getDeterminant() const;
 
                     //## Setter ##//
                         /**

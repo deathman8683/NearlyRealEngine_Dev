@@ -62,7 +62,7 @@
             }
 
             template <class T>
-            NREfloat Matrix2x2<T>::getDeterminant() const {
+            NREfloat const Matrix2x2<T>::getDeterminant() const {
                 return data[0][0] * data[1][1] - data[0][1] * data[1][0];
             }
 
