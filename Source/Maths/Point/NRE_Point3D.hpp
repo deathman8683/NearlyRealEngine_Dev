@@ -8,7 +8,6 @@
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
     #include "NRE_Point2D.hpp"
 
     /**
@@ -30,7 +29,7 @@
              */
             template <class T>
             class Point3D : public Point2D<T> {
-                private:
+                protected:
                     T z;
 
                 public:
@@ -103,15 +102,9 @@
                     //## Shift Operator ##//
 
                 protected:
-                    static int DEFAULT_X;  /**< The default abscissa */
-                    static int DEFAULT_Y;  /**< The default ordinate */
                     static int DEFAULT_Z;  /**< The default applicate */
             };
 
-            template <class T>
-            int Point3D<T>::DEFAULT_X = 0.;
-            template <class T>
-            int Point3D<T>::DEFAULT_Y = 0.;
             template <class T>
             int Point3D<T>::DEFAULT_Z = 0.;
 
