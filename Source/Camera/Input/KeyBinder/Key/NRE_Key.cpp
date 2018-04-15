@@ -13,6 +13,9 @@
             Key::Key(Key const& k) : active(k.isActive()), switchKey(k.isSwitch()), action(k.getAction()) {
             }
 
+            Key::Key(Key && k) : active(std::move(k.isActive())), switchKey(std::move(k.isSwitch())), action(std::move(k.getAction())) {
+            }
+
             Key::~Key() {
                 delete action;
             }
@@ -45,6 +48,20 @@
                 if (action != 0) {
                     action->execute();
                 }
+            }
+
+            Key& Key::operator=(Key const& k) {
+                active = k.isActive();
+                switchKey = k.isSwitch();
+                action = k.getAction();
+                return *this;
+            }
+
+            Key& Key::operator=(Key && k) {
+                active = std::move(k.isActive());
+                switchKey = std::move(k.isSwitch());
+                action = std::move(k.getAction());
+                return *this;
             }
 
         };

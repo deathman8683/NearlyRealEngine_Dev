@@ -9,7 +9,7 @@
 
             KeyBinder::KeyBinder(size_t const& n) : keyMap(n) {
                 for (GLuint i = 0; i < n; i = i + 1) {
-                    keyMap.insert({i, Key(false, false, 0)});
+                    keyMap.emplace(i, Key(false, false, 0));
                 }
             }
 

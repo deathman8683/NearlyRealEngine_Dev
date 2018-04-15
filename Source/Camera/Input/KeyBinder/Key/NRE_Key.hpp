@@ -33,33 +33,38 @@
 
                 public:
                     //## Constructor ##//
-                    Key();
-                    Key(bool const& active, bool const& switchKey, BaseCommand* cmd);
+                        Key();
+                        Key(bool const& active, bool const& switchKey, BaseCommand* cmd);
 
                     //## Copy-Constructor ##//
-                    Key(Key const& k);
+                        Key(Key const& k);
+
+                    //## Move-Constructor ##//
+                        Key(Key && k);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Key();
+                        ~Key();
 
                     //## Getter ##//
-                    bool const& isActive() const;
-                    bool const& isSwitch() const;
-                    BaseCommand* const getAction() const;
+                        bool const& isActive() const;
+                        bool const& isSwitch() const;
+                        BaseCommand* const getAction() const;
 
                     //## Setter ##//
-                    void setActive(bool const& state);
-                    void setSwitch(bool const& state);
-                    void setAction(BaseCommand* cmd);
-                    void execute();
+                        void setActive(bool const& state);
+                        void setSwitch(bool const& state);
+                        void setAction(BaseCommand* cmd);
+                        void execute();
 
                     //## Methods ##//
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        Key& operator=(Key const& k);
+                        Key& operator=(Key && k);
 
                     //## Shortcut Operator ##//
 
