@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../../../Generic/NRE_Type.hpp"
 
     /**
      * @namespace NRE

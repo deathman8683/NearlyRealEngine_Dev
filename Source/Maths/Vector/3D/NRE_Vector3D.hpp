@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "NRE_Vector3D.hpp"
+    #include "../2D/NRE_Vector2D.hpp"
 
     /**
      * @namespace NRE
@@ -51,8 +51,6 @@
                         Vector3D(Vector3D<K> const& u);
                         template <class K>
                         Vector3D(Point3D<K> const& p);
-                        template <class K>
-                        Vector3D(Vector4D<K> const& u);
                         Vector3D(Vector2D<T> const& u);
                         Vector3D(Vector2D<T> const& u, T const& z);
 

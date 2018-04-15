@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "NRE_Vector4D.hpp"
+    #include "../3D/NRE_Vector3D.hpp"
 
     /**
      * @namespace NRE
@@ -58,20 +58,11 @@
 
                     //## Getter ##//
                         T const& getW() const;
-                        T const& getR() const;
-                        T const& getG() const;
-                        T const& getB() const;
                         T const& getA() const;
 
                     //## Setter ##//
                         template <class K>
                         void setW(K const& w);
-                        template <class K>
-                        void setR(K const& r);
-                        template <class K>
-                        void setG(K const& g);
-                        template <class K>
-                        void setB(K const& b);
                         template <class K>
                         void setA(K const& a);
                         template <class K, class L, class M, class N>

@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
+    #include "../../../Generic/NRE_Type.hpp"
 
     /**
      * @namespace NRE
@@ -73,6 +73,8 @@
                         const T* const value() const;
 
                     //## Access Operator ##//
+                        T& operator[](unsigned int const& index);
+                        const T& operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
                         Point2D<T>& operator=(Point2D<T> const& base);

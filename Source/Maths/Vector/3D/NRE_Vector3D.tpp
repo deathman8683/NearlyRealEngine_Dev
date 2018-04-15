@@ -11,7 +11,7 @@
             }
 
             template <class T>
-            Vector3D<T>::Vector3D(T const& value) : Vector2D<T>::Vector2D(value), z(z) {
+            Vector3D<T>::Vector3D(T const& value) : Vector2D<T>::Vector2D(value), z(value) {
             }
 
             template <class T>
@@ -30,11 +30,6 @@
             template <class T>
             template <class K>
             Vector3D<T>::Vector3D(Point3D<K> const& p) : Vector2D<T>::Vector2D(p), z(static_cast <T> (p.getZ())) {
-            }
-
-            template <class T>
-            template <class K>
-            Vector3D<T>::Vector3D(Vector4D<K> const& u) : Vector3D(static_cast <T> (u.getX()), static_cast <T> (u.getY()), static_cast <T> (u.getZ())) {
             }
 
             template <class T>
@@ -118,7 +113,7 @@
 
             template <class T>
             NREfloat const Vector3D<T>::normSquared() const {
-                return this->getX() * this->getX() + this->getY() * this->getY() + this->getZ() * this->getZ();
+                return Vector2D<T>::normSquared() + getZ() * getZ();
             }
 
             template <class T>
@@ -128,55 +123,49 @@
 
             template <class T>
             Vector3D<T>& Vector3D<T>::operator=(Vector3D<T> const& base) {
-                this->x = base.getX();
-                this->y = base.getY();
+                Vector2D<T>::operator=(base);
                 this->z = base.getZ();
                 return *this;
             }
 
             template <class T>
             Vector3D<T>& Vector3D<T>::operator=(Vector3D<T> && base) {
-                this->x = std::move(base.getX());
-                this->y = std::move(base.getY());
+                Vector2D<T>::operator=(base);
                 this->z = std::move(base.getZ());
                 return *this;
             }
 
             template <class T>
             Vector3D<T>& Vector3D<T>::operator+=(Vector3D<T> const& u) {
-                this->setX(this->getX() + u.getX());
-                this->setY(this->getY() + u.getY());
+                Vector2D<T>::operator+=(u);
                 this->setZ(this->getZ() + u.getZ());
                 return *this;
             }
 
             template <class T>
             Vector3D<T>& Vector3D<T>::operator-=(Vector3D<T> const& u) {
-                this->setX(this->getX() - u.getX());
-                this->setY(this->getY() - u.getY());
+                Vector2D<T>::operator-=(u);
                 this->setZ(this->getZ() - u.getZ());
                 return *this;
             }
 
             template <class T>
             Vector3D<T>& Vector3D<T>::operator*=(T const& k) {
-                this->setX(this->getX() * k);
-                this->setY(this->getY() * k);
+                Vector2D<T>::operator*=(k);
                 this->setZ(this->getZ() * k);
                 return *this;
             }
 
             template <class T>
             Vector3D<T>& Vector3D<T>::operator/=(T const& k) {
-                this->setX(this->getX() / k);
-                this->setY(this->getY() / k);
+                Vector2D<T>::operator/=(k);
                 this->setZ(this->getZ() / k);
                 return *this;
             }
 
             template <class T>
             NREfloat const Vector3D<T>::operator|=(Vector3D<T> const& u) const {
-                return this->getX() * u.getX() + this->getY() * u.getY() + this->getZ() * u.getZ();
+                return Vector2D<T>::operator|=(u) + this->getZ() * u.getZ();
             }
 
             template <class T>
@@ -202,7 +191,7 @@
 
             template <class T>
             Vector3D<T> Vector3D<T>::operator-() const {
-                Vector3D<T> tmp(-this->getX(), -this->getY(), -getZ());
+                Vector3D<T> tmp(Vector2D<T>::operator-(), -getZ());
                 return tmp;
             }
 
@@ -232,13 +221,13 @@
             template <class T>
             template <class K>
             bool const Vector3D<T>::operator==(Vector3D<K> const& u) const {
-                return this->getX() == u.getX() && this->getY() == u.getY() && this->getZ() == u.getZ();
+                return Vector2D<T>::operator==(u) && this->getZ() == u.getZ();
             }
 
             template <>
             template <class K>
             bool const Vector3D<NREfloat>::operator==(Vector3D<K> const& u) const {
-                return almostEqual(this->getX(), u.getX()) && almostEqual(this->getY(), u.getY()) && almostEqual(this->getZ(), u.getZ());
+                return Vector2D<NREfloat>::operator==(u) && almostEqual(this->getZ(), u.getZ());
             }
 
             template <class T>

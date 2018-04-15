@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "NRE_Point3D.hpp"
+    #include "../3D/NRE_Point3D.hpp"
 
     /**
      * @namespace NRE

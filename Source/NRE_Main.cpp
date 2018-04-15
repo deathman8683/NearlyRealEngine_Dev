@@ -5,8 +5,6 @@
     #include "Time/Clock/NRE_Clock.hpp"
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
-    #include "Maths/Base/3D/NRE_Base3D.hpp"
-
     using namespace NRE;
     using namespace Maths;
 

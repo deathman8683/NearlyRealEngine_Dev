@@ -54,21 +54,6 @@
             }
 
             template <class T>
-            T const& Vector4D<T>::getR() const {
-                return this->x;
-            }
-
-            template <class T>
-            T const& Vector4D<T>::getG() const {
-                return this->y;
-            }
-
-            template <class T>
-            T const& Vector4D<T>::getB() const {
-                return this->z;
-            }
-
-            template <class T>
             T const& Vector4D<T>::getA() const {
                 return w;
             }
@@ -77,24 +62,6 @@
             template <class K>
             void Vector4D<T>::setW(K const& w) {
                 this->w = static_cast <T> (w);
-            }
-
-            template <class T>
-            template <class K>
-            void Vector4D<T>::setR(K const& r) {
-                this->x = static_cast <T> (r);
-            }
-
-            template <class T>
-            template <class K>
-            void Vector4D<T>::setG(K const& g) {
-                this->y = static_cast <T> (g);
-            }
-
-            template <class T>
-            template <class K>
-            void Vector4D<T>::setB(K const& b) {
-                this->z = static_cast <T> (b);
             }
 
             template <class T>
@@ -128,7 +95,7 @@
 
             template <class T>
             NREfloat const Vector4D<T>::normSquared() const {
-                return this->getX() * this->getX() + this->getY() * this->getY() + this->getZ() * this->getZ() + this->getW() * this->getW();
+                return Vector3D<T>::normSquared() + this->getW() * this->getW();
             }
 
             template <class T>
@@ -138,61 +105,49 @@
 
             template <class T>
             Vector4D<T>& Vector4D<T>::operator=(Vector4D<T> const& base) {
-                this->x = base.getX();
-                this->y = base.getY();
-                this->z = base.getZ();
+                Vector3D<T>::operator=(base);
                 this->w = base.getW();
                 return *this;
             }
 
             template <class T>
             Vector4D<T>& Vector4D<T>::operator=(Vector4D<T> && base) {
-                this->x = std::move(base.getX());
-                this->y = std::move(base.getY());
-                this->z = std::move(base.getZ());
+                Vector3D<T>::operator=(base);
                 this->w = std::move(base.getW());
                 return *this;
             }
 
             template <class T>
             Vector4D<T>& Vector4D<T>::operator+=(Vector4D<T> const& u) {
-                this->setX(this->getX() + u.getX());
-                this->setY(this->getY() + u.getY());
-                this->setZ(this->getZ() + u.getZ());
+                Vector3D<T>::operator+=(u);
                 this->setW(this->getW() + u.getW());
                 return *this;
             }
 
             template <class T>
             Vector4D<T>& Vector4D<T>::operator-=(Vector4D<T> const& u) {
-                this->setX(this->getX() - u.getX());
-                this->setY(this->getY() - u.getY());
-                this->setZ(this->getZ() - u.getZ());
+                Vector3D<T>::operator-=(u);
                 this->setW(this->getW() - u.getW());
                 return *this;
             }
 
             template <class T>
             Vector4D<T>& Vector4D<T>::operator*=(T const& k) {
-                this->setX(this->getX() * k);
-                this->setY(this->getY() * k);
-                this->setZ(this->getZ() * k);
+                Vector3D<T>::operator*=(k);
                 this->setW(this->getW() * k);
                 return *this;
             }
 
             template <class T>
             Vector4D<T>& Vector4D<T>::operator/=(T const& k) {
-                this->setX(this->getX() / k);
-                this->setY(this->getY() / k);
-                this->setZ(this->getZ() / k);
+                Vector3D<T>::operator/=(k);
                 this->setW(this->getW() / k);
                 return *this;
             }
 
             template <class T>
             NREfloat const Vector4D<T>::operator|=(Vector4D<T> const& u) const {
-                return this->getX() * u.getX() + this->getY() * u.getY() + this->getZ() * u.getZ() + this->getW() * u.getW();
+                return Vector3D<T>::operator|=(u) + this->getW() * u.getW();
             }
 
             template <class T>
@@ -209,7 +164,7 @@
 
             template <class T>
             Vector4D<T> Vector4D<T>::operator-() const {
-                Vector4D<T> tmp(-this->getX(), -this->getY(), -this->getZ(), -this->getW());
+                Vector4D<T> tmp(Vector3D<T>::operator-(), -getW());
                 return tmp;
             }
 
@@ -233,13 +188,13 @@
             template <class T>
             template <class K>
             bool const Vector4D<T>::operator==(Vector4D<K> const& u) const {
-                return this->getX() == u.getX() && this->getY() == u.getY() && this->getZ() == u.getZ() && this->getW() == u.getW();
+                return Vector3D<T>::operator==(u) && this->getW() == u.getW();
             }
 
             template <>
             template <class K>
             bool const Vector4D<NREfloat>::operator==(Vector4D<K> const& u) const {
-                return almostEqual(this->getX(), u.getX()) && almostEqual(this->getY(), u.getY()) && almostEqual(this->getZ(), u.getZ()) && almostEqual(this->getW(), u.getW());
+                return Vector3D<NREfloat>::operator==(u) && almostEqual(this->getW(), u.getW());
             }
 
             template <class T>

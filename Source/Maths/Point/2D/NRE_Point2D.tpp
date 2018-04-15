@@ -86,6 +86,16 @@
             }
 
             template <class T>
+            T& Point2D<T>::operator[](unsigned int const& index) {
+                return *(&x + index);
+            }
+
+            template <class T>
+            const T& Point2D<T>::operator[](unsigned int const& index) const {
+                return *(&x + index);
+            }
+
+            template <class T>
             Point2D<T>& Point2D<T>::operator=(Point2D<T> const& base) {
                 x = base.getX();
                 y = base.getY();
