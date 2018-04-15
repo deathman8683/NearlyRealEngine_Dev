@@ -33,7 +33,7 @@
 
             template <class T>
             template <class K>
-            Point3D<T>::Point3D(Vector3D<K> const& u) : Point2D<T>::Point2D(u.getX(), u.getY()), z(static_cast <T> (u.getZ())) {
+            Point3D<T>::Point3D(Vector3D<K> const& u) : Point2D<T>::Point2D(u), z(static_cast <T> (u.getZ())) {
             }
 
             template <class T>
