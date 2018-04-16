@@ -4,7 +4,7 @@
     namespace NRE {
         namespace Renderer {
 
-            GLuint SSAO::KERNEL_SIZE = 32;
+            GLuint SSAO::KERNEL_SIZE = 16;
             GLuint SSAO::NOISE_SIZE = 4;
 
             SSAO::SSAO() : kernel(0), noise(0) {

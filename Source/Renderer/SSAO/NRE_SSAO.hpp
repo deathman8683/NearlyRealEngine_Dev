@@ -74,8 +74,9 @@
 
                     //## Shift Operator ##//
 
-                private:
+                public:
                     static GLuint KERNEL_SIZE;
+                private:
                     static GLuint NOISE_SIZE;
             };
 

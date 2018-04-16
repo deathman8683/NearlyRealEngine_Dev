@@ -167,7 +167,7 @@
 
                             shader.useMat4("projection", 1, &projection);
                             shader.useMat4("invProjection", 1, &invProjection);
-                            shader.use3FV("gKernel", 32, ssao.getKernel()[0].value());
+                            shader.use3FV("gKernel", SSAO::KERNEL_SIZE, ssao.getKernel()[0].value());
                             shader.use1F("gSampleRad", 0.5);
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
