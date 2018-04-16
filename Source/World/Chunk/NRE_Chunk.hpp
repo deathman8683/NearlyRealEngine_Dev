@@ -100,7 +100,6 @@
 
                     //## Methods ##//
                     void constructMesh(World* w);
-                    void renderAlone(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera = 0);
                     void render();
                     void save(std::fstream &chunkFile);
                     void load(std::fstream &chunkFile, World* w);

@@ -158,27 +158,6 @@
                 modified = state;
             }
 
-            void Chunk::renderAlone(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
-                if (camera != 0) {
-                    setActive(camera->AABBCollision(getBounding()));
-                } else {
-                    setActive(true);
-                }
-
-                if (isActive()) {
-                    shader.bind();
-                        vao.bind();
-
-                            shader.useMat4("modelview", 1, &modelview);
-                            shader.useMat4("projection", 1, &projection);
-
-                            glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
-
-                        vao.unbind();
-                    shader.unbind();
-                }
-            }
-
             void Chunk::render() {
                 vao.bind();
                     glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);

@@ -148,12 +148,9 @@
             }
 
             void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
-                glUseProgram(shader.getID());
-                    glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "modelview"), 1, GL_TRUE, modelview.value());
-                    glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
-                    if (camera != 0) {
-                        glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera->getEye().value());
-                    }
+                shader.bind();
+                    shader.useMat4("modelview", 1, &modelview);
+                    shader.useMat4("projection", 1, &projection);
                     for (auto &it : chunkMap) {
                         if (camera != 0) {
                             it.second->setActive(camera->AABBCollision(it.second->getBounding()));
@@ -175,7 +172,7 @@
                             it.second->render();
                         }
                     }
-                glUseProgram(0);
+                shader.unbind();
             }
 
             void World::update(GLuint const& loadLimit) {
