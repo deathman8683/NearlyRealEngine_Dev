@@ -33,7 +33,7 @@
                 private:
                     Chunk* target;
                     std::vector<GLint> vData;
-                    std::vector<GLfloat> mData;
+                    std::vector<GLubyte> mData;
                     std::vector<GLbyte> nData;
                     std::vector<GLuint> iData;
 
@@ -53,18 +53,18 @@
                     //## Getter ##//
                     Chunk* const& getTarget() const;
                     std::vector<GLint> const& getVData() const;
-                    std::vector<GLfloat> const& getMData() const;
+                    std::vector<GLubyte> const& getMData() const;
                     std::vector<GLbyte> const& getNData() const;
                     std::vector<GLuint> const& getIData() const;
                     GLint* getVPointer();
-                    GLfloat* getMPointer();
+                    GLubyte* getMPointer();
                     GLbyte* getNPointer();
                     GLuint* getIPointer();
 
                     //## Setter ##//
                     void setTarget(Chunk* const& target);
                     void setVData(std::vector<GLint> const& data);
-                    void setMData(std::vector<GLfloat> const& data);
+                    void setMData(std::vector<GLubyte> const& data);
                     void setNData(std::vector<GLbyte> const& data);
                     void setIData(std::vector<GLuint> const& data);
 

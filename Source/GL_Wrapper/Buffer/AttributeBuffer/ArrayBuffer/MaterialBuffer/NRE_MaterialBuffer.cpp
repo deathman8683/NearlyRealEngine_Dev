@@ -5,8 +5,8 @@
         namespace GL {
 
             GLint MaterialBuffer::INDEX = 4;
-            GLenum MaterialBuffer::TYPE = GL_FLOAT;
-            GLint MaterialBuffer::TYPESIZE = sizeof(GLfloat);
+            GLenum MaterialBuffer::TYPE = GL_UNSIGNED_BYTE;
+            GLint MaterialBuffer::TYPESIZE = sizeof(GLubyte);
             GLint MaterialBuffer::SIZE = 1;
 
             MaterialBuffer::MaterialBuffer() {

@@ -142,7 +142,7 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     engineWorld.render(gBufferPass, modelview, projection, &camera);
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                     Maths::Matrix4x4<NREfloat> tmp(modelview);

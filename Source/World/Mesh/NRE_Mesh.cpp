@@ -24,7 +24,7 @@
                 return vData;
             }
 
-            std::vector<GLfloat> const& Mesh::getMData() const {
+            std::vector<GLubyte> const& Mesh::getMData() const {
                 return mData;
             }
 
@@ -40,7 +40,7 @@
                 return &vData.front();
             }
 
-            GLfloat* Mesh::getMPointer() {
+            GLubyte* Mesh::getMPointer() {
                 return &mData.front();
             }
 
@@ -60,7 +60,7 @@
                 vData = data;
             }
 
-            void Mesh::setMData(std::vector<GLfloat> const& data) {
+            void Mesh::setMData(std::vector<GLubyte> const& data) {
                 mData = data;
             }
 
@@ -79,7 +79,7 @@
             }
 
             void Mesh::addMaterialID(GLubyte const& id) {
-                mData.push_back(static_cast <NREfloat> (id));
+                mData.push_back(id);
             }
 
             void Mesh::addNormal(Maths::Vector3D<GLbyte> const& n) {
