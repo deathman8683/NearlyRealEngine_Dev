@@ -100,6 +100,10 @@
             glViewport(0, 0, 1280.0, 720.0);
 
             camera.Keyboard::getKey(SDL_SCANCODE_E).setSwitch(true);
+            camera.Keyboard::getKey(SDL_SCANCODE_F).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksLeft));
+            camera.Keyboard::getKey(SDL_SCANCODE_H).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksRight));
+            camera.Keyboard::getKey(SDL_SCANCODE_G).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksBack));
+            camera.Keyboard::getKey(SDL_SCANCODE_T).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksFront));
 
             while(!camera.getQuit())
             {
@@ -151,23 +155,6 @@
                 invModelview.inverse();
 
                 engineDeferredRenderer.SSAOPass(ssaoPass, projection, invProjection);
-
-                Camera::Key& it2 = camera.Keyboard::getKey(SDL_SCANCODE_F);
-                if (it2.isActive()) {
-                    engineWorld.shiftChunks(Maths::Vector2D<GLint>(1, 0));
-                }
-                Camera::Key& it3 = camera.Keyboard::getKey(SDL_SCANCODE_G);
-                if (it3.isActive()) {
-                    engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, -1));
-                }
-                Camera::Key& it4 = camera.Keyboard::getKey(SDL_SCANCODE_H);
-                if (it4.isActive()) {
-                    engineWorld.shiftChunks(Maths::Vector2D<GLint>(-1, 0));
-                }
-                Camera::Key& it5 = camera.Keyboard::getKey(SDL_SCANCODE_T);
-                if (it5.isActive()) {
-                    engineWorld.shiftChunks(Maths::Vector2D<GLint>(0, 1));
-                }
 
                 engineDeferredRenderer.render(pbrShader, invModelview, invProjection, rotation, camera, engineLight, engineSkybox);
 

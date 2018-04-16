@@ -102,6 +102,10 @@
                     void flushSaveRegionMap();
                     void flushConstructionStack();
                     void shiftChunks(Maths::Vector2D<GLint> shiftSize);
+                    void shiftChunksRight();
+                    void shiftChunksLeft();
+                    void shiftChunksFront();
+                    void shiftChunksBack();
 
                     //## Access Operator ##//
 
