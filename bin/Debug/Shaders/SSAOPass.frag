@@ -10,7 +10,7 @@
     uniform sampler2D texNoise;
 
     uniform float gSampleRad;
-    const int MAX_KERNEL_SIZE = 32;
+    const int MAX_KERNEL_SIZE = 16;
     uniform vec3 gKernel[MAX_KERNEL_SIZE];
 
     const vec2 noiseOffset = vec2(1280.0 / 4.0, 720.0 / 4.0);
