@@ -17,7 +17,7 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), 1, generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD),
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD), maxSolidHeight(0),
                                                                                                           active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::MaterialBuffer(generateID));
@@ -25,7 +25,7 @@
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()),
+            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()), maxSolidHeight(c.getMaxSolidHeight()),
                                            active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()), loading(c.isLoading()), constructing(c.isConstructing()), modified(c.isModfied()) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 memcpy(voxel, c.getVoxels(), sizeof(Voxel));
@@ -72,6 +72,10 @@
 
             GLint const& Chunk::getLoD() const {
                 return loD;
+            }
+
+            GLuint const& Chunk::getMaxSolidHeight() const {
+                return maxSolidHeight;
             }
 
             bool const& Chunk::isActive() const {
@@ -132,6 +136,10 @@
 
             void Chunk::setLoD(GLint const& value) {
                 loD = value;
+            }
+
+            void Chunk::setMaxSolidHeight(GLuint const& height) {
+                maxSolidHeight = height;
             }
 
             void Chunk::setActive(bool const& state) {
@@ -276,6 +284,11 @@
                         }
                     }
                     n = n - 1;
+                }
+                if (voxel[index].getType() != VOID) {
+                    if (getMaxSolidHeight() < z) {
+                        setMaxSolidHeight(z);
+                    }
                 }
             }
 

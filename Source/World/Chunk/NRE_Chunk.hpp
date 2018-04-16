@@ -43,6 +43,7 @@
                     GL::VAO vao;
                     Physics::AABB<GLint> bounding;
                     GLint loD;
+                    GLuint maxSolidHeight;
                     bool active;
                     bool loaded;
                     bool constructed;
@@ -74,6 +75,7 @@
                     GL::VAO const& getVAO() const;
                     Physics::AABB<GLint> const& getBounding() const;
                     GLint const& getLoD() const;
+                    GLuint const& getMaxSolidHeight() const;
                     bool const& isActive() const;
                     bool const& isLoaded() const;
                     bool const& isConstructed() const;
@@ -91,6 +93,7 @@
                     void setVAO(GL::VAO const& vao);
                     void setBounding(Physics::AABB<GLint> const& box);
                     void setLoD(GLint const& value);
+                    void setMaxSolidHeight(GLuint const& height);
                     void setActive(bool const& state);
                     void setLoaded(bool const& state);
                     void setConstructed(bool const& state);

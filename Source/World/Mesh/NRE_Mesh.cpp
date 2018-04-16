@@ -108,7 +108,7 @@
 
                 for (unsigned int x = 0; x < Chunk::SIZE_X; x = x + getTarget()->getLoD()) {
                     for (unsigned int y = 0; y < Chunk::SIZE_Y; y = y + getTarget()->getLoD()) {
-                        for (unsigned int z = 0; z < Chunk::SIZE_Z; z = z + getTarget()->getLoD()) {
+                        for (unsigned int z = 0; z < getTarget()->getMaxSolidHeight() + 1; z = z + getTarget()->getLoD()) {
                             index = getVoxelIndex(x, y, z);
                             if (getTarget()->getVoxel(index).getType() != VOID) {
                                 face[XNegative] = checkVoxelXNegativeFace(w, x, y, z);
