@@ -10,7 +10,7 @@
             Mesh::Mesh(Chunk* const& target) : target(target) {
             }
 
-            Mesh::Mesh(Mesh const& mesh) : target(mesh.getTarget()), vData(mesh.getVData()), mData(mesh.getMData()), nData(mesh.getNData()), iData(mesh.getIData()), map(mesh.getMap()) {
+            Mesh::Mesh(Mesh const& mesh) : target(mesh.getTarget()), vData(mesh.getVData()), mData(mesh.getMData()), nData(mesh.getNData()), iData(mesh.getIData()) {
             }
 
             Mesh::~Mesh() {
@@ -52,10 +52,6 @@
                 return &iData.front();
             }
 
-            std::unordered_map<PackedVertex, size_t> const& Mesh::getMap() const {
-                return map;
-            }
-
             void Mesh::setTarget(Chunk* const& target) {
                 this->target = target;
             }
@@ -74,10 +70,6 @@
 
             void Mesh::setIData(std::vector<GLuint> const& data) {
                 iData = data;
-            }
-
-            void Mesh::setMap(std::unordered_map<PackedVertex, size_t> const& map) {
-                this->map = map;
             }
 
             void Mesh::addVertex(Maths::Point3D<GLint> const& v) {
@@ -101,6 +93,7 @@
             }
 
             void Mesh::constructMesh(World* w) {
+                double time = SDL_GetTicks();
                 GLuint index;
                 bool face[FACE_NUM];
 
@@ -123,6 +116,7 @@
                         }
                     }
                 }
+                std::cout << "Time taken : " << (SDL_GetTicks() - time) << "ms" << std::endl;
             }
 
             void Mesh::addVoxel(World* w, GLuint const& x, GLuint const& y, GLuint const& z, GLint const& rX, GLint const& rY, GLint const& rZ, bool const (&face)[6]) {
@@ -327,8 +321,7 @@
 
             void Mesh::addPackedVertex(Maths::Point3D<GLint> const (&p)[4], GLuint const& face, size_t const& cCode) {
                 Maths::Vector3D<GLbyte> n;
-                GLuint idx0, idx1, idx2, nIdx;
-                bool found;
+                GLuint idx1, idx2, nIdx;
 
                 switch (face) {
                     case (XNegative) : {
@@ -359,78 +352,34 @@
                     }
                 }
 
-                PackedVertex packed(p[2], n, static_cast <size_t> (face), cCode);
-                found = getSimilarVertexIndex(packed, map, idx0);
+                addVertex(p[2]);
+                addNormal(n);
+                addMaterialID(cCode);
+                nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
+                addIndex(nIdx);
+                idx1 = nIdx;
 
-                if (found) {
-                    iData.push_back(idx0);
-                    idx1 = idx0;
-                } else {
-                    addVertex(p[2]);
-                    addNormal(n);
-                    addMaterialID(cCode);
-                    nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
-                    addIndex(nIdx);
-                    map[packed] = nIdx;
-                    idx1 = nIdx;
-                }
+                addVertex(p[1]);
+                addNormal(n);
+                addMaterialID(cCode);
+                nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
+                addIndex(nIdx);
+                idx2 = nIdx;
 
-                packed = {p[1], n, static_cast <size_t> (face), cCode};
-                found = getSimilarVertexIndex(packed, map, idx0);
+                addVertex(p[0]);
+                addNormal(n);
+                addMaterialID(cCode);
+                nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
+                addIndex(nIdx);
 
-                if (found) {
-                    iData.push_back(idx0);
-                    idx2 = idx0;
-                } else {
-                    addVertex(p[1]);
-                    addNormal(n);
-                    addMaterialID(cCode);
-                    nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
-                    addIndex(nIdx);
-                    map[packed] = nIdx;
-                    idx2 = nIdx;
-                }
-
-                packed = {p[0], n, static_cast <size_t> (face), cCode};
-                found = getSimilarVertexIndex(packed, map, idx0);
-
-                if (found) {
-                    iData.push_back(idx0);
-                } else {
-                    addVertex(p[0]);
-                    addNormal(n);
-                    addMaterialID(cCode);
-                    nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
-                    addIndex(nIdx);
-                    map[packed] = nIdx;
-                }
-
-                packed = {p[3], n, static_cast <size_t> (face), cCode};
-                found = getSimilarVertexIndex(packed, map, idx0);
-
-                if (found) {
-                    iData.push_back(idx0);
-                } else {
-                    addVertex(p[3]);
-                    addNormal(n);
-                    addMaterialID(cCode);
-                    nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
-                    addIndex(nIdx);
-                    map[packed] = nIdx;
-                }
+                addVertex(p[3]);
+                addNormal(n);
+                addMaterialID(cCode);
+                nIdx = static_cast <GLuint> (vData.size() / 3) - 1;
+                addIndex(nIdx);
 
                 iData.push_back(idx2);
                 iData.push_back(idx1);
-            }
-
-            bool const Mesh::getSimilarVertexIndex(PackedVertex const& packed, std::unordered_map<PackedVertex, size_t> const& map, GLuint &result) const {
-                auto it = map.find(packed);
-                if (it == map.end()) {
-                    return false;
-                } else {
-                    result = it->second;
-                    return true;
-                }
             }
 
             bool Mesh::checkVoxelXNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
