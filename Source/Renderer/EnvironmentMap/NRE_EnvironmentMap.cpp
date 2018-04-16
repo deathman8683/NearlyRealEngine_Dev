@@ -149,15 +149,15 @@
                 modelviews[4].lookAt(Maths::Point3D<NREfloat>(0.0), Maths::Point3D<NREfloat>( 0.0,  1.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
                 modelviews[5].lookAt(Maths::Point3D<NREfloat>(0.0), Maths::Point3D<NREfloat>( 0.0, -1.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
 
-                glUseProgram(captureShader.getID());
-                    glUniform1i(glGetUniformLocation(captureShader.getID(), "skyBox"), 0);
-                    glUniformMatrix4fv(glGetUniformLocation(captureShader.getID(), "projection"), 1, GL_TRUE, projection.value());
+                captureShader.bind();
+                    captureShader.use1I("skyBox", 0);
+                    captureShader.useMat4("projection", 1, &projection);
                     cubeMap.bind();
 
                     glViewport(0, 0, SIZE, SIZE);
                     capture.bind();
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            glUniformMatrix4fv(glGetUniformLocation(captureShader.getID(), "modelview"), 1, GL_TRUE, modelviews[i].value());
+                            captureShader.useMat4("modelview", 1, &modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, map.getID());
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -167,21 +167,21 @@
                             getVAO().unbind();
                         }
                     capture.unbind();
-                glUseProgram(0);
+                captureShader.unbind();
 
                 capture.bind();
                     tmp->allocate(GL_DEPTH_COMPONENT24, 32, 32);
                 capture.unbind();
 
-                glUseProgram(irradianceShader.getID());
-                    glUniform1i(glGetUniformLocation(irradianceShader.getID(), "skyBox"), 0);
-                    glUniformMatrix4fv(glGetUniformLocation(irradianceShader.getID(), "projection"), 1, GL_TRUE, projection.value());
+                irradianceShader.bind();
+                    irradianceShader.use1I("skyBox", 0);
+                    irradianceShader.useMat4("projection", 1, &projection);
                     map.bind();
 
                     glViewport(0, 0, 32, 32);
                     capture.bind();
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            glUniformMatrix4fv(glGetUniformLocation(irradianceShader.getID(), "modelview"), 1, GL_TRUE, modelviews[i].value());
+                            irradianceShader.useMat4("modelview", 1, &modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap.getID());
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -191,7 +191,7 @@
                             getVAO().unbind();
                         }
                     capture.unbind();
-                glUseProgram(0);
+                irradianceShader.unbind();
 
                 modelviews[0].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
                 modelviews[1].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
@@ -200,9 +200,9 @@
                 modelviews[4].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
                 modelviews[5].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
 
-                glUseProgram(prefilterShader.getID());
-                    glUniform1i(glGetUniformLocation(prefilterShader.getID(), "skyBox"), 0);
-                    glUniformMatrix4fv(glGetUniformLocation(prefilterShader.getID(), "projection"), 1, GL_TRUE, projection.value());
+                prefilterMap.bind();
+                    prefilterShader.use1I("skyBox", 0);
+                    prefilterShader.useMat4("projection", 1, &projection);
                     map.bind();
 
                     capture.bind();
@@ -215,9 +215,9 @@
                         glViewport(0, 0, mipWidth, mipHeight);
 
                         float roughness = (float)mip / (float)(maxMipLevels - 1);
-                        glUniform1f(glGetUniformLocation(prefilterShader.getID(), "roughness"), roughness);
+                        prefilterShader.use1F("roughness", roughness);
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            glUniformMatrix4fv(glGetUniformLocation(prefilterShader.getID(), "modelview"), 1, GL_TRUE, modelviews[i].value());
+                            prefilterShader.useMat4("modelview", 1, &modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, prefilterMap.getID(), mip);
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -228,38 +228,38 @@
                         }
                     }
                     capture.unbind();
-                glUseProgram(0);
+                prefilterShader.unbind();
 
                 capture.bind();
                     tmp->allocate(GL_DEPTH_COMPONENT24, SIZE, SIZE);
                     capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, brdfLUT.getID());
 
                     glViewport(0, 0, SIZE, SIZE);
-                    glUseProgram(BRDFShader.getID());
+                    BRDFShader.bind();
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                        renderQuad(BRDFShader);
-                    glUseProgram(0);
+                        renderQuad();
+                    BRDFShader.unbind();
                 capture.unbind();
             }
 
             void EnvironmentMap::render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview) {
                 Maths::Matrix4x4<NREfloat> MVP = projection * Maths::Matrix4x4<NREfloat>(Maths::Matrix3x3<NREfloat>(modelview));
                 glDepthFunc(GL_LEQUAL);
-                glUseProgram(shader.getID());
+                shader.bind();
                     getVAO().bind();
                             map.bind();
 
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "MVP"), 1, GL_TRUE, MVP.value());
+                            shader.useMat4("MVP", 1, &MVP);
                             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
                             map.unbind();
                     getVAO().unbind();
-               glUseProgram(0);
+                shader.unbind();
                glDepthFunc(GL_LESS);
             }
 
-            void EnvironmentMap::renderQuad(Shader const& BRDFShader) {
+            void EnvironmentMap::renderQuad() {
                 GLint vData[12] = {
                     -1, 1, 0,
                     -1, -1, 0,
@@ -285,12 +285,9 @@
 
                 GL::VAO quadVAO(true);
                 quadVAO.access(quadVBO, GL_INT, true);
-
-                glUseProgram(BRDFShader.getID());
-                    quadVAO.bind();
-                        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-                    quadVAO.unbind();
-               glUseProgram(0);
+                quadVAO.bind();
+                    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+                quadVAO.unbind();
             }
 
         };

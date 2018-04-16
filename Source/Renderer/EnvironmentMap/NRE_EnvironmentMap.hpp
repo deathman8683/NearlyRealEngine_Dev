@@ -73,7 +73,7 @@
                     void fillBuffer();
                     void capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
                     void render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
-                    void renderQuad(Shader const& BRDFShader);
+                    void renderQuad();
 
                     //## Access Operator ##//
 

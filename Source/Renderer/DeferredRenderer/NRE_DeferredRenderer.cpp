@@ -72,51 +72,51 @@
 
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                glUseProgram(shader.getID());
+                shader.bind();
                     vao.bind();
 
                         glActiveTexture(GL_TEXTURE0);
                         getFrameBuffer().getDepthBuffer()->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texDepth"), 0);
+                            shader.use1I("texDepth", 0);
                         glActiveTexture(GL_TEXTURE1);
                         getFrameBuffer().getColorBuffer(0)->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texDiffuse"), 1);
+                            shader.use1I("texDiffuse", 1);
                         glActiveTexture(GL_TEXTURE2);
                         getFrameBuffer().getColorBuffer(1)->bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
+                            shader.use1I("texNormal", 2);
                         glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "irradianceMap"), 4);
+                            shader.use1I("irradianceMap", 4);
                         glActiveTexture(GL_TEXTURE5);
                         skyBox.getPrefilterMap().bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "prefilterMap"), 5);
+                            shader.use1I("prefilterMap", 5);
                         glActiveTexture(GL_TEXTURE6);
                         skyBox.getBRDFLUT().bind();
-                            glUniform1i(glGetUniformLocation(shader.getID(), "brdfLUT"), 6);
+                            shader.use1I("brdfLUT", 6);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
                             index << i;
-                            glUniform4fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].position").c_str()), 1, light.at(i)->getPosition().value());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].intensities").c_str()), 1, light.at(i)->getIntensities().value());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].direction").c_str()), 1, light.at(i)->getDirection().value());
-                            glUniform1fv(glGetUniformLocation(shader.getID(), ("lights[" + index.str() + "].angle").c_str()), 1, light.at(i)->getAngleValue());
+                            shader.use4FV("lights[" + index.str() + "].position", 1, light.at(i)->getPosition().value());
+                            shader.use3FV("lights[" + index.str() + "].intensities", 1, light.at(i)->getIntensities().value());
+                            shader.use3FV("lights[" + index.str() + "].direction", 1, light.at(i)->getDirection().value());
+                            shader.use1FV("lights[" + index.str() + "].angle", 1, light.at(i)->getAngleValue());
                         }
 
 
                         for (unsigned int i = 0; i < World::VoxelTypes::getSize(); i = i + 1) {
                             std::ostringstream index;
                             index << i;
-                            glUniform3fv(glGetUniformLocation(shader.getID(), ("materials[" + index.str() + "].albedo").c_str()), 1, World::VoxelTypes::getMaterial(i).getAlbedo().value());
-                            glUniform1fv(glGetUniformLocation(shader.getID(), ("materials[" + index.str() + "].metallic").c_str()), 1, World::VoxelTypes::getMaterial(i).getMetallicValue());
-                            glUniform1fv(glGetUniformLocation(shader.getID(), ("materials[" + index.str() + "].roughness").c_str()), 1, World::VoxelTypes::getMaterial(i).getRoughnessValue());
+                            shader.use3FV("materials[" + index.str() + "].albedo", 1, World::VoxelTypes::getMaterial(i).getAlbedo().value());
+                            shader.use1FV("materials[" + index.str() + "].metallic", 1, World::VoxelTypes::getMaterial(i).getMetallicValue());
+                            shader.use1FV("materials[" + index.str() + "].roughness", 1, World::VoxelTypes::getMaterial(i).getRoughnessValue());
                         }
 
-                        glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera.getEye().value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invModelview"), 1, GL_TRUE, invModelview.value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invProjection"), 1, GL_TRUE, invProjection.value());
-                        glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "rotation"), 1, GL_TRUE, rotation.value());
-                        glUniform1i(glGetUniformLocation(shader.getID(), "numLights"), light.size());
+                        shader.use3FV("cameraV", 1, camera.getEye().value());
+                        shader.useMat4("invModelview", 1, &invModelview);
+                        shader.useMat4("invProjection", 1, &invProjection);
+                        shader.useMat4("rotation", 1, &rotation);
+                        shader.use1I("numLights", light.size());
 
                         glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -156,26 +156,26 @@
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0};
                     glDrawBuffers(1, buffers);
 
-                    glUseProgram(shader.getID());
+                    shader.bind();
                         vao.bind();
 
                             glActiveTexture(GL_TEXTURE0);
                             getFrameBuffer().getDepthBuffer()->bind();
-                                glUniform1i(glGetUniformLocation(shader.getID(), "texDepth"), 0);
+                                shader.use1I("texDepth", 0);
                             glActiveTexture(GL_TEXTURE1);
                             getFrameBuffer().getColorBuffer(0)->bind();
-                                glUniform1i(glGetUniformLocation(shader.getID(), "texDiffuse"), 1);
+                                shader.use1I("texDiffuse", 1);
                             glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(1)->bind();
-                                glUniform1i(glGetUniformLocation(shader.getID(), "texNormal"), 2);
+                                shader.use1I("texNormal", 2);
                             glActiveTexture(GL_TEXTURE3);
                             getSSAO().getNoise()->bind();
-                                glUniform1i(glGetUniformLocation(shader.getID(), "texNoise"), 3);
+                                shader.use1I("texNoise", 3);
 
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "invProjection"), 1, GL_TRUE, invProjection.value());
-                            glUniform3fv(glGetUniformLocation(shader.getID(), "gKernel"), 32, ssao.getKernel()[0].value());
-                            glUniform1f(glGetUniformLocation(shader.getID(), "gSampleRad"), 0.5);
+                            shader.useMat4("projection", 1, &projection);
+                            shader.useMat4("invProjection", 1, &invProjection);
+                            shader.use3FV("gKernel", 32, ssao.getKernel()[0].value());
+                            shader.use1F("gSampleRad", 0.5);
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -188,7 +188,7 @@
                             glActiveTexture(GL_TEXTURE0);
                                 getFrameBuffer().getDepthBuffer()->unbind();
                         vao.unbind();
-                    glUseProgram(0);
+                    shader.unbind();
                     glColorMask(true, true, true, true);
                     glDepthMask(true);
                 getFrameBuffer().unbind();

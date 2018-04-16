@@ -15,15 +15,6 @@
 
             World::World engineWorld(Maths::Vector2D<GLuint>(10, 10), Maths::Vector2D<GLint>(0, 0));
 
-            Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
-            Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
-            Renderer::Shader ssaoPass("Shaders/SSAOPass.vert", "Shaders/SSAOPass.frag", true);
-            Renderer::Shader pbrShader("Shaders/PBRShader.vert", "Shaders/PBRShader.frag", true);
-            Renderer::Shader captureShader("Shaders/CaptureShader.vert", "Shaders/CaptureShader.frag", true);
-            Renderer::Shader irradianceShader("Shaders/IrradianceShader.vert", "Shaders/IrradianceShader.frag", true);
-            Renderer::Shader prefilterShader("Shaders/PrefilterShader.vert", "Shaders/PrefilterShader.frag", true);
-            Renderer::Shader brdfShader("Shaders/BRDFShader.vert", "Shaders/BRDFShader.frag", true);
-
             std::vector<Light::Light*> engineLight;
             //Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 250, 300),Maths::Vector3D<NREfloat>(1.0, 1.0, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0), 0.1);
             Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(400.0, 0.0, 0.0));
@@ -35,6 +26,63 @@
             engineLight.push_back(&engineLight3);
             engineLight.push_back(&engineLight4);
             engineLight.push_back(&engineLight5);
+
+            Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
+                skyBoxShader.addUniformLocation("MVP");
+            Renderer::Shader captureShader("Shaders/CaptureShader.vert", "Shaders/CaptureShader.frag", true);
+                captureShader.addUniformLocation("skyBox");
+                captureShader.addUniformLocation("projection");
+                captureShader.addUniformLocation("modelview");
+            Renderer::Shader irradianceShader("Shaders/IrradianceShader.vert", "Shaders/IrradianceShader.frag", true);
+                irradianceShader.addUniformLocation("skyBox");
+                irradianceShader.addUniformLocation("projection");
+                irradianceShader.addUniformLocation("modelview");
+            Renderer::Shader prefilterShader("Shaders/PrefilterShader.vert", "Shaders/PrefilterShader.frag", true);
+                prefilterShader.addUniformLocation("skyBox");
+                prefilterShader.addUniformLocation("projection");
+                prefilterShader.addUniformLocation("modelview");
+                prefilterShader.addUniformLocation("roughness");
+            Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
+                gBufferPass.addUniformLocation("modelview");
+                gBufferPass.addUniformLocation("projection");
+                gBufferPass.addUniformLocation("cameraV");
+            Renderer::Shader ssaoPass("Shaders/SSAOPass.vert", "Shaders/SSAOPass.frag", true);
+                ssaoPass.addUniformLocation("texDepth");
+                ssaoPass.addUniformLocation("texDiffuse");
+                ssaoPass.addUniformLocation("texNormal");
+                ssaoPass.addUniformLocation("texNoise");
+                ssaoPass.addUniformLocation("projection");
+                ssaoPass.addUniformLocation("invProjection");
+                ssaoPass.addUniformLocation("gKernel");
+                ssaoPass.addUniformLocation("gSampleRad");
+            Renderer::Shader pbrShader("Shaders/PBRShader.vert", "Shaders/PBRShader.frag", true);
+                pbrShader.addUniformLocation("texDepth");
+                pbrShader.addUniformLocation("texDiffuse");
+                pbrShader.addUniformLocation("texNormal");
+                pbrShader.addUniformLocation("irradianceMap");
+                pbrShader.addUniformLocation("prefilterMap");
+                pbrShader.addUniformLocation("brdfLUT");
+                for (GLuint i = 0; i < engineLight.size(); i = i + 1) {
+                    std::ostringstream index;
+                    index << i;
+                    pbrShader.addUniformLocation("lights[" + index.str() + "].position");
+                    pbrShader.addUniformLocation("lights[" + index.str() + "].intensities");
+                    pbrShader.addUniformLocation("lights[" + index.str() + "].direction");
+                    pbrShader.addUniformLocation("lights[" + index.str() + "].angle");
+                }
+                for (unsigned int i = 0; i < World::VoxelTypes::getSize(); i = i + 1) {
+                    std::ostringstream index;
+                    index << i;
+                    pbrShader.addUniformLocation("materials[" + index.str() + "].albedo");
+                    pbrShader.addUniformLocation("materials[" + index.str() + "].metallic");
+                    pbrShader.addUniformLocation("materials[" + index.str() + "].roughness");
+                }
+                pbrShader.addUniformLocation("cameraV");
+                pbrShader.addUniformLocation("invModelview");
+                pbrShader.addUniformLocation("invProjection");
+                pbrShader.addUniformLocation("rotation");
+                pbrShader.addUniformLocation("numLights");
+            Renderer::Shader brdfShader("Shaders/BRDFShader.vert", "Shaders/BRDFShader.frag", true);
 
             Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, rotation;
 

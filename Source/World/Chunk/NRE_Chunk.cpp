@@ -166,19 +166,19 @@
                 }
 
                 if (isActive()) {
-                    glUseProgram(shader.getID());
+                    shader.bind();
                         vao.bind();
 
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "modelview"), 1, GL_TRUE, modelview.value());
-                            glUniformMatrix4fv(glGetUniformLocation(shader.getID(), "projection"), 1, GL_TRUE, projection.value());
+                            shader.useMat4("modelview", 1, &modelview);
+                            shader.useMat4("projection", 1, &projection);
                             if (camera != 0) {
-                                glUniform3fv(glGetUniformLocation(shader.getID(), "cameraV"), 1, camera->getEye().value());
+                                shader.use3FV("cameraV", 1, camera->getEye().value());
                             }
 
                             glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 
                         vao.unbind();
-                    glUseProgram(0);
+                    shader.unbind();
                 }
             }
 
