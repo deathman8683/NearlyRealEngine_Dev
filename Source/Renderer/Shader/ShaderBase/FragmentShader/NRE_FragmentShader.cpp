@@ -10,7 +10,7 @@
             FragmentShader::FragmentShader(std::string const& path) : ShaderBase::ShaderBase(path) {
             }
 
-            FragmentShader::FragmentShader(FragmentShader const& s) : ShaderBase::ShaderBase(s) {
+            FragmentShader::FragmentShader(FragmentShader && s) : ShaderBase::ShaderBase(std::move(s)) {
             }
 
             FragmentShader::~FragmentShader() {
@@ -18,6 +18,11 @@
 
             GLenum const FragmentShader::getType() const {
                 return GL_FRAGMENT_SHADER;
+            }
+
+            FragmentShader& FragmentShader::operator=(FragmentShader && s) {
+                ShaderBase::operator=(std::move(s));
+                return *this;
             }
         };
     };

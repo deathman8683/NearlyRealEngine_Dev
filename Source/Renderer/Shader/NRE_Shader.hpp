@@ -10,6 +10,7 @@
 
     #include "ShaderBase/VertexShader/NRE_VertexShader.hpp"
     #include "ShaderBase/FragmentShader/NRE_FragmentShader.hpp"
+    #include "ShaderMap/NRE_ShaderMap.hpp"
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace
@@ -30,40 +31,45 @@
                     GLuint id;
                     VertexShader vShader;
                     FragmentShader fShader;
+                    ShaderMap uniformsLocations;
 
                 public:
                     //## Constructor ##//
-                    Shader();
-                    Shader(std::string const& vPath, std::string const& fPath, bool const& loadImmediatly = false);
+                        Shader();
+                        Shader(std::string const& vPath, std::string const& fPath, bool const& loadImmediatly = false);
 
                     //## Copy-Constructor ##//
-                    Shader(Shader const& s);
+                        Shader(Shader const& s) = delete;
+
+                    //## Move-Constructor ##//
+                        Shader(Shader && s);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Shader();
+                        ~Shader();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
-                    VertexShader const& getVertexShader() const;
-                    FragmentShader const& getFragmentShader() const;
-                    GLint const getLocation(std::string const& var);
+                        GLuint const& getID() const;
+                        VertexShader const& getVertexShader() const;
+                        FragmentShader const& getFragmentShader() const;
+                        GLint const getLocation(std::string const& var);
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
-                    void setVertexShader(VertexShader const& s);
-                    void setFragmentShader(FragmentShader const& s);
+                        void setID(GLuint const& id);
 
                     //## Methods ##//
-                    void bind();
-                    void unbind();
-                    void load();
-                    void use(GLint const& i);
+                        void bind();
+                        void unbind();
+                        void load();
+                        void use1i(std::string const& location, GLint const& v0);
+                        void use2i(std::string const& location, GLint const& v0, GLint const& v1);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        Shader& operator=(Shader const& map) = delete;
+                        Shader& operator=(Shader && map);
 
                     //## Shortcut Operator ##//
 

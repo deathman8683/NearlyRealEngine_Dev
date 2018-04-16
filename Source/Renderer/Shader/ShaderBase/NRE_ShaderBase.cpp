@@ -10,7 +10,7 @@
             ShaderBase::ShaderBase(std::string const& path) :  id(0), path(path) {
             }
 
-            ShaderBase::ShaderBase(ShaderBase const& s) : id(s.getID()), path(s.getPath()) {
+            ShaderBase::ShaderBase(ShaderBase && base) : id(std::move(base.getID())), path(std::move(base.getPath())) {
             }
 
             ShaderBase::~ShaderBase() {
@@ -76,6 +76,13 @@
 
                     throw (Exception::ShaderException(getPath() + " : " + std::string(eError)));
                 }
+            }
+
+            ShaderBase& ShaderBase::operator=(ShaderBase && base) {
+                id = std::move(base.id);
+                path = std::move(base.path);
+
+                return *this;
             }
 
         };

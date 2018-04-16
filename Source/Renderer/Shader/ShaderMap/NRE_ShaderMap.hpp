@@ -1,14 +1,16 @@
 
     /**
-     * @file NRE_VertexShader.hpp
-     * @brief Declaration of Engine's Renderer's Object : VertexShader
+     * @file NRE_ShaderMap.hpp
+     * @brief Declaration of Engine's Renderer's Object : ShaderMap
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NRE_ShaderBase.hpp"
+    #include <unordered_map>
+    #include "../../../Generic/NRE_Type.hpp"
+
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace
@@ -19,42 +21,44 @@
          * @brief Engine's Renderer Module
          */
         namespace Renderer {
-
             /**
-             * @class VertexShader
-             * @brief Renderer's Object : Manage VertexShader transfer and compiling
+             * @class ShaderMap
+             * @brief Renderer's Object : Store all uniform location efficiently
              */
-            class VertexShader : public ShaderBase {
+            class ShaderMap {
                 private:
+                    std::unordered_map<std::string, GLint> locations;
 
                 public:
                     //## Constructor ##//
-                        VertexShader();
-                        VertexShader(std::string const& path);
+                        ShaderMap();
+                        ShaderMap(size_t const& n);
 
                     //## Copy-Constructor ##//
-                        VertexShader(VertexShader const& s) = delete;
+                        ShaderMap(ShaderMap const& map);
 
                     //## Move-Constructor ##//
-                        VertexShader(VertexShader && s);
+                        ShaderMap(ShaderMap && map);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                        ~VertexShader();
+                        ~ShaderMap();
 
                     //## Getter ##//
-                        GLenum const getType() const override;
+                        GLint const& getLocation(std::string const& key) const;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        void queryLocation(GLuint const& id, std::string const& key);
+                        size_t const size() const;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
-                        VertexShader& operator=(VertexShader const& s) = delete;
-                        VertexShader& operator=(VertexShader && s);
+                        ShaderMap& operator=(ShaderMap const& map);
+                        ShaderMap& operator=(ShaderMap && map);
 
                     //## Shortcut Operator ##//
 

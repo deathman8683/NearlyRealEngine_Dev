@@ -23,7 +23,7 @@
             }
 
             template <class T>
-            Vector4D<T>::Vector4D(Vector4D && u) : Vector3D<T>::Vector3D(u), w(std::move(u.getW())) {
+            Vector4D<T>::Vector4D(Vector4D && u) : Vector3D<T>::Vector3D(std::move(u)), w(std::move(u.getW())) {
             }
 
             template <class T>
@@ -112,7 +112,7 @@
 
             template <class T>
             Vector4D<T>& Vector4D<T>::operator=(Vector4D<T> && base) {
-                Vector3D<T>::operator=(base);
+                Vector3D<T>::operator=(std::move(base));
                 this->w = std::move(base.getW());
                 return *this;
             }

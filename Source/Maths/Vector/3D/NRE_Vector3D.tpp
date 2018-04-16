@@ -23,6 +23,10 @@
             }
 
             template <class T>
+            Vector3D<T>::Vector3D(Vector3D && u) : Vector2D<T>::Vector2D(std::move(u)), z(std::move(u.getZ())) {
+            }
+
+            template <class T>
             template <class K>
             Vector3D<T>::Vector3D(Vector3D<K> const& u) : Vector2D<T>::Vector2D(u), z(static_cast <T> (u.getZ())) {
             }
@@ -130,7 +134,7 @@
 
             template <class T>
             Vector3D<T>& Vector3D<T>::operator=(Vector3D<T> && base) {
-                Vector2D<T>::operator=(base);
+                Vector2D<T>::operator=(std::move(base));
                 this->z = std::move(base.getZ());
                 return *this;
             }

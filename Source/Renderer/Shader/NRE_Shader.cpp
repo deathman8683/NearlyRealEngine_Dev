@@ -13,9 +13,6 @@
                 }
             }
 
-            Shader::Shader(Shader const& s) : id(s.getID()), vShader(s.getVertexShader()), fShader(s.getFragmentShader()) {
-            }
-
             Shader::~Shader() {
                 glDeleteProgram(getID());
             }
@@ -38,14 +35,6 @@
 
             void Shader::setID(GLuint const& id) {
                 this->id = id;
-            }
-
-            void Shader::setVertexShader(VertexShader const& s) {
-                vShader = s;
-            }
-
-            void Shader::setFragmentShader(FragmentShader const& s) {
-                fShader = s;
             }
 
             void Shader::bind() {
@@ -95,6 +84,15 @@
 
                     throw (Exception::ShaderException("Linking Error : " + std::string(eError)));
                 }
+            }
+
+            Shader& Shader::operator=(Shader && map) {
+                id = std::move(map.getID());
+                vShader = std::move(map.vShader);
+                fShader = std::move(map.fShader);
+                uniformsLocations = std::move(map).uniformsLocations;
+
+                return *this;
             }
 
         };

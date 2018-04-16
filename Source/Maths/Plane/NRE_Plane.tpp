@@ -81,8 +81,8 @@
 
             template <class T>
             Plane<T>& Plane<T>::operator=(Plane<T> && p) {
-                n = std::move(p.getNormal().getX());
-                p = std::move(p.getPoint().getY());
+                n = std::move(p.getNormal());
+                p = std::move(p.getPoint());
                 return *this;
             }
 

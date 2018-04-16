@@ -29,25 +29,30 @@
 
                 public:
                     //## Constructor ##//
-                    FragmentShader();
-                    FragmentShader(std::string const& path);
+                        FragmentShader();
+                        FragmentShader(std::string const& path);
 
                     //## Copy-Constructor ##//
-                    FragmentShader(FragmentShader const& s);
+                        FragmentShader(FragmentShader const& s) = delete;
+
+                    //## Move-Constructor ##//
+                        FragmentShader(FragmentShader && s);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~FragmentShader();
+                        ~FragmentShader();
 
                     //## Getter ##//
-                    GLenum const getType() const override;
+                        GLenum const getType() const override;
 
                     //## Setter ##//
 
                     //## Methods ##//
 
-                    //## Access Operator ##//
+                    //## Access Operator ##/
+                        FragmentShader& operator=(FragmentShader const& s) = delete;
+                        FragmentShader& operator=(FragmentShader && s);
 
                     //## Assignment Operator ##//
 

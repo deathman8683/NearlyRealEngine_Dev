@@ -23,7 +23,7 @@
             }
 
             template <class T>
-            Point3D<T>::Point3D(Point3D && p) : Point2D<T>::Point2D(p), z(std::move(p.getZ())) {
+            Point3D<T>::Point3D(Point3D && p) : Point2D<T>::Point2D(std::move(p)), z(std::move(p.getZ())) {
             }
 
             template <class T>
@@ -91,7 +91,7 @@
 
             template <class T>
             Point3D<T>& Point3D<T>::operator=(Point3D<T> && base) {
-                Point2D<T>::operator=(base);
+                Point2D<T>::operator=(std::move(base));
                 this->z = std::move(base.getZ());
                 return *this;
             }

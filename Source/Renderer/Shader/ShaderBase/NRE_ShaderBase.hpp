@@ -33,32 +33,37 @@
 
                 public:
                     //## Constructor ##//
-                    ShaderBase();
-                    ShaderBase(std::string const& path);
+                        ShaderBase();
+                        ShaderBase(std::string const& path);
 
                     //## Copy-Constructor ##//
-                    ShaderBase(ShaderBase const& s);
+                        ShaderBase(ShaderBase const& s) = delete;
+
+                    //## Move-Constructor ##//
+                        ShaderBase(ShaderBase && s);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~ShaderBase();
+                        virtual ~ShaderBase();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
-                    std::string const& getPath() const;
-                    virtual GLenum const getType() const = 0;
+                        GLuint const& getID() const;
+                        std::string const& getPath() const;
+                        virtual GLenum const getType() const = 0;
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
-                    void setPath(std::string const& path);
+                        void setID(GLuint const& id);
+                        void setPath(std::string const& path);
 
                     //## Methods ##//
-                    void compile();
+                        void compile();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        ShaderBase& operator=(ShaderBase const& base) = delete;
+                        ShaderBase& operator=(ShaderBase && base);
 
                     //## Shortcut Operator ##//
 

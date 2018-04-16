@@ -23,7 +23,7 @@
             }
 
             template <class T>
-            Point4D<T>::Point4D(Point4D && p) : Point3D<T>::Point3D(p), w(std::move(p.getW())) {
+            Point4D<T>::Point4D(Point4D && p) : Point3D<T>::Point3D(std::move(p)), w(std::move(p.getW())) {
             }
 
             template <class T>
@@ -91,7 +91,7 @@
 
             template <class T>
             Point4D<T>& Point4D<T>::operator=(Point4D<T> && base) {
-                Point3D<T>::operator=(base);
+                Point3D<T>::operator=(std::move(base));
                 this->w = std::move(base.getW());
                 return *this;
             }
