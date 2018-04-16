@@ -8,10 +8,12 @@
 
     #pragma once
 
+    #include <sstream>
     #include "../../../Maths/NRE_Maths.hpp"
     #include "../../Buffer/FrameBuffer/NRE_FrameBuffer.hpp"
     #include "../../Buffer/DepthBuffer/NRE_DepthBuffer.hpp"
     #include "../../Buffer/RenderBuffer/NRE_RenderBuffer.hpp"
+    #include "../../../Exception/GLException/NRE_GLException.hpp"
 
     /**
      * @namespace NRE
@@ -64,6 +66,7 @@
                     void attachDepthBuffer(GLenum const& attachment) const;
                     void push_back(Texture2D* const& buffer);
                     void access();
+                    void checkIntegrity();
 
                     //## Access Operator ##//
 

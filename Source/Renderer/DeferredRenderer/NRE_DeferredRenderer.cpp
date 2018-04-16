@@ -20,11 +20,7 @@
                 gBuffer.setDepthBuffer(new GL::Texture2D(gBuffer.getSize().getW(), gBuffer.getSize().getH(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT32F, GL_FLOAT));
                 gBuffer.attachDepthBuffer(GL_DEPTH_ATTACHMENT);
 
-                gBuffer.bind();
-                if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-                    std::cout << "ERROR 1" << std::endl;
-                }
-                gBuffer.unbind();
+                gBuffer.checkIntegrity();
 
                 buffer.push_back(new GL::UVBuffer(true));
                 fillBuffer();

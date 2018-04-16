@@ -75,5 +75,16 @@
                 colorBuffer.push_back(buffer);
             }
 
+            void FBO::checkIntegrity() {
+                bind();
+                    GLenum err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+                    if (err != GL_FRAMEBUFFER_COMPLETE) {
+                        std::ostringstream errStr;
+                        errStr << err;
+                        throw (Exception::GLException("FrameBufferObject Error : " + errStr.str()));
+                    }
+                unbind();
+            }
+
         };
     };
