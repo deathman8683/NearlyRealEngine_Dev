@@ -142,11 +142,11 @@
 
             vec3 Lo = vec3(0.0);
             for (int i = 0; i < numLights; i = i + 1) {
-                vec3 L = normalize(lights[i].position.xyz - vertex);
+                vec3 L = mix(normalize(lights[i].position.xyz), normalize(lights[i].position.xyz - vertex), lights[i].position.w);
                 vec3 H = normalize(V + L);
 
                 float distance = length(lights[i].position.xyz - vertex);
-                float attenuation = 1.0 / (distance * distance);
+                float attenuation = mix(1.0, 1.0 / (distance * distance), lights[i].position.w);
                 vec3 radiance = lights[i].intensities * attenuation;
 
                 float NDF = distributionGGX(N, H, materials[id].roughness);

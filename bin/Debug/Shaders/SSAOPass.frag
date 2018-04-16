@@ -6,7 +6,6 @@
     uniform mat4 projection;
     uniform mat4 invProjection;
     uniform sampler2D texDepth;
-    uniform sampler2D texDiffuse;
     uniform sampler2D texNormal;
     uniform sampler2D texNoise;
 

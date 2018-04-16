@@ -3,7 +3,6 @@
 
     in vec3 in_Vertex;
 
-    uniform mat4 projection;
     uniform mat4 modelview;
 
     out vec3 vertex;

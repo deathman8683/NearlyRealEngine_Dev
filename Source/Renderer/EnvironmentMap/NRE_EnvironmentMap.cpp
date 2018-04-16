@@ -138,9 +138,6 @@
                 capture.setDepthBuffer(tmp);
                 capture.attachDepthBuffer(GL_DEPTH_ATTACHMENT);
 
-                Maths::Matrix4x4<NREfloat> projection;
-                projection.projection(70.0, 1.0, 0.1, 10.0);
-
                 Maths::Matrix4x4<NREfloat> modelviews[6];
                 modelviews[0].lookAt(Maths::Point3D<NREfloat>(0.0), Maths::Point3D<NREfloat>( 1.0,  0.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
                 modelviews[1].lookAt(Maths::Point3D<NREfloat>(0.0), Maths::Point3D<NREfloat>(-1.0,  0.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
@@ -151,7 +148,6 @@
 
                 captureShader.bind();
                     captureShader.use1I("skyBox", 0);
-                    captureShader.useMat4("projection", 1, &projection);
                     cubeMap.bind();
 
                     glViewport(0, 0, SIZE, SIZE);
@@ -175,7 +171,6 @@
 
                 irradianceShader.bind();
                     irradianceShader.use1I("skyBox", 0);
-                    irradianceShader.useMat4("projection", 1, &projection);
                     map.bind();
 
                     glViewport(0, 0, 32, 32);
@@ -202,7 +197,6 @@
 
                 prefilterMap.bind();
                     prefilterShader.use1I("skyBox", 0);
-                    prefilterShader.useMat4("projection", 1, &projection);
                     map.bind();
 
                     capture.bind();

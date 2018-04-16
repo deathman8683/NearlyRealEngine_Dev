@@ -171,9 +171,6 @@
 
                             shader.useMat4("modelview", 1, &modelview);
                             shader.useMat4("projection", 1, &projection);
-                            if (camera != 0) {
-                                shader.use3FV("cameraV", 1, camera->getEye().value());
-                            }
 
                             glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
 

@@ -163,14 +163,11 @@
                             getFrameBuffer().getDepthBuffer()->bind();
                                 shader.use1I("texDepth", 0);
                             glActiveTexture(GL_TEXTURE1);
-                            getFrameBuffer().getColorBuffer(0)->bind();
-                                shader.use1I("texDiffuse", 1);
-                            glActiveTexture(GL_TEXTURE2);
                             getFrameBuffer().getColorBuffer(1)->bind();
-                                shader.use1I("texNormal", 2);
-                            glActiveTexture(GL_TEXTURE3);
+                                shader.use1I("texNormal", 1);
+                            glActiveTexture(GL_TEXTURE2);
                             getSSAO().getNoise()->bind();
-                                shader.use1I("texNoise", 3);
+                                shader.use1I("texNoise", 2);;
 
                             shader.useMat4("projection", 1, &projection);
                             shader.useMat4("invProjection", 1, &invProjection);
@@ -179,12 +176,10 @@
 
                             glDrawArrays(GL_TRIANGLES, 0, 6);
 
-                            glActiveTexture(GL_TEXTURE3);
-                                getSSAO().getNoise()->unbind();
                             glActiveTexture(GL_TEXTURE2);
-                                getFrameBuffer().getColorBuffer(1)->unbind();
+                                getSSAO().getNoise()->unbind();
                             glActiveTexture(GL_TEXTURE1);
-                                getFrameBuffer().getColorBuffer(0)->unbind();
+                                getFrameBuffer().getColorBuffer(1)->unbind();
                             glActiveTexture(GL_TEXTURE0);
                                 getFrameBuffer().getDepthBuffer()->unbind();
                         vao.unbind();
