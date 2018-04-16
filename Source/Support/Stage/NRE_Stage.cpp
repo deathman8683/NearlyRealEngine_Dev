@@ -1,19 +1,19 @@
 
-    #include "NRE_Scene.hpp"
+    #include "NRE_Stage.hpp"
 
     namespace NRE {
         namespace Support {
 
-            Uint32 Scene::DEFAULT_FLAGS = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
-            Uint32 Scene::SDL_INIT_FLAGS = SDL_INIT_VIDEO;
-            int Scene::MAJOR_VERSION = 4;
-            int Scene::MINOR_VERSION = 5;
-            int Scene::DEPTH_SIZE = 24;
+            Uint32 Stage::DEFAULT_FLAGS = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
+            Uint32 Stage::SDL_INIT_FLAGS = SDL_INIT_VIDEO;
+            int Stage::MAJOR_VERSION = 4;
+            int Stage::MINOR_VERSION = 5;
+            int Stage::DEPTH_SIZE = 24;
 
-            Scene::Scene() : context(0) {
+            Stage::Stage() : context(0) {
             }
 
-            Scene::Scene(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord) : context(0) {
+            Stage::Stage(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord) : context(0) {
                 int err = SDL_Init(SDL_INIT_FLAGS);
                 if (err != 0) {
                     throw (Exception::SupportException(std::string(SDL_GetError())));
@@ -24,40 +24,40 @@
                 viewport.createCurrent();
             }
 
-            Scene::Scene(Scene const& s) : window(s.getWindow()), viewport(s.getViewport()), context(s.getContext()) {
+            Stage::Stage(Stage const& s) : window(s.getWindow()), viewport(s.getViewport()), context(s.getContext()) {
             }
 
-            Scene::~Scene() {
+            Stage::~Stage() {
                 SDL_GL_DeleteContext(getContext());
 
                 SDL_Quit();
             }
 
-            SDL::Window const& Scene::getWindow() const {
+            SDL::Window const& Stage::getWindow() const {
                 return window;
             }
 
-            Viewport const& Scene::getViewport() const {
+            Viewport const& Stage::getViewport() const {
                 return viewport;
             }
 
-            SDL_GLContext const& Scene::getContext() const {
+            SDL_GLContext const& Stage::getContext() const {
                 return context;
             }
 
-            void Scene::setWindow(SDL::Window const& w) {
+            void Stage::setWindow(SDL::Window const& w) {
                 window = w;
             }
 
-            void Scene::setViewport(Viewport const& v) {
+            void Stage::setViewport(Viewport const& v) {
                 viewport = v;
             }
 
-            void Scene::setContext(SDL_GLContext const& c) {
+            void Stage::setContext(SDL_GLContext const& c) {
                 context = c;
             }
 
-            void Scene::init() {
+            void Stage::init() {
                 initScreen();
                 initGL();
 
@@ -69,7 +69,7 @@
                 SDL_SetRelativeMouseMode(SDL_TRUE);
             }
 
-            void Scene::initScreen() {
+            void Stage::initScreen() {
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, MAJOR_VERSION);
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, MINOR_VERSION);
 
@@ -83,7 +83,7 @@
                 }
             }
 
-            void Scene::initGL() {
+            void Stage::initGL() {
                 GLenum err = glewInit();
                 if (err != GLEW_OK) {
                     throw (Exception::SupportException(std::string(reinterpret_cast <const char*> (glewGetErrorString(err)))));

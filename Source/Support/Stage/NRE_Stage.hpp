@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_Scene.hpp
-     * @brief Declaration of Engine's Support's Object : Scene
+     * @file NRE_Stage.hpp
+     * @brief Declaration of Engine's Support's Object : Stage
      * @author Louis ABEL
      * @version 1.0
      */
@@ -24,10 +24,10 @@
         namespace Support {
 
             /**
-             * @class Scene
+             * @class Stage
              * @brief Support's Object : Manage the application window and viewport
              */
-            class Scene {
+            class Stage {
                 private:
                     SDL::Window window;
                     Viewport viewport;
@@ -35,16 +35,16 @@
 
                 public:
                     //## Constructor ##//
-                    Scene();
-                    Scene(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord = Maths::Point2D<int>(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED));
+                    Stage();
+                    Stage(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord = Maths::Point2D<int>(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED));
 
                     //## Copy-Constructor ##//
-                    Scene(Scene const& s);
+                    Stage(Stage const& s);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Scene();
+                    ~Stage();
 
                     //## Getter ##//
                     SDL::Window const& getWindow() const;

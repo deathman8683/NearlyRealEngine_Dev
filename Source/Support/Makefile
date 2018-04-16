@@ -1,5 +1,5 @@
 VIEWPORT = Viewport
-SCENE = Scene
+SCENE = Stage
 
 all : $(TARGET)
 

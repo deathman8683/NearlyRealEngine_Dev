@@ -1,6 +1,6 @@
-SRC = NRE_Scene.cpp
-OBJ = $(OBJDIR)NRE_Scene.o
-OBJDIR = ../../../obj/Debug/Support/Scene/
+SRC = NRE_Stage.cpp
+OBJ = $(OBJDIR)NRE_Stage.o
+OBJDIR = ../../../obj/Debug/Support/Stage/
 
 all : $(TARGET)
 
