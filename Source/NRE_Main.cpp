@@ -13,7 +13,7 @@
             Support::Stage engineStage("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
+            World::World engineWorld(Maths::Vector2D<GLuint>(10, 10), Maths::Vector2D<GLint>(0, 0));
 
             std::vector<Light::Light*> engineLight;
             Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 250, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
@@ -90,7 +90,7 @@
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             NREfloat skyboxAngleX = 0.0;
-            int colorAngle = 0, nbFrames = 0;
+            int colorAngle = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
 
@@ -102,16 +102,7 @@
 
             while(!camera.getQuit())
             {
-                engineClock.updateActualTime();
-                nbFrames = nbFrames + 1;
-
-                if (engineClock.getActualTime() - engineClock.getLastTime() >= 1000.0) {
-                    std::cout << 1000.0 / nbFrames << "ms / frame" << std::endl;
-                    nbFrames = 0;
-                    engineClock.setLastTime(engineClock.getLastTime() + 1000.0);
-                }
-
-                //std::cout << camera.getEye() << std::endl;
+                engineClock.updateTimestep(1000.0 / 60.0);
 
                 camera.update();
 
@@ -142,9 +133,7 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     engineWorld.render(gBufferPass, modelview, projection, &camera);
-                    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(skyBoxShader, projection, modelview);
@@ -160,7 +149,7 @@
 
                 engineDeferredRenderer.render(pbrShader, invModelview, invProjection, rotation, camera, engineLight, engineSkybox);
 
-                engineWorld.update(2);
+                engineWorld.update(1);
 
                 SDL_GL_SwapWindow(engineStage.getWindow().getItem());
             }

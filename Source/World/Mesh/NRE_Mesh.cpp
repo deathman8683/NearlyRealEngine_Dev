@@ -93,7 +93,6 @@
             }
 
             void Mesh::constructMesh(World* w) {
-                double time = SDL_GetTicks();
                 GLuint index;
                 bool face[FACE_NUM];
 
@@ -116,7 +115,6 @@
                         }
                     }
                 }
-                std::cout << "Time taken : " << (SDL_GetTicks() - time) << "ms" << std::endl;
             }
 
             void Mesh::addVoxel(World* w, GLuint const& x, GLuint const& y, GLuint const& z, GLint const& rX, GLint const& rY, GLint const& rZ, bool const (&face)[6]) {

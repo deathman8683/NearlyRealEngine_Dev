@@ -109,10 +109,17 @@
                             }
                         }
 
+                        if (getMaxSolidHeight() < static_cast <GLuint> (z)) {
+                            setMaxSolidHeight(z);
+                        }
+
                         if (noise < 0.22) {
                             for (int zPrime = static_cast <int> (z); zPrime < 0.22 * SIZE_Z; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
                                 voxel[index].setType(OCEAN);
+                            }
+                            if (getMaxSolidHeight() < 0.22 * SIZE_Z) {
+                                setMaxSolidHeight(0.22 * SIZE_Z);
                             }
                             for (unsigned int zPrime = 0.22 * SIZE_Z; zPrime < SIZE_Z; zPrime = zPrime + 1) {
                                 index = getVoxelIndex(x, y, zPrime);
