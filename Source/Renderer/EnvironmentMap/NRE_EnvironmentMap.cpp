@@ -195,7 +195,7 @@
                 modelviews[4].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
                 modelviews[5].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
 
-                prefilterMap.bind();
+                prefilterShader.bind();
                     prefilterShader.use1I("skyBox", 0);
                     map.bind();
 

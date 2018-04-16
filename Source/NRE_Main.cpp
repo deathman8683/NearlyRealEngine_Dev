@@ -16,7 +16,7 @@
             World::World engineWorld(Maths::Vector2D<GLuint>(10, 10), Maths::Vector2D<GLint>(0, 0));
 
             std::vector<Light::Light*> engineLight;
-            Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 250, 300),Maths::Vector3D<NREfloat>(1.5, 1.5, 1.0), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
+            Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 250, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
             Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(400.0, 0.0, 0.0));
             Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 400.0, 0.0));
             Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 400.0));
@@ -131,6 +131,11 @@
                                                    (static_cast <NREfloat> (colorRGB.getB() / 255.0)) * 4000.0);
                 engineLight5.setIntensities(tmpColor);
 
+                rotation.rotate(-skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
+
+                engineLight1.setPosition(rotation * Maths::Vector3D<NREfloat>(0, 250, 300));
+
+                rotation.rotate(skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
                 rotation.rotate(skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
 
                 modelview.setIdentity();
