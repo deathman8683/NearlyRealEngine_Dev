@@ -254,9 +254,9 @@
             };
 
             template <class T>
-            int Point2D<T>::DEFAULT_X = 0.;
+            int Point2D<T>::DEFAULT_X = 0;
             template <class T>
-            int Point2D<T>::DEFAULT_Y = 0.;
+            int Point2D<T>::DEFAULT_Y = 0;
 
             /**
              * Outstream operation for 2D point

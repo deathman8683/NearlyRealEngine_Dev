@@ -244,7 +244,7 @@
             };
 
             template <class T>
-            int Point3D<T>::DEFAULT_Z = 0.;
+            int Point3D<T>::DEFAULT_Z = 0;
 
             /**
              * Outstream operation for 3D point
