@@ -13,10 +13,10 @@
             Support::Stage engineStage("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
-            World::World engineWorld(Maths::Vector2D<GLuint>(10, 10), Maths::Vector2D<GLint>(0, 0));
+            World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
 
             std::vector<Light::Light*> engineLight;
-            Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 250, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
+            Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 0, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
             Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(400.0, 0.0, 0.0));
             Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 400.0, 0.0));
             Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 400.0));
@@ -90,7 +90,7 @@
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             NREfloat skyboxAngleX = 0.0;
-            int colorAngle = 0;
+            int colorAngle = 0, nbFrames = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
 
@@ -102,7 +102,15 @@
 
             while(!camera.getQuit())
             {
-                engineClock.updateTimestep(1000.0 / 60.0);
+                engineClock.updateActualTime();
+                nbFrames = nbFrames + 1;
+
+                if (engineClock.getActualTime() - engineClock.getLastTime() >= 1000.0) {
+                    std::cout << 1000.0 / nbFrames << "ms / frame" << std::endl;
+                    nbFrames = 0;
+                    engineClock.setLastTime(engineClock.getLastTime() + 1000.0);
+                }
+                //engineClock.updateTimestep(1000.0 / 60.0);
 
                 camera.update();
 
@@ -124,7 +132,7 @@
 
                 rotation.rotate(-skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
 
-                engineLight1.setPosition(rotation * Maths::Vector3D<NREfloat>(0, 250, 300));
+                engineLight1.setPosition(rotation * Maths::Vector3D<NREfloat>(0, 0, 300));
 
                 rotation.rotate(skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
                 rotation.rotate(skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
