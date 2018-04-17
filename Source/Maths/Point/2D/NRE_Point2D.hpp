@@ -40,18 +40,18 @@
                          */
                         Point2D();
                         /**
-                         * Construct a point with passed value
+                         * Construct a point with passed values
                          * @param x new x value
                          * @param y new y value
                          */
                         Point2D(T const& x, T const& y);
                         /**
-                         * Construct a point with a unique value for all coordinates
+                         * Construct a point with an unique value for all coordinates
                          * @param value new x and y values
                          */
                         Point2D(T const& value);
                         /**
-                         * Construct a point with the translation on another on
+                         * Construct a point with the translation on another one
                          * @param p the base point
                          * @param u the translation vector applied to p
                          */
