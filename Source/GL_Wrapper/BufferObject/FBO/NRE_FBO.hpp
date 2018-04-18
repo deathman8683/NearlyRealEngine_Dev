@@ -32,45 +32,107 @@
              */
             class FBO : public BufferObject, public FrameBuffer {
                 private:
-                    std::vector<Texture2D*> colorBuffer;
-                    DepthBuffer* depthBuffer;
-                    Maths::Vector2D<GLushort> size;
+                    std::vector<Texture2D*> colorBuffers;    /**< The FBO's colorbuffer array */
+                    DepthBuffer* depthBuffer;               /**< The FBO's depthBuffer */
+                    Maths::Vector2D<GLushort> size;         /**< The FBO's size */
 
                 public:
                     //## Constructor ##//
-                    FBO();
-                    FBO(GLsizei const& w, GLsizei const& h);
+                        /**
+                         * Default Constructor
+                         */
+                        FBO();
+                        /**
+                         * Construct a frame buffer object with a given size
+                         * @param w the fbo's width
+                         * @param h the fbo's height
+                         */
+                        FBO(GLsizei const& w, GLsizei const& h);
 
                     //## Copy-Constructor ##//
-                    FBO(FBO const& buf);
+                        /**
+                         * No copy allowed
+                         * @param buf the fbo to copy
+                         */
+                        FBO(FBO const& buf) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the fbo to move
+                         */
+                        FBO(FBO && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~FBO();
+                        /**
+                         * FBO Deconstructor
+                         */
+                        ~FBO();
 
                     //## Getter ##//
-                    std::vector<Texture2D*> const& getColorBuffers() const;
-                    Texture2D* const& getColorBuffer(GLuint const& index) const;
-                    DepthBuffer* const& getDepthBuffer() const;
-                    Maths::Vector2D<GLushort> const& getSize() const;
+                        /**
+                         * Return a specific colorBuffer
+                         * @param  index the colorBuffer index
+                         * @return       a 2D texture representing the colorBuffer
+                         */
+                        Texture2D* const& getColorBuffer(GLuint const& index) const;
+                        /**
+                         * DepthBuffer getter
+                         * @return the fbo's depth buffer
+                         */
+                        DepthBuffer* const& getDepthBuffer() const;
+                        /**
+                         * Size getter
+                         * @return the fbo's size
+                         */
+                        Maths::Vector2D<GLushort> const& getSize() const;
 
                     //## Setter ##//
-                    void setColorBuffers(std::vector<Texture2D*> const& buffers);
-                    void setColorBuffer(GLuint const& index, Texture2D* const&& buffer);
-                    void setDepthBuffer(DepthBuffer* const& buffer);
-                    void setSize(Maths::Vector2D<GLushort> const& size);
+                        /**
+                         * DepthBuffer setter
+                         * @param buffer the new fbo's depthBuffer
+                         */
+                        void setDepthBuffer(DepthBuffer* const& buffer);
 
                     //## Methods ##//
-                    void allocateColorBuffer(GLuint const& nbColorBuffer, std::vector<GLenum> const& format, std::vector<GLint> const& internalFormat, std::vector<GLenum> const& type);
-                    void attachDepthBuffer(GLenum const& attachment) const;
-                    void push_back(Texture2D* const& buffer);
-                    void access();
-                    void checkIntegrity();
+                        /**
+                         * Allocate some colorbuffer for the fbo, with given array of parameters
+                         * @param nbColorBuffer  the number of colorBuffer to allocate
+                         * @param format         colorBuffer's format
+                         * @param internalFormat colorBuffer's internal format
+                         * @param type           colorBuffer's type enum
+                         */
+                        void allocateColorBuffer(GLuint const& nbColorBuffer, std::vector<GLenum> const& format, std::vector<GLint> const& internalFormat, std::vector<GLenum> const& type);
+                        /**
+                         * Attach the depth buffer to a specific attachment point
+                         * @param attachment the specific attachment point
+                         */
+                        void attachDepthBuffer(GLenum const& attachment) const;
+                        /**
+                         * Store calls for VAO managing
+                         */
+                        void access();
+                        /**
+                         * Check if the FBO is complete, throw an exception if not
+                         */
+                        void checkIntegrity();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param buf the fbo to copy
+                         */
+                        FBO& operator=(FBO const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the fbo to move into this
+                         * @return the reference of himself
+                         */
+                        FBO& operator=(FBO && buf);
 
                     //## Shortcut Operator ##//
 
@@ -83,8 +145,6 @@
                     //## Shift Operator ##//
 
                 private:
-                    static GLenum DEFAULT_FORMAT;
-                    static GLenum DEFAULT_INTERNAL_FORMAT;
             };
 
         };

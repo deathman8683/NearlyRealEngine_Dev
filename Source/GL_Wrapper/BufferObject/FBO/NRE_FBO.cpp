@@ -4,32 +4,25 @@
     namespace NRE {
         namespace GL {
 
-            GLenum FBO::DEFAULT_FORMAT = GL_RGBA;
-            GLenum FBO::DEFAULT_INTERNAL_FORMAT = GL_RGBA;
-
             FBO::FBO() {
             }
 
             FBO::FBO(GLsizei const& w, GLsizei const& h) : FrameBuffer::FrameBuffer(true), depthBuffer(0), size(w, h) {
             }
 
-            FBO::FBO(FBO const& buf) : BufferObject::BufferObject(buf), FrameBuffer::FrameBuffer(buf), colorBuffer(buf.getColorBuffers()), depthBuffer(buf.getDepthBuffer()) {
+            FBO::FBO(FBO && buf) : BufferObject::BufferObject(std::move(buf)), FrameBuffer::FrameBuffer(std::move(buf)), colorBuffers(std::move(buf.colorBuffers)), depthBuffer(std::move(buf.getDepthBuffer())) {
             }
 
             FBO::~FBO() {
-                for (Texture2D* buf : colorBuffer) {
+                for (Texture2D* buf : colorBuffers) {
                     delete buf;
                 }
-                colorBuffer.clear();
+                colorBuffers.erase(colorBuffers.begin(), colorBuffers.end());
                 delete depthBuffer;
             }
 
-            std::vector<Texture2D*> const& FBO::getColorBuffers() const {
-                return colorBuffer;
-            }
-
             Texture2D* const& FBO::getColorBuffer(GLuint const& index) const {
-                return colorBuffer[index];
+                return colorBuffers[index];
             }
 
             DepthBuffer* const& FBO::getDepthBuffer() const {
@@ -40,27 +33,16 @@
                 return size;
             }
 
-            void FBO::setColorBuffers(std::vector<Texture2D*> const& buffers) {
-                colorBuffer = buffers;
-            }
-
-            void FBO::setColorBuffer(GLuint const& index, Texture2D* const&& buffer) {
-                colorBuffer[index] = buffer;
-            }
-
             void FBO::setDepthBuffer(DepthBuffer* const& buffer) {
                 depthBuffer = buffer;
-            }
-
-            void FBO::setSize(Maths::Vector2D<GLushort> const& size) {
-                this->size = size;
             }
 
             void FBO::allocateColorBuffer(GLuint const& nbColorBuffer, std::vector<GLenum> const& format, std::vector<GLint> const& internalFormat, std::vector<GLenum> const& type) {
                 bind();
                     for (GLuint i = 0; i < nbColorBuffer; i = i + 1) {
-                        push_back(new Texture2D(getSize().getW(), getSize().getH(), format[i], internalFormat[i], type[i]));
-                        colorBuffer.at(i)->attach(GL_COLOR_ATTACHMENT0 + i);
+                        Texture2D *tmp = new Texture2D(getSize().getW(), getSize().getH(), format[i], internalFormat[i], type[i]);
+                        tmp->attach(GL_COLOR_ATTACHMENT0 + i);
+                        colorBuffers.push_back(tmp);
                     }
                 unbind();
             }
@@ -69,10 +51,6 @@
                 bind();
                     depthBuffer->attach(attachment);
                 unbind();
-            }
-
-            void FBO::push_back(Texture2D* const& buffer) {
-                colorBuffer.push_back(buffer);
             }
 
             void FBO::checkIntegrity() {
@@ -84,6 +62,15 @@
                         throw (Exception::GLException("FrameBufferObject Error : " + errStr.str()));
                     }
                 unbind();
+            }
+
+            FBO& FBO::operator=(FBO && buf) {
+                BufferObject::operator=(std::move(buf));
+                FrameBuffer::operator=(std::move(buf));
+                colorBuffers = std::move(buf.colorBuffers);
+                depthBuffer = std::move(buf.depthBuffer);
+                size = std::move(buf.size);
+                return *this;
             }
 
         };
