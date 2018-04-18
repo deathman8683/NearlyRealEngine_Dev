@@ -31,164 +31,271 @@
              template <class T>
             class Matrix2x2 {
                 private:
-                    Vector2D<T> data[2];   /**< Matrix's data */
+                    Vector2D<T> data[2];   /**< Matrix's lines, row major order */
 
                 public:
                     //## Constructor ##//
-                         /**
-                          * @brief Constructor
-                          * Default constructor, iniatlize a 2x2 identity matrix
-                          */
+                        /**
+                         * Default Constructor
+                         */
                         Matrix2x2();
+                        /**
+                         * Construct a matrix with passed values
+                         * @param a first matrix component
+                         * @param b second matrix component
+                         * @param c third matrix component
+                         * @param d fourth matrix component
+                         */
                         Matrix2x2(T const& a, T const& b,
                                   T const& c, T const& d);
+                        /**
+                         * Construct a matrix witn a unique value for all component
+                         * @param value new value for all component
+                         */
                         Matrix2x2(T const& value);
+                        /**
+                         * Construct a matrix with their lines passed in parameters with vector
+                         * @param l1 the new value for the first line
+                         * @param l2 the new value for the second line
+                         */
                         Matrix2x2(Vector2D<T> const& l1, Vector2D<T> const& l2);
+                        /**
+                         * Construct a matrix with their lines passed in parameters with point
+                         * @param l1 the new value for the first line
+                         * @param l2 the new value for the second line
+                         */
                         Matrix2x2(Point2D<T> const& l1, Point2D<T> const& l2);
 
                     //## Copy-Constructor ##//
+                        /**
+                         * Copy m into this
+                         * @param m the matrix to copy the content
+                         */
                         Matrix2x2(Matrix2x2 const& m);
 
                     //## Move-Constructor ##//
+                        /**
+                         * Move m into this, leaving m empty
+                         * @param m the matrix to move
+                         */
                         Matrix2x2(Matrix2x2 && m);
 
                     //## Convertor ##//
                         /**
-                         * @brief Convertor
-                         * Convert a 2x2 generic-type matrix into a 2x2 T matrix
-                         * @param m : Matrix2x2<K>, the matrix to convert
+                         * Convert a K-type matrix into a T-type matrix
+                         * @param m the K-type matrix to convert
                          */
                         template <class K>
                         Matrix2x2(Matrix2x2<K> const& m);
 
                     //## Deconstructor ##//
                         /**
-                         * @brief Deconstructor
-                         * Deconstruct a 2x2 matrix
+                         * Matrix2x2 Deconstructor
                          */
                         ~Matrix2x2();
 
                     //## Getter ##//
                         /**
-                         * @brief First line getter
-                         * Return the matrix's first line as a 2D vector
-                         * @return Vector2D<T>, the matrix's first line
+                         * First line getter
+                         * @return the matrix's first line vector
                          */
                         Vector2D<T> const& getL1() const;
                         /**
-                         * @brief Second line getter
-                         * Return the matrix's second line as a 2D vector
-                         * @return Vector2D<T>, the matrix's second line
+                         * Second line getter
+                         * @return the matrix's second line vector
                          */
                         Vector2D<T> const& getL2() const;
                         /**
-                         * @brief First column getter
-                         * Return the matrix's first column as a 2D vector
-                         * @return Vector2D<T>, the matrix's first column
+                         * First column getter
+                         * @return the matrix's first column vector
                          */
                         Vector2D<T> getC1() const;
                         /**
-                         * @brief Second column getter
-                         * Return the matrix's second column as a 2D vector
-                         * @return Vector2D<T>, the matrix's second column
+                         * Second column getter
+                         * @return the matrix's second column vector
                          */
                         Vector2D<T> getC2() const;
                         /**
-                         * @brief Determinant getter
                          * Compute the matrix's determinant
-                         * @return NREfloat, the computed determinant
+                         * @return the computed matrix's determinant
                          */
                         NREfloat const getDeterminant() const;
 
                     //## Setter ##//
                         /**
-                         * @brief First line setter
-                         * Set the matrix's first line with a 2D generic-type vector
-                         * @param l1 : Vector2D<K>, the vector use as first line
+                         * First line setter
+                         * @param l1 the new first line vector
                          */
                         template <class K>
                         void setL1(Vector2D<K> const& l1);
                         /**
-                         * @brief Second line setter
-                         * Set the matrix's second line with a 2D generic-type vector
-                         * @param l2 : Vector2D<K>, the vector use as second line
+                         * Second line setter
+                         * @param l2 the new second line vector
                          */
                         template <class K>
                         void setL2(Vector2D<K> const& l2);
                         /**
-                         * @brief First column setter
-                         * Set the matrix's first column with a 2D generic-type vector
-                         * @param c1 : Vector2D<K>, the vector use as first column
+                         * First column setter
+                         * @param c1 the new first column vector
                          */
                         template <class K>
                         void setC1(Vector2D<K> const& c1);
                         /**
-                         * @brief Second column setter
-                         * Set the matrix's second column with a 2D generic-type vector
-                         * @param c2 : Vector2D<K>, the vector use as second column
+                         * Second column setter
+                         * @param c2 the new second column vector
                          */
                         template <class K>
                         void setC2(Vector2D<K> const& c2);
                         /**
-                         * @brief Identity setter
-                         * Erase the matrix and transform it into the identity matrix
+                         * Set the matrix to the identity matrix
                          */
                         void setIdentity();
 
                     //## Methods ##//
                         /**
-                         * @brief Transpose the matrix
-                         * Transpose the current matrix
+                         * Transpose the matrix
                          */
                         void transpose();
                         /**
-                         * @brief Inverse the matrix
-                         * Inverse the current matrix, set it to identity if the determinant is null
+                         * Inverse the matrix, if not possible the matrix become the identity one
                          */
                         void inverse();
+                        /**
+                         * Perfom a translation transformation on this
+                         * @param u the translation vector
+                         */
                         void translate(T const& u);
+                        /**
+                         * Perform a scale transformation on this
+                         * @param u the scaling vector
+                         */
                         void scale(T const& u);
+                        /**
+                         * Return a pointer to the start of the matrix's data
+                         * @return the matrix's data's pointer
+                         */
                         const T* const value() const;
 
                     //## Access Operator ##//
                         /**
-                         * @brief Write Access Operator []
-                         * Return the index's line from the matrix
-                         * @param index : unsigned int, tell which line to return
-                         * @return T*, the matrix's line
+                         * Return a reference on the index's line of the matrix, don't check the index range
+                         * @param  index the matrix's line index
+                         * @return a reference on the index's line of the matrix
                          */
                         Vector2D<T>& operator[](unsigned int const& index);
                         /**
-                         * @brief Read Access Operator []
-                         * Return the index's line from the matrix
-                         * @param index : unsigned int, tell which line to return
-                         * @return T*, the matrix's line
+                         * Return a const-reference on the index's line of the matrix, don't check the index range
+                         * @param  index the matrix's line index
+                         * @return a const-reference on the index's line of the matrix
                          */
                         const Vector2D<T>& operator[](unsigned int const& index) const;
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of m into this
+                         * @param m the matrix to copy into this
+                         * @return the reference of himself
+                         */
                         Matrix2x2<T>& operator=(Matrix2x2<T> const& m);
+                        /**
+                         * Move assigment of m into this, leaving m empty
+                         * @param m the matrix to move into this
+                         * @return the reference of himself
+                         */
                         Matrix2x2<T>& operator=(Matrix2x2<T> && m);
 
                     //## Shortcut Operator ##//
+                        /**
+                         * Add all m's component with this' ones
+                         * @param m the matrix to add into this
+                         * @return the reference on himself
+                         */
                         Matrix2x2<T>& operator+=(Matrix2x2<T> const& m);
+                        /**
+                         * Subtract all m's component with this' ones
+                         * @param m the matrix to add into this
+                         * @return the reference on himself
+                         */
                         Matrix2x2<T>& operator-=(Matrix2x2<T> const& m);
+                        /**
+                         * Multiply all component by k
+                         * @param k the multiplication factor
+                         * @return the reference of himself
+                         */
                         Matrix2x2<T>& operator*=(T const& k);
+                        /**
+                         * Multiply this with m
+                         * @param m the matrix to multiply with this
+                         * @return the reference of himself
+                         */
                         Matrix2x2<T>& operator*=(Matrix2x2<T> const& m);
+                        /**
+                         * Divide all component by k
+                         * @param k the division factor
+                         * @return the reference of himself
+                         */
                         Matrix2x2<T>& operator/=(T const& k);
+                        /**
+                         * Divide this with m, by multiply this with m's inverse
+                         * @param m the matrix to divide with this
+                         * @return the reference of himself
+                         */
                         Matrix2x2<T>& operator/=(Matrix2x2<T> const& m);
 
                     //## Arithmetic Operator ##//
+                        /**
+                         * Compute the matrix resulting in the addition of this and m
+                         * @param m the matrix to add with this
+                         * @return the newly computed matrix
+                         */
                         Matrix2x2<T> operator+(Matrix2x2<T> const& m) const;
+                        /**
+                         * Compute the matrix resulting in the subtraction of this and m
+                         * @param m the matrix to subtract with this
+                         * @return the newly computed matrix
+                         */
                         Matrix2x2<T> operator-(Matrix2x2<T> const& m) const;
+                        /**
+                         * Compute the matrix resulting in the multiplication of this by k
+                         * @param k the multiplication factor
+                         * @return the newly computed matrix
+                         */
                         Matrix2x2<T> operator*(T const& k) const;
+                        /**
+                         * Compute the matrix resulting in the multiplication of this and m
+                         * @param m the matrix to multiply with this
+                         * @return the newly computed matrix
+                         */
                         Matrix2x2<T> operator*(Matrix2x2<T> const& m) const;
+                        /**
+                         * Compute the vector resulting in the transformation of u by this
+                         * @param u the vector to transform
+                         * @return the newly computed vector
+                         */
                         Vector2D<T> operator*(Vector2D<T> const& u) const;
+                        /**
+                         * Compute the matrix resulting in the division of this by k
+                         * @param k the division factor
+                         * @return the newly computed matrix
+                         */
                         Matrix2x2<T> operator/(T const& k) const;
+                        /**
+                         * Compute the matrix resulting in the division of this and m
+                         * @param m the matrix to divide with this
+                         * @return the newly computed matrix
+                         */
                         Matrix2x2<T> operator/(Matrix2x2<T> const& m) const;
 
                     //## Comparison Operator ##//
+                        /**
+                         * Equality test between this and m
+                         * @param m the matrix to test with this
+                         */
                         bool operator==(Matrix2x2<T> const& m) const;
+                        /**
+                         * Difference test between this and m
+                         * @param m the matrix to test with this
+                         */
                         bool operator!=(Matrix2x2<T> const& m) const;
 
                     //## BitWise Operator ##//
@@ -199,11 +306,10 @@
             };
 
             /**
-             * @brief Shift Operator <<
-             * Add m to an out stream with : [a b]\n[c d]
-             * @param stream : std::ostream, the out stream to add m
-             * @param m : Matrix2x2<T>, the matrix to add
-             * @return std::ostream, the modified out stream
+             * Outstream operation for 2x2 matrix
+             * @param stream the out stream to add the matrix m
+             * @param m the matrix to add in the stream
+             * @return the modified outstream
              */
              template <class T>
              inline std::ostream& operator<<(std::ostream &stream, Matrix2x2<T> const& m) {

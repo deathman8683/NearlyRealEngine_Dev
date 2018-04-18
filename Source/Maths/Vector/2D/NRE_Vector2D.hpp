@@ -210,8 +210,8 @@
                          */
                         Vector2D<T>& operator+=(Vector2D<T> const& u);
                         /**
-                         * Substract a translation vector to this
-                         * @param u the translation vector to substract
+                         * Subtract a translation vector to this
+                         * @param u the translation vector to subtract
                          * @return the reference of himself
                          */
                         Vector2D<T>& operator-=(Vector2D<T> const& u);
@@ -243,7 +243,7 @@
                         Vector2D<T> operator+(Vector2D<T> const& u) const;
                         /**
                          * Compute the vector resulting in the subtraction of u into this
-                         * @param u the translation vector to substract
+                         * @param u the translation vector to subtract
                          * @return the newly computed vector
                          */
                         Vector2D<T> operator-(Vector2D<T> const& u) const;
