@@ -7,7 +7,7 @@
             Buffer::Buffer() : id(0) {
             }
 
-            Buffer::Buffer(Buffer const& buf) : id(buf.getID()) {
+            Buffer::Buffer(Buffer && buf) : id(std::move(buf.getID())) {
             }
 
             Buffer::~Buffer() {
@@ -17,13 +17,14 @@
                 return id;
             }
 
-            void Buffer::setID(GLuint const& id) {
-                this->id = id;
-            }
-
             void Buffer::reload() {
                 deleteID();
                 generateID();
+            }
+
+            Buffer& Buffer::operator=(Buffer && buf) {
+                id = std::move(buf.getID());
+                return *this;
             }
 
         };

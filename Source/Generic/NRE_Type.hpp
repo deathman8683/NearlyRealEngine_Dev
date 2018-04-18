@@ -27,11 +27,19 @@
     //typedef GLdouble NREfloat;
     typedef GLfloat NREfloat;
 
+    /**
+     * @namespace NRE
+     * @brief The global NearlyRealEngine's namespace
+     */
     namespace NRE {
+        /**
+         * @namespace Global
+         * @brief Engine's Global Module with different constant and macro
+         */
         namespace Global {
 
-            static const NREfloat PI = 3.14159265359;
-            static const NREfloat EPSILON = 0.00001;
+            static const NREfloat PI = 3.14159265359;   /**< PI constant with float precision */
+            static const NREfloat EPSILON = 0.00001;    /**< Engine's epsilon for float comparison */
 
         };
     };

@@ -27,34 +27,66 @@
              */
             class Buffer {
                 protected:
-                    GLuint id;
+                    GLuint id;  /**< Buffer OpenGL's id */
 
                 public:
                     //## Constructor ##//
-                    Buffer();
+                        /**
+                         * Default Constructor
+                         */
+                        Buffer();
 
                     //## Copy-Constructor ##//
-                    Buffer(Buffer const& buf);
+                        Buffer(Buffer const& buf) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the buffer to move
+                         */
+                        Buffer(Buffer && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Buffer();
+                        /**
+                         * Buffer Deconstructor
+                         */
+                        virtual ~Buffer();
 
                     //## Getter ##//
-                    GLuint const& getID() const;
+                        /**
+                         * ID getter
+                         * @return the id value
+                         */
+                        GLuint const& getID() const;
 
                     //## Setter ##//
-                    void setID(GLuint const& id);
 
                     //## Methods ##//
-                    virtual void generateID() = 0;
-                    virtual void deleteID() = 0;
-                    void reload();
+                        /**
+                         * Generate the buffer's id with different openGL command for different buffer
+                         */
+                        virtual void generateID() = 0;
+                        /**
+                         * Delete the buffer's id with different openGL command for different buffer
+                         */
+                        virtual void deleteID() = 0;
+                        /**
+                         * Reload the buffer by deleting and reloading the id
+                         */
+                        void reload();
 
                     //## Access Operator ##//
 
-                    //## Assignment Operator ##//
+                    //## Assignment Operator ##/
+                        Buffer& operator=(Buffer const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the buffer to move into this
+                         * @return the reference of himself
+                         */
+                        Buffer& operator=(Buffer && buf);
 
                     //## Shortcut Operator ##//
 
