@@ -11,30 +11,18 @@
                 push_back(new VertexBuffer(generate));
             }
 
-            VBO::VBO(VBO const& buf) : BufferObject::BufferObject(buf), attributes(buf.getAttributes()) {
+            VBO::VBO(VBO && buf) : BufferObject::BufferObject(std::move(buf)), attributes(std::move(buf.attributes)) {
             }
 
             VBO::~VBO() {
                 for (ArrayBuffer* attr : attributes) {
                     delete attr;
                 }
-                attributes.clear();
-            }
-
-            std::vector<ArrayBuffer*> const& VBO::getAttributes() const {
-                return attributes;
+                attributes.erase(attributes.begin(), attributes.end());
             }
 
             ArrayBuffer* const& VBO::getAttribute(GLuint const& index) const {
                 return attributes[index];
-            }
-
-            void VBO::setAttributes(std::vector<ArrayBuffer*> const& attr) {
-                attributes = attr;
-            }
-
-            void VBO::setAttribute(GLuint const& index, ArrayBuffer* const& attr) {
-                attributes[index] = attr;
             }
 
             void VBO::reload() {
@@ -76,6 +64,16 @@
 
             void VBO::push_back(ArrayBuffer* const& attr) {
                 attributes.push_back(attr);
+            }
+
+            GLuint const VBO::size() const {
+                return attributes.size();
+            }
+
+            VBO& VBO::operator=(VBO && buf) {
+                BufferObject::operator=(std::move(buf));
+                attributes = std::move(buf.attributes);
+                return *this;
             }
 
         };

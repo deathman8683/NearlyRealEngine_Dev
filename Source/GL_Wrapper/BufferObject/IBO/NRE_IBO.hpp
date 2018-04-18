@@ -160,7 +160,7 @@
              */
             inline std::ostream& operator<<(std::ostream &stream, IBO const& buf) {
                 stream << "(";
-                for (GLuint i = 0; i < buf.getAttributes().size(); i = i + 1) {
+                for (GLuint i = 0; i < buf.size(); i = i + 1) {
                     stream << *(buf.getAttribute(i)) << ",";
                 }
                 stream << buf.getIndexBuffer() << ")";

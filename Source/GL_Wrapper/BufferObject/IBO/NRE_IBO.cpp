@@ -10,7 +10,7 @@
             IBO::IBO(bool const& generate) : VBO::VBO(generate), index(generate), nb(0) {
             }
 
-            IBO::IBO(IBO && buf) : VBO::VBO(std::move(buf)), index(std::move(buf.getIndexBuffer())), nb(std::move(buf.getNb())) {
+            IBO::IBO(IBO && buf) : VBO::VBO(std::move(buf)), index(std::move(buf.index)), nb(std::move(buf.nb)) {
             }
 
             IBO::~IBO() {
@@ -58,7 +58,7 @@
 
             IBO& IBO::operator=(IBO && buf) {
                 VBO::operator=(std::move(buf));
-                indexBuffer = std::move(buf.indexBuffer);
+                index = std::move(buf.index);
                 nb = std::move(buf.nb);
                 return *this;
             }

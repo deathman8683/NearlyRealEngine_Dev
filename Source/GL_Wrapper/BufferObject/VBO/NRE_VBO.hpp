@@ -36,36 +36,107 @@
 
                 public:
                     //## Constructor ##//
-                    VBO();
-                    VBO(bool const& generate);
+                        /**
+                         * Default Constructor
+                         */
+                        VBO();
+                        /**
+                         * Construct the buffer and generate or not his id
+                         * @param generate tell if the base class has to generate an id or not
+                         */
+                        VBO(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    VBO(VBO const& buf);
+                        /**
+                         * No copy allowed
+                         * @param buf the buffer to copy
+                         */
+                        VBO(VBO const& buf) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the buffer to move
+                         */
+                        VBO(VBO && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~VBO();
+                        /**
+                         * VBO Deconstructor
+                         */
+                        virtual ~VBO();
 
                     //## Getter ##//
-                    std::vector<ArrayBuffer*> const& getAttributes() const;
-                    ArrayBuffer* const& getAttribute(GLuint const& index) const;
+                        /**
+                         * Return a specific arrayBuffer
+                         * @param  index the arrayBuffer's index
+                         * @return       the specific arrayBuffer
+                         */
+                        ArrayBuffer* const& getAttribute(GLuint const& index) const;
 
                     //## Setter ##//
-                    void setAttributes(std::vector<ArrayBuffer*> const& attr);
-                    void setAttribute(GLuint const& index, ArrayBuffer* const& attr);
 
                     //## Methods ##//
-                    void reload();
-                    void allocate(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage);
-                    void update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data);
-                    void allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data);
-                    virtual void access(GLenum const& vertexType, bool const& enableVAA = true) const;
-                    void push_back(ArrayBuffer* const& attr);
+                        /**
+                         * Reload all buffer stored in the VBO
+                         */
+                        void reload();
+                        /**
+                         * Allocate the storage for all buffer stored in the VO
+                         * @param vertexSize the vertex type size
+                         * @param nbVertex   the number of vertex to store
+                         * @param usage      the vbo's usage
+                         */
+                        void allocate(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage);
+                        /**
+                         * Update the vbo's storage
+                         * @param offset     the offset in the buffer
+                         * @param vertexSize the vertex type size
+                         * @param nbVertex   the number of vertex to store
+                         * @param data       arrays of data for all buffer
+                         */
+                        void update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data);
+                        /**
+                         * ALlocate the storage and fill all buffer in the VBO
+                         * @param vertexSize the vertex type size
+                         * @param nbVertex   the number of vertex to store
+                         * @param usage      the ibo's usage
+                         * @param data       arrays of data for all buffer
+                         */
+                        void allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data);
+                        /**
+                         * Store calls for VAO managing
+                         * @param vertexType the vertex buffer type size
+                         * @param enableVAA  tell if the function has to call glEnableVertexAttribArray
+                         */
+                        virtual void access(GLenum const& vertexType, bool const& enableVAA = true) const;
+                        /**
+                         * Push back an arrayBuffer into the VBO
+                         * @param attr the arrayBuffer to add into the VBO
+                         */
+                        void push_back(ArrayBuffer* const& attr);
+                        /**
+                         * Return the size of the attributes vector
+                         * @return the size of the VBO
+                         */
+                        GLuint const size() const;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param buf the VBO to copy
+                         */
+                        VBO& operator=(VBO const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the VBO to move into this
+                         * @return the reference of himself
+                         */
+                        VBO& operator=(VBO && buf);
 
                     //## Shortcut Operator ##//
 
@@ -80,12 +151,18 @@
                 private:
             };
 
+            /**
+             * Outstream operation for VBO
+             * @param stream the out stream to add the VBO buf
+             * @param buf the VBO to add in the stream
+             * @return the modified outstream
+             */
             inline std::ostream& operator<<(std::ostream &stream, VBO const& buf) {
                 stream << "(";
-                for (GLuint i = 0; i < buf.getAttributes().size() - 1; i = i + 1) {
+                for (GLuint i = 0; i < buf.size() - 1; i = i + 1) {
                     stream << *(buf.getAttribute(i)) << ",";
                 }
-                stream << *(buf.getAttribute(buf.getAttributes().size() - 1)) << ")";
+                stream << *(buf.getAttribute(buf.size() - 1)) << ")";
                 return stream;
             }
 
