@@ -53,6 +53,9 @@
                         GLException(GLException && e) throw();
 
                     //## Deconstructor ##//
+                        /**
+                         * GLException Deconstructor
+                         */
                         virtual ~GLException() throw();
 
                     //## Assignment Operator ##//

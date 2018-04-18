@@ -13,7 +13,20 @@
             SDLException::SDLException(SDLException const& e) throw() : ExceptionHandler::ExceptionHandler(e) {
             }
 
+            SDLException::SDLException(SDLException && e) throw() : ExceptionHandler::ExceptionHandler(std::move(e)) {
+            }
+
             SDLException::~SDLException() throw() {
+            }
+
+            SDLException& SDLException::operator=(SDLException const& e) {
+                ExceptionHandler::operator=(e);
+                return *this;
+            }
+
+            SDLException& SDLException::operator=(SDLException && e) {
+                ExceptionHandler::operator=(std::move(e));
+                return *this;
             }
 
         };
