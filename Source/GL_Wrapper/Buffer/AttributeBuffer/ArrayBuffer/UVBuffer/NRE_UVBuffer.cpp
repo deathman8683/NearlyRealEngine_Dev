@@ -15,7 +15,7 @@
             UVBuffer::UVBuffer(bool const& generate) : ArrayBuffer::ArrayBuffer(generate) {
             }
 
-            UVBuffer::UVBuffer(UVBuffer const& buf) : ArrayBuffer::ArrayBuffer(buf) {
+            UVBuffer::UVBuffer(UVBuffer && buf) : ArrayBuffer::ArrayBuffer(std::move(buf)) {
             }
 
             UVBuffer::~UVBuffer() {
@@ -35,6 +35,11 @@
 
             GLint const UVBuffer::getIndex() const {
                 return INDEX;
+            }
+
+            UVBuffer& UVBuffer::operator=(UVBuffer && buf) {
+                ArrayBuffer::operator=(std::move(buf));
+                return *this;
             }
 
         };

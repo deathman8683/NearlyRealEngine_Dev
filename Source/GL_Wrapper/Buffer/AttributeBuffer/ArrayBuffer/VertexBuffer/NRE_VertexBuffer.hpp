@@ -114,8 +114,8 @@
                     //## Shift Operator ##//
 
                 private:
-                    static GLint INDEX;
-                    static GLint SIZE;
+                    static GLint INDEX; /**< Vertex's shader's index */
+                    static GLint SIZE;  /**< Vertex's number of component */
             };
 
         };

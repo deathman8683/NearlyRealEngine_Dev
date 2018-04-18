@@ -113,8 +113,8 @@
                     //## Shift Operator ##//
 
                 private:
-                    static GLenum TYPE;
-                    static GLint TYPESIZE;
+                    static GLenum TYPE;     /**< Index's type enum */
+                    static GLint TYPESIZE;  /**< Index's type size */
             };
 
         };
