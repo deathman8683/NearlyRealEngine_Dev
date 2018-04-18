@@ -15,7 +15,7 @@
             NormalBuffer::NormalBuffer(bool const& generate) : ArrayBuffer::ArrayBuffer(generate) {
             }
 
-            NormalBuffer::NormalBuffer(NormalBuffer const& buf) : ArrayBuffer::ArrayBuffer(buf) {
+            NormalBuffer::NormalBuffer(NormalBuffer && buf) : ArrayBuffer::ArrayBuffer(std::move(buf)) {
             }
 
             NormalBuffer::~NormalBuffer() {
@@ -35,6 +35,11 @@
 
             GLint const NormalBuffer::getIndex() const {
                 return INDEX;
+            }
+
+            NormalBuffer& NormalBuffer::operator=(NormalBuffer && buf) {
+                ArrayBuffer::operator=(std::move(buf));
+                return *this;
             }
 
         };
