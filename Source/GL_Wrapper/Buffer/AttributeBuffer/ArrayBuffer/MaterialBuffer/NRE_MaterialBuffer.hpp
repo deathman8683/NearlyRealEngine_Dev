@@ -30,22 +30,59 @@
 
                 public:
                     //## Constructor ##//
-                    MaterialBuffer();
-                    MaterialBuffer(bool const& generate);
+                        /**
+                         * Default Constructor
+                         */
+                        MaterialBuffer();
+                        /**
+                         * Construct the buffer and generate or not his id
+                         * @param generate tell if the base class has to generate an id or not
+                         */
+                        MaterialBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    MaterialBuffer(MaterialBuffer const& buf);
+                        /**
+                         * No copy allowed
+                         * @param buf the buffer to copy
+                         */
+                        MaterialBuffer(MaterialBuffer const& buf) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the buffer to move
+                         */
+                        MaterialBuffer(MaterialBuffer && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~MaterialBuffer();
+                        /**
+                         * MaterialBuffer Deconstructor
+                         */
+                        ~MaterialBuffer();
 
                     //## Getter ##//
-                    GLint const getTypeSize() const;
-                    GLint const getSize() const;
-                    GLenum const getType() const;
-                    GLint const getIndex() const;
+                        /**
+                         * Return the attribute type size, used with derived class
+                         * @return the attribute type size
+                         */
+                        GLint const getTypeSize() const;
+                        /**
+                         * Return the attribute number of component, used with derived class
+                         * @return the attribute number of component
+                         */
+                        GLint const getSize() const;
+                        /**
+                         * Return the attribute type enum, used with derived class
+                         * @return the attribute type enum
+                         */
+                        GLenum const getType() const;
+                        /**
+                         * Return the attribute shader's index, used with derived class
+                         * @return the attribute shader's index
+                         */
+                        GLint const getIndex() const;
 
                     //## Setter ##//
 
@@ -54,6 +91,17 @@
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param buf the buffer to copy
+                         */
+                        MaterialBuffer& operator=(MaterialBuffer const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the buffer to move into this
+                         * @return the reference of himself
+                         */
+                        MaterialBuffer& operator=(MaterialBuffer && buf);
 
                     //## Shortcut Operator ##//
 
@@ -66,10 +114,10 @@
                     //## Shift Operator ##//
 
                 private:
-                    static GLint INDEX;
-                    static GLenum TYPE;
-                    static GLint TYPESIZE;
-                    static GLint SIZE;
+                    static GLint INDEX;     /**< Material's shader's index */
+                    static GLenum TYPE;     /**< Material's type enum */
+                    static GLint TYPESIZE;  /**< Material's type size */
+                    static GLint SIZE;      /**< Material's number of component */
             };
 
         };

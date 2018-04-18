@@ -15,7 +15,7 @@
             MaterialBuffer::MaterialBuffer(bool const& generate) : ArrayBuffer::ArrayBuffer(generate) {
             }
 
-            MaterialBuffer::MaterialBuffer(MaterialBuffer const& buf) : ArrayBuffer::ArrayBuffer(buf) {
+            MaterialBuffer::MaterialBuffer(MaterialBuffer && buf) : ArrayBuffer::ArrayBuffer(std::move(buf)) {
             }
 
             MaterialBuffer::~MaterialBuffer() {
@@ -35,6 +35,11 @@
 
             GLint const MaterialBuffer::getIndex() const {
                 return INDEX;
+            }
+
+            MaterialBuffer& MaterialBuffer::operator=(MaterialBuffer && buf) {
+                ArrayBuffer::operator=(std::move(buf));
+                return *this;
             }
 
         };
