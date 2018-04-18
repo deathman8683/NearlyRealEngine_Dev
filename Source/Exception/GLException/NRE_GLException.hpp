@@ -28,14 +28,46 @@
             class GLException : public ExceptionHandler {
                 public:
                     //## Constructor ##//
-                    GLException() throw();
-                    GLException(std::string const& log) throw();
+                        /**
+                         * Default Constructor
+                         */
+                        GLException() throw();
+                        /**
+                         * Construct an exception with a custom log
+                         * @param log the exception's log
+                         */
+                        GLException(std::string const& log) throw();
 
                     //## Copy-Constructor ##//
-                    GLException(GLException const& e) throw();
+                        /**
+                         * Copy e into this
+                         * @param e the exception to copy the content
+                         */
+                        GLException(GLException const& e) throw();
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move e into this, leaving e empty
+                         * @param e the exception to move
+                         */
+                        GLException(GLException && e) throw();
 
                     //## Deconstructor ##//
-                    virtual ~GLException() throw();
+                        virtual ~GLException() throw();
+
+                    //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of e into this
+                         * @param e the exception to copy into this
+                         * @return the reference of himself
+                         */
+                        GLException& operator=(GLException const& e);
+                        /**
+                         * Move assigment of e into this, leaving e empty
+                         * @param e the exception to move into this
+                         * @return the reference of himself
+                         */
+                        GLException& operator=(GLException && e);
             };
 
         };

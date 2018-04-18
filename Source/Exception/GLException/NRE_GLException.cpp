@@ -13,7 +13,20 @@
             GLException::GLException(GLException const& e) throw() : ExceptionHandler::ExceptionHandler(e) {
             }
 
+            GLException::GLException(GLException && e) throw() : ExceptionHandler::ExceptionHandler(std::move(e)) {
+            }
+
             GLException::~GLException() throw() {
+            }
+
+            GLException& GLException::operator=(GLException const& e) {
+                ExceptionHandler::operator=(e);
+                return *this;
+            }
+
+            GLException& GLException::operator=(GLException && e) {
+                ExceptionHandler::operator=(std::move(e));
+                return *this;
             }
 
         };
