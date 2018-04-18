@@ -13,7 +13,7 @@
                 }
             }
 
-            FrameBuffer::FrameBuffer(FrameBuffer const& buf) : Buffer::Buffer(buf) {
+            FrameBuffer::FrameBuffer(FrameBuffer && buf) : Buffer::Buffer(std::move(buf)) {
             }
 
             FrameBuffer::~FrameBuffer() {
@@ -42,6 +42,11 @@
 
             void FrameBuffer::access() const {
                 bind();
+            }
+
+            FrameBuffer& FrameBuffer::operator=(FrameBuffer && buf) {
+                Buffer::operator=(std::move(buf));
+                return *this;
             }
 
         };
