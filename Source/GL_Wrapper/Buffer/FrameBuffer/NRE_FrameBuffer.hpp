@@ -48,8 +48,8 @@
                     //## Methods ##//
                     void generateID() override;
                     void deleteID() override;
-                    void bind() const;
-                    void unbind() const;
+                    void bind() const override;
+                    void unbind() const override;
                     void attachBuffer(GLenum const& attachment, GLenum const& target, GLuint const& id, GLint const& level = 0) const;
                     void access() const;
 

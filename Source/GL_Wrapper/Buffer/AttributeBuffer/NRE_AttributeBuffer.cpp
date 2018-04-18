@@ -13,7 +13,7 @@
                 }
             }
 
-            AttributeBuffer::AttributeBuffer(AttributeBuffer const& buf) : Buffer::Buffer(buf) {
+            AttributeBuffer::AttributeBuffer(AttributeBuffer && buf) : Buffer::Buffer(std::move(buf)) {
             }
 
             AttributeBuffer::~AttributeBuffer() {
@@ -52,6 +52,11 @@
                 bind();
                     glBufferData(getTarget(), size, data, usage);
                 unbind();
+            }
+
+            AttributeBuffer& AttributeBuffer::operator=(AttributeBuffer && buf) {
+                Buffer::operator=(std::move(buf));
+                return *this;
             }
 
         };

@@ -49,8 +49,8 @@
                     //## Methods ##//
                     void generateID() override;
                     void deleteID() override;
-                    void bind() const;
-                    void unbind() const;
+                    void bind() const override;
+                    void unbind() const override;
                     void access(VBO const& buffer, GLenum const& vertexType, bool const& enableVAA = true) const;
 
                     //## Access Operator ##//

@@ -49,8 +49,8 @@
                     //## Methods ##//
                     void generateID() override;
                     void deleteID() override;
-                    void bind() const;
-                    void unbind() const;
+                    void bind() const override;
+                    void unbind() const override;
                     void allocate(GLenum const& internalFormat, GLsizei const& w, GLsizei const& h) const;
                     void access() const;
                     void attach(GLenum const& attachment) const;

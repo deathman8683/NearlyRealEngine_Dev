@@ -37,6 +37,10 @@
                         Buffer();
 
                     //## Copy-Constructor ##//
+                        /**
+                         * No copy allowed
+                         * @param buf the buffer to copy
+                         */
                         Buffer(Buffer const& buf) = delete;
 
                     //## Move-Constructor ##//
@@ -65,21 +69,33 @@
 
                     //## Methods ##//
                         /**
-                         * Generate the buffer's id with different openGL command for different buffer
+                         * Generate the buffer's id with different OpenGL command for different buffer
                          */
                         virtual void generateID() = 0;
                         /**
-                         * Delete the buffer's id with different openGL command for different buffer
+                         * Delete the buffer's id with different OpenGL command for different buffer
                          */
                         virtual void deleteID() = 0;
                         /**
                          * Reload the buffer by deleting and reloading the id
                          */
                         void reload();
+                        /**
+                         * Bind the current buffer with his custom target and OpenGL command
+                         */
+                        virtual void bind() const = 0;
+                        /**
+                         * Unbind the current buffer with his custom target and OpenGL command
+                         */
+                        virtual void unbind() const = 0;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##/
+                        /**
+                         * No copy assigment allowed
+                         * @param buf the buffer to copy
+                         */
                         Buffer& operator=(Buffer const& buf) = delete;
                         /**
                          * Move assigment of buf into this, leaving buf empty
