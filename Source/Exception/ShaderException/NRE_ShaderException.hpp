@@ -28,14 +28,49 @@
             class ShaderException : public ExceptionHandler {
                 public:
                     //## Constructor ##//
-                    ShaderException() throw();
-                    ShaderException(std::string const& log) throw();
+                        /**
+                         * Default Constructor
+                         */
+                        ShaderException() throw();
+                        /**
+                         * Construct an exception with a custom log
+                         * @param log the exception's log
+                         */
+                        ShaderException(std::string const& log) throw();
 
                     //## Copy-Constructor ##//
-                    ShaderException(ShaderException const& e) throw();
+                        /**
+                         * Copy e into this
+                         * @param e the exception to copy the content
+                         */
+                        ShaderException(ShaderException const& e) throw();
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move e into this, leaving e empty
+                         * @param e the exception to move
+                         */
+                        ShaderException(ShaderException && e) throw();
 
                     //## Deconstructor ##//
-                    virtual ~ShaderException() throw();
+                        /**
+                         * ShaderException Deconstructor
+                         */
+                        virtual ~ShaderException() throw();
+
+                    //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of e into this
+                         * @param e the exception to copy into this
+                         * @return the reference of himself
+                         */
+                        ShaderException& operator=(ShaderException const& e);
+                        /**
+                         * Move assigment of e into this, leaving e empty
+                         * @param e the exception to move into this
+                         * @return the reference of himself
+                         */
+                        ShaderException& operator=(ShaderException && e);
             };
 
         };
