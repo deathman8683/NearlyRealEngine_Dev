@@ -10,6 +10,9 @@
             Event::Event(Event const& e) : item(e.getItem()) {
             }
 
+            Event::Event(Event && e) : item(std::move(e.item)) {
+            }
+
             Event::Event(SDL_Event const& e) : item(e) {
             }
 
@@ -52,16 +55,22 @@
                 return getItem().button.which;
             }
 
-            void Event::setItem(SDL_Event const& e) {
-                item = e;
-            }
-
             int Event::poll() {
                 return SDL_PollEvent(&item);
             }
 
             int Event::wait() {
                 return SDL_WaitEvent(&item);
+            }
+
+            Event& Event::operator=(Event const& e) {
+                item = e.item;
+                return *this;
+            }
+
+            Event& Event::operator=(Event && e) {
+                item = std::move(e.item);
+                return *this;
             }
 
         };
