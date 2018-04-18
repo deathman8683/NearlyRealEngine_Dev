@@ -13,7 +13,7 @@
                 }
             }
 
-            CubeMap::CubeMap(CubeMap const& buf) : Buffer::Buffer(buf) {
+            CubeMap::CubeMap(CubeMap && buf) : Buffer::Buffer(std::move(buf)) {
             }
 
             CubeMap::~CubeMap() {
@@ -77,6 +77,11 @@
 
             void CubeMap::access() const {
                 bind();
+            }
+
+            CubeMap& CubeMap::operator=(CubeMap && buf) {
+                Buffer::operator=(std::move(buf));
+                return *this;
             }
 
         };
