@@ -32,38 +32,115 @@
 
                 public:
                     //## Constructor ##//
-                    PixelFormat();
-                    PixelFormat(bool const& allocate, Uint32 const& format);
+                        /**
+                         * Default Constructor
+                         */
+                        PixelFormat();
+                        /**
+                         * Construct a pixelFormat from the given format
+                         * @param allocate tell if PixelFormat has to be allocated or not
+                         * @param format   the pixelFormat construction enum
+                         */
+                        PixelFormat(bool const& allocate, Uint32 const& format);
 
                     //## Copy-Constructor ##//
-                    PixelFormat(PixelFormat const& pf);
+                        /**
+                         * Copy pf into this
+                         * @param pf the pixelFormat to copy the content
+                         */
+                        PixelFormat(PixelFormat const& pf);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move pf into this, leaving pf empty
+                         * @param pf the pixelFormat to move
+                         */
+                        PixelFormat(PixelFormat && pf);
 
                     //## Convertor ##//
-                    PixelFormat(SDL_PixelFormat* const& pf);
+                        /**
+                         * Convert a C-style SDL_PixelFormat into his wrapped version
+                         * @param e the C-style SDL_PixelFormat
+                         */
+                        PixelFormat(SDL_PixelFormat* const& pf);
 
                     //## Deconstructor ##//
-                    ~PixelFormat();
+                        /**
+                         * PixelFormat Deconstructor
+                         */
+                        ~PixelFormat();
 
                     //## Getter ##//
-                    SDL_PixelFormat* const& getItem() const;
-                    bool const& isAllocated() const;
-                    Uint8 const& getBitsPerPixel() const;
-                    Uint8 const& getBytesPerPixel() const;
-                    Uint32 const& getRMask() const;
-                    Uint32 const& getGMask() const;
-                    Uint32 const& getBMask() const;
-                    Uint32 const& getAMask() const;
-                    Uint32 const& getFormat() const;
+                        /**
+                         * Wrapped Item getter
+                         * @return the wrapped item
+                         */
+                        SDL_PixelFormat* const& getItem() const;
+                        /**
+                         * Allocated state getter
+                         * @return the allocation state
+                         */
+                        bool const& isAllocated() const;
+                        /**
+                         * PixelFormat BitsPerPixel getter
+                         * @return the bits per pixel value from the pixelFormat
+                         */
+                        Uint8 const& getBitsPerPixel() const;
+                        /**
+                         * PixelFormat BytesPerPixel getter
+                         * @return the bytes per pixel value from the pixelFormat
+                         */
+                        Uint8 const& getBytesPerPixel() const;
+                        /**
+                         * PixelFormat Red mask getter
+                         * @return the red mask value
+                         */
+                        Uint32 const& getRMask() const;
+                        /**
+                         * PixelFormat Green mask getter
+                         * @return the green mask value
+                         */
+                        Uint32 const& getGMask() const;
+                        /**
+                         * PixelFormat Blue mask getter
+                         * @return the blue mask value
+                         */
+                        Uint32 const& getBMask() const;
+                        /**
+                         * PixelFormat Alpha mask getter
+                         * @return the alpha mask value
+                         */
+                        Uint32 const& getAMask() const;
+                        /**
+                         * PixelFormat format getter
+                         * @return the pixelFormat's format
+                         */
+                        Uint32 const& getFormat() const;
 
                     //## Setter ##//
-                    void setItem(SDL_PixelFormat* const& pf);
-                    void setAllocated(bool const& state);
+                        /**
+                         * Allocation state setter
+                         * @param state the new allocation state
+                         */
+                        void setAllocated(bool const& state);
 
                     //## Methods ##//
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of pf into this
+                         * @param pf the pixelFormat to copy into this
+                         * @return the reference of himself
+                         */
+                        PixelFormat& operator=(PixelFormat const& pf);
+                        /**
+                         * Move assigment of pf into this, leaving pf empty
+                         * @param pf the pixelFormat to move into this
+                         * @return the reference of himself
+                         */
+                        PixelFormat& operator=(PixelFormat && pf);
 
                     //## Shortcut Operator ##//
 

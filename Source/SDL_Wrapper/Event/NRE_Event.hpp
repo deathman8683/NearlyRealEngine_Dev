@@ -54,7 +54,7 @@
                     //## Convertor ##//
                         /**
                          * Convert a C-style SDL_Event into his wrapped version
-                         * @param e the C-stule SDL_Event
+                         * @param e the C-style SDL_Event
                          */
                         Event(SDL_Event const& e);
 
@@ -65,14 +65,50 @@
                         virtual ~Event();
 
                     //## Getter ##//
+                        /**
+                         * Wrapped Item getter
+                         * @return the wrapped item
+                         */
                         SDL_Event const& getItem() const;
+                        /**
+                         * Event type getter
+                         * @return the current event type
+                         */
                         Uint32 const& getType() const;
+                        /**
+                         * Event key scancode getter
+                         * @return the current event key scancode
+                         */
                         SDL_Scancode const& getKeyScancode() const;
+                        /**
+                         * Event key keycode getter
+                         * @return the current event key keycode
+                         */
                         SDL_Keycode const& getKeyKeycode() const;
+                        /**
+                         * Event mouse button getter
+                         * @return the current event mouse button
+                         */
                         Uint8 const& getMouseButton() const;
+                        /**
+                         * Event mouse click position
+                         * @return a point with the current event mouse click coordinate
+                         */
                         Maths::Point2D<unsigned short int> const getMouseClick() const;
+                        /**
+                         * Event mouse cursor position
+                         * @return a point with the current event mouse cursor coordinate
+                         */
                         Maths::Point2D<unsigned short int> const getMotion() const;
+                        /**
+                         * Event mouse relative movement getter
+                         * @return a size vector with the current event mouse relative movement
+                         */
                         Maths::Vector2D<NREfloat> const getMotionRel() const;
+                        /**
+                         * Event mouse's which value, tell which controller as occured the event
+                         * @return the controller code
+                         */
                         Uint32 const& getMouseWhich() const;
 
                     //## Setter ##//
