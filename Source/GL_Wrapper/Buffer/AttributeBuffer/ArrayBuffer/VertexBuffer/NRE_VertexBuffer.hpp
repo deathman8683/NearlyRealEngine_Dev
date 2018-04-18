@@ -30,22 +30,59 @@
 
                 public:
                     //## Constructor ##//
-                    VertexBuffer();
-                    VertexBuffer(bool const& generate);
+                        /**
+                         * Default Constructor
+                         */
+                        VertexBuffer();
+                        /**
+                         * Construct the buffer and generate or not his id
+                         * @param generate tell if the base class has to generate an id or not
+                         */
+                        VertexBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    VertexBuffer(VertexBuffer const& buf);
+                        /**
+                         * No copy allowed
+                         * @param buf the buffer to copy
+                         */
+                        VertexBuffer(VertexBuffer const& buf) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the buffer to move
+                         */
+                        VertexBuffer(VertexBuffer && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~VertexBuffer();
+                        /**
+                         * VertexBuffer Deconstructor
+                         */
+                        ~VertexBuffer();
 
                     //## Getter ##//
-                    GLint const getTypeSize() const;
-                    GLint const getSize() const;
-                    GLenum const getType() const;
-                    GLint const getIndex() const;
+                        /**
+                         * Return the attribute type size, used with derived class
+                         * @return the attribute type size
+                         */
+                        GLint const getTypeSize() const;
+                        /**
+                         * Return the attribute number of component, used with derived class
+                         * @return the attribute number of component
+                         */
+                        GLint const getSize() const;
+                        /**
+                         * Return the attribute type enum, used with derived class
+                         * @return the attribute type enum
+                         */
+                        GLenum const getType() const;
+                        /**
+                         * Return the attribute shader's index, used with derived class
+                         * @return the attribute shader's index
+                         */
+                        GLint const getIndex() const;
 
                     //## Setter ##//
 
@@ -54,6 +91,17 @@
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param buf the buffer to copy
+                         */
+                        VertexBuffer& operator=(VertexBuffer const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the buffer to move into this
+                         * @return the reference of himself
+                         */
+                        VertexBuffer& operator=(VertexBuffer && buf);
 
                     //## Shortcut Operator ##//
 

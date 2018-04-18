@@ -13,7 +13,7 @@
             VertexBuffer::VertexBuffer(bool const& generate) : ArrayBuffer::ArrayBuffer(generate) {
             }
 
-            VertexBuffer::VertexBuffer(VertexBuffer const& buf) : ArrayBuffer::ArrayBuffer(buf) {
+            VertexBuffer::VertexBuffer(VertexBuffer && buf) : ArrayBuffer::ArrayBuffer(std::move(buf)) {
             }
 
             VertexBuffer::~VertexBuffer() {
@@ -33,6 +33,11 @@
 
             GLint const VertexBuffer::getIndex() const {
                 return INDEX;
+            }
+
+            VertexBuffer& VertexBuffer::operator=(VertexBuffer && buf) {
+                ArrayBuffer::operator=(std::move(buf));
+                return *this;
             }
 
         };
