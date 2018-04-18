@@ -266,7 +266,7 @@
                         Vector2D<T> operator/(T const& k) const;
                         /**
                          * Compute the scalar product between this and u
-                         * @param u the second vector the for the scalar product
+                         * @param u the second vector for the scalar product
                          * @return the computed scalar product
                          */
                         NREfloat const operator|(Vector2D<T> const& u) const;
