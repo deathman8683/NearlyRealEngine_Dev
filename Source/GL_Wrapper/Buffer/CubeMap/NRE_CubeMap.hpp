@@ -47,6 +47,13 @@
                          */
                         CubeMap(CubeMap const& buf) = delete;
 
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the cubemap to move
+                         */
+                        CubeMap(CubeMap && buf);
+
                     //## Convertor ##//
 
                     //## Deconstructor ##//

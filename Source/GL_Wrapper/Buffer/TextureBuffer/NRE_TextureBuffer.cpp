@@ -13,7 +13,7 @@
                 }
             }
 
-            TextureBuffer::TextureBuffer(TextureBuffer const& buf) : Buffer::Buffer(buf) {
+            TextureBuffer::TextureBuffer(TextureBuffer && buf) : Buffer::Buffer(std::move(buf)) {
             }
 
             TextureBuffer::~TextureBuffer() {
@@ -62,6 +62,11 @@
 
             void TextureBuffer::access() const {
                 bind();
+            }
+
+            TextureBuffer& TextureBuffer::operator=(TextureBuffer && buf) {
+                Buffer::operator=(std::move(buf));
+                return *this;
             }
 
         };
