@@ -31,7 +31,7 @@
             template <class T>
             class Vector3D : public Vector2D<T> {
                 protected:
-                    T z;    /**< z coordinates */
+                    T z;    /**< z coordinate */
 
                 public:
                     //## Constructor ##//

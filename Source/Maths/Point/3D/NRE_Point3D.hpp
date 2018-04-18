@@ -30,7 +30,7 @@
             template <class T>
             class Point3D : public Point2D<T> {
                 protected:
-                    T z;    /**< z coordinates */
+                    T z;    /**< z coordinate */
 
                 public:
                     //## Constructor ##//

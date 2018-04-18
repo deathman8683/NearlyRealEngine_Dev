@@ -30,8 +30,8 @@
             template <class T>
             class Vector2D {
                 protected:
-                    T x;    /**< x coordinates */
-                    T y;    /**< y coordinates */
+                    T x;    /**< x coordinate */
+                    T y;    /**< y coordinate */
 
                 public:
                     //## Constructor ##//
