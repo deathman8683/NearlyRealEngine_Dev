@@ -40,7 +40,7 @@
                 glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
             }
 
-            SkyBox& SkyBox::operator=(CubeMap && buf) {
+            SkyBox& SkyBox::operator=(SkyBox && buf) {
                 CubeMap::operator=(std::move(buf));
                 BufferObject::operator=(std::move(buf));
                 return *this;

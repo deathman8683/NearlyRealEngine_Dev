@@ -17,7 +17,7 @@
                 allocate(true);
             }
 
-            Texture2D::Texture2D(Texture2D const& tex) : TextureBuffer::TextureBuffer(tex), BufferObject::BufferObject(tex), SDL::Surface::Surface(tex), type(tex.getType()) {
+            Texture2D::Texture2D(Texture2D && tex) : TextureBuffer::TextureBuffer(std::move(tex)), BufferObject::BufferObject(std::move(tex)), SDL::Surface::Surface(std::move(tex)), type(std::move(tex.getType())) {
             }
 
             Texture2D::~Texture2D() {
@@ -67,6 +67,14 @@
 
             void Texture2D::attach(GLenum const& attachment) const {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, getID(), 0);
+            }
+
+            Texture2D& Texture2D::operator=(Texture2D && tex) {
+                TextureBuffer::operator=(std::move(tex));
+                BufferObject::operator=(std::move(tex));
+                SDL::Surface::operator=(std::move(tex));
+                DepthBuffer::operator=(std::move(tex));
+                return *this;
             }
 
         };
