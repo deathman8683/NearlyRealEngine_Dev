@@ -13,7 +13,7 @@
             SkyBox::SkyBox() : CubeMap::CubeMap(true) {
             }
 
-            SkyBox::SkyBox(SkyBox const& sb) : CubeMap::CubeMap(sb), BufferObject::BufferObject(sb) {
+            SkyBox::SkyBox(SkyBox && sb) : CubeMap::CubeMap(std::move(sb)), BufferObject::BufferObject(std::move(sb)) {
             }
 
             SkyBox::~SkyBox() {
@@ -38,6 +38,12 @@
                 glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
                 glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
                 glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+            }
+
+            SkyBox& SkyBox::operator=(CubeMap && buf) {
+                CubeMap::operator=(std::move(buf));
+                BufferObject::operator=(std::move(buf));
+                return *this;
             }
 
         };

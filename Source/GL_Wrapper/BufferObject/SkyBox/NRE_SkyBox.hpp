@@ -31,29 +31,74 @@
 
                 public:
                     //## Constructor ##//
-                    SkyBox();
+                        /**
+                         * Default Constructor
+                         */
+                        SkyBox();
 
                     //## Copy-Constructor ##//
-                    SkyBox(SkyBox const& sb);
+                        /**
+                         * No copy allowed
+                         * @param buf the skyBox to copy
+                         */
+                        SkyBox(SkyBox const& buf) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the skyBox to move
+                         */
+                        SkyBox(SkyBox && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~SkyBox();
+                        /**
+                         * SkyBox Deconstructor
+                         */
+                        ~SkyBox();
 
                     //## Getter ##//
-                    GLenum const getType() const;
-                    GLenum const getTarget() const;
+                        /**
+                         * Return the skyBox type enum, used with derived class
+                         * @return the skyBox type enum
+                         */
+                        GLenum const getType() const;
+                        /**
+                         * Return the skyBox target, used with derived class
+                         * @return the skyBox target
+                         */
+                        GLenum const getTarget() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void allocate(GLsizei const& w, GLsizei const& h, bool const& callFilter);
-                    void applyFilter() const;
+                        /**
+                         * Allocate the skyBox cubemap with given parameter
+                         * @param w          skyBox's width
+                         * @param h          skyBox's height
+                         * @param callFilter tell if the function has to apply filter or not for the given binding
+                         */
+                        void allocate(GLsizei const& w, GLsizei const& h, bool const& callFilter);
+                        /**
+                         * SkyBox specific filter
+                         */
+                        void applyFilter() const;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param buf the skyBox to copy
+                         */
+                        SkyBox& operator=(SkyBox const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the skyBox to move into this
+                         * @return the reference of himself
+                         */
+                        SkyBox& operator=(SkyBox && buf);
 
                     //## Shortcut Operator ##//
 
@@ -66,7 +111,7 @@
                     //## Shift Operator ##//
 
                 private:
-                    static GLenum TYPE;
+                    static GLenum TYPE; /**< The SkyBox's type enum */
             };
 
         };

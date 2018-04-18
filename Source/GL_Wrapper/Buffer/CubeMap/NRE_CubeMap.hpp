@@ -64,8 +64,8 @@
 
                     //## Getter ##//
                         /**
-                         * Return the attribute type enum, used with derived class
-                         * @return the attribute type enum
+                         * Return the cubeMap type enum, used with derived class
+                         * @return the cubeMap type enum
                          */
                         virtual GLenum const getType() const = 0;
 
@@ -99,7 +99,7 @@
                          */
                         void allocate(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, bool const& callFilter) const;
                         /**
-                         * Update the 6 cubmap texture with given parameters
+                         * Update the 6 cubemap texture with given parameters
                          * @param level   the level of the texture used in mipmap
                          * @param xOffset the buffers xOffset for particular region update
                          * @param yOffset the buffers yOffset for particular region update
@@ -121,7 +121,7 @@
                          */
                         void allocateAndFill(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, std::vector<GLvoid*> const& data, bool const& callFilter) const;
                         /**
-                         * Cubmap specific filter
+                         * Cubemap specific filter
                          */
                         virtual void applyFilter() const = 0;
                         /**
