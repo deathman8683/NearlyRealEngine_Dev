@@ -7,4 +7,5 @@
 *.png
 *.hdr
 *.jpg
+docs/*
 !WallPaper.png

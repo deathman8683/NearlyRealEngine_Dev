@@ -28,33 +28,71 @@
              */
             class ExceptionHandler {
                 private:
-                    std::string log;
+                    std::string log;    /**< Exception's log */
 
                 public:
                     //## Constructor ##//
-                    ExceptionHandler() throw();
-                    ExceptionHandler(std::string const& log) throw();
+                        /**
+                         * Default Constructor
+                         */
+                        ExceptionHandler() throw();
+                        /**
+                         * Construct an exception with a custom log
+                         * @param log the exception's log
+                         */
+                        ExceptionHandler(std::string const& log) throw();
 
                     //## Copy-Constructor ##//
-                    ExceptionHandler(ExceptionHandler const& e) throw();
+                        /**
+                         * Copy e into this
+                         * @param e the exception to copy the content
+                         */
+                        ExceptionHandler(ExceptionHandler const& e) throw();
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move e into this, leaving e empty
+                         * @param e the exception to move
+                         */
+                        ExceptionHandler(ExceptionHandler && e) throw();
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~ExceptionHandler() throw();
+                        /**
+                         * ExceptionHandler Deconstructor
+                         */
+                        virtual ~ExceptionHandler() throw();
 
                     //## Getter ##//
-                    std::string const& getLog() const throw();
-
-                    //## Setter ##//
-                    void setLog(std::string const& log) throw();
+                        /**
+                         * Log getter
+                         * @return the exception's logs
+                         */
+                        std::string const& getLog() const throw();
 
                     //## Methods ##//
-                    virtual const char* what() const throw();
+                        /**
+                         * Inherited methods for exception
+                         * @return C-style string with the log
+                         */
+                        virtual const char* what() const throw();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of e into this
+                         * @param e the exception to copy into this
+                         * @return the reference of himself
+                         */
+                        ExceptionHandler& operator=(ExceptionHandler const& e);
+                        /**
+                         * Move assigment of e into this, leaving e empty
+                         * @param e the exception to move into this
+                         * @return the reference of himself
+                         */
+                        ExceptionHandler& operator=(ExceptionHandler && e);
 
                     //## Shortcut Operator ##//
 

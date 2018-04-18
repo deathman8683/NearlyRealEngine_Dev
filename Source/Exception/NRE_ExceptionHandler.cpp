@@ -13,6 +13,9 @@
             ExceptionHandler::ExceptionHandler(ExceptionHandler const& e) throw() : log(e.getLog()) {
             }
 
+            ExceptionHandler::ExceptionHandler(ExceptionHandler && e) throw() : log(std::move(e.getLog())) {
+            }
+
             ExceptionHandler::~ExceptionHandler() throw() {
             }
 
@@ -20,12 +23,18 @@
                 return log;
             }
 
-            void ExceptionHandler::setLog(std::string const& log) throw() {
-                this->log = log;
-            }
-
             const char* ExceptionHandler::what() const throw() {
                 return getLog().c_str();
+            }
+
+            ExceptionHandler& ExceptionHandler::operator=(ExceptionHandler const& e) {
+                log = e.getLog();
+                return *this;
+            }
+
+            ExceptionHandler& ExceptionHandler::operator=(ExceptionHandler && e) {
+                log = std::move(e.getLog());
+                return *this;
             }
 
         };
