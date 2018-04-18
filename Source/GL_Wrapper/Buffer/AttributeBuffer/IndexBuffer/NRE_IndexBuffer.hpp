@@ -30,30 +30,77 @@
 
                 public:
                     //## Constructor ##//
-                    IndexBuffer();
-                    IndexBuffer(bool const& generate);
+                        /**
+                         * Default Constructor
+                         */
+                        IndexBuffer();
+                        /**
+                         * Construct the buffer and generate or not his id
+                         * @param generate tell if the base class has to generate an id or not
+                         */
+                        IndexBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
-                    IndexBuffer(IndexBuffer const& buf);
+                        /**
+                         * No copy allowed
+                         * @param buf the buffer to copy
+                         */
+                        IndexBuffer(IndexBuffer const& buf) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the buffer to move
+                         */
+                        IndexBuffer(IndexBuffer && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~IndexBuffer();
+                        /**
+                         * IndexBuffer Deconstructor
+                         */
+                        ~IndexBuffer();
 
                     //## Getter ##//
-                    GLint const getTypeSize() const;
-                    GLenum const getType() const;
-                    GLenum const getTarget() const;
+                        /**
+                         * Return the attribute type size, used with derived class
+                         * @return the attribute type size
+                         */
+                        GLint const getTypeSize() const;
+                        /**
+                         * Return the attribute type enum, used with derived class
+                         * @return the attribute type enum
+                         */
+                        GLenum const getType() const;
+                        /**
+                         * Return the attribute buffer target, used with derived class
+                         * @return the attribute buffer target
+                         */
+                        GLenum const getTarget() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void access() const;
+                        /**
+                         * Store calls for VAO managing
+                         */
+                        void access() const;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param buf the buffer to copy
+                         */
+                        IndexBuffer& operator=(IndexBuffer const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the buffer to move into this
+                         * @return the reference of himself
+                         */
+                        IndexBuffer& operator=(IndexBuffer && buf);
 
                     //## Shortcut Operator ##//
 

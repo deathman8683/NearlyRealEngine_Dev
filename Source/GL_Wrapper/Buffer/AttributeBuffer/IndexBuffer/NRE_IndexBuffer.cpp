@@ -13,7 +13,7 @@
             IndexBuffer::IndexBuffer(bool const& generate) : AttributeBuffer::AttributeBuffer(generate) {
             }
 
-            IndexBuffer::IndexBuffer(IndexBuffer const& buf) : AttributeBuffer::AttributeBuffer(buf) {
+            IndexBuffer::IndexBuffer(IndexBuffer && buf) : AttributeBuffer::AttributeBuffer(std::move(buf)) {
             }
 
             IndexBuffer::~IndexBuffer() {
@@ -33,6 +33,11 @@
 
             void IndexBuffer::access() const {
                 bind();
+            }
+
+            IndexBuffer& IndexBuffer::operator=(IndexBuffer && buf) {
+                AttributeBuffer::operator=(std::move(buf));
+                return *this;
             }
 
         };

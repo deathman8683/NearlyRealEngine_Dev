@@ -35,7 +35,7 @@
                          */
                         AttributeBuffer();
                         /**
-                         * Construct an attribute buffer and generate or not his id
+                         * Construct the buffer and generate or not his id
                          * @param generate tell if the base class has to generate an id or not
                          */
                         AttributeBuffer(bool const& generate);
@@ -47,7 +47,7 @@
                          */
                         AttributeBuffer(AttributeBuffer const& buf) = delete;
 
-                    //## Copy-Constructor ##//
+                    //## Move-Constructor ##//
                         /**
                          * Move buf into this, leaving buf empty
                          * @param buf the buffer to move
