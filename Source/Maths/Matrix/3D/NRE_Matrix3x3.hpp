@@ -49,7 +49,8 @@
                          * @param e fifth matrix component
                          * @param f sixth matrix component
                          * @param g seventh matrix component
-                         * @param i eigth matrix component
+                         * @param h eigth matrix component
+                         * @param i nineth matrix component
                          */
                         Matrix3x3(T const& a, T const& b, T const& c,
                                   T const& d, T const& e, T const& f,
