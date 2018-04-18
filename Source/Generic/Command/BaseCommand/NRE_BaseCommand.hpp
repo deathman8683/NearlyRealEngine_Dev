@@ -23,21 +23,30 @@
 
             public:
                 //## Constructor ##//
-                BaseCommand();
+                    /**
+                     * Default Constructor
+                     */
+                    BaseCommand();
 
                 //## Copy-Constructor ##//
 
                 //## Convertor ##//
 
                 //## Deconstructor ##//
-                virtual ~BaseCommand();
+                    /**
+                     * BaseCommand Deconstructor
+                     */
+                    virtual ~BaseCommand();
 
                 //## Getter ##//
 
                 //## Setter ##//
 
                 //## Methods ##//
-                virtual void execute() = 0;
+                    /**
+                     * Execute the stored methods from the targeted object
+                     */
+                    virtual void execute() = 0;
 
                 //## Access Operator ##//
 
