@@ -14,7 +14,7 @@
                 }
             }
 
-            RenderBuffer::RenderBuffer(RenderBuffer const& buf) : Buffer::Buffer(buf) {
+            RenderBuffer::RenderBuffer(RenderBuffer && buf) : Buffer::Buffer(std::move(buf)) {
             }
 
             RenderBuffer::~RenderBuffer() {
@@ -49,6 +49,11 @@
 
             void RenderBuffer::attach(GLenum const& attachment) const {
                 glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, GL_RENDERBUFFER, getID());
+            }
+
+            RenderBuffer& RenderBuffer::operator=(RenderBuffer && buf) {
+                Buffer::operator=(std::move(buf));
+                return *this;
             }
 
         };

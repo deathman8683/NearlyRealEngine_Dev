@@ -35,15 +35,15 @@
                          */
                         FrameBuffer();
                         /**
-                         * No copy allowed
-                         * @param buf the buffer to copy
+                         * Construct the buffer and generate or not his id
+                         * @param generate tell if the base class has to generate an id or not
                          */
                         FrameBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
                         /**
-                         * Move buf into this, leaving buf empty
-                         * @param buf the buffer to move
+                         * No copy allowed
+                         * @param buf the buffer to copy
                          */
                         FrameBuffer(FrameBuffer const& buf) = delete;
 
