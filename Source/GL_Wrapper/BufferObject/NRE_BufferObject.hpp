@@ -27,31 +27,67 @@
              */
             class BufferObject {
                 private:
-                    bool allocated;
+                    bool allocated; /**< The object allocation state */
 
                 public:
                     //## Constructor ##//
-                    BufferObject();
+                        /**
+                         * Default Constructor
+                         */
+                        BufferObject();
 
                     //## Copy-Constructor ##//
-                    BufferObject(BufferObject const& buf);
+                        /**
+                         * No copy allowed
+                         * @param buf the object to copy
+                         */
+                        BufferObject(BufferObject const& buf) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move buf into this, leaving buf empty
+                         * @param buf the object to move
+                         */
+                        BufferObject(BufferObject && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~BufferObject();
+                        /**
+                         * BufferObject Deconstructor
+                         */
+                        virtual ~BufferObject();
 
                     //## Getter ##//
-                    bool const& isAllocated() const;
+                        /**
+                         * Return the allocation's state of this
+                         * @return the allocation state
+                         */
+                        bool const& isAllocated() const;
 
                     //## Setter ##//
-                    void setAllocated(bool const& state);
+                        /**
+                         * Allocate setter
+                         * @param state the new allocation state
+                         */
+                        void setAllocated(bool const& state);
 
                     //## Methods ##//
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param buf the object to copy
+                         */
+                        BufferObject& operator=(BufferObject const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the object to move into this
+                         * @return the reference of himself
+                         */
+                        BufferObject& operator=(BufferObject && buf);
 
                     //## Shortcut Operator ##//
 

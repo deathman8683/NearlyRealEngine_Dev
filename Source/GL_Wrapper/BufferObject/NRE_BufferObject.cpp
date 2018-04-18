@@ -7,7 +7,7 @@
             BufferObject::BufferObject() : allocated(false) {
             }
 
-            BufferObject::BufferObject(BufferObject const& buf) : allocated(buf.isAllocated()) {
+            BufferObject::BufferObject(BufferObject && buf) : allocated(std::move(buf.isAllocated())) {
             }
 
             BufferObject::~BufferObject() {
@@ -19,6 +19,11 @@
 
             void BufferObject::setAllocated(bool const& state) {
                 allocated = state;
+            }
+
+            BufferObject& BufferObject::operator=(BufferObject && buf) {
+                allocated = std::move(buf.isAllocated());
+                return *this;
             }
 
         };
