@@ -15,7 +15,7 @@
             ColorBuffer::ColorBuffer(bool const& generate) : ArrayBuffer::ArrayBuffer(generate) {
             }
 
-            ColorBuffer::ColorBuffer(ColorBuffer const& buf) : ArrayBuffer::ArrayBuffer(buf) {
+            ColorBuffer::ColorBuffer(ColorBuffer && buf) : ArrayBuffer::ArrayBuffer(std::move(buf)) {
             }
 
             ColorBuffer::~ColorBuffer() {
@@ -35,6 +35,11 @@
 
             GLint const ColorBuffer::getIndex() const {
                 return INDEX;
+            }
+
+            ColorBuffer& ColorBuffer::operator=(ColorBuffer && buf) {
+                ArrayBuffer::operator=(std::move(buf));
+                return *this;
             }
 
         };
