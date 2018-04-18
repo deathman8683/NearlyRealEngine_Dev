@@ -10,7 +10,7 @@
             ArrayBuffer::ArrayBuffer(bool const& generate) : AttributeBuffer::AttributeBuffer(generate) {
             }
 
-            ArrayBuffer::ArrayBuffer(ArrayBuffer const& buf) : AttributeBuffer::AttributeBuffer(buf) {
+            ArrayBuffer::ArrayBuffer(ArrayBuffer && buf) : AttributeBuffer::AttributeBuffer(std::move(buf)) {
             }
 
             ArrayBuffer::~ArrayBuffer() {
@@ -26,6 +26,11 @@
                     if (enableVAA) {
                         glEnableVertexAttribArray(index);
                     }
+            }
+
+            ArrayBuffer& ArrayBuffer::operator=(ArrayBuffer && buf) {
+                AttributeBuffer::operator=(std::move(buf));
+                return *this;
             }
 
         };
