@@ -40,7 +40,6 @@
                     SSAO();
 
                     //## Copy-Constructor ##//
-                    SSAO(SSAO const& ao);
 
                     //## Convertor ##//
 
@@ -53,7 +52,6 @@
 
                     //## Setter ##//
                     void setKernel(Maths::Vector3D<NREfloat>* const& kern);
-                    void setNoise(GL::Texture2D* const& tex);
 
                     //## Methods ##//
                     void generateKernel();

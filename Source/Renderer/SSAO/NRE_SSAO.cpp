@@ -14,9 +14,6 @@
                generateNoise();
             }
 
-            SSAO::SSAO(SSAO const& ao) : kernel(ao.getKernel()), noise(ao.getNoise()) {
-            }
-
             SSAO::~SSAO() {
                 delete[] kernel;
             }
@@ -31,10 +28,6 @@
 
             void SSAO::setKernel(Maths::Vector3D<NREfloat>* const& kern) {
                 kernel = kern;
-            }
-
-            void SSAO::setNoise(GL::Texture2D* const& tex) {
-                noise = tex;
             }
 
             void SSAO::generateKernel() {

@@ -58,7 +58,6 @@
                     Chunk(Maths::Point2D<GLint> const& coord, GLint const& loD, bool const& generateID);
 
                     //## Copy-Constructor ##//
-                    Chunk(Chunk const& c);
 
                     //## Convertor ##//
 
@@ -89,8 +88,6 @@
                     void setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel const& vox);
                     void setVoxel(GLuint const& index, Voxel const& vox);
                     void setCoord(Maths::Point2D<GLint> const& p);
-                    void setBuffer(GL::IBO const& buffer);
-                    void setVAO(GL::VAO const& vao);
                     void setBounding(Physics::AABB<GLint> const& box);
                     void setLoD(GLint const& value);
                     void setMaxSolidHeight(GLuint const& height);

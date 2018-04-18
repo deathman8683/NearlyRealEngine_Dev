@@ -25,15 +25,6 @@
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk const& c) : voxel(0), buffer(true), vao(true), bounding(c.getBounding()), loD(c.getLoD()), maxSolidHeight(c.getMaxSolidHeight()),
-                                           active(c.isActive()), loaded(c.isLoaded()), constructed(c.isConstructed()), loading(c.isLoading()), constructing(c.isConstructing()), modified(c.isModfied()) {
-                voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
-                memcpy(voxel, c.getVoxels(), sizeof(Voxel));
-                buffer.push_back(new GL::MaterialBuffer(true));
-                buffer.push_back(new GL::NormalBuffer(true));
-                vao.access(getBuffer(), GL_INT);
-            }
-
             Chunk::~Chunk() {
                 delete[] voxel;
             }
@@ -120,14 +111,6 @@
 
             void Chunk::setCoord(Maths::Point2D<GLint> const& p) {
                 coord = p;
-            }
-
-            void Chunk::setBuffer(GL::IBO const& buffer) {
-                this->buffer = buffer;
-            }
-
-            void Chunk::setVAO(GL::VAO const& vao) {
-                this->vao = vao;
             }
 
             void Chunk::setBounding(Physics::AABB<GLint> const& box) {

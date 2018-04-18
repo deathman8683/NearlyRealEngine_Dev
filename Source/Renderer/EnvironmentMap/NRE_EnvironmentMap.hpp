@@ -41,39 +41,32 @@
 
                 public:
                     //## Constructor ##//
-                    EnvironmentMap();
-                    EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
+                        EnvironmentMap();
+                        EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
 
                     //## Copy-Constructor ##//
-                    EnvironmentMap(EnvironmentMap const& map);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~EnvironmentMap();
+                        ~EnvironmentMap();
 
                     //## Getter ##//
-                    GL::SkyBox const& getMap() const;
-                    GL::SkyBox const& getIrradianceMap() const;
-                    GL::SkyBox const& getPrefilterMap() const;
-                    GL::Texture2D const& getBRDFLUT() const;
-                    GL::IBO const& getBuffer() const;
-                    GL::VAO const& getVAO() const;
+                        GL::SkyBox const& getMap() const;
+                        GL::SkyBox const& getIrradianceMap() const;
+                        GL::SkyBox const& getPrefilterMap() const;
+                        GL::Texture2D const& getBRDFLUT() const;
+                        GL::IBO const& getBuffer() const;
+                        GL::VAO const& getVAO() const;
 
                     //## Setter ##//
-                    void setMap(GL::SkyBox const& map);
-                    void setIrradianceMap(GL::SkyBox const& map);
-                    void setPrefilterMap(GL::SkyBox const& map);
-                    void setBRDFLUT(GL::Texture2D const& tex);
-                    void setBuffer(GL::IBO const& buf);
-                    void setVAO(GL::VAO const& vao);
 
                     //## Methods ##//
-                    void allocate();
-                    void fillBuffer();
-                    void capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
-                    void render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
-                    void renderQuad();
+                        void allocate();
+                        void fillBuffer();
+                        void capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
+                        void render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
+                        void renderQuad();
 
                     //## Access Operator ##//
 

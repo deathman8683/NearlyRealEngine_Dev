@@ -26,9 +26,6 @@
                 fillBuffer();
             }
 
-            DeferredRenderer::DeferredRenderer(DeferredRenderer const& renderer) : gBuffer(renderer.getFrameBuffer()), ssao(renderer.getSSAO()), buffer(renderer.getBuffer()), vao(renderer.getVAO()) {
-            }
-
             DeferredRenderer::~DeferredRenderer() {
             }
 
@@ -46,22 +43,6 @@
 
             GL::VAO const& DeferredRenderer::getVAO() const {
                 return vao;
-            }
-
-            void DeferredRenderer::setFrameBuffer(GL::FBO const& buffer) {
-                gBuffer = buffer;
-            }
-
-            void DeferredRenderer::setSSAO(SSAO const& ssao) {
-                this->ssao = ssao;
-            }
-
-            void DeferredRenderer::setBuffer(GL::VBO const& buffer) {
-                this->buffer = buffer;
-            }
-
-            void DeferredRenderer::setVAO(GL::VAO const& vao) {
-                this->vao = vao;
             }
 
             void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, EnvironmentMap const& skyBox) {

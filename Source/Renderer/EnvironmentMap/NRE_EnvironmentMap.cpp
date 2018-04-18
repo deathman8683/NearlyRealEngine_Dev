@@ -17,10 +17,6 @@
                 capture(path, captureShader, irradianceShader, prefilterShader, BRDFShader);
             }
 
-            EnvironmentMap::EnvironmentMap(EnvironmentMap const& map) : map(map.getMap()), irradianceMap(map.getIrradianceMap()), prefilterMap(map.getPrefilterMap()), brdfLUT(map.getBRDFLUT()), buffer(true), vao(true) {
-                fillBuffer();
-            }
-
             EnvironmentMap::~EnvironmentMap() {
             }
 
@@ -46,30 +42,6 @@
 
             GL::VAO const& EnvironmentMap::getVAO() const {
                 return vao;
-            }
-
-            void EnvironmentMap::setMap(GL::SkyBox const& map) {
-                this->map = map;
-            }
-
-            void EnvironmentMap::setIrradianceMap(GL::SkyBox const& map) {
-                irradianceMap = map;
-            }
-
-            void EnvironmentMap::setPrefilterMap(GL::SkyBox const& map) {
-                prefilterMap = map;
-            }
-
-            void EnvironmentMap::setBRDFLUT(GL::Texture2D const& tex) {
-                brdfLUT = tex;
-            }
-
-            void EnvironmentMap::setBuffer(GL::IBO const& buf) {
-                buffer = buf;
-            }
-
-            void EnvironmentMap::setVAO(GL::VAO const& vao) {
-                this->vao = vao;
             }
 
             void EnvironmentMap::allocate() {
