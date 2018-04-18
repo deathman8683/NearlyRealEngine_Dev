@@ -138,7 +138,7 @@
                          * @param  p the point to measure the distance with this
                          * @return the computed distance
                          */
-                        NREfloat const distance(Point3D<T> const& p = Point3D()) const
+                        NREfloat const distance(Point3D<T> const& p = Point3D()) const;
                         /**
                          * Compute the squared distance between this and p, if p is not specified the distance is computed with the origin
                          * @param  p the point to measure the square distance with this

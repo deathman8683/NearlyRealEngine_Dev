@@ -18,6 +18,7 @@
     #include <iostream>
     #include <string>
     #include <vector>
+    #include <memory>
     #include <GL/glew.h>
     #include <SDL2/SDL.h>
     #include <SDL2/SDL_image.h>

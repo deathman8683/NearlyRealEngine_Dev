@@ -115,29 +115,29 @@
                 nc = getEye() + getForward() * getDist().getX();
                 fc = getEye() + getForward() * getDist().getY();
 
-                plane[Maths::NEAR].setNormalAndPoint(getForward(), nc);
-                plane[Maths::FAR].setNormalAndPoint(-getForward(), fc);
+                planes[Maths::NEAR].setNormalAndPoint(getForward(), nc);
+                planes[Maths::FAR].setNormalAndPoint(-getForward(), fc);
 
 
                 a = (nc + getUp() * getNear().getY()) - getEye();
                 a.normalize();
                 normal = a ^ getLeft();
-                plane[Maths::TOP].setNormalAndPoint(normal, nc + getUp() * getNear().getY());
+                planes[Maths::TOP].setNormalAndPoint(normal, nc + getUp() * getNear().getY());
 
                 a = (nc - getUp() * getNear().getY()) - getEye();
                 a.normalize();
                 normal = getLeft() ^ a;
-                plane[Maths::BOTTOM].setNormalAndPoint(normal, nc - getUp() * getNear().getY());
+                planes[Maths::BOTTOM].setNormalAndPoint(normal, nc - getUp() * getNear().getY());
 
                 a = (nc - getLeft() * getNear().getX()) - getEye();
                 a.normalize();
                 normal = a ^ getUp();
-                plane[Maths::LEFT].setNormalAndPoint(normal, nc - getLeft() * getNear().getX());
+                planes[Maths::LEFT].setNormalAndPoint(normal, nc - getLeft() * getNear().getX());
 
                 a = (nc + getLeft() * getNear().getX()) - getEye();
                 a.normalize();
                 normal = getUp() ^ a;
-                plane[Maths::RIGHT].setNormalAndPoint(normal, nc + getLeft() * getNear().getX());
+                planes[Maths::RIGHT].setNormalAndPoint(normal, nc + getLeft() * getNear().getX());
             }
 
             size_t FixedCamera::getVertices(GLfloat* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf) {
@@ -166,20 +166,20 @@
                 vBuf[18] = fbr.getX(); vBuf[19] = fbr.getY(); vBuf[20] = fbr.getZ();
                 vBuf[21] = ftr.getX(); vBuf[22] = ftr.getY(); vBuf[23] = ftr.getZ();
 
-                vBuf[24] = plane[Maths::TOP].getPoint().getX(); vBuf[25] = plane[Maths::TOP].getPoint().getY(); vBuf[26] = plane[Maths::TOP].getPoint().getZ();
-                vBuf[27] = plane[Maths::TOP].getPoint().getX() + plane[Maths::TOP].getNormal().getX() * 10; vBuf[28] = plane[Maths::TOP].getPoint().getY() + plane[Maths::TOP].getNormal().getY() * 10; vBuf[29] = plane[Maths::TOP].getPoint().getZ() + plane[Maths::TOP].getNormal().getZ() * 10;
-                vBuf[30] = plane[Maths::BOTTOM].getPoint().getX(); vBuf[31] = plane[Maths::BOTTOM].getPoint().getY(); vBuf[32] = plane[Maths::BOTTOM].getPoint().getZ();
-                vBuf[33] = plane[Maths::BOTTOM].getPoint().getX() + plane[Maths::BOTTOM].getNormal().getX() * 10; vBuf[34] = plane[Maths::BOTTOM].getPoint().getY() + plane[Maths::BOTTOM].getNormal().getY() * 10; vBuf[35] = plane[Maths::BOTTOM].getPoint().getZ() + plane[Maths::BOTTOM].getNormal().getZ() * 10;
+                vBuf[24] = planes[Maths::TOP].getPoint().getX(); vBuf[25] = planes[Maths::TOP].getPoint().getY(); vBuf[26] = planes[Maths::TOP].getPoint().getZ();
+                vBuf[27] = planes[Maths::TOP].getPoint().getX() + planes[Maths::TOP].getNormal().getX() * 10; vBuf[28] = planes[Maths::TOP].getPoint().getY() + planes[Maths::TOP].getNormal().getY() * 10; vBuf[29] = planes[Maths::TOP].getPoint().getZ() + planes[Maths::TOP].getNormal().getZ() * 10;
+                vBuf[30] = planes[Maths::BOTTOM].getPoint().getX(); vBuf[31] = planes[Maths::BOTTOM].getPoint().getY(); vBuf[32] = planes[Maths::BOTTOM].getPoint().getZ();
+                vBuf[33] = planes[Maths::BOTTOM].getPoint().getX() + planes[Maths::BOTTOM].getNormal().getX() * 10; vBuf[34] = planes[Maths::BOTTOM].getPoint().getY() + planes[Maths::BOTTOM].getNormal().getY() * 10; vBuf[35] = planes[Maths::BOTTOM].getPoint().getZ() + planes[Maths::BOTTOM].getNormal().getZ() * 10;
 
-                vBuf[36] = plane[Maths::NEAR].getPoint().getX(); vBuf[37] = plane[Maths::NEAR].getPoint().getY(); vBuf[38] = plane[Maths::NEAR].getPoint().getZ();
-                vBuf[39] = plane[Maths::NEAR].getPoint().getX() + plane[Maths::NEAR].getNormal().getX() * 10; vBuf[40] = plane[Maths::NEAR].getPoint().getY() + plane[Maths::NEAR].getNormal().getY() * 10; vBuf[41] = plane[Maths::NEAR].getPoint().getZ() + plane[Maths::NEAR].getNormal().getZ() * 10;
-                vBuf[42] = plane[Maths::FAR].getPoint().getX(); vBuf[43] = plane[Maths::FAR].getPoint().getY(); vBuf[44] = plane[Maths::FAR].getPoint().getZ();
-                vBuf[45] = plane[Maths::FAR].getPoint().getX() + plane[Maths::FAR].getNormal().getX() * 10; vBuf[46] = plane[Maths::FAR].getPoint().getY() + plane[Maths::FAR].getNormal().getY() * 10; vBuf[47] = plane[Maths::FAR].getPoint().getZ() + plane[Maths::FAR].getNormal().getZ() * 10;
+                vBuf[36] = planes[Maths::NEAR].getPoint().getX(); vBuf[37] = planes[Maths::NEAR].getPoint().getY(); vBuf[38] = planes[Maths::NEAR].getPoint().getZ();
+                vBuf[39] = planes[Maths::NEAR].getPoint().getX() + planes[Maths::NEAR].getNormal().getX() * 10; vBuf[40] = planes[Maths::NEAR].getPoint().getY() + planes[Maths::NEAR].getNormal().getY() * 10; vBuf[41] = planes[Maths::NEAR].getPoint().getZ() + planes[Maths::NEAR].getNormal().getZ() * 10;
+                vBuf[42] = planes[Maths::FAR].getPoint().getX(); vBuf[43] = planes[Maths::FAR].getPoint().getY(); vBuf[44] = planes[Maths::FAR].getPoint().getZ();
+                vBuf[45] = planes[Maths::FAR].getPoint().getX() + planes[Maths::FAR].getNormal().getX() * 10; vBuf[46] = planes[Maths::FAR].getPoint().getY() + planes[Maths::FAR].getNormal().getY() * 10; vBuf[47] = planes[Maths::FAR].getPoint().getZ() + planes[Maths::FAR].getNormal().getZ() * 10;
 
-                vBuf[48] = plane[Maths::LEFT].getPoint().getX(); vBuf[49] = plane[Maths::LEFT].getPoint().getY(); vBuf[50] = plane[Maths::LEFT].getPoint().getZ();
-                vBuf[51] = plane[Maths::LEFT].getPoint().getX() + plane[Maths::LEFT].getNormal().getX() * 10; vBuf[52] = plane[Maths::LEFT].getPoint().getY() + plane[Maths::LEFT].getNormal().getY() * 10; vBuf[53] = plane[Maths::LEFT].getPoint().getZ() + plane[Maths::LEFT].getNormal().getZ() * 10;
-                vBuf[54] = plane[Maths::RIGHT].getPoint().getX(); vBuf[55] = plane[Maths::RIGHT].getPoint().getY(); vBuf[56] = plane[Maths::RIGHT].getPoint().getZ();
-                vBuf[57] = plane[Maths::RIGHT].getPoint().getX() + plane[Maths::RIGHT].getNormal().getX() * 10; vBuf[58] = plane[Maths::RIGHT].getPoint().getY() + plane[Maths::RIGHT].getNormal().getY() * 10; vBuf[59] = plane[Maths::RIGHT].getPoint().getZ() + plane[Maths::RIGHT].getNormal().getZ() * 10;
+                vBuf[48] = planes[Maths::LEFT].getPoint().getX(); vBuf[49] = planes[Maths::LEFT].getPoint().getY(); vBuf[50] = planes[Maths::LEFT].getPoint().getZ();
+                vBuf[51] = planes[Maths::LEFT].getPoint().getX() + planes[Maths::LEFT].getNormal().getX() * 10; vBuf[52] = planes[Maths::LEFT].getPoint().getY() + planes[Maths::LEFT].getNormal().getY() * 10; vBuf[53] = planes[Maths::LEFT].getPoint().getZ() + planes[Maths::LEFT].getNormal().getZ() * 10;
+                vBuf[54] = planes[Maths::RIGHT].getPoint().getX(); vBuf[55] = planes[Maths::RIGHT].getPoint().getY(); vBuf[56] = planes[Maths::RIGHT].getPoint().getZ();
+                vBuf[57] = planes[Maths::RIGHT].getPoint().getX() + planes[Maths::RIGHT].getNormal().getX() * 10; vBuf[58] = planes[Maths::RIGHT].getPoint().getY() + planes[Maths::RIGHT].getNormal().getY() * 10; vBuf[59] = planes[Maths::RIGHT].getPoint().getZ() + planes[Maths::RIGHT].getNormal().getZ() * 10;
 
                 cBuf = new GLfloat[60];
                     for (int i = 0; i < 24; i = i + 3) {

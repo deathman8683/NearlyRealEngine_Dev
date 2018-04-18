@@ -3,38 +3,37 @@
         namespace Maths {
 
             template <class T>
-            Frustum<T>::Frustum() : Frustum(DEFAULT_FOV, DEFAULT_RATIO, Vector2D<T>(0, 0)) {
+            Frustum<T>::Frustum() : Frustum(DEFAULT_FOV, DEFAULT_RATIO, Vector2D<T>()) {
             }
 
             template <class T>
-            template <class K, class L, class M>
-            Frustum<T>::Frustum(K const& fov, L const& ratio, Vector2D<M> const& dist) : plane(0), dist(dist), fov(fov), ratio(ratio) {
-                plane = new Plane<T>[FACE_NUM];
+            Frustum<T>::Frustum(T const& fov, T const& ratio, Vector2D<T> const& dist) : planes(new Plane<T>[FACE_NUM]), dist(dist), fov(fov), ratio(ratio) {
                 computeNearAndFar();
             }
 
             template <class T>
-            Frustum<T>::Frustum(Frustum const& f) : plane(f.getPlanes()), near(f.getNear()), far(f.getFar()), dist(f.getDist()), fov(f.getFov()), ratio(f.getRatio()) {
+            Frustum<T>::Frustum(Frustum const& f) : planes(new Plane<T>[FACE_NUM]), near(f.getNear()), far(f.getFar()), dist(f.getDist()), fov(f.getFov()), ratio(f.getRatio()) {
+                for (GLuint i = 0; i < FACE_NUM; i = i + 1) {
+                    planes[i] = f.getPlane(i);
+                }
+            }
+
+            template <class T>
+            Frustum<T>::Frustum(Frustum && f) : planes(std::move(f.planes)), near(std::move(f.getNear())), far(std::move(f.getFar())), dist(std::move(f.getDist())), fov(std::move(f.getFov())), ratio(std::move(f.getRatio())) {
             }
 
             template <class T>
             template <class K>
-            Frustum<T>::Frustum(Frustum<K> const& f) : plane(f.getPlanes()), near(f.getNear()), far(f.getFar()), dist(f.getDist()), fov(f.getFov()), ratio(f.getRatio()) {
+            Frustum<T>::Frustum(Frustum<K> const& f) : planes(f.getPlanes()), near(f.getNear()), far(f.getFar()), dist(f.getDist()), fov(f.getFov()), ratio(f.getRatio()) {
             }
 
             template <class T>
             Frustum<T>::~Frustum() {
-                delete[] plane;
-            }
-
-            template <class T>
-            Plane<T>* const& Frustum<T>::getPlanes() const {
-                return plane;
             }
 
             template <class T>
             Plane<T> const& Frustum<T>::getPlane(unsigned int const& index) const {
-                return plane[index];
+                return planes[index];
             }
 
             template <class T>
@@ -62,59 +61,18 @@
             }
 
             template <class T>
-            void Frustum<T>::setPlanes(Plane<T>* const& p) {
-                plane = p;
-            }
-
-            template <class T>
-            template <class K>
-            void Frustum<T>::setPlane(Plane<K> const& p, unsigned int const& index) {
-                plane[index] = p;
-            }
-
-            template <class T>
-            template <class K>
-            void Frustum<T>::setNear(Vector2D<K> const& size) {
-                near = size;
-            }
-
-            template <class T>
-            template <class K>
-            void Frustum<T>::setFar(Vector2D<K> const& size) {
-                far = size;
-            }
-
-            template <class T>
-            template <class K>
-            void Frustum<T>::setDist(Vector2D<K> const& size) {
-                dist = size;
-            }
-            template <class T>
-            template <class K>
-            void Frustum<T>::setFov(K const& f) {
-                fov = f;
-            }
-
-            template <class T>
-            template <class K>
-            void Frustum<T>::setRatio(K const& r) {
-                ratio = r;
-            }
-
-            template <class T>
             void Frustum<T>::computeNearAndFar() {
                 T tang = std::tan(toRad(getFov()) * 0.5);
 
-                setNear(Vector2D<T>(0, tang * getDist().getX()));
-                setNear(Vector2D<T>(getNear().getY() * getRatio(), getNear().getY()));
-                setFar(Vector2D<T>(0, tang * getDist().getY()));
-                setFar(Vector2D<T>(getFar().getY() * getRatio(), getFar().getY()));
+                near = Vector2D<T>(0, tang * getDist().getX());
+                near = Vector2D<T>(getNear().getY() * getRatio(), getNear().getY());
+                far = Vector2D<T>(0, tang * getDist().getY());
+                far = Vector2D<T>(getFar().getY() * getRatio(), getFar().getY());
 
             }
 
             template <class T>
-            template <class K>
-            Physics::CollisionResult const Frustum<T>::pointCollision(Point3D<K> const& p) const {
+            Physics::CollisionResult const Frustum<T>::pointCollision(Point3D<T> const& p) const {
                 for (GLuint i = 0; i < FACE_NUM; i = i + 1) {
                     if (getPlane(i).distance(p) < 0) {
                         return Physics::OUTSIDE;
@@ -124,8 +82,7 @@
             }
 
             template <class T>
-            template <class K, class L>
-            Physics::CollisionResult const Frustum<T>::sphereCollision(Point3D<K> const& p, L const& radius) const {
+            Physics::CollisionResult const Frustum<T>::sphereCollision(Point3D<T> const& p, T const& radius) const {
                 T distance;
                 Physics::CollisionResult result = Physics::INSIDE;
 
@@ -141,8 +98,7 @@
             }
 
             template <class T>
-            template <class K>
-            Physics::CollisionResult const Frustum<T>::AABBCollision(Physics::AABB<K> const& box) const {
+            Physics::CollisionResult const Frustum<T>::AABBCollision(Physics::AABB<T> const& box) const {
                 Physics::CollisionResult result = Physics::INSIDE;
 
                 for (GLuint i = 0; i < FACE_NUM; i = i + 1) {
@@ -157,9 +113,30 @@
             }
 
             template <class T>
-            template <class K>
-            void Frustum<T>::computeProjectionMatrix(Matrix4x4<K> &m) {
+            void Frustum<T>::computeProjectionMatrix(Matrix4x4<T> &m) {
                 m.projection(getFov(), getRatio(), getDist().getX(), getDist().getY());
+            }
+
+            template <class T>
+            Frustum<T>& Frustum<T>::operator=(Frustum<T> const& f) {
+                for (GLuint i = 0; i < FACE_NUM; i = i + 1) {
+                    planes[i] = f.getPlane(i);
+                }
+                near = f.getNear();
+                far = f.getFar();
+                dist = f.getDist();
+                fov = f.getFov();
+                ratio = f.getRatio();
+            }
+
+            template <class T>
+            Frustum<T>& Frustum<T>::operator=(Frustum<T> && f) {
+                planes = std::move(f.planes);
+                near = std::move(f.getNear());
+                far = std::move(f.getFar());
+                dist = std::move(f.getDist());
+                fov = std::move(f.getFov());
+                ratio = std::move(f.getRatio());
             }
 
         };

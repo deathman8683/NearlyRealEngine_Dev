@@ -23,15 +23,18 @@
          */
         namespace Maths {
 
+            /**
+             * @enum regroup constant for box's faces managing
+             */
             enum BoxFace {
-                TOP,
-                BOTTOM,
-                LEFT,
-                RIGHT,
-                NEAR,
-                FAR,
+                TOP,        /**< The top face */
+                BOTTOM,     /**< The bottom face */
+                LEFT,       /**< The left face */
+                RIGHT,      /**< The right face */
+                NEAR,       /**< The near face */
+                FAR,        /**< The far face */
 
-                FACE_NUM
+                FACE_NUM    /**< The number of face in a box */
             };
 
             /**
@@ -41,67 +44,135 @@
             template <class T>
             class Frustum {
                 protected:
-                    Plane<T> *plane;
-                    Vector2D<T> near;
-                    Vector2D<T> far;
-                    Vector2D<T> dist;
-                    T fov;
-                    T ratio;
+                    Plane<T> *planes;    /**< The frustum' six planes */
+                    Vector2D<T> near;   /**< The near size vector */
+                    Vector2D<T> far;    /**< The far size vector */
+                    Vector2D<T> dist;   /**< The dist size vector */
+                    T fov;              /**< The frustum's fov */
+                    T ratio;            /**< The frustum's ratio */
 
                 public:
                     //## Constructor ##//
-                    Frustum();
-                    template <class K, class L, class M>
-                    Frustum(K const& fov, L const& ratio, Vector2D<M> const& dist);
+                        /**
+                         * Default Constructor
+                         */
+                        Frustum();
+                        /**
+                         * Construct a frustum with his fov, his ratio and the distance vector
+                         * @param fov   the frustum's fov
+                         * @param ratio the frustum's ratio
+                         * @param dist  the frustum's distance
+                         */
+                        Frustum(T const& fov, T const& ratio, Vector2D<T> const& dist);
 
                     //## Copy-Constructor ##//
-                    Frustum(Frustum const& f);
+                        /**
+                         * Copy f into this
+                         * @param f the frustum to copy the content
+                         */
+                        Frustum(Frustum const& f);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move f into this, leaving f empty
+                         * @param f the frustum to move
+                         */
+                        Frustum(Frustum && f);
 
                     //## Convertor ##//
-                    template <class K>
-                    Frustum(Frustum<K> const& f);
+                        /**
+                         * Convert a K-type frustum into a T-type frustum
+                         * @param f the K-type frustum to convert
+                         */
+                        template <class K>
+                        Frustum(Frustum<K> const& f);
 
                     //## Deconstructor ##//
-                    virtual ~Frustum();
+                        /**
+                         * Frustum Deconstructor
+                         */
+                        virtual ~Frustum();
 
                     //## Getter ##//
-                    Plane<T>* const& getPlanes() const;
-                    Plane<T> const& getPlane(unsigned int const& index) const;
-                    Vector2D<T> const& getNear() const;
-                    Vector2D<T> const& getFar() const;
-                    Vector2D<T> const& getDist() const;
-                    T const& getFov() const;
-                    T const& getRatio() const;
+                        /**
+                         * Return a specific plane
+                         * @param  index the desired planes index
+                         * @return       the reference of the plane
+                         */
+                        Plane<T> const& getPlane(unsigned int const& index) const;
+                        /**
+                         * Near getter
+                         * @return the near value
+                         */
+                        Vector2D<T> const& getNear() const;
+                        /**
+                         * Far getter
+                         * @return the far value
+                         */
+                        Vector2D<T> const& getFar() const;
+                        /**
+                         * Dist getter
+                         * @return the dist value
+                         */
+                        Vector2D<T> const& getDist() const;
+                        /**
+                         * Fov getter
+                         * @return the fov value
+                         */
+                        T const& getFov() const;
+                        /**
+                         * Ratio getter
+                         * @return the ratio value
+                         */
+                        T const& getRatio() const;
 
                     //## Setter ##//
-                    void setPlanes(Plane<T>* const& p);
-                    template <class K>
-                    void setPlane(Plane<K> const& p, unsigned int const& index);
-                    template <class K>
-                    void setNear(Vector2D<K> const& size);
-                    template <class K>
-                    void setFar(Vector2D<K> const& size);
-                    template <class K>
-                    void setDist(Vector2D<K> const& size);
-                    template <class K>
-                    void setFov(K const& f);
-                    template <class K>
-                    void setRatio(K const& r);
 
                     //## Methods ##//
-                    void computeNearAndFar();
-                    template <class K>
-                    Physics::CollisionResult const pointCollision(Point3D<K> const& p) const;
-                    template <class K, class L>
-                    Physics::CollisionResult const sphereCollision(Point3D<K> const& p, L const& radius) const;
-                    template <class K>
-                    Physics::CollisionResult const AABBCollision(Physics::AABB<K> const& box) const;
-                    template <class K>
-                    void computeProjectionMatrix(Matrix4x4<K> &m);
+                        /**
+                         * Compute the near and far vector from the frustum members
+                         */
+                        void computeNearAndFar();
+                        /**
+                         * Test if a point is in the frustum
+                         * @param  p the point to test
+                         * @return   the test result
+                         */
+                        Physics::CollisionResult const pointCollision(Point3D<T> const& p) const;
+                        /**
+                         * Test if a sphere defined by the center p and it's radius is in the frustum
+                         * @param  p      the sphere's center
+                         * @param  radius the sphere's radiu
+                         * @return        the test result
+                         */
+                        Physics::CollisionResult const sphereCollision(Point3D<T> const& p, T const& radius) const;
+                        /**
+                         * Test if an AABB is in the frustum
+                         * @param  box the bounding box to test
+                         * @return     the test result
+                         */
+                        Physics::CollisionResult const AABBCollision(Physics::AABB<T> const& box) const;
+                        /**
+                         * Perform a perspective projection on m
+                         * @param m the matrix to transform
+                         */
+                        void computeProjectionMatrix(Matrix4x4<T> &m);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of f into this
+                         * @param f the frustum to copy into this
+                         * @return the reference of himself
+                         */
+                        Frustum<T>& operator=(Frustum<T> const& f);
+                        /**
+                         * Move assigment of f into this, leaving f empty
+                         * @param f the frustum to move into this
+                         * @return the reference of himself
+                         */
+                        Frustum<T>& operator=(Frustum<T> && f);
 
                     //## Shortcut Operator ##//
 
@@ -114,8 +185,8 @@
                     //## Shift Operator ##//
 
                     protected:
-                    static NREfloat DEFAULT_FOV;
-                    static NREfloat DEFAULT_RATIO;
+                        static NREfloat DEFAULT_FOV;    /**< default fov value */
+                        static NREfloat DEFAULT_RATIO;  /**< default ratio value */
             };
 
             template <class T>
@@ -123,6 +194,12 @@
             template <class T>
             NREfloat Frustum<T>::DEFAULT_RATIO = 800.0 / 600.0;
 
+            /**
+             * Outstream operation for frustum
+             * @param stream the out stream to add the frustum f
+             * @param f the frustum to add in the stream
+             * @return the modified outstream
+             */
             template <class T>
             inline std::ostream& operator<<(std::ostream &stream, Frustum<T> const& f) {
                 stream << "TOP[" << f.getPlane(TOP) << "]" << std::endl;
