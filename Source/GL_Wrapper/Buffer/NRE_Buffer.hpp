@@ -117,6 +117,12 @@
                 private:
             };
 
+            /**
+             * Outstream operation for Buffer
+             * @param stream the out stream to add the Buffer buf
+             * @param buf the Buffer to add in the stream
+             * @return the modified outstream
+             */
             inline std::ostream& operator<<(std::ostream &stream, Buffer const& buf) {
                 stream << "(" << buf.getID() << ")";
                 return stream;

@@ -10,7 +10,7 @@
             IBO::IBO(bool const& generate) : VBO::VBO(generate), index(generate), nb(0) {
             }
 
-            IBO::IBO(IBO const& buf) : VBO::VBO(buf), index(buf.getIndexBuffer()), nb(buf.getNb()) {
+            IBO::IBO(IBO && buf) : VBO::VBO(std::move(buf)), index(std::move(buf.getIndexBuffer())), nb(std::move(buf.getNb())) {
             }
 
             IBO::~IBO() {
@@ -22,10 +22,6 @@
 
             GLuint const& IBO::getNb() const {
                 return nb;
-            }
-
-            void IBO::setIndexBuffer(IndexBuffer const buf) {
-                index = buf;
             }
 
             void IBO::setNb(GLuint const& n) {
@@ -58,6 +54,13 @@
             void IBO::access(GLenum const& vertexType, bool const& enableVAA) const {
                 VBO::access(vertexType, enableVAA);
                 getIndexBuffer().access();
+            }
+
+            IBO& IBO::operator=(IBO && buf) {
+                VBO::operator=(std::move(buf));
+                indexBuffer = std::move(buf.indexBuffer);
+                nb = std::move(buf.nb);
+                return *this;
             }
 
         };
