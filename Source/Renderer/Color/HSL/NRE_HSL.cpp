@@ -17,6 +17,9 @@
             HSL::HSL(HSL const& color) : h(color.getH()), s(color.getS()), l(color.getL()) {
             }
 
+            HSL::HSL(HSL && color) : h(std::move(color.getH())), s(std::move(color.getS())), l(std::move(color.getL())) {
+            }
+
             HSL::~HSL() {
             }
 
@@ -42,6 +45,20 @@
 
             void HSL::setL(NREfloat const& value) {
                 l = value;
+            }
+
+            HSL& HSL::operator=(HSL const& color) {
+                h = color.getH();
+                s = color.getS();
+                l = color.getL();
+                return *this;
+            }
+
+            HSL& HSL::operator=(HSL && color) {
+                h = std::move(color.getH());
+                s = std::move(color.getS());
+                l = std::move(color.getL());
+                return *this;
             }
 
             HSL HSL::operator+(HSL const& c) {
