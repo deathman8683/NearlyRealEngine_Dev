@@ -18,6 +18,9 @@
             HSLA::HSLA(HSLA const& color) : HSL::HSL(color), a(color.getA()) {
             }
 
+            HSLA::HSLA(HSLA && color) : HSL::HSL(std::move(color)), a(std::move(color.getA())) {
+            }
+
             HSLA::~HSLA() {
             }
 
@@ -27,6 +30,18 @@
 
             void HSLA::setA(NREfloat const& value) {
                 a = value;
+            }
+
+            HSLA& HSLA::operator=(HSLA const& color) {
+                HSL::operator=(color);
+                a = color.getA();
+                return *this;
+            }
+
+            HSLA& HSLA::operator=(HSLA && color) {
+                HSL::operator=(std::move(color));
+                a = std::move(color.getA());
+                return *this;
             }
 
             HSLA& HSLA::operator+=(HSLA const& c) {
