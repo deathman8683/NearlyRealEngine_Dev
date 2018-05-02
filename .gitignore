@@ -8,4 +8,8 @@
 *.hdr
 *.jpg
 docs/*
+Metrics
+Metrics_File
+Metrics_Line
+Doxyfile
 !WallPaper.png

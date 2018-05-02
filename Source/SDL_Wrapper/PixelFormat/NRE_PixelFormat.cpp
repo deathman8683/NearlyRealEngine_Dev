@@ -16,7 +16,7 @@
             PixelFormat::PixelFormat(PixelFormat const& pf) : item(pf.getItem()), allocated(pf.isAllocated()) {
             }
 
-            PixelFormat::PixelFormat(PixelFormat && pf) : item(std::move(pf.item,)) allocated(std::move(pf.isAllocated())) {
+            PixelFormat::PixelFormat(PixelFormat && pf) : item(std::move(pf.item)), allocated(std::move(pf.isAllocated())) {
             }
 
             PixelFormat::PixelFormat(SDL_PixelFormat* const& pf) : item(pf), allocated(false) {
@@ -62,10 +62,6 @@
 
             Uint32 const& PixelFormat::getFormat() const {
                 return getItem()->format;
-            }
-
-            void PixelFormat::setItem(SDL_PixelFormat* const& pf) {
-                item = pf;
             }
 
             void PixelFormat::setAllocated(bool const& state) {
