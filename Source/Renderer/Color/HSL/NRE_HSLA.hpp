@@ -68,7 +68,7 @@
                          */
                         HSLA(RGBA const& color);
                         /**
-                         * Convert a base HSL colro into a HSLA color with a default a value
+                         * Convert a base HSL color into a HSLA color with a default a value
                          * @param color the HSL color to convert
                          */
                         HSLA(HSL const& color);

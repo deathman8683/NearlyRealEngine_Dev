@@ -21,7 +21,20 @@
             RGBA::RGBA(RGBA const& color) : Maths::Vector4D<GLubyte>::Vector4D(color) {
             }
 
+            RGBA::RGBA(RGBA && color) : Maths::Vector4D<GLubyte>::Vector4D(std::move(color)) {
+            }
+
             RGBA::~RGBA() {
+            }
+
+            RGBA& RGBA::operator=(RGBA const& color) {
+                Maths::Vector4D<GLubyte>::operator=(color);
+                return *this;
+            }
+
+            RGBA& RGBA::operator=(RGBA && color) {
+                Maths::Vector4D<GLubyte>::operator=(std::move(color));
+                return *this;
             }
 
             RGBA& RGBA::operator+=(RGBA const& c) {
