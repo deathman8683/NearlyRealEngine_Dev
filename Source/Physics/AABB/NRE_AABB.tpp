@@ -26,7 +26,7 @@
 
             template <class T>
             template <class K>
-            AABB<T>::AABB(AABB<K> const& box) : center(static_cast <Point3D<T>> (box.getCenter())), hExtent(static_cast <Vector3D<T>> (box.getHExtent())) {
+            AABB<T>::AABB(AABB<K> const& box) : center(static_cast <Maths::Point3D<T>> (box.getCenter())), hExtent(static_cast <Maths::Vector3D<T>> (box.getHExtent())) {
             }
 
             template <class T>

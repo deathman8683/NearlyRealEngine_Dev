@@ -17,7 +17,20 @@
             RGB::RGB(RGB const& color) : Maths::Vector3D<GLubyte>::Vector3D(color) {
             }
 
+            RGB::RGB(RGB && color) : Maths::Vector3D<GLubyte>::Vector3D(std::move(color)) {
+            }
+
             RGB::~RGB() {
+            }
+
+            RGB& RGB::operator=(RGB const& color) {
+                Maths::Vector3D<GLubyte>::operator=(color);
+                return *this;
+            }
+
+            RGB& RGB::operator=(RGB && color) {
+                Maths::Vector3D<GLubyte>::operator=(std::move(color));
+                return *this;
             }
 
             RGB& RGB::operator+=(RGB const& c) {

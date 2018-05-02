@@ -33,17 +33,44 @@
 
                 public:
                     //## Constructor ##//
-                    RGB();
-                    RGB(GLubyte const& r, GLubyte const& g, GLubyte const& b);
+                        /**
+                         * Default Constructor
+                         */
+                        RGB();
+                        /**
+                         * Construct the color from their base value
+                         * @param r the new red value
+                         * @param g the new green value
+                         * @param b the new blue value
+                         */
+                        RGB(GLubyte const& r, GLubyte const& g, GLubyte const& b);
 
                     //## Copy-Constructor ##//
-                    RGB(RGB const& color);
+                        /**
+                         * Copy color into this
+                         * @param color the RGB color to copy the content
+                         */
+                        RGB(RGB const& color);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move color into this, leaving color empty
+                         * @param color the RGB color to move
+                         */
+                        RGB(RGB && color);
 
                     //## Convertor ##//
-                    RGB(HSL const& color);
+                        /**
+                         * Convert a HSL color into the RGB color
+                         * @param color the color to convert
+                         */
+                        RGB(HSL const& color);
 
                     //## Deconstructor ##//
-                    ~RGB();
+                        /**
+                         * HSL Deconstructor
+                         */
+                        ~RGB();
 
                     //## Getter ##//
 
@@ -54,15 +81,51 @@
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of color into this
+                         * @param color the RGB color to copy into this
+                         * @return the reference of himself
+                         */
+                        RGB& operator=(RGB const& color);
+                        /**
+                         * Move assigment of color into this, leaving color empty
+                         * @param color the RGB color to move into this
+                         * @return the reference of himself
+                         */
+                        RGB& operator=(RGB && color);
 
                     //## Shortcut Operator ##//
-                    RGB& operator+=(RGB const& c);
-                    RGB& operator-=(RGB const& c);
+                        /**
+                         * Add c to this
+                         * @param c the color to add
+                         * @return the reference of himself
+                         */
+                        RGB& operator+=(RGB const& c);
+                        /**
+                         * Subtract c to this
+                         * @param c the color to subtract
+                         * @return the reference of himself
+                         */
+                        RGB& operator-=(RGB const& c);
 
                     //## Arithmetic Operator ##//
-                    RGB operator+(RGB const& c);
-                    RGB operator-(RGB const& c);
-                    RGB operator-();
+                        /**
+                         * Compute the color resulting in the addition of c into this
+                         * @param c the color to add
+                         * @return the newly computed color
+                         */
+                        RGB operator+(RGB const& c);
+                        /**
+                         * Compute the color resulting in the subtraction of c into this
+                         * @param c the color to subtract
+                         * @return the newly computed color
+                         */
+                        RGB operator-(RGB const& c);
+                        /**
+                         * Compute the negative color of this
+                         * @return the newly negative color of this
+                         */
+                        RGB operator-();
 
                     //## Comparison Operator ##//
 
@@ -71,9 +134,9 @@
                     //## Shift Operator ##//
 
                 protected:
-                    static GLubyte DEFAULT_R;
-                    static GLubyte DEFAULT_G;
-                    static GLubyte DEFAULT_B;
+                    static GLubyte DEFAULT_R;   /**< default red value */
+                    static GLubyte DEFAULT_G;   /**< default green value */
+                    static GLubyte DEFAULT_B;   /**< default blue value */
             };
 
         };
