@@ -19,6 +19,9 @@
          */
         namespace World {
 
+            /**
+             * @enum regroup all different voxel type name
+             */
             enum VoxelTypeEnum {
                 VOID,
                 OCEAN,
@@ -37,18 +40,21 @@
                 TROPICAL_SEASONAL_FOREST,
                 TROPICAL_RAIN_FOREST,
 
-                TYPE_NUM
+                TYPE_NUM    /**< Number of voxel type */
             };
 
+            /**
+             * @enum regroup voxel face designation
+             */
             enum VoxelFace {
-                XNegative,
-                YNegative,
-                ZNegative,
-                XPositive,
-                YPositive,
-                ZPositive,
+                XNegative,  /**< Back */
+                YNegative,  /**< Left */
+                ZNegative,  /**< Bottom */
+                XPositive,  /**< Front */
+                YPositive,  /**< Right */
+                ZPositive,  /**< Top */
 
-                FACE_NUM
+                FACE_NUM    /**< Number of faces */
             };
 
         };
