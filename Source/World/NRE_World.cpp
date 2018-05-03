@@ -30,7 +30,8 @@
                 }
             }
 
-            World::World(World const& w) : chunkMap(w.getChunkMap()), loadRegionMap(w.getLoadRegionMap()), saveRegionMap(w.getSaveRegionMap()), constructionStack(w.getConstructionStack()), hExtent(w.getHExtent()), shift(w.getShift()), soilGenerator(w.getSoilGenerator()), moistureGenerator(w.getMoistureGenerator()), voxelMergingGlobalCache(w.getVoxelMergingGlobalCache()) {
+            World::World(World && w) : chunkMap(std::move(w.chunkMap)), loadRegionMap(std::move(w.loadRegionMap)), saveRegionMap(std::move(w.saveRegionMap)), constructionQueue(std::move(w.constructionQueue)),
+                                        hExtent(std::move(w.getHExtent())), shift(std::move(w.getShift())), soilGenerator(std::move(w.getSoilGenerator())), moistureGenerator(std::move(w.getMoistureGenerator())), voxelMergingGlobalCache(std::move(w.voxelMergingGlobalCache)) {
             }
 
             World::~World() {
@@ -42,22 +43,6 @@
                 for (const auto &it : chunkMap) {
                     delete it.second;
                 }
-            }
-
-            std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& World::getChunkMap() const {
-                return chunkMap;
-            }
-
-            std::unordered_map<Maths::Point2D<GLint>, Region*> const& World::getLoadRegionMap() const {
-                return loadRegionMap;
-            }
-
-            std::unordered_map<Maths::Point2D<GLint>, Region*> const& World::getSaveRegionMap() const {
-                return saveRegionMap;
-            }
-
-            std::queue<Chunk*> const& World::getConstructionStack() const {
-                return constructionStack;
             }
 
             Chunk* const& World::getChunk(Maths::Point2D<GLint> const& p) {
@@ -84,10 +69,6 @@
                 return moistureGenerator;
             }
 
-            bool* World::getVoxelMergingGlobalCache() const {
-                return voxelMergingGlobalCache;
-            }
-
             bool const& World::getVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face) const {
                 return getVoxelMergingFace(p.getX(), p.getY(), p.getZ(), face);
             }
@@ -96,49 +77,10 @@
                 return voxelMergingGlobalCache[getVoxelCacheIndex(x, y, z, face)];
             }
 
-            void World::setChunkMap(std::unordered_map<Maths::Point2D<GLint>, Chunk*> const& map) {
-                chunkMap = map;
-            }
-
-            void World::setLoadRegionMap(std::unordered_map<Maths::Point2D<GLint>, Region*> const& map) {
-                loadRegionMap = map;
-            }
-
-            void World::setSaveRegionMap(std::unordered_map<Maths::Point2D<GLint>, Region*> const& map) {
-                saveRegionMap = map;
-            }
-
-            void World::setConstructionStack(std::queue<Chunk*> const& queue) {
-                constructionStack = queue;
-            }
-
-            void World::setChunk(Maths::Point2D<GLint> const& p, Chunk* const& chunk) {
-                chunkMap[p] = chunk;
-            }
-
-            void World::setChunk(GLint const& x, GLint const& y, Chunk* const& chunk) {
-                setChunk(Maths::Point2D<GLint>(x, y), chunk);
-            }
-
-            void World::setHExtent(Maths::Vector2D<GLuint> const& size) {
-                hExtent = size;
-            }
-
             void World::setShift(Maths::Vector2D<GLint> const& size) {
                 shift = size;
             }
 
-            void World::setSoilGenerator(FastNoise const& gen) {
-                soilGenerator = gen;
-            }
-
-            void World::setMoistureGenerator(FastNoise const& gen) {
-                moistureGenerator = gen;
-            }
-
-            void World::setVoxelMergingGlobalCache(bool* (&cache)) {
-                voxelMergingGlobalCache = cache;
-            }
             void World::setVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face, bool const& state) {
                 setVoxelMergingFace(p.getX(), p.getY(), p.getZ(), face, state);
             }
@@ -178,7 +120,7 @@
             void World::update(GLuint const& loadLimit) {
                 emptyLoadRegionMap();
                 for (GLuint i = 0; i < loadLimit; i = i + 1) {
-                    updateConstructionStack();
+                    updateConstructionQueue();
                 }
                 emptySaveRegionMap();
             }
@@ -242,7 +184,7 @@
 
             void World::addChunkToConstruction(Chunk *chunk) {
                 chunk->setConstructing(true);
-                constructionStack.push(chunk);
+                constructionQueue.push(chunk);
             }
 
             void World::updateLoadRegionMap() {
@@ -263,12 +205,12 @@
                 }
             }
 
-            void World::updateConstructionStack() {
-                if (!constructionStack.empty()) {
-                    constructionStack.front()->constructMesh(this);
-                    constructionStack.front()->setConstructed(true);
-                    constructionStack.front()->setConstructing(false);
-                    constructionStack.pop();
+            void World::updateConstructionQueue() {
+                if (!constructionQueue.empty()) {
+                    constructionQueue.front()->constructMesh(this);
+                    constructionQueue.front()->setConstructed(true);
+                    constructionQueue.front()->setConstructing(false);
+                    constructionQueue.pop();
                 }
             }
 
@@ -284,9 +226,9 @@
                 }
             }
 
-            void World::emptyConstructionStack() {
-                while (!constructionStack.empty()) {
-                    updateConstructionStack();
+            void World::emptyConstructionQueue() {
+                while (!constructionQueue.empty()) {
+                    updateConstructionQueue();
                 }
             }
 
@@ -307,9 +249,9 @@
                 }
             }
 
-            void World::flushConstructionStack() {
-                while (!constructionStack.empty()) {
-                    constructionStack.pop();
+            void World::flushConstructionQueue() {
+                while (!constructionQueue.empty()) {
+                    constructionQueue.pop();
                 }
             }
 
@@ -402,6 +344,19 @@
                     chunkMap[tmp] = adr;
                 }
                 shift.setY(getShift().getY() + 1);
+            }
+
+            World& World::operator=(World && w) {
+                chunkMap = std::move(w.chunkMap);
+                loadRegionMap = std::move(w.loadRegionMap);
+                saveRegionMap = std::move(w.saveRegionMap);
+                constructionQueue = std::move(w.constructionQueue);
+                hExtent = std::move(w.hExtent);
+                shift = std::move(w.shift);
+                soilGenerator = std::move(w.soilGenerator);
+                moistureGenerator = std::move(w.moistureGenerator);
+                voxelMergingGlobalCache = std::move(w.voxelMergingGlobalCache);
+                return *this;
             }
 
             GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face) {
