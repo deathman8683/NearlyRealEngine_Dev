@@ -18,19 +18,19 @@
             }
 
             Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), maxSolidHeight(0),
-                                                                                                          active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
+                                                                                       active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::MaterialBuffer(generateID));
                 buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::~Chunk() {
-                delete[] voxel;
+            Chunk::Chunk(Chunk && c) : voxel(std::move(c.voxel)), coord(std::move(c.coord)), buffer(std::move(c.buffer)), vao(std::move(c.vao)), bounding(std::move(c.bounding)), maxSolidHeight(std::move(c.maxSolidHeight)),
+                                       active(std::move(c.active)), loaded(std::move(c.loaded)), constructed(std::move(c.constructed)), loading(std::move(c.loading)), constructing(std::move(c.constructing)), modified(std::move(c.modified)) {
             }
 
-            Voxel* const& Chunk::getVoxels() const {
-                return voxel;
+            Chunk::~Chunk() {
+                delete[] voxel;
             }
 
             Voxel const& Chunk::getVoxel(Maths::Point3D<GLuint> const& p) const {
@@ -87,10 +87,6 @@
 
             bool const& Chunk::isModfied() const {
                 return modified;
-            }
-
-            void Chunk::setVoxels(Voxel* const& vox) {
-                voxel = vox;
             }
 
             void Chunk::setVoxel(Maths::Point3D<GLuint> const& p, Voxel const& vox) {
@@ -302,6 +298,22 @@
                 }
                 data.write(reinterpret_cast<char*> (&currentLineSize), 2);
                 data.write(reinterpret_cast<char*> (&currentType), 1);
+            }
+
+            Chunk& Chunk::operator=(Chunk && c) {
+                voxel = std::move(c.voxel);
+                coord = std::move(c.coord);
+                buffer = std::move(c.buffer);
+                vao = std::move(c.vao);
+                bounding = std::move(c.bounding);
+                maxSolidHeight = std::move(c.maxSolidHeight);
+                active = std::move(c.active);
+                loaded = std::move(c.loaded);
+                constructed = std::move(c.constructed);
+                loading = std::move(c.loading);
+                constructing = std::move(c.constructing);
+                modified = std::move(c.modified);
+                return *this;
             }
 
             GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) {

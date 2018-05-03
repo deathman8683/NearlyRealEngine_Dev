@@ -57,7 +57,7 @@
 
                      //## Move-Constructor ##//
                          /**
-                          * Move mesh into this, leaving reg empty
+                          * Move mesh into this, leaving mesh empty
                           * @param mesh the mesh to move
                           */
                          Mesh(Mesh && mesh);
