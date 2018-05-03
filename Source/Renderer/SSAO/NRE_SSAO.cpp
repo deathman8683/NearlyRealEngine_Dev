@@ -43,7 +43,7 @@
                     kernel[i] = kernel[i] * rFloat(generator);
                     kernel[i].normalize();
                     NREfloat scale = static_cast <NREfloat> (i) / static_cast <NREfloat> (KERNEL_SIZE);
-                    scale = lerp(0.1, 1.0, scale * scale);
+                    scale = Maths::lerp(0.1, 1.0, scale * scale);
                     kernel[i] = kernel[i] * scale;
                 }
             }
@@ -67,10 +67,6 @@
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
                 noise->unbind();
-            }
-
-            NREfloat SSAO::lerp(NREfloat const& a, NREfloat const& b, NREfloat const& f) const {
-                return a + f * (b - a);
             }
 
         };

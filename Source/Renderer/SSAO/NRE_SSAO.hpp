@@ -56,7 +56,6 @@
                     //## Methods ##//
                     void generateKernel();
                     void generateNoise();
-                    NREfloat lerp(NREfloat const& a, NREfloat const& b, NREfloat const& f) const;
 
                     //## Access Operator ##//
 

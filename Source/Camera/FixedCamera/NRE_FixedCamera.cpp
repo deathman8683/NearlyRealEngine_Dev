@@ -77,8 +77,8 @@
             }
 
             void FixedCamera::initAngle() {
-                angle.setX(toDeg(std::atan2((getCenter().getY() - getEye().getY()), (getCenter().getX() - getEye().getX()))));
-                angle.setY(toDeg(std::acos((getCenter().getZ() - getEye().getZ()) / getCenter().distance(getEye()))));
+                angle.setX(Maths::toDeg(std::atan2((getCenter().getY() - getEye().getY()), (getCenter().getX() - getEye().getX()))));
+                angle.setY(Maths::toDeg(std::acos((getCenter().getZ() - getEye().getZ()) / getCenter().distance(getEye()))));
                 if (angle.getX() > 90.0) {
                     angle.setX(450.0 - angle.getX());
                 } else {
@@ -95,10 +95,10 @@
             }
 
             void FixedCamera::computeVector() {
-                NREfloat tmp = std::cos(toRad(getAngle().getX()));
-                forward.setX(tmp * std::cos(toRad(getAngle().getY())));
-                forward.setY(tmp * std::sin(toRad(getAngle().getY())));
-                forward.setZ(std::sin(toRad(getAngle().getX())));
+                NREfloat tmp = std::cos(Maths::toRad(getAngle().getX()));
+                forward.setX(tmp * std::cos(Maths::toRad(getAngle().getY())));
+                forward.setY(tmp * std::sin(Maths::toRad(getAngle().getY())));
+                forward.setZ(std::sin(Maths::toRad(getAngle().getX())));
                 forward.normalize();
 
                 left = Maths::Vector3D<NREfloat>(0, 0, 1) ^ forward;

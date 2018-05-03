@@ -5,7 +5,7 @@
         namespace Color {
 
             RGB::RGB(HSL const& color) : RGB(DEFAULT_R, DEFAULT_G, DEFAULT_B) {
-                if (almostEqual(color.getS(), 0.0)) {
+                if (Maths::almostEqual(color.getS(), 0.0)) {
                     NREfloat value = std::round(color.getL() * 255.0);
                     setR(value);
                     setG(value);
