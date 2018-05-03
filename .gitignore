@@ -7,7 +7,6 @@
 *.png
 *.hdr
 *.jpg
-docs/*
 Metrics
 Metrics_File
 Metrics_Line
