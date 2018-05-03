@@ -42,7 +42,6 @@
                     GL::IBO buffer;
                     GL::VAO vao;
                     Physics::AABB<GLint> bounding;
-                    GLint loD;
                     GLuint maxSolidHeight;
                     bool active;
                     bool loaded;
@@ -55,7 +54,7 @@
                     //## Constructor ##//
                     Chunk();
                     Chunk(bool const& generateID);
-                    Chunk(Maths::Point2D<GLint> const& coord, GLint const& loD, bool const& generateID);
+                    Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID);
 
                     //## Copy-Constructor ##//
 
@@ -73,7 +72,6 @@
                     GL::IBO const& getBuffer() const;
                     GL::VAO const& getVAO() const;
                     Physics::AABB<GLint> const& getBounding() const;
-                    GLint const& getLoD() const;
                     GLuint const& getMaxSolidHeight() const;
                     bool const& isActive() const;
                     bool const& isLoaded() const;

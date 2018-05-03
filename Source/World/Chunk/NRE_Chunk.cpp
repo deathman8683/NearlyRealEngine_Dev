@@ -14,10 +14,10 @@
             Chunk::Chunk() : voxel(0) {
             }
 
-            Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), 1, generateID) {
+            Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, GLint const& loD, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), loD(loD), maxSolidHeight(0),
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), maxSolidHeight(0),
                                                                                                           active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
                 voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::MaterialBuffer(generateID));
@@ -59,10 +59,6 @@
 
             Physics::AABB<GLint> const& Chunk::getBounding() const {
                 return bounding;
-            }
-
-            GLint const& Chunk::getLoD() const {
-                return loD;
             }
 
             GLuint const& Chunk::getMaxSolidHeight() const {
@@ -115,10 +111,6 @@
 
             void Chunk::setBounding(Physics::AABB<GLint> const& box) {
                 bounding = box;
-            }
-
-            void Chunk::setLoD(GLint const& value) {
-                loD = value;
             }
 
             void Chunk::setMaxSolidHeight(GLuint const& height) {
