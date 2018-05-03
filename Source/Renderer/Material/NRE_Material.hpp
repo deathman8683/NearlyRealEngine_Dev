@@ -28,41 +28,107 @@
              */
             class Material {
                 private:
-                    Maths::Vector3D<NREfloat> albedo;
-                    NREfloat metallic;
-                    NREfloat roughness;
+                    Maths::Vector3D<NREfloat> albedo;   /**< The material albedo */
+                    NREfloat metallic;                  /**< The material metallic aspect */
+                    NREfloat roughness;                 /**< The material roughness */
 
                 public:
                     //## Constructor ##//
-                    Material();
-                    Material(Maths::Vector3D<NREfloat> const& albedo, NREfloat const& metallic, NREfloat const& roughness);
+                        /**
+                         * Default Constructor
+                         */
+                        Material();
+                        /**
+                         * Construct a material from his different attributes
+                         * @param albedo    the new material albedo
+                         * @param metallic  the new material metallic aspect
+                         * @param roughness the new material roughness
+                         */
+                        Material(Maths::Vector3D<NREfloat> const& albedo, NREfloat const& metallic, NREfloat const& roughness);
 
                     //## Copy-Constructor ##//
-                    Material(Material const& mat);
+                        /**
+                         * Copy mat into this
+                         * @param mat the material to copy the content
+                         */
+                        Material(Material const& mat);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move mat into this, leaving mat empty
+                         * @param pmmat the material to move
+                         */
+                        Material(Material && mat);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Material();
+                        /**
+                         * Material Deconstructor
+                         */
+                        ~Material();
 
                     //## Getter ##//
-                    Maths::Vector3D<NREfloat> const& getAlbedo() const;
-                    NREfloat const& getMetallic() const;
-                    NREfloat const& getRoughness() const;
-                    NREfloat* const getMetallicValue();
-                    NREfloat* const getRoughnessValue();
+                        /**
+                         * Albedo getter
+                         * @return the material albedo
+                         */
+                        Maths::Vector3D<NREfloat> const& getAlbedo() const;
+                        /**
+                         * Metallic Aspect getter
+                         * @return the material metallic aspect
+                         */
+                        NREfloat const& getMetallic() const;
+                        /**
+                         * Roughness getter
+                         * @return the material roughness
+                         */
+                        NREfloat const& getRoughness() const;
+                        /**
+                         * Metallic pointer getter
+                         * @return the material metallic pointer, used with uniform in shader
+                         */
+                        NREfloat* const getMetallicValue();
+                        /**
+                         * Roughness pointer getter
+                         * @return the material roughness pointer, used with uniform in shader
+                         */
+                        NREfloat* const getRoughnessValue();
 
                     //## Setter ##//
-                    void setAlbedo(Maths::Vector3D<NREfloat> const& albedo);
-                    void setMetallic(NREfloat const& value);
-                    void setRoughness(NREfloat const& value);
+                        /**
+                         * Albedo setter
+                         * @param albedo the new albedo value
+                         */
+                        void setAlbedo(Maths::Vector3D<NREfloat> const& albedo);
+                        /**
+                         * Metallic Aspect setter
+                         * @param value the new metallic aspect value
+                         */
+                        void setMetallic(NREfloat const& value);
+                        /**
+                         * Roughness setter
+                         * @param value the new roughness value
+                         */
+                        void setRoughness(NREfloat const& value);
 
                     //## Methods ##//
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
-                    Material& operator=(Material const& mat);
+                        /**
+                         * Copy assigment of mat into this
+                         * @param mat the material to copy into this
+                         * @return the reference of himself
+                         */
+                        Material& operator=(Material const& mat);
+                        /**
+                         * Move assigment of mat into this, leaving mat empty
+                         * @param mat the material to move into this
+                         * @return the reference of himself
+                         */
+                        Material& operator=(Material && mat);
 
                     //## Shortcut Operator ##//
 

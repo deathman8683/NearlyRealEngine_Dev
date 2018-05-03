@@ -13,6 +13,9 @@
             Material::Material(Material const& mat) : albedo(mat.getAlbedo()), metallic(mat.getMetallic()), roughness(mat.getRoughness()) {
             }
 
+            Material::Material(Material && mat) : albedo(std::move(mat.getAlbedo())), metallic(std::move(mat.getMetallic())), roughness(std::move(mat.getRoughness())) {
+            }
+
             Material::~Material() {
             }
 
@@ -52,6 +55,14 @@
                 albedo = mat.getAlbedo();
                 metallic = mat.getMetallic();
                 roughness = mat.getRoughness();
+
+                return *this;
+            }
+
+            Material& Material::operator=(Material && mat) {
+                albedo = std::move(mat.albedo);
+                metallic = std::move(mat.metallic);
+                roughness = std::move(mat.roughness);
 
                 return *this;
             }

@@ -62,10 +62,10 @@
                         ~VertexShader();
 
                     //## Getter ##//
-                    /**
-                     * Type getter
-                     * @return return the shader program type, used to differentiate derived shader
-                     */
+                        /**
+                         * Type getter
+                         * @return return the shader program type, used to differentiate derived shader
+                         */
                         GLenum const getType() const override;
 
                     //## Setter ##//
