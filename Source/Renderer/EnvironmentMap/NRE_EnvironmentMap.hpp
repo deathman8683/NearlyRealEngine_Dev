@@ -28,7 +28,7 @@
 
             /**
              * @class EnvironmentMap
-             * @brief Renderer's Object : Manage environmental mapping, more advanced form of skybox, used in the PBR pipeline
+             * @brief Renderer's Object : Manage environment mapping, more advanced form of skybox, used in the PBR pipeline
              */
             class EnvironmentMap {
                 private:
@@ -46,7 +46,7 @@
                          */
                         EnvironmentMap();
                         /**
-                         * Construct an environmental map with a specific file, several shader for capture and computation
+                         * Construct an environment map with a specific file, several shader for capture and computation
                          * @param path             the path to the main skybox
                          * @param captureShader    the shader used to capture the Cube Map faces
                          * @param irradianceShader the shader used to compute the irradiance map
@@ -58,14 +58,14 @@
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param map the environmental map to copy
+                         * @param map the environment map to copy
                          */
                         EnvironmentMap(EnvironmentMap const& map) = delete;
 
                     //## Move-Constructor ##//
                         /**
                          * Move map into this, leaving map empty
-                         * @param buf the environmental map to move
+                         * @param buf the environment map to move
                          */
                         EnvironmentMap(EnvironmentMap && map);
 
@@ -146,12 +146,12 @@
                     //## Assignment Operator ##//
                         /**
                          * No copy assigment allowed
-                         * @param map the environmental map to copy
+                         * @param map the environment map to copy
                          */
                         EnvironmentMap& operator=(EnvironmentMap const& map) = delete;
                         /**
                          * Move assigment of map into this, leaving map empty
-                         * @param map the environmental map to move into this
+                         * @param map the environment map to move into this
                          * @return the reference of himself
                          */
                         EnvironmentMap& operator=(EnvironmentMap && map);
