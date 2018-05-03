@@ -14,8 +14,12 @@
                generateNoise();
             }
 
+            SSAO::SSAO(SSAO && ssao) : kernel(std::move(ssao.kernel)), noise(std::move(ssao.noise)), ratio(std::move(ssao.ratio)), tanHalfFOV(std::move(ssao.tanHalfFOV)) {
+            }
+
             SSAO::~SSAO() {
                 delete[] kernel;
+                delete noise;
             }
 
             Maths::Vector3D<NREfloat>* const& SSAO::getKernel() const {
@@ -24,10 +28,6 @@
 
             GL::Texture2D* const& SSAO::getNoise() const {
                 return noise;
-            }
-
-            void SSAO::setKernel(Maths::Vector3D<NREfloat>* const& kern) {
-                kernel = kern;
             }
 
             void SSAO::generateKernel() {
@@ -67,6 +67,14 @@
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
                 noise->unbind();
+            }
+
+            SSAO& SSAO::operator=(SSAO && ssao) {
+                kernel = std::move(ssao.kernel);
+                noise = std::move(ssao.noise);
+                ratio = std::move(ssao.ratio);
+                tanHalfFOV = std::move(ssao.tanHalfFOV);
+                return *this;
             }
 
         };

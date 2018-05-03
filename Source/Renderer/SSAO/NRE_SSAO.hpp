@@ -30,36 +30,78 @@
              */
             class SSAO {
                 private:
-                    Maths::Vector3D<NREfloat> *kernel;
-                    GL::Texture2D* noise;
-                    NREfloat ratio;
-                    NREfloat tanHalfFOV;
+                    Maths::Vector3D<NREfloat> *kernel;  /**< SSAO kernel with random sample */
+                    GL::Texture2D* noise;               /**< SSAO texture with a random noise to reduce the kernel size */
+                    NREfloat ratio;                     /**< SSAO ratio, the window radio */
+                    NREfloat tanHalfFOV;                /**< Half tan FOV stored to reduce computation */
 
                 public:
                     //## Constructor ##//
-                    SSAO();
+                        /**
+                         * Default Constructor
+                         */
+                        SSAO();
 
                     //## Copy-Constructor ##//
+                        /**
+                         * No copy allowed
+                         * @param ssao the SSAO to copy
+                         */
+                        SSAO(SSAO const& ssao) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move ssao into this, leaving ssao empty
+                         * @param ssao the SSAO to move
+                         */
+                        SSAO(SSAO && ssao);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~SSAO();
+                        /**
+                         * SSAO Deconstructor
+                         */
+                        ~SSAO();
 
                     //## Getter ##//
-                    Maths::Vector3D<NREfloat>* const& getKernel() const;
-                    GL::Texture2D* const& getNoise() const;
+                        /**
+                         * Kernel getter
+                         * @return the pointer to the first vector of the kernel
+                         */
+                        Maths::Vector3D<NREfloat>* const& getKernel() const;
+                        /**
+                         * Noise getter
+                         * @return the noise texture
+                         */
+                        GL::Texture2D* const& getNoise() const;
 
                     //## Setter ##//
-                    void setKernel(Maths::Vector3D<NREfloat>* const& kern);
 
                     //## Methods ##//
-                    void generateKernel();
-                    void generateNoise();
+                        /**
+                         * Generate the SSAO kernel
+                         */
+                        void generateKernel();
+                        /**
+                         * Generate the noise texture
+                         */
+                        void generateNoise();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param ssao the SSAO to copy
+                         */
+                        SSAO& operator=(SSAO const& ssao) = delete;
+                        /**
+                         * Move assigment of ssao into this, leaving ssao empty
+                         * @param ssao the SSAO to move into this
+                         * @return the reference of himself
+                         */
+                        SSAO& operator=(SSAO && ssao);
 
                     //## Shortcut Operator ##//
 
@@ -72,9 +114,9 @@
                     //## Shift Operator ##//
 
                 public:
-                    static GLuint KERNEL_SIZE;
+                    static GLuint KERNEL_SIZE;  /**< The SSSAO kernel size */
                 private:
-                    static GLuint NOISE_SIZE;
+                    static GLuint NOISE_SIZE;   /**< The SSAO noise texture size */
             };
 
         };
