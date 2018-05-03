@@ -10,6 +10,9 @@
             Timestep::Timestep(Timestep const& t) : actualTime(t.getActualTime()), lastTime(t.getLastTime()) {
             }
 
+            Timestep::Timestep(Timestep && t) : actualTime(std::move(t.getActualTime())), lastTime(std::move(t.getLastTime())) {
+            }
+
             Timestep::~Timestep() {
             }
 
@@ -44,6 +47,18 @@
             void Timestep::update() {
                 updateLastTime();
                 updateActualTime();
+            }
+
+            Timestep& Timestep::operator=(Timestep const& t) {
+                actualTime = t.actualTime;
+                lastTime = t.lastTime;
+                return *this;
+            }
+
+            Timestep& Timestep::operator=(Timestep && t) {
+                actualTime = std::move(t.actualTime);
+                lastTime = std::move(t.lastTime);
+                return *this;
             }
 
         };
