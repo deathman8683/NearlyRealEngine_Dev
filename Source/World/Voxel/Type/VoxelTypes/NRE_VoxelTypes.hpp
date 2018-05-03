@@ -28,21 +28,49 @@
             class VoxelTypes {
                 public:
                     //## Getter ##//
-                    static VoxelType** getVoxelTypes();
-                    static Renderer::Material* getMaterialTypes();
-                    static GLuint const& getSize();
-                    static VoxelType* getVoxelType(GLubyte const& type);
-                    static Renderer::Material& getMaterial(GLubyte const& type);
+                        /**
+                         * VoxelType array getter
+                         * @return the pointer to the first type of voxel
+                         */
+                        static VoxelType** getVoxelTypes();
+                        /**
+                         * MaterialType array getter
+                         * @return the pointer to the first type of material
+                         */
+                        static Renderer::Material* getMaterialTypes();
+                        /**
+                         * Array size getter
+                         * @return the size of the voxel type array
+                         */
+                        static GLuint const& getSize();
+                        /**
+                         * Specific voxel type getter
+                         * @param  type the specific type enum
+                         * @return      the corresponding voxel type object
+                         */
+                        static VoxelType* getVoxelType(GLubyte const& type);
+                        /**
+                         * Specific material type getter
+                         * @param  type the specific type enum
+                         * @return      the corresponding material type object
+                         */
+                        static Renderer::Material& getMaterial(GLubyte const& type);
 
                     //## Methods ##//
-                    static void init();
-                    static void free();
+                        /**
+                         * Initialize both voxel and material array
+                         */
+                        static void init();
+                        /**
+                         * Free both voxel and material array
+                         */
+                        static void free();
 
                 private:
-                    static VoxelType **voxelTypes;
-                    static Renderer::Material *materialTypes;
+                    static VoxelType **voxelTypes;              /**< Store all differents voxel types */
+                    static Renderer::Material *materialTypes;   /**< Store all differents material types */
                 public:
-                    static GLuint size;
+                    static GLuint size;                         /**< The size of both types array */
             };
 
         };
