@@ -14,7 +14,10 @@
             Surface::Surface(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat) : item(0), glW(w), glH(h), glFormat(glFormat), glInternalFormat(glInternalFormat) {
             }
 
-            Surface::Surface(Surface const& s) : item(s.getItem()), glFormat(s.getGLFormat()), glInternalFormat(s.getGLInternalFormat()) {
+            Surface::Surface(Surface const& s) : item(s.getItem()), glW(s.getGLW()), glH(s.getGLH()), glFormat(s.getGLFormat()), glInternalFormat(s.getGLInternalFormat()) {
+            }
+
+            Surface::Surface(Surface && s) : item(std::move(s.getItem())), glW(std::move(s.getGLW())), glH(std::move(s.getGLH())), glFormat(std::move(s.getGLFormat())), glInternalFormat(std::move(s.getGLInternalFormat())) {
             }
 
             Surface::Surface(SDL_Surface* const& s) : item(s) {
@@ -45,10 +48,6 @@
                 return glInternalFormat;
             }
 
-            SDL_Rect const& Surface::getClipRect() const {
-                return getItem()->clip_rect;
-            }
-
             Uint32 const& Surface::getFlags() const {
                 return getItem()->flags;
             }
@@ -77,10 +76,6 @@
                 return getItem()->pixels;
             }
 
-            void Surface::setItem(SDL_Surface* const& s) {
-                item = s;
-            }
-
             void Surface::setGLW(GLsizei const& w) {
                 glW = w;
             }
@@ -100,7 +95,7 @@
             void Surface::free() {
                 if (getItem() != 0) {
                     SDL_FreeSurface(getItem());
-                    setItem(0);
+                    item = 0;
                 }
             }
 
@@ -146,8 +141,8 @@
                 unlock();
 
                 free();
-                setItem(flippedSurface.getItem());
-                flippedSurface.setItem(0);
+                item = flippedSurface.getItem();
+                flippedSurface.item = 0;
             }
 
             void Surface::loadFormat() {
@@ -166,6 +161,24 @@
                         setGLFormat(GL_BGRA);
                     }
                 }
+            }
+
+            Surface& Surface::operator=(Surface const& s) {
+                item = s.item;
+                glW = s.glW;
+                glH = s.glH;
+                glFormat = s.glFormat;
+                glInternalFormat = s.glInternalFormat;
+                return *this;
+            }
+
+            Surface& Surface::operator=(Surface && s) {
+                item = std::move(s.item);
+                glW = std::move(s.glW);
+                glH = std::move(s.glH);
+                glFormat = std::move(s.glFormat);
+                glInternalFormat = std::move(s.glInternalFormat);
+                return *this;
             }
 
 

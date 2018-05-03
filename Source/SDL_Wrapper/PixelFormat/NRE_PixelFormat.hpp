@@ -60,7 +60,7 @@
                     //## Convertor ##//
                         /**
                          * Convert a C-style SDL_PixelFormat into his wrapped version
-                         * @param e the C-style SDL_PixelFormat
+                         * @param pf the C-style SDL_PixelFormat
                          */
                         PixelFormat(SDL_PixelFormat* const& pf);
 
