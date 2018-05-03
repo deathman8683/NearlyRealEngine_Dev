@@ -127,7 +127,7 @@
                          * @param reg the region to move into this
                          * @return the reference of himself
                          */
-                        Region& operator=(Region && v);
+                        Region& operator=(Region && reg);
 
                     //## Shortcut Operator ##//
 

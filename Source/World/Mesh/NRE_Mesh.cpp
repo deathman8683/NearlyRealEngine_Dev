@@ -10,7 +10,7 @@
             Mesh::Mesh(Chunk* const& target) : target(target) {
             }
 
-            Mesh::Mesh(Mesh const& mesh) : target(mesh.getTarget()), vData(mesh.getVData()), mData(mesh.getMData()), nData(mesh.getNData()), iData(mesh.getIData()) {
+            Mesh::Mesh(Mesh && mesh) : target(std::move(mesh.getTarget())), vData(std::move(mesh.getVData())), mData(std::move(mesh.getMData())), nData(std::move(mesh.getNData())), iData(std::move(mesh.getIData())) {
             }
 
             Mesh::~Mesh() {
@@ -50,26 +50,6 @@
 
             GLuint* Mesh::getIPointer() {
                 return &iData.front();
-            }
-
-            void Mesh::setTarget(Chunk* const& target) {
-                this->target = target;
-            }
-
-            void Mesh::setVData(std::vector<GLint> const& data) {
-                vData = data;
-            }
-
-            void Mesh::setMData(std::vector<GLubyte> const& data) {
-                mData = data;
-            }
-
-            void Mesh::setNData(std::vector<GLbyte> const& data) {
-                nData = data;
-            }
-
-            void Mesh::setIData(std::vector<GLuint> const& data) {
-                iData = data;
             }
 
             void Mesh::addVertex(Maths::Point3D<GLint> const& v) {
@@ -378,6 +358,15 @@
 
                 iData.push_back(idx2);
                 iData.push_back(idx1);
+            }
+
+            Mesh& Mesh::operator=(Mesh && mesh) {
+                target = std::move(mesh.target);
+                vData = std::move(mesh.vData);
+                mData = std::move(mesh.mData);
+                nData = std::move(mesh.nData);
+                iData = std::move(mesh.iData);
+                return *this;
             }
 
             bool Mesh::checkVoxelXNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
