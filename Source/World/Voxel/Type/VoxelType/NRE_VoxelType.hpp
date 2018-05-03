@@ -29,15 +29,33 @@
             class VoxelType {
                 public:
                     //## Constructor ##//
-                    VoxelType();
+                        /**
+                         * Default Constructor
+                         */
+                        VoxelType();
 
                     //## Deconstructor ##//
-                    ~VoxelType();
+                        /**
+                         * VoxelType Deconstructor
+                         */
+                        virtual ~VoxelType();
 
                     //## Getter ##//
-                    virtual Color::RGB const getColor() const = 0;
-                    virtual bool const isSolid() const = 0;
-                    virtual Renderer::Material const getMaterial() const = 0;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        virtual Color::RGB const getColor() const = 0;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        virtual bool const isSolid() const = 0;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        virtual Renderer::Material const getMaterial() const = 0;
             };
 
         };
