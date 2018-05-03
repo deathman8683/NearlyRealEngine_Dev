@@ -29,10 +29,6 @@
                 return fShader;
             }
 
-            void Shader::setID(GLuint const& id) {
-                this->id = id;
-            }
-
             void Shader::bind() const {
                 glUseProgram(getID());
             }
@@ -49,7 +45,7 @@
                 vShader.compile();
                 fShader.compile();
 
-                setID(glCreateProgram());
+                id = glCreateProgram();
 
                 glAttachShader(getID(), getVertexShader().getID());
                 glAttachShader(getID(), getFragmentShader().getID());
@@ -196,11 +192,11 @@
                 glUniform4uiv(uniformsLocations.getLocation(location), count, value);
             }
 
-            Shader& Shader::operator=(Shader && map) {
-                id = std::move(map.getID());
-                vShader = std::move(map.vShader);
-                fShader = std::move(map.fShader);
-                uniformsLocations = std::move(map).uniformsLocations;
+            Shader& Shader::operator=(Shader && s) {
+                id = std::move(s.getID());
+                vShader = std::move(s.vShader);
+                fShader = std::move(s.fShader);
+                uniformsLocations = std::move(s.uniformsLocations);
 
                 return *this;
             }
