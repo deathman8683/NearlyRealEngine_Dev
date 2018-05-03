@@ -26,7 +26,10 @@
                 this->chunk.push(std::pair<Maths::Point2D<GLint>, Chunk*>(chunk->getCoord(), chunk));
             }
 
-            Region::Region(Region const& reg) : path(reg.getPath()), chunk(reg.getChunk()) {
+            Region::Region(Region const& reg) : path(reg.getPath()), chunk(reg.chunk) {
+            }
+
+            Region::Region(Region && reg) : path(std::move(reg.getPath())), chunk(std::move(reg.chunk)) {
             }
 
             Region::~Region() {
@@ -34,18 +37,6 @@
 
             std::string const& Region::getPath() const {
                 return path;
-            }
-
-            std::queue<std::pair<Maths::Point2D<GLint>, Chunk*>> const& Region::getChunk() const {
-                return chunk;
-            }
-
-            void Region::setPath(std::string const& path) {
-                this->path = path;
-            }
-
-            void Region::setChunk(std::queue<std::pair<Maths::Point2D<GLint>, Chunk*>> const& chunk) {
-                this->chunk = chunk;
             }
 
             bool Region::isEmpty() const {
@@ -58,7 +49,7 @@
                 if (!chunkFile.is_open()) {
                     createTable(chunkFile);
                 }
-                size_t limit = getChunk().size();
+                size_t limit = chunk.size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
                     Maths::Point2D<GLint> tmp = chunk.front().second->getCoord();
                     chunk.front().second->setCoord(chunk.front().first);
@@ -75,7 +66,7 @@
                 if (!chunkFile.is_open()) {
                     createTable(chunkFile);
                 }
-                size_t limit = getChunk().size();
+                size_t limit = chunk.size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
                     chunk.front().second->load(chunkFile, w);
                     chunk.pop();
@@ -102,6 +93,18 @@
 
             void Region::add(Chunk *chunk, Maths::Point2D<GLint> const& coord) {
                 this->chunk.push(std::pair<Maths::Point2D<GLint>, Chunk*>(coord, chunk));
+            }
+
+            Region& Region::operator=(Region const& reg) {
+                path = reg.path;
+                chunk = reg.chunk;
+                return *this;
+            }
+
+            Region& Region::operator=(Region && reg) {
+                path = std::move(reg.path);
+                chunk = std::move(reg.chunk);
+                return *this;
             }
 
         };
