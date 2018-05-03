@@ -17,6 +17,9 @@
             Date::Date(Date const& d) : h(d.getH()), m(d.getM()), s(d.getS()) {
             }
 
+            Date::Date(Date && d) : h(std::move(d.getH())), m(std::move(d.getM())), s(std::move(d.getS())) {
+            }
+
             Date::~Date() {
             }
 
@@ -54,6 +57,20 @@
                 setS(tmpS);
                 setM(tmpM);
                 setH(tmpH);
+            }
+
+            Date& Date::operator=(Date const& d) {
+                h = d.h;
+                m = d.m;
+                s = d.s;
+                return *this;
+            }
+
+            Date& Date::operator=(Date && d) {
+                h = std::move(d.h);
+                m = std::move(d.m);
+                s = std::move(d.s);
+                return *this;
             }
 
         };
