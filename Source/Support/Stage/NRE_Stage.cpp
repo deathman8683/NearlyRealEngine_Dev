@@ -24,37 +24,17 @@
                 viewport.createCurrent();
             }
 
-            Stage::Stage(Stage const& s) : window(s.getWindow()), viewport(s.getViewport()), context(s.getContext()) {
+            Stage::Stage(Stage && s) : window(std::move(s.window)), viewport(std::move(s.viewport)), context(std::move(s.context)) {
             }
 
             Stage::~Stage() {
-                SDL_GL_DeleteContext(getContext());
+                SDL_GL_DeleteContext(context);
 
                 SDL_Quit();
             }
 
-            SDL::Window const& Stage::getWindow() const {
-                return window;
-            }
-
             Viewport const& Stage::getViewport() const {
                 return viewport;
-            }
-
-            SDL_GLContext const& Stage::getContext() const {
-                return context;
-            }
-
-            void Stage::setWindow(SDL::Window const& w) {
-                window = w;
-            }
-
-            void Stage::setViewport(Viewport const& v) {
-                viewport = v;
-            }
-
-            void Stage::setContext(SDL_GLContext const& c) {
-                context = c;
             }
 
             void Stage::init() {
@@ -69,6 +49,10 @@
                 SDL_SetRelativeMouseMode(SDL_TRUE);
             }
 
+            void Stage::updateScreen() {
+                SDL_GL_SwapWindow(window.getItem());
+            }
+
             void Stage::initScreen() {
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, MAJOR_VERSION);
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, MINOR_VERSION);
@@ -77,7 +61,7 @@
                 SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, DEPTH_SIZE);
                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-                context = SDL_GL_CreateContext(getWindow().getItem());
+                context = SDL_GL_CreateContext(window.getItem());
                 if (context == NULL) {
                     throw (Exception::SDLException(std::string(SDL_GetError())));
                 }
@@ -88,6 +72,13 @@
                 if (err != GLEW_OK) {
                     throw (Exception::SupportException(std::string(reinterpret_cast <const char*> (glewGetErrorString(err)))));
                 }
+            }
+
+            Stage& Stage::operator=(Stage && s) {
+                window = std::move(s.window);
+                viewport = std::move(s.viewport);
+                context = std::move(s.context);
+                return *this;
             }
 
         };

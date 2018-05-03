@@ -29,39 +29,80 @@
              */
             class Stage {
                 private:
-                    SDL::Window window;
-                    Viewport viewport;
-                    SDL_GLContext context;
+                    SDL::Window window;     /**< The stage window */
+                    Viewport viewport;      /**< The stage viewport */
+                    SDL_GLContext context;  /**< The stage OpenGL context */
 
                 public:
                     //## Constructor ##//
-                    Stage();
-                    Stage(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord = Maths::Point2D<int>(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED));
+                        /**
+                         * Default Constructor
+                         */
+                        Stage();
+                        /**
+                         * Construct a stage with different parameters for the window construction
+                         * @param title the window title
+                         * @param size  the window size
+                         * @param coord the window position
+                         */
+                        Stage(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord = Maths::Point2D<int>(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED));
 
                     //## Copy-Constructor ##//
-                    Stage(Stage const& s);
+                        /**
+                         * No copy allowed
+                         * @param s the stage to copy the content
+                         */
+                        Stage(Stage const& s) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move s into this, leaving s empty
+                         * @param s the stage to move
+                         */
+                        Stage(Stage && w);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Stage();
+                        /**
+                         * Stage Deconstructor
+                         */
+                        ~Stage();
 
                     //## Getter ##//
-                    SDL::Window const& getWindow() const;
-                    Viewport const& getViewport() const;
-                    SDL_GLContext const& getContext() const;
+                        /**
+                         * Viewport getter
+                         * @return the stage viewport
+                         */
+                        Viewport const& getViewport() const;
 
                     //## Setter ##//
-                    void setWindow(SDL::Window const& w);
-                    void setViewport(Viewport const& v);
-                    void setContext(SDL_GLContext const& c);
 
                     //## Methods ##//
-                    void init();
+                        /**
+                         * Initialize the stage while calling SDL - GLEW - GL initialisation command
+                         */
+                        void init();
+                        /**
+                         * Refresh the screen
+                         */
+                        void updateScreen();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy allowed
+                         * @param s the stage to copy into this
+                         * @return the reference of himself
+                         */
+                        Stage& operator=(Stage const& w) = delete;
+                        /**
+                         * Move assigment of s into this, leaving s empty
+                         * @param s the stage to move into this
+                         * @return the reference of himself
+                         */
+                        Stage& operator=(Stage && w);
 
                     //## Shortcut Operator ##//
 
@@ -74,14 +115,20 @@
                     //## Shift Operator ##//
 
                 private:
+                    /**
+                     * Initialize the SDL Screen
+                     */
                     void initScreen();
+                    /**
+                     * Initialize OpenGL context
+                     */
                     void initGL();
 
-                    static Uint32 DEFAULT_FLAGS;
-                    static Uint32 SDL_INIT_FLAGS;
-                    static int MAJOR_VERSION;
-                    static int MINOR_VERSION;
-                    static int DEPTH_SIZE;
+                    static Uint32 DEFAULT_FLAGS;    /**< Default flags for the window */
+                    static Uint32 SDL_INIT_FLAGS;   /**< Default flags for the SDL init command */
+                    static int MAJOR_VERSION;       /**< Major version used for OpenGL */
+                    static int MINOR_VERSION;       /**< Minor version used for OpenGL */
+                    static int DEPTH_SIZE;          /**< Size of the window's depth buffer */
             };
 
         };

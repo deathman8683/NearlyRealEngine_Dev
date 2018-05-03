@@ -159,7 +159,7 @@
 
                 engineWorld.update(1);
 
-                SDL_GL_SwapWindow(engineStage.getWindow().getItem());
+                engineStage.updateScreen();
             }
         }
         catch (Exception::ExceptionHandler const& e) {
