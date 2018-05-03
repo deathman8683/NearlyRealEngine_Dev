@@ -10,6 +10,9 @@
             AdvancedDate::AdvancedDate(AdvancedDate const& t) : Date::Date(t), ms(t.getMs()) {
             }
 
+            AdvancedDate::AdvancedDate(AdvancedDate && t) : Date::Date(std::move(t)), ms(std::move(t.getMs())) {
+            }
+
             AdvancedDate::~AdvancedDate() {
             }
 
@@ -27,6 +30,18 @@
 
             void AdvancedDate::convertMs() {
                 Date::convertMs(getMs());
+            }
+
+            AdvancedDate& AdvancedDate::operator=(AdvancedDate const& t) {
+                Date::operator=(t);
+                ms = t.ms;
+                return *this;
+            }
+
+            AdvancedDate& AdvancedDate::operator=(AdvancedDate && t) {
+                Date::operator=(std::move(t));
+                ms = std::move(t.ms);
+                return *this;
             }
 
         };

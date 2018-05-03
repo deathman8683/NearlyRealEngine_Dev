@@ -27,33 +27,77 @@
              */
             class AdvancedDate : public Date {
                 private:
-                    GLint ms;
+                    GLint ms;   /**< The date in ms */
 
                 public:
                     //## Constructor ##//
-                    AdvancedDate();
+                        /**
+                         * Default Constructor
+                         */
+                        AdvancedDate();
 
                     //## Copy-Constructor ##//
-                    AdvancedDate(AdvancedDate const& t);
+                        /**
+                         * Copy t into this
+                         * @param t the advanced date to copy the content
+                         */
+                        AdvancedDate(AdvancedDate const& t);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move t into this, leaving t empty
+                         * @param t the advanced date to move
+                         */
+                        AdvancedDate(AdvancedDate && t);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~AdvancedDate();
+                        /**
+                         * AdvancedDate Deconstructor
+                         */
+                        virtual ~AdvancedDate();
 
                     //## Getter ##//
-                    GLint const& getMs() const;
+                        /**
+                         * Ms getter
+                         * @return the date in ms
+                         */
+                        GLint const& getMs() const;
 
                     //## Setter ##//
-                    void setMs(GLint const& t);
+                        /**
+                         * Ms setter
+                         * @param t the new ms value
+                         */
+                        void setMs(GLint const& t);
 
                     //## Methods ##//
-                    virtual void update(GLint const& increment);
-                    void convertMs();
+                        /**
+                         * Update the date with an increment
+                         * @param increment the increment to add
+                         */
+                        virtual void update(GLint const& increment);
+                        /**
+                         * Convert the ms value into a date
+                         */
+                        void convertMs();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of t into this
+                         * @param t the exception to copy into this
+                         * @return the reference of himself
+                         */
+                        AdvancedDate& operator=(AdvancedDate const& t);
+                        /**
+                         * Move assigment of t into this, leaving t empty
+                         * @param t the exception to move into this
+                         * @return the reference of himself
+                         */
+                        AdvancedDate& operator=(AdvancedDate && t);
 
                     //## Shortcut Operator ##//
 
