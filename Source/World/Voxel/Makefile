@@ -3,13 +3,11 @@ OBJ = $(OBJDIR)NRE_Voxel.o
 OBJDIR = ../../../obj/Debug/World/Voxel/
 
 TYPE = Type
-PACKED = PackedVertex
 
 all : before $(TARGET)
 
 before:
 	@(cd $(TYPE) && $(MAKE))
-	@(cd $(PACKED) && $(MAKE))
 
 debug: $(OBJ)
 

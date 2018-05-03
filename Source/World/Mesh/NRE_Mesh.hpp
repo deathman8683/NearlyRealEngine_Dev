@@ -8,7 +8,6 @@
 
     #pragma once
 
-    #include "../Voxel/PackedVertex/NRE_PackedVertex.hpp"
     #include "../Chunk/NRE_Chunk.hpp"
     #include "../NRE_World.hpp"
     #include <vector>
