@@ -26,23 +26,10 @@
                 fillBuffer();
             }
 
+            DeferredRenderer::DeferredRenderer(DeferredRenderer && def) : gBuffer(std::move(def.gBuffer)), ssao(std::move(def.ssao)), buffer(std::move(def.buffer)), vao(std::move(def.vao)) {
+            }
+
             DeferredRenderer::~DeferredRenderer() {
-            }
-
-            GL::FBO const& DeferredRenderer::getFrameBuffer() const {
-                return gBuffer;
-            }
-
-            SSAO const& DeferredRenderer::getSSAO() const {
-                return ssao;
-            }
-
-            GL::VBO const& DeferredRenderer::getBuffer() const {
-                return buffer;
-            }
-
-            GL::VAO const& DeferredRenderer::getVAO() const {
-                return vao;
             }
 
             void DeferredRenderer::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, EnvironmentMap const& skyBox) {
@@ -53,23 +40,23 @@
                     vao.bind();
 
                         glActiveTexture(GL_TEXTURE0);
-                        getFrameBuffer().getDepthBuffer()->bind();
-                            shader.use1I("texDepth", 0);
+                            gBuffer.getDepthBuffer()->bind();
+                                shader.use1I("texDepth", 0);
                         glActiveTexture(GL_TEXTURE1);
-                        getFrameBuffer().getColorBuffer(0)->bind();
-                            shader.use1I("texDiffuse", 1);
+                            gBuffer.getColorBuffer(0)->bind();
+                                shader.use1I("texDiffuse", 1);
                         glActiveTexture(GL_TEXTURE2);
-                        getFrameBuffer().getColorBuffer(1)->bind();
-                            shader.use1I("texNormal", 2);
+                            gBuffer.getColorBuffer(1)->bind();
+                                shader.use1I("texNormal", 2);
                         glActiveTexture(GL_TEXTURE4);
-                        skyBox.getIrradianceMap().bind();
-                            shader.use1I("irradianceMap", 4);
+                            skyBox.getIrradianceMap().bind();
+                                shader.use1I("irradianceMap", 4);
                         glActiveTexture(GL_TEXTURE5);
-                        skyBox.getPrefilterMap().bind();
-                            shader.use1I("prefilterMap", 5);
+                            skyBox.getPrefilterMap().bind();
+                                shader.use1I("prefilterMap", 5);
                         glActiveTexture(GL_TEXTURE6);
-                        skyBox.getBRDFLUT().bind();
-                            shader.use1I("brdfLUT", 6);
+                            skyBox.getBRDFLUT().bind();
+                                shader.use1I("brdfLUT", 6);
 
                         for (unsigned int i = 0; i < light.size(); i = i + 1) {
                             std::ostringstream index;
@@ -104,17 +91,17 @@
                         glActiveTexture(GL_TEXTURE4);
                             skyBox.getIrradianceMap().unbind();
                         glActiveTexture(GL_TEXTURE2);
-                            getFrameBuffer().getColorBuffer(1)->unbind();
+                            gBuffer.getColorBuffer(1)->unbind();
                         glActiveTexture(GL_TEXTURE1);
-                            getFrameBuffer().getColorBuffer(0)->unbind();
+                            gBuffer.getColorBuffer(0)->unbind();
                         glActiveTexture(GL_TEXTURE0);
-                            getFrameBuffer().getDepthBuffer()->unbind();
+                            gBuffer.getDepthBuffer()->unbind();
                     vao.unbind();
                 glUseProgram(0);
             }
 
             void DeferredRenderer::startGBufferPass() {
-                getFrameBuffer().bind();
+                gBuffer.bind();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
@@ -122,11 +109,11 @@
             }
 
             void DeferredRenderer::endGBufferPass() {
-                getFrameBuffer().unbind();
+                gBuffer.unbind();
             }
 
             void DeferredRenderer::SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection) {
-                getFrameBuffer().bind();
+                gBuffer.bind();
                     glDepthMask(false);
                     glColorMask(false, false, false, true);
 
@@ -137,14 +124,14 @@
                         vao.bind();
 
                             glActiveTexture(GL_TEXTURE0);
-                            getFrameBuffer().getDepthBuffer()->bind();
-                                shader.use1I("texDepth", 0);
+                                gBuffer.getDepthBuffer()->bind();
+                                    shader.use1I("texDepth", 0);
                             glActiveTexture(GL_TEXTURE1);
-                            getFrameBuffer().getColorBuffer(1)->bind();
-                                shader.use1I("texNormal", 1);
+                                gBuffer.getColorBuffer(1)->bind();
+                                    shader.use1I("texNormal", 1);
                             glActiveTexture(GL_TEXTURE2);
-                            getSSAO().getNoise()->bind();
-                                shader.use1I("texNoise", 2);;
+                                ssao.getNoise()->bind();
+                                    shader.use1I("texNoise", 2);;
 
                             shader.useMat4("projection", 1, &projection);
                             shader.useMat4("invProjection", 1, &invProjection);
@@ -154,16 +141,16 @@
                             glDrawArrays(GL_TRIANGLES, 0, 6);
 
                             glActiveTexture(GL_TEXTURE2);
-                                getSSAO().getNoise()->unbind();
+                                ssao.getNoise()->unbind();
                             glActiveTexture(GL_TEXTURE1);
-                                getFrameBuffer().getColorBuffer(1)->unbind();
+                                gBuffer.getColorBuffer(1)->unbind();
                             glActiveTexture(GL_TEXTURE0);
-                                getFrameBuffer().getDepthBuffer()->unbind();
+                                gBuffer.getDepthBuffer()->unbind();
                         vao.unbind();
                     shader.unbind();
                     glColorMask(true, true, true, true);
                     glDepthMask(true);
-                getFrameBuffer().unbind();
+                gBuffer.unbind();
             }
 
             void DeferredRenderer::fillBuffer() {
@@ -188,6 +175,14 @@
 
                 buffer.allocateAndFill(sizeof(GLint), 6, GL_STREAM_DRAW, data);
                 vao.access(buffer, GL_INT, true);
+            }
+
+            DeferredRenderer& DeferredRenderer::operator=(DeferredRenderer && def) {
+                gBuffer = std::move(def.gBuffer);
+                ssao = std::move(def.ssao);
+                buffer = std::move(def.buffer);
+                vao = std::move(def.vao);
+                return *this;
             }
 
         };
