@@ -11,8 +11,7 @@
                 createWindow(title, coord, size, flags);
             }
 
-            Window::Window(Window const& w) {
-                item = w.getItem();
+            Window::Window(Window && w) : item(std::move(w.item)) {
             }
 
             Window::Window(SDL_Window* const& w) : item(w) {
@@ -58,10 +57,6 @@
                 return Maths::Vector2D<int>(w, h);
             }
 
-            void Window::setItem(SDL_Window* const& w) {
-                item = w;
-            }
-
             void Window::setBrightness(NREfloat const& brightness) {
                 SDL_SetWindowBrightness(item, brightness);
             }
@@ -91,6 +86,11 @@
                 if (item == NULL) {
                     throw (Exception::SDLException(std::string(SDL_GetError())));
                 }
+            }
+
+            Window& Window::operator=(Window && w) {
+                item = std::move(w.item);
+                return *this;
             }
 
 

@@ -30,46 +30,144 @@
              */
             class Window {
                 private:
-                    SDL_Window* item;
+                    SDL_Window* item;   /**< SDL wrapped item */
 
                 public:
                     //## Constructor ##//
-                    Window();
-                    Window(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags);
+                        /**
+                         * Default Constructor
+                         */
+                        Window();
+                        /**
+                         * Construct a window with her attributes
+                         * @param title the window title
+                         * @param coord the window position on screen
+                         * @param size  the window size
+                         * @param flags the window flag in initialisation
+                         */
+                        Window(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags);
 
                     //## Copy-Constructor ##//
-                    Window(Window const& w);
+                        /**
+                         * No copy allowed
+                         * @param w the window to copy the content
+                         */
+                        Window(Window const& w) = delete;
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move w into this, leaving w empty
+                         * @param w the window to move
+                         */
+                        Window(Window && w);
 
                     //## Convertor ##//
-                    Window(SDL_Window* const& w);
+                        /**
+                         * Convert a C-style SDL_Window into his wrapped version
+                         * @param w the C-style SDL_Window
+                         */
+                        Window(SDL_Window* const& w);
 
                     //## Deconstructor ##//
-                    virtual ~Window();
+                        /**
+                         * Window Deconstructor
+                         */
+                        virtual ~Window();
 
                     //## Getter ##//
-                    SDL_Window* const& getItem() const;
-                    NREfloat const getBrightness() const;
-                    std::string const getTitle() const;
-                    Maths::Vector2D<int> const getSize() const;
-                    Maths::Point2D<int> const getCoord() const;
-                    Maths::Vector2D<int> const getMinSize() const;
-                    Maths::Vector2D<int> const getMaxSize() const;
+                        /**
+                         * Wrapped Item getter
+                         * @return the wrapped item
+                         */
+                        SDL_Window* const& getItem() const;
+                        /**
+                         * Brightness getter
+                         * @return the window's brightness
+                         */
+                        NREfloat const getBrightness() const;
+                        /**
+                         * Title getter
+                         * @return the window's title
+                         */
+                        std::string const getTitle() const;
+                        /**
+                         * Size getter
+                         * @return the window's size
+                         */
+                        Maths::Vector2D<int> const getSize() const;
+                        /**
+                         * Position getter
+                         * @return the window's position
+                         */
+                        Maths::Point2D<int> const getCoord() const;
+                        /**
+                         * Minimum size getter
+                         * @return the window's minimum size
+                         */
+                        Maths::Vector2D<int> const getMinSize() const;
+                        /**
+                         * Maximum size getter
+                         * @return the window's maximum size
+                         */
+                        Maths::Vector2D<int> const getMaxSize() const;
 
                     //## Setter ##//
-                    void setItem(SDL_Window* const& w);
-                    void setBrightness(NREfloat const& brightness);
-                    void setTitle(std::string const& title);
-                    void setSize(Maths::Vector2D<int> const& size);
-                    void setCoord(Maths::Point2D<int> const& coord);
-                    void setMinSize(Maths::Vector2D<int> const& minSize);
-                    void setMaxSize(Maths::Vector2D<int> const& maxSize);
+                        /**
+                         * Brightness setter
+                         * @param brightness the new brightness value
+                         */
+                        void setBrightness(NREfloat const& brightness);
+                        /**
+                         * Title setter
+                         * @param title the new title value
+                         */
+                        void setTitle(std::string const& title);
+                        /**
+                         * Size setter
+                         * @param size the new size value
+                         */
+                        void setSize(Maths::Vector2D<int> const& size);
+                        /**
+                         * Position setter
+                         * @param coord the new position value
+                         */
+                        void setCoord(Maths::Point2D<int> const& coord);
+                        /**
+                         * Minimum size setter
+                         * @param minSize the new minimum size value
+                         */
+                        void setMinSize(Maths::Vector2D<int> const& minSize);
+                        /**
+                         * Maximum size setter
+                         * @param maxSize the new maximum size value
+                         */
+                        void setMaxSize(Maths::Vector2D<int> const& maxSize);
 
                     //## Methods ##//
-                    void createWindow(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags);
+                        /**
+                         * Call the SDL command to create a window with different attributes
+                         * @param title the window title
+                         * @param coord the window position on screen
+                         * @param size  the window size
+                         * @param flags the window flag in initialisation
+                         */
+                        void createWindow(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy allowed
+                         * @param w the window to copy into this
+                         * @return the reference of himself
+                         */
+                        Window& operator=(Window const& w) = delete;
+                        /**
+                         * Move assigment of w into this, leaving w empty
+                         * @param w the window to move into this
+                         * @return the reference of himself
+                         */
+                        Window& operator=(Window && w);
 
                     //## Shortcut Operator ##//
 
