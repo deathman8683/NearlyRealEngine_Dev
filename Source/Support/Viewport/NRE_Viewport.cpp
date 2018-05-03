@@ -19,6 +19,9 @@
             Viewport::Viewport(Viewport const& v) : coord(v.getCoord()), size(v.getSize()) {
             }
 
+            Viewport::Viewport(Viewport && v) : coord(std::move(v.getCoord())), size(std::move(v.getSize())) {
+            }
+
             Viewport::~Viewport() {
             }
 
@@ -43,6 +46,18 @@
                 glGetIntegerv(GL_VIEWPORT, tmp);
                 setCoord(Maths::Point2D<GLushort>(tmp[0], tmp[1]));
                 setSize(Maths::Vector2D<GLushort>(tmp[2], tmp[3]));
+            }
+
+            Viewport& Viewport::operator=(Viewport const& v) {
+                coord = v.getCoord();
+                size = v.getSize();
+                return *this;
+            }
+
+            Viewport& Viewport::operator=(Viewport && v) {
+                coord = std::move(v.getCoord());
+                size = std::move(v.getSize());
+                return *this;
             }
 
         };

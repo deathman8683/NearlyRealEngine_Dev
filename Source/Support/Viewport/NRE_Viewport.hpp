@@ -28,37 +28,94 @@
              */
             class Viewport {
                 private:
-                    Maths::Point2D<GLushort> coord;
-                    Maths::Vector2D<GLushort> size;
+                    Maths::Point2D<GLushort> coord; /**< The viewport position */
+                    Maths::Vector2D<GLushort> size; /**< The viewport size */
 
                 public:
                     //## Constructor ##//
-                    Viewport();
-                    Viewport(bool const& createCurrentViewport);
-                    Viewport(Maths::Point2D<GLushort> const& coord, Maths::Vector2D<GLushort> const& size);
+                        /**
+                         * Default Constructor
+                         */
+                        Viewport();
+                        /**
+                         * Construct the viewport with the current screen size
+                         * @param createCurrentViewport tell if the viewport is constructed with the current screen size
+                         */
+                        Viewport(bool const& createCurrentViewport);
+                        /**
+                         * Construct a viewport with passed attributes
+                         * @param coord the viewport posittion
+                         * @param size  the viewport size
+                         */
+                        Viewport(Maths::Point2D<GLushort> const& coord, Maths::Vector2D<GLushort> const& size);
 
                     //## Copy-Constructor ##//
-                    Viewport(Viewport const& v);
+                        /**
+                         * Copy v into this
+                         * @param v the viewport to copy the content
+                         */
+                        Viewport(Viewport const& v);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move v into this, leaving v empty
+                         * @param v the viewport to move
+                         */
+                        Viewport(Viewport && v);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Viewport();
+                        /**
+                         * Viewport Deconstructor
+                         */
+                        ~Viewport();
 
                     //## Getter ##//
-                    Maths::Point2D<GLushort> const& getCoord() const;
-                    Maths::Vector2D<GLushort> const& getSize() const;
+                        /**
+                         * Position getter
+                         * @return the viewport position
+                         */
+                        Maths::Point2D<GLushort> const& getCoord() const;
+                        /**
+                         * Size getter
+                         * @return the viewport size
+                         */
+                        Maths::Vector2D<GLushort> const& getSize() const;
 
                     //## Setter ##//
-                    void setCoord(Maths::Point2D<GLushort> const& coord);
-                    void setSize(Maths::Vector2D<GLushort> const& size);
+                        /**
+                         * Position setter
+                         * @param coord the new viewport position
+                         */
+                        void setCoord(Maths::Point2D<GLushort> const& coord);
+                        /**
+                         * Size setter
+                         * @param size the new viewport size
+                         */
+                        void setSize(Maths::Vector2D<GLushort> const& size);
 
                     //## Methods ##//
-                    void createCurrent();
+                        /**
+                         * Construct the viewport from the current OpenGL screen
+                         */
+                        void createCurrent();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of v into this
+                         * @param v the viewport to copy into this
+                         * @return the reference of himself
+                         */
+                        Viewport& operator=(Viewport const& v);
+                        /**
+                         * Move assigment of v into this, leaving v empty
+                         * @param v the viewport to move into this
+                         * @return the reference of himself
+                         */
+                        Viewport& operator=(Viewport && v);
 
                     //## Shortcut Operator ##//
 
