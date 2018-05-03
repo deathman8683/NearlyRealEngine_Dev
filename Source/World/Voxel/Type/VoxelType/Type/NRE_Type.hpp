@@ -29,15 +29,33 @@
             class Void : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Void();
+                        /**
+                         * Default Constructor
+                         */
+                        Void();
 
                     //## Deconstructor ##//
-                    virtual ~Void();
+                        /**
+                         * Void Deconstructor
+                         */
+                        ~Void();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -47,15 +65,33 @@
             class Ocean : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Ocean();
+                        /**
+                         * Default Constructor
+                         */
+                         Ocean();
 
                     //## Deconstructor ##//
-                    virtual ~Ocean();
+                        /**
+                         * Ocean Deconstructor
+                         */
+                        ~Ocean();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -65,15 +101,33 @@
             class Beach : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Beach();
+                        /**
+                         * Default Constructor
+                         */
+                        Beach();
 
                     //## Deconstructor ##//
-                    virtual ~Beach();
+                        /**
+                         * Beach Deconstructor
+                         */
+                        ~Beach();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -83,15 +137,33 @@
             class Scorched : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Scorched();
+                        /**
+                         * Default Constructor
+                         */
+                        Scorched();
 
                     //## Deconstructor ##//
-                    virtual ~Scorched();
+                        /**
+                         * Scorched Deconstructor
+                         */
+                        ~Scorched();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -101,15 +173,33 @@
             class Bare : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Bare();
+                        /**
+                         * Default Constructor
+                         */
+                        Bare();
 
                     //## Deconstructor ##//
-                    virtual ~Bare();
+                        /**
+                         * Bare Deconstructor
+                         */
+                        ~Bare();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -119,15 +209,33 @@
             class Tundra : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Tundra();
+                        /**
+                         * Default Constructor
+                         */
+                        Tundra();
 
                     //## Deconstructor ##//
-                    virtual ~Tundra();
+                        /**
+                         * Tundra Deconstructor
+                         */
+                        ~Tundra();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -137,15 +245,33 @@
             class Snow : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Snow();
+                        /**
+                         * Default Constructor
+                         */
+                        Snow();
 
                     //## Deconstructor ##//
-                    virtual ~Snow();
+                        /**
+                         * Snow Deconstructor
+                         */
+                        ~Snow();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -155,15 +281,33 @@
             class TemperateDesert : public VoxelType {
                 public:
                     //## Constructor ##//
-                    TemperateDesert();
+                        /**
+                         * Default Constructor
+                         */
+                        TemperateDesert();
 
                     //## Deconstructor ##//
-                    virtual ~TemperateDesert();
+                        /**
+                         * TemperateDesert Deconstructor
+                         */
+                        ~TemperateDesert();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -173,15 +317,33 @@
             class SubtropicalDesert : public VoxelType {
                 public:
                     //## Constructor ##//
-                    SubtropicalDesert();
+                        /**
+                         * Default Constructor
+                         */
+                        SubtropicalDesert();
 
                     //## Deconstructor ##//
-                    virtual ~SubtropicalDesert();
+                        /**
+                         * SubtropicalDesert Deconstructor
+                         */
+                        ~SubtropicalDesert();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -191,15 +353,33 @@
             class Shrubland : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Shrubland();
+                        /**
+                         * Default Constructor
+                         */
+                        Shrubland();
 
                     //## Deconstructor ##//
-                    virtual ~Shrubland();
+                        /**
+                         * Shrubland Deconstructor
+                         */
+                        ~Shrubland();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -209,15 +389,33 @@
             class Taiga : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Taiga();
+                        /**
+                         * Default Constructor
+                         */
+                        Taiga();
 
                     //## Deconstructor ##//
-                    virtual ~Taiga();
+                        /**
+                         * Taiga Deconstructor
+                         */
+                        ~Taiga();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -227,15 +425,33 @@
             class Grassland : public VoxelType {
                 public:
                     //## Constructor ##//
-                    Grassland();
+                        /**
+                         * Default Constructor
+                         */
+                        Grassland();
 
                     //## Deconstructor ##//
-                    virtual ~Grassland();
+                        /**
+                         * Grassland Deconstructor
+                         */
+                        ~Grassland();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -245,15 +461,33 @@
             class TemperateDeciduousForest : public VoxelType {
                 public:
                     //## Constructor ##//
-                    TemperateDeciduousForest();
+                        /**
+                         * Default Constructor
+                         */
+                        TemperateDeciduousForest();
 
                     //## Deconstructor ##//
-                    virtual ~TemperateDeciduousForest();
+                        /**
+                         * TemperateDeciduousForest Deconstructor
+                         */
+                        ~TemperateDeciduousForest();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -263,15 +497,33 @@
             class TemperateRainForest : public VoxelType {
                 public:
                     //## Constructor ##//
-                    TemperateRainForest();
+                        /**
+                         * Default Constructor
+                         */
+                        TemperateRainForest();
 
                     //## Deconstructor ##//
-                    virtual ~TemperateRainForest();
+                        /**
+                         * TemperateRainForest Deconstructor
+                         */
+                        ~TemperateRainForest();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -281,15 +533,33 @@
             class TropicalSeasonalForest : public VoxelType {
                 public:
                     //## Constructor ##//
-                    TropicalSeasonalForest();
+                        /**
+                         * Default Constructor
+                         */
+                        TropicalSeasonalForest();
 
                     //## Deconstructor ##//
-                    virtual ~TropicalSeasonalForest();
+                        /**
+                         * TropicalSeasonalForest Deconstructor
+                         */
+                        ~TropicalSeasonalForest();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
             /**
@@ -299,15 +569,33 @@
             class TropicalRainForest : public VoxelType {
                 public:
                     //## Constructor ##//
-                    TropicalRainForest();
+                        /**
+                         * Default Constructor
+                         */
+                        TropicalRainForest();
 
                     //## Deconstructor ##//
-                    virtual ~TropicalRainForest();
+                        /**
+                         * TropicalRainForest Deconstructor
+                         */
+                        ~TropicalRainForest();
 
                     //## Getter ##//
-                    Color::RGB const getColor() const;
-                    bool const isSolid() const;
-                    Renderer::Material const getMaterial() const;
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
             };
 
         };
