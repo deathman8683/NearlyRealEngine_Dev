@@ -88,13 +88,13 @@
                     //## Assignment Operator ##//
                         /**
                          * Copy assigment of t into this
-                         * @param t the exception to copy into this
+                         * @param t the advanced date to copy into this
                          * @return the reference of himself
                          */
                         AdvancedDate& operator=(AdvancedDate const& t);
                         /**
                          * Move assigment of t into this, leaving t empty
-                         * @param t the exception to move into this
+                         * @param t the advanced date to move into this
                          * @return the reference of himself
                          */
                         AdvancedDate& operator=(AdvancedDate && t);

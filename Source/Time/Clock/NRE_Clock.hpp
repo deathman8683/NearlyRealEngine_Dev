@@ -31,27 +31,64 @@
 
                 public:
                     //## Constructor ##//
-                    Clock();
+                        /**
+                         * Default Constructor
+                         */
+                        Clock();
 
                     //## Copy-Constructor ##//
-                    Clock(Clock const& c);
+                        /**
+                         * Copy c into this
+                         * @param c the clock to copy the content
+                         */
+                        Clock(Clock const& c);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move c into this, leaving c empty
+                         * @param c the clock to move
+                         */
+                        Clock(Clock && c);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~Clock();
+                        /**
+                         * Clock Deconstructor
+                         */
+                        ~Clock();
 
                     //## Getter ##//
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void updateTimestep(NREfloat const& minTimestep);
-                    void updateTime(bool const& convert);
+                        /**
+                         * Update the timestep with a minimum timestep to get, freeze the program if inferior
+                         * @param minTimestep the minimum timestep
+                         */
+                        void updateTimestep(NREfloat const& minTimestep);
+                        /**
+                         * Update the clock's date
+                         * @param convert tell if the object have to convert the ms value into a date
+                         */
+                        void updateTime(bool const& convert);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of c into this
+                         * @param c the clock to copy into this
+                         * @return the reference of himself
+                         */
+                        Clock& operator=(Clock const& c);
+                        /**
+                         * Move assigment of c into this, leaving c empty
+                         * @param c the clock to move into this
+                         * @return the reference of himself
+                         */
+                        Clock& operator=(Clock && c);
 
                     //## Shortcut Operator ##//
 
