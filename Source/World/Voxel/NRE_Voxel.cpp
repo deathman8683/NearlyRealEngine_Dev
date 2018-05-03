@@ -16,6 +16,9 @@
             Voxel::Voxel(Voxel const& vox) : type(vox.getType()) {
             }
 
+            Voxel::Voxel(Voxel && vox) : type(std::move(vox.getType())) {
+            }
+
             Voxel::~Voxel() {
             }
 
@@ -100,6 +103,16 @@
                     iBuf[35] = 3;
 
                 return NB_INDEX;
+            }
+
+            Voxel& Voxel::operator=(Voxel const& vox) {
+                type = vox.getType();
+                return *this;
+            }
+
+            Voxel& Voxel::operator=(Voxel && vox) {
+                type = std::move(vox.getType());
+                return *this;
             }
         };
     };
