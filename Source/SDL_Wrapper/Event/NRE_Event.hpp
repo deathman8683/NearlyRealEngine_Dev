@@ -28,7 +28,7 @@
              */
             class Event {
                 private:
-                    SDL_Event item;
+                    SDL_Event item;     /**< SDL wrapped item */
 
                 public:
                     //## Constructor ##//

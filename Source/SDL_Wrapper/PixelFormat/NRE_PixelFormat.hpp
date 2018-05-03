@@ -27,8 +27,8 @@
              */
             class PixelFormat {
                 private:
-                    SDL_PixelFormat* item;
-                    bool allocated;
+                    SDL_PixelFormat* item;  /**< SDL wrapped item */
+                    bool allocated;         /**< Tell if the pixelFormat was allocated or not */
 
                 public:
                     //## Constructor ##//
