@@ -28,41 +28,81 @@
              */
             class ShaderBase {
                 private:
-                    GLuint id;
-                    std::string path;
+                    GLuint id;          /**< The shader base OpenGL id */
+                    std::string path;   /**< The shade base path */
 
                 public:
                     //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
                         ShaderBase();
+                        /**
+                         * Construct a shader base with his shader path
+                         * @param path the path to the shader program
+                         */
                         ShaderBase(std::string const& path);
 
                     //## Copy-Constructor ##//
+                        /**
+                         * No copy allowed
+                         * @param s the shader base to copy
+                         */
                         ShaderBase(ShaderBase const& s) = delete;
 
                     //## Move-Constructor ##//
+                        /**
+                         * Move s into this, leaving s empty
+                         * @param s the shader base to move
+                         */
                         ShaderBase(ShaderBase && s);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
+                        /**
+                         * ShaderBase Deconstructor
+                         */
                         virtual ~ShaderBase();
 
                     //## Getter ##//
+                        /**
+                         * ID getter
+                         * @return the program id
+                         */
                         GLuint const& getID() const;
+                        /**
+                         * Path getter
+                         * @return the shader path
+                         */
                         std::string const& getPath() const;
+                        /**
+                         * Type getter
+                         * @return return the shader program type, used to differentiate derived shader
+                         */
                         virtual GLenum const getType() const = 0;
 
                     //## Setter ##//
-                        void setID(GLuint const& id);
-                        void setPath(std::string const& path);
 
                     //## Methods ##//
+                        /**
+                         * Compile the current shader
+                         */
                         void compile();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * No copy assigment allowed
+                         * @param s the shader base to copy
+                         */
                         ShaderBase& operator=(ShaderBase const& base) = delete;
+                        /**
+                         * Move assigment of s into this, leaving s empty
+                         * @param s the shader base to move into this
+                         * @return the reference of himself
+                         */
                         ShaderBase& operator=(ShaderBase && base);
 
                     //## Shortcut Operator ##//

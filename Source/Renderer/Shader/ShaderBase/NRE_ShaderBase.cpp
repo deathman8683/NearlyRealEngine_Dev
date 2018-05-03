@@ -25,14 +25,6 @@
                 return path;
             }
 
-            void ShaderBase::setID(GLuint const& id) {
-                this->id = id;
-            }
-
-            void ShaderBase::setPath(std::string const& path) {
-                this->path = path;
-            }
-
             void ShaderBase::compile() {
                 if (path.empty()) {
                     throw (Exception::ShaderException("No path selected"));
