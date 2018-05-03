@@ -17,6 +17,9 @@
                 capture(path, captureShader, irradianceShader, prefilterShader, BRDFShader);
             }
 
+            EnvironmentMap::EnvironmentMap(EnvironmentMap && map) : map(std::move(map.map)), irradianceMap(std::move(map.irradianceMap)), prefilterMap(std::move(map.prefilterMap)), brdfLUT(std::move(map.brdfLUT)), buffer(std::move(map.buffer)), vao(std::move(map.vao)) {
+            }
+
             EnvironmentMap::~EnvironmentMap() {
             }
 
@@ -254,6 +257,16 @@
                 quadVAO.bind();
                     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
                 quadVAO.unbind();
+            }
+
+            EnvironmentMap& EnvironmentMap::operator=(EnvironmentMap && map) {
+                this->map = std::move(map.map);
+                irradianceMap = std::move(map.irradianceMap);
+                prefilterMap = std::move(map.prefilterMap);
+                brdfLUT = std::move(map.brdfLUT);
+                buffer = std::move(map.buffer);
+                vao = std::move(map.vao);
+                return *this;
             }
 
         };
