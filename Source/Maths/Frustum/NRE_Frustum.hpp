@@ -24,7 +24,8 @@
         namespace Maths {
 
             /**
-             * @enum regroup constant for box's faces managing
+             * @enum BoxFace
+             * Regroup constant for box's faces managing
              */
             enum BoxFace {
                 TOP,        /**< The top face */

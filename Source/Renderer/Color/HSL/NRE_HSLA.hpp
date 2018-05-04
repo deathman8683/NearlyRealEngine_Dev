@@ -18,7 +18,7 @@
     namespace NRE {
         /**
          * @namespace Color
-         * @brief <Module_Desc>
+         * @brief Engine's Color's Managment System>
          */
         namespace Color {
 

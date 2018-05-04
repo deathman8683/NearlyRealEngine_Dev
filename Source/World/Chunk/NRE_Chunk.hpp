@@ -292,13 +292,13 @@
                          * @param c the chunk to copy into this
                          * @return the reference of himself
                          */
-                        Chunk& operator=(Chunk const& mesh) = delete;
+                        Chunk& operator=(Chunk const& c) = delete;
                         /**
                          * Move assigment of c into this, leaving c empty
                          * @param c the chunk to move into this
                          * @return the reference of himself
                          */
-                        Chunk& operator=(Chunk && mesh);
+                        Chunk& operator=(Chunk && c);
 
                     //## Shortcut Operator ##//
 

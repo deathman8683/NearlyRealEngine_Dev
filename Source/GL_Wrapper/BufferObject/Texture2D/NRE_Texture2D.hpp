@@ -1,6 +1,6 @@
 
     /**
-     * @file NRE_Texture.hpp
+     * @file NRE_Texture2D.hpp
      * @brief Declaration of Engine's GL's Object : Texture2D
      * @author Louis ABEL
      * @version 1.0
@@ -64,7 +64,7 @@
                          * Move tex into this, leaving tex empty
                          * @param tex the texture to move
                          */
-                        Texture2D(Texture2D && buf);
+                        Texture2D(Texture2D && tex);
 
                     //## Convertor ##//
 

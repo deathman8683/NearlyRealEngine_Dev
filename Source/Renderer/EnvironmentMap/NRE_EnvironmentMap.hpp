@@ -65,7 +65,7 @@
                     //## Move-Constructor ##//
                         /**
                          * Move map into this, leaving map empty
-                         * @param buf the environment map to move
+                         * @param map the environment map to move
                          */
                         EnvironmentMap(EnvironmentMap && map);
 

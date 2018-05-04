@@ -59,7 +59,7 @@
                          * Move s into this, leaving s empty
                          * @param s the stage to move
                          */
-                        Stage(Stage && w);
+                        Stage(Stage && s);
 
                     //## Convertor ##//
 
@@ -96,13 +96,13 @@
                          * @param s the stage to copy into this
                          * @return the reference of himself
                          */
-                        Stage& operator=(Stage const& w) = delete;
+                        Stage& operator=(Stage const& s) = delete;
                         /**
                          * Move assigment of s into this, leaving s empty
                          * @param s the stage to move into this
                          * @return the reference of himself
                          */
-                        Stage& operator=(Stage && w);
+                        Stage& operator=(Stage && s);
 
                     //## Shortcut Operator ##//
 

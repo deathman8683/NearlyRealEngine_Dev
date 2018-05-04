@@ -152,7 +152,7 @@
                         void setGLW(GLsizei const& w);
                         /**
                          * GL height setter
-                         * @param w the new gl height value
+                         * @param h the new gl height value
                          */
                         void setGLH(GLsizei const& h);
                         /**

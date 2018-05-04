@@ -165,6 +165,7 @@
                          * @param z    the voxel z coordinates in chunk referencial
                          * @param type the voxel type
                          * @param p    an array of point designating the 4 point of the mesh for the current voxel face
+                         * @param face tell which face is being merged
                          */
                         void mergeVoxels(World* w, GLuint x, GLuint y, GLuint z, GLint const& type, Maths::Point3D<GLint> (&p)[4], int const& face);
                         /**

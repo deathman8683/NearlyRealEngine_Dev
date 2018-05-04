@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['s',['s',['../class_n_r_e_1_1_color_1_1_h_s_l.html#a3971505f5f9add310298d60af22b8e24',1,'NRE::Color::HSL']]]
+  ['near',['near',['../class_n_r_e_1_1_maths_1_1_frustum.html#a21ab629ba963f0c2fb374e95421d97d2',1,'NRE::Maths::Frustum']]]
 ];

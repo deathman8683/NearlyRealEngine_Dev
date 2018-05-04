@@ -56,7 +56,7 @@
                     //## Move-Constructor ##//
                         /**
                          * Move mat into this, leaving mat empty
-                         * @param pmmat the material to move
+                         * @param mat the material to move
                          */
                         Material(Material && mat);
 

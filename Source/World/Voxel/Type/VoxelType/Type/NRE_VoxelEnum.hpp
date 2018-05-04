@@ -1,6 +1,6 @@
 
     /**
-     * @file NRE_NRE_VoxelEnum.hpp
+     * @file NRE_VoxelEnum.hpp
      * @brief Declaration of Engine's Voxel's Object : TypeEnum
      * @author Louis ABEL
      * @version 1.0
@@ -20,7 +20,8 @@
         namespace World {
 
             /**
-             * @enum regroup all different voxel type name
+             * @enum VoxelTypeEnum
+             * Regroup all different voxel type name
              */
             enum VoxelTypeEnum {
                 VOID,
@@ -44,7 +45,8 @@
             };
 
             /**
-             * @enum regroup voxel face designation
+             * @enum VoxelFace
+             * Regroup voxel face designation
              */
             enum VoxelFace {
                 XNegative,  /**< Back */

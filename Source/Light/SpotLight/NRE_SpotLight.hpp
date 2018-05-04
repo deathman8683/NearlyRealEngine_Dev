@@ -39,7 +39,7 @@
                          * @param coord     the light's position
                          * @param color     the light's color
                          * @param direction the light's direction
-                         * @param direction the light's cutoff angle
+                         * @param angle     the light's cutoff angle
                          */
                         SpotLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction, NREfloat const& angle);
 

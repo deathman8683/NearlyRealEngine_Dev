@@ -46,16 +46,16 @@
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param s the shader base to copy
+                         * @param base the shader base to copy
                          */
-                        ShaderBase(ShaderBase const& s) = delete;
+                        ShaderBase(ShaderBase const& base) = delete;
 
                     //## Move-Constructor ##//
                         /**
-                         * Move s into this, leaving s empty
-                         * @param s the shader base to move
+                         * Move base into this, leaving base empty
+                         * @param base the shader base to move
                          */
-                        ShaderBase(ShaderBase && s);
+                        ShaderBase(ShaderBase && base);
 
                     //## Convertor ##//
 
@@ -95,12 +95,12 @@
                     //## Assignment Operator ##//
                         /**
                          * No copy assigment allowed
-                         * @param s the shader base to copy
+                         * @param base the shader base to copy
                          */
                         ShaderBase& operator=(ShaderBase const& base) = delete;
                         /**
-                         * Move assigment of s into this, leaving s empty
-                         * @param s the shader base to move into this
+                         * Move assigment of base into this, leaving base empty
+                         * @param base the shader base to move into this
                          * @return the reference of himself
                          */
                         ShaderBase& operator=(ShaderBase && base);

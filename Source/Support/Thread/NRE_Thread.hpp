@@ -95,7 +95,7 @@
                          * @param t the thread to move into this
                          * @return the reference of himself
                          */
-                        Thread& operator=(Thread && w);
+                        Thread& operator=(Thread && t);
 
                     //## Shortcut Operator ##//
 

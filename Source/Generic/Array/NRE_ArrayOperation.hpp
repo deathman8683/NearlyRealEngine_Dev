@@ -1,6 +1,6 @@
 
     /**
-     * @file NRE_<Class>.hpp
+     * @file NRE_ArrayOperation.hpp
      * @brief Declaration of Engine's Array's Function
      * @author Louis ABEL
      * @version 1.0

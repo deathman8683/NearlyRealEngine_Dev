@@ -277,6 +277,10 @@
         template <>
         class hash<NRE::Maths::Point2D<GLint>> {
             public:
+                /**
+                 * Compute a hash for a 2D integer point
+                 * @return the computed hash
+                 */
                 size_t operator()(NRE::Maths::Point2D<GLint> const& p) const
                 {
                     size_t h1 = p.getX();

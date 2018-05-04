@@ -23,7 +23,8 @@
         namespace Physics {
 
             /**
-             * @enum regroup constant for collision's test signification
+             * @enum CollisionResult
+             * Regroup constant for collision's test signification
              */
             enum CollisionResult {
                 OUTSIDE,    /**< The tested object isn't in collision */

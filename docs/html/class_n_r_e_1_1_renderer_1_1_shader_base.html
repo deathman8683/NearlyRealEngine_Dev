@@ -93,10 +93,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a26cef8a6e2e9ff89558221ae411e566e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a784492267f91d823fa36325653b48727"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a784492267f91d823fa36325653b48727">ShaderBase</a> (std::string const &amp;path)</td></tr>
 <tr class="separator:a784492267f91d823fa36325653b48727"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b1bc3a37e207d1dc5cffc9b317d1a6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a2b1bc3a37e207d1dc5cffc9b317d1a6a">ShaderBase</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> const &amp;s)=delete</td></tr>
-<tr class="separator:a2b1bc3a37e207d1dc5cffc9b317d1a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bc887fa97b783058019d2c03ca66099"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a6bc887fa97b783058019d2c03ca66099">ShaderBase</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> &amp;&amp;s)</td></tr>
-<tr class="separator:a6bc887fa97b783058019d2c03ca66099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81490b2681a39e45a5f01ef47cbd0b1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a81490b2681a39e45a5f01ef47cbd0b1a">ShaderBase</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> const &amp;base)=delete</td></tr>
+<tr class="separator:a81490b2681a39e45a5f01ef47cbd0b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3566966815e626b4fd95695b6524129c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a3566966815e626b4fd95695b6524129c">ShaderBase</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> &amp;&amp;base)</td></tr>
+<tr class="separator:a3566966815e626b4fd95695b6524129c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d05fffc7c98a7713d4a97c64173af7f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a3d05fffc7c98a7713d4a97c64173af7f">~ShaderBase</a> ()</td></tr>
 <tr class="separator:a3d05fffc7c98a7713d4a97c64173af7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ed958068367a3fa3ce96e5503c0955d"><td class="memItemLeft" align="right" valign="top">GLuint const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a8ed958068367a3fa3ce96e5503c0955d">getID</a> () const</td></tr>
@@ -157,8 +157,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2b1bc3a37e207d1dc5cffc9b317d1a6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b1bc3a37e207d1dc5cffc9b317d1a6a">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[3/4]</span></h2>
+<a id="a81490b2681a39e45a5f01ef47cbd0b1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81490b2681a39e45a5f01ef47cbd0b1a">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +170,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">NRE::Renderer::ShaderBase::ShaderBase </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> const &amp;&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
+          <td class="paramname"><em>base</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -182,15 +182,15 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>No copy allowed </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>the shader base to copy </td></tr>
+    <tr><td class="paramname">base</td><td>the shader base to copy </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a6bc887fa97b783058019d2c03ca66099"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bc887fa97b783058019d2c03ca66099">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[4/4]</span></h2>
+<a id="a3566966815e626b4fd95695b6524129c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3566966815e626b4fd95695b6524129c">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,14 +199,14 @@ Public Member Functions</h2></td></tr>
           <td class="memname">NRE::Renderer::ShaderBase::ShaderBase </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
+          <td class="paramname"><em>base</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Move s into this, leaving s empty </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Move base into this, leaving base empty </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>the shader base to move </td></tr>
+    <tr><td class="paramname">base</td><td>the shader base to move </td></tr>
   </table>
   </dd>
 </dl>
@@ -347,7 +347,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>No copy assigment allowed </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>the shader base to copy </td></tr>
+    <tr><td class="paramname">base</td><td>the shader base to copy </td></tr>
   </table>
   </dd>
 </dl>
@@ -369,9 +369,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Move assigment of s into this, leaving s empty </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Move assigment of base into this, leaving base empty </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>the shader base to move into this </td></tr>
+    <tr><td class="paramname">base</td><td>the shader base to move into this </td></tr>
   </table>
   </dd>
 </dl>
