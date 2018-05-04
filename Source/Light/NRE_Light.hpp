@@ -44,7 +44,7 @@
                          * @param coord the light's position
                          * @param color the light's color
                          * @param dir   the light's direction
-                         * @param angle the light's angle
+                         * @param angle the light's cutoff angle
                          */
                         Light(Maths::Point4D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> const& dir, NREfloat const& angle);
 

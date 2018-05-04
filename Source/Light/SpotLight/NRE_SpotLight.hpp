@@ -30,16 +30,40 @@
 
                 public:
                     //## Constructor ##//
-                    SpotLight();
-                    SpotLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction, NREfloat const& angle);
+                        /**
+                         * Default Constructor
+                         */
+                        SpotLight();
+                        /**
+                         * Construct a spot light from his position, color, direction and cutoff angle
+                         * @param coord     the light's position
+                         * @param color     the light's color
+                         * @param direction the light's direction
+                         * @param direction the light's cutoff angle
+                         */
+                        SpotLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction, NREfloat const& angle);
 
                     //## Copy-Constructor ##//
-                    SpotLight(SpotLight const& l);
+                        /**
+                         * Copy l into this
+                         * @param l the spot light to copy the content
+                         */
+                        SpotLight(SpotLight const& l);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move l into this, leaving l empty
+                         * @param l the spot light to move
+                         */
+                        SpotLight(SpotLight && l);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~SpotLight();
+                        /**
+                         * SpotLight Deconstructor
+                         */
+                         virtual ~SpotLight();
 
                     //## Getter ##//
 
@@ -50,6 +74,18 @@
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of l into this
+                         * @param l the spot light to copy into this
+                         * @return the reference of himself
+                         */
+                        SpotLight& operator=(SpotLight const& l);
+                        /**
+                         * Move assigment of l into this, leaving l empty
+                         * @param l the spot light to move into this
+                         * @return the reference of himself
+                         */
+                        SpotLight& operator=(SpotLight && l);
 
                     //## Shortcut Operator ##//
 

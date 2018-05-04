@@ -14,7 +14,20 @@
             SpotLight::SpotLight(SpotLight const& l) : Light(l) {
             }
 
+            SpotLight::SpotLight(SpotLight && l) : Light(std::move(l)) {
+            }
+
             SpotLight::~SpotLight() {
+            }
+
+            SpotLight& SpotLight::operator=(SpotLight const& l) {
+                Light::operator=(l);
+                return *this;
+            }
+
+            SpotLight& SpotLight::operator=(SpotLight && l) {
+                Light::operator=(std::move(l));
+                return *this;
             }
 
         };
