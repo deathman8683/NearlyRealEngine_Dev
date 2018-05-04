@@ -16,6 +16,9 @@
             KeyBinder::KeyBinder(KeyBinder const& map) : keyMap(map.keyMap), activeKeys(map.activeKeys) {
             }
 
+            KeyBinder::KeyBinder(KeyBinder && map) : keyMap(std::move(map.keyMap)), activeKeys(std::move(map.activeKeys)) {
+            }
+
             KeyBinder::~KeyBinder() {
                 keyMap.erase(keyMap.begin(), keyMap.end());
                 activeKeys.erase(activeKeys.begin(), activeKeys.end());
@@ -27,14 +30,6 @@
 
             Key const& KeyBinder::getKey(unsigned int const& code) const {
                 return keyMap.at(code);
-            }
-
-            void KeyBinder::setKeyMap(std::unordered_map<unsigned int, Key> const& map) {
-                keyMap = map;
-            }
-
-            void KeyBinder::setActiveKeys(std::unordered_map<unsigned int, Key*> const& keys) {
-                activeKeys = keys;
             }
 
             void KeyBinder::insert(unsigned int const& code, Key const& k) {
@@ -80,8 +75,16 @@
                 return keyMap.size();
             }
 
-            std::unordered_map<unsigned int, Key>::iterator KeyBinder::operator[](unsigned int const& code) {
-                return keyMap.find(code);
+            KeyBinder& KeyBinder::operator=(KeyBinder const& map) {
+                keyMap = map.keyMap;
+                activeKeys = map.activeKeys;
+                return *this;
+            }
+
+            KeyBinder& KeyBinder::operator=(KeyBinder && map) {
+                keyMap = std::move(map.keyMap);
+                activeKeys = std::move(map.activeKeys);
+                return *this;
             }
 
         };

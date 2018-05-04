@@ -139,7 +139,7 @@
             /**
              * Outstream operation for Key
              * @param stream the out stream to add the key k
-             * @param k the chunk to add in the stream
+             * @param k the key to add in the stream
              * @return the modified outstream
              */
             inline std::ostream& operator<<(std::ostream &stream, Key const& k) {
