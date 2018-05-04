@@ -14,7 +14,20 @@
             DirectionnalLight::DirectionnalLight(DirectionnalLight const& l) : SpotLight(l) {
             }
 
+            DirectionnalLight::DirectionnalLight(DirectionnalLight && l) : SpotLight(std::move(l)) {
+            }
+
             DirectionnalLight::~DirectionnalLight() {
+            }
+
+            DirectionnalLight& DirectionnalLight::operator=(DirectionnalLight const& l) {
+                SpotLight::operator=(l);
+                return *this;
+            }
+
+            DirectionnalLight& DirectionnalLight::operator=(DirectionnalLight && l) {
+                SpotLight::operator=(std::move(l));
+                return *this;
             }
 
         };

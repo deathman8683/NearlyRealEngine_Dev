@@ -30,16 +30,39 @@
 
                 public:
                     //## Constructor ##//
-                    DirectionnalLight();
-                    DirectionnalLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction);
+                        /**
+                         * Default Constructor
+                         */
+                        DirectionnalLight();
+                        /**
+                         * Construct a directionnal light from his position, color and direction
+                         * @param coord     the light's position
+                         * @param color     the light's color
+                         * @param direction the light's direction
+                         */
+                        DirectionnalLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color, Maths::Vector3D<NREfloat> direction);
 
                     //## Copy-Constructor ##//
-                    DirectionnalLight(DirectionnalLight const& l);
+                        /**
+                         * Copy l into this
+                         * @param l the directionnal light to copy the content
+                         */
+                        DirectionnalLight(DirectionnalLight const& l);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move l into this, leaving l empty
+                         * @param l the directionnal light to move
+                         */
+                        DirectionnalLight(DirectionnalLight && l);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    ~DirectionnalLight();
+                        /**
+                         * DirectionnalLight Deconstructor
+                         */
+                        ~DirectionnalLight();
 
                     //## Getter ##//
 
@@ -50,6 +73,18 @@
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of l into this
+                         * @param l the directionnal light to copy into this
+                         * @return the reference of himself
+                         */
+                        DirectionnalLight& operator=(DirectionnalLight const& l);
+                        /**
+                         * Move assigment of l into this, leaving l empty
+                         * @param l the directionnal light to move into this
+                         * @return the reference of himself
+                         */
+                        DirectionnalLight& operator=(DirectionnalLight && l);
 
                     //## Shortcut Operator ##//
 
