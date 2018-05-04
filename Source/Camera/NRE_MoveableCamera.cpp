@@ -22,6 +22,9 @@
             MoveableCamera::MoveableCamera(MoveableCamera const& camera) : FixedCamera::FixedCamera(camera), Input::Input(camera), speed(camera.getSpeed()) {
             }
 
+            MoveableCamera::MoveableCamera(MoveableCamera && camera) : FixedCamera::FixedCamera(std::move(camera)), Input::Input(std::move(camera)), speed(std::move(camera.getSpeed())) {
+            }
+
             MoveableCamera::MoveableCamera(FixedCamera const& camera) : FixedCamera::FixedCamera(camera), speed(DEFAULT_SPEED) {
                 bindKey();
             }
@@ -79,6 +82,20 @@
 
             void MoveableCamera::moveCenter() {
                 setCenter(getEye() + getForward());
+            }
+
+            MoveableCamera& MoveableCamera::operator=(MoveableCamera const& camera) {
+                FixedCamera::operator=(camera);
+                Input::operator=(camera);
+                speed = camera.speed;
+                return *this;
+            }
+
+            MoveableCamera& MoveableCamera::operator=(MoveableCamera && camera) {
+                FixedCamera::operator=(std::move(camera));
+                Input::operator=(std::move(camera));
+                speed = std::move(camera.speed);
+                return *this;
             }
 
         };

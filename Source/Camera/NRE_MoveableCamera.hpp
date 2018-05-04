@@ -33,40 +33,123 @@
 
                 public:
                     //## Constructor ##//
-                    MoveableCamera();
-                    MoveableCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
-                                   Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, NREfloat const& speed = DEFAULT_SPEED);
-                    MoveableCamera(FixedCamera const& camera, Input const& in, NREfloat const& speed);
+                        /**
+                         * Default Constructor
+                         */
+                        MoveableCamera();
+                        /**
+                         * Construct a moveable camera from all needed parameters for base class
+                         * @param fov    the fixed camera's fov
+                         * @param ratio  the fixed camera's ratio
+                         * @param dist   the fixed camera's near and far distance
+                         * @param eye    the fixed camera's position
+                         * @param center the fixed camera's fixed point
+                         * @param speed  the camera's speed
+                         */
+                        MoveableCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
+                                       Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, NREfloat const& speed = DEFAULT_SPEED);
+                        /**
+                         * Construct a moveable camera from base part
+                         * @param camera the fixed camera
+                         * @param in     the input system
+                         * @param speed  the camera's speed
+                         */
+                        MoveableCamera(FixedCamera const& camera, Input const& in, NREfloat const& speed);
 
                     //## Copy-Constructor ##//
-                    MoveableCamera(MoveableCamera const& camera);
+                        /**
+                         * Copy camera into this
+                         * @param camera the moveable camera to copy the content
+                         */
+                        MoveableCamera(MoveableCamera const& camera);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move camera into this, leaving camera empty
+                         * @param camera the moveable camera to move
+                         */
+                        MoveableCamera(MoveableCamera && camera);
 
                     //## Convertor ##//
-                    MoveableCamera(FixedCamera const& camera);
+                        /**
+                         * Convert a not moveable camera into a moveable one, attaching an input system to it
+                         * @param camera the camera to convert
+                         */
+                        MoveableCamera(FixedCamera const& camera);
 
                     //## Deconstructor ##//
-                    ~MoveableCamera();
+                        /**
+                         * MoveableCamera Deconstructor
+                         */
+                        ~MoveableCamera();
 
                     //## Getter ##//
-                    NREfloat const& getSpeed() const;
+                        /**
+                         * Speed getter
+                         * @return the camera's speed value
+                         */
+                        NREfloat const& getSpeed() const;
 
                     //## Setter ##//
-                    void setSpeed(NREfloat const& speed);
+                        /**
+                         * Speed setter
+                         * @param speed the new speed value
+                         */
+                        void setSpeed(NREfloat const& speed);
 
                     //## Methods ##//
-                    void update();
-                    void bindKey();
-                    void moveFront();
-                    void moveBack();
-                    void moveDown();
-                    void moveUp();
-                    void moveLeft();
-                    void moveRight();
-                    void moveCenter();
+                        /**
+                         * Update the input system and compute new camera's value after
+                         */
+                        void update();
+                        /**
+                         * Bind key system to their command
+                         */
+                        void bindKey();
+                        /**
+                         * Move the camera forward
+                         */
+                        void moveFront();
+                        /**
+                         * Move the camera backward
+                         */
+                        void moveBack();
+                        /**
+                         * Move the camera downward
+                         */
+                        void moveDown();
+                        /**
+                         * Move the camera upward
+                         */
+                        void moveUp();
+                        /**
+                         * Move the camera to the left
+                         */
+                        void moveLeft();
+                        /**
+                         * Move the camera to the right
+                         */
+                        void moveRight();
+                        /**
+                         * Move the center of the fixed camera
+                         */
+                        void moveCenter();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of camera into this
+                         * @param camera the moveable camera to copy into this
+                         * @return the reference of himself
+                         */
+                        MoveableCamera& operator=(MoveableCamera const& camera);
+                        /**
+                         * Move assigment of camera into this, leaving camera empty
+                         * @param camera the moveable camera to move into this
+                         * @return the reference of himself
+                         */
+                        MoveableCamera& operator=(MoveableCamera && camera);
 
                     //## Shortcut Operator ##//
 
@@ -79,7 +162,7 @@
                     //## Shift Operator ##//
 
                 private:
-                    static NREfloat DEFAULT_SPEED;
+                    static NREfloat DEFAULT_SPEED;  /**< The default camera's speed */
             };
 
         };
