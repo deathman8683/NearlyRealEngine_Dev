@@ -28,32 +28,73 @@
              */
             class EventHandler : public SDL::Event {
                 private:
-                    bool quit;
+                    bool quit;  /**< Quit state, used to quit the application */
 
                 public:
                     //## Constructor ##//
-                    EventHandler();
+                        /**
+                         * Default Constructor
+                         */
+                        EventHandler();
 
                     //## Copy-Constructor ##//
-                    EventHandler(EventHandler const& e);
+                        /**
+                         * Copy e into this
+                         * @param e the event handler to copy the content
+                         */
+                        EventHandler(EventHandler const& e);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move e into this, leaving e empty
+                         * @param e the event handler to move
+                         */
+                        EventHandler(EventHandler && e);
 
                     //## Convertor ##//
-                    EventHandler(SDL::Event const& e);
+                        /**
+                         * Convert a wrapped SDL event into a more advanced event handler
+                         * @param e the wrapped SDL event
+                         */
+                        EventHandler(SDL::Event const& e);
 
                     //## Deconstructor ##//
-                    virtual ~EventHandler();
+                        /**
+                         * EventHandler Deconstructor
+                         */
+                         virtual ~EventHandler();
 
                     //## Getter ##//
-                    bool const& getQuit() const;
+                        /**
+                         * Quit state getter
+                         * @return the quit state value
+                         */
+                        bool const& getQuit() const;
 
                     //## Setter ##//
-                    void setQuit(bool const& state);
+                        /**
+                         * Quit state setter
+                         * @param state the new quit state value
+                         */
+                        void setQuit(bool const& state);
 
                     //## Methods ##//
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of e into this
+                         * @param e the event handler to copy into this
+                         * @return the reference of himself
+                         */
+                        EventHandler& operator=(EventHandler const& e);
+                        /**
+                         * Move assigment of e into this, leaving e empty
+                         * @param e the event handler to move into this
+                         * @return the reference of himself
+                         */
+                        EventHandler& operator=(EventHandler && e);
 
                     //## Shortcut Operator ##//
 
