@@ -16,6 +16,9 @@
             Mouse::Mouse(Mouse const& m) : KeyBinder::KeyBinder(m), click(m.getClick()), cursor(m.getCursor()), sensitivity(m.getSensitivity()) {
             }
 
+            Mouse::Mouse(Mouse && m) : KeyBinder::KeyBinder(std::move(m)), click(std::move(m.getClick())), cursor(std::move(m.getCursor())), sensitivity(std::move(m.getSensitivity())) {
+            }
+
             Mouse::~Mouse() {
             }
 
@@ -41,6 +44,22 @@
 
             void Mouse::setSensitivity(NREfloat const& s) {
                 sensitivity = s;
+            }
+
+            Mouse& Mouse::operator=(Mouse const& m) {
+                KeyBinder::operator=(m);
+                click = m.click;
+                cursor = m.cursor;
+                sensitivity = m.sensitivity;
+                return *this;
+            }
+
+            Mouse& Mouse::operator=(Mouse && m) {
+                KeyBinder::operator=(std::move(m));
+                click = std::move(m.click);
+                cursor = std::move(m.cursor);
+                sensitivity = std::move(m.sensitivity);
+                return *this;
             }
 
         };
