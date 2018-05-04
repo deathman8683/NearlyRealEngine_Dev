@@ -13,6 +13,9 @@
             Light::Light(Light const& l) : position(l.getPosition()), intensities(l.getIntensities()), direction(l.getDirection()), angle(l.getAngle()) {
             }
 
+            Light::Light(Light && l) : position(std::move(l.getPosition())), intensities(std::move(l.getIntensities())), direction(std::move(l.getDirection())), angle(std::move(l.getAngle())) {
+            }
+
             Light::~Light() {
             }
 
@@ -50,6 +53,22 @@
 
             void Light::setAngle(NREfloat const& angle) {
                 this->angle = angle;
+            }
+
+            Light& Light::operator=(Light const& l) {
+                position = l.position;
+                intensities = l.intensities;
+                direction = l.direction;
+                angle = l.angle;
+                return *this;
+            }
+
+            Light& Light::operator=(Light && l) {
+                position = std::move(l.position);
+                intensities = std::move(l.intensities);
+                direction = std::move(l.direction);
+                angle = std::move(l.angle);
+                return *this;
             }
 
         };
