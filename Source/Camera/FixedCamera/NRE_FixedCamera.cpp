@@ -12,13 +12,17 @@
 
             FixedCamera::FixedCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
                                      Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center)
-                                    : Frustum<NREfloat>::Frustum(fov, ratio, dist), eye(eye), center(center) {
+                                    : Maths::Frustum<NREfloat>::Frustum(fov, ratio, dist), eye(eye), center(center) {
                 initAngle();
                 computeVector();
             }
 
-            FixedCamera::FixedCamera(FixedCamera const& camera) : eye(camera.getEye()), center(camera.getCenter()),
+            FixedCamera::FixedCamera(FixedCamera const& camera) : Maths::Frustum<NREfloat>::Frustum(camera), eye(camera.getEye()), center(camera.getCenter()),
                                                                   up(camera.getUp()), forward(camera.getForward()), left(camera.getLeft()), angle(camera.getAngle()) {
+            }
+
+            FixedCamera::FixedCamera(FixedCamera && camera) : Maths::Frustum<NREfloat>::Frustum(std::move(camera)), eye(std::move(camera.getEye())), center(std::move(camera.getCenter())),
+                                                                  up(std::move(camera.getUp())), forward(std::move(camera.getForward())), left(std::move(camera.getLeft())), angle(std::move(camera.getAngle())) {
             }
 
             FixedCamera::~FixedCamera() {
@@ -231,6 +235,28 @@
                     }
 
                 return 36;
+            }
+
+            FixedCamera& FixedCamera::operator=(FixedCamera const& camera) {
+                Maths::Frustum<NREfloat>::operator=(camera);
+                eye = camera.eye;
+                center = camera.center;
+                up = camera.up;
+                forward = camera.forward;
+                left = camera.left;
+                angle = camera.angle;
+                return *this;
+            }
+
+            FixedCamera& FixedCamera::operator=(FixedCamera && camera) {
+                Maths::Frustum<NREfloat>::operator=(std::move(camera));
+                eye = std::move(camera.eye);
+                center = std::move(camera.center);
+                up = std::move(camera.up);
+                forward = std::move(camera.forward);
+                left = std::move(camera.left);
+                angle = std::move(camera.angle);
+                return *this;
             }
 
         };

@@ -127,6 +127,7 @@
                 dist = f.getDist();
                 fov = f.getFov();
                 ratio = f.getRatio();
+                return *this;
             }
 
             template <class T>
@@ -137,6 +138,7 @@
                 dist = std::move(f.getDist());
                 fov = std::move(f.getFov());
                 ratio = std::move(f.getRatio());
+                return *this;
             }
 
         };

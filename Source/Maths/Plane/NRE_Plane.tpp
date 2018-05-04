@@ -75,14 +75,14 @@
             template <class T>
             Plane<T>& Plane<T>::operator=(Plane<T> const& p) {
                 n = p.getNormal();
-                p = p.getPoint();
+                this->p = p.getPoint();
                 return *this;
             }
 
             template <class T>
             Plane<T>& Plane<T>::operator=(Plane<T> && p) {
                 n = std::move(p.getNormal());
-                p = std::move(p.getPoint());
+                this->p = std::move(p.getPoint());
                 return *this;
             }
 
