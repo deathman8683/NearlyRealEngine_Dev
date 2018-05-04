@@ -55,8 +55,8 @@
 
                     //## Move-Constructor ##//
                         /**
-                         * Move map into keyBinder, leaving map empty
-                         * @param map the key to move
+                         * Move map into this, leaving map empty
+                         * @param map the keyBinder to move
                          */
                         KeyBinder(KeyBinder && map);
 

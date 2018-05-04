@@ -31,15 +31,32 @@
 
                 public:
                     //## Constructor ##//
-                    Keyboard();
+                        /**
+                         * Default Constructor
+                         */
+                        Keyboard();
 
                     //## Copy-Constructor ##//
-                    Keyboard(Keyboard const& kb);
+                        /**
+                         * Copy kb into this
+                         * @param kb the keyboard to copy the content
+                         */
+                        Keyboard(Keyboard const& kb);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move kb into this, leaving kb empty
+                         * @param kb the keyboard to move
+                         */
+                        Keyboard(Keyboard && kb);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Keyboard();
+                        /**
+                         * Keyboard Deconstructor
+                         */
+                        virtual ~Keyboard();
 
                     //## Getter ##//
 
@@ -50,6 +67,18 @@
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of kb into this
+                         * @param kb the keyboard to copy into this
+                         * @return the reference of himself
+                         */
+                        Keyboard& operator=(Keyboard const& kb);
+                        /**
+                         * Move assigment of kb into this, leaving kb empty
+                         * @param kb the keyboard to move into this
+                         * @return the reference of himself
+                         */
+                        Keyboard& operator=(Keyboard && kb);
 
                     //## Shortcut Operator ##//
 
