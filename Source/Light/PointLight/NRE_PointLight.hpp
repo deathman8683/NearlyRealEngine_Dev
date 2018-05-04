@@ -30,16 +30,38 @@
 
                 public:
                     //## Constructor ##//
-                    PointLight();
-                    PointLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color);
+                        /**
+                         * Default Constructor
+                         */
+                        PointLight();
+                        /**
+                         * Construct a point light from his position and color
+                         * @param coord the light's position
+                         * @param color the light's color
+                         */
+                        PointLight(Maths::Point3D<NREfloat> const& coord, Maths::Vector3D<NREfloat> const& color);
 
                     //## Copy-Constructor ##//
-                    PointLight(PointLight const& l);
+                        /**
+                         * Copy l into this
+                         * @param l the point light to copy the content
+                         */
+                        PointLight(PointLight const& l);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move l into this, leaving l empty
+                         * @param l the point light to move
+                         */
+                        PointLight(PointLight && l);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~PointLight();
+                        /**
+                         * PointLight Deconstructor
+                         */
+                        ~PointLight();
 
                     //## Getter ##//
 
@@ -50,6 +72,18 @@
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of l into this
+                         * @param l the point light to copy into this
+                         * @return the reference of himself
+                         */
+                        PointLight& operator=(PointLight const& l);
+                        /**
+                         * Move assigment of l into this, leaving l empty
+                         * @param l the point light to move into this
+                         * @return the reference of himself
+                         */
+                        PointLight& operator=(PointLight && l);
 
                     //## Shortcut Operator ##//
 

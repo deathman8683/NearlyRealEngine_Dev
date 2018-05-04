@@ -14,7 +14,20 @@
             PointLight::PointLight(PointLight const& l) : Light(l) {
             }
 
+            PointLight::PointLight(PointLight && l) : Light(std::move(l)) {
+            }
+
             PointLight::~PointLight() {
+            }
+
+            PointLight& PointLight::operator=(PointLight const& l) {
+                Light::operator=(l);
+                return *this;
+            }
+
+            PointLight& PointLight::operator=(PointLight && l) {
+                Light::operator=(std::move(l));
+                return *this;
             }
 
         };
