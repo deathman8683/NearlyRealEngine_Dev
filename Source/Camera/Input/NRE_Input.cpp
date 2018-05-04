@@ -13,6 +13,9 @@
             Input::Input(Input const& in) : Keyboard::Keyboard(in), Mouse::Mouse(in), EventHandler::EventHandler(in) {
             }
 
+            Input::Input(Input && in) : Keyboard::Keyboard(std::move(in)), Mouse::Mouse(std::move(in)), EventHandler::EventHandler(std::move(in)) {
+            }
+
             Input::~Input() {
             }
 
@@ -58,6 +61,20 @@
                 }
                 Keyboard::execute();
                 Mouse::execute();
+            }
+
+            Input& Input::operator=(Input const& in) {
+                Keyboard::operator=(in);
+                Mouse::operator=(in);
+                EventHandler::operator=(in);
+                return *this;
+            }
+
+            Input& Input::operator=(Input && in) {
+                Keyboard::operator=(std::move(in));
+                Mouse::operator=(std::move(in));
+                EventHandler::operator=(std::move(in));
+                return *this;
             }
         };
     };

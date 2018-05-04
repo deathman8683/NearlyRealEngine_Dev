@@ -33,27 +33,66 @@
 
                 public:
                     //## Constructor ##//
-                    Input();
-                    Input(Keyboard const& kb, Mouse const& m, EventHandler const& e);
+                        /**
+                         * Default Constructor
+                         */
+                        Input();
+                        /**
+                         * Construct an input system with different base object
+                         * @param kb the input's keyboard
+                         * @param m  the input's mouse
+                         * @param e  the input's event handler
+                         */
+                        Input(Keyboard const& kb, Mouse const& m, EventHandler const& e);
 
                     //## Copy-Constructor ##//
-                    Input(Input const& in);
+                        /**
+                         * Copy in into this
+                         * @param in the input to copy the content
+                         */
+                        Input(Input const& in);
+
+                    //## Move-Constructor ##//
+                        /**
+                         * Move in into this, leaving in empty
+                         * @param in the input to move
+                         */
+                        Input(Input && in);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
-                    virtual ~Input();
+                        /**
+                         * Input Deconstructor
+                         */
+                        virtual ~Input();
 
                     //## Getter ##//
 
                     //## Setter ##//
 
                     //## Methods ##//
-                    void update(Maths::Vector2D<NREfloat>* cameraAngle);
+                        /**
+                         * Update the input with his event handler, can update a camera angle passed
+                         * @param cameraAngle if not null may be updated on mouse event
+                         */
+                        void update(Maths::Vector2D<NREfloat>* cameraAngle);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
+                        /**
+                         * Copy assigment of in into this
+                         * @param in the input to copy into this
+                         * @return the reference of himself
+                         */
+                        Input& operator=(Input const& in);
+                        /**
+                         * Move assigment of in into this, leaving in empty
+                         * @param in the input to move into this
+                         * @return the reference of himself
+                         */
+                        Input& operator=(Input && in);
 
                     //## Shortcut Operator ##//
 
