@@ -10,7 +10,7 @@
 
     #include "../Generic/NRE_Type.hpp"
     #include "../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
-    #include "../GL_Wrapper/BufferObject/VAO/NRE_VAO.hpp"
+    #include "../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
 
     /**
      * @namespace NRE
@@ -40,16 +40,17 @@
                         Object();
                         /**
                          * Construct an object with his rendering buffer
-                         * @param buf the rendering buffer, containing (or not yet) the object's model
+                         * @param buf   the rendering buffer, containing (or not yet) the object's model
+                         * @param type  the rendering buffer vertex type
                          */
-                        Object(GL::VBO* buf);
+                        Object(GL::VBO* buf, GLenum const& type);
 
                     //## Copy-Constructor ##//
                         /**
-                         * Copy o into this
+                         * No copy allowed
                          * @param o the object to copy the content
                          */
-                        Object(Object const& o);
+                        Object(Object const& o) = delete;
 
                     //## Move-Constructor ##//
                         /**
@@ -80,11 +81,11 @@
 
                     //## Assignment Operator ##//
                         /**
-                         * Copy assigment of o into this
+                         * No copy allowed
                          * @param o the object to copy into this
                          * @return the reference of himself
                          */
-                        Object& operator=(Object const& o);
+                        Object& operator=(Object const& o) = delete;
                         /**
                          * Move assigment of o into this, leaving o empty
                          * @param o the object to move into this

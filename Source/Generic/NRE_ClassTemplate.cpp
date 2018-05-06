@@ -2,7 +2,7 @@
     #include "NRE_<Class>.hpp"
 
     namespace NRE {
-        namespace <Class> {
+        namespace <Module> {
 
             <Class>::<Class>() {
             }
