@@ -71,6 +71,10 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Draw the current object, need to be call from a rendering context (Shader bind)
+                         */
+                        void draw() const;
 
                     //## Access Operator ##//
 
