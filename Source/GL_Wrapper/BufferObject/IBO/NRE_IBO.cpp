@@ -4,6 +4,8 @@
     namespace NRE {
         namespace GL {
 
+            GLenum IBO::TYPE = GL_UNSIGNED_INT;
+
             IBO::IBO() : nb(0) {
             }
 
@@ -54,6 +56,10 @@
             void IBO::access(GLenum const& vertexType, bool const& enableVAA) const {
                 VBO::access(vertexType, enableVAA);
                 getIndexBuffer().access();
+            }
+
+            void IBO::draw() const {
+                glDrawElements(GL_TRIANGLES, getNb(), TYPE, 0);
             }
 
             IBO& IBO::operator=(IBO && buf) {

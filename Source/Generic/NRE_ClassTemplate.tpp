@@ -52,6 +52,10 @@
                     //## Convertor ##//
 
                     //## Deconstructor ##//
+                        /**
+                         * <Class> Deconstructor
+                         */
+                        ~<Class>();
 
                     //## Getter ##//
 

@@ -123,6 +123,10 @@
                          * @param enableVAA  tell if the function has to call glEnableVertexAttribArray
                          */
                         void access(GLenum const& vertexType, bool const& enableVAA = true) const override;
+                        /**
+                         * Calls the OpenGL command to draw the buffer
+                         */
+                        void draw() const override;
 
                     //## Access Operator ##//
 
@@ -150,6 +154,7 @@
                     //## Shift Operator ##//
 
                 private:
+                    static GLenum TYPE;
             };
 
             /**

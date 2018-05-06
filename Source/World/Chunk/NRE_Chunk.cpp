@@ -139,7 +139,7 @@
 
             void Chunk::render() {
                 vao.bind();
-                    glDrawElements(GL_TRIANGLES, getBuffer().getNb(), GL_UNSIGNED_INT, 0);
+                    buffer.draw();
                 vao.unbind();
             }
 

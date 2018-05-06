@@ -25,6 +25,14 @@
                 return attributes[index];
             }
 
+            GLuint const& VBO::getNb() const {
+                return nb;
+            }
+
+            void VBO::setNb(GLuint const& n) {
+                nb = n;
+            }
+
             void VBO::reload() {
                 for (GLuint i = 0; i < attributes.size(); i = i + 1) {
                     getAttribute(i)->reload();
@@ -38,6 +46,7 @@
                     getAttribute(i)->allocate(getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), usage);
                 }
                 setAllocated(true);
+                setNb(nbVertex);
             }
 
             void VBO::update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data) {
@@ -45,6 +54,7 @@
                 for (GLuint i = 1; i < attributes.size(); i = i + 1) {
                     getAttribute(i)->update(offset, getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), data[i]);
                 }
+                setNb(nbVertex);
             }
 
             void VBO::allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data) {
@@ -53,6 +63,7 @@
                     getAttribute(i)->allocateAndFill(getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), usage, data[i]);
                 }
                 setAllocated(true);
+                setNb(nbVertex);
             }
 
             void VBO::access(GLenum const& vertexType, bool const& enableVAA) const {
@@ -68,6 +79,10 @@
 
             GLuint const VBO::size() const {
                 return attributes.size();
+            }
+
+            void VBO::draw() const {
+                glDrawArrays(GL_TRIANGLES, getNb(), 0);
             }
 
             VBO& VBO::operator=(VBO && buf) {

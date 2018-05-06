@@ -32,7 +32,8 @@
              */
             class VBO : public BufferObject {
                 private:
-                    std::vector<ArrayBuffer*> attributes;
+                    std::vector<ArrayBuffer*> attributes;   /**< The VBO's attributes array to store all needed buffer */
+                    GLuint nb;                              /**< The VBO's number of vertex */
 
                 public:
                     //## Constructor ##//
@@ -75,8 +76,18 @@
                          * @return       the specific arrayBuffer
                          */
                         ArrayBuffer* const& getAttribute(GLuint const& index) const;
+                        /**
+                         * Nb getter
+                         * @return return the vertexBuffer size
+                         */
+                        GLuint const& getNb() const;
 
                     //## Setter ##//
+                        /**
+                         * Nb setter
+                         * @param n the new vertexBuffer size
+                         */
+                        void setNb(GLuint const& n);
 
                     //## Methods ##//
                         /**
@@ -122,6 +133,10 @@
                          * @return the size of the VBO
                          */
                         GLuint const size() const;
+                        /**
+                         * Calls the OpenGL command to draw the buffer
+                         */
+                        virtual void draw() const;
 
                     //## Access Operator ##//
 
