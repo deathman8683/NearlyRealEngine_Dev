@@ -115,13 +115,13 @@
 
             GLint* vBuf = new GLint[24];
                 vBuf[0] = 0; vBuf[1] = 0; vBuf[2] = 0;
-                vBuf[3] = 0; vBuf[4] = 0; vBuf[5] = 100;
-                vBuf[6] = 0; vBuf[7] = 100; vBuf[8] = 0;
-                vBuf[9] = 0; vBuf[10] = 100; vBuf[11] = 100;
-                vBuf[12] = 100; vBuf[13] = 0; vBuf[14] = 0;
-                vBuf[15] = 100; vBuf[16] = 0; vBuf[17] = 100;
-                vBuf[18] = 100; vBuf[19] = 100; vBuf[20] = 100;
-                vBuf[21] = 100; vBuf[22] = 100; vBuf[23] = 0;
+                vBuf[3] = 0; vBuf[4] = 0; vBuf[5] = 10;
+                vBuf[6] = 0; vBuf[7] = 10; vBuf[8] = 0;
+                vBuf[9] = 0; vBuf[10] = 10; vBuf[11] = 10;
+                vBuf[12] = 10; vBuf[13] = 0; vBuf[14] = 0;
+                vBuf[15] = 10; vBuf[16] = 0; vBuf[17] = 10;
+                vBuf[18] = 10; vBuf[19] = 10; vBuf[20] = 10;
+                vBuf[21] = 10; vBuf[22] = 10; vBuf[23] = 0;
 
             GLbyte* nBuf = new GLbyte[24];
                 for (int i = 0; i < 24; i = i + 3) {
@@ -179,7 +179,7 @@
             oTMesh.add(2, nBuf, 24);
             oTMesh.add(3, iBuf, 36);
 
-            oTMesh.allocateAndFillIBO(*oTIBO, GL_STREAM_DRAW);
+            oTMesh.allocateAndFill(*oTIBO, GL_STREAM_DRAW);
 
             while(!camera.getQuit())
             {

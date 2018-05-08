@@ -103,7 +103,7 @@
 
                     //## Shift Operator ##//
 
-                public:
+                private:
                     void updateVBO(GL::VBO& buffer, std::vector<GLintptr> const& offset) const;
                     void updateIBO(GL::IBO& buffer, std::vector<GLintptr> const& offset) const;
                     void allocateAndFillVBO(GL::VBO& buffer, GLenum const& usage) const;
