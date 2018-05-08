@@ -108,7 +108,15 @@
             Object::Mesh m;
             Object::VertexData* vData = new Object::VertexData();
 
+            int value[] = {
+                1, 2, 3, 4, 5, 6
+            };
+
+            vData->add(&value, 6);
+
             m.push_back(vData);
+
+            std::cout << *vData << std::endl;
 
             while(!camera.getQuit())
             {

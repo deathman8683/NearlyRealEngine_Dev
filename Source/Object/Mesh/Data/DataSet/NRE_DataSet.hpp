@@ -62,6 +62,7 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        virtual void add(void* value, GLuint const& nbValue = 1) = 0;
 
                     //## Access Operator ##//
 

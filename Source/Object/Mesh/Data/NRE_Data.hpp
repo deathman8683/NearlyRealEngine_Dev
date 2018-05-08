@@ -60,10 +60,13 @@
                         virtual ~Data();
 
                     //## Getter ##//
+                        T const& get(GLuint const& index) const;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        void add(void* value, GLuint const& nbValue = 1) override;
+                        size_t const size() const;
 
                     //## Access Operator ##//
 
@@ -93,6 +96,22 @@
 
                 private:
             };
+
+            /**
+             * Outstream operation for Data
+             * @param stream the out stream to add the data d
+             * @param d the data to add in the stream
+             * @return the modified outstream
+             */
+            template <class T>
+            inline std::ostream& operator<<(std::ostream &stream, Data<T> const& c) {
+                stream << "(";
+                for (GLuint i = 0; i < c.size() - 1; i = i + 1) {
+                    stream << c.get(i) << ",";
+                }
+                stream << c.get(c.size() - 1) << ")";
+                return stream;
+            }
 
         };
     };
