@@ -42,13 +42,13 @@
                 unbind();
             }
 
-            void AttributeBuffer::update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const {
+            void AttributeBuffer::update(GLintptr const& offset, GLsizeiptr const& size, const GLvoid* const& data) const {
                 bind();
                     glBufferSubData(getTarget(), offset, size, data);
                 unbind();
             }
 
-            void AttributeBuffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const {
+            void AttributeBuffer::allocateAndFill(GLsizeiptr const& size, GLenum const& usage, const GLvoid* const& data) const {
                 bind();
                     glBufferData(getTarget(), size, data, usage);
                 unbind();

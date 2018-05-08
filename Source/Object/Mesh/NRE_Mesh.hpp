@@ -9,6 +9,11 @@
     #pragma once
 
     #include "Data/NRE_Data.hpp"
+    #include "Data/VertexData/NRE_VertexData.hpp"
+    #include "Data/MaterialData/NRE_MaterialData.hpp"
+    #include "Data/NormalData/NRE_NormalData.hpp"
+    #include "Data/IndexData/NRE_IndexData.hpp"
+    #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
 
     /**
      * @namespace NRE
@@ -67,7 +72,12 @@
                          * Push back a dataset into the mesh
                          * @param d the dateset to add into the mesh
                          */
-                        void push_back(DataSet* d);
+                        void push_back(DataSet* const& d);
+                        void add(GLuint const& index, void* value, GLuint const& nbValue = 1) const;
+                        void updateVBO(GL::VBO const& buffer, std::vector<GLintptr> const& offset) const;
+                        void updateIBO(GL::IBO const& buffer, std::vector<GLintptr> const& offset) const;
+                        void allocateAndFillVBO(GL::VBO const& buffer, GLenum const& usage) const;
+                        void allocateAndFillIBO(GL::IBO const& buffer, GLenum const& usage) const;
 
                     //## Access Operator ##//
 

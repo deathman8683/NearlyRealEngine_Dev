@@ -1,15 +1,14 @@
 
     /**
-     * @file NRE_DataSet.hpp
-     * @brief Declaration of Engine's Object's Object : DataSet
+     * @file NRE_VertexData.hpp
+     * @brief Declaration of Engine's Object's Object : NormalData
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../../Generic/NRE_Type.hpp"
-    #include "../../../../GL_Wrapper/Buffer/AttributeBuffer/NRE_AttributeBuffer.hpp"
+    #include "../NRE_Data.hpp"
 
     /**
      * @namespace NRE
@@ -23,10 +22,10 @@
         namespace Object {
 
             /**
-             * @class DataSet
-             * @brief Object's Object : An interface to manage template specialization of data in mesh
+             * @class NormalData
+             * @brief Object's Object : A specialized data object for normal storing
              */
-            class DataSet {
+            class NormalData : public Data<GLbyte> {
                 private:
 
                 public:
@@ -34,54 +33,51 @@
                         /**
                          * Default Constructor
                          */
-                        DataSet();
+                        NormalData();
 
                     //## Copy-Constructor ##//
                         /**
                          * Copy d into this
-                         * @param d the data set to copy the content
+                         * @param d the normal data to copy the content
                          */
-                        DataSet(DataSet const& d);
+                        NormalData(NormalData const& d);
 
                     //## Move-Constructor ##//
                         /**
                          * Move d into this, leaving d empty
-                         * @param d the data set to move
+                         * @param d the normal data to move
                          */
-                        DataSet(DataSet && d);
+                        NormalData(NormalData && d);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * DataSet Deconstructor
+                         * NormalData Deconstructor
                          */
-                        virtual ~DataSet();
+                        ~NormalData();
 
                     //## Getter ##//
 
                     //## Setter ##//
 
                     //## Methods ##//
-                        virtual void add(void* value, GLuint const& nbValue = 1) = 0;
-                        virtual void update(const GL::AttributeBuffer* const& buffer, GLintptr const& offset) const = 0;
-                        virtual void allocateAndFill(const GL::AttributeBuffer* const& buffer, GLenum const& usage) const = 0;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
                          * Copy assigment of d into this
-                         * @param d the data set to copy into this
+                         * @param d the normal data to copy into this
                          * @return the reference of himself
                          */
-                        DataSet& operator=(DataSet const& d);
+                        NormalData& operator=(NormalData const& d);
                         /**
                          * Move assigment of d into this, leaving d empty
-                         * @param d the data set to move into this
+                         * @param d the normal data to move into this
                          * @return the reference of himself
                          */
-                        DataSet& operator=(DataSet && d);
+                        NormalData& operator=(NormalData && d);
 
                     //## Shortcut Operator ##//
 

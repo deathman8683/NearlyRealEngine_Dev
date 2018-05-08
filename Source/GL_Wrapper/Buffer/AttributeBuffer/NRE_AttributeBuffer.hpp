@@ -110,14 +110,14 @@
                          * @param size   the data's size
                          * @param data   the pointer to the data
                          */
-                        void update(GLintptr const& offset, GLsizeiptr const& size, GLvoid* const& data) const;
+                        void update(GLintptr const& offset, GLsizeiptr const& size, const GLvoid* const& data) const;
                         /**
                          * Allocate the buffer and send all data in the same time, need the data's size, the specific usage and a pointer to the data
                          * @param size  the buffer's size
                          * @param usage the buffer's usage
                          * @param data  the pointer to the data
                          */
-                        void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, GLvoid* const& data) const;
+                        void allocateAndFill(GLsizeiptr const& size, GLenum const& usage, const GLvoid* const& data) const;
 
                     //## Access Operator ##//
 

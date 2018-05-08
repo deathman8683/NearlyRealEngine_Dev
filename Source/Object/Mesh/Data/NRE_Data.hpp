@@ -67,6 +67,9 @@
                     //## Methods ##//
                         void add(void* value, GLuint const& nbValue = 1) override;
                         size_t const size() const;
+                        void update(const GL::AttributeBuffer* const& buffer, GLintptr const& offset) const override;
+                        void allocateAndFill(const GL::AttributeBuffer* const& buffer, GLenum const& usage) const override;
+                        const T* const value() const;
 
                     //## Access Operator ##//
 

@@ -1,15 +1,14 @@
 
     /**
-     * @file NRE_DataSet.hpp
-     * @brief Declaration of Engine's Object's Object : DataSet
+     * @file NRE_VertexData.hpp
+     * @brief Declaration of Engine's Object's Object : MaterialData
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../../Generic/NRE_Type.hpp"
-    #include "../../../../GL_Wrapper/Buffer/AttributeBuffer/NRE_AttributeBuffer.hpp"
+    #include "../NRE_Data.hpp"
 
     /**
      * @namespace NRE
@@ -23,10 +22,10 @@
         namespace Object {
 
             /**
-             * @class DataSet
-             * @brief Object's Object : An interface to manage template specialization of data in mesh
+             * @class MaterialData
+             * @brief Object's Object : A specialized data object for material storing
              */
-            class DataSet {
+            class MaterialData : public Data<GLubyte> {
                 private:
 
                 public:
@@ -34,54 +33,51 @@
                         /**
                          * Default Constructor
                          */
-                        DataSet();
+                        MaterialData();
 
                     //## Copy-Constructor ##//
                         /**
                          * Copy d into this
-                         * @param d the data set to copy the content
+                         * @param d the material data to copy the content
                          */
-                        DataSet(DataSet const& d);
+                        MaterialData(MaterialData const& d);
 
                     //## Move-Constructor ##//
                         /**
                          * Move d into this, leaving d empty
-                         * @param d the data set to move
+                         * @param d the material data to move
                          */
-                        DataSet(DataSet && d);
+                        MaterialData(MaterialData && d);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * DataSet Deconstructor
+                         * MaterialData Deconstructor
                          */
-                        virtual ~DataSet();
+                        ~MaterialData();
 
                     //## Getter ##//
 
                     //## Setter ##//
 
                     //## Methods ##//
-                        virtual void add(void* value, GLuint const& nbValue = 1) = 0;
-                        virtual void update(const GL::AttributeBuffer* const& buffer, GLintptr const& offset) const = 0;
-                        virtual void allocateAndFill(const GL::AttributeBuffer* const& buffer, GLenum const& usage) const = 0;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
                          * Copy assigment of d into this
-                         * @param d the data set to copy into this
+                         * @param d the material data to copy into this
                          * @return the reference of himself
                          */
-                        DataSet& operator=(DataSet const& d);
+                        MaterialData& operator=(MaterialData const& d);
                         /**
                          * Move assigment of d into this, leaving d empty
-                         * @param d the data set to move into this
+                         * @param d the material data to move into this
                          * @return the reference of himself
                          */
-                        DataSet& operator=(DataSet && d);
+                        MaterialData& operator=(MaterialData && d);
 
                     //## Shortcut Operator ##//
 

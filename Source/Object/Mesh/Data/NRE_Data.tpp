@@ -37,6 +37,21 @@
             }
 
             template <class T>
+            const T* const Data<T>::value() const {
+                return &data[0];
+            }
+
+            template <class T>
+            void Data<T>::update(const GL::AttributeBuffer* const& buffer, GLintptr const& offset) const {
+                buffer->update(offset, size(), value());
+            }
+
+            template <class T>
+            void Data<T>::allocateAndFill(const GL::AttributeBuffer* const& buffer, GLenum const& usage) const {
+                buffer->allocateAndFill(size(), usage, value());
+            }
+
+            template <class T>
             Data<T>& Data<T>::operator=(Data const& d) {
                 data = d.data;
                 return *this;

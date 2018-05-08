@@ -6,9 +6,6 @@
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
     #include "Object/NRE_Object.hpp"
-    #include "Object/Mesh/NRE_Mesh.hpp"
-    #include "Object/Mesh/Data/VertexData/NRE_VertexData.hpp"
-    #include "World/Mesh/NRE_Mesh.hpp"
 
     using namespace NRE;
     using namespace Maths;
@@ -105,11 +102,16 @@
             camera.Keyboard::getKey(SDL_SCANCODE_G).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksBack));
             camera.Keyboard::getKey(SDL_SCANCODE_T).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksFront));
 
-            GL::IBO* oTVBO = new GL::IBO(true);
-            oTVBO->push_back(new GL::MaterialBuffer(true));
-            oTVBO->push_back(new GL::NormalBuffer(true));
+            GL::IBO* oTIBO = new GL::IBO(true);
+            oTIBO->push_back(new GL::MaterialBuffer(true));
+            oTIBO->push_back(new GL::NormalBuffer(true));
 
-            Object::Object oT(oTVBO, GL_INT);
+            Object::Mesh oTMesh;
+            oTMesh.push_back(new Object::MaterialData());
+            oTMesh.push_back(new Object::NormalData());
+            oTMesh.push_back(new Object::IndexData());
+
+            Object::Object oT(oTIBO, GL_INT);
 
             GLint* vBuf = new GLint[24];
                 vBuf[0] = 0; vBuf[1] = 0; vBuf[2] = 0;
@@ -171,12 +173,13 @@
                 iBuf[34] = 7;
                 iBuf[35] = 3;
 
-            std::vector<GLvoid*> data;
-            data.push_back(vBuf);
-            data.push_back(mBuf);
-            data.push_back(nBuf);
 
-            oTVBO->allocateAndFill(sizeof(GLint), 8, 36, GL_STREAM_DRAW, data, iBuf);
+            oTMesh.add(0, vBuf, 24);
+            oTMesh.add(1, mBuf, 24);
+            oTMesh.add(2, nBuf, 24);
+            oTMesh.add(3, iBuf, 36);
+
+            oTMesh.allocateAndFillIBO(oTIBO, GL_STREAM_DRAW);
 
             while(!camera.getQuit())
             {

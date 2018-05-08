@@ -11,6 +11,7 @@
     #include "../Generic/NRE_Type.hpp"
     #include "../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
     #include "../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
+    #include "Mesh/NRE_Mesh.hpp"
 
     /**
      * @namespace NRE
