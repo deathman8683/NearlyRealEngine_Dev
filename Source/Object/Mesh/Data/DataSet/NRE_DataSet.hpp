@@ -59,13 +59,30 @@
                         virtual ~DataSet();
 
                     //## Getter ##//
+                        /**
+                         * TypeSize getter
+                         * @return the data set type size
+                         */
                         virtual size_t const getTypeSize() const = 0;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Size getter
+                         * @return the set's size
+                         */
                         virtual size_t const size() const = 0;
+                        /**
+                         * Add a set of value in the set
+                         * @param value   the pointer to the set of value
+                         * @param nbValue the number of value to add
+                         */
                         virtual void add(GLvoid* value, GLuint const& nbValue = 1) = 0;
+                        /**
+                         * Return a pointer to the start of the data
+                         * @return the data set's pointer
+                         */
                         virtual GLvoid* const value() = 0;
 
                     //## Access Operator ##//

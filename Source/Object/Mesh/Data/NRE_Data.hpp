@@ -60,15 +60,41 @@
                         virtual ~Data();
 
                     //## Getter ##//
+                        /**
+                         * Value getter
+                         * @param  index the data's index
+                         * @return       the corresponding data
+                         */
                         T const& getValue(GLuint const& index) const;
+                        /**
+                         * TypeSize getter
+                         * @return the data set type size
+                         */
                         size_t const getTypeSize() const override;
+                        /**
+                         * DataSize getter
+                         * @return the data set size in bytes
+                         */
                         size_t const getDataSize() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Size getter
+                         * @return the set's size
+                         */
                         size_t const size() const override;
+                        /**
+                         * Add a set of value in the set
+                         * @param value   the pointer to the set of value
+                         * @param nbValue the number of value to add
+                         */
                         void add(GLvoid* value, GLuint const& nbValue = 1) override;
+                        /**
+                         * Return a pointer to the start of the data
+                         * @return the data set's pointer
+                         */
                         GLvoid* const value() override;
 
                     //## Access Operator ##//

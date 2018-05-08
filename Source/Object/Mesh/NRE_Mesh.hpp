@@ -73,8 +73,24 @@
                          * @param d the dateset to add into the mesh
                          */
                         void push_back(DataSet* const& d);
+                        /**
+                         * Add a set of value into a specific DataSet
+                         * @param index   the dataSet's index in the mesh
+                         * @param value   the pointer to the set of value
+                         * @param nbValue the number of value to add
+                         */
                         void add(GLuint const& index, void* value, GLuint const& nbValue = 1) const;
+                        /**
+                         * Update a VBO with mesh's data
+                         * @param buffer the buffer to update
+                         * @param offset a set of offset to pass to VBO's update
+                         */
                         void update(GL::VBO& buffer, std::vector<GLintptr> const& offset) const;
+                        /**
+                         * Allocate and fill a VBO with mesh's data
+                         * @param buffer the buffer to allocate and fill
+                         * @param usage  the buffer's usage
+                         */
                         void allocateAndFill(GL::VBO& buffer, GLenum const& usage) const;
 
                     //## Access Operator ##//
@@ -104,9 +120,29 @@
                     //## Shift Operator ##//
 
                 private:
+                    /**
+                     * Update a VBO with mesh's data
+                     * @param buffer the buffer to update
+                     * @param offset a set of offset to pass to VBO's update
+                     */
                     void updateVBO(GL::VBO& buffer, std::vector<GLintptr> const& offset) const;
+                    /**
+                     * Update an IBO with mesh's data
+                     * @param buffer the buffer to update
+                     * @param offset a set of offset to pass to VBO's update
+                     */
                     void updateIBO(GL::IBO& buffer, std::vector<GLintptr> const& offset) const;
+                    /**
+                     * Allocate and fill a VBO with mesh's data
+                     * @param buffer the buffer to allocate and fill
+                     * @param usage  the buffer's usage
+                     */
                     void allocateAndFillVBO(GL::VBO& buffer, GLenum const& usage) const;
+                    /**
+                     * Allocate and fill an IBO with mesh's data
+                     * @param buffer the buffer to allocate and fill
+                     * @param usage  the buffer's usage
+                     */
                     void allocateAndFillIBO(GL::IBO& buffer, GLenum const& usage) const;
             };
 
