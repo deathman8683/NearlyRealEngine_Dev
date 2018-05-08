@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_Mesh.hpp
-     * @brief Declaration of Engine's Object's Object : Mesh
+     * @file NRE_DataSet.hpp
+     * @brief Declaration of Engine's Object's Object : DataSet
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "Data/NRE_Data.hpp"
+    #include "../../../Generic/NRE_Type.hpp"
 
     /**
      * @namespace NRE
@@ -22,10 +22,10 @@
         namespace Object {
 
             /**
-             * @class Mesh
-             * @brief Object's Object : Base class for 2D and 3D mesh specialization
+             * @class DataSet
+             * @brief Object's Object : An interface to manage template specialization of data in mesh
              */
-            class Mesh {
+            class DataSet {
                 private:
 
                 public:
@@ -33,29 +33,29 @@
                         /**
                          * Default Constructor
                          */
-                        Mesh();
+                        DataSet();
 
                     //## Copy-Constructor ##//
                         /**
-                         * Copy m into this
-                         * @param m the mesh to copy the content
+                         * Copy d into this
+                         * @param d the data set to copy the content
                          */
-                        Mesh(Mesh const& m);
+                        DataSet(DataSet const& d);
 
                     //## Move-Constructor ##//
                         /**
-                         * Move m into this, leaving m empty
-                         * @param m the mesh to move
+                         * Move d into this, leaving d empty
+                         * @param d the data set to move
                          */
-                        Mesh(Mesh && m);
+                        DataSet(DataSet && d);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * Mesh Deconstructor
+                         * DataSet Deconstructor
                          */
-                        ~Mesh();
+                        ~DataSet();
 
                     //## Getter ##//
 
@@ -67,17 +67,17 @@
 
                     //## Assignment Operator ##//
                         /**
-                         * Copy assigment of m into this
-                         * @param m the mesh to copy into this
+                         * Copy assigment of d into this
+                         * @param d the data set to copy into this
                          * @return the reference of himself
                          */
-                        Mesh& operator=(Mesh const& m);
+                        DataSet& operator=(DataSet const& d);
                         /**
-                         * Move assigment of m into this, leaving m empty
-                         * @param m the mesh to move into this
+                         * Move assigment of d into this, leaving d empty
+                         * @param d the data set to move into this
                          * @return the reference of himself
                          */
-                        Mesh& operator=(Mesh && m);
+                        DataSet& operator=(DataSet && d);
 
                     //## Shortcut Operator ##//
 

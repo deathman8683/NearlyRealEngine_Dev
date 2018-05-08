@@ -17,7 +17,7 @@
     namespace NRE {
         /**
          * @namespace Object
-         * @brief The Engine's Object's managing system>
+         * @brief The Engine's Object's managing system
          */
         namespace Object {
 
@@ -96,3 +96,5 @@
 
         };
     };
+
+    #include "NRE_Data.tpp"
