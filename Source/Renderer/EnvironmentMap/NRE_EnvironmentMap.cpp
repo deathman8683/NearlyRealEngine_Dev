@@ -85,8 +85,9 @@
 
                 std::vector<GLvoid*> data;
                 data.push_back(vData);
+                data.push_back(iData);
 
-                buffer.allocateAndFill(sizeof(GLint), 24, 36, GL_STATIC_DRAW, data, iData);
+                buffer.allocateAndFill(sizeof(GLint), 24, 36, GL_STATIC_DRAW, data);
                 vao.access(buffer, GL_INT, true);
             }
 

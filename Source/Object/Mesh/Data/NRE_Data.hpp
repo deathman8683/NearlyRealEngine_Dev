@@ -60,16 +60,16 @@
                         virtual ~Data();
 
                     //## Getter ##//
-                        T const& get(GLuint const& index) const;
+                        T const& getValue(GLuint const& index) const;
+                        size_t const getTypeSize() const override;
+                        size_t const getDataSize() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                        void add(void* value, GLuint const& nbValue = 1) override;
-                        size_t const size() const;
-                        void update(const GL::AttributeBuffer* const& buffer, GLintptr const& offset) const override;
-                        void allocateAndFill(const GL::AttributeBuffer* const& buffer, GLenum const& usage) const override;
-                        const T* const value() const;
+                        size_t const size() const override;
+                        void add(GLvoid* value, GLuint const& nbValue = 1) override;
+                        GLvoid* const value() override;
 
                     //## Access Operator ##//
 
@@ -110,9 +110,9 @@
             inline std::ostream& operator<<(std::ostream &stream, Data<T> const& c) {
                 stream << "(";
                 for (GLuint i = 0; i < c.size() - 1; i = i + 1) {
-                    stream << c.get(i) << ",";
+                    stream << c.getValue(i) << ",";
                 }
-                stream << c.get(c.size() - 1) << ")";
+                stream << c.getValue(c.size() - 1) << ")";
                 return stream;
             }
 

@@ -74,10 +74,8 @@
                          */
                         void push_back(DataSet* const& d);
                         void add(GLuint const& index, void* value, GLuint const& nbValue = 1) const;
-                        void updateVBO(GL::VBO const& buffer, std::vector<GLintptr> const& offset) const;
-                        void updateIBO(GL::IBO const& buffer, std::vector<GLintptr> const& offset) const;
-                        void allocateAndFillVBO(GL::VBO const& buffer, GLenum const& usage) const;
-                        void allocateAndFillIBO(GL::IBO const& buffer, GLenum const& usage) const;
+                        void update(GL::VBO& buffer, std::vector<GLintptr> const& offset) const;
+                        void allocateAndFill(GL::VBO& buffer, GLenum const& usage) const;
 
                     //## Access Operator ##//
 
@@ -105,7 +103,11 @@
 
                     //## Shift Operator ##//
 
-                private:
+                public:
+                    void updateVBO(GL::VBO& buffer, std::vector<GLintptr> const& offset) const;
+                    void updateIBO(GL::IBO& buffer, std::vector<GLintptr> const& offset) const;
+                    void allocateAndFillVBO(GL::VBO& buffer, GLenum const& usage) const;
+                    void allocateAndFillIBO(GL::IBO& buffer, GLenum const& usage) const;
             };
 
         };

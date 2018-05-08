@@ -30,6 +30,10 @@
                 nb = n;
             }
 
+            VBOType const IBO::getType() const {
+                return INDEXBUFFEROBJECT;
+            }
+
             void IBO::reload() {
                 index.reload();
                 VBO::reload();
@@ -41,14 +45,14 @@
                 setNb(nbIndex);
             }
 
-            void IBO::update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, std::vector<GLvoid*> const& data, GLvoid* const& iData) {
-                getIndexBuffer().update(offset, nbIndex * index.getTypeSize(), iData);
+            void IBO::update(std::vector<GLintptr> const& offset, GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, std::vector<GLvoid*> const& data) {
+                getIndexBuffer().update(offset[offset.size() - 1], nbIndex * index.getTypeSize(), data[data.size() - 1]);
                 VBO::update(offset, vertexSize, nbVertex, data);
                 setNb(nbIndex);
             }
 
-            void IBO::allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage, std::vector<GLvoid*> const& data, GLvoid* const& iData) {
-                getIndexBuffer().allocateAndFill(nbIndex * index.getTypeSize(), usage, iData);
+            void IBO::allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage, std::vector<GLvoid*> const& data) {
+                getIndexBuffer().allocateAndFill(nbIndex * index.getTypeSize(), usage, data[data.size() - 1]);
                 VBO::allocateAndFill(vertexSize, nbVertex, usage, data);
                 setNb(nbIndex);
             }

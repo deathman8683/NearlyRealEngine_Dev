@@ -15,11 +15,17 @@
                 data.push_back(cMesh->getVPointer());
                 data.push_back(cMesh->getMPointer());
                 data.push_back(cMesh->getNPointer());
+                data.push_back(cMesh->getIPointer());
 
                 if (!getBuffer().isAllocated()) {
-                    buffer.allocateAndFill(sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), GL_STREAM_DRAW, data, cMesh->getIPointer());
+                    buffer.allocateAndFill(sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), GL_STREAM_DRAW, data);
                 } else {
-                    buffer.update(0, sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), data, cMesh->getIPointer());
+                    std::vector<GLintptr> offset;
+                    offset.push_back(0);
+                    offset.push_back(0);
+                    offset.push_back(0);
+                    offset.push_back(0);
+                    buffer.update(offset, sizeof(GLint), cMesh->getVData().size() / 3, cMesh->getIData().size(), data);
                 }
 
                 delete cMesh;

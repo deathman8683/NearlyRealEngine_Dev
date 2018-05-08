@@ -19,12 +19,12 @@
             }
 
             template <class T>
-            T const& Data<T>::get(GLuint const& index) const {
+            T const& Data<T>::getValue(GLuint const& index) const {
                 return data.at(index);
             }
 
             template <class T>
-            void Data<T>::add(void* value, GLuint const& nbValue) {
+            void Data<T>::add(GLvoid* value, GLuint const& nbValue) {
                 T* v = static_cast <T*> (value);
                 for (GLuint i = 0; i < nbValue; i = i + 1) {
                     data.push_back(v[i]);
@@ -37,18 +37,18 @@
             }
 
             template <class T>
-            const T* const Data<T>::value() const {
+            size_t const Data<T>::getTypeSize() const {
+                return sizeof(T);
+            }
+
+            template <class T>
+            size_t const Data<T>::getDataSize() const {
+                return size() * getTypeSize();
+            }
+
+            template <class T>
+            GLvoid* const Data<T>::value() {
                 return &data[0];
-            }
-
-            template <class T>
-            void Data<T>::update(const GL::AttributeBuffer* const& buffer, GLintptr const& offset) const {
-                buffer->update(offset, size(), value());
-            }
-
-            template <class T>
-            void Data<T>::allocateAndFill(const GL::AttributeBuffer* const& buffer, GLenum const& usage) const {
-                buffer->allocateAndFill(size(), usage, value());
             }
 
             template <class T>

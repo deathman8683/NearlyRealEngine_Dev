@@ -59,13 +59,14 @@
                         virtual ~DataSet();
 
                     //## Getter ##//
+                        virtual size_t const getTypeSize() const = 0;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                        virtual void add(void* value, GLuint const& nbValue = 1) = 0;
-                        virtual void update(const GL::AttributeBuffer* const& buffer, GLintptr const& offset) const = 0;
-                        virtual void allocateAndFill(const GL::AttributeBuffer* const& buffer, GLenum const& usage) const = 0;
+                        virtual size_t const size() const = 0;
+                        virtual void add(GLvoid* value, GLuint const& nbValue = 1) = 0;
+                        virtual GLvoid* const value() = 0;
 
                     //## Access Operator ##//
 

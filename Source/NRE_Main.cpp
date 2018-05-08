@@ -179,7 +179,7 @@
             oTMesh.add(2, nBuf, 24);
             oTMesh.add(3, iBuf, 36);
 
-            oTMesh.allocateAndFillIBO(oTIBO, GL_STREAM_DRAW);
+            oTMesh.allocateAndFillIBO(*oTIBO, GL_STREAM_DRAW);
 
             while(!camera.getQuit())
             {

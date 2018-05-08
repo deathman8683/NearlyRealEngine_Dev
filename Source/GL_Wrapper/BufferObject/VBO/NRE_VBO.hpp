@@ -26,6 +26,11 @@
          */
         namespace GL {
 
+            enum VBOType {
+                VERTEXBUFFEROBJECT,
+                INDEXBUFFEROBJECT
+            };
+
             /**
              * @class VBO
              * @brief GL's Object : Specialization of an BufferObject for vertex managing
@@ -81,6 +86,11 @@
                          * @return return the vertexBuffer size
                          */
                         GLuint const& getNb() const;
+                        /**
+                         * Type getter
+                         * @return if the current object is a VBO or an IBO
+                         */
+                        virtual VBOType const getType() const;
 
                     //## Setter ##//
                         /**
@@ -103,18 +113,18 @@
                         void allocate(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage);
                         /**
                          * Update the vbo's storage
-                         * @param offset     the offset in the buffer
+                         * @param offset     arrays of offset for all buffer
                          * @param vertexSize the vertex type size
                          * @param nbVertex   the number of vertex to store
-                         * @param data       arrays of data for all buffer
+                         * @param data       arrays of data for all buffer, vertex data must be in first
                          */
-                        void update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data);
+                        void update(std::vector<GLintptr> const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data);
                         /**
                          * ALlocate the storage and fill all buffer in the VBO
                          * @param vertexSize the vertex type size
                          * @param nbVertex   the number of vertex to store
                          * @param usage      the ibo's usage
-                         * @param data       arrays of data for all buffer
+                         * @param data       arrays of data for all buffer, vertex data must be in first
                          */
                         void allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, GLenum const& usage, std::vector<GLvoid*> const& data);
                         /**

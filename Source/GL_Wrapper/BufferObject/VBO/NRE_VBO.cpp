@@ -33,6 +33,10 @@
                 nb = n;
             }
 
+            VBOType const VBO::getType() const {
+                return VERTEXBUFFEROBJECT;
+            }
+
             void VBO::reload() {
                 for (GLuint i = 0; i < attributes.size(); i = i + 1) {
                     getAttribute(i)->reload();
@@ -49,10 +53,10 @@
                 setNb(nbVertex);
             }
 
-            void VBO::update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data) {
-                getAttribute(0)->update(offset, vertexSize * nbVertex * getAttribute(0)->getSize(), data[0]);
+            void VBO::update(std::vector<GLintptr> const& offset, GLuint const& vertexSize, size_t const& nbVertex, std::vector<GLvoid*> const& data) {
+                getAttribute(0)->update(offset[0], vertexSize * nbVertex * getAttribute(0)->getSize(), data[0]);
                 for (GLuint i = 1; i < attributes.size(); i = i + 1) {
-                    getAttribute(i)->update(offset, getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), data[i]);
+                    getAttribute(i)->update(offset[i], getAttribute(i)->getTypeSize() * nbVertex * getAttribute(i)->getSize(), data[i]);
                 }
                 setNb(nbVertex);
             }

@@ -29,30 +29,20 @@
                 data[index]->add(value, nbValue);
             }
 
-            void Mesh::updateVBO(GL::VBO const& buffer, std::vector<GLintptr> const& offset) const {
-                for (GLuint i = 0; i < data.size(); i = i + 1) {
-                    data[i]->update(buffer.getAttribute(i), offset[i]);
+            void Mesh::update(GL::VBO& buffer, std::vector<GLintptr> const& offset) const {
+                if (buffer.getType() == GL::VERTEXBUFFEROBJECT) {
+                    updateVBO(buffer, offset);
+                } else {
+                    updateIBO(dynamic_cast <GL::IBO&> (buffer), offset);
                 }
             }
 
-            void Mesh::updateIBO(GL::IBO const& buffer, std::vector<GLintptr> const& offset) const {
-                for (GLuint i = 0; i < data.size() - 1; i = i + 1) {
-                    data[i]->update(buffer.getAttribute(i), offset[i]);
+            void Mesh::allocateAndFill(GL::VBO& buffer, GLenum const& usage) const {
+                if (buffer.getType() == GL::VERTEXBUFFEROBJECT) {
+                    allocateAndFillVBO(buffer, usage);
+                } else {
+                    allocateAndFillIBO(dynamic_cast <GL::IBO&> (buffer), usage);
                 }
-                data[data.size() - 1]->update(&(buffer.getIndexBuffer()), offset[data.size() - 1]);
-            }
-
-            void Mesh::allocateAndFillVBO(GL::VBO const& buffer, GLenum const& usage) const {
-                for (GLuint i = 0; i < data.size(); i = i + 1) {
-                    data[i]->update(buffer.getAttribute(i), usage);
-                }
-            }
-
-            void Mesh::allocateAndFillIBO(GL::IBO const& buffer, GLenum const& usage) const {
-                for (GLuint i = 0; i < data.size() - 1; i = i + 1) {
-                    data[i]->allocateAndFill(buffer.getAttribute(i), usage);
-                }
-                data[data.size() - 1]->allocateAndFill(&(buffer.getIndexBuffer()), usage);
             }
 
             Mesh& Mesh::operator=(Mesh const& m) {
@@ -63,6 +53,38 @@
             Mesh& Mesh::operator=(Mesh && m) {
                 data = std::move(m.data);
                 return *this;
+            }
+
+            void Mesh::updateVBO(GL::VBO& buffer, std::vector<GLintptr> const& offset) const {
+                std::vector<GLvoid*> dataPointer;
+                for (GLuint i = 0; i < data.size(); i = i + 1) {
+                    dataPointer.push_back(data[i]->value());
+                }
+                buffer.update(offset,  data[0]->getTypeSize(), data[0]->size() / 3, dataPointer);
+            }
+
+            void Mesh::updateIBO(GL::IBO& buffer, std::vector<GLintptr> const& offset) const {
+                std::vector<GLvoid*> dataPointer;
+                for (GLuint i = 0; i < data.size(); i = i + 1) {
+                    dataPointer.push_back(data[i]->value());
+                }
+                buffer.update(offset, data[0]->getTypeSize(), data[0]->size() / 3, data[data.size() - 1]->size(), dataPointer);
+            }
+
+            void Mesh::allocateAndFillVBO(GL::VBO& buffer, GLenum const& usage) const {
+                std::vector<GLvoid*> dataPointer;
+                for (GLuint i = 0; i < data.size(); i = i + 1) {
+                    dataPointer.push_back(data[i]->value());
+                }
+                buffer.allocateAndFill(data[0]->getTypeSize(), data[0]->size() / 3, usage, dataPointer);
+            }
+
+            void Mesh::allocateAndFillIBO(GL::IBO& buffer, GLenum const& usage) const {
+                std::vector<GLvoid*> dataPointer;
+                for (GLuint i = 0; i < data.size(); i = i + 1) {
+                    dataPointer.push_back(data[i]->value());
+                }
+                buffer.allocateAndFill(data[0]->getTypeSize(), data[0]->size() / 3, data[data.size() - 1]->size(), usage, dataPointer);
             }
 
         };

@@ -76,6 +76,11 @@
                          * @return return the indexBuffer size
                          */
                         GLuint const& getNb() const;
+                        /**
+                         * Type getter
+                         * @return if the current object is a VBO or an IBO
+                         */
+                        VBOType const getType() const override;
 
                     //## Setter ##//
                         /**
@@ -99,24 +104,22 @@
                         void allocate(GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage);
                         /**
                          * Update the ibo's storage
-                         * @param offset     the offset in the buffer
+                         * @param offset     arrays of offset for all buffer
                          * @param vertexSize the vertex type size
                          * @param nbVertex   the number of vertex to store
                          * @param nbIndex    the number of index to store
-                         * @param data       arrays of data for all buffer
-                         * @param iData      the index data
+                         * @param data       arrays of data for all buffer, vertex data must be in first, index data must be in last
                          */
-                        void update(GLintptr const& offset, GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, std::vector<GLvoid*> const& data, GLvoid* const& iData);
+                        void update(std::vector<GLintptr> const& offset, GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, std::vector<GLvoid*> const& data);
                         /**
                          * ALlocate the storage and fill all buffer in the IBO
                          * @param vertexSize the vertex type size
                          * @param nbVertex   the number of vertex to store
                          * @param nbIndex    the number of index to store
                          * @param usage      the ibo's usage
-                         * @param data       arrays of data for all buffer
-                         * @param iData      the index data
+                         * @param data       arrays of data for all buffer, vertex data must be in first, index data must be in last
                          */
-                        void allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage, std::vector<GLvoid*> const& data, GLvoid* const& iData);
+                        void allocateAndFill(GLuint const& vertexSize, size_t const& nbVertex, size_t const& nbIndex, GLenum const& usage, std::vector<GLvoid*> const& data);
                         /**
                          * Store calls for VAO managing
                          * @param vertexType the vertex buffer type size
