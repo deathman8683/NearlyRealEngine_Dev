@@ -5,8 +5,10 @@
     #include "Time/Clock/NRE_Clock.hpp"
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
+    #include "Object/NRE_Object.hpp"
     #include "Object/Mesh/NRE_Mesh.hpp"
     #include "Object/Mesh/Data/VertexData/NRE_VertexData.hpp"
+    #include "World/Mesh/NRE_Mesh.hpp"
 
     using namespace NRE;
     using namespace Maths;
@@ -103,20 +105,78 @@
             camera.Keyboard::getKey(SDL_SCANCODE_G).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksBack));
             camera.Keyboard::getKey(SDL_SCANCODE_T).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksFront));
 
+            GL::IBO* oTVBO = new GL::IBO(true);
+            oTVBO->push_back(new GL::MaterialBuffer(true));
+            oTVBO->push_back(new GL::NormalBuffer(true));
 
+            Object::Object oT(oTVBO, GL_INT);
 
-            Object::Mesh m;
-            Object::VertexData* vData = new Object::VertexData();
+            GLint* vBuf = new GLint[24];
+                vBuf[0] = 0; vBuf[1] = 0; vBuf[2] = 0;
+                vBuf[3] = 0; vBuf[4] = 0; vBuf[5] = 100;
+                vBuf[6] = 0; vBuf[7] = 100; vBuf[8] = 0;
+                vBuf[9] = 0; vBuf[10] = 100; vBuf[11] = 100;
+                vBuf[12] = 100; vBuf[13] = 0; vBuf[14] = 0;
+                vBuf[15] = 100; vBuf[16] = 0; vBuf[17] = 100;
+                vBuf[18] = 100; vBuf[19] = 100; vBuf[20] = 100;
+                vBuf[21] = 100; vBuf[22] = 100; vBuf[23] = 0;
 
-            int value[] = {
-                1, 2, 3, 4, 5, 6
-            };
+            GLbyte* nBuf = new GLbyte[24];
+                for (int i = 0; i < 24; i = i + 3) {
+                    nBuf[i] = 1;
+                    nBuf[i + 1] = 0;
+                    nBuf[i + 2] = 0;
+                }
 
-            vData->add(&value, 6);
+            GLubyte* mBuf = new GLubyte[24];
+                for (int i = 0; i < 24; i = i + 1) {
+                    mBuf[i] = 11;
+                }
 
-            m.push_back(vData);
+            GLuint* iBuf = new GLuint[36];
+                iBuf[0] = 0;
+                iBuf[1] = 1;
+                iBuf[2] = 2;
+                iBuf[3] = 3;
+                iBuf[4] = 2;
+                iBuf[5] = 1;
+                iBuf[6] = 0;
+                iBuf[7] = 1;
+                iBuf[8] = 4;
+                iBuf[9] = 5;
+                iBuf[10] = 4;
+                iBuf[11] = 1;
+                iBuf[12] = 1;
+                iBuf[13] = 5;
+                iBuf[14] = 3;
+                iBuf[15] = 6;
+                iBuf[16] = 3;
+                iBuf[17] = 5;
+                iBuf[18] = 0;
+                iBuf[19] = 2;
+                iBuf[20] = 4;
+                iBuf[21] = 7;
+                iBuf[22] = 4;
+                iBuf[23] = 2;
+                iBuf[24] = 4;
+                iBuf[25] = 5;
+                iBuf[26] = 7;
+                iBuf[27] = 6;
+                iBuf[28] = 7;
+                iBuf[29] = 5;
+                iBuf[30] = 2;
+                iBuf[31] = 3;
+                iBuf[32] = 7;
+                iBuf[33] = 6;
+                iBuf[34] = 7;
+                iBuf[35] = 3;
 
-            std::cout << *vData << std::endl;
+            std::vector<GLvoid*> data;
+            data.push_back(vBuf);
+            data.push_back(mBuf);
+            data.push_back(nBuf);
+
+            oTVBO->allocateAndFill(sizeof(GLint), 8, 36, GL_STREAM_DRAW, data, iBuf);
 
             while(!camera.getQuit())
             {
@@ -159,7 +219,12 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    //engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    gBufferPass.bind();
+                        gBufferPass.useMat4("modelview", 1, &modelview);
+                        gBufferPass.useMat4("projection", 1, &projection);
+                        oT.draw();
+                    gBufferPass.unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(skyBoxShader, projection, modelview);

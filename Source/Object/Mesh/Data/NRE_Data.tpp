@@ -25,7 +25,7 @@
 
             template <class T>
             void Data<T>::add(void* value, GLuint const& nbValue) {
-                T* v = reinterpret_cast <T*> (value);
+                T* v = static_cast <T*> (value);
                 for (GLuint i = 0; i < nbValue; i = i + 1) {
                     data.push_back(v[i]);
                 }

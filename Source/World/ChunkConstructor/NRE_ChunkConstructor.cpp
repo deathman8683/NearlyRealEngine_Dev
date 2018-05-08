@@ -7,7 +7,7 @@
         namespace World {
 
             void Chunk::constructMesh(World* w) {
-                Mesh* cMesh = new Mesh{this};
+                Mesh* cMesh = new Mesh(this);
 
                 cMesh->constructMesh(w);
 

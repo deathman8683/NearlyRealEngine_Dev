@@ -164,8 +164,10 @@
                 };
 
                 GLshort uvData[] = {
-                    0, 0, 1, 0, 1, 1,
-                    1, 1, 0, 1, 0, 0
+                    0, 0, 1,
+                    0, 1, 1,
+                    1, 1, 0,
+                    1, 0, 0
                 };
 
                 std::vector<GLvoid*> data;
@@ -174,7 +176,7 @@
 
 
                 buffer.allocateAndFill(sizeof(GLint), 6, GL_STREAM_DRAW, data);
-                vao.access(buffer, GL_INT, true);
+                vao.access(buffer, GL_INT);
             }
 
             DeferredRenderer& DeferredRenderer::operator=(DeferredRenderer && def) {

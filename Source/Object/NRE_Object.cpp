@@ -8,7 +8,7 @@
             }
 
             Object::Object(GL::VBO* buf, GLenum const& type) : buffer(buf), vao(true) {
-                vao.access(buffer, type);
+                vao.access(*buffer, type);
             }
 
             Object::Object(Object && o) : buffer(std::move(o.buffer)), vao(std::move(o.vao)) {
