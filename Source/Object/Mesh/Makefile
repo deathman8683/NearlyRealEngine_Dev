@@ -2,12 +2,12 @@ SRC = NRE_Mesh.cpp
 OBJ = $(OBJDIR)NRE_Mesh.o
 OBJDIR = ../../../obj/Debug/Object/Mesh/
 
-DATASET = DataSet
+DATA = Data
 
 all : before $(TARGET)
 
 before:
-	@(cd $(DATASET) && $(MAKE))
+	@(cd $(DATA) && $(MAKE))
 
 debug: $(OBJ)
 

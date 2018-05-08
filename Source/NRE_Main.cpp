@@ -5,6 +5,9 @@
     #include "Time/Clock/NRE_Clock.hpp"
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
+    #include "Object/Mesh/NRE_Mesh.hpp"
+    #include "Object/Mesh/Data/VertexData/NRE_VertexData.hpp"
+
     using namespace NRE;
     using namespace Maths;
 
@@ -99,6 +102,13 @@
             camera.Keyboard::getKey(SDL_SCANCODE_H).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksRight));
             camera.Keyboard::getKey(SDL_SCANCODE_G).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksBack));
             camera.Keyboard::getKey(SDL_SCANCODE_T).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksFront));
+
+
+
+            Object::Mesh m;
+            Object::VertexData* vData = new Object::VertexData();
+
+            m.push_back(vData);
 
             while(!camera.getQuit())
             {

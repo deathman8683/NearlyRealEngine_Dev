@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "../../../Generic/NRE_Type.hpp"
+    #include "DataSet/NRE_DataSet.hpp"
 
     /**
      * @namespace NRE
@@ -26,7 +26,7 @@
              * @brief Object's Object : Manage storing of mesh's attributes data
              */
             template <class T>
-            class Data {
+            class Data : public DataSet {
                 protected:
                     std::vector<T> data;
 
@@ -57,7 +57,7 @@
                         /**
                          * Data Deconstructor
                          */
-                        ~Data();
+                        virtual ~Data();
 
                     //## Getter ##//
 

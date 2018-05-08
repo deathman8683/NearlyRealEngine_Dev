@@ -1,6 +1,6 @@
 SRC = NRE_DataSet.cpp
 OBJ = $(OBJDIR)NRE_DataSet.o
-OBJDIR = ../../../../obj/Debug/Object/Mesh/DataSet/
+OBJDIR = ../../../../../obj/Debug/Object/Mesh/Data/DataSet/
 
 all : $(TARGET)
 

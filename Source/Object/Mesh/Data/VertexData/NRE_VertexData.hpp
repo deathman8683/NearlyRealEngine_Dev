@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_Mesh.hpp
-     * @brief Declaration of Engine's Object's Object : Mesh
+     * @file NRE_VertexData.hpp
+     * @brief Declaration of Engine's Object's Object : VertexData
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "Data/NRE_Data.hpp"
+    #include "../NRE_Data.hpp"
 
     /**
      * @namespace NRE
@@ -22,68 +22,62 @@
         namespace Object {
 
             /**
-             * @class Mesh
-             * @brief Object's Object : Base class for 2D and 3D mesh specialization
+             * @class VertexData
+             * @brief Object's Object : A specialized data object for vertex storing
              */
-            class Mesh {
+            class VertexData : public Data<GLint> {
                 private:
-                    std::vector<DataSet*> data;
 
                 public:
                     //## Constructor ##//
                         /**
                          * Default Constructor
                          */
-                        Mesh();
+                        VertexData();
 
                     //## Copy-Constructor ##//
                         /**
-                         * Copy m into this
-                         * @param m the mesh to copy the content
+                         * Copy d into this
+                         * @param d the vertex data to copy the content
                          */
-                        Mesh(Mesh const& m);
+                        VertexData(VertexData const& d);
 
                     //## Move-Constructor ##//
                         /**
-                         * Move m into this, leaving m empty
-                         * @param m the mesh to move
+                         * Move d into this, leaving d empty
+                         * @param d the vertex data to move
                          */
-                        Mesh(Mesh && m);
+                        VertexData(VertexData && d);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * Mesh Deconstructor
+                         * VertexData Deconstructor
                          */
-                        ~Mesh();
+                        ~VertexData();
 
                     //## Getter ##//
 
                     //## Setter ##//
 
                     //## Methods ##//
-                        /**
-                         * Push back a dataset into the mesh
-                         * @param d the dateset to add into the mesh
-                         */
-                        void push_back(DataSet* d);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
-                         * Copy assigment of m into this
-                         * @param m the mesh to copy into this
+                         * Copy assigment of d into this
+                         * @param d the vertex data to copy into this
                          * @return the reference of himself
                          */
-                        Mesh& operator=(Mesh const& m);
+                        VertexData& operator=(VertexData const& d);
                         /**
-                         * Move assigment of m into this, leaving m empty
-                         * @param m the mesh to move into this
+                         * Move assigment of d into this, leaving d empty
+                         * @param d the vertex data to move into this
                          * @return the reference of himself
                          */
-                        Mesh& operator=(Mesh && m);
+                        VertexData& operator=(VertexData && d);
 
                     //## Shortcut Operator ##//
 
