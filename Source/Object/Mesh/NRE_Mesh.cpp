@@ -33,7 +33,7 @@
                 if (buffer.getType() == GL::VERTEXBUFFEROBJECT) {
                     updateVBO(buffer, offset);
                 } else {
-                    updateIBO(dynamic_cast <GL::IBO&> (buffer), offset);
+                    updateIBO(static_cast <GL::IBO&> (buffer), offset);
                 }
             }
 
@@ -41,7 +41,7 @@
                 if (buffer.getType() == GL::VERTEXBUFFEROBJECT) {
                     allocateAndFillVBO(buffer, usage);
                 } else {
-                    allocateAndFillIBO(dynamic_cast <GL::IBO&> (buffer), usage);
+                    allocateAndFillIBO(static_cast <GL::IBO&> (buffer), usage);
                 }
             }
 

@@ -9,9 +9,11 @@
     #pragma once
 
     #include "../Generic/NRE_Type.hpp"
-    #include "../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
-    #include "../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
+    #include "../Maths/NRE_Maths.hpp"
     #include "Mesh/NRE_Mesh.hpp"
+    #include "Mesh/2D/NRE_Mesh2D.hpp"
+    //#include "Mesh/3D/NRE_Mesh3D.hpp"
+    #include "../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
 
     /**
      * @namespace NRE
@@ -29,7 +31,7 @@
              * @brief Object's Object : Manage a simple object with a VBO (or IBO) and a VAO
              */
             class Object {
-                private:
+                protected:
                     GL::VBO* buffer;    /**< The object's rendering buffer */
                     GL::VAO vao;        /**< The object's rendering VAO */
                     Mesh* mesh;         /**< The object's mesh */

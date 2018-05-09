@@ -2,14 +2,18 @@ SRC = NRE_Object.cpp
 OBJ = $(OBJDIR)NRE_Object.o
 OBJDIR = ../../obj/Debug/Object/
 
+2D = 2D
 3D = 3D
 MESH = Mesh
 
-all : $(TARGET) after
+all : before $(TARGET) after
+
+before:
+	@(cd $(MESH) && $(MAKE))
 
 after:
+	@(cd $(2D) && $(MAKE))
 	@(cd $(3D) && $(MAKE))
-	@(cd $(MESH) && $(MAKE))
 
 debug: $(OBJ)
 

@@ -13,6 +13,8 @@
     #include "Data/MaterialData/NRE_MaterialData.hpp"
     #include "Data/NormalData/NRE_NormalData.hpp"
     #include "Data/IndexData/NRE_IndexData.hpp"
+    #include "Data/UVData/NRE_UVData.hpp"
+    #include "Data/ColorData/NRE_ColorData.hpp"
     #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
 
     /**
@@ -31,7 +33,7 @@
              * @brief Object's Object : Base class for 2D and 3D mesh specialization
              */
             class Mesh {
-                private:
+                protected:
                     std::vector<DataSet*> data;     /**< The mesh's array of data set fill with a model information */
 
                 public:
@@ -61,7 +63,7 @@
                         /**
                          * Mesh Deconstructor
                          */
-                        ~Mesh();
+                        virtual ~Mesh();
 
                     //## Getter ##//
 
