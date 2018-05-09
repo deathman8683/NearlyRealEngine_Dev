@@ -90,6 +90,7 @@
                          * Draw the current object, need to be call from a rendering context (Shader bind)
                          */
                         void draw() const;
+                        void access(GLenum const& type);
 
                     //## Access Operator ##//
 

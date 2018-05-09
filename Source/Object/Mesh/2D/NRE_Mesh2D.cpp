@@ -27,7 +27,7 @@
                     coord.getX(),               coord.getY(),               0,
                 };
 
-                add(0, vData, 24);
+                add(0, vData, 18);
 
                 GLshort uvData[] = {
                     0, 0,

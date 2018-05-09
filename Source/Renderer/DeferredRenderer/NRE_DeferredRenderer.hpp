@@ -16,6 +16,7 @@
     #include "../../Light/PointLight/NRE_PointLight.hpp"
     #include "../../World/NRE_World.hpp"
     #include "../SSAO/NRE_SSAO.hpp"
+    #include "../../Object/2D/NRE_Object2D.hpp"
 
     /**
      * @namespace NRE
@@ -32,12 +33,10 @@
              * @class DeferredRenderer
              * @brief Renderer's Object : Manage deferred renderding techniques using FBO
              */
-            class DeferredRenderer {
+            class DeferredRenderer : public Object::Object2D {
                 private:
                     GL::FBO gBuffer;    /**< The Deferred Renderer G-Buffer to store scene information */
                     SSAO ssao;          /**< The Deferred Renderer SSAO effect/object */
-                    GL::VBO buffer;     /**< The Screen buffer */
-                    GL::VAO vao;        /**< The Screen VAO */
 
                 public:
                     //## Constructor ##//
@@ -104,10 +103,6 @@
                          * @param invProjection the inverse projection matrix
                          */
                         void SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection);
-                        /**
-                         * Fill the Screen buffer for later rendering
-                         */
-                        void fillBuffer();
 
                     //## Access Operator ##//
 

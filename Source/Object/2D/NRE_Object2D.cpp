@@ -4,8 +4,13 @@
     namespace NRE {
         namespace Object {
 
-            Object2D::Object2D() : Object(new GL::VBO(true), new Mesh2D(), GL_INT) {
+            Object2D::Object2D() {
+                buffer = new GL::VBO(true);
                 buffer->push_back(new GL::UVBuffer(true));
+
+                mesh = new Mesh2D();
+
+                access(GL_INT);
             }
 
             Object2D::Object2D(GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size) : Object2D() {

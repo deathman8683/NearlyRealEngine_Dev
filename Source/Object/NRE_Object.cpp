@@ -8,7 +8,7 @@
             }
 
             Object::Object(GL::VBO* buf, Mesh* mesh, GLenum const& type) : buffer(buf), vao(true), mesh(mesh) {
-                vao.access(*buffer, type);
+                access(type);
             }
 
             Object::Object(Object && o) : buffer(std::move(o.buffer)), vao(std::move(o.vao)), mesh(std::move(o.mesh)) {
@@ -46,6 +46,10 @@
                 vao.bind();
                     buffer->draw();
                 vao.unbind();
+            }
+
+            void Object::access(GLenum const& type) {
+                vao.access(*buffer, type);
             }
 
             Object& Object::operator=(Object && o) {

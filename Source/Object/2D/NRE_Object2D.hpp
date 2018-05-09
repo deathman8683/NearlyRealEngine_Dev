@@ -56,7 +56,7 @@
                         /**
                          * Object2D Deconstructor
                          */
-                        ~Object2D();
+                        virtual ~Object2D();
 
                     //## Getter ##//
 

@@ -86,7 +86,7 @@
             }
 
             void VBO::draw() const {
-                glDrawArrays(GL_TRIANGLES, getNb(), 0);
+                glDrawArrays(GL_TRIANGLES, 0, getNb());
             }
 
             VBO& VBO::operator=(VBO && buf) {
