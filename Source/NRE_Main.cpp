@@ -106,12 +106,12 @@
             oTIBO->push_back(new GL::MaterialBuffer(true));
             oTIBO->push_back(new GL::NormalBuffer(true));
 
-            Object::Mesh oTMesh;
-            oTMesh.push_back(new Object::MaterialData());
-            oTMesh.push_back(new Object::NormalData());
-            oTMesh.push_back(new Object::IndexData());
+            Object::Mesh* oTMesh = new Object::Mesh();
+            oTMesh->push_back(new Object::MaterialData());
+            oTMesh->push_back(new Object::NormalData());
+            oTMesh->push_back(new Object::IndexData());
 
-            Object::Object oT(oTIBO, GL_INT);
+            Object::Object oT(oTIBO, oTMesh, GL_INT);
 
             GLint* vBuf = new GLint[24];
                 vBuf[0] = 0; vBuf[1] = 0; vBuf[2] = 0;
@@ -174,12 +174,12 @@
                 iBuf[35] = 3;
 
 
-            oTMesh.add(0, vBuf, 24);
-            oTMesh.add(1, mBuf, 24);
-            oTMesh.add(2, nBuf, 24);
-            oTMesh.add(3, iBuf, 36);
+            oT.add(0, vBuf, 24);
+            oT.add(1, mBuf, 24);
+            oT.add(2, nBuf, 24);
+            oT.add(3, iBuf, 36);
 
-            oTMesh.allocateAndFill(*oTIBO, GL_STREAM_DRAW);
+            oT.allocateAndFill(GL_STREAM_DRAW);
 
             while(!camera.getQuit())
             {

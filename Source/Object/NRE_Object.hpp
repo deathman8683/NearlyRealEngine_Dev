@@ -31,7 +31,8 @@
             class Object {
                 private:
                     GL::VBO* buffer;    /**< The object's rendering buffer */
-                    GL::VAO vao;       /**< The object's rendering VAO */
+                    GL::VAO vao;        /**< The object's rendering VAO */
+                    Mesh* mesh;         /**< The object's mesh */
 
                 public:
                     //## Constructor ##//
@@ -43,8 +44,9 @@
                          * Construct an object with his rendering buffer
                          * @param buf   the rendering buffer, containing (or not yet) the object's model
                          * @param type  the rendering buffer vertex type
+                         * @param mesh  the object mesh, containing (or not yet) the object's model
                          */
-                        Object(GL::VBO* buf, GLenum const& type);
+                        Object(GL::VBO* buf, Mesh* mesh, GLenum const& type);
 
                     //## Copy-Constructor ##//
                         /**
@@ -73,6 +75,15 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Add a set of value into in the mesh
+                         * @param index   the dataSet's index in the mesh
+                         * @param value   the pointer to the set of value
+                         * @param nbValue the number of value to add
+                         */
+                        void add(GLuint const& index, void* value, GLuint const& nbValue = 1) const;
+                        void update();
+                        void allocateAndFill(GLenum const& usage);
                         /**
                          * Draw the current object, need to be call from a rendering context (Shader bind)
                          */

@@ -26,9 +26,13 @@
          */
         namespace GL {
 
+            /**
+             * @enum VBOType
+             * Describe the type of the current buffer (VBO or IBO)
+             */
             enum VBOType {
-                VERTEXBUFFEROBJECT,
-                INDEXBUFFEROBJECT
+                VERTEXBUFFEROBJECT,     /**< The Buffer is a VBO */
+                INDEXBUFFEROBJECT       /**< The Buffer is an IBO */
             };
 
             /**

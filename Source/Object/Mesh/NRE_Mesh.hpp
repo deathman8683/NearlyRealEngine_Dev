@@ -32,7 +32,7 @@
              */
             class Mesh {
                 private:
-                    std::vector<DataSet*> data;
+                    std::vector<DataSet*> data;     /**< The mesh's array of data set fill with a model information */
 
                 public:
                     //## Constructor ##//

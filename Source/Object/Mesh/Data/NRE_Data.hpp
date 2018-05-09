@@ -28,7 +28,7 @@
             template <class T>
             class Data : public DataSet {
                 protected:
-                    std::vector<T> data;
+                    std::vector<T> data;    /**< The data set values */
 
                 public:
                     //## Constructor ##//
