@@ -113,71 +113,43 @@
 
             Object::Object oT(oTIBO, oTMesh, GL_INT);
 
-            GLint* vBuf = new GLint[24];
-                vBuf[0] = 0; vBuf[1] = 0; vBuf[2] = 0;
-                vBuf[3] = 0; vBuf[4] = 0; vBuf[5] = 10;
-                vBuf[6] = 0; vBuf[7] = 10; vBuf[8] = 0;
-                vBuf[9] = 0; vBuf[10] = 10; vBuf[11] = 10;
-                vBuf[12] = 10; vBuf[13] = 0; vBuf[14] = 0;
-                vBuf[15] = 10; vBuf[16] = 0; vBuf[17] = 10;
-                vBuf[18] = 10; vBuf[19] = 10; vBuf[20] = 10;
-                vBuf[21] = 10; vBuf[22] = 10; vBuf[23] = 0;
+            GLint vData[24] = {
+                -10, -10, -10,
+                -10, -10, 10,
+                -10, 10, -10,
+                -10, 10, 10,
+                10, 10, 10,
+                10, 10, -10,
+                10, -10, 10,
+                10, -10, -10
+            };
 
-            GLbyte* nBuf = new GLbyte[24];
-                for (int i = 0; i < 24; i = i + 3) {
-                    nBuf[i] = 1;
-                    nBuf[i + 1] = 0;
-                    nBuf[i + 2] = 0;
-                }
+            GLuint iData[36] = {
+                7, 0, 2, 2, 5, 7,
+                2, 0, 1, 1, 3, 2,
+                4, 6, 7, 7, 5, 4,
+                4, 3, 1, 1, 6, 4,
+                4, 5, 2, 2, 3, 4,
+                0, 7, 1, 1, 7, 6,
+            };
 
-            GLubyte* mBuf = new GLubyte[24];
-                for (int i = 0; i < 24; i = i + 1) {
-                    mBuf[i] = 11;
-                }
+            GLbyte nData[24] = {
+                1, 0, 0,
+                1, 0, 0,
+                1, 0, 0,
+                1, 0, 0,
+                1, 0, 0,
+                1, 0, 0
+            };
 
-            GLuint* iBuf = new GLuint[36];
-                iBuf[0] = 0;
-                iBuf[1] = 1;
-                iBuf[2] = 2;
-                iBuf[3] = 3;
-                iBuf[4] = 2;
-                iBuf[5] = 1;
-                iBuf[6] = 0;
-                iBuf[7] = 1;
-                iBuf[8] = 4;
-                iBuf[9] = 5;
-                iBuf[10] = 4;
-                iBuf[11] = 1;
-                iBuf[12] = 1;
-                iBuf[13] = 5;
-                iBuf[14] = 3;
-                iBuf[15] = 6;
-                iBuf[16] = 3;
-                iBuf[17] = 5;
-                iBuf[18] = 0;
-                iBuf[19] = 2;
-                iBuf[20] = 4;
-                iBuf[21] = 7;
-                iBuf[22] = 4;
-                iBuf[23] = 2;
-                iBuf[24] = 4;
-                iBuf[25] = 5;
-                iBuf[26] = 7;
-                iBuf[27] = 6;
-                iBuf[28] = 7;
-                iBuf[29] = 5;
-                iBuf[30] = 2;
-                iBuf[31] = 3;
-                iBuf[32] = 7;
-                iBuf[33] = 6;
-                iBuf[34] = 7;
-                iBuf[35] = 3;
+            GLubyte mData[8] = {
+                11, 11, 11, 11, 11, 11, 11, 11,
+            };
 
-
-            oT.add(0, vBuf, 24);
-            oT.add(1, mBuf, 24);
-            oT.add(2, nBuf, 24);
-            oT.add(3, iBuf, 36);
+            oT.add(0, vData, 24);
+            oT.add(1, mData, 8);
+            oT.add(2, nData, 24);
+            oT.add(3, iData, 36);
 
             oT.allocateAndFill(GL_STREAM_DRAW);
 
