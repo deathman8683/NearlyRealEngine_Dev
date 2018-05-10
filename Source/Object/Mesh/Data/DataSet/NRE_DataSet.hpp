@@ -78,7 +78,7 @@
                          * @param value   the pointer to the set of value
                          * @param nbValue the number of value to add
                          */
-                        virtual void add(GLvoid* value, GLuint const& nbValue = 1) = 0;
+                        virtual void add(const GLvoid* const value, GLuint const& nbValue = 1) = 0;
                         /**
                          * Return a pointer to the start of the data
                          * @return the data set's pointer

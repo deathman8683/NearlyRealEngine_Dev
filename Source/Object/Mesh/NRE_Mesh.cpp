@@ -21,11 +21,15 @@
                 data.erase(data.begin(), data.end());
             }
 
+            const DataSet* const Mesh::getDataSet(GLuint const& index) const {
+                return data[index];
+            }
+
             void Mesh::push_back(DataSet* const& d) {
                 data.push_back(d);
             }
 
-            void Mesh::add(GLuint const& index, void* value, GLuint const& nbValue) const {
+            void Mesh::add(GLuint const& index, const GLvoid* const value, GLuint const& nbValue) const {
                 data[index]->add(value, nbValue);
             }
 

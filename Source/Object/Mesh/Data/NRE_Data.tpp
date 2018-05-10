@@ -24,8 +24,8 @@
             }
 
             template <class T>
-            void Data<T>::add(GLvoid* value, GLuint const& nbValue) {
-                T* v = static_cast <T*> (value);
+            void Data<T>::add(const GLvoid* const value, GLuint const& nbValue) {
+                const T* const v = static_cast <const T* const> (value);
                 for (GLuint i = 0; i < nbValue; i = i + 1) {
                     data.push_back(v[i]);
                 }

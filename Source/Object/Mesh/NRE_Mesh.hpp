@@ -66,6 +66,12 @@
                         virtual ~Mesh();
 
                     //## Getter ##//
+                        /**
+                         * DataSet getter
+                         * @param  index the data set index
+                         * @return       the corresponding data set
+                         */
+                        const DataSet* const getDataSet(GLuint const& index) const;
 
                     //## Setter ##//
 
@@ -81,7 +87,7 @@
                          * @param value   the pointer to the set of value
                          * @param nbValue the number of value to add
                          */
-                        void add(GLuint const& index, void* value, GLuint const& nbValue = 1) const;
+                        void add(GLuint const& index, const GLvoid* const value, GLuint const& nbValue = 1) const;
                         /**
                          * Update a VBO with mesh's data
                          * @param buffer the buffer to update

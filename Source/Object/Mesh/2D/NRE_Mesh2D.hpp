@@ -63,6 +63,13 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Process the mesh and create the graphical model from the object coordinates and size
+                         * @param buffer the buffer to fill
+                         * @param usage  the buffer's usage
+                         * @param coord  the object's coordinates
+                         * @param size   the object's size
+                         */
                         void process(GL::VBO& buffer, GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> const& size);
 
                     //## Access Operator ##//

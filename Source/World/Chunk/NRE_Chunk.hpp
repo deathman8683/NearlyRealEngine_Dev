@@ -10,11 +10,9 @@
 
     #include <sstream>
     #include <fstream>
-    #include "../../Generic/Array/NRE_ArrayOperation.hpp"
     #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
     #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
-    #include "../../lib/FastNoise/FastNoise.h"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
     #include "../../Object/Model/NRE_Model.hpp"
 
