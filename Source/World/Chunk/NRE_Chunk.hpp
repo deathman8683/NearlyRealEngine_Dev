@@ -16,7 +16,7 @@
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../lib/FastNoise/FastNoise.h"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
-    #include "../Voxel/NRE_Voxel.hpp"
+    #include "../../Object/Model/NRE_Model.hpp"
 
     /**
      * @namespace NRE
@@ -37,12 +37,11 @@
              */
             class Chunk {
                 private:
-                    Voxel *voxel;                   /**< Voxel array*/
+                    Object::Model model;           /**< Chunk's model*/
                     Maths::Point2D<GLint> coord;    /**< Chunk coordinates */
                     GL::IBO buffer;                 /**< Chunk rendering buffer */
                     GL::VAO vao;                    /**< Chunk rendering VAO */
                     Physics::AABB<GLint> bounding;  /**< Chunk bounding box */
-                    GLuint maxSolidHeight;          /**< The maximum height with solid voxel */
                     bool active;                    /**< Active state, for rendering purpose */
                     bool loaded;                    /**< Loaded state, for rendering/loading purpose */
                     bool constructed;               /**< Constructed state, for rendering/loading purpose */
@@ -92,25 +91,10 @@
 
                     //## Getter ##//
                         /**
-                         * Specific Voxel getter
-                         * @param  p the voxel's coordinates
-                         * @return   the corresponding voxel
+                         * Model getter
+                         * @return the chunk's model
                          */
-                        Voxel const& getVoxel(Maths::Point3D<GLuint> const& p) const;
-                        /**
-                         * Specific Voxel getter
-                         * @param  x the voxel's x coordinate
-                         * @param  y the voxel's y coordinate
-                         * @param  z the voxel's z coordinate
-                         * @return   the corresponding voxel
-                         */
-                        Voxel const& getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const;
-                        /**
-                         * Specific Voxel getter
-                         * @param  index the already computed voxel index (3D to 1D)
-                         * @return       the corresponding voxel
-                         */
-                        Voxel const& getVoxel(GLuint const& index) const;
+                        Object::Model const& getModel() const;
                         /**
                          * Coordinates getter
                          * @return the chunk's coordinates value
@@ -131,11 +115,6 @@
                          * @return the chunk's AABB object
                          */
                         Physics::AABB<GLint> const& getBounding() const;
-                        /**
-                         * Maximum solid voxel height getter
-                         * @return the chunk's maximum height of solid voxel
-                         */
-                        GLuint const& getMaxSolidHeight() const;
                         /**
                          * Active state getter
                          * @return the chunk's active state
@@ -169,26 +148,6 @@
 
                     //## Setter ##//
                         /**
-                         * Specific Voxel setter
-                         * @param p   the voxel's coordinates
-                         * @param vox the new voxel object
-                         */
-                        void setVoxel(Maths::Point3D<GLuint> const& p, Voxel const& vox);
-                        /**
-                         * Specific Voxel setter
-                         * @param x   the voxel's x coordinate
-                         * @param y   the voxel's y coordinate
-                         * @param z   the voxel's z coordinate
-                         * @param vox the new voxel object
-                         */
-                        void setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel const& vox);
-                        /**
-                         * Specific Voxel setter
-                         * @param index the already computed voxel index (3D to 1D)
-                         * @param vox the new voxel object
-                         */
-                        void setVoxel(GLuint const& index, Voxel const& vox);
-                        /**
                          * Coordinates setter
                          * @param p the new coordinates value
                          */
@@ -198,11 +157,6 @@
                          * @param box the new AABB object
                          */
                         void setBounding(Physics::AABB<GLint> const& box);
-                        /**
-                         * Maximum solid voxel height setter
-                         * @param height the new maximum solid voxel height value
-                         */
-                        void setMaxSolidHeight(GLuint const& height);
                         /**
                          * Active state setter
                          * @param state the new active state value
@@ -256,15 +210,6 @@
                          */
                         void load(std::fstream &chunkFile, World* w);
                         /**
-                         * Load a number of voxel with a based coordinate and a type
-                         * @param x    the first voxel x coordinate
-                         * @param y    the first voxel y coordinate
-                         * @param z    the first voxel z coordinate
-                         * @param nb   the number of voxel to add, used to increment through coordinates
-                         * @param type the voxel's type to add
-                         */
-                        void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
-                        /**
                          * Construct a procedural terrain from a custom generator using FastNoise library
                          * @param w the world used to get the seed and FastNoise generator
                          */
@@ -273,7 +218,7 @@
                          * Update the active state with a camera, using the camera's view frustum
                          * @param camera the camera to use the view frustum and perform AABB test
                          */
-                        void checkActiveState(Camera::FixedCamera const& camera);
+                        void checkActiveState(Camera::FixedCamera* camera);
                         /**
                          * Reload the chunk's ID, reset chunk's state
                          */
@@ -329,15 +274,6 @@
                 stream << "(" << c.getCoord() << "," << c.getBuffer() << "," << c.getVAO() << ")";
                 return stream;
             }
-
-            /**
-             * Compute the voxel 1D index from 3D coordinates
-             * @param  x the voxel's x coordinate
-             * @param  y the voxel's y coordinate
-             * @param  z the voxel's z coordinate
-             * @return   the computed index using array operation function
-             */
-            GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z);
 
         };
     };

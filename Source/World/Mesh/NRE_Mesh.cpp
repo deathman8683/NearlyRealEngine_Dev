@@ -10,14 +10,10 @@
             Mesh::Mesh(Chunk* const& target) : target(target) {
             }
 
-            Mesh::Mesh(Mesh && mesh) : target(std::move(mesh.getTarget())), vData(std::move(mesh.getVData())), mData(std::move(mesh.getMData())), nData(std::move(mesh.getNData())), iData(std::move(mesh.getIData())) {
+            Mesh::Mesh(Mesh && mesh) : target(std::move(mesh.target)), vData(std::move(mesh.getVData())), mData(std::move(mesh.getMData())), nData(std::move(mesh.getNData())), iData(std::move(mesh.getIData())) {
             }
 
             Mesh::~Mesh() {
-            }
-
-            Chunk* const& Mesh::getTarget() const {
-                return target;
             }
 
             std::vector<GLint> const& Mesh::getVData() const {
@@ -80,9 +76,9 @@
 
                 for (unsigned int x = 0; x < Chunk::SIZE_X; x = x + 1) {
                     for (unsigned int y = 0; y < Chunk::SIZE_Y; y = y + 1) {
-                        for (unsigned int z = 0; z < getTarget()->getMaxSolidHeight() + 1; z = z + 1) {
-                            index = getVoxelIndex(x, y, z);
-                            if (getTarget()->getVoxel(index).getType() != VOID) {
+                        for (unsigned int z = 0; z < target->getModel().getMaxSolidHeight() + 1; z = z + 1) {
+                            index = target->getModel().getVoxelIndex(x, y, z);
+                            if (target->getModel().getVoxel(index).getType() != VOID) {
                                 face[XNegative] = checkVoxelXNegativeFace(w, x, y, z);
                                 face[XPositive] = checkVoxelXPositiveFace(w, x, y, z);
                                 face[YNegative] = checkVoxelYNegativeFace(w, x, y, z);
@@ -108,8 +104,8 @@
                         p[2] = {rX, rY, rZ + 1};
                         p[3] = {rX, rY + 1, rZ + 1};
 
-                        mergeVoxels(w, x, y, z, getTarget()->getVoxel(x, y, z).getType(), p, XNegative);
-                        addPackedVertex(p, XNegative, static_cast <size_t> (target->getVoxel(x, y, z).getType()));
+                        mergeVoxels(w, x, y, z, target->getModel().getVoxel(x, y, z).getType(), p, XNegative);
+                        addPackedVertex(p, XNegative, static_cast <size_t> (target->getModel().getVoxel(x, y, z).getType()));
                     }
                 }
 
@@ -120,8 +116,8 @@
                         p[2] = {rX + 1, rY, rZ + 1};
                         p[3] = {rX, rY, rZ + 1};
 
-                        mergeVoxels(w, x, y, z, getTarget()->getVoxel(x, y, z).getType(), p, YNegative);
-                        addPackedVertex(p, YNegative, static_cast <size_t> (target->getVoxel(x, y, z).getType()));
+                        mergeVoxels(w, x, y, z, target->getModel().getVoxel(x, y, z).getType(), p, YNegative);
+                        addPackedVertex(p, YNegative, static_cast <size_t> (target->getModel().getVoxel(x, y, z).getType()));
                     }
                 }
 
@@ -132,8 +128,8 @@
                         p[2] = {rX, rY + 1, rZ};
                         p[3] = {rX + 1, rY + 1, rZ};
 
-                        mergeVoxels(w, x, y, z, getTarget()->getVoxel(x, y, z).getType(), p, ZNegative);
-                        addPackedVertex(p, ZNegative, static_cast <size_t> (target->getVoxel(x, y, z).getType()));
+                        mergeVoxels(w, x, y, z, target->getModel().getVoxel(x, y, z).getType(), p, ZNegative);
+                        addPackedVertex(p, ZNegative, static_cast <size_t> (target->getModel().getVoxel(x, y, z).getType()));
                     }
                 }
 
@@ -144,8 +140,8 @@
                         p[2] = {rX + 1, rY + 1, rZ + 1};
                         p[3] = {rX + 1, rY, rZ + 1};
 
-                        mergeVoxels(w, x, y, z, getTarget()->getVoxel(x, y, z).getType(), p, XPositive);
-                        addPackedVertex(p, XPositive, static_cast <size_t> (target->getVoxel(x, y, z).getType()));
+                        mergeVoxels(w, x, y, z, target->getModel().getVoxel(x, y, z).getType(), p, XPositive);
+                        addPackedVertex(p, XPositive, static_cast <size_t> (target->getModel().getVoxel(x, y, z).getType()));
                     }
                 }
 
@@ -156,8 +152,8 @@
                         p[2] = {rX,  rY + 1, rZ + 1};
                         p[3] = {rX + 1, rY + 1, rZ + 1};
 
-                        mergeVoxels(w, x, y, z, getTarget()->getVoxel(x, y, z).getType(), p, YPositive);
-                        addPackedVertex(p, YPositive, static_cast <size_t> (target->getVoxel(x, y, z).getType()));
+                        mergeVoxels(w, x, y, z, target->getModel().getVoxel(x, y, z).getType(), p, YPositive);
+                        addPackedVertex(p, YPositive, static_cast <size_t> (target->getModel().getVoxel(x, y, z).getType()));
                     }
                 }
 
@@ -168,8 +164,8 @@
                         p[2] = {rX + 1, rY + 1, rZ + 1};
                         p[3] = {rX, rY + 1, rZ + 1};
 
-                        mergeVoxels(w, x, y, z, getTarget()->getVoxel(x, y, z).getType(), p, ZPositive);
-                        addPackedVertex(p, ZPositive, static_cast <size_t> (target->getVoxel(x, y, z).getType()));
+                        mergeVoxels(w, x, y, z, target->getModel().getVoxel(x, y, z).getType(), p, ZPositive);
+                        addPackedVertex(p, ZPositive, static_cast <size_t> (target->getModel().getVoxel(x, y, z).getType()));
                     }
                 }
             }
@@ -232,16 +228,16 @@
                     }
                 }
 
-                index = getVoxelIndex(x, y, z);
+                index = target->getModel().getVoxelIndex(x, y, z);
                 Object::MergingCache::setVoxelMergingFace(x, y, z, face, true);
                 axe1More = !(*axe1 == limit1 - 1);
                 *axe1 = *axe1 + 1;
 
                 while (axe1More) {
-                    index = getVoxelIndex(x, y, z);
+                    index = target->getModel().getVoxelIndex(x, y, z);
                     if ((this->*checkFace)(w, x, y, z)
                      && !Object::MergingCache::getVoxelMergingFace(x, y, z, face)
-                     && getTarget()->getVoxel(index).getType() == type) {
+                     && target->getModel().getVoxel(index).getType() == type) {
                          (p1->*setAxe1)((p1->*getAxe1)() + 1);
                          (p2->*setAxe1)((p2->*getAxe1)() + 1);
                          Object::MergingCache::setVoxelMergingFace(x, y, z, face, true);
@@ -261,10 +257,10 @@
                 *axe2 = *axe2 + 1;
                 while (axe2More) {
                     while (axe1More && axe1Size != axe2Size) {
-                        index = getVoxelIndex(x, y, z);
+                        index = target->getModel().getVoxelIndex(x, y, z);
                         if ((this->*checkFace)(w, x, y, z)
                          && !Object::MergingCache::getVoxelMergingFace(x, y, z, face)
-                         && getTarget()->getVoxel(index).getType() == type) {
+                         && target->getModel().getVoxel(index).getType() == type) {
                             axe2Size = axe2Size + 1;
                             *axe1 = *axe1 + 1;
                         } else {
@@ -279,7 +275,7 @@
                         (p4->*setAxe2)((p4->*getAxe2)() + 1);
                         *axe1 = axe1Cpy;
                         while (axe2Size != 0) {
-                            index = getVoxelIndex(x, y, z);
+                            index = target->getModel().getVoxelIndex(x, y, z);
                             Object::MergingCache::setVoxelMergingFace(x, y, z, face, true);
                             axe2Size = axe2Size - 1;
                             *axe1 = *axe1 + 1;
@@ -371,49 +367,49 @@
 
             bool Mesh::checkVoxelXNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (x == 0) {
-                    if (getTarget()->getCoord().getX() - w->getShift().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
+                    if (target->getCoord().getX() - w->getShift().getX() == -1 * static_cast <GLint> (w->getHExtent().getX())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX() - 1, getTarget()->getCoord().getY())->getVoxel(Chunk::SIZE_X - 1, y, z).getType() == VOID;
+                        return w->getChunk(target->getCoord().getX() - 1, target->getCoord().getY())->getModel().getVoxel(Chunk::SIZE_X - 1, y, z).getType() == VOID;
                     }
                 } else {
-                    return getTarget()->getVoxel(x - 1, y, z).getType() == VOID;
+                    return target->getModel().getVoxel(x - 1, y, z).getType() == VOID;
                 }
             }
 
             bool Mesh::checkVoxelXPositiveFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (x == Chunk::SIZE_X - 1) {
-                    if (getTarget()->getCoord().getX() - w->getShift().getX() == static_cast <GLint> (w->getHExtent().getX())) {
+                    if (target->getCoord().getX() - w->getShift().getX() == static_cast <GLint> (w->getHExtent().getX())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX() + 1, getTarget()->getCoord().getY())->getVoxel(0, y, z).getType() == VOID;
+                        return w->getChunk(target->getCoord().getX() + 1, target->getCoord().getY())->getModel().getVoxel(0, y, z).getType() == VOID;
                     }
                 } else {
-                    return getTarget()->getVoxel(x + 1, y, z).getType() == VOID;
+                    return target->getModel().getVoxel(x + 1, y, z).getType() == VOID;
                 }
             }
 
             bool Mesh::checkVoxelYNegativeFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (y == 0) {
-                    if (getTarget()->getCoord().getY() - w->getShift().getY() == -1 * static_cast <GLint> (w->getHExtent().getY())) {
+                    if (target->getCoord().getY() - w->getShift().getY() == -1 * static_cast <GLint> (w->getHExtent().getY())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() - 1)->getVoxel(x, Chunk::SIZE_Y - 1, z).getType() == VOID;
+                        return w->getChunk(target->getCoord().getX(), target->getCoord().getY() - 1)->getModel().getVoxel(x, Chunk::SIZE_Y - 1, z).getType() == VOID;
                     }
                 } else {
-                    return getTarget()->getVoxel(x, y - 1, z).getType() == VOID;
+                    return target->getModel().getVoxel(x, y - 1, z).getType() == VOID;
                 }
             }
 
             bool Mesh::checkVoxelYPositiveFace(World* w, GLuint const& x, GLuint const& y, GLuint const& z) {
                 if (y == Chunk::SIZE_Y - 1) {
-                    if (getTarget()->getCoord().getY() - w->getShift().getY() == static_cast <GLint> (w->getHExtent().getY())) {
+                    if (target->getCoord().getY() - w->getShift().getY() == static_cast <GLint> (w->getHExtent().getY())) {
                         return true;
                     } else {
-                        return w->getChunk(getTarget()->getCoord().getX(), getTarget()->getCoord().getY() + 1)->getVoxel(x, 0, z).getType() == VOID;
+                        return w->getChunk(target->getCoord().getX(), target->getCoord().getY() + 1)->getModel().getVoxel(x, 0, z).getType() == VOID;
                     }
                 } else {
-                    return getTarget()->getVoxel(x, y + 1, z).getType() == VOID;
+                    return target->getModel().getVoxel(x, y + 1, z).getType() == VOID;
                 }
             }
 
@@ -421,7 +417,7 @@
                 if (z == 0) {
                     return true;
                 } else {
-                    return getTarget()->getVoxel(x, y, z - 1).getType() == VOID;
+                    return target->getModel().getVoxel(x, y, z - 1).getType() == VOID;
                 }
             }
 
@@ -429,7 +425,7 @@
                 if (z == Chunk::SIZE_Z - 1) {
                     return true;
                 } else {
-                    return getTarget()->getVoxel(x, y, z + 1).getType() == VOID;
+                    return target->getModel().getVoxel(x, y, z + 1).getType() == VOID;
                 }
             }
 

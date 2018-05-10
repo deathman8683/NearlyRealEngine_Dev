@@ -11,38 +11,28 @@
             GLuint Chunk::SECTOR_SIZE = 4096;
             GLuint Chunk::LOOKUP_SIZE = 1024;
 
-            Chunk::Chunk() : voxel(0) {
+            Chunk::Chunk() {
             }
 
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : voxel(0), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)), maxSolidHeight(0),
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : model(SIZE), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
                                                                                        active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
-                voxel = new Voxel[SIZE_X * SIZE_Y * SIZE_Z];
                 buffer.push_back(new GL::MaterialBuffer(generateID));
                 buffer.push_back(new GL::NormalBuffer(generateID));
                 vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk && c) : voxel(std::move(c.voxel)), coord(std::move(c.coord)), buffer(std::move(c.buffer)), vao(std::move(c.vao)), bounding(std::move(c.bounding)), maxSolidHeight(std::move(c.maxSolidHeight)),
+            Chunk::Chunk(Chunk && c) : model(std::move(c.model)), coord(std::move(c.coord)), buffer(std::move(c.buffer)), vao(std::move(c.vao)), bounding(std::move(c.bounding)),
                                        active(std::move(c.active)), loaded(std::move(c.loaded)), constructed(std::move(c.constructed)), loading(std::move(c.loading)), constructing(std::move(c.constructing)), modified(std::move(c.modified)) {
             }
 
             Chunk::~Chunk() {
-                delete[] voxel;
             }
 
-            Voxel const& Chunk::getVoxel(Maths::Point3D<GLuint> const& p) const {
-                return getVoxel(p.getX(), p.getY(), p.getZ());
-            }
-
-            Voxel const& Chunk::getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const {
-                return voxel[getVoxelIndex(x, y, z)];
-            }
-
-            Voxel const& Chunk::getVoxel(GLuint const& index) const {
-                return voxel[index];
+            Object::Model const& Chunk::getModel() const {
+                return model;
             }
 
             Maths::Point2D<GLint> const& Chunk::getCoord() const {
@@ -59,10 +49,6 @@
 
             Physics::AABB<GLint> const& Chunk::getBounding() const {
                 return bounding;
-            }
-
-            GLuint const& Chunk::getMaxSolidHeight() const {
-                return maxSolidHeight;
             }
 
             bool const& Chunk::isActive() const {
@@ -89,28 +75,12 @@
                 return modified;
             }
 
-            void Chunk::setVoxel(Maths::Point3D<GLuint> const& p, Voxel const& vox) {
-                setVoxel(p.getX(), p.getY(), p.getZ(), vox);
-            }
-
-            void Chunk::setVoxel(GLuint const& x, GLuint const& y, GLuint const& z, Voxel const& vox) {
-                voxel[getVoxelIndex(x, y, z)] = vox;
-            }
-
-            void Chunk::setVoxel(GLuint const& index, Voxel const& vox) {
-                voxel[index] = vox;
-            }
-
             void Chunk::setCoord(Maths::Point2D<GLint> const& p) {
                 coord = p;
             }
 
             void Chunk::setBounding(Physics::AABB<GLint> const& box) {
                 bounding = box;
-            }
-
-            void Chunk::setMaxSolidHeight(GLuint const& height) {
-                maxSolidHeight = height;
             }
 
             void Chunk::setActive(bool const& state) {
@@ -233,33 +203,18 @@
                         data.read(reinterpret_cast<char*> (&voxType), 1);
                         dataSize = dataSize - 3;
 
-                        loadVoxels(x, y, z, voxNumber, voxType);
+                        model.loadVoxels(x, y, z, voxNumber, voxType);
                     }
                 }
                 setLoaded(true);
                 setLoading(false);
             }
 
-            void Chunk::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type) {
-                GLuint index, n = nb;
-                while (n != 0) {
-                    index = getVoxelIndex(x, y, z);
-                    voxel[index].setType(type);
-                    x = x + 1;
-                    if (x == SIZE_X) {
-                        x = 0;
-                        y = y + 1;
-                        if (y == SIZE_Y) {
-                            y = 0;
-                            z = z + 1;
-                        }
-                    }
-                    n = n - 1;
-                }
-                if (voxel[index].getType() != VOID) {
-                    if (getMaxSolidHeight() < z) {
-                        setMaxSolidHeight(z);
-                    }
+            void Chunk::checkActiveState(Camera::FixedCamera* camera) {
+                if (camera != 0) {
+                    setActive(camera->AABBCollision(getBounding()));
+                } else {
+                    setActive(true);
                 }
             }
 
@@ -275,14 +230,14 @@
 
             void Chunk::writeCompressedData(std::stringstream &data) {
                 GLuint x = 0, y = 0, z = 0;
-                GLuint currentType = getVoxel(x, y, z).getType(), currentLineSize = 0;
+                GLuint currentType = model.getVoxel(x, y, z).getType(), currentLineSize = 0;
                 while (z != SIZE_Z) {
-                    if (currentType == static_cast <GLuint> (getVoxel(x, y, z).getType())) {
+                    if (currentType == static_cast <GLuint> (model.getVoxel(x, y, z).getType())) {
                         currentLineSize = currentLineSize + 1;
                     } else {
                         data.write(reinterpret_cast<char*> (&currentLineSize), 2);
                         data.write(reinterpret_cast<char*> (&currentType), 1);
-                        currentType = getVoxel(x, y, z).getType();
+                        currentType = model.getVoxel(x, y, z).getType();
                         currentLineSize = 1;
                     }
 
@@ -301,12 +256,11 @@
             }
 
             Chunk& Chunk::operator=(Chunk && c) {
-                voxel = std::move(c.voxel);
+                model = std::move(c.model);
                 coord = std::move(c.coord);
                 buffer = std::move(c.buffer);
                 vao = std::move(c.vao);
                 bounding = std::move(c.bounding);
-                maxSolidHeight = std::move(c.maxSolidHeight);
                 active = std::move(c.active);
                 loaded = std::move(c.loaded);
                 constructed = std::move(c.constructed);
@@ -314,10 +268,6 @@
                 constructing = std::move(c.constructing);
                 modified = std::move(c.modified);
                 return *this;
-            }
-
-            GLuint getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) {
-                return Array::get1DIndexFrom3D(x, y, z, Chunk::SIZE);
             }
 
         };

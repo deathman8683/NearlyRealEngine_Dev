@@ -196,7 +196,7 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    //engineWorld.render(gBufferPass, modelview, projection, &camera);
                     gBufferPass.bind();
                         gBufferPass.useMat4("modelview", 1, &modelview);
                         gBufferPass.useMat4("projection", 1, &projection);

@@ -73,11 +73,6 @@
 
                     //## Getter ##//
                         /**
-                         * Target getter
-                         * @return the mesh target
-                         */
-                        Chunk* const& getTarget() const;
-                        /**
                          * Vertex buffer getter
                          * @return the vertex data buffer
                          */
