@@ -10,6 +10,7 @@
 
     #include "../Chunk/NRE_Chunk.hpp"
     #include "../NRE_World.hpp"
+    #include "../../Object/MergingCache/NRE_MergingCache.hpp"
     #include <vector>
     #include <unordered_map>
 

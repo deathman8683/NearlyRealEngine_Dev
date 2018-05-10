@@ -10,7 +10,7 @@
             World::World() : World(Maths::Vector2D<GLuint>(0, 0), Maths::Vector2D<GLint>(0, 0)) {
             }
 
-            World::World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift) : chunkMap((hExtent.getX() * 2 + 1) * (hExtent.getY() * 2 + 1)), hExtent(hExtent), shift(shift), voxelMergingGlobalCache(0) {
+            World::World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift) : chunkMap((hExtent.getX() * 2 + 1) * (hExtent.getY() * 2 + 1)), hExtent(hExtent), shift(shift){
                 FastNoise worldGen, worldGen2;
                 worldGen.SetNoiseType(FastNoise::Simplex);
                 worldGen.SetSeed(DEFAULT_SOIL_SEED);
@@ -19,8 +19,6 @@
                 worldGen2.SetSeed(DEFAULT_MOISTURE_SEED);
                 soilGenerator = worldGen;
                 moistureGenerator = worldGen2;
-
-                voxelMergingGlobalCache = new bool[Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * FACE_NUM];
 
                 for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
@@ -31,11 +29,10 @@
             }
 
             World::World(World && w) : chunkMap(std::move(w.chunkMap)), loadRegionMap(std::move(w.loadRegionMap)), saveRegionMap(std::move(w.saveRegionMap)), constructionQueue(std::move(w.constructionQueue)),
-                                        hExtent(std::move(w.getHExtent())), shift(std::move(w.getShift())), soilGenerator(std::move(w.getSoilGenerator())), moistureGenerator(std::move(w.getMoistureGenerator())), voxelMergingGlobalCache(std::move(w.voxelMergingGlobalCache)) {
+                                        hExtent(std::move(w.getHExtent())), shift(std::move(w.getShift())), soilGenerator(std::move(w.getSoilGenerator())), moistureGenerator(std::move(w.getMoistureGenerator())) {
             }
 
             World::~World() {
-                delete[] voxelMergingGlobalCache;
                 for (auto &it : chunkMap) {
                     addChunkToSaveRegion(it.second);
                 }
@@ -69,24 +66,8 @@
                 return moistureGenerator;
             }
 
-            bool const& World::getVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face) const {
-                return getVoxelMergingFace(p.getX(), p.getY(), p.getZ(), face);
-            }
-
-            bool const& World::getVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face) const {
-                return voxelMergingGlobalCache[getVoxelCacheIndex(x, y, z, face)];
-            }
-
             void World::setShift(Maths::Vector2D<GLint> const& size) {
                 shift = size;
-            }
-
-            void World::setVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face, bool const& state) {
-                setVoxelMergingFace(p.getX(), p.getY(), p.getZ(), face, state);
-            }
-
-            void World::setVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face, bool const& state) {
-                voxelMergingGlobalCache[getVoxelCacheIndex(x, y, z, face)] = state;
             }
 
             void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
@@ -123,10 +104,6 @@
                     updateConstructionQueue();
                 }
                 emptySaveRegionMap();
-            }
-
-            void World::resetVoxelMergingGlobalCache() {
-                std::fill(voxelMergingGlobalCache, voxelMergingGlobalCache + (Chunk::SIZE_X * Chunk::SIZE_Y * Chunk::SIZE_Z * FACE_NUM), false);
             }
 
             NREfloat const World::getSoilNoise(NREfloat const& x, NREfloat const& y) const {
@@ -355,12 +332,7 @@
                 shift = std::move(w.shift);
                 soilGenerator = std::move(w.soilGenerator);
                 moistureGenerator = std::move(w.moistureGenerator);
-                voxelMergingGlobalCache = std::move(w.voxelMergingGlobalCache);
                 return *this;
-            }
-
-            GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face) {
-                return Array::get1DIndexFrom4D(x, y, z, face, Maths::Vector4D<GLuint>(Chunk::SIZE, FACE_NUM));
             }
 
         };

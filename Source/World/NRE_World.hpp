@@ -37,7 +37,6 @@
                     Maths::Vector2D<GLint> shift;                                       /**< World shift vector from (0, 0) */
                     FastNoise soilGenerator;                                            /**< FastNoise generator used for soil generation */
                     FastNoise moistureGenerator;                                        /**< FastNoise generator used for moisture generation */
-                    bool *voxelMergingGlobalCache;                                      /**< Specific pointer to a global cache used for chunk mesh construction process */
 
                 public:
                     //## Constructor ##//
@@ -108,22 +107,6 @@
                          * @return the Moisture generator object
                          */
                         FastNoise const& getMoistureGenerator() const;
-                        /**
-                         * Voxel Face Merged State getter
-                         * @param  p    the voxel's coordinates
-                         * @param  face the voxel's face to check
-                         * @return      the face merged state
-                         */
-                        bool const& getVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face) const;
-                        /**
-                         * Voxel Face Merged State getter
-                         * @param  x    the voxel's x coordinate
-                         * @param  y    the voxel's y coordinate
-                         * @param  z    the voxel's z coordinate
-                         * @param  face the voxel's face to check
-                         * @return      the face merged state
-                         */
-                        bool const& getVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face) const;
 
                     //## Setter ##//
                         /**
@@ -131,22 +114,6 @@
                          * @param size the new shift value
                          */
                         void setShift(Maths::Vector2D<GLint> const& size);
-                        /**
-                         * Voxel Face Merged State setter
-                         * @param  p    the voxel's coordinates
-                         * @param  face the voxel's face to modify
-                         * @param state the new voxel's face merged state value
-                         */
-                        void setVoxelMergingFace(Maths::Point3D<GLuint> const& p, int const& face, bool const& state);
-                        /**
-                         * Voxel Face Merged State setter
-                         * @param  x    the voxel's x coordinate
-                         * @param  y    the voxel's y coordinate
-                         * @param  z    the voxel's z coordinate
-                         * @param  face the voxel's face to modify
-                         * @param state the new voxel's face merged state value
-                         */
-                        void setVoxelMergingFace(GLuint const& x, GLuint const& y, GLuint const& z, int const& face, bool const& state);
 
                     //## Methods ##//
                         /**
@@ -162,10 +129,6 @@
                          * @param loadLimit the number of chunk to update in one frame
                          */
                         void update(GLuint const& loadLimit);
-                        /**
-                         * Reset the whole Voxel Face Merged Cache
-                         */
-                        void resetVoxelMergingGlobalCache();
                         /**
                          * Compute a noise from the soil generator
                          * @param  x the x coordinate
@@ -289,16 +252,6 @@
                     static int DEFAULT_SOIL_SEED;       /**< The default soil generator seed */
                     static int DEFAULT_MOISTURE_SEED;   /**< The default moisture generator seed */
             };
-
-            /**
-             * Compute the voxel cache 1D index from 4D coordinates
-             * @param  x    the voxel's x coordinate
-             * @param  y    the voxel's y coordinate
-             * @param  z    the voxel's z coordinate
-             * @param  face the voxel's face to check
-             * @return      the computed index using array operation function
-             */
-            GLuint getVoxelCacheIndex(GLuint const& x, GLuint const& y, GLuint const& z, GLuint const& face);
 
         };
     };

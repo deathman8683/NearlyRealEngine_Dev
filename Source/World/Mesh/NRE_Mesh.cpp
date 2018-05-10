@@ -76,7 +76,7 @@
                 GLuint index;
                 bool face[FACE_NUM];
 
-                w->resetVoxelMergingGlobalCache();
+                Object::MergingCache::reset();
 
                 for (unsigned int x = 0; x < Chunk::SIZE_X; x = x + 1) {
                     for (unsigned int y = 0; y < Chunk::SIZE_Y; y = y + 1) {
@@ -101,7 +101,7 @@
                 Maths::Point3D<GLint> p[4];
 
                 if (face[XNegative]) {
-                    if (!w->getVoxelMergingFace(x, y, z, XNegative)) {
+                    if (!Object::MergingCache::getVoxelMergingFace(x, y, z, XNegative)) {
 
                         p[0] = {rX, rY, rZ};
                         p[1] = {rX, rY + 1, rZ};
@@ -114,7 +114,7 @@
                 }
 
                 if (face[YNegative]) {
-                    if (!w->getVoxelMergingFace(x, y, z, YNegative)) {
+                    if (!Object::MergingCache::getVoxelMergingFace(x, y, z, YNegative)) {
                         p[0] = {rX + 1, rY, rZ};
                         p[1] = {rX, rY, rZ};
                         p[2] = {rX + 1, rY, rZ + 1};
@@ -126,7 +126,7 @@
                 }
 
                 if (face[ZNegative]) {
-                    if (!w->getVoxelMergingFace(x, y, z, ZNegative)) {
+                    if (!Object::MergingCache::getVoxelMergingFace(x, y, z, ZNegative)) {
                         p[0] = {rX, rY, rZ};
                         p[1] = {rX + 1, rY, rZ};
                         p[2] = {rX, rY + 1, rZ};
@@ -138,7 +138,7 @@
                 }
 
                 if (face[XPositive]) {
-                    if (!w->getVoxelMergingFace(x, y, z, XPositive)) {
+                    if (!Object::MergingCache::getVoxelMergingFace(x, y, z, XPositive)) {
                         p[0] = {rX + 1, rY + 1, rZ};
                         p[1] = {rX + 1, rY, rZ};
                         p[2] = {rX + 1, rY + 1, rZ + 1};
@@ -150,7 +150,7 @@
                 }
 
                 if (face[YPositive]) {
-                    if (!w->getVoxelMergingFace(x, y, z, YPositive)) {
+                    if (!Object::MergingCache::getVoxelMergingFace(x, y, z, YPositive)) {
                         p[0] = {rX, rY + 1, rZ};
                         p[1] = {rX + 1, rY + 1, rZ};
                         p[2] = {rX,  rY + 1, rZ + 1};
@@ -162,7 +162,7 @@
                 }
 
                 if (face[ZPositive]) {
-                    if (!w->getVoxelMergingFace(x, y, z, ZPositive)) {
+                    if (!Object::MergingCache::getVoxelMergingFace(x, y, z, ZPositive)) {
                         p[0] = {rX + 1, rY, rZ + 1};
                         p[1] = {rX, rY, rZ + 1};
                         p[2] = {rX + 1, rY + 1, rZ + 1};
@@ -233,18 +233,18 @@
                 }
 
                 index = getVoxelIndex(x, y, z);
-                w->setVoxelMergingFace(x, y, z, face, true);
+                Object::MergingCache::setVoxelMergingFace(x, y, z, face, true);
                 axe1More = !(*axe1 == limit1 - 1);
                 *axe1 = *axe1 + 1;
 
                 while (axe1More) {
                     index = getVoxelIndex(x, y, z);
                     if ((this->*checkFace)(w, x, y, z)
-                     && !w->getVoxelMergingFace(x, y, z, face)
+                     && !Object::MergingCache::getVoxelMergingFace(x, y, z, face)
                      && getTarget()->getVoxel(index).getType() == type) {
                          (p1->*setAxe1)((p1->*getAxe1)() + 1);
                          (p2->*setAxe1)((p2->*getAxe1)() + 1);
-                         w->setVoxelMergingFace(x, y, z, face, true);
+                         Object::MergingCache::setVoxelMergingFace(x, y, z, face, true);
                         *axe1 = *axe1 + 1;
                         axe1Size = axe1Size + 1;
                     } else {
@@ -263,7 +263,7 @@
                     while (axe1More && axe1Size != axe2Size) {
                         index = getVoxelIndex(x, y, z);
                         if ((this->*checkFace)(w, x, y, z)
-                         && !w->getVoxelMergingFace(x, y, z, face)
+                         && !Object::MergingCache::getVoxelMergingFace(x, y, z, face)
                          && getTarget()->getVoxel(index).getType() == type) {
                             axe2Size = axe2Size + 1;
                             *axe1 = *axe1 + 1;
@@ -280,7 +280,7 @@
                         *axe1 = axe1Cpy;
                         while (axe2Size != 0) {
                             index = getVoxelIndex(x, y, z);
-                            w->setVoxelMergingFace(x, y, z, face, true);
+                            Object::MergingCache::setVoxelMergingFace(x, y, z, face, true);
                             axe2Size = axe2Size - 1;
                             *axe1 = *axe1 + 1;
                         }
