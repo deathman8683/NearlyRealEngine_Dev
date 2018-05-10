@@ -5,11 +5,13 @@ OBJDIR = ../../obj/Debug/Object/
 2D = 2D
 3D = 3D
 MESH = Mesh
+CACHE = MergingCache
 
 all : before $(TARGET) after
 
 before:
 	@(cd $(MESH) && $(MAKE))
+	@(cd $(CACHE) && $(MAKE))
 
 after:
 	@(cd $(2D) && $(MAKE))

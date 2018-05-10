@@ -29,16 +29,6 @@
                 public:
                     //## Getter ##//
                         /**
-                         * VoxelType array getter
-                         * @return the pointer to the first type of voxel
-                         */
-                        static VoxelType** getVoxelTypes();
-                        /**
-                         * MaterialType array getter
-                         * @return the pointer to the first type of material
-                         */
-                        static Renderer::Material* getMaterialTypes();
-                        /**
                          * Array size getter
                          * @return the size of the voxel type array
                          */

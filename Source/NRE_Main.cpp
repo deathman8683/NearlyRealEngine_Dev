@@ -6,11 +6,13 @@
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
     #include "Object/NRE_Object.hpp"
+    #include "Generic/Init/NRE_Init.hpp"
 
     using namespace NRE;
     using namespace Maths;
 
     int main(int argc, char **argv) {
+        init();
         try {
             Support::Stage engineStage("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
@@ -194,7 +196,7 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    //engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    engineWorld.render(gBufferPass, modelview, projection, &camera);
                     gBufferPass.bind();
                         gBufferPass.useMat4("modelview", 1, &modelview);
                         gBufferPass.useMat4("projection", 1, &projection);
@@ -227,7 +229,7 @@
             std::cout << e.what() << std::endl;
         }
 
-        World::VoxelTypes::free();
+        quit();
 
         return 0;
     }
