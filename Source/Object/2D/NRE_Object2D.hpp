@@ -34,6 +34,12 @@
                          * Default Constructor
                          */
                         Object2D();
+                        /**
+                         * Construt a 2D object from his rendering usage, position and size
+                         * @param usage the object's rendering usage
+                         * @param coord the object's position on screen
+                         * @param size  the object's size
+                         */
                         Object2D(GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size);
 
                     //## Copy-Constructor ##//

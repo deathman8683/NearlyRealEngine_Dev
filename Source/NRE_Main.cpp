@@ -5,7 +5,7 @@
     #include "Time/Clock/NRE_Clock.hpp"
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
-    #include "Object/NRE_Object.hpp"
+    #include "Object/3D/NRE_Object3D.hpp"
     #include "Generic/Init/NRE_Init.hpp"
 
     using namespace NRE;
@@ -113,47 +113,18 @@
             oTMesh->push_back(new Object::NormalData());
             oTMesh->push_back(new Object::IndexData());
 
-            Object::Object oT(oTIBO, oTMesh, GL_INT);
+            Object::Object3D oT1(Maths::Vector3D<GLuint>(16, 16, 16));
+            Object::Object3D oT2(Maths::Vector3D<GLuint>(12, 12, 12));
 
-            GLint vData[24] = {
-                -10, -10, -10,
-                -10, -10, 10,
-                -10, 10, -10,
-                -10, 10, 10,
-                10, 10, 10,
-                10, 10, -10,
-                10, -10, 10,
-                10, -10, -10
-            };
+            GLuint x = 0, y = 0, z = 0, nb = 4096;
 
-            GLuint iData[36] = {
-                7, 0, 2, 2, 5, 7,
-                2, 0, 1, 1, 3, 2,
-                4, 6, 7, 7, 5, 4,
-                4, 3, 1, 1, 6, 4,
-                4, 5, 2, 2, 3, 4,
-                0, 7, 1, 1, 7, 6,
-            };
+            oT1.loadVoxels(x, y, z, nb, World::GRASSLAND);
+            oT1.process(GL_STATIC_DRAW, Maths::Point2D<GLint>(0, 0));
 
-            GLbyte nData[24] = {
-                1, 0, 0,
-                1, 0, 0,
-                1, 0, 0,
-                1, 0, 0,
-                1, 0, 0,
-                1, 0, 0
-            };
+            x = 0; y = 0; z = 0; nb = 1728;
 
-            GLubyte mData[8] = {
-                11, 11, 11, 11, 11, 11, 11, 11,
-            };
-
-            oT.add(0, vData, 24);
-            oT.add(1, mData, 8);
-            oT.add(2, nData, 24);
-            oT.add(3, iData, 36);
-
-            oT.allocateAndFill(GL_STREAM_DRAW);
+            oT2.loadVoxels(x, y, z, nb, World::GRASSLAND);
+            oT2.process(GL_STATIC_DRAW, Maths::Point2D<GLint>(2, 0));
 
             while(!camera.getQuit())
             {
@@ -200,7 +171,8 @@
                     gBufferPass.bind();
                         gBufferPass.useMat4("modelview", 1, &modelview);
                         gBufferPass.useMat4("projection", 1, &projection);
-                        oT.draw();
+                        oT1.draw();
+                        oT2.draw();
                     gBufferPass.unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;

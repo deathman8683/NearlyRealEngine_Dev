@@ -76,7 +76,7 @@
 
                 for (unsigned int x = 0; x < Chunk::SIZE_X; x = x + 1) {
                     for (unsigned int y = 0; y < Chunk::SIZE_Y; y = y + 1) {
-                        for (unsigned int z = 0; z < target->getModel().getMaxSolidHeight() + 1; z = z + 1) {
+                        for (unsigned int z = 0; z < target->getModel().getMaxSolidHeight(); z = z + 1) {
                             index = target->getModel().getVoxelIndex(x, y, z);
                             if (target->getModel().getVoxel(index).getType() != VOID) {
                                 face[XNegative] = checkVoxelXNegativeFace(w, x, y, z);

@@ -12,7 +12,7 @@
     #include "../Maths/NRE_Maths.hpp"
     #include "Mesh/NRE_Mesh.hpp"
     #include "Mesh/2D/NRE_Mesh2D.hpp"
-    //#include "Mesh/3D/NRE_Mesh3D.hpp"
+    #include "Mesh/3D/NRE_Mesh3D.hpp"
     #include "../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
 
     /**

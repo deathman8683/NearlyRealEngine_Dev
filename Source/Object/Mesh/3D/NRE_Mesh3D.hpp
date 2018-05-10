@@ -30,13 +30,13 @@
              */
             class Mesh3D : public Mesh {
                 private:
-                    const Model* target;
-                    const Model* left;
-                    const Model* right;
-                    const Model* front;
-                    const Model* back;
-                    const Model* up;
-                    const Model* bottom;
+                    const Model* target;    /**< The mesh's model */
+                    const Model* left;      /**< The mesh's model left neigboor */
+                    const Model* right;     /**< The mesh's model right neigboor */
+                    const Model* front;     /**< The mesh's model front neigboor */
+                    const Model* back;      /**< The mesh's model back neigboor */
+                    const Model* up;        /**< The mesh's model up neigboor */
+                    const Model* bottom;    /**< The mesh's model bottom neigboor */
 
                 public:
                     //## Constructor ##//

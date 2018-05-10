@@ -11,13 +11,13 @@
             }
 
             Mesh3D::Mesh3D(const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom) : Mesh3D() {
-                target = target;
-                left = left;
-                right = right;
-                front = front;
-                back = back;
-                up = up;
-                bottom = bottom;
+                this->target = target;
+                this->left = left;
+                this->right = right;
+                this->front = front;
+                this->back = back;
+                this->up = up;
+                this->bottom = bottom;
             }
 
             Mesh3D::Mesh3D(Mesh3D const& m) : Mesh::Mesh(m), target(m.target), left(m.left), right(m.right), front(m.front), back(m.back), up(m.up), bottom(m.bottom) {
@@ -37,7 +37,7 @@
 
                 for (unsigned int x = 0; x < target->getSize().getX(); x = x + 1) {
                     for (unsigned int y = 0; y < target->getSize().getY(); y = y + 1) {
-                        for (unsigned int z = 0; z < target->getMaxSolidHeight() + 1; z = z + 1) {
+                        for (unsigned int z = 0; z < target->getMaxSolidHeight(); z = z + 1) {
                             index = target->getVoxelIndex(x, y, z);
                             if (target->getVoxel(index).getType() != World::VOID) {
                                 face[World::XNegative] = checkVoxelXNegativeFace(x, y, z);
@@ -52,6 +52,8 @@
                         }
                     }
                 }
+
+                allocateAndFill(buffer, usage);
             }
 
             void Mesh3D::addVoxel(GLuint const& x, GLuint const& y, GLuint const& z, GLint const& rX, GLint const& rY, GLint const& rZ, bool const (&face)[6]) {

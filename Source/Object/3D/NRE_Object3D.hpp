@@ -27,6 +27,7 @@
              */
             class Object3D : public Object {
                 private:
+                    Model model;
 
                 public:
                     //## Constructor ##//
@@ -34,6 +35,11 @@
                          * Default Constructor
                          */
                         Object3D();
+                        /**
+                         * Construt a 3D object from his size
+                         * @param size  the object's size
+                         */
+                        Object3D(Maths::Vector3D<GLuint> size);
 
                     //## Copy-Constructor ##//
                         /**
@@ -55,13 +61,15 @@
                         /**
                          * Object3D Deconstructor
                          */
-                        ~Object3D();
+                        virtual ~Object3D();
 
                     //## Getter ##//
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        void process(GLenum const& usage, Maths::Point2D<GLint> const& coord);
+                        void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
 
                     //## Access Operator ##//
 
