@@ -10,7 +10,7 @@ SSAO = SSAO
 all : $(TARGET)
 
 debug:
-	#@(cd $(BRDF) && $(MAKE))
+	@(cd $(BRDF) && $(MAKE))
 	@(cd $(CAPTURE) && $(MAKE))
 	@(cd $(GBUFFER) && $(MAKE))
 	@(cd $(IRRADIANCE) && $(MAKE))
