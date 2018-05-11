@@ -113,18 +113,49 @@
             oTMesh->push_back(new Object::NormalData());
             oTMesh->push_back(new Object::IndexData());
 
-            Object::Object3D oT1(Maths::Vector3D<GLuint>(16, 16, 16));
-            Object::Object3D oT2(Maths::Vector3D<GLuint>(12, 12, 12));
+            Object::Object3D oT1(Maths::Vector3D<GLuint>(5, 9, 6));
+            GLuint x = 0, y = 0, z = 0;
 
-            GLuint x = 0, y = 0, z = 0, nb = 4096;
-
-            oT1.loadVoxels(x, y, z, nb, World::GRASSLAND);
+            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 3, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 25, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 3, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 10, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 3, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 25, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 3, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 10, World::VOID);
+            oT1.loadVoxels(x, y, z, 35, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 10, World::VOID);
+            oT1.loadVoxels(x, y, z, 35, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 35, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 35, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
+            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
+            oT1.loadVoxels(x, y, z, 1, World::VOID);
             oT1.process(GL_STATIC_DRAW, Maths::Point2D<GLint>(0, 0));
-
-            x = 0; y = 0; z = 0; nb = 1728;
-
-            oT2.loadVoxels(x, y, z, nb, World::GRASSLAND);
-            oT2.process(GL_STATIC_DRAW, Maths::Point2D<GLint>(2, 0));
 
             while(!camera.getQuit())
             {
@@ -172,7 +203,6 @@
                         gBufferPass.useMat4("modelview", 1, &modelview);
                         gBufferPass.useMat4("projection", 1, &projection);
                         oT1.draw();
-                        oT2.draw();
                     gBufferPass.unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
