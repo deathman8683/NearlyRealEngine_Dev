@@ -93,10 +93,10 @@
 
             void EnvironmentMap::capture(std::string const& path) {
 
-                const Shader* captureShader = EngineShader::getShader("Capture");
-                const Shader* irradianceShader = EngineShader::getShader("Irradiance");
-                const Shader* prefilterShader = EngineShader::getShader("Prefilter");
-                const Shader* BRDFShader = EngineShader::getShader("BRDF");
+                const CaptureShader*    captureShader    = static_cast <const CaptureShader*>    (EngineShader::getShader("Capture"));
+                const IrradianceShader* irradianceShader = static_cast <const IrradianceShader*> (EngineShader::getShader("Irradiance"));
+                const PrefilterShader*  prefilterShader  = static_cast <const PrefilterShader*>  (EngineShader::getShader("Prefilter"));
+                const BRDFShader*       brdfShader       = static_cast <const BRDFShader*>       (EngineShader::getShader("BRDF"));
 
                 GL::Texture2D cubeMap;
 
@@ -129,7 +129,6 @@
                 modelviews[5].lookAt(Maths::Point3D<NREfloat>(0.0), Maths::Point3D<NREfloat>( 0.0, -1.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
 
                 captureShader->bind();
-                    captureShader->use1I("skyBox", 0);
                     cubeMap.bind();
 
                     glViewport(0, 0, SIZE, SIZE);
@@ -152,7 +151,6 @@
                 capture.unbind();
 
                 irradianceShader->bind();
-                    irradianceShader->use1I("skyBox", 0);
                     map.bind();
 
                     glViewport(0, 0, 32, 32);
@@ -178,7 +176,6 @@
                 modelviews[5].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
 
                 prefilterShader->bind();
-                    prefilterShader->use1I("skyBox", 0);
                     map.bind();
 
                     capture.bind();
@@ -191,9 +188,9 @@
                         glViewport(0, 0, mipWidth, mipHeight);
 
                         float roughness = (float)mip / (float)(maxMipLevels - 1);
-                        prefilterShader->use1F("roughness", roughness);
+                        prefilterShader->sendRoughness(roughness);
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            prefilterShader->useMat4("modelview", 1, &modelviews[i]);
+                            prefilterShader->sendModelview(modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, prefilterMap.getID(), mip);
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -211,11 +208,11 @@
                     capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, brdfLUT.getID());
 
                     glViewport(0, 0, SIZE, SIZE);
-                    BRDFShader->bind();
+                    brdfShader->bind();
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                         renderQuad();
-                    BRDFShader->unbind();
+                    brdfShader->unbind();
                 capture.unbind();
             }
 

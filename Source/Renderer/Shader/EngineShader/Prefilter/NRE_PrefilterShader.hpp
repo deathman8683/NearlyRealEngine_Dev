@@ -67,6 +67,8 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        void sendRoughness(NREfloat const& value) const;
+                        void sendModelview(Maths::Matrix4x4<NREfloat> const& m) const;
 
                     //## Access Operator ##//
 

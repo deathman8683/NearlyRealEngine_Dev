@@ -21,6 +21,14 @@
                 return "Prefilter";
             }
 
+            void PrefilterShader::sendRoughness(NREfloat const& value) const {
+                use1F("roughness", value);
+            }
+
+            void PrefilterShader::sendModelview(Maths::Matrix4x4<NREfloat> const& m) const {
+                useMat4("modelview", 1, &m);
+            }
+
             PrefilterShader& PrefilterShader::operator=(PrefilterShader && s) {
                 Shader::operator=(std::move(s));
                 return *this;
