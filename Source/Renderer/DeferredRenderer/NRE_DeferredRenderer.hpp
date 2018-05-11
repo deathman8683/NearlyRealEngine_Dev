@@ -79,7 +79,6 @@
                     //## Methods ##//
                         /**
                          * Render the gBuffer with a lighting pass, use it in last pass in the rendering pipeline
-                         * @param shader        the rendering shader
                          * @param invModelview  the inverse modelview matrix
                          * @param invProjection the inverse projection matrix
                          * @param rotation      the rotation matrix for the skybox
@@ -87,7 +86,7 @@
                          * @param light         the array which store all light in the stage
                          * @param skyBox        the skybox to render
                          */
-                        void render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, EnvironmentMap const& skyBox);
+                        void render(Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, EnvironmentMap const& skyBox);
                         /**
                          * Setup draw command to start filling the G-Buffer
                          */
@@ -98,11 +97,10 @@
                         void endGBufferPass();
                         /**
                          * Process the SSAO pass
-                         * @param shader        the SSAO shader
                          * @param projection    the projection matrix
                          * @param invProjection the inverse projection matrix
                          */
-                        void SSAOPass(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection);
+                        void SSAOPass(Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection);
 
                     //## Access Operator ##//
 

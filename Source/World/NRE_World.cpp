@@ -74,10 +74,13 @@
                 shift = size;
             }
 
-            void World::render(Renderer::Shader const& shader, Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
-                shader.bind();
-                    shader.useMat4("modelview", 1, &modelview);
-                    shader.useMat4("projection", 1, &projection);
+            void World::render(Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
+
+                const Renderer::Shader* shader = Renderer::EngineShader::getShader("GBuffer");
+
+                shader->bind();
+                    shader->useMat4("modelview", 1, &modelview);
+                    shader->useMat4("projection", 1, &projection);
                     for (auto &it : chunkMap) {
                         it.second->checkActiveState(camera);
                         if (!it.second->isLoaded()) {
@@ -96,7 +99,7 @@
                             }
                         }
                     }
-                shader.unbind();
+                shader->unbind();
             }
 
             void World::update(GLuint const& loadLimit) {

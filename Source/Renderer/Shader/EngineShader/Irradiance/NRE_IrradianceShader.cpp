@@ -4,7 +4,8 @@
     namespace NRE {
         namespace Renderer {
 
-            IrradianceShader::IrradianceShader() : Shader::Shader(true) {
+            IrradianceShader::IrradianceShader() {
+                load();
                 addUniformLocation("skyBox");
                 addUniformLocation("modelview");
             }

@@ -6,7 +6,8 @@
 
             GLuint PBRShader::MAX_LIGHTS = 10;
 
-            PBRShader::PBRShader() : Shader::Shader(true) {
+            PBRShader::PBRShader() {
+                load();
                 addUniformLocation("texDepth");
                 addUniformLocation("texDiffuse");
                 addUniformLocation("texNormal");

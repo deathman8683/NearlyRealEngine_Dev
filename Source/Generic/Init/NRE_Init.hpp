@@ -10,6 +10,7 @@
 
     #include "../../World/Voxel/Type/VoxelTypes/NRE_VoxelTypes.hpp"
     #include "../../Object/MergingCache/NRE_MergingCache.hpp"
+    #include "../../Renderer/Shader/EngineShader/NRE_EngineShader.hpp"
 
     /**
      * @namespace NRE

@@ -13,7 +13,7 @@
     #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
     #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
     #include "../../Maths/NRE_Maths.hpp"
-    #include "../Shader/NRE_Shader.hpp"
+    #include "../Shader/EngineShader/NRE_EngineShader.hpp"
 
     /**
      * @namespace NRE
@@ -48,12 +48,8 @@
                         /**
                          * Construct an environment map with a specific file, several shader for capture and computation
                          * @param path             the path to the main skybox
-                         * @param captureShader    the shader used to capture the Cube Map faces
-                         * @param irradianceShader the shader used to compute the irradiance map
-                         * @param prefilterShader  the shader used to compute the prefiltered map
-                         * @param BRDFShader       the shader used to computed the BRDF texture
                          */
-                        EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
+                        EnvironmentMap(std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
@@ -123,19 +119,14 @@
                         /**
                          * Capture all map for later rendering
                          * @param path             the path to the main skybox
-                         * @param captureShader    the shader used to capture the Cube Map faces
-                         * @param irradianceShader the shader used to compute the irradiance map
-                         * @param prefilterShader  the shader used to compute the prefiltered map
-                         * @param BRDFShader       the shader used to computed the BRDF texture
                          */
-                        void capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader);
+                        void capture(std::string const& path);
                         /**
                          * Render the base skybox
-                         * @param shader     the rendering shader
                          * @param projection the proection matrix
                          * @param modelview  the modelview matrix
                          */
-                        void render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
+                        void render(Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
                         /**
                          * Render a quad, used to capture CubeMap faces
                          */

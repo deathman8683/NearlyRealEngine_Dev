@@ -4,15 +4,9 @@
     namespace NRE {
         namespace Renderer {
 
-            std::string BASE_PATH = "Data/Shaders/";
+            std::string Shader::BASE_PATH = "Shaders/";
 
             Shader::Shader() : id(0) {
-            }
-
-            Shader::Shader(bool const& loadImmediatly) :  id(0) {
-                if (loadImmediatly) {
-                    load();
-                }
             }
 
             Shader::Shader(Shader && s) : id(std::move(s.id)), vShader(std::move(s.vShader)), fShader(std::move(s.fShader)), uniformsLocations(std::move(s.uniformsLocations)) {

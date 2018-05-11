@@ -4,7 +4,8 @@
     namespace NRE {
         namespace Renderer {
 
-            BRDFShader::BRDFShader() : Shader::Shader(true) {
+            BRDFShader::BRDFShader() {
+                load();
             }
 
             BRDFShader::BRDFShader(BRDFShader && s) : Shader::Shader(std::move(s)) {

@@ -4,7 +4,8 @@
     namespace NRE {
         namespace Renderer {
 
-            CaptureShader::CaptureShader() : Shader::Shader(true) {
+            CaptureShader::CaptureShader() {
+                load();
                 addUniformLocation("skyBox");
                 addUniformLocation("modelview");
             }

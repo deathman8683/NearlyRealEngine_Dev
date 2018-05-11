@@ -41,11 +41,6 @@
                          * Default Constructor
                          */
                         Shader();
-                        /**
-                         * Construct a shader and load it on fly or not
-                         * @param loadImmediatly tell if the constructor has to load the shader on fly
-                         */
-                        Shader(bool const& loadImmediatly = false);
 
                     //## Copy-Constructor ##//
                         /**

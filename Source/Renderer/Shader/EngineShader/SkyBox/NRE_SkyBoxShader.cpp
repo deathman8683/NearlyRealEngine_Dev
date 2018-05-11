@@ -4,7 +4,8 @@
     namespace NRE {
         namespace Renderer {
 
-            SkyBoxShader::SkyBoxShader() : Shader::Shader(true) {
+            SkyBoxShader::SkyBoxShader() {
+                load();
                 addUniformLocation("MVP");
             }
 

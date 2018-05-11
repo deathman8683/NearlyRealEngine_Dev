@@ -4,7 +4,8 @@
     namespace NRE {
         namespace Renderer {
 
-            SSAOShader::SSAOShader() : Shader::Shader(true) {
+            SSAOShader::SSAOShader() {
+                load();
                 addUniformLocation("texDepth");
                 addUniformLocation("texNormal");
                 addUniformLocation("texNoise");

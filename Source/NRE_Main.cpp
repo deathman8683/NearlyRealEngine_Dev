@@ -12,9 +12,9 @@
     using namespace Maths;
 
     int main(int argc, char **argv) {
-        init();
         try {
             Support::Stage engineStage("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
+            init();
             Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
             World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
@@ -31,63 +31,11 @@
             engineLight.push_back(&engineLight4);
             engineLight.push_back(&engineLight5);
 
-            Renderer::Shader skyBoxShader("Shaders/SkyBox.vert", "Shaders/SkyBox.frag", true);
-                skyBoxShader.addUniformLocation("MVP");
-            Renderer::Shader captureShader("Shaders/CaptureShader.vert", "Shaders/CaptureShader.frag", true);
-                captureShader.addUniformLocation("skyBox");
-                captureShader.addUniformLocation("modelview");
-            Renderer::Shader irradianceShader("Shaders/IrradianceShader.vert", "Shaders/IrradianceShader.frag", true);
-                irradianceShader.addUniformLocation("skyBox");
-                irradianceShader.addUniformLocation("modelview");
-            Renderer::Shader prefilterShader("Shaders/PrefilterShader.vert", "Shaders/PrefilterShader.frag", true);
-                prefilterShader.addUniformLocation("skyBox");
-                prefilterShader.addUniformLocation("modelview");
-                prefilterShader.addUniformLocation("roughness");
-            Renderer::Shader gBufferPass("Shaders/GBufferPass.vert", "Shaders/GBufferPass.frag", true);
-                gBufferPass.addUniformLocation("modelview");
-                gBufferPass.addUniformLocation("projection");
-            Renderer::Shader ssaoPass("Shaders/SSAOPass.vert", "Shaders/SSAOPass.frag", true);
-                ssaoPass.addUniformLocation("texDepth");
-                ssaoPass.addUniformLocation("texNormal");
-                ssaoPass.addUniformLocation("texNoise");
-                ssaoPass.addUniformLocation("projection");
-                ssaoPass.addUniformLocation("invProjection");
-                ssaoPass.addUniformLocation("gKernel");
-                ssaoPass.addUniformLocation("gSampleRad");
-            Renderer::Shader pbrShader("Shaders/PBRShader.vert", "Shaders/PBRShader.frag", true);
-                pbrShader.addUniformLocation("texDepth");
-                pbrShader.addUniformLocation("texDiffuse");
-                pbrShader.addUniformLocation("texNormal");
-                pbrShader.addUniformLocation("irradianceMap");
-                pbrShader.addUniformLocation("prefilterMap");
-                pbrShader.addUniformLocation("brdfLUT");
-                for (GLuint i = 0; i < engineLight.size(); i = i + 1) {
-                    std::ostringstream index;
-                    index << i;
-                    pbrShader.addUniformLocation("lights[" + index.str() + "].position");
-                    pbrShader.addUniformLocation("lights[" + index.str() + "].intensities");
-                    pbrShader.addUniformLocation("lights[" + index.str() + "].direction");
-                    pbrShader.addUniformLocation("lights[" + index.str() + "].angle");
-                }
-                for (unsigned int i = 0; i < World::VoxelTypes::getSize(); i = i + 1) {
-                    std::ostringstream index;
-                    index << i;
-                    pbrShader.addUniformLocation("materials[" + index.str() + "].albedo");
-                    pbrShader.addUniformLocation("materials[" + index.str() + "].metallic");
-                    pbrShader.addUniformLocation("materials[" + index.str() + "].roughness");
-                }
-                pbrShader.addUniformLocation("cameraV");
-                pbrShader.addUniformLocation("invModelview");
-                pbrShader.addUniformLocation("invProjection");
-                pbrShader.addUniformLocation("rotation");
-                pbrShader.addUniformLocation("numLights");
-            Renderer::Shader brdfShader("Shaders/BRDFShader.vert", "Shaders/BRDFShader.frag", true);
-
             Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, rotation;
 
             Time::Clock engineClock;
 
-            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Space_HD.hdr", captureShader, irradianceShader, prefilterShader, brdfShader);
+            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Space_HD.hdr");
 
             camera.computeProjectionMatrix(projection);
 
@@ -198,15 +146,15 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    //engineWorld.render(gBufferPass, modelview, projection, &camera);
-                    gBufferPass.bind();
-                        gBufferPass.useMat4("modelview", 1, &modelview);
-                        gBufferPass.useMat4("projection", 1, &projection);
+                    //engineWorld.render(modelview, projection, &camera);
+                    Renderer::EngineShader::getShader("GBuffer")->bind();
+                        Renderer::EngineShader::getShader("GBuffer")->useMat4("modelview", 1, &modelview);
+                        Renderer::EngineShader::getShader("GBuffer")->useMat4("projection", 1, &projection);
                         oT1.draw();
-                    gBufferPass.unbind();
+                    Renderer::EngineShader::getShader("GBuffer")->unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
-                    engineSkybox.render(skyBoxShader, projection, modelview);
+                    engineSkybox.render( projection, modelview);
                     modelview = tmp;
                 engineDeferredRenderer.endGBufferPass();
 
@@ -215,9 +163,9 @@
                 invModelview = modelview;
                 invModelview.inverse();
 
-                engineDeferredRenderer.SSAOPass(ssaoPass, projection, invProjection);
+                engineDeferredRenderer.SSAOPass(projection, invProjection);
 
-                engineDeferredRenderer.render(pbrShader, invModelview, invProjection, rotation, camera, engineLight, engineSkybox);
+                engineDeferredRenderer.render(invModelview, invProjection, rotation, camera, engineLight, engineSkybox);
 
                 engineWorld.update(1);
 

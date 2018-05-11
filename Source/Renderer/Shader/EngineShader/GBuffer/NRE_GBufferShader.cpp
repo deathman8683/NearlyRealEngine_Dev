@@ -4,7 +4,8 @@
     namespace NRE {
         namespace Renderer {
 
-            GBufferShader::GBufferShader() : Shader::Shader(true) {
+            GBufferShader::GBufferShader() {
+                load();
                 addUniformLocation("modelview");
                 addUniformLocation("projection");
             }

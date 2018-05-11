@@ -11,10 +11,10 @@
             EnvironmentMap::EnvironmentMap() {
             }
 
-            EnvironmentMap::EnvironmentMap(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader) : brdfLUT(SIZE, SIZE, GL_RG, GL_RG16F, GL_FLOAT), buffer(true), vao(true) {
+            EnvironmentMap::EnvironmentMap(std::string const& path) : brdfLUT(SIZE, SIZE, GL_RG, GL_RG16F, GL_FLOAT), buffer(true), vao(true) {
                 fillBuffer();
                 allocate();
-                capture(path, captureShader, irradianceShader, prefilterShader, BRDFShader);
+                capture(path);
             }
 
             EnvironmentMap::EnvironmentMap(EnvironmentMap && map) : map(std::move(map.map)), irradianceMap(std::move(map.irradianceMap)), prefilterMap(std::move(map.prefilterMap)), brdfLUT(std::move(map.brdfLUT)), buffer(std::move(map.buffer)), vao(std::move(map.vao)) {
@@ -91,7 +91,13 @@
                 vao.access(buffer, GL_INT, true);
             }
 
-            void EnvironmentMap::capture(std::string const& path, Shader const& captureShader, Shader const& irradianceShader, Shader const& prefilterShader, Shader const& BRDFShader) {
+            void EnvironmentMap::capture(std::string const& path) {
+
+                const Shader* captureShader = EngineShader::getShader("Capture");
+                const Shader* irradianceShader = EngineShader::getShader("Irradiance");
+                const Shader* prefilterShader = EngineShader::getShader("Prefilter");
+                const Shader* BRDFShader = EngineShader::getShader("BRDF");
+
                 GL::Texture2D cubeMap;
 
                 cubeMap.setType(GL_FLOAT);
@@ -122,14 +128,14 @@
                 modelviews[4].lookAt(Maths::Point3D<NREfloat>(0.0), Maths::Point3D<NREfloat>( 0.0,  1.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
                 modelviews[5].lookAt(Maths::Point3D<NREfloat>(0.0), Maths::Point3D<NREfloat>( 0.0, -1.0,  0.0), Maths::Vector3D<NREfloat>(0.0,  0.0,  1.0));
 
-                captureShader.bind();
-                    captureShader.use1I("skyBox", 0);
+                captureShader->bind();
+                    captureShader->use1I("skyBox", 0);
                     cubeMap.bind();
 
                     glViewport(0, 0, SIZE, SIZE);
                     capture.bind();
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            captureShader.useMat4("modelview", 1, &modelviews[i]);
+                            captureShader->useMat4("modelview", 1, &modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, map.getID());
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -139,20 +145,20 @@
                             getVAO().unbind();
                         }
                     capture.unbind();
-                captureShader.unbind();
+                captureShader->unbind();
 
                 capture.bind();
                     tmp->allocate(GL_DEPTH_COMPONENT24, 32, 32);
                 capture.unbind();
 
-                irradianceShader.bind();
-                    irradianceShader.use1I("skyBox", 0);
+                irradianceShader->bind();
+                    irradianceShader->use1I("skyBox", 0);
                     map.bind();
 
                     glViewport(0, 0, 32, 32);
                     capture.bind();
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            irradianceShader.useMat4("modelview", 1, &modelviews[i]);
+                            irradianceShader->useMat4("modelview", 1, &modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap.getID());
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -162,7 +168,7 @@
                             getVAO().unbind();
                         }
                     capture.unbind();
-                irradianceShader.unbind();
+                irradianceShader->unbind();
 
                 modelviews[0].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
                 modelviews[1].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
@@ -171,8 +177,8 @@
                 modelviews[4].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
                 modelviews[5].rotate(90.0, Maths::Vector3D<NREfloat>(-1.0, 0.0, 0.0));
 
-                prefilterShader.bind();
-                    prefilterShader.use1I("skyBox", 0);
+                prefilterShader->bind();
+                    prefilterShader->use1I("skyBox", 0);
                     map.bind();
 
                     capture.bind();
@@ -185,9 +191,9 @@
                         glViewport(0, 0, mipWidth, mipHeight);
 
                         float roughness = (float)mip / (float)(maxMipLevels - 1);
-                        prefilterShader.use1F("roughness", roughness);
+                        prefilterShader->use1F("roughness", roughness);
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            prefilterShader.useMat4("modelview", 1, &modelviews[i]);
+                            prefilterShader->useMat4("modelview", 1, &modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, prefilterMap.getID(), mip);
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -198,34 +204,37 @@
                         }
                     }
                     capture.unbind();
-                prefilterShader.unbind();
+                prefilterShader->unbind();
 
                 capture.bind();
                     tmp->allocate(GL_DEPTH_COMPONENT24, SIZE, SIZE);
                     capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, brdfLUT.getID());
 
                     glViewport(0, 0, SIZE, SIZE);
-                    BRDFShader.bind();
+                    BRDFShader->bind();
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                         renderQuad();
-                    BRDFShader.unbind();
+                    BRDFShader->unbind();
                 capture.unbind();
             }
 
-            void EnvironmentMap::render(Shader const& shader, Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview) {
+            void EnvironmentMap::render(Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview) {
+
+                const Shader* shader = EngineShader::getShader("SkyBox");
+
                 Maths::Matrix4x4<NREfloat> MVP = projection * Maths::Matrix4x4<NREfloat>(Maths::Matrix3x3<NREfloat>(modelview));
                 glDepthFunc(GL_LEQUAL);
-                shader.bind();
+                shader->bind();
                     getVAO().bind();
                             map.bind();
 
-                            shader.useMat4("MVP", 1, &MVP);
+                            shader->useMat4("MVP", 1, &MVP);
                             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
                             map.unbind();
                     getVAO().unbind();
-                shader.unbind();
+                shader->unbind();
                glDepthFunc(GL_LESS);
             }
 

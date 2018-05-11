@@ -4,7 +4,8 @@
     namespace NRE {
         namespace Renderer {
 
-            PrefilterShader::PrefilterShader() : Shader::Shader(true) {
+            PrefilterShader::PrefilterShader() {
+                load();
                 addUniformLocation("skyBox");
                 addUniformLocation("modelview");
                 addUniformLocation("roughness");
