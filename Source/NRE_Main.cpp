@@ -43,8 +43,6 @@
 
             glViewport(0, 0, 1280.0, 720.0);
 
-            camera.Mouse::getKey(SDL_BUTTON_LEFT).setAction(new Command<Camera::MoveableCamera>(&camera, Camera::MoveableCamera::interact));
-
             while(!camera.getQuit())
             {
                 /*engineClock.updateActualTime();

@@ -54,6 +54,7 @@
                 Keyboard::keyMap[SDL_SCANCODE_D].setAction(new Command<MoveableCamera>(this, moveRight));
                 Keyboard::keyMap[SDL_SCANCODE_SPACE].setAction(new Command<MoveableCamera>(this, moveUp));
                 Keyboard::keyMap[SDL_SCANCODE_LSHIFT].setAction(new Command<MoveableCamera>(this, moveDown));
+                Mouse::keyMap[SDL_BUTTON_LEFT].setAction(new Command<Camera::MoveableCamera>(this, Camera::MoveableCamera::interact));
             }
 
             void MoveableCamera::moveFront() {
