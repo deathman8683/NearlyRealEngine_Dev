@@ -68,9 +68,24 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Send the SSAO's kernel to the shader
+                         * @param ssao the ssao to send the kernel
+                         */
                         void sendKernel(SSAO const& ssao) const;
+                        /**
+                         * Send textures's index to the shader
+                         */
                         void sendTextures() const;
+                        /**
+                         * Send the projection matrix to the shader
+                         * @param m the projection matrix
+                         */
                         void sendProjection(Maths::Matrix4x4<NREfloat> const& m) const;
+                        /**
+                         * Send the inverse projection matrix to the shader
+                         * @param m the inverse projection matrix
+                         */
                         void sendInvProjection(Maths::Matrix4x4<NREfloat> const& m) const;
 
                     //## Access Operator ##//

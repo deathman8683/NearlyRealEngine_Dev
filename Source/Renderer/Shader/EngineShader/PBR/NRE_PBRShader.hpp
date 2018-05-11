@@ -72,12 +72,38 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Send all materials values to the shader
+                         */
                         void sendMaterials() const;
+                        /**
+                         * Send all lights values to the shader
+                         * @param lights the arrays of lights
+                         */
                         void sendLigths(std::vector<Light::Light*> const& lights) const;
+                        /**
+                         * Send textures's index to the shader
+                         */
                         void sendTextures() const;
+                        /**
+                         * Send the inverse projection matrix to the shader
+                         * @param m the inverse projection matrix
+                         */
                         void sendInvProjection(Maths::Matrix4x4<NREfloat> const& m) const;
+                        /**
+                         * Send the inverse modelview matrix to the shader
+                         * @param m the inverse modelview matrix
+                         */
                         void sendInvModelview(Maths::Matrix4x4<NREfloat> const& m) const;
+                        /**
+                         * Send the rotation matrix to the shader
+                         * @param m the rotation matrix
+                         */
                         void sendRotation(Maths::Matrix4x4<NREfloat> const& m) const;
+                        /**
+                         * Send the camera's eye position to the shader
+                         * @param c the corresponding camera
+                         */
                         void sendCamera(Camera::FixedCamera const& c) const;
 
                     //## Access Operator ##//

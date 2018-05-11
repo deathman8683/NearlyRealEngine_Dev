@@ -328,7 +328,7 @@
                     //## Shift Operator ##//
 
                 protected:
-                    static std::string BASE_PATH;
+                    static std::string BASE_PATH;   /**< Shader's base path to all shaders */
             };
 
         };

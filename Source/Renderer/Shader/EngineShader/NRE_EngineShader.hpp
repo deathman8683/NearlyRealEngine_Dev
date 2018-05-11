@@ -36,16 +36,35 @@
             class EngineShader {
                 public:
                     //## Getter ##//
+                        /**
+                         * Specific Shader getter
+                         * @param  name the shader's name
+                         * @return      the corresponding shader
+                         */
                         static const Shader* const& getShader(std::string const& name);
 
                     //## Methods ##//
+                        /**
+                         * Allocate all engine's shader
+                         */
                         static void init();
+                        /**
+                         * Free all engine's shader
+                         */
                         static void free();
+                        /**
+                         * Send the projection matrix and it's inverse to all shader which need it
+                         * @param m the projection matrix
+                         */
                         static void sendProjection(Maths::Matrix4x4<NREfloat> const& m);
+                        /**
+                         * Send the SSAO's kernel to the corresponding shader
+                         * @param ssao the SSAo to send the kernel
+                         */
                         static void sendKernel(SSAO const& ssao);
 
                 private:
-                    static std::unordered_map<std::string, const Shader*>* programs;
+                    static std::unordered_map<std::string, const Shader*>* programs;    /**< The map storing all shader by their name */
             };
 
         };

@@ -67,7 +67,15 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Send the roughness's value to the shader
+                         * @param value the roughness's value
+                         */
                         void sendRoughness(NREfloat const& value) const;
+                        /**
+                         * Send the modelview matrix to the shader
+                         * @param m the modelview matrix
+                         */
                         void sendModelview(Maths::Matrix4x4<NREfloat> const& m) const;
 
                     //## Access Operator ##//

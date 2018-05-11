@@ -67,6 +67,10 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Send the modelview matrix to the shader
+                         * @param m the modelview matrix
+                         */
                         void sendModelview(Maths::Matrix4x4<NREfloat> const& m) const;
 
                     //## Access Operator ##//
