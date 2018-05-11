@@ -88,9 +88,6 @@
                          * @return   the corresponding chunk
                          */
                         Chunk* const& getChunk(GLint const& x, GLint const& y);
-                        Chunk* const& getChunk(Maths::Point3D<GLint> const& p);
-                        Voxel const& getWorldVoxel(Maths::Point3D<GLint> const& p);
-                        Maths::Point3D<GLuint> const getVoxelCoord(Maths::Point3D<GLint> const& p);
                         /**
                          * Half Extent getter
                          * @return the half extent value

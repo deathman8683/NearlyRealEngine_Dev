@@ -85,12 +85,13 @@
             }
 
             void MoveableCamera::interact() {
-                Maths::Point3D<GLint> voxel = rayCast();
-                world->getChunk(voxel)->setType(world->getVoxelCoord(voxel), World::VOID);
+                World::VoxelPoint voxel = rayCast();
+                world->getChunk(voxel.getChunkCoord())->setType(voxel.getCoord(), World::VOID);
             }
 
-            Maths::Point3D<GLint> const MoveableCamera::rayCast() const {
+            World::VoxelPoint const MoveableCamera::rayCast() const {
                 Maths::Point3D<GLint> voxel(std::floor(getEye().getX()), std::floor(getEye().getY()), std::floor(getEye().getZ()));
+                World::VoxelPoint res(voxel);
 
                 NREfloat dx = getForward().getX();
                 NREfloat dy = getForward().getY();
@@ -114,7 +115,7 @@
                 bool find = false, stop = false;
 
                 while (world->isInBound(voxel) && !find && !stop) {
-                    if (world->getWorldVoxel(voxel).getType() != World::VOID) {
+                    if (world->getChunk(res.getChunkCoord())->getModel().getVoxel(res.getCoord()).getType() != World::VOID) {
                         find = true;
                     } else {
                         if (tMaxX < tMaxY) {
@@ -151,9 +152,10 @@
                             }
                         }
                     }
+                    res.compute(voxel);
                 }
 
-                return voxel;
+                return res;
             }
 
             MoveableCamera& MoveableCamera::operator=(MoveableCamera const& camera) {

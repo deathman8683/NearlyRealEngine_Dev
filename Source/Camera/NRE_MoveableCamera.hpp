@@ -12,6 +12,7 @@
     #include "FixedCamera/NRE_FixedCamera.hpp"
     #include "Input/NRE_Input.hpp"
     #include "../World/NRE_World.hpp"
+    #include "../World/Voxel/VoxelPoint/NRE_VoxelPoint.hpp"
 
     /**
      * @namespace NRE
@@ -139,7 +140,7 @@
                          */
                         void moveCenter();
                         void interact();
-                        Maths::Point3D<GLint> const rayCast() const;
+                        World::VoxelPoint const rayCast() const;
 
                     //## Access Operator ##//
 
