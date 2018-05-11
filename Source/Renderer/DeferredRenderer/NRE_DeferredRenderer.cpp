@@ -29,55 +29,30 @@
             DeferredRenderer::~DeferredRenderer() {
             }
 
-            void DeferredRenderer::render(Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, EnvironmentMap const& skyBox) {
+            void DeferredRenderer::render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& invProjection, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& lights, EnvironmentMap const& skyBox) {
 
-                const Shader* shader = EngineShader::getShader("PBR");
+                const PBRShader* shader = static_cast <const PBRShader*> (EngineShader::getShader("PBR"));
 
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 shader->bind();
                     glActiveTexture(GL_TEXTURE0);
                         gBuffer.getDepthBuffer()->bind();
-                            shader->use1I("texDepth", 0);
                     glActiveTexture(GL_TEXTURE1);
                         gBuffer.getColorBuffer(0)->bind();
-                            shader->use1I("texDiffuse", 1);
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->bind();
-                            shader->use1I("texNormal", 2);
                     glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().bind();
-                            shader->use1I("irradianceMap", 4);
                     glActiveTexture(GL_TEXTURE5);
                         skyBox.getPrefilterMap().bind();
-                            shader->use1I("prefilterMap", 5);
                     glActiveTexture(GL_TEXTURE6);
                         skyBox.getBRDFLUT().bind();
-                            shader->use1I("brdfLUT", 6);
 
-                    for (unsigned int i = 0; i < light.size(); i = i + 1) {
-                        std::ostringstream index;
-                        index << i;
-                        shader->use4FV("lights[" + index.str() + "].position", 1, light.at(i)->getPosition().value());
-                        shader->use3FV("lights[" + index.str() + "].intensities", 1, light.at(i)->getIntensities().value());
-                        shader->use3FV("lights[" + index.str() + "].direction", 1, light.at(i)->getDirection().value());
-                        shader->use1FV("lights[" + index.str() + "].angle", 1, light.at(i)->getAngleValue());
-                    }
-
-
-                    for (unsigned int i = 0; i < World::VoxelTypes::getSize(); i = i + 1) {
-                        std::ostringstream index;
-                        index << i;
-                        shader->use3FV("materials[" + index.str() + "].albedo", 1, World::VoxelTypes::getMaterial(i).getAlbedo().value());
-                        shader->use1FV("materials[" + index.str() + "].metallic", 1, World::VoxelTypes::getMaterial(i).getMetallicValue());
-                        shader->use1FV("materials[" + index.str() + "].roughness", 1, World::VoxelTypes::getMaterial(i).getRoughnessValue());
-                    }
-
-                    shader->use3FV("cameraV", 1, camera.getEye().value());
-                    shader->useMat4("invModelview", 1, &invModelview);
-                    shader->useMat4("invProjection", 1, &invProjection);
-                    shader->useMat4("rotation", 1, &rotation);
-                    shader->use1I("numLights", light.size());
+                    shader->sendLigths(lights);
+                    shader->sendCamera(camera);
+                    shader->sendInvModelview(invModelview);
+                    shader->sendRotation(rotation);
 
                     draw();
 
@@ -108,7 +83,7 @@
                 gBuffer.unbind();
             }
 
-            void DeferredRenderer::SSAOPass(Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection) {
+            void DeferredRenderer::SSAOPass(Maths::Matrix4x4<NREfloat> const& projection, Maths::Matrix4x4<NREfloat> const& invProjection) {
 
                 const Shader* shader = EngineShader::getShader("SSAO");
 

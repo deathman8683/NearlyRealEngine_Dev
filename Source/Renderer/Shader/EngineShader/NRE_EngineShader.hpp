@@ -41,6 +41,7 @@
                     //## Methods ##//
                         static void init();
                         static void free();
+                        static void sendProjection(Maths::Matrix4x4<NREfloat> const& m);
 
                 private:
                     static std::unordered_map<std::string, const Shader*>* programs;

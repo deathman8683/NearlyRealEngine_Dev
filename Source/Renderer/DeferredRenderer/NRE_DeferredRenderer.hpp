@@ -10,13 +10,13 @@
 
     #include <sstream>
     #include <fstream>
+    #include "../../Object/2D/NRE_Object2D.hpp"
     #include "../EnvironmentMap/NRE_EnvironmentMap.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
     #include "../../Light/DirectionnalLight/NRE_DirectionnalLight.hpp"
     #include "../../Light/PointLight/NRE_PointLight.hpp"
     #include "../../World/NRE_World.hpp"
     #include "../SSAO/NRE_SSAO.hpp"
-    #include "../../Object/2D/NRE_Object2D.hpp"
 
     /**
      * @namespace NRE
@@ -83,10 +83,10 @@
                          * @param invProjection the inverse projection matrix
                          * @param rotation      the rotation matrix for the skybox
                          * @param camera        the player camera
-                         * @param light         the array which store all light in the stage
+                         * @param lights        the array which store all light in the stage
                          * @param skyBox        the skybox to render
                          */
-                        void render(Maths::Matrix4x4<NREfloat> &invModelview, Maths::Matrix4x4<NREfloat> &invProjection, Maths::Matrix4x4<NREfloat> &rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& light, EnvironmentMap const& skyBox);
+                        void render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& invProjection, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& lights, EnvironmentMap const& skyBox);
                         /**
                          * Setup draw command to start filling the G-Buffer
                          */
@@ -100,7 +100,7 @@
                          * @param projection    the projection matrix
                          * @param invProjection the inverse projection matrix
                          */
-                        void SSAOPass(Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &invProjection);
+                        void SSAOPass(Maths::Matrix4x4<NREfloat> const& projection, Maths::Matrix4x4<NREfloat> const& invProjection);
 
                     //## Access Operator ##//
 

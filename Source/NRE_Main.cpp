@@ -35,6 +35,8 @@
 
             camera.computeProjectionMatrix(projection);
 
+            Renderer::EngineShader::sendProjection(projection);
+
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             NREfloat skyboxAngleX = 0.0;
@@ -142,11 +144,11 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    //engineWorld.render(modelview, projection, &camera);
+                    engineWorld.render(modelview, projection, &camera);
                     Renderer::EngineShader::getShader("GBuffer")->bind();
                         Renderer::EngineShader::getShader("GBuffer")->useMat4("modelview", 1, &modelview);
                         Renderer::EngineShader::getShader("GBuffer")->useMat4("projection", 1, &projection);
-                        oT1.draw();
+                        //oT1.draw();
                     Renderer::EngineShader::getShader("GBuffer")->unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;

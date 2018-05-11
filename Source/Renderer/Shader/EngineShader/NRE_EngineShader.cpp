@@ -20,6 +20,22 @@
                 (*programs)["Prefilter"] = new PrefilterShader();
                 (*programs)["SkyBox"] = new SkyBoxShader();
                 (*programs)["SSAO"] = new SSAOShader();
+
+                const PBRShader* pbr = static_cast<const PBRShader*> (getShader("PBR"));
+                pbr->bind();
+                    pbr->sendMaterials();
+                    pbr->sendTextures();
+                pbr->unbind();
+            }
+
+            void EngineShader::sendProjection(Maths::Matrix4x4<NREfloat> const& m) {
+                Maths::Matrix4x4<NREfloat> inv(m);
+                inv.inverse();
+
+                const PBRShader* pbr = static_cast<const PBRShader*> (getShader("PBR"));
+                pbr->bind();
+                    pbr->sendInvProjection(inv);
+                pbr->unbind();
             }
 
             void EngineShader::free() {

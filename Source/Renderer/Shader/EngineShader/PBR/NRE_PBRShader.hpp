@@ -11,6 +11,8 @@
     #include <sstream>
     #include <fstream>
     #include "../../NRE_Shader.hpp"
+    #include "../../../../Light/NRE_Light.hpp"
+    #include "../../../../Camera/FixedCamera/NRE_FixedCamera.hpp"
     #include "../../../../World/Voxel/Type/VoxelTypes/NRE_VoxelTypes.hpp"
 
     /**
@@ -70,6 +72,13 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        void sendMaterials() const;
+                        void sendLigths(std::vector<Light::Light*> const& lights) const;
+                        void sendTextures() const;
+                        void sendInvProjection(Maths::Matrix4x4<NREfloat> const& m) const;
+                        void sendInvModelview(Maths::Matrix4x4<NREfloat> const& m) const;
+                        void sendRotation(Maths::Matrix4x4<NREfloat> const& m) const;
+                        void sendCamera(Camera::FixedCamera const& c) const;
 
                     //## Access Operator ##//
 
