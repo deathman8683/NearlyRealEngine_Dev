@@ -27,31 +27,8 @@
                     }
                 }
 
-                for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
-                    for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
-                        Maths::Point2D<GLint> tmp(x + getShift().getX(), y + getShift().getY());
-                        Maths::Point2D<GLint> neighbor(tmp);
-                        if (tmp.getX() - 1 >= static_cast <GLint> (-getHExtent().getX())) {
-                            neighbor.setX(neighbor.getX() - 1);
-                            getChunk(tmp)->setLeft(*getChunk(neighbor));
-                            neighbor = tmp;
-                        }
-                        if (tmp.getX() + 1 <= static_cast <GLint> (getHExtent().getX())) {
-                            neighbor.setX(neighbor.getX() + 1);
-                            getChunk(tmp)->setRight(*getChunk(neighbor));
-                            neighbor = tmp;
-                        }
-                        if (tmp.getY() - 1 >= static_cast <GLint> (-getHExtent().getY())) {
-                            neighbor.setY(neighbor.getY() - 1);
-                            getChunk(tmp)->setBack(*getChunk(neighbor));
-                            neighbor = tmp;
-                        }
-                        if (tmp.getY() + 1 <= static_cast <GLint> (getHExtent().getX())) {
-                            neighbor.setY(neighbor.getY() + 1);
-                            getChunk(tmp)->setFront(*getChunk(neighbor));
-                            neighbor = tmp;
-                        }
-                    }
+                for (auto &it : chunkMap) {
+                    setChunkNeighbor(it.second->getCoord());
                 }
             }
 
@@ -298,6 +275,7 @@
                     Chunk* adr = getChunk(coord);
                     chunkMap.erase(coord);
                     chunkMap[tmp] = adr;
+                    setChunkNeighbor(tmp);
                 }
                 shift.setX(getShift().getX() - 1);
             }
@@ -313,6 +291,7 @@
                     Chunk* adr = getChunk(coord);
                     chunkMap.erase(coord);
                     chunkMap[tmp] = adr;
+                    setChunkNeighbor(tmp);
                 }
                 shift.setX(getShift().getX() + 1);
             }
@@ -328,6 +307,7 @@
                     Chunk* adr = getChunk(coord);
                     chunkMap.erase(coord);
                     chunkMap[tmp] = adr;
+                    setChunkNeighbor(tmp);
                 }
                 shift.setY(getShift().getY() - 1);
             }
@@ -343,9 +323,34 @@
                     Chunk* adr = getChunk(coord);
                     chunkMap.erase(coord);
                     chunkMap[tmp] = adr;
+                    setChunkNeighbor(tmp);
                 }
                 shift.setY(getShift().getY() + 1);
             }
+
+           void World::setChunkNeighbor(Maths::Point2D<GLint> const& coord) {
+               Maths::Point2D<GLint> neighbor(coord);
+               if (coord.getX() - 1 >= static_cast <GLint> (-getHExtent().getX() + getShift().getX())) {
+                   neighbor.setX(neighbor.getX() - 1);
+                   getChunk(coord)->setLeft(*getChunk(neighbor));
+                   neighbor = coord;
+               }
+               if (coord.getX() + 1 <= static_cast <GLint> (getHExtent().getX() + getShift().getX())) {
+                   neighbor.setX(neighbor.getX() + 1);
+                   getChunk(coord)->setRight(*getChunk(neighbor));
+                   neighbor = coord;
+               }
+               if (coord.getY() - 1 >= static_cast <GLint> (-getHExtent().getY() + getShift().getY())) {
+                   neighbor.setY(neighbor.getY() - 1);
+                   getChunk(coord)->setBack(*getChunk(neighbor));
+                   neighbor = coord;
+               }
+               if (coord.getY() + 1 <= static_cast <GLint> (getHExtent().getX() + getShift().getY())) {
+                   neighbor.setY(neighbor.getY() + 1);
+                   getChunk(coord)->setFront(*getChunk(neighbor));
+                   neighbor = coord;
+               }
+           }
 
             World& World::operator=(World && w) {
                 chunkMap = std::move(w.chunkMap);

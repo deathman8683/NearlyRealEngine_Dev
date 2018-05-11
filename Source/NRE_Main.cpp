@@ -99,10 +99,10 @@
             glViewport(0, 0, 1280.0, 720.0);
 
             camera.Keyboard::getKey(SDL_SCANCODE_E).setSwitch(true);
-            camera.Keyboard::getKey(SDL_SCANCODE_F).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksLeft));
-            camera.Keyboard::getKey(SDL_SCANCODE_H).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksRight));
-            camera.Keyboard::getKey(SDL_SCANCODE_G).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksBack));
-            camera.Keyboard::getKey(SDL_SCANCODE_T).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksFront));
+            //camera.Keyboard::getKey(SDL_SCANCODE_F).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksLeft));
+            //camera.Keyboard::getKey(SDL_SCANCODE_H).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksRight));
+            //camera.Keyboard::getKey(SDL_SCANCODE_G).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksBack));
+            //camera.Keyboard::getKey(SDL_SCANCODE_T).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksFront));
 
             GL::IBO* oTIBO = new GL::IBO(true);
             oTIBO->push_back(new GL::MaterialBuffer(true));
@@ -167,13 +167,13 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    engineWorld.render(gBufferPass, modelview, projection, &camera);
-                    /*gBufferPass.bind();
+                    //engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    gBufferPass.bind();
                         gBufferPass.useMat4("modelview", 1, &modelview);
                         gBufferPass.useMat4("projection", 1, &projection);
                         oT1.draw();
                         oT2.draw();
-                    gBufferPass.unbind();*/
+                    gBufferPass.unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(skyBoxShader, projection, modelview);

@@ -221,6 +221,11 @@
                          * Shift all front chunk to become the new back ones
                          */
                         void shiftChunksBack();
+                        /**
+                         * Set the different neighbor for a given chunk
+                         * @param coord the chunk's coordinates
+                         */
+                        void setChunkNeighbor(Maths::Point2D<GLint> const& coord);
 
                     //## Access Operator ##//
 
