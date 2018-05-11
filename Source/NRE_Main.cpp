@@ -6,7 +6,6 @@
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
     using namespace NRE;
-    using namespace Maths;
 
     int main(int argc, char **argv) {
         try {
@@ -43,65 +42,6 @@
             int colorAngle = 0, nbFrames = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
-
-            camera.Keyboard::getKey(SDL_SCANCODE_E).setSwitch(true);
-            //camera.Keyboard::getKey(SDL_SCANCODE_F).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksLeft));
-            //camera.Keyboard::getKey(SDL_SCANCODE_H).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksRight));
-            //camera.Keyboard::getKey(SDL_SCANCODE_G).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksBack));
-            //camera.Keyboard::getKey(SDL_SCANCODE_T).setAction(new Command<World::World>(&engineWorld, World::World::shiftChunksFront));
-
-            GL::IBO* oTIBO = new GL::IBO(true);
-            oTIBO->push_back(new GL::MaterialBuffer(true));
-            oTIBO->push_back(new GL::NormalBuffer(true));
-
-            Object::Mesh* oTMesh = new Object::Mesh();
-            oTMesh->push_back(new Object::MaterialData());
-            oTMesh->push_back(new Object::NormalData());
-            oTMesh->push_back(new Object::IndexData());
-
-            Object::Object3D oT1(Maths::Vector3D<GLuint>(5, 9, 6));
-            GLuint x = 0, y = 0, z = 0;
-
-            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 3, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 25, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 3, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 10, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 3, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 25, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 3, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 10, World::VOID);
-            oT1.loadVoxels(x, y, z, 35, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 10, World::VOID);
-            oT1.loadVoxels(x, y, z, 35, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 35, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 35, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.loadVoxels(x, y, z, 3, World::SCORCHED);
-            oT1.loadVoxels(x, y, z, 1, World::VOID);
-            oT1.process(GL_STATIC_DRAW, Maths::Point2D<GLint>(0, 0));
 
             while(!camera.getQuit())
             {
@@ -145,11 +85,6 @@
 
                 engineDeferredRenderer.startGBufferPass();
                     engineWorld.render(modelview, &camera);
-                    Renderer::EngineShader::getShader("GBuffer")->bind();
-                        Renderer::EngineShader::getShader("GBuffer")->useMat4("modelview", 1, &modelview);
-                        Renderer::EngineShader::getShader("GBuffer")->useMat4("projection", 1, &projection);
-                        //oT1.draw();
-                    Renderer::EngineShader::getShader("GBuffer")->unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(projection, modelview);
