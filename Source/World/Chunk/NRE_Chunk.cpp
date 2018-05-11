@@ -17,34 +17,19 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : model(SIZE), coord(coord), buffer(generateID), vao(generateID), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : Object3D(SIZE), coord(coord), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
                                                                                        active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
-                buffer.push_back(new GL::MaterialBuffer(generateID));
-                buffer.push_back(new GL::NormalBuffer(generateID));
-                vao.access(getBuffer(), GL_INT);
             }
 
-            Chunk::Chunk(Chunk && c) : model(std::move(c.model)), coord(std::move(c.coord)), buffer(std::move(c.buffer)), vao(std::move(c.vao)), bounding(std::move(c.bounding)),
+            Chunk::Chunk(Chunk && c) : Object3D(std::move(c)), coord(std::move(c.coord)), bounding(std::move(c.bounding)),
                                        active(std::move(c.active)), loaded(std::move(c.loaded)), constructed(std::move(c.constructed)), loading(std::move(c.loading)), constructing(std::move(c.constructing)), modified(std::move(c.modified)) {
             }
 
             Chunk::~Chunk() {
             }
 
-            Object::Model const& Chunk::getModel() const {
-                return model;
-            }
-
             Maths::Point2D<GLint> const& Chunk::getCoord() const {
                 return coord;
-            }
-
-            GL::IBO const& Chunk::getBuffer() const {
-                return buffer;
-            }
-
-            GL::VAO const& Chunk::getVAO() const {
-                return vao;
             }
 
             Physics::AABB<GLint> const& Chunk::getBounding() const {
@@ -105,12 +90,6 @@
 
             void Chunk::setModified(bool const& state) {
                 modified = state;
-            }
-
-            void Chunk::render() {
-                vao.bind();
-                    buffer.draw();
-                vao.unbind();
             }
 
             void Chunk::save(std::fstream &chunkFile) {
@@ -197,7 +176,8 @@
                     std::stringstream data;
                     data.rdbuf()->pubsetbuf(&buffer[0], dataSize);
 
-                    GLuint voxNumber, voxType, x = 0, y = 0, z = 0;
+                    GLuint voxNumber, x = 0, y = 0, z = 0;
+                    GLubyte voxType;
                     while (dataSize > 0) {
                         data.read(reinterpret_cast<char*> (&voxNumber), 2);
                         data.read(reinterpret_cast<char*> (&voxType), 1);
@@ -223,8 +203,8 @@
                 setLoading(false);
                 setConstructed(false);
                 setConstructing(false);
-                buffer.reload();
-                vao.access(getBuffer(), GL_INT);
+                buffer->reload();
+                vao.access(*buffer, GL_INT);
                 bounding.setCenter(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2);
             }
 

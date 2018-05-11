@@ -26,6 +26,33 @@
                         chunkMap[tmp] = new Chunk(tmp, true);
                     }
                 }
+
+                for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
+                    for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
+                        Maths::Point2D<GLint> tmp(x + getShift().getX(), y + getShift().getY());
+                        Maths::Point2D<GLint> neighbor(tmp);
+                        if (tmp.getX() - 1 >= static_cast <GLint> (-getHExtent().getX())) {
+                            neighbor.setX(neighbor.getX() - 1);
+                            getChunk(tmp)->setLeft(*getChunk(neighbor));
+                            neighbor = tmp;
+                        }
+                        if (tmp.getX() + 1 <= static_cast <GLint> (getHExtent().getX())) {
+                            neighbor.setX(neighbor.getX() + 1);
+                            getChunk(tmp)->setRight(*getChunk(neighbor));
+                            neighbor = tmp;
+                        }
+                        if (tmp.getY() - 1 >= static_cast <GLint> (-getHExtent().getY())) {
+                            neighbor.setY(neighbor.getY() - 1);
+                            getChunk(tmp)->setBack(*getChunk(neighbor));
+                            neighbor = tmp;
+                        }
+                        if (tmp.getY() + 1 <= static_cast <GLint> (getHExtent().getX())) {
+                            neighbor.setY(neighbor.getY() + 1);
+                            getChunk(tmp)->setFront(*getChunk(neighbor));
+                            neighbor = tmp;
+                        }
+                    }
+                }
             }
 
             World::World(World && w) : chunkMap(std::move(w.chunkMap)), loadRegionMap(std::move(w.loadRegionMap)), saveRegionMap(std::move(w.saveRegionMap)), constructionQueue(std::move(w.constructionQueue)),
@@ -76,19 +103,19 @@
                     shader.useMat4("projection", 1, &projection);
                     for (auto &it : chunkMap) {
                         it.second->checkActiveState(camera);
+                        if (!it.second->isLoaded()) {
+                            if (!it.second->isLoading()) {
+                                addChunkToLoadRegion(it.second);
+                            }
+                        }
+                        if (it.second->isLoaded() && !it.second->isConstructed()) {
+                            if (!it.second->isConstructing()) {
+                                addChunkToConstruction(it.second);
+                            }
+                        }
                         if (it.second->isActive()) {
-                            if (!it.second->isLoaded()) {
-                                if (!it.second->isLoading()) {
-                                    addChunkToLoadRegion(it.second);
-                                }
-                            }
-                            if (it.second->isLoaded() && !it.second->isConstructed()) {
-                                if (!it.second->isConstructing()) {
-                                    addChunkToConstruction(it.second);
-                                }
-                            }
                             if (it.second->isLoaded() && it.second->isConstructed()) {
-                                it.second->render();
+                                it.second->draw();
                             }
                         }
                     }
@@ -181,7 +208,7 @@
 
             void World::updateConstructionQueue() {
                 if (!constructionQueue.empty()) {
-                    constructionQueue.front()->constructMesh(this);
+                    constructionQueue.front()->process(GL_STATIC_DRAW, constructionQueue.front()->getCoord());
                     constructionQueue.front()->setConstructed(true);
                     constructionQueue.front()->setConstructing(false);
                     constructionQueue.pop();

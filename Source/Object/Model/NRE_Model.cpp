@@ -49,7 +49,7 @@
                 maxSolidHeight = height;
             }
 
-            void Model::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type) {
+            void Model::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type) {
                 GLuint index, n = nb;
                 while (n != 0) {
                     index = getVoxelIndex(x, y, z);
@@ -65,7 +65,7 @@
                     }
                     n = n - 1;
                 }
-                if (voxels[index].getType() != World::VOID) {
+                if (type != World::VOID) {
                     if (getMaxSolidHeight() < z) {
                         setMaxSolidHeight(z);
                     }

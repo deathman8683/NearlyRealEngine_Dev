@@ -167,13 +167,13 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    //engineWorld.render(gBufferPass, modelview, projection, &camera);
-                    gBufferPass.bind();
+                    engineWorld.render(gBufferPass, modelview, projection, &camera);
+                    /*gBufferPass.bind();
                         gBufferPass.useMat4("modelview", 1, &modelview);
                         gBufferPass.useMat4("projection", 1, &projection);
                         oT1.draw();
                         oT2.draw();
-                    gBufferPass.unbind();
+                    gBufferPass.unbind();*/
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(skyBoxShader, projection, modelview);

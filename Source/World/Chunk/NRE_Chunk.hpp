@@ -10,11 +10,9 @@
 
     #include <sstream>
     #include <fstream>
-    #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
-    #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
-    #include "../../Object/Model/NRE_Model.hpp"
+    #include "../../Object/3D/NRE_Object3D.hpp"
 
     /**
      * @namespace NRE
@@ -33,12 +31,9 @@
              * @class Chunk
              * @brief World's Object : A collection of voxel
              */
-            class Chunk {
+            class Chunk : public Object::Object3D {
                 private:
-                    Object::Model model;           /**< Chunk's model*/
                     Maths::Point2D<GLint> coord;    /**< Chunk coordinates */
-                    GL::IBO buffer;                 /**< Chunk rendering buffer */
-                    GL::VAO vao;                    /**< Chunk rendering VAO */
                     Physics::AABB<GLint> bounding;  /**< Chunk bounding box */
                     bool active;                    /**< Active state, for rendering purpose */
                     bool loaded;                    /**< Loaded state, for rendering/loading purpose */
@@ -89,25 +84,10 @@
 
                     //## Getter ##//
                         /**
-                         * Model getter
-                         * @return the chunk's model
-                         */
-                        Object::Model const& getModel() const;
-                        /**
                          * Coordinates getter
                          * @return the chunk's coordinates value
                          */
                         Maths::Point2D<GLint> const& getCoord() const;
-                        /**
-                         * Buffer getter
-                         * @return the chunk's rendering buffer
-                         */
-                        GL::IBO const& getBuffer() const;
-                        /**
-                         * VAO getter
-                         * @return the chunk's rendering VAO
-                         */
-                        GL::VAO const& getVAO() const;
                         /**
                          * Bounding getter
                          * @return the chunk's AABB object
@@ -188,15 +168,6 @@
 
                     //## Methods ##//
                         /**
-                         * Construct the chunk's mesh
-                         * @param w the world used to compute chunk border
-                         */
-                        void constructMesh(World* w);
-                        /**
-                         * Render the chunk using the VAO
-                         */
-                        void render();
-                        /**
                          * Save the chunk into a passed file stream
                          * @param chunkFile the chunk's file stream
                          */
@@ -269,7 +240,7 @@
              * @return the modified outstream
              */
             inline std::ostream& operator<<(std::ostream &stream, Chunk const& c) {
-                stream << "(" << c.getCoord() << "," << c.getBuffer() << "," << c.getVAO() << ")";
+                stream << "(" << c.getCoord() << ")";
                 return stream;
             }
 

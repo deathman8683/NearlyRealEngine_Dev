@@ -31,12 +31,12 @@
             class Mesh3D : public Mesh {
                 private:
                     const Model* target;    /**< The mesh's model */
-                    const Model* left;      /**< The mesh's model left neigboor */
-                    const Model* right;     /**< The mesh's model right neigboor */
-                    const Model* front;     /**< The mesh's model front neigboor */
-                    const Model* back;      /**< The mesh's model back neigboor */
-                    const Model* up;        /**< The mesh's model up neigboor */
-                    const Model* bottom;    /**< The mesh's model bottom neigboor */
+                    const Model* left;      /**< The mesh's model left neighbor */
+                    const Model* right;     /**< The mesh's model right neighbor */
+                    const Model* front;     /**< The mesh's model front neighbor */
+                    const Model* back;      /**< The mesh's model back neighbor */
+                    const Model* up;        /**< The mesh's model up neighbor */
+                    const Model* bottom;    /**< The mesh's model bottom neighbor */
 
                 public:
                     //## Constructor ##//
@@ -47,12 +47,12 @@
                         /**
                          * Construct a 3D mesh with a given target and his neighboors
                          * @param target the mesh's model to manage
-                         * @param left   the mesh's model left neigboor
-                         * @param right  the mesh's model right neigboor
-                         * @param front  the mesh's model front neigboor
-                         * @param back   the mesh's model back neigboor
-                         * @param up     the mesh's model up neigboor
-                         * @param bottom the mesh's model bottom neigboor
+                         * @param left   the mesh's model left neighbor
+                         * @param right  the mesh's model right neighbor
+                         * @param front  the mesh's model front neighbor
+                         * @param back   the mesh's model back neighbor
+                         * @param up     the mesh's model up neighbor
+                         * @param bottom the mesh's model bottom neighbor
                          */
                         Mesh3D(const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom);
 
@@ -81,6 +81,12 @@
                     //## Getter ##//
 
                     //## Setter ##//
+                        void setLeft(const Model* const model);
+                        void setRight(const Model* const model);
+                        void setFront(const Model* const model);
+                        void setBack(const Model* const model);
+                        void setUp(const Model* const model);
+                        void setBottom(const Model* const model);
 
                     //## Methods ##//
                         /**
@@ -103,7 +109,7 @@
                          */
                         void addVoxel(GLuint const& x, GLuint const& y, GLuint const& z, GLint const& rX, GLint const& rY, GLint const& rZ, bool const (&face)[6]);
                         /**
-                         * Merge a voxel face with direct neighboor, merge in line and then in column
+                         * Merge a voxel face with direct neighbor, merge in line and then in column
                          * @param x    the voxel x coordinates in model referencial
                          * @param y    the voxel y coordinates in model referencial
                          * @param z    the voxel z coordinates in model referencial

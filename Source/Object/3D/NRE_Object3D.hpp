@@ -26,7 +26,7 @@
              * @brief Object's Object : Manage 3D object
              */
             class Object3D : public Object {
-                private:
+                protected:
                     Model model;
 
                 public:
@@ -66,10 +66,16 @@
                     //## Getter ##//
 
                     //## Setter ##//
+                        void setLeft(Object3D const& o);
+                        void setRight(Object3D const& o);
+                        void setFront(Object3D const& o);
+                        void setBack(Object3D const& o);
+                        void setUp(Object3D const& o);
+                        void setBottom(Object3D const& o);
 
                     //## Methods ##//
                         void process(GLenum const& usage, Maths::Point2D<GLint> const& coord);
-                        void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
+                        void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type);
 
                     //## Access Operator ##//
 

@@ -29,15 +29,44 @@
             Mesh3D::~Mesh3D() {
             }
 
+            void Mesh3D::setLeft(const Model* const model) {
+                left = model;
+            }
+
+            void Mesh3D::setRight(const Model* const model) {
+                right = model;
+            }
+
+            void Mesh3D::setFront(const Model* const model) {
+                front = model;
+            }
+
+            void Mesh3D::setBack(const Model* const model) {
+                back = model;
+            }
+
+            void Mesh3D::setUp(const Model* const model) {
+                up = model;
+            }
+
+            void Mesh3D::setBottom(const Model* const model) {
+                bottom = model;
+            }
+
             void Mesh3D::process(GL::IBO& buffer, GLenum const& usage,  Maths::Point2D<GLint> const& coord) {
                 GLuint index;
                 bool face[World::FACE_NUM];
+                GLuint maxZ = target->getMaxSolidHeight();
 
                 MergingCache::reset();
 
+                if (maxZ < target->getSize().getZ() - 1) {
+                    maxZ = maxZ + 1;
+                }
+
                 for (unsigned int x = 0; x < target->getSize().getX(); x = x + 1) {
                     for (unsigned int y = 0; y < target->getSize().getY(); y = y + 1) {
-                        for (unsigned int z = 0; z < target->getMaxSolidHeight(); z = z + 1) {
+                        for (unsigned int z = 0; z < maxZ; z = z + 1) {
                             index = target->getVoxelIndex(x, y, z);
                             if (target->getVoxel(index).getType() != World::VOID) {
                                 face[World::XNegative] = checkVoxelXNegativeFace(x, y, z);

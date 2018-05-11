@@ -125,7 +125,7 @@
                          * @param nb   the number of voxel to add, used to increment through coordinates
                          * @param type the voxel's type to add
                          */
-                        void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLuint const& type);
+                        void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type);
                         /**
                          * Construct a procedural terrain from a custom generator using FastNoise library
                          * @param soilGenerator     the soil generator
