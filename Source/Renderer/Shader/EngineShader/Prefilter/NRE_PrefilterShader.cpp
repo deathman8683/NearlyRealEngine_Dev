@@ -7,6 +7,7 @@
             PrefilterShader::PrefilterShader() : Shader::Shader(true) {
                 addUniformLocation("skyBox");
                 addUniformLocation("modelview");
+                addUniformLocation("roughness");
             }
 
             PrefilterShader::PrefilterShader(PrefilterShader && s) : Shader::Shader(std::move(s)) {

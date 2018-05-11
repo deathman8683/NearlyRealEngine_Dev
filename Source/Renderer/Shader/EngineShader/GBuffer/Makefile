@@ -1,6 +1,6 @@
-SRC = NRE_SkyBoxShader.cpp
-OBJ = $(OBJDIR)NRE_SkyBoxShader.o
-OBJDIR = ../../../../../obj/Debug/Renderer/Shader/EngineShader/SkyBox/
+SRC = NRE_GBufferShader.cpp
+OBJ = $(OBJDIR)NRE_GBufferShader.o
+OBJDIR = ../../../../../obj/Debug/Renderer/Shader/EngineShader/GBuffer/
 
 all : $(TARGET)
 
