@@ -6,6 +6,7 @@ SHADER = ShaderException
 SUPPORT = SupportException
 SDL = SDLException
 GL = GLException
+IO = IOException
 
 all : $(TARGET) after
 
@@ -14,6 +15,7 @@ after:
 	@(cd $(SUPPORT) && $(MAKE))
 	@(cd $(SDL) && $(MAKE))
 	@(cd $(GL) && $(MAKE))
+	@(cd $(IO) && $(MAKE))
 
 debug: $(OBJ)
 

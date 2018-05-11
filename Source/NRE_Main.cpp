@@ -39,39 +39,29 @@
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             NREfloat skyboxAngleX = 0.0;
-            int colorAngle = 0, nbFrames = 0;
+            //int nbFrames = 0;
 
             glViewport(0, 0, 1280.0, 720.0);
 
             while(!camera.getQuit())
             {
-                engineClock.updateActualTime();
+                /*engineClock.updateActualTime();
                 nbFrames = nbFrames + 1;
 
                 if (engineClock.getActualTime() - engineClock.getLastTime() >= 1000.0) {
                     std::cout << 1000.0 / nbFrames << "ms / frame" << std::endl;
                     nbFrames = 0;
                     engineClock.setLastTime(engineClock.getLastTime() + 1000.0);
-                }
-                //engineClock.updateTimestep(1000.0 / 60.0);
+                }*/
+                engineClock.updateTimestep(1000.0 / 60.0);
 
                 camera.update();
-
-                colorAngle = colorAngle + 1;
-                colorAngle = colorAngle % 360;
 
                 skyboxAngleX += 0.01;
                 if (skyboxAngleX >= 360) {
                     skyboxAngleX = 0.0;
                 }
                 rotation.setIdentity();
-
-                Color::HSL color(colorAngle, 1.0, 0.5);
-                Color::RGB colorRGB(color);
-                Maths::Vector3D<NREfloat> tmpColor((static_cast <NREfloat> (colorRGB.getR() / 255.0)) * 4000.0,
-                                                   (static_cast <NREfloat> (colorRGB.getG() / 255.0)) * 4000.0,
-                                                   (static_cast <NREfloat> (colorRGB.getB() / 255.0)) * 4000.0);
-                engineLight5.setIntensities(tmpColor);
 
                 rotation.rotate(-skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
 

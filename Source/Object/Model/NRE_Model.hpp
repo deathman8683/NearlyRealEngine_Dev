@@ -8,6 +8,8 @@
 
     #pragma once
 
+    #include <sstream>
+    #include <fstream>
     #include "../../Generic/NRE_Type.hpp"
     #include "../../World/Voxel/NRE_Voxel.hpp"
     #include "../../Generic/Array/NRE_ArrayOperation.hpp"
@@ -117,6 +119,8 @@
                         void setMaxSolidHeight(GLuint const& height);
 
                     //## Methods ##//
+                        void save(std::string const& path) const;
+                        void load(std::string const& path);
                         /**
                          * Load a number of voxel with a based coordinate and a type
                          * @param x    the first voxel x coordinate
@@ -133,6 +137,11 @@
                          * @param coord             the model's coordinate
                          */
                         void createProceduralTerrain(FastNoise const& soilGenerator, FastNoise const& moistureGenerator, Maths::Point2D<GLint> const& coord);
+                        /**
+                         * Write compressed data into a string stream for later process in save system
+                         * @param data the string stream to add compressed data
+                         */
+                        void writeCompressedData(std::stringstream &data);
 
                     //## Access Operator ##//
 

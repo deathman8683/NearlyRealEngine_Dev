@@ -192,11 +192,6 @@
                          * Reload the chunk's ID, reset chunk's state
                          */
                         void reload();
-                        /**
-                         * Write compressed data into a string stream for later process in save system
-                         * @param data the string stream to add compressed data
-                         */
-                        void writeCompressedData(std::stringstream &data);
 
                     //## Access Operator ##//
 

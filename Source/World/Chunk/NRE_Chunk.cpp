@@ -112,7 +112,7 @@
 
                 if (offset == 0 && size == 0) {
                     std::stringstream data;
-                    writeCompressedData(data);
+                    model.writeCompressedData(data);
                     GLuint dataSize = data.tellp();
                     chunkFile.seekg(0, chunkFile.end);
                     GLuint endOffset = chunkFile.tellp();
@@ -133,7 +133,7 @@
                 } else {
                     if (isModfied()) {
                         std::stringstream data;
-                        writeCompressedData(data);
+                        model.writeCompressedData(data);
                         GLuint dataSize = data.tellp();
                         chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
                         chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
@@ -206,33 +206,6 @@
                 buffer->reload();
                 vao.access(*buffer, GL_INT);
                 bounding.setCenter(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2);
-            }
-
-            void Chunk::writeCompressedData(std::stringstream &data) {
-                GLuint x = 0, y = 0, z = 0;
-                GLuint currentType = model.getVoxel(x, y, z).getType(), currentLineSize = 0;
-                while (z != SIZE_Z) {
-                    if (currentType == static_cast <GLuint> (model.getVoxel(x, y, z).getType())) {
-                        currentLineSize = currentLineSize + 1;
-                    } else {
-                        data.write(reinterpret_cast<char*> (&currentLineSize), 2);
-                        data.write(reinterpret_cast<char*> (&currentType), 1);
-                        currentType = model.getVoxel(x, y, z).getType();
-                        currentLineSize = 1;
-                    }
-
-                    x = x + 1;
-                    if (x == SIZE_X) {
-                        x = 0;
-                        y = y + 1;
-                        if (y == SIZE_Y) {
-                            y = 0;
-                            z = z + 1;
-                        }
-                    }
-                }
-                data.write(reinterpret_cast<char*> (&currentLineSize), 2);
-                data.write(reinterpret_cast<char*> (&currentType), 1);
             }
 
             Chunk& Chunk::operator=(Chunk && c) {
