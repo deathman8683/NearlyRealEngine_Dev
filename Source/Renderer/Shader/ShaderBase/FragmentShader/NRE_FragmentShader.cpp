@@ -7,9 +7,6 @@
             FragmentShader::FragmentShader() {
             }
 
-            FragmentShader::FragmentShader(std::string const& path) : ShaderBase::ShaderBase(path) {
-            }
-
             FragmentShader::FragmentShader(FragmentShader && s) : ShaderBase::ShaderBase(std::move(s)) {
             }
 
@@ -18,6 +15,10 @@
 
             GLenum const FragmentShader::getType() const {
                 return GL_FRAGMENT_SHADER;
+            }
+
+            std::string const FragmentShader::getExt() const {
+                return "Shader.frag";
             }
 
             FragmentShader& FragmentShader::operator=(FragmentShader && s) {

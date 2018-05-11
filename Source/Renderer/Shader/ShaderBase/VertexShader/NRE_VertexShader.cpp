@@ -7,9 +7,6 @@
             VertexShader::VertexShader() {
             }
 
-            VertexShader::VertexShader(std::string const& path) : ShaderBase::ShaderBase(path) {
-            }
-
             VertexShader::VertexShader(VertexShader && s) : ShaderBase::ShaderBase(std::move(s)) {
             }
 
@@ -18,6 +15,10 @@
 
             GLenum const VertexShader::getType() const {
                 return GL_VERTEX_SHADER;
+            }
+
+            std::string const VertexShader::getExt() const {
+                return "Shader.vert";
             }
 
             VertexShader& VertexShader::operator=(VertexShader && s) {

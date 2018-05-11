@@ -29,7 +29,6 @@
             class ShaderBase {
                 private:
                     GLuint id;          /**< The shader base OpenGL id */
-                    std::string path;   /**< The shade base path */
 
                 public:
                     //## Constructor ##//
@@ -37,11 +36,6 @@
                          * Default Constructor
                          */
                         ShaderBase();
-                        /**
-                         * Construct a shader base with his shader path
-                         * @param path the path to the shader program
-                         */
-                        ShaderBase(std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
@@ -72,23 +66,24 @@
                          */
                         GLuint const& getID() const;
                         /**
-                         * Path getter
-                         * @return the shader path
-                         */
-                        std::string const& getPath() const;
-                        /**
                          * Type getter
-                         * @return return the shader program type, used to differentiate derived shader
+                         * @return the shader program type, used to differentiate derived shader
                          */
                         virtual GLenum const getType() const = 0;
+                        /**
+                         * Extension getter
+                         * @return the shader program extension, used to compile derived shader
+                         */
+                        virtual std::string const getExt() const = 0;
 
                     //## Setter ##//
 
                     //## Methods ##//
                         /**
                          * Compile the current shader
+                         * @param name  the shader's name (And with the base path added)
                          */
-                        void compile();
+                        void compile(std::string const& name);
 
                     //## Access Operator ##//
 

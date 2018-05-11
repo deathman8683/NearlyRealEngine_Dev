@@ -4,12 +4,16 @@ OBJDIR = ../../../obj/Debug/Renderer/Shader/
 
 BASE = ShaderBase
 MAP = ShaderMap
+ENGINE = EngineShader
 
-all : before $(TARGET)
+all : before $(TARGET) after
 
 before:
 	@(cd $(BASE) && $(MAKE))
 	@(cd $(MAP) && $(MAKE))
+
+after:
+	@(cd $(ENGINE) && $(MAKE))
 
 debug: $(OBJ)
 

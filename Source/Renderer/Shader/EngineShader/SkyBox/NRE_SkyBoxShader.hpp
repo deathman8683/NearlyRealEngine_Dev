@@ -1,14 +1,15 @@
 
     /**
-     * @file NRE_VertexShader.hpp
-     * @brief Declaration of Engine's Renderer's Object : VertexShader
+     * @file NRE_SkyBoxShader.hpp
+     * @brief Declaration of Engine's Renderer's Object : SkyBoxShader
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NRE_ShaderBase.hpp"
+    #include "../../NRE_Shader.hpp"
+
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace
@@ -21,10 +22,10 @@
         namespace Renderer {
 
             /**
-             * @class VertexShader
-             * @brief Renderer's Object : Manage VertexShader transfer and compiling
+             * @class SkyBoxShader
+             * @brief Renderer's Object : Manage the skybox specific shader
              */
-            class VertexShader : public ShaderBase {
+            class SkyBoxShader : public Shader {
                 private:
 
                 public:
@@ -32,41 +33,36 @@
                         /**
                          * Default Constructor
                          */
-                        VertexShader();
+                        SkyBoxShader();
 
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param s the vertex shader to copy
+                         * @param s the skybox shader to copy the content
                          */
-                        VertexShader(VertexShader const& s) = delete;
+                        SkyBoxShader(SkyBoxShader const& s) = delete;
 
                     //## Move-Constructor ##//
                         /**
                          * Move s into this, leaving s empty
-                         * @param s the vertex shader to move
+                         * @param s the skybox shader to move
                          */
-                        VertexShader(VertexShader && s);
+                        SkyBoxShader(SkyBoxShader && s);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * VertexShader Deconstructor
+                         * SkyBoxShader Deconstructor
                          */
-                        ~VertexShader();
+                        ~SkyBoxShader();
 
                     //## Getter ##//
                         /**
-                         * Type getter
-                         * @return return the shader program type, used to differentiate derived shader
+                         * Path getter
+                         * @return the shader's specific name path
                          */
-                        GLenum const getType() const override;
-                        /**
-                         * Extension getter
-                         * @return the shader program extension, used to compile derived shader
-                         */
-                        std::string const getExt() const override;
+                        std::string const getPath() const override;
 
                     //## Setter ##//
 
@@ -76,16 +72,17 @@
 
                     //## Assignment Operator ##//
                         /**
-                         * No copy assigment allowed
-                         * @param s the vertex shader to copy
-                         */
-                        VertexShader& operator=(VertexShader const& s) = delete;
-                        /**
-                         * Move assigment of s into this, leaving s empty
-                         * @param s the vertex shader to move into this
+                         * No copy allowed
+                         * @param s the skybox shader to copy into this
                          * @return the reference of himself
                          */
-                        VertexShader& operator=(VertexShader && s);
+                        SkyBoxShader& operator=(SkyBoxShader const& s) = delete;
+                        /**
+                         * Move assigment of s into this, leaving s empty
+                         * @param s the skybox shader to move into this
+                         * @return the reference of himself
+                         */
+                        SkyBoxShader& operator=(SkyBoxShader && s);
 
                     //## Shortcut Operator ##//
 

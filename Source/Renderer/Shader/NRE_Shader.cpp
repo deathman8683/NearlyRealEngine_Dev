@@ -4,13 +4,18 @@
     namespace NRE {
         namespace Renderer {
 
+            std::string BASE_PATH = "Data/Shaders/";
+
             Shader::Shader() : id(0) {
             }
 
-            Shader::Shader(std::string const& vPath, std::string const& fPath, bool const& loadImmediatly) :  id(0), vShader(vPath), fShader(fPath) {
+            Shader::Shader(bool const& loadImmediatly) :  id(0) {
                 if (loadImmediatly) {
                     load();
                 }
+            }
+
+            Shader::Shader(Shader && s) : id(std::move(s.id)), vShader(std::move(s.vShader)), fShader(std::move(s.fShader)), uniformsLocations(std::move(s.uniformsLocations)) {
             }
 
             Shader::~Shader() {
@@ -42,8 +47,8 @@
                     glDeleteProgram(getID());
                 }
 
-                vShader.compile();
-                fShader.compile();
+                vShader.compile(BASE_PATH + getPath());
+                fShader.compile(BASE_PATH + getPath());
 
                 id = glCreateProgram();
 

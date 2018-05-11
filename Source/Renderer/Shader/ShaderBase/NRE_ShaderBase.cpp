@@ -4,13 +4,10 @@
     namespace NRE {
         namespace Renderer {
 
-            ShaderBase::ShaderBase() : id(0), path("") {
+            ShaderBase::ShaderBase() : id(0) {
             }
 
-            ShaderBase::ShaderBase(std::string const& path) :  id(0), path(path) {
-            }
-
-            ShaderBase::ShaderBase(ShaderBase && base) : id(std::move(base.getID())), path(std::move(base.getPath())) {
+            ShaderBase::ShaderBase(ShaderBase && base) : id(std::move(base.getID())) {
             }
 
             ShaderBase::~ShaderBase() {
@@ -21,22 +18,14 @@
                 return id;
             }
 
-            std::string const& ShaderBase::getPath() const {
-                return path;
-            }
-
-            void ShaderBase::compile() {
-                if (path.empty()) {
-                    throw (Exception::ShaderException("No path selected"));
-                }
-
+            void ShaderBase::compile(std::string const& name) {
                 if (glIsShader(getID()) == GL_TRUE) {
                     glDeleteShader(getID());
                 }
 
                 id = glCreateShader(getType());
 
-                std::ifstream shaderFile(getPath().c_str());
+                std::ifstream shaderFile((name + getExt()).c_str());
 
                 std::string line, sourceCode;
 
@@ -66,13 +55,12 @@
                     delete[] error;
                     glDeleteShader(getID());
 
-                    throw (Exception::ShaderException(getPath() + " : " + std::string(eError)));
+                    throw (Exception::ShaderException((name + getExt()) + " : " + std::string(eError)));
                 }
             }
 
             ShaderBase& ShaderBase::operator=(ShaderBase && base) {
                 id = std::move(base.id);
-                path = std::move(base.path);
 
                 return *this;
             }

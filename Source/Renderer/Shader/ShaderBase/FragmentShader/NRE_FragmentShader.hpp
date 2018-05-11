@@ -33,11 +33,6 @@
                          * Default Constructor
                          */
                         FragmentShader();
-                        /**
-                         * Construct a fragment shader with his shader path
-                         * @param path the path to the shader program
-                         */
-                        FragmentShader(std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
@@ -67,6 +62,11 @@
                          * @return return the shader program type, used to differentiate derived shader
                          */
                         GLenum const getType() const override;
+                        /**
+                         * Extension getter
+                         * @return the shader program extension, used to compile derived shader
+                         */
+                        std::string const getExt() const override;
 
                     //## Setter ##//
 

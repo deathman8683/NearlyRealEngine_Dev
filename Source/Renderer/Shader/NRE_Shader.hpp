@@ -29,7 +29,7 @@
              * @brief Renderer's Object : Manage shader transfer and compiling
              */
             class Shader {
-                private:
+                protected:
                     GLuint id;                  /**< OpenGL Program ID */
                     VertexShader vShader;       /**< The vertex shader program */
                     FragmentShader fShader;     /**< The fragment shader program */
@@ -42,12 +42,10 @@
                          */
                         Shader();
                         /**
-                         * Construct a shader from the vertex/fragment shader path
-                         * @param vPath          the path to the vertex shader
-                         * @param fPath          the path to the fragment shader
+                         * Construct a shader and load it on fly or not
                          * @param loadImmediatly tell if the constructor has to load the shader on fly
                          */
-                        Shader(std::string const& vPath, std::string const& fPath, bool const& loadImmediatly = false);
+                        Shader(bool const& loadImmediatly = false);
 
                     //## Copy-Constructor ##//
                         /**
@@ -69,7 +67,7 @@
                         /**
                          * Shader Deconstructor
                          */
-                        ~Shader();
+                        virtual ~Shader();
 
                     //## Getter ##//
                         /**
@@ -87,6 +85,11 @@
                          * @return the fragment shader object
                          */
                         FragmentShader const& getFragmentShader() const;
+                        /**
+                         * Path getter
+                         * @return the shader's specific name path
+                         */
+                        virtual std::string const getPath() const = 0;
 
                     //## Setter ##//
 
@@ -329,7 +332,8 @@
 
                     //## Shift Operator ##//
 
-                private:
+                protected:
+                    static std::string BASE_PATH;
             };
 
         };
