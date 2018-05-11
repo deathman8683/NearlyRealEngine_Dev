@@ -14,7 +14,7 @@ debug:
 	#@(cd $(CAPTURE) && $(MAKE))
 	#@(cd $(GBUFFER) && $(MAKE))
 	#@(cd $(IRRADIANCE) && $(MAKE))
-	#@(cd $(PBR) && $(MAKE))
+	@(cd $(PBR) && $(MAKE))
 	@(cd $(PREFILTER) && $(MAKE))
 	@(cd $(SKYBOX) && $(MAKE))
 	#@(cd $(SSAO) && $(MAKE))
