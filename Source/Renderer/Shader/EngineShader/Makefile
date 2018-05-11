@@ -17,4 +17,4 @@ debug:
 	@(cd $(PBR) && $(MAKE))
 	@(cd $(PREFILTER) && $(MAKE))
 	@(cd $(SKYBOX) && $(MAKE))
-	#@(cd $(SSAO) && $(MAKE))
+	@(cd $(SSAO) && $(MAKE))
