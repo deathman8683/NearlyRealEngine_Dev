@@ -12,7 +12,7 @@ all : $(TARGET)
 debug:
 	#@(cd $(BRDF) && $(MAKE))
 	#@(cd $(CAPTURE) && $(MAKE))
-	#@(cd $(GBUFFER) && $(MAKE))
+	@(cd $(GBUFFER) && $(MAKE))
 	@(cd $(IRRADIANCE) && $(MAKE))
 	@(cd $(PBR) && $(MAKE))
 	@(cd $(PREFILTER) && $(MAKE))
