@@ -46,8 +46,8 @@
                          */
                         EnvironmentMap();
                         /**
-                         * Construct an environment map with a specific file, several shader for capture and computation
-                         * @param path             the path to the main skybox
+                         * Construct an environment map with a specific file
+                         * @param path  the path to the main skybox
                          */
                         EnvironmentMap(std::string const& path);
 
@@ -118,7 +118,7 @@
                         void fillBuffer();
                         /**
                          * Capture all map for later rendering
-                         * @param path             the path to the main skybox
+                         * @param path   the path to the main skybox
                          */
                         void capture(std::string const& path);
                         /**

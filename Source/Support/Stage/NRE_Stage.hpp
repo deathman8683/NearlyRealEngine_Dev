@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../../Generic/NRE_Type.hpp"
+    #include "../../Generic/Init/NRE_Init.hpp"
     #include "../Viewport/NRE_Viewport.hpp"
     #include "../../SDL_Wrapper/Window/NRE_Window.hpp"
     #include "../../Exception/SupportException/NRE_SupportException.hpp"

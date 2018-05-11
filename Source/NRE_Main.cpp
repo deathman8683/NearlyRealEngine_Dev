@@ -5,16 +5,12 @@
     #include "Time/Clock/NRE_Clock.hpp"
     #include "Renderer/DeferredRenderer/NRE_DeferredRenderer.hpp"
 
-    #include "Object/3D/NRE_Object3D.hpp"
-    #include "Generic/Init/NRE_Init.hpp"
-
     using namespace NRE;
     using namespace Maths;
 
     int main(int argc, char **argv) {
         try {
             Support::Stage engineStage("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
-            init();
             Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
 
             World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
@@ -178,8 +174,6 @@
         catch (std::exception const& e) {
             std::cout << e.what() << std::endl;
         }
-
-        quit();
 
         return 0;
     }

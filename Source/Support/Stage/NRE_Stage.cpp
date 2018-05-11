@@ -28,6 +28,8 @@
             }
 
             Stage::~Stage() {
+                NRE::quit();
+
                 SDL_GL_DeleteContext(context);
 
                 SDL_Quit();
@@ -45,6 +47,8 @@
                 glEnable(GL_CULL_FACE);
                     glCullFace(GL_BACK);
                 glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+
+                NRE::init();
 
                 SDL_SetRelativeMouseMode(SDL_TRUE);
             }
