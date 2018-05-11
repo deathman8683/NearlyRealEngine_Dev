@@ -64,6 +64,7 @@
                         virtual ~Object3D();
 
                     //## Getter ##//
+                        Model const& getModel() const;
 
                     //## Setter ##//
                         void setLeft(Object3D const& o);

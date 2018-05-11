@@ -23,6 +23,10 @@
             Object3D::~Object3D() {
             }
 
+            Model const& Object3D::getModel() const {
+                return model;
+            }
+
             void Object3D::setLeft(Object3D const& o) {
                 static_cast <Mesh3D*> (mesh)->setLeft(&(o.model));
             }

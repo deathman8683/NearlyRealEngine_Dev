@@ -118,6 +118,7 @@
                          * @param height the new maximum solid voxel height value
                          */
                         void setMaxSolidHeight(GLuint const& height);
+                        void setType(Maths::Point3D<GLuint> const& p, GLubyte const& type);
 
                     //## Methods ##//
                         void save(std::string const& path) const;

@@ -49,6 +49,10 @@
                 maxSolidHeight = height;
             }
 
+            void Model::setType(Maths::Point3D<GLuint> const& p, GLubyte const& type) {
+                voxels[getVoxelIndex(p.getX(), p.getY(), p.getZ())].setType(type);
+            }
+
             void Model::save(std::string const& path) const {
                 std::fstream modelFile;
                 modelFile.open(path, std::ios::trunc | std::ios::out | std::ios::binary);

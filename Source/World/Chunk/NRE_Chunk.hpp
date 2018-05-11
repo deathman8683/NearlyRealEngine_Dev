@@ -165,6 +165,7 @@
                          * @param state the new modified state value
                          */
                         void setModified(bool const& state);
+                        void setType(Maths::Point3D<GLuint> const& p, GLubyte const& type);
 
                     //## Methods ##//
                         /**

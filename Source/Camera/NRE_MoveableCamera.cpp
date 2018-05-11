@@ -6,23 +6,23 @@
 
             NREfloat MoveableCamera::DEFAULT_SPEED = 3.0;
 
-            MoveableCamera::MoveableCamera() : speed(DEFAULT_SPEED) {
+            MoveableCamera::MoveableCamera() : speed(DEFAULT_SPEED), world(0) {
             }
 
             MoveableCamera::MoveableCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
-                                           Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, NREfloat const& speed)
-                                           : FixedCamera::FixedCamera(fov, ratio, dist, eye, center), speed(speed) {
+                                           Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, World::World* world, NREfloat const& speed)
+                                           : FixedCamera::FixedCamera(fov, ratio, dist, eye, center), speed(speed), world(world) {
                 bindKey();
             }
 
-            MoveableCamera::MoveableCamera(FixedCamera const& camera, Input const& in, NREfloat const& speed) : FixedCamera::FixedCamera(camera), Input::Input(in), speed(speed) {
+            MoveableCamera::MoveableCamera(FixedCamera const& camera, Input const& in, World::World* world, NREfloat const& speed) : FixedCamera::FixedCamera(camera), Input::Input(in), speed(speed), world(world) {
                 bindKey();
             }
 
-            MoveableCamera::MoveableCamera(MoveableCamera const& camera) : FixedCamera::FixedCamera(camera), Input::Input(camera), speed(camera.getSpeed()) {
+            MoveableCamera::MoveableCamera(MoveableCamera const& camera) : FixedCamera::FixedCamera(camera), Input::Input(camera), speed(camera.getSpeed()), world(camera.world) {
             }
 
-            MoveableCamera::MoveableCamera(MoveableCamera && camera) : FixedCamera::FixedCamera(std::move(camera)), Input::Input(std::move(camera)), speed(std::move(camera.getSpeed())) {
+            MoveableCamera::MoveableCamera(MoveableCamera && camera) : FixedCamera::FixedCamera(std::move(camera)), Input::Input(std::move(camera)), speed(std::move(camera.getSpeed())), world(std::move(camera.world)) {
             }
 
             MoveableCamera::MoveableCamera(FixedCamera const& camera) : FixedCamera::FixedCamera(camera), speed(DEFAULT_SPEED) {
@@ -84,10 +84,83 @@
                 setCenter(getEye() + getForward());
             }
 
+            void MoveableCamera::interact() {
+                Maths::Point3D<GLint> voxel = rayCast();
+                world->getChunk(voxel)->setType(world->getVoxelCoord(voxel), World::VOID);
+            }
+
+            Maths::Point3D<GLint> const MoveableCamera::rayCast() const {
+                Maths::Point3D<GLint> voxel(std::floor(getEye().getX()), std::floor(getEye().getY()), std::floor(getEye().getZ()));
+
+                NREfloat dx = getForward().getX();
+                NREfloat dy = getForward().getY();
+                NREfloat dz = getForward().getZ();
+
+                GLint stepX = Maths::numSign(dx);
+                GLint stepY = Maths::numSign(dy);
+                GLint stepZ = Maths::numSign(dz);
+
+                NREfloat tMaxX = Maths::intBound(getEye().getX(), dx);
+                NREfloat tMaxY = Maths::intBound(getEye().getY(), dy);
+                NREfloat tMaxZ = Maths::intBound(getEye().getZ(), dz);
+
+                NREfloat tDeltaX = stepX / dx;
+                NREfloat tDeltaY = stepY / dy;
+                NREfloat tDeltaZ = stepZ / dz;
+
+                NREfloat radius = 10;
+                radius = radius / getForward().norm();
+
+                bool find = false, stop = false;
+
+                while (world->isInBound(voxel) && !find && !stop) {
+                    if (world->getWorldVoxel(voxel).getType() != World::VOID) {
+                        find = true;
+                    } else {
+                        if (tMaxX < tMaxY) {
+                            if (tMaxX < tMaxZ) {
+                                if (tMaxX > radius) {
+                                    stop = true;
+                                } else {
+                                    voxel.setX(voxel.getX() + stepX);
+                                    tMaxX = tMaxX + tDeltaX;
+                                }
+                            } else {
+                                if (tMaxZ > radius) {
+                                    stop = true;
+                                } else {
+                                    voxel.setZ(voxel.getZ() + stepZ);
+                                    tMaxZ = tMaxZ + tDeltaZ;
+                                }
+                            }
+                        } else {
+                            if (tMaxY < tMaxZ) {
+                                if (tMaxY > radius) {
+                                    stop = true;
+                                } else {
+                                    voxel.setY(voxel.getY() + stepY);
+                                    tMaxY = tMaxY + tDeltaY;
+                                }
+                            } else {
+                                if (tMaxZ > radius) {
+                                    stop = true;
+                                } else {
+                                    voxel.setZ(voxel.getZ() + stepZ);
+                                    tMaxZ = tMaxZ + tDeltaZ;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return voxel;
+            }
+
             MoveableCamera& MoveableCamera::operator=(MoveableCamera const& camera) {
                 FixedCamera::operator=(camera);
                 Input::operator=(camera);
                 speed = camera.speed;
+                world = camera.world;
                 return *this;
             }
 
@@ -95,6 +168,7 @@
                 FixedCamera::operator=(std::move(camera));
                 Input::operator=(std::move(camera));
                 speed = std::move(camera.speed);
+                world = std::move(camera.world);
                 return *this;
             }
 

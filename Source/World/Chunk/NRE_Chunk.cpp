@@ -92,6 +92,11 @@
                 modified = state;
             }
 
+            void Chunk::setType(Maths::Point3D<GLuint> const& p, GLubyte const& type) {
+                model.setType(p, type);
+                reload();
+            }
+
             void Chunk::save(std::fstream &chunkFile) {
                 GLuint xOff, yOff;
                 if (getCoord().getX() < 0) {
@@ -199,8 +204,6 @@
             }
 
             void Chunk::reload() {
-                setLoaded(false);
-                setLoading(false);
                 setConstructed(false);
                 setConstructing(false);
                 buffer->reload();

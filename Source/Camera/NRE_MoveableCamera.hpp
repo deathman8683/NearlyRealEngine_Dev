@@ -11,6 +11,7 @@
     #include "../Generic/NRE_Type.hpp"
     #include "FixedCamera/NRE_FixedCamera.hpp"
     #include "Input/NRE_Input.hpp"
+    #include "../World/NRE_World.hpp"
 
     /**
      * @namespace NRE
@@ -30,6 +31,7 @@
             class MoveableCamera : public FixedCamera, public Input {
                 private:
                     NREfloat speed;
+                    World::World *world;
 
                 public:
                     //## Constructor ##//
@@ -44,17 +46,19 @@
                          * @param dist   the fixed camera's near and far distance
                          * @param eye    the fixed camera's position
                          * @param center the fixed camera's fixed point
+                         * @param world  the camera's world
                          * @param speed  the camera's speed
                          */
                         MoveableCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
-                                       Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, NREfloat const& speed = DEFAULT_SPEED);
+                                       Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, World::World* world, NREfloat const& speed = DEFAULT_SPEED);
                         /**
                          * Construct a moveable camera from base part
                          * @param camera the fixed camera
                          * @param in     the input system
+                         * @param world  the camera's world
                          * @param speed  the camera's speed
                          */
-                        MoveableCamera(FixedCamera const& camera, Input const& in, NREfloat const& speed);
+                        MoveableCamera(FixedCamera const& camera, Input const& in, World::World* world, NREfloat const& speed);
 
                     //## Copy-Constructor ##//
                         /**
@@ -134,6 +138,8 @@
                          * Move the center of the fixed camera
                          */
                         void moveCenter();
+                        void interact();
+                        Maths::Point3D<GLint> const rayCast() const;
 
                     //## Access Operator ##//
 

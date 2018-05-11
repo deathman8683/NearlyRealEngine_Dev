@@ -54,6 +54,94 @@
                 return getChunk(Maths::Point2D<GLint>(x, y));
             }
 
+            Chunk* const& World::getChunk(Maths::Point3D<GLint> const& p) {
+                Maths::Point3D<GLint> trunc;
+                Maths::Point2D<GLint> chunk;
+
+                trunc.setX(static_cast <GLint> (std::floor(p.getX())));
+                trunc.setY(static_cast <GLint> (std::floor(p.getY())));
+                trunc.setZ(static_cast <GLint> (std::floor(p.getZ())));
+                if (trunc.getX() < 0) {
+                    chunk.setX(((trunc.getX() + 1) / static_cast <GLint> (Chunk::SIZE_X)));
+                } else {
+                    chunk.setX((trunc.getX() / static_cast <GLint> (Chunk::SIZE_X)));
+                }
+                if (trunc.getY() < 0) {
+                    chunk.setY(((trunc.getY() + 1) / static_cast <GLint> (Chunk::SIZE_Y)));
+                } else {
+                    chunk.setY((trunc.getY() / static_cast <GLint> (Chunk::SIZE_Y)));
+                }
+                if (p.getX() < 0) {
+                    chunk.setX(chunk.getX() - 1);
+                }
+                if (p.getY() < 0) {
+                    chunk.setY(chunk.getY() - 1);
+                }
+                return getChunk(chunk);
+            }
+
+            Voxel const& World::getWorldVoxel(Maths::Point3D<GLint> const& p) {
+                Maths::Point3D<GLint> trunc;
+                Maths::Point3D<GLuint> voxel;
+                Maths::Point2D<GLint> chunk;
+
+                trunc.setX(static_cast <GLint> (std::floor(p.getX())));
+                trunc.setY(static_cast <GLint> (std::floor(p.getY())));
+                trunc.setZ(static_cast <GLint> (std::floor(p.getZ())));
+                if (trunc.getX() < 0) {
+                    chunk.setX(((trunc.getX() + 1) / static_cast <GLint> (Chunk::SIZE_X)));
+                } else {
+                    chunk.setX((trunc.getX() / static_cast <GLint> (Chunk::SIZE_X)));
+                }
+                if (trunc.getY() < 0) {
+                    chunk.setY(((trunc.getY() + 1) / static_cast <GLint> (Chunk::SIZE_Y)));
+                } else {
+                    chunk.setY((trunc.getY() / static_cast <GLint> (Chunk::SIZE_Y)));
+                }
+                if (p.getX() < 0) {
+                    chunk.setX(chunk.getX() - 1);
+                }
+                if (p.getY() < 0) {
+                    chunk.setY(chunk.getY() - 1);
+                }
+
+                voxel.setX(trunc.getX() - (chunk.getX() * static_cast <GLint> (Chunk::SIZE_X)));
+                voxel.setY(trunc.getY() - (chunk.getY() * static_cast <GLint> (Chunk::SIZE_Y)));
+                voxel.setZ(trunc.getZ());
+                return getChunk(chunk)->getModel().getVoxel(voxel);
+            }
+
+            Maths::Point3D<GLuint> const World::getVoxelCoord(Maths::Point3D<GLint> const& p) {
+                Maths::Point3D<GLint> trunc;
+                Maths::Point3D<GLuint> voxel;
+                Maths::Point2D<GLint> chunk;
+
+                trunc.setX(static_cast <GLint> (std::floor(p.getX())));
+                trunc.setY(static_cast <GLint> (std::floor(p.getY())));
+                trunc.setZ(static_cast <GLint> (std::floor(p.getZ())));
+                if (trunc.getX() < 0) {
+                    chunk.setX(((trunc.getX() + 1) / static_cast <GLint> (Chunk::SIZE_X)));
+                } else {
+                    chunk.setX((trunc.getX() / static_cast <GLint> (Chunk::SIZE_X)));
+                }
+                if (trunc.getY() < 0) {
+                    chunk.setY(((trunc.getY() + 1) / static_cast <GLint> (Chunk::SIZE_Y)));
+                } else {
+                    chunk.setY((trunc.getY() / static_cast <GLint> (Chunk::SIZE_Y)));
+                }
+                if (p.getX() < 0) {
+                    chunk.setX(chunk.getX() - 1);
+                }
+                if (p.getY() < 0) {
+                    chunk.setY(chunk.getY() - 1);
+                }
+
+                voxel.setX(trunc.getX() - (chunk.getX() * static_cast <GLint> (Chunk::SIZE_X)));
+                voxel.setY(trunc.getY() - (chunk.getY() * static_cast <GLint> (Chunk::SIZE_Y)));
+                voxel.setZ(trunc.getZ());
+                return voxel;
+            }
+
             Maths::Vector2D<GLuint> const& World::getHExtent() const {
                 return hExtent;
             }
@@ -352,6 +440,12 @@
                    getChunk(coord)->setFront(*getChunk(neighbor));
                    neighbor = coord;
                }
+           }
+
+           bool const World::isInBound(Maths::Point3D<GLint> const& p) const {
+               return p.getX() > static_cast <GLint> (((-getHExtent().getX() + getShift().getX()) * Chunk::SIZE_X)) && p.getX() < static_cast <GLint> (((getHExtent().getX() + getShift().getX()) * Chunk::SIZE_X)) &&
+                      p.getY() > static_cast <GLint> (((-getHExtent().getY() + getShift().getY()) * Chunk::SIZE_Y)) && p.getY() < static_cast <GLint> (((getHExtent().getY() + getShift().getY()) * Chunk::SIZE_Y)) &&
+                      p.getZ() > 0 && p.getX() < static_cast <GLint> (Chunk::SIZE_Z);
            }
 
             World& World::operator=(World && w) {

@@ -20,6 +20,23 @@
             NREfloat const lerp(NREfloat const& a, NREfloat const& b, NREfloat const& f) {
                 return a + f * (b - a);
             }
-            
+
+            GLint const numSign(NREfloat const& x) {
+                return x > 0 ? 1 : x < 0 ? -1 : 0;
+            }
+
+            NREfloat const intBound(GLint const& x, NREfloat const& delta) {
+                if (delta < 0) {
+                    return intBound(-x, -delta);
+                } else {
+                    GLint s = mod(x, 1);
+                    return (1 - s) / delta;
+                }
+            }
+
+            GLint const mod(GLint const& x, GLint const& modulus) {
+                return (x % modulus + modulus) % modulus;
+            }
+
         };
     };

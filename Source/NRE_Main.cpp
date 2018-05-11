@@ -10,9 +10,9 @@
     int main(int argc, char **argv) {
         try {
             Support::Stage engineStage("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
-            Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100));
-
             World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
+
+            Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), &engineWorld);
 
             std::vector<Light::Light*> engineLight;
             Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 0, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
@@ -43,19 +43,7 @@
 
             glViewport(0, 0, 1280.0, 720.0);
 
-            GL::IBO* oTIBO = new GL::IBO(true);
-            oTIBO->push_back(new GL::MaterialBuffer(true));
-            oTIBO->push_back(new GL::NormalBuffer(true));
-
-            Object::Mesh* oTMesh = new Object::Mesh();
-            oTMesh->push_back(new Object::MaterialData());
-            oTMesh->push_back(new Object::NormalData());
-            oTMesh->push_back(new Object::IndexData());
-
-            Object::Object3D oT1(Maths::Vector3D<GLuint>(5, 9, 6));
-
-            oT1.load("Data/Model/Cow.dat");
-            oT1.process(GL_STATIC_DRAW, Maths::Point2D<GLint>(0, 0));
+            camera.Mouse::getKey(SDL_BUTTON_LEFT).setAction(new Command<Camera::MoveableCamera>(&camera, Camera::MoveableCamera::interact));
 
             while(!camera.getQuit())
             {
@@ -88,11 +76,7 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    //engineWorld.render(modelview, &camera);
-                    Renderer::EngineShader::getShader("GBuffer")->bind();
-                        static_cast <const Renderer::GBufferShader*> (Renderer::EngineShader::getShader("GBuffer"))->sendModelview(modelview);
-                        oT1.draw();
-                    Renderer::EngineShader::getShader("GBuffer")->unbind();
+                    engineWorld.render(modelview, &camera);
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(projection, modelview);
