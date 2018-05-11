@@ -67,6 +67,7 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        void sendModelview(Maths::Matrix4x4<NREfloat> const& m) const;
 
                     //## Access Operator ##//
 

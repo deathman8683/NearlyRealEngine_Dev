@@ -80,13 +80,12 @@
                         /**
                          * Render the gBuffer with a lighting pass, use it in last pass in the rendering pipeline
                          * @param invModelview  the inverse modelview matrix
-                         * @param invProjection the inverse projection matrix
                          * @param rotation      the rotation matrix for the skybox
                          * @param camera        the player camera
                          * @param lights        the array which store all light in the stage
                          * @param skyBox        the skybox to render
                          */
-                        void render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& invProjection, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& lights, EnvironmentMap const& skyBox);
+                        void render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& lights, EnvironmentMap const& skyBox);
                         /**
                          * Setup draw command to start filling the G-Buffer
                          */
@@ -97,10 +96,8 @@
                         void endGBufferPass();
                         /**
                          * Process the SSAO pass
-                         * @param projection    the projection matrix
-                         * @param invProjection the inverse projection matrix
                          */
-                        void SSAOPass(Maths::Matrix4x4<NREfloat> const& projection, Maths::Matrix4x4<NREfloat> const& invProjection);
+                        void SSAOPass();
 
                     //## Access Operator ##//
 

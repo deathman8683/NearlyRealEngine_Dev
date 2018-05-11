@@ -120,10 +120,9 @@
                         /**
                          * Render all world's active chunk
                          * @param modelview  the modelview matrix
-                         * @param projection the projection matrix
                          * @param camera     the camera used for the view frustum, if null all chunk are visible
                          */
-                        void render(Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera = 0);
+                        void render(Maths::Matrix4x4<NREfloat> const& modelview, Camera::FixedCamera* const& camera = 0);
                         /**
                          * Update chunk queue
                          * @param loadLimit the number of chunk to update in one frame

@@ -33,7 +33,9 @@
             DeferredRenderer::~DeferredRenderer() {
             }
 
-            void DeferredRenderer::render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& invProjection, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& lights, EnvironmentMap const& skyBox) {
+            void DeferredRenderer::render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& lights, EnvironmentMap const& skyBox) {
+
+                SSAOPass();
 
                 const PBRShader* shader = static_cast <const PBRShader*> (EngineShader::getShader("PBR"));
 
@@ -87,7 +89,7 @@
                 gBuffer.unbind();
             }
 
-            void DeferredRenderer::SSAOPass(Maths::Matrix4x4<NREfloat> const& projection, Maths::Matrix4x4<NREfloat> const& invProjection) {
+            void DeferredRenderer::SSAOPass() {
 
                 const Shader* shader = EngineShader::getShader("SSAO");
 

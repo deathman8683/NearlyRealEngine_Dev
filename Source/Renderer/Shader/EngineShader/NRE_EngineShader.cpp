@@ -36,6 +36,11 @@
                     ssao->sendInvProjection(inv);
                     ssao->sendProjection(m);
                 ssao->unbind();
+
+                const GBufferShader* gBuffer = static_cast<const GBufferShader*> (getShader("GBuffer"));
+                gBuffer->bind();
+                    gBuffer->sendProjection(m);
+                gBuffer->unbind();
             }
 
             void EngineShader::sendKernel(SSAO const& ssao) {

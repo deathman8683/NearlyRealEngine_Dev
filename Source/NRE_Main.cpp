@@ -144,7 +144,7 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    engineWorld.render(modelview, projection, &camera);
+                    engineWorld.render(modelview, &camera);
                     Renderer::EngineShader::getShader("GBuffer")->bind();
                         Renderer::EngineShader::getShader("GBuffer")->useMat4("modelview", 1, &modelview);
                         Renderer::EngineShader::getShader("GBuffer")->useMat4("projection", 1, &projection);
@@ -152,18 +152,14 @@
                     Renderer::EngineShader::getShader("GBuffer")->unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
-                    engineSkybox.render( projection, modelview);
+                    engineSkybox.render(projection, modelview);
                     modelview = tmp;
                 engineDeferredRenderer.endGBufferPass();
 
-                invProjection = projection;
-                invProjection.inverse();
                 invModelview = modelview;
                 invModelview.inverse();
 
-                engineDeferredRenderer.SSAOPass(projection, invProjection);
-
-                engineDeferredRenderer.render(invModelview, invProjection, rotation, camera, engineLight, engineSkybox);
+                engineDeferredRenderer.render(invModelview, rotation, camera, engineLight, engineSkybox);
 
                 engineWorld.update(1);
 

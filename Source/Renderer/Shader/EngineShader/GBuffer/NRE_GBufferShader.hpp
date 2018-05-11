@@ -67,6 +67,8 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        void sendProjection(Maths::Matrix4x4<NREfloat> const& m) const;
+                        void sendModelview(Maths::Matrix4x4<NREfloat> const& m) const;
 
                     //## Access Operator ##//
 

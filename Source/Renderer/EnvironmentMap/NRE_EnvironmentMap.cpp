@@ -134,7 +134,7 @@
                     glViewport(0, 0, SIZE, SIZE);
                     capture.bind();
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            captureShader->useMat4("modelview", 1, &modelviews[i]);
+                            captureShader->sendModelview(modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, map.getID());
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -156,7 +156,7 @@
                     glViewport(0, 0, 32, 32);
                     capture.bind();
                         for (GLuint i = 0; i < 6; i = i + 1) {
-                            irradianceShader->useMat4("modelview", 1, &modelviews[i]);
+                            irradianceShader->sendModelview(modelviews[i]);
                             capture.attachBuffer(GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap.getID());
 
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

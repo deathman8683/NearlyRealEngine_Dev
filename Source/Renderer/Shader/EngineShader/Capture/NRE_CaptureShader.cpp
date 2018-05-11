@@ -20,6 +20,10 @@
                 return "Capture";
             }
 
+            void CaptureShader::sendModelview(Maths::Matrix4x4<NREfloat> const& m) const {
+                useMat4("modelview", 1, &m);
+            }
+
             CaptureShader& CaptureShader::operator=(CaptureShader && s) {
                 Shader::operator=(std::move(s));
                 return *this;

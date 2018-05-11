@@ -74,13 +74,12 @@
                 shift = size;
             }
 
-            void World::render(Maths::Matrix4x4<NREfloat> &modelview, Maths::Matrix4x4<NREfloat> &projection, Camera::FixedCamera* const& camera) {
+            void World::render(Maths::Matrix4x4<NREfloat> const& modelview, Camera::FixedCamera* const& camera) {
 
-                const Renderer::Shader* shader = Renderer::EngineShader::getShader("GBuffer");
+                const Renderer::GBufferShader* shader = static_cast <const Renderer::GBufferShader*> (Renderer::EngineShader::getShader("GBuffer"));
 
                 shader->bind();
-                    shader->useMat4("modelview", 1, &modelview);
-                    shader->useMat4("projection", 1, &projection);
+                    shader->sendModelview(modelview);
                     for (auto &it : chunkMap) {
                         it.second->checkActiveState(camera);
                         if (!it.second->isLoaded()) {
