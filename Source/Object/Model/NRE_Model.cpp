@@ -50,10 +50,36 @@
             }
 
             void Model::save(std::string const& path) const {
-
+                std::fstream modelFile;
+                modelFile.open(path, std::ios::trunc | std::ios::out | std::ios::binary);
+                if (!modelFile.is_open()) {
+                    throw (Exception::IOException("Model File could not be open : " + path));
+                }
+                std::stringstream data;
+                writeCompressedData(data);
+                modelFile << data.rdbuf();
+                modelFile.close();
             }
-            void Model::load(std::string const& path) {
 
+            void Model::load(std::string const& path) {
+                std::fstream modelFile;
+                modelFile.open(path, std::ios::in | std::ios::binary | std::ios_base::ate);
+                if (!modelFile.is_open()) {
+                    throw (Exception::IOException("Model File could not be open : " + path));
+                }
+
+                GLuint dataSize = modelFile.tellg();
+                modelFile.seekg(0, modelFile.beg);
+
+                GLuint voxNumber, x = 0, y = 0, z = 0;
+                GLubyte voxType;
+                while (dataSize > 0) {
+                    modelFile.read(reinterpret_cast<char*> (&voxNumber), 2);
+                    modelFile.read(reinterpret_cast<char*> (&voxType), 1);
+                    dataSize = dataSize - 3;
+
+                    loadVoxels(x, y, z, voxNumber, voxType);
+                }
             }
 
             void Model::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type) {
@@ -189,7 +215,7 @@
                 }
             }
 
-            void Model::writeCompressedData(std::stringstream &data) {
+            void Model::writeCompressedData(std::stringstream &data) const {
                 GLuint x = 0, y = 0, z = 0;
                 GLuint currentType = getVoxel(x, y, z).getType(), currentLineSize = 0;
                 while (z != size.getZ()) {

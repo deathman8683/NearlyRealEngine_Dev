@@ -96,6 +96,7 @@
                          * @return the data set's pointer
                          */
                         GLvoid* const value() override;
+                        void clear() override;
 
                     //## Access Operator ##//
 

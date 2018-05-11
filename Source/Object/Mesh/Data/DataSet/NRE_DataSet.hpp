@@ -84,6 +84,7 @@
                          * @return the data set's pointer
                          */
                         virtual GLvoid* const value() = 0;
+                        virtual void clear() = 0;
 
                     //## Access Operator ##//
 

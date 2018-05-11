@@ -33,19 +33,27 @@
                 data[index]->add(value, nbValue);
             }
 
-            void Mesh::update(GL::VBO& buffer, std::vector<GLintptr> const& offset) const {
+            void Mesh::update(GL::VBO& buffer, std::vector<GLintptr> const& offset) {
                 if (buffer.getType() == GL::VERTEXBUFFEROBJECT) {
                     updateVBO(buffer, offset);
                 } else {
                     updateIBO(static_cast <GL::IBO&> (buffer), offset);
                 }
+                clear();
             }
 
-            void Mesh::allocateAndFill(GL::VBO& buffer, GLenum const& usage) const {
+            void Mesh::allocateAndFill(GL::VBO& buffer, GLenum const& usage) {
                 if (buffer.getType() == GL::VERTEXBUFFEROBJECT) {
                     allocateAndFillVBO(buffer, usage);
                 } else {
                     allocateAndFillIBO(static_cast <GL::IBO&> (buffer), usage);
+                }
+                clear();
+            }
+
+            void Mesh::clear() {
+                for (DataSet* d : data) {
+                    d->clear();
                 }
             }
 

@@ -15,6 +15,7 @@
     #include "../../Generic/Array/NRE_ArrayOperation.hpp"
     #include "../../Maths/NRE_Maths.hpp"
     #include "../../lib/FastNoise/FastNoise.h"
+    #include "../../Exception/IOException/NRE_IOException.hpp"
 
     /**
      * @namespace NRE
@@ -141,7 +142,7 @@
                          * Write compressed data into a string stream for later process in save system
                          * @param data the string stream to add compressed data
                          */
-                        void writeCompressedData(std::stringstream &data);
+                        void writeCompressedData(std::stringstream &data) const;
 
                     //## Access Operator ##//
 

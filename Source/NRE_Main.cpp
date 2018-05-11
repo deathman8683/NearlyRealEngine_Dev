@@ -43,6 +43,20 @@
 
             glViewport(0, 0, 1280.0, 720.0);
 
+            GL::IBO* oTIBO = new GL::IBO(true);
+            oTIBO->push_back(new GL::MaterialBuffer(true));
+            oTIBO->push_back(new GL::NormalBuffer(true));
+
+            Object::Mesh* oTMesh = new Object::Mesh();
+            oTMesh->push_back(new Object::MaterialData());
+            oTMesh->push_back(new Object::NormalData());
+            oTMesh->push_back(new Object::IndexData());
+
+            Object::Object3D oT1(Maths::Vector3D<GLuint>(5, 9, 6));
+
+            oT1.load("Data/Model/Cow.dat");
+            oT1.process(GL_STATIC_DRAW, Maths::Point2D<GLint>(0, 0));
+
             while(!camera.getQuit())
             {
                 /*engineClock.updateActualTime();
@@ -74,7 +88,11 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    engineWorld.render(modelview, &camera);
+                    //engineWorld.render(modelview, &camera);
+                    Renderer::EngineShader::getShader("GBuffer")->bind();
+                        static_cast <const Renderer::GBufferShader*> (Renderer::EngineShader::getShader("GBuffer"))->sendModelview(modelview);
+                        oT1.draw();
+                    Renderer::EngineShader::getShader("GBuffer")->unbind();
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(projection, modelview);

@@ -52,6 +52,11 @@
             }
 
             template <class T>
+            void Data<T>::clear() {
+                data.clear();
+            }
+
+            template <class T>
             Data<T>& Data<T>::operator=(Data const& d) {
                 data = d.data;
                 return *this;

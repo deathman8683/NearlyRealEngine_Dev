@@ -74,6 +74,8 @@
                         void setBottom(Object3D const& o);
 
                     //## Methods ##//
+                        void save(std::string const& path) const;
+                        void load(std::string const& path);
                         void process(GLenum const& usage, Maths::Point2D<GLint> const& coord);
                         void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type);
 

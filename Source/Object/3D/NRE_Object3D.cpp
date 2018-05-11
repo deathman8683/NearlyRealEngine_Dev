@@ -47,6 +47,13 @@
                 static_cast <Mesh3D*> (mesh)->setBottom(&(o.model));
             }
 
+            void Object3D::save(std::string const& path) const {
+                model.save(path);
+            }
+            void Object3D::load(std::string const& path) {
+                model.load(path);
+            }
+
             void Object3D::process(GLenum const& usage, Maths::Point2D<GLint> const& coord) {
                 static_cast <Mesh3D*> (mesh)->process(*(static_cast<GL::IBO*> (buffer)), usage, coord);
             }

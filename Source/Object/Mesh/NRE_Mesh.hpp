@@ -93,13 +93,14 @@
                          * @param buffer the buffer to update
                          * @param offset a set of offset to pass to VBO's update
                          */
-                        void update(GL::VBO& buffer, std::vector<GLintptr> const& offset) const;
+                        void update(GL::VBO& buffer, std::vector<GLintptr> const& offset);
                         /**
                          * Allocate and fill a VBO with mesh's data
                          * @param buffer the buffer to allocate and fill
                          * @param usage  the buffer's usage
                          */
-                        void allocateAndFill(GL::VBO& buffer, GLenum const& usage) const;
+                        void allocateAndFill(GL::VBO& buffer, GLenum const& usage);
+                        void clear();
 
                     //## Access Operator ##//
 
