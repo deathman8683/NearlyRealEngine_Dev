@@ -42,6 +42,7 @@
                         static void init();
                         static void free();
                         static void sendProjection(Maths::Matrix4x4<NREfloat> const& m);
+                        static void sendKernel(SSAO const& ssao);
 
                 private:
                     static std::unordered_map<std::string, const Shader*>* programs;

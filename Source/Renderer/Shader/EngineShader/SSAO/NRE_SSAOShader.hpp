@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../../NRE_Shader.hpp"
+    #include "../../../SSAO/NRE_SSAO.hpp"
 
     /**
      * @namespace NRE
@@ -67,6 +68,10 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        void sendKernel(SSAO const& ssao) const;
+                        void sendTextures() const;
+                        void sendProjection(Maths::Matrix4x4<NREfloat> const& m) const;
+                        void sendInvProjection(Maths::Matrix4x4<NREfloat> const& m) const;
 
                     //## Access Operator ##//
 

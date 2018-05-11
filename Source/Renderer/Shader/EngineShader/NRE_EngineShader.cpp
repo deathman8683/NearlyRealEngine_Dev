@@ -26,6 +26,11 @@
                     pbr->sendMaterials();
                     pbr->sendTextures();
                 pbr->unbind();
+
+                const SSAOShader* ssao = static_cast<const SSAOShader*> (getShader("SSAO"));
+                ssao->bind();
+                    ssao->sendTextures();
+                ssao->unbind();
             }
 
             void EngineShader::sendProjection(Maths::Matrix4x4<NREfloat> const& m) {
@@ -36,6 +41,19 @@
                 pbr->bind();
                     pbr->sendInvProjection(inv);
                 pbr->unbind();
+
+                const SSAOShader* ssao = static_cast<const SSAOShader*> (getShader("SSAO"));
+                ssao->bind();
+                    ssao->sendInvProjection(inv);
+                    ssao->sendProjection(m);
+                ssao->unbind();
+            }
+
+            void EngineShader::sendKernel(SSAO const& ssao) {
+                const SSAOShader* s = static_cast<const SSAOShader*> (getShader("SSAO"));
+                s->bind();
+                    s->sendKernel(ssao);
+                s->unbind();
             }
 
             void EngineShader::free() {
