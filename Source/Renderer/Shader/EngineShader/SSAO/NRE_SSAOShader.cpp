@@ -13,6 +13,10 @@
                 addUniformLocation("invProjection");
                 addUniformLocation("gKernel");
                 addUniformLocation("gSampleRad");
+
+                bind();
+                    sendTextures();
+                unbind();
             }
 
             SSAOShader::SSAOShader(SSAOShader && s) : Shader::Shader(std::move(s)) {

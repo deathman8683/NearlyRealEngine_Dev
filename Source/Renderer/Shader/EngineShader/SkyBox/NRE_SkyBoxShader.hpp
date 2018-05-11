@@ -63,6 +63,7 @@
                          * @return the shader's specific name path
                          */
                         std::string const getPath() const override;
+                        void sendMVP(Maths::Matrix4x4<NREfloat> const& m) const;
 
                     //## Setter ##//
 

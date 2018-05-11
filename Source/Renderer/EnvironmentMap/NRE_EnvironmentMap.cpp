@@ -219,9 +219,9 @@
                 capture.unbind();
             }
 
-            void EnvironmentMap::render(Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview) {
+            void EnvironmentMap::render(Maths::Matrix4x4<NREfloat> const& projection, Maths::Matrix4x4<NREfloat> const& modelview) const {
 
-                const Shader* shader = EngineShader::getShader("SkyBox");
+                const SkyBoxShader* shader = static_cast <const SkyBoxShader*> (EngineShader::getShader("SkyBox"));
 
                 Maths::Matrix4x4<NREfloat> MVP = projection * Maths::Matrix4x4<NREfloat>(Maths::Matrix3x3<NREfloat>(modelview));
                 glDepthFunc(GL_LEQUAL);
@@ -229,7 +229,7 @@
                     getVAO().bind();
                             map.bind();
 
-                            shader->useMat4("MVP", 1, &MVP);
+                            shader->sendMVP(MVP);
                             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
                             map.unbind();

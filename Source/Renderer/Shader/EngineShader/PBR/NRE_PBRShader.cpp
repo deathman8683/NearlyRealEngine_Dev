@@ -34,6 +34,11 @@
                 addUniformLocation("invProjection");
                 addUniformLocation("rotation");
                 addUniformLocation("numLights");
+
+                bind();
+                    sendMaterials();
+                    sendTextures();
+                unbind();
             }
 
             PBRShader::PBRShader(PBRShader && s) : Shader::Shader(std::move(s)) {

@@ -126,7 +126,7 @@
                          * @param projection the proection matrix
                          * @param modelview  the modelview matrix
                          */
-                        void render(Maths::Matrix4x4<NREfloat> &projection, Maths::Matrix4x4<NREfloat> &modelview);
+                        void render(Maths::Matrix4x4<NREfloat> const& projection, Maths::Matrix4x4<NREfloat> const& modelview) const;
                         /**
                          * Render a quad, used to capture CubeMap faces
                          */
