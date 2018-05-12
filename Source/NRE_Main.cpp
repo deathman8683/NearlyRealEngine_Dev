@@ -41,6 +41,9 @@
             NREfloat skyboxAngleX = 0.0;
             //int nbFrames = 0;
 
+            Object::Object3D sphere(Maths::Vector3D<GLuint>(0, 0, 0));
+            sphere.processSphere(GL_STATIC_DRAW, 10.0, 10, 10, 11);
+
             glViewport(0, 0, 1280.0, 720.0);
 
             while(!camera.getQuit())
@@ -74,7 +77,13 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    engineWorld.render(modelview, &camera);
+                    //engineWorld.render(modelview, &camera);
+                    const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
+                    s->bind();
+                        s->sendModelview(modelview);
+                        sphere.draw();
+                    s->unbind();
+
                     Maths::Matrix4x4<NREfloat> tmp(modelview);
                     modelview = modelview * rotation;
                     engineSkybox.render(projection, modelview);

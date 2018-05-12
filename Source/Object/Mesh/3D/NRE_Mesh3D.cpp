@@ -53,7 +53,7 @@
                 bottom = model;
             }
 
-            void Mesh3D::process(GL::IBO& buffer, GLenum const& usage,  Maths::Point2D<GLint> const& coord) {
+            void Mesh3D::process(GL::IBO& buffer, GLenum const& usage, Maths::Point2D<GLint> const& coord) {
                 GLuint index;
                 bool face[World::FACE_NUM];
 
@@ -341,6 +341,56 @@
 
                 add(3, &idx2);
                 add(3, &idx1);
+            }
+
+            void Mesh3D::processSphere(GL::IBO& buffer, GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type) {
+                NREfloat ring = 1.0 / static_cast <NREfloat> (rings - 1);
+                NREfloat sector = 1.0 / static_cast <NREfloat> (sectors - 1);
+
+
+                data[0]->resize(rings * sectors * 3);
+                data[2]->resize(rings * sectors * 3);
+                data[3]->resize(rings * sectors * 6);
+
+                for (GLint r = 0; r < static_cast <GLint> (rings); r = r + 1) {
+                    for (GLint s = 0; s < static_cast <GLint> (sectors); s = s + 1) {
+                        NREfloat x = std::cos(2 * Global::PI * s * sector) * std::sin(Global::PI * r * ring);
+                        NREfloat y = std::sin(-Global::PI_2 + Global::PI * r * ring);
+                        NREfloat z = std::sin(2 * Global::PI * s * sector) * std::sin(Global::PI * r * ring);
+
+                        GLint vX = static_cast <GLint> (x * radius);
+                        GLint vY = static_cast <GLint> (y * radius);
+                        GLint vZ = static_cast <GLint> (z * radius);
+
+                        add(0, &vX);
+                        add(0, &vY);
+                        add(0, &vZ);
+
+                        add(1, &type);
+
+                        add(2, &x);
+                        add(2, &y);
+                        add(2, &z);
+                    }
+                }
+
+                for (GLint r = 0; r < static_cast <GLint> (rings) - 1; r = r + 1) {
+                    for (GLint s = 0; s < static_cast <GLint> (sectors) - 1; s = s + 1) {
+                        GLuint idx1 = r * sectors * s;
+                        GLuint idx2 = r * sectors * (s + 1);
+                        GLuint idx3 = (r + 1) * sectors * (s + 1);
+                        GLuint idx4 = (r + 1) * sectors * s;
+
+                        add(3, &idx1);
+                        add(3, &idx2);
+                        add(3, &idx3);
+                        add(3, &idx4);
+                        add(3, &idx3);
+                        add(3, &idx1);
+                    }
+                }
+
+                allocateAndFill(buffer, usage);
             }
 
             Mesh3D& Mesh3D::operator=(Mesh3D const& m) {

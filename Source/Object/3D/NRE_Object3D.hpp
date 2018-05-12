@@ -78,6 +78,7 @@
                         void save(std::string const& path) const;
                         void load(std::string const& path);
                         void process(GLenum const& usage, Maths::Point2D<GLint> const& coord);
+                        void processSphere(GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type);
                         void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type);
 
                     //## Access Operator ##//

@@ -125,6 +125,7 @@
                          * @param cCode tell the material id
                          */
                         void addPackedVertex(Maths::Point3D<GLint> const (&p)[4], GLuint const& face, size_t const& cCode);
+                        void processSphere(GL::IBO& buffer, GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type);
 
                     //## Access Operator ##//
 

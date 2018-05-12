@@ -62,6 +62,10 @@
                 static_cast <Mesh3D*> (mesh)->process(*(static_cast<GL::IBO*> (buffer)), usage, coord);
             }
 
+            void Object3D::processSphere(GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type) {
+                static_cast <Mesh3D*> (mesh)->processSphere(*(static_cast<GL::IBO*> (buffer)), usage, radius, rings, sectors, type);
+            }
+
             void Object3D::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type) {
                 model.loadVoxels(x, y, z, nb, type);
             }

@@ -38,7 +38,8 @@
          */
         namespace Global {
 
-            static const NREfloat PI = 3.14159265359;   /**< PI constant with float precision */
+            static const NREfloat PI   = 3.14159265359;   /**< PI constant with float precision */
+            static const NREfloat PI_2 = 1.57079632679;   /**< PI / 2 constant with float precision */
             static const NREfloat EPSILON = 0.00001;    /**< Engine's epsilon for float comparison */
 
         };
