@@ -96,6 +96,9 @@
                          * @return the data set's pointer
                          */
                         GLvoid* const value() override;
+                        /**
+                         * Clear the data set
+                         */
                         void clear() override;
 
                     //## Access Operator ##//
@@ -134,12 +137,12 @@
              * @return the modified outstream
              */
             template <class T>
-            inline std::ostream& operator<<(std::ostream &stream, Data<T> const& c) {
+            inline std::ostream& operator<<(std::ostream &stream, Data<T> const& d) {
                 stream << "(";
-                for (GLuint i = 0; i < c.size() - 1; i = i + 1) {
-                    stream << c.getValue(i) << ",";
+                for (GLuint i = 0; i < d.size() - 1; i = i + 1) {
+                    stream << d.getValue(i) << ",";
                 }
-                stream << c.getValue(c.size() - 1) << ")";
+                stream << d.getValue(d.size() - 1) << ")";
                 return stream;
             }
 

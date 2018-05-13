@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NearlyRealEngine: Source/World/Mesh/NRE_Mesh.hpp File Reference</title>
+<title>NearlyRealEngine: Source/Object/Mesh/NRE_Mesh.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,7 +60,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_5dafbfdeb44cebc7d08902826c854cdd.html">World</a></li><li class="navelem"><a class="el" href="dir_06670c452c6ee8f321b6ab320eb5876f.html">Mesh</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_fd9cf520c73cb872ebf24ce675c6ba56.html">Object</a></li><li class="navelem"><a class="el" href="dir_68908f9adc625325d826b7eeda9dcf60.html">Mesh</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -72,19 +72,24 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Declaration of Engine's <a class="el" href="namespace_world.html" title="Engine&#39;s World&#39;s Module. ">World</a>'s Object : Mesh.  
+<p>Declaration of Engine's <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : Mesh.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="_n_r_e___chunk_8hpp_source.html">../Chunk/NRE_Chunk.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_n_r_e___world_8hpp_source.html">../NRE_World.hpp</a>&quot;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;unordered_map&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_n_r_e___data_8hpp_source.html">Data/NRE_Data.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_r_e___int_vertex_data_8hpp_source.html">Data/IntVertexData/NRE_IntVertexData.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_r_e___float_vertex_data_8hpp_source.html">Data/FloatVertexData/NRE_FloatVertexData.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_r_e___material_data_8hpp_source.html">Data/MaterialData/NRE_MaterialData.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_r_e___normal_data_8hpp_source.html">Data/NormalData/NRE_NormalData.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_r_e___index_data_8hpp_source.html">Data/IndexData/NRE_IndexData.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_r_e___u_v_data_8hpp_source.html">Data/UVData/NRE_UVData.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_r_e___color_data_8hpp_source.html">Data/ColorData/NRE_ColorData.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_r_e___i_b_o_8hpp_source.html">../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp</a>&quot;</code><br />
 </div>
 <p><a href="_n_r_e___mesh_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_world_1_1_mesh.html">NRE::World::Mesh</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_n_r_e_1_1_world_1_1_world.html" title="World&#39;s Object : A collection of chunk. ">World</a>'s Object : Manage object's rendering while creating their mesh with optimization.  <a href="class_n_r_e_1_1_world_1_1_mesh.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">NRE::Object::Mesh</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html" title="Object&#39;s Object : Manage a simple object with a VBO (or IBO) and a VAO. ">Object</a>'s <a class="el" href="class_n_r_e_1_1_object_1_1_object.html" title="Object&#39;s Object : Manage a simple object with a VBO (or IBO) and a VAO. ">Object</a> : Base class for 2D and 3D mesh specialization.  <a href="class_n_r_e_1_1_object_1_1_mesh.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -92,12 +97,12 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_n_r_e"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_n_r_e.html">NRE</a></td></tr>
 <tr class="memdesc:namespace_n_r_e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The global NearlyRealEngine's namespace. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespace_world"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_world.html">World</a></td></tr>
-<tr class="memdesc:namespace_world"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine's <a class="el" href="namespace_world.html" title="Engine&#39;s World&#39;s Module. ">World</a>'s Module. <br /></td></tr>
+<tr class="memitem:namespace_object"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_object.html">Object</a></td></tr>
+<tr class="memdesc:namespace_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Engine's <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a>'s managing system&gt; <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Declaration of Engine's <a class="el" href="namespace_world.html" title="Engine&#39;s World&#39;s Module. ">World</a>'s Object : Mesh. </p>
+<div class="textblock"><p>Declaration of Engine's <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : Mesh. </p>
 <dl class="section author"><dt>Author</dt><dd>Louis ABEL </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 </div></div><!-- contents -->

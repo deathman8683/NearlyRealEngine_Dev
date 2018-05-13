@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['world',['World',['../namespace_world.html',1,'']]]
+  ['voxel',['Voxel',['../namespace_voxel.html',1,'']]]
 ];

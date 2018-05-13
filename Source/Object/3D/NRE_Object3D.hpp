@@ -27,7 +27,7 @@
              */
             class Object3D : public Object {
                 protected:
-                    Model model;
+                    Model model;    /**< The object's model, used only for voxel type model */
 
                 public:
                     //## Constructor ##//
@@ -65,21 +65,78 @@
                         virtual ~Object3D();
 
                     //## Getter ##//
+                        /**
+                         * Model getter
+                         * @return the object's model
+                         */
                         Model const& getModel() const;
 
                     //## Setter ##//
+                        /**
+                         * Left's Model setter
+                         * @param o the new left's model taken from the object
+                         */
                         void setLeft(Object3D const& o);
+                        /**
+                         * Right's Model setter
+                         * @param o the new right's model taken from the object
+                         */
                         void setRight(Object3D const& o);
+                        /**
+                         * Front's Model setter
+                         * @param o the new front's model taken from the object
+                         */
                         void setFront(Object3D const& o);
+                        /**
+                         * Back's Model setter
+                         * @param o the new back's model taken from the object
+                         */
                         void setBack(Object3D const& o);
+                        /**
+                         * Up's Model setter
+                         * @param o the new up's model taken from the object
+                         */
                         void setUp(Object3D const& o);
+                        /**
+                         * Bottom's Model setter
+                         * @param o the new bottom's model taken from the object
+                         */
                         void setBottom(Object3D const& o);
 
                     //## Methods ##//
+                        /**
+                         * Save the current object's model into a given file
+                         * @param path the file's path
+                         */
                         void save(std::string const& path) const;
+                        /**
+                         * Load the current object's model from a given file
+                         * @param path the file's path
+                         */
                         void load(std::string const& path);
+                        /**
+                         * Process the object's mesh
+                         * @param usage the object's rendering usage
+                         * @param coord the object's chunk's coordinates
+                         */
                         void process(GLenum const& usage, Maths::Point2D<GLint> const& coord);
+                        /**
+                         * Process a sphere into the current object
+                         * @param usage the object's rendering usage
+                         * @param radius  the sphere's radius
+                         * @param rings   the sphere's number of rings
+                         * @param sectors the sphere's number of sectors
+                         * @param type    the sphere's material's type
+                         */
                         void processSphere(GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type);
+                        /**
+                         * Load a given number of voxels in the file
+                         * @param x    the start x coordinates
+                         * @param y    the start y coordinates
+                         * @param z    the start z coordinates
+                         * @param nb   the number of voxels  to load
+                         * @param type the voxel's type
+                         */
                         void loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type);
 
                     //## Access Operator ##//

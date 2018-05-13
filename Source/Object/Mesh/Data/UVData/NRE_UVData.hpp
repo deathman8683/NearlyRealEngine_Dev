@@ -1,6 +1,6 @@
 
     /**
-     * @file NRE_VertexData.hpp
+     * @file NRE_UVData.hpp
      * @brief Declaration of Engine's Object's Object : UVData
      * @author Louis ABEL
      * @version 1.0

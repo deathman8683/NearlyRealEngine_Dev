@@ -1,6 +1,6 @@
 
     /**
-     * @file NRE_VertexData.hpp
+     * @file NRE_MaterialData.hpp
      * @brief Declaration of Engine's Object's Object : MaterialData
      * @author Louis ABEL
      * @version 1.0

@@ -75,6 +75,12 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Process the object's mesh
+                         * @param usage the object's rendering usage
+                         * @param coord the object's position on screen
+                         * @param size  the object's size
+                         */
                         void process(GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size);
 
                     //## Access Operator ##//

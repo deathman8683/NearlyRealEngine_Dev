@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['id',['id',['../class_n_r_e_1_1_g_l_1_1_buffer.html#a9217d5f6e2bd8f693fab108a32807d19',1,'NRE::GL::Buffer']]]
+  ['h',['h',['../class_n_r_e_1_1_color_1_1_h_s_l.html#a81016a13a977dea7c9a3122cb27817c0',1,'NRE::Color::HSL']]]
 ];

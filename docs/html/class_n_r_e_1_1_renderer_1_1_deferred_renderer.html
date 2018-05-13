@@ -72,10 +72,20 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s Object : Manage deferred renderding techniques using FBO.  
+<p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : Manage deferred renderding techniques using FBO.  
  <a href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_n_r_e___deferred_renderer_8hpp_source.html">NRE_DeferredRenderer.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for NRE::Renderer::DeferredRenderer:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_n_r_e_1_1_renderer_1_1_deferred_renderer.png" usemap="#NRE::Renderer::DeferredRenderer_map" alt=""/>
+  <map id="NRE::Renderer::DeferredRenderer_map" name="NRE::Renderer::DeferredRenderer_map">
+<area href="class_n_r_e_1_1_object_1_1_object2_d.html" title="Object&#39;s Object : Manage 2D object. " alt="NRE::Object::Object2D" shape="rect" coords="0,56,206,80"/>
+<area href="class_n_r_e_1_1_object_1_1_object.html" title="Object&#39;s Object : Manage a simple object with a VBO (or IBO) and a VAO. " alt="NRE::Object::Object" shape="rect" coords="0,0,206,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -89,23 +99,75 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8a0021d6895525a7822693f820677712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08da42beddc266263b74cebe9d422e28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a08da42beddc266263b74cebe9d422e28">~DeferredRenderer</a> ()</td></tr>
 <tr class="separator:a08da42beddc266263b74cebe9d422e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad53c117ea2fea4628ce7459c097547cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#ad53c117ea2fea4628ce7459c097547cb">render</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html">Renderer::Shader</a> const &amp;shader, <a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;invModelview, <a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;invProjection, <a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;rotation, <a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html">Camera::FixedCamera</a> const &amp;camera, std::vector&lt; <a class="el" href="class_n_r_e_1_1_light_1_1_light.html">Light::Light</a> *&gt; const &amp;light, <a class="el" href="class_n_r_e_1_1_renderer_1_1_environment_map.html">EnvironmentMap</a> const &amp;skyBox)</td></tr>
-<tr class="separator:ad53c117ea2fea4628ce7459c097547cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0101e33f862578f7ee3be184bb237e32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a0101e33f862578f7ee3be184bb237e32">render</a> (<a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; const &amp;invModelview, <a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; const &amp;rotation, <a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html">Camera::FixedCamera</a> const &amp;camera, std::vector&lt; <a class="el" href="class_n_r_e_1_1_light_1_1_light.html">Light::Light</a> *&gt; const &amp;lights, <a class="el" href="class_n_r_e_1_1_renderer_1_1_environment_map.html">EnvironmentMap</a> const &amp;skyBox)</td></tr>
+<tr class="separator:a0101e33f862578f7ee3be184bb237e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7b5db70d1694bd6168eadeecd1de5da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#ac7b5db70d1694bd6168eadeecd1de5da">startGBufferPass</a> ()</td></tr>
 <tr class="separator:ac7b5db70d1694bd6168eadeecd1de5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0abc9858cc78d4e5a53d9efc350c15cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a0abc9858cc78d4e5a53d9efc350c15cd">endGBufferPass</a> ()</td></tr>
 <tr class="separator:a0abc9858cc78d4e5a53d9efc350c15cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a371e9dc129266a3dc6bb710606ceac85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a371e9dc129266a3dc6bb710606ceac85">SSAOPass</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html">Renderer::Shader</a> const &amp;shader, <a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;projection, <a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;invProjection)</td></tr>
-<tr class="separator:a371e9dc129266a3dc6bb710606ceac85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22e231264e19b9379345caf7e2e3bb76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a22e231264e19b9379345caf7e2e3bb76">fillBuffer</a> ()</td></tr>
-<tr class="separator:a22e231264e19b9379345caf7e2e3bb76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d2d85fd17f21038a17e4670d60d7a46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a4d2d85fd17f21038a17e4670d60d7a46">SSAOPass</a> ()</td></tr>
+<tr class="separator:a4d2d85fd17f21038a17e4670d60d7a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26b261eed076508a11a78cb9c97ec301"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html">DeferredRenderer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a26b261eed076508a11a78cb9c97ec301">operator=</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html">DeferredRenderer</a> const &amp;def)=delete</td></tr>
 <tr class="separator:a26b261eed076508a11a78cb9c97ec301"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a071ee7762d46a9a11c4cf5375d1b8ecf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html">DeferredRenderer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a071ee7762d46a9a11c4cf5375d1b8ecf">operator=</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html">DeferredRenderer</a> &amp;&amp;def)</td></tr>
 <tr class="separator:a071ee7762d46a9a11c4cf5375d1b8ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_n_r_e_1_1_object_1_1_object2_d')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html">NRE::Object::Object2D</a></td></tr>
+<tr class="memitem:afb0efebd7b14a42865683bcc3ac92e6c inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#afb0efebd7b14a42865683bcc3ac92e6c">Object2D</a> ()</td></tr>
+<tr class="separator:afb0efebd7b14a42865683bcc3ac92e6c inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9e59fdaf6ee4cf30de07924adccef5 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#a3a9e59fdaf6ee4cf30de07924adccef5">Object2D</a> (GLenum const &amp;type)</td></tr>
+<tr class="separator:a3a9e59fdaf6ee4cf30de07924adccef5 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf66dda4f7ef006b267122e8d9e4d4cc inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#abf66dda4f7ef006b267122e8d9e4d4cc">Object2D</a> (GLenum const &amp;type, GLenum const &amp;usage, <a class="el" href="class_n_r_e_1_1_maths_1_1_point2_d.html">Maths::Point2D</a>&lt; GLint &gt; const &amp;coord, <a class="el" href="class_n_r_e_1_1_maths_1_1_vector2_d.html">Maths::Vector2D</a>&lt; GLint &gt; size)</td></tr>
+<tr class="separator:abf66dda4f7ef006b267122e8d9e4d4cc inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6853fe85e3c99a2e10da101c3be7a9a6 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#a6853fe85e3c99a2e10da101c3be7a9a6">Object2D</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html">Object2D</a> const &amp;o)=delete</td></tr>
+<tr class="separator:a6853fe85e3c99a2e10da101c3be7a9a6 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c5df6ea28b53b6c0fd57ebef8b16858 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#a9c5df6ea28b53b6c0fd57ebef8b16858">Object2D</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html">Object2D</a> &amp;&amp;o)</td></tr>
+<tr class="separator:a9c5df6ea28b53b6c0fd57ebef8b16858 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6e32c2470b5639f9856eb10b042adb3 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#ae6e32c2470b5639f9856eb10b042adb3">~Object2D</a> ()</td></tr>
+<tr class="separator:ae6e32c2470b5639f9856eb10b042adb3 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c8a852971ee5f5797c59cb4b2b7b3a9 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#a9c8a852971ee5f5797c59cb4b2b7b3a9">process</a> (GLenum const &amp;usage, <a class="el" href="class_n_r_e_1_1_maths_1_1_point2_d.html">Maths::Point2D</a>&lt; GLint &gt; const &amp;coord, <a class="el" href="class_n_r_e_1_1_maths_1_1_vector2_d.html">Maths::Vector2D</a>&lt; GLint &gt; size)</td></tr>
+<tr class="separator:a9c8a852971ee5f5797c59cb4b2b7b3a9 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabf2a1499a68853d896fea77e78d19cc inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html">Object2D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#aabf2a1499a68853d896fea77e78d19cc">operator=</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html">Object2D</a> const &amp;o)=delete</td></tr>
+<tr class="separator:aabf2a1499a68853d896fea77e78d19cc inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad68a0f581842e8433a94355c2e106b88 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html">Object2D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html#ad68a0f581842e8433a94355c2e106b88">operator=</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object2_d.html">Object2D</a> &amp;&amp;o)</td></tr>
+<tr class="separator:ad68a0f581842e8433a94355c2e106b88 inherit pub_methods_class_n_r_e_1_1_object_1_1_object2_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_n_r_e_1_1_object_1_1_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_n_r_e_1_1_object_1_1_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_n_r_e_1_1_object_1_1_object.html">NRE::Object::Object</a></td></tr>
+<tr class="memitem:a26b3a1500ad830fede6e46124916459a inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a26b3a1500ad830fede6e46124916459a">Object</a> ()</td></tr>
+<tr class="separator:a26b3a1500ad830fede6e46124916459a inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc52d3aed547a5e07dc17b539a57c81 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#accc52d3aed547a5e07dc17b539a57c81">Object</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">GL::VBO</a> *buf, <a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a> *<a class="el" href="class_n_r_e_1_1_object_1_1_object.html#ae310dcc8438d2ddaf5bbe56206a3d6ee">mesh</a>)</td></tr>
+<tr class="separator:accc52d3aed547a5e07dc17b539a57c81 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b587df9f7b7240a9444633e04cfd5aa inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a9b587df9f7b7240a9444633e04cfd5aa">Object</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> const &amp;o)=delete</td></tr>
+<tr class="separator:a9b587df9f7b7240a9444633e04cfd5aa inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85de2b6b348d6ebfd6d4185a2a4cac1c inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a85de2b6b348d6ebfd6d4185a2a4cac1c">Object</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> &amp;&amp;o)</td></tr>
+<tr class="separator:a85de2b6b348d6ebfd6d4185a2a4cac1c inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add84df02bf832bacde3badf42399b752 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#add84df02bf832bacde3badf42399b752">~Object</a> ()</td></tr>
+<tr class="separator:add84df02bf832bacde3badf42399b752 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ec32a1dd9adbcba2cdd39c005f9fb53 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a3ec32a1dd9adbcba2cdd39c005f9fb53">add</a> (GLuint const &amp;index, void *value, GLuint const &amp;nbValue=1) const</td></tr>
+<tr class="separator:a3ec32a1dd9adbcba2cdd39c005f9fb53 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32410b0f95deada0accda2e436231e5a inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a32410b0f95deada0accda2e436231e5a">update</a> ()</td></tr>
+<tr class="separator:a32410b0f95deada0accda2e436231e5a inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb3d74d4f086a92fa7b0659c64deef59 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#afb3d74d4f086a92fa7b0659c64deef59">allocateAndFill</a> (GLenum const &amp;usage)</td></tr>
+<tr class="separator:afb3d74d4f086a92fa7b0659c64deef59 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6137c80358103b59fcdcc0d74471ad1 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#ad6137c80358103b59fcdcc0d74471ad1">draw</a> () const</td></tr>
+<tr class="separator:ad6137c80358103b59fcdcc0d74471ad1 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a792cd302a2c8f7c1e911cac83e3ba87a inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a792cd302a2c8f7c1e911cac83e3ba87a">access</a> ()</td></tr>
+<tr class="separator:a792cd302a2c8f7c1e911cac83e3ba87a inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad114d786a74ceb056454e9bd34aefb59 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#ad114d786a74ceb056454e9bd34aefb59">operator=</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> const &amp;o)=delete</td></tr>
+<tr class="separator:ad114d786a74ceb056454e9bd34aefb59 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d90f0bd8778f7891035385afc36d19 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a69d90f0bd8778f7891035385afc36d19">operator=</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> &amp;&amp;o)</td></tr>
+<tr class="separator:a69d90f0bd8778f7891035385afc36d19 inherit pub_methods_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_class_n_r_e_1_1_object_1_1_object"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_n_r_e_1_1_object_1_1_object')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_n_r_e_1_1_object_1_1_object.html">NRE::Object::Object</a></td></tr>
+<tr class="memitem:a112d90eab17a3c8e2abaf4cd7b6dfa33 inherit pro_attribs_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">GL::VBO</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a112d90eab17a3c8e2abaf4cd7b6dfa33">buffer</a></td></tr>
+<tr class="separator:a112d90eab17a3c8e2abaf4cd7b6dfa33 inherit pro_attribs_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeba9bc20ef129d130f2bc3126766dd7f inherit pro_attribs_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_a_o.html">GL::VAO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#aeba9bc20ef129d130f2bc3126766dd7f">vao</a></td></tr>
+<tr class="separator:aeba9bc20ef129d130f2bc3126766dd7f inherit pro_attribs_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae310dcc8438d2ddaf5bbe56206a3d6ee inherit pro_attribs_class_n_r_e_1_1_object_1_1_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#ae310dcc8438d2ddaf5bbe56206a3d6ee">mesh</a></td></tr>
+<tr class="separator:ae310dcc8438d2ddaf5bbe56206a3d6ee inherit pro_attribs_class_n_r_e_1_1_object_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s Object : Manage deferred renderding techniques using FBO. </p>
+<div class="textblock"><p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : Manage deferred renderding techniques using FBO. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a18f7dea302043b23aeaa7b6d04b31af9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a18f7dea302043b23aeaa7b6d04b31af9">&#9670;&nbsp;</a></span>DeferredRenderer() <span class="overload">[1/4]</span></h2>
@@ -242,24 +304,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a22e231264e19b9379345caf7e2e3bb76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22e231264e19b9379345caf7e2e3bb76">&#9670;&nbsp;</a></span>fillBuffer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NRE::Renderer::DeferredRenderer::fillBuffer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Fill the Screen buffer for later rendering </p>
-
-</div>
-</div>
 <a id="a26b261eed076508a11a78cb9c97ec301"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26b261eed076508a11a78cb9c97ec301">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
@@ -317,8 +361,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad53c117ea2fea4628ce7459c097547cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad53c117ea2fea4628ce7459c097547cb">&#9670;&nbsp;</a></span>render()</h2>
+<a id="a0101e33f862578f7ee3be184bb237e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0101e33f862578f7ee3be184bb237e32">&#9670;&nbsp;</a></span>render()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -326,25 +370,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void NRE::Renderer::DeferredRenderer::render </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html">Renderer::Shader</a> const &amp;&#160;</td>
-          <td class="paramname"><em>shader</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; const &amp;&#160;</td>
           <td class="paramname"><em>invModelview</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;&#160;</td>
-          <td class="paramname"><em>invProjection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; const &amp;&#160;</td>
           <td class="paramname"><em>rotation</em>, </td>
         </tr>
         <tr>
@@ -357,7 +389,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; <a class="el" href="class_n_r_e_1_1_light_1_1_light.html">Light::Light</a> *&gt; const &amp;&#160;</td>
-          <td class="paramname"><em>light</em>, </td>
+          <td class="paramname"><em>lights</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -374,12 +406,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Render the gBuffer with a lighting pass, use it in last pass in the rendering pipeline </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shader</td><td>the rendering shader </td></tr>
     <tr><td class="paramname">invModelview</td><td>the inverse modelview matrix </td></tr>
-    <tr><td class="paramname">invProjection</td><td>the inverse projection matrix </td></tr>
     <tr><td class="paramname">rotation</td><td>the rotation matrix for the skybox </td></tr>
     <tr><td class="paramname">camera</td><td>the player camera </td></tr>
-    <tr><td class="paramname">light</td><td>the array which store all light in the stage </td></tr>
+    <tr><td class="paramname">lights</td><td>the array which store all light in the stage </td></tr>
     <tr><td class="paramname">skyBox</td><td>the skybox to render </td></tr>
   </table>
   </dd>
@@ -387,8 +417,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a371e9dc129266a3dc6bb710606ceac85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a371e9dc129266a3dc6bb710606ceac85">&#9670;&nbsp;</a></span>SSAOPass()</h2>
+<a id="a4d2d85fd17f21038a17e4670d60d7a46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d2d85fd17f21038a17e4670d60d7a46">&#9670;&nbsp;</a></span>SSAOPass()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -396,36 +426,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void NRE::Renderer::DeferredRenderer::SSAOPass </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html">Renderer::Shader</a> const &amp;&#160;</td>
-          <td class="paramname"><em>shader</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;&#160;</td>
-          <td class="paramname"><em>projection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; &amp;&#160;</td>
-          <td class="paramname"><em>invProjection</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Process the <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o.html" title="Renderer&#39;s Object : Screen Space Ambient Occlusion manager. ">SSAO</a> pass </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">shader</td><td>the <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o.html" title="Renderer&#39;s Object : Screen Space Ambient Occlusion manager. ">SSAO</a> shader </td></tr>
-    <tr><td class="paramname">projection</td><td>the projection matrix </td></tr>
-    <tr><td class="paramname">invProjection</td><td>the inverse projection matrix </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Process the <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o.html" title="Renderer&#39;s Object : Screen Space Ambient Occlusion manager. ">SSAO</a> pass </p>
 
 </div>
 </div>

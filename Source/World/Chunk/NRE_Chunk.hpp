@@ -165,6 +165,11 @@
                          * @param state the new modified state value
                          */
                         void setModified(bool const& state);
+                        /**
+                         * Voxel's type setter
+                         * @param p    the voxel's coordinates
+                         * @param type the new voxel's type
+                         */
                         void setType(Maths::Point3D<GLuint> const& p, GLubyte const& type);
 
                     //## Methods ##//

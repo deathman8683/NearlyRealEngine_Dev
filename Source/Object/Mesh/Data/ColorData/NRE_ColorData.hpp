@@ -1,6 +1,6 @@
 
     /**
-     * @file NRE_VertexData.hpp
+     * @file NRE_ColorData.hpp
      * @brief Declaration of Engine's Object's Object : ColorData
      * @author Louis ABEL
      * @version 1.0

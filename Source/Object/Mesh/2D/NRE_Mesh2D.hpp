@@ -44,14 +44,14 @@
                     //## Copy-Constructor ##//
                         /**
                          * Copy m into this
-                         * @param m the <class> to copy the content
+                         * @param m the 2D mesh to copy the content
                          */
                         Mesh2D(Mesh2D const& m);
 
                     //## Move-Constructor ##//
                         /**
                          * Move m into this, leaving m empty
-                         * @param m the <class> to move
+                         * @param m the 2D mesh to move
                          */
                         Mesh2D(Mesh2D && m);
 
@@ -82,13 +82,13 @@
                     //## Assignment Operator ##//
                         /**
                          * Copy assigment of m into this
-                         * @param m the <class> to copy into this
+                         * @param m the 2D mesh to copy into this
                          * @return the reference of himself
                          */
                         Mesh2D& operator=(Mesh2D const& m);
                         /**
                          * Move assigment of m into this, leaving m empty
-                         * @param m the <class> to move into this
+                         * @param m the 2D mesh to move into this
                          * @return the reference of himself
                          */
                         Mesh2D& operator=(Mesh2D && m);

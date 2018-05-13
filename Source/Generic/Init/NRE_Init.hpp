@@ -18,7 +18,13 @@
      */
     namespace NRE {
 
+        /**
+         * Initializa the engine
+         */
         void init();
+        /**
+         * Desallocate engine's global singleton
+         */
         void quit();
 
     };

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ratio',['ratio',['../class_n_r_e_1_1_maths_1_1_frustum.html#ac144d35acb43b5c577bcc132d06c8ac2',1,'NRE::Maths::Frustum']]]
+  ['near',['near',['../class_n_r_e_1_1_maths_1_1_frustum.html#a21ab629ba963f0c2fb374e95421d97d2',1,'NRE::Maths::Frustum']]]
 ];

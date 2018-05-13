@@ -72,7 +72,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s Object : A base shader for vertex and fragment specialization.  
+<p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : A base shader for vertex and fragment specialization.  
  <a href="class_n_r_e_1_1_renderer_1_1_shader_base.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_n_r_e___shader_base_8hpp_source.html">NRE_ShaderBase.hpp</a>&gt;</code></p>
@@ -91,8 +91,6 @@ Inheritance diagram for NRE::Renderer::ShaderBase:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a26cef8a6e2e9ff89558221ae411e566e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a26cef8a6e2e9ff89558221ae411e566e">ShaderBase</a> ()</td></tr>
 <tr class="separator:a26cef8a6e2e9ff89558221ae411e566e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a784492267f91d823fa36325653b48727"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a784492267f91d823fa36325653b48727">ShaderBase</a> (std::string const &amp;path)</td></tr>
-<tr class="separator:a784492267f91d823fa36325653b48727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81490b2681a39e45a5f01ef47cbd0b1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a81490b2681a39e45a5f01ef47cbd0b1a">ShaderBase</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> const &amp;base)=delete</td></tr>
 <tr class="separator:a81490b2681a39e45a5f01ef47cbd0b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3566966815e626b4fd95695b6524129c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a3566966815e626b4fd95695b6524129c">ShaderBase</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> &amp;&amp;base)</td></tr>
@@ -101,22 +99,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3d05fffc7c98a7713d4a97c64173af7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ed958068367a3fa3ce96e5503c0955d"><td class="memItemLeft" align="right" valign="top">GLuint const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a8ed958068367a3fa3ce96e5503c0955d">getID</a> () const</td></tr>
 <tr class="separator:a8ed958068367a3fa3ce96e5503c0955d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58632b18bee6ea104c5cf81855353e6f"><td class="memItemLeft" align="right" valign="top">std::string const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a58632b18bee6ea104c5cf81855353e6f">getPath</a> () const</td></tr>
-<tr class="separator:a58632b18bee6ea104c5cf81855353e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac359e4e9bbfedb5167374d46d7fce77b"><td class="memItemLeft" align="right" valign="top">virtual GLenum const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#ac359e4e9bbfedb5167374d46d7fce77b">getType</a> () const =0</td></tr>
 <tr class="separator:ac359e4e9bbfedb5167374d46d7fce77b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac71c9dfad70424f336593b10a93f91ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#ac71c9dfad70424f336593b10a93f91ca">compile</a> ()</td></tr>
-<tr class="separator:ac71c9dfad70424f336593b10a93f91ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08b21fd7ba839cefb59a66c93f89f4d1"><td class="memItemLeft" align="right" valign="top">virtual std::string const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a08b21fd7ba839cefb59a66c93f89f4d1">getExt</a> () const =0</td></tr>
+<tr class="separator:a08b21fd7ba839cefb59a66c93f89f4d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a541e0dde12d6bfabb48775f04874212f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a541e0dde12d6bfabb48775f04874212f">compile</a> (std::string const &amp;name)</td></tr>
+<tr class="separator:a541e0dde12d6bfabb48775f04874212f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a363a75c7315fab7862dbb1cb8f82e76e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a363a75c7315fab7862dbb1cb8f82e76e">operator=</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> const &amp;base)=delete</td></tr>
 <tr class="separator:a363a75c7315fab7862dbb1cb8f82e76e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66cac62d6b1098b3d9b4af10d62642ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a66cac62d6b1098b3d9b4af10d62642ce">operator=</a> (<a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html">ShaderBase</a> &amp;&amp;base)</td></tr>
 <tr class="separator:a66cac62d6b1098b3d9b4af10d62642ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s Object : A base shader for vertex and fragment specialization. </p>
+<div class="textblock"><p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : A base shader for vertex and fragment specialization. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a26cef8a6e2e9ff89558221ae411e566e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26cef8a6e2e9ff89558221ae411e566e">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a26cef8a6e2e9ff89558221ae411e566e">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -133,32 +131,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a784492267f91d823fa36325653b48727"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a784492267f91d823fa36325653b48727">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">NRE::Renderer::ShaderBase::ShaderBase </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Construct a shader base with his shader path </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">path</td><td>the path to the shader program </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a81490b2681a39e45a5f01ef47cbd0b1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81490b2681a39e45a5f01ef47cbd0b1a">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a81490b2681a39e45a5f01ef47cbd0b1a">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -190,7 +164,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a3566966815e626b4fd95695b6524129c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3566966815e626b4fd95695b6524129c">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3566966815e626b4fd95695b6524129c">&#9670;&nbsp;</a></span>ShaderBase() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,8 +214,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac71c9dfad70424f336593b10a93f91ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac71c9dfad70424f336593b10a93f91ca">&#9670;&nbsp;</a></span>compile()</h2>
+<a id="a541e0dde12d6bfabb48775f04874212f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a541e0dde12d6bfabb48775f04874212f">&#9670;&nbsp;</a></span>compile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,12 +223,46 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void NRE::Renderer::ShaderBase::compile </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Compile the current shader </p>
+<p>Compile the current shader </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the shader's name (And with the base path added) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a08b21fd7ba839cefb59a66c93f89f4d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08b21fd7ba839cefb59a66c93f89f4d1">&#9670;&nbsp;</a></span>getExt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string const NRE::Renderer::ShaderBase::getExt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Extension getter </p><dl class="section return"><dt>Returns</dt><dd>the shader program extension, used to compile derived shader </dd></dl>
+
+<p>Implemented in <a class="el" href="class_n_r_e_1_1_renderer_1_1_fragment_shader.html#a279fef94a3f9dc9468001e3de38ceada">NRE::Renderer::FragmentShader</a>, and <a class="el" href="class_n_r_e_1_1_renderer_1_1_vertex_shader.html#aabb436e5777e0638b48c9d8f5dddd8c6">NRE::Renderer::VertexShader</a>.</p>
 
 </div>
 </div>
@@ -273,24 +281,6 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>ID getter </p><dl class="section return"><dt>Returns</dt><dd>the program id </dd></dl>
-
-</div>
-</div>
-<a id="a58632b18bee6ea104c5cf81855353e6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58632b18bee6ea104c5cf81855353e6f">&#9670;&nbsp;</a></span>getPath()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string const  &amp; NRE::Renderer::ShaderBase::getPath </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Path getter </p><dl class="section return"><dt>Returns</dt><dd>the shader path </dd></dl>
 
 </div>
 </div>
@@ -316,7 +306,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Type getter </p><dl class="section return"><dt>Returns</dt><dd>return the shader program type, used to differentiate derived shader </dd></dl>
+<p>Type getter </p><dl class="section return"><dt>Returns</dt><dd>the shader program type, used to differentiate derived shader </dd></dl>
 
 <p>Implemented in <a class="el" href="class_n_r_e_1_1_renderer_1_1_fragment_shader.html#a46e06b5b4b7f129d2c89b9848e20a48e">NRE::Renderer::FragmentShader</a>, and <a class="el" href="class_n_r_e_1_1_renderer_1_1_vertex_shader.html#a535ce43b074e49867e0a10cc18209836">NRE::Renderer::VertexShader</a>.</p>
 

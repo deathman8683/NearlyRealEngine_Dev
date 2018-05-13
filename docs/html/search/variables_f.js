@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x',['x',['../class_n_r_e_1_1_maths_1_1_point2_d.html#a0780371286f91a87f423559755cfccc2',1,'NRE::Maths::Point2D::x()'],['../class_n_r_e_1_1_maths_1_1_vector2_d.html#aa6eaf15fe369de1fec2139cf8e728367',1,'NRE::Maths::Vector2D::x()']]]
+  ['type',['type',['../class_n_r_e_1_1_object_1_1_mesh.html#aa2c2c08fc87ec4576c67782183027271',1,'NRE::Object::Mesh::type()'],['../class_n_r_e_1_1_world_1_1_voxel.html#abeea2f6b5c0cf092516be8fb48c225e8',1,'NRE::World::Voxel::type()']]]
 ];

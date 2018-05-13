@@ -40,8 +40,25 @@
              * @return   the interpolated value
              */
             NREfloat const lerp(NREfloat const& a, NREfloat const& b, NREfloat const& f);
+            /**
+             * Compute the sign of a variable
+             * @param  x the variable
+             * @return   te computed sign (-1, 0, 1)
+             */
             GLint const numSign(NREfloat const& x);
+            /**
+             * Compute the first integer in the bound
+             * @param  x     the variable to compute
+             * @param  delta the delta
+             * @return       the computed integer
+             */
             NREfloat const intBound(GLint const& x, NREfloat const& delta);
+            /**
+             * Compute the modulus of a variable
+             * @param  x       the variable
+             * @param  modulus the modulus
+             * @return         the computed result
+             */
             GLint const mod(GLint const& x, GLint const& modulus);
 
         };

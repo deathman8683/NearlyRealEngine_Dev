@@ -139,7 +139,14 @@
                          * Move the center of the fixed camera
                          */
                         void moveCenter();
+                        /**
+                         * Interact with the world
+                         */
                         void interact();
+                        /**
+                         * Cast a ray to the first solid bloc in vicinity
+                         * @return the Voxel point corresponding to the end of the ray
+                         */
                         World::VoxelPoint const rayCast() const;
 
                     //## Access Operator ##//

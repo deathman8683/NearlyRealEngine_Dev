@@ -65,14 +65,14 @@
                     //## Copy-Constructor ##//
                         /**
                          * Copy m into this
-                         * @param m the <class> to copy the content
+                         * @param m the 3D mesh to copy the content
                          */
                         Mesh3D(Mesh3D const& m);
 
                     //## Move-Constructor ##//
                         /**
                          * Move m into this, leaving m empty
-                         * @param m the <class> to move
+                         * @param m the 3D mesh to move
                          */
                         Mesh3D(Mesh3D && m);
 
@@ -87,11 +87,35 @@
                     //## Getter ##//
 
                     //## Setter ##//
+                        /**
+                         * Left setter
+                         * @param model the new left's model
+                         */
                         void setLeft(const Model* const model);
+                        /**
+                         * Right setter
+                         * @param model the new right's model
+                         */
                         void setRight(const Model* const model);
+                        /**
+                         * Front setter
+                         * @param model the new front's model
+                         */
                         void setFront(const Model* const model);
+                        /**
+                         * Back setter
+                         * @param model the new back's model
+                         */
                         void setBack(const Model* const model);
+                        /**
+                         * Up setter
+                         * @param model the new up's model
+                         */
                         void setUp(const Model* const model);
+                        /**
+                         * Bottom setter
+                         * @param model the new bottom's model
+                         */
                         void setBottom(const Model* const model);
 
                     //## Methods ##//
@@ -100,9 +124,8 @@
                          * @param buffer the buffer to fill
                          * @param usage  the buffer's usage
                          * @param coord  the model's coordinates
-                         * @param size   the model's size
                          */
-                        void process(GL::IBO& buffer, GLenum const& usage,  Maths::Point2D<GLint> const& coord);
+                        void process(GL::IBO& buffer, GLenum const& usage, Maths::Point2D<GLint> const& coord);
                         /**
                          * Add a voxel into the mesh, compute several optimization like merging and culling
                          * @param x    the voxel x coordinates in model referencial
@@ -131,6 +154,15 @@
                          * @param cCode tell the material id
                          */
                         void addPackedVertex(Maths::Point3D<GLint> const (&p)[4], GLuint const& face, size_t const& cCode);
+                        /**
+                         * Process a sphere with given parameters
+                         * @param buffer  the buffer to fill
+                         * @param usage   the buffer's usage
+                         * @param radius  the sphere's radius
+                         * @param rings   the sphere's number of rings
+                         * @param sectors the sphere's number of sectors
+                         * @param type    the sphere's material's type
+                         */
                         void processSphere(GL::IBO& buffer, GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type);
 
                     //## Access Operator ##//
@@ -138,13 +170,13 @@
                     //## Assignment Operator ##//
                         /**
                          * Copy assigment of m into this
-                         * @param m the <class> to copy into this
+                         * @param m the 3D mesh to copy into this
                          * @return the reference of himself
                          */
                         Mesh3D& operator=(Mesh3D const& m);
                         /**
                          * Move assigment of m into this, leaving m empty
-                         * @param m the <class> to move into this
+                         * @param m the 3D mesh to move into this
                          * @return the reference of himself
                          */
                         Mesh3D& operator=(Mesh3D && m);
@@ -168,45 +200,45 @@
                      * @return     if the voxel face is visible or not
                      */
                     bool const checkVoxelXNegativeFace(GLuint const& x, GLuint const& y, GLuint const& z);
-                        /**
-                         * Check if the XPositive face is visible or not
-                         * @param x    the voxel x coordinates in model referencial
-                         * @param y    the voxel y coordinates in model referencial
-                         * @param z    the voxel z coordinates in model referencial
-                         * @return     if the voxel face is visible or not
-                         */
+                    /**
+                     * Check if the XPositive face is visible or not
+                     * @param x    the voxel x coordinates in model referencial
+                     * @param y    the voxel y coordinates in model referencial
+                     * @param z    the voxel z coordinates in model referencial
+                     * @return     if the voxel face is visible or not
+                     */
                     bool const checkVoxelXPositiveFace(GLuint const& x, GLuint const& y, GLuint const& z);
-                        /**
-                         * Check if the YNegative face is visible or not
-                         * @param x    the voxel x coordinates in model referencial
-                         * @param y    the voxel y coordinates in model referencial
-                         * @param z    the voxel z coordinates in model referencial
-                         * @return     if the voxel face is visible or not
-                         */
+                    /**
+                     * Check if the YNegative face is visible or not
+                     * @param x    the voxel x coordinates in model referencial
+                     * @param y    the voxel y coordinates in model referencial
+                     * @param z    the voxel z coordinates in model referencial
+                     * @return     if the voxel face is visible or not
+                     */
                     bool const checkVoxelYNegativeFace(GLuint const& x, GLuint const& y, GLuint const& z);
-                        /**
-                         * Check if the YPositive face is visible or not
-                         * @param x    the voxel x coordinates in model referencial
-                         * @param y    the voxel y coordinates in model referencial
-                         * @param z    the voxel z coordinates in model referencial
-                         * @return     if the voxel face is visible or not
-                         */
+                    /**
+                     * Check if the YPositive face is visible or not
+                     * @param x    the voxel x coordinates in model referencial
+                     * @param y    the voxel y coordinates in model referencial
+                     * @param z    the voxel z coordinates in model referencial
+                     * @return     if the voxel face is visible or not
+                     */
                     bool const checkVoxelYPositiveFace(GLuint const& x, GLuint const& y, GLuint const& z);
-                        /**
-                         * Check if the ZNegative face is visible or not
-                         * @param x    the voxel x coordinates in model referencial
-                         * @param y    the voxel y coordinates in model referencial
-                         * @param z    the voxel z coordinates in model referencial
-                         * @return     if the voxel face is visible or not
-                         */
+                    /**
+                     * Check if the ZNegative face is visible or not
+                     * @param x    the voxel x coordinates in model referencial
+                     * @param y    the voxel y coordinates in model referencial
+                     * @param z    the voxel z coordinates in model referencial
+                     * @return     if the voxel face is visible or not
+                     */
                     bool const checkVoxelZNegativeFace(GLuint const& x, GLuint const& y, GLuint const& z);
-                        /**
-                         * Check if the ZPositive face is visible or not²
-                         * @param x    the voxel x coordinates in model referencial
-                         * @param y    the voxel y coordinates in model referencial
-                         * @param z    the voxel z coordinates in model referencial
-                         * @return     if the voxel face is visible or not
-                         */
+                    /**
+                     * Check if the ZPositive face is visible or not²
+                     * @param x    the voxel x coordinates in model referencial
+                     * @param y    the voxel y coordinates in model referencial
+                     * @param z    the voxel z coordinates in model referencial
+                     * @return     if the voxel face is visible or not
+                     */
                     bool const checkVoxelZPositiveFace(GLuint const& x, GLuint const& y, GLuint const& z);
             };
 

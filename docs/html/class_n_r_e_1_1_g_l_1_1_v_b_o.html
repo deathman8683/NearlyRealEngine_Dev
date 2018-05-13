@@ -72,7 +72,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="namespace_g_l.html" title="Engine&#39;s OpenGL&#39;s Wrapper&#39;s Module. ">GL</a>'s Object : Specialization of an <a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer_object.html" title="GL&#39;s Object : Base for openGL advanced buffer object. ">BufferObject</a> for vertex managing.  
+<p><a class="el" href="namespace_g_l.html" title="Engine&#39;s OpenGL&#39;s Wrapper&#39;s Module. ">GL</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : Specialization of an <a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer_object.html" title="GL&#39;s Object : Base for openGL advanced buffer object. ">BufferObject</a> for vertex managing.  
  <a href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_n_r_e___v_b_o_8hpp_source.html">NRE_VBO.hpp</a>&gt;</code></p>
@@ -101,12 +101,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a23f39e12934d052189e24d86e200bcb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec737e51bcd93d68c37d1b7c55346647"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_array_buffer.html">ArrayBuffer</a> *const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#aec737e51bcd93d68c37d1b7c55346647">getAttribute</a> (GLuint const &amp;index) const</td></tr>
 <tr class="separator:aec737e51bcd93d68c37d1b7c55346647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21b68b1e8ffbf73afffbc40cc35965bd"><td class="memItemLeft" align="right" valign="top">GLuint const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#a21b68b1e8ffbf73afffbc40cc35965bd">getNb</a> () const</td></tr>
+<tr class="separator:a21b68b1e8ffbf73afffbc40cc35965bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9269cee4773e1121150ff7234f918b59"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_n_r_e___v_b_o_8hpp.html#aa28a453dea3afb5ee0356a0257f951c5">VBOType</a> const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#a9269cee4773e1121150ff7234f918b59">getType</a> () const</td></tr>
+<tr class="separator:a9269cee4773e1121150ff7234f918b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e10c65782a7ad7eee0d078c0967b5b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#a7e10c65782a7ad7eee0d078c0967b5b5">setNb</a> (GLuint const &amp;n)</td></tr>
+<tr class="separator:a7e10c65782a7ad7eee0d078c0967b5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acad3262207c8c1749cce7195a91f9ad2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#acad3262207c8c1749cce7195a91f9ad2">reload</a> ()</td></tr>
 <tr class="separator:acad3262207c8c1749cce7195a91f9ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab05f1a49a99153b0eb87114ed8c37e09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#ab05f1a49a99153b0eb87114ed8c37e09">allocate</a> (GLuint const &amp;vertexSize, size_t const &amp;nbVertex, GLenum const &amp;usage)</td></tr>
 <tr class="separator:ab05f1a49a99153b0eb87114ed8c37e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8146e16aa757e8843d6e4d86b7f43fa6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#a8146e16aa757e8843d6e4d86b7f43fa6">update</a> (GLintptr const &amp;offset, GLuint const &amp;vertexSize, size_t const &amp;nbVertex, std::vector&lt; GLvoid *&gt; const &amp;data)</td></tr>
-<tr class="separator:a8146e16aa757e8843d6e4d86b7f43fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac72c92c9db6796714f30dee92773fea4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#ac72c92c9db6796714f30dee92773fea4">update</a> (std::vector&lt; GLintptr &gt; const &amp;offset, GLuint const &amp;vertexSize, size_t const &amp;nbVertex, std::vector&lt; GLvoid *&gt; const &amp;data)</td></tr>
+<tr class="separator:ac72c92c9db6796714f30dee92773fea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5ceda41a817973ca6da5907cd26c851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#ab5ceda41a817973ca6da5907cd26c851">allocateAndFill</a> (GLuint const &amp;vertexSize, size_t const &amp;nbVertex, GLenum const &amp;usage, std::vector&lt; GLvoid *&gt; const &amp;data)</td></tr>
 <tr class="separator:ab5ceda41a817973ca6da5907cd26c851"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abafa6e7a0bba5a1fb6a421e7ed6bbf0b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#abafa6e7a0bba5a1fb6a421e7ed6bbf0b">access</a> (GLenum const &amp;vertexType, bool const &amp;enableVAA=true) const</td></tr>
@@ -115,6 +121,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a89dcdded4aa4aa16308a7f258c5d497e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a146deefd3105a2524f52fff0d296ef42"><td class="memItemLeft" align="right" valign="top">GLuint const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#a146deefd3105a2524f52fff0d296ef42">size</a> () const</td></tr>
 <tr class="separator:a146deefd3105a2524f52fff0d296ef42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a846c6f217b44607a1eb05332cd296375"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#a846c6f217b44607a1eb05332cd296375">draw</a> () const</td></tr>
+<tr class="separator:a846c6f217b44607a1eb05332cd296375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31593c864feca8faf9306aac4dddbd54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">VBO</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#a31593c864feca8faf9306aac4dddbd54">operator=</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">VBO</a> const &amp;buf)=delete</td></tr>
 <tr class="separator:a31593c864feca8faf9306aac4dddbd54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81b49390ea55904132606dbf804d6221"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">VBO</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#a81b49390ea55904132606dbf804d6221">operator=</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">VBO</a> &amp;&amp;buf)</td></tr>
@@ -138,7 +146,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adf07737e790e7e7c127d6c0085546809 inherit pub_methods_class_n_r_e_1_1_g_l_1_1_buffer_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="namespace_g_l.html" title="Engine&#39;s OpenGL&#39;s Wrapper&#39;s Module. ">GL</a>'s Object : Specialization of an <a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer_object.html" title="GL&#39;s Object : Base for openGL advanced buffer object. ">BufferObject</a> for vertex managing. </p>
+<div class="textblock"><p><a class="el" href="namespace_g_l.html" title="Engine&#39;s OpenGL&#39;s Wrapper&#39;s Module. ">GL</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : Specialization of an <a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer_object.html" title="GL&#39;s Object : Base for openGL advanced buffer object. ">BufferObject</a> for vertex managing. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1397861a24746ab59bcd4a63c42599c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1397861a24746ab59bcd4a63c42599c6">&#9670;&nbsp;</a></span>VBO() <span class="overload">[1/4]</span></h2>
@@ -394,10 +402,38 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">vertexSize</td><td>the vertex type size </td></tr>
     <tr><td class="paramname">nbVertex</td><td>the number of vertex to store </td></tr>
     <tr><td class="paramname">usage</td><td>the ibo's usage </td></tr>
-    <tr><td class="paramname">data</td><td>arrays of data for all buffer </td></tr>
+    <tr><td class="paramname">data</td><td>arrays of data for all buffer, vertex data must be in first </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a846c6f217b44607a1eb05332cd296375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a846c6f217b44607a1eb05332cd296375">&#9670;&nbsp;</a></span>draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::GL::VBO::draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calls the OpenGL command to draw the buffer </p>
+
+<p>Reimplemented in <a class="el" href="class_n_r_e_1_1_g_l_1_1_i_b_o.html#a27dc1145e9658e6c43fdaed813b7bf01">NRE::GL::IBO</a>.</p>
 
 </div>
 </div>
@@ -423,6 +459,52 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the specific arrayBuffer </dd></dl>
+
+</div>
+</div>
+<a id="a21b68b1e8ffbf73afffbc40cc35965bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21b68b1e8ffbf73afffbc40cc35965bd">&#9670;&nbsp;</a></span>getNb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLuint const  &amp; NRE::GL::VBO::getNb </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nb getter </p><dl class="section return"><dt>Returns</dt><dd>return the vertexBuffer size </dd></dl>
+
+</div>
+</div>
+<a id="a9269cee4773e1121150ff7234f918b59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9269cee4773e1121150ff7234f918b59">&#9670;&nbsp;</a></span>getType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_n_r_e___v_b_o_8hpp.html#aa28a453dea3afb5ee0356a0257f951c5">VBOType</a> const NRE::GL::VBO::getType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Type getter </p><dl class="section return"><dt>Returns</dt><dd>if the current object is a <a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html" title="GL&#39;s Object : Specialization of an BufferObject for vertex managing. ">VBO</a> or an <a class="el" href="class_n_r_e_1_1_g_l_1_1_i_b_o.html" title="GL&#39;s Object : Specialization of an BufferObject for vertex managing with indexing. ">IBO</a> </dd></dl>
+
+<p>Reimplemented in <a class="el" href="class_n_r_e_1_1_g_l_1_1_i_b_o.html#a82055b1f64dcf053f5de8f29f00be0d5">NRE::GL::IBO</a>.</p>
 
 </div>
 </div>
@@ -525,6 +607,30 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7e10c65782a7ad7eee0d078c0967b5b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e10c65782a7ad7eee0d078c0967b5b5">&#9670;&nbsp;</a></span>setNb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::GL::VBO::setNb </td>
+          <td>(</td>
+          <td class="paramtype">GLuint const &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nb setter </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>the new vertexBuffer size </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a146deefd3105a2524f52fff0d296ef42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a146deefd3105a2524f52fff0d296ef42">&#9670;&nbsp;</a></span>size()</h2>
 
@@ -543,8 +649,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8146e16aa757e8843d6e4d86b7f43fa6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8146e16aa757e8843d6e4d86b7f43fa6">&#9670;&nbsp;</a></span>update()</h2>
+<a id="ac72c92c9db6796714f30dee92773fea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac72c92c9db6796714f30dee92773fea4">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -552,7 +658,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void NRE::GL::VBO::update </td>
           <td>(</td>
-          <td class="paramtype">GLintptr const &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; GLintptr &gt; const &amp;&#160;</td>
           <td class="paramname"><em>offset</em>, </td>
         </tr>
         <tr>
@@ -582,10 +688,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Update the vbo's storage </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">offset</td><td>the offset in the buffer </td></tr>
+    <tr><td class="paramname">offset</td><td>arrays of offset for all buffer </td></tr>
     <tr><td class="paramname">vertexSize</td><td>the vertex type size </td></tr>
     <tr><td class="paramname">nbVertex</td><td>the number of vertex to store </td></tr>
-    <tr><td class="paramname">data</td><td>arrays of data for all buffer </td></tr>
+    <tr><td class="paramname">data</td><td>arrays of data for all buffer, vertex data must be in first </td></tr>
   </table>
   </dd>
 </dl>

@@ -1,6 +1,6 @@
 
     /**
-     * @file NRE_Object>.hpp
+     * @file NRE_Object.hpp
      * @brief Declaration of Engine's Object's Object : Object
      * @author Louis ABEL
      * @version 1.0
@@ -83,7 +83,14 @@
                          * @param nbValue the number of value to add
                          */
                         void add(GLuint const& index, void* value, GLuint const& nbValue = 1) const;
+                        /**
+                         * Update the current object from his mesh
+                         */
                         void update();
+                        /**
+                         * Allocate and fill the current object's buffer from his mesh
+                         * @param usage the object's rendering usage
+                         */
                         void allocateAndFill(GLenum const& usage);
                         /**
                          * Draw the current object, need to be call from a rendering context (Shader bind)

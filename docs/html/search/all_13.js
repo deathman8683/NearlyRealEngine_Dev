@@ -15,6 +15,6 @@ var searchData=
   ['tropicalrainforest',['TropicalRainForest',['../class_n_r_e_1_1_world_1_1_tropical_rain_forest.html',1,'NRE::World::TropicalRainForest'],['../class_n_r_e_1_1_world_1_1_tropical_rain_forest.html#ac4e7af194f5739256fc860c2230e068b',1,'NRE::World::TropicalRainForest::TropicalRainForest()']]],
   ['tropicalseasonalforest',['TropicalSeasonalForest',['../class_n_r_e_1_1_world_1_1_tropical_seasonal_forest.html',1,'NRE::World::TropicalSeasonalForest'],['../class_n_r_e_1_1_world_1_1_tropical_seasonal_forest.html#ac7446c3ba133e5722b85a07b2f58bb9b',1,'NRE::World::TropicalSeasonalForest::TropicalSeasonalForest()']]],
   ['tundra',['Tundra',['../class_n_r_e_1_1_world_1_1_tundra.html',1,'NRE::World::Tundra'],['../class_n_r_e_1_1_world_1_1_tundra.html#a0e5dd877d162ba1c0033803e657233b8',1,'NRE::World::Tundra::Tundra()']]],
-  ['type',['type',['../class_n_r_e_1_1_world_1_1_voxel.html#abeea2f6b5c0cf092516be8fb48c225e8',1,'NRE::World::Voxel']]],
+  ['type',['type',['../class_n_r_e_1_1_object_1_1_mesh.html#aa2c2c08fc87ec4576c67782183027271',1,'NRE::Object::Mesh::type()'],['../class_n_r_e_1_1_world_1_1_voxel.html#abeea2f6b5c0cf092516be8fb48c225e8',1,'NRE::World::Voxel::type()']]],
   ['type_5fnum',['TYPE_NUM',['../_n_r_e___voxel_enum_8hpp.html#ac8a4dcb9ac9e777be539c0b18f92e5cdae6f1d3837ff55869f930fb6ec95bff86',1,'NRE::World']]]
 ];

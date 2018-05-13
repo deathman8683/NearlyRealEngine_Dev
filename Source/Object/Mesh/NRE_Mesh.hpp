@@ -112,6 +112,9 @@
                          * @param usage  the buffer's usage
                          */
                         void allocateAndFill(GL::VBO& buffer, GLenum const& usage);
+                        /**
+                         * Clear all data set
+                         */
                         void clear();
 
                     //## Access Operator ##//

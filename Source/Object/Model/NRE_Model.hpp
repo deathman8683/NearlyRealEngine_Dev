@@ -118,10 +118,23 @@
                          * @param height the new maximum solid voxel height value
                          */
                         void setMaxSolidHeight(GLuint const& height);
+                        /**
+                         * Voxel's type setter
+                         * @param p    the voxel's coordinates
+                         * @param type the new voxel's type
+                         */
                         void setType(Maths::Point3D<GLuint> const& p, GLubyte const& type);
 
                     //## Methods ##//
+                        /**
+                         * Save the current model into a given file
+                         * @param path the file's path
+                         */
                         void save(std::string const& path) const;
+                        /**
+                         * Load the model from a given file
+                         * @param path the file's path
+                         */
                         void load(std::string const& path);
                         /**
                          * Load a number of voxel with a based coordinate and a type

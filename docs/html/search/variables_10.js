@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['y',['y',['../class_n_r_e_1_1_maths_1_1_point2_d.html#a3490795cd7dfd3c200796841a1871dbc',1,'NRE::Maths::Point2D::y()'],['../class_n_r_e_1_1_maths_1_1_vector2_d.html#abf66a22f38fec227184187c6e9d4f0d1',1,'NRE::Maths::Vector2D::y()']]]
+  ['uniformslocations',['uniformsLocations',['../class_n_r_e_1_1_renderer_1_1_shader.html#a942f2191aa86445b394c7b7e75c5f43e',1,'NRE::Renderer::Shader']]],
+  ['up',['up',['../class_n_r_e_1_1_camera_1_1_fixed_camera.html#a252380f5ef2495888a7aac8f3d1dc321',1,'NRE::Camera::FixedCamera']]]
 ];

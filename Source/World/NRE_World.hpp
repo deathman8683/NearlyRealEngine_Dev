@@ -225,6 +225,11 @@
                          * @param coord the chunk's coordinates
                          */
                         void setChunkNeighbor(Maths::Point2D<GLint> const& coord);
+                        /**
+                         * Check if a voxel is in world's bound or not
+                         * @param  p the voxel's coordinates
+                         * @return   the test's result
+                         */
                         bool const isInBound(Maths::Point3D<GLint> const& p) const;
 
                     //## Access Operator ##//

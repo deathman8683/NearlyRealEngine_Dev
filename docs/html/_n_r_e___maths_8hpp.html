@@ -105,6 +105,12 @@ Functions</h2></td></tr>
 <tr class="separator:adaa3d45a43894a374a6b2c845a917e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb928460056f7ec79d72ff7a3075f654"><td class="memItemLeft" align="right" valign="top">NREfloat const&#160;</td><td class="memItemRight" valign="bottom"><b>NRE::Maths::lerp</b> (NREfloat const &amp;a, NREfloat const &amp;b, NREfloat const &amp;f)</td></tr>
 <tr class="separator:adb928460056f7ec79d72ff7a3075f654"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f5502d841644241d8fce846698485a"><td class="memItemLeft" align="right" valign="top">GLint const&#160;</td><td class="memItemRight" valign="bottom"><b>NRE::Maths::numSign</b> (NREfloat const &amp;x)</td></tr>
+<tr class="separator:a16f5502d841644241d8fce846698485a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acde27d2a6547e2800ec4155c45edfea5"><td class="memItemLeft" align="right" valign="top">NREfloat const&#160;</td><td class="memItemRight" valign="bottom"><b>NRE::Maths::intBound</b> (GLint const &amp;x, NREfloat const &amp;delta)</td></tr>
+<tr class="separator:acde27d2a6547e2800ec4155c45edfea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eb6bd9a7da82b7d4e9001fac4194318"><td class="memItemLeft" align="right" valign="top">GLint const&#160;</td><td class="memItemRight" valign="bottom"><b>NRE::Maths::mod</b> (GLint const &amp;x, GLint const &amp;modulus)</td></tr>
+<tr class="separator:a3eb6bd9a7da82b7d4e9001fac4194318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Declaration of Engine's <a class="el" href="namespace_maths.html" title="Engine&#39;s Mathematicals Module. ">Maths</a>'s Functions. </p>
@@ -144,6 +150,42 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the test result </dd></dl>
+
+</div>
+</div>
+<a id="file_acde27d2a6547e2800ec4155c45edfea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_acde27d2a6547e2800ec4155c45edfea5">&#9670;&nbsp;</a></span>intBound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NREfloat const NRE::Maths::intBound </td>
+          <td>(</td>
+          <td class="paramtype">GLint const &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">NREfloat const &amp;&#160;</td>
+          <td class="paramname"><em>delta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Compute the first integer in the bound </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the variable to compute </td></tr>
+    <tr><td class="paramname">delta</td><td>the delta </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the computed integer </dd></dl>
 
 </div>
 </div>
@@ -187,6 +229,67 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the interpolated value </dd></dl>
+
+</div>
+</div>
+<a id="file_a3eb6bd9a7da82b7d4e9001fac4194318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a3eb6bd9a7da82b7d4e9001fac4194318">&#9670;&nbsp;</a></span>mod()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLint const NRE::Maths::mod </td>
+          <td>(</td>
+          <td class="paramtype">GLint const &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLint const &amp;&#160;</td>
+          <td class="paramname"><em>modulus</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Compute the modulus of a variable </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the variable </td></tr>
+    <tr><td class="paramname">modulus</td><td>the modulus </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the computed result </dd></dl>
+
+</div>
+</div>
+<a id="file_a16f5502d841644241d8fce846698485a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a16f5502d841644241d8fce846698485a">&#9670;&nbsp;</a></span>numSign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLint const NRE::Maths::numSign </td>
+          <td>(</td>
+          <td class="paramtype">NREfloat const &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Compute the sign of a variable </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>te computed sign (-1, 0, 1) </dd></dl>
 
 </div>
 </div>
