@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_CubeMap.hpp
-     * @brief Declaration of Engine's GL's Object : CubeMap
+     * @file NRE_Texture2DBuffer.hpp
+     * @brief Declaration of Engine's GL's Object : Texture2DBuffer
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../NRE_Buffer.hpp"
+    #include "../NRE_TextureBuffer.hpp"
 
     /**
      * @namespace NRE
@@ -17,15 +17,15 @@
     namespace NRE {
         /**
          * @namespace GL
-         * @brief Engine's OpenGL's Wrapper's Module
+         * @brief <Module_Desc>
          */
         namespace GL {
 
             /**
-             * @class CubeMap
-             * @brief GL's Object : A specialized buffer for cubemap managing
+             * @class Texture2DBuffer
+             * @brief GL's Object : Manage 2D texture
              */
-            class CubeMap : public Buffer {
+            class Texture2DBuffer : public TextureBuffer {
                 private:
 
                 public:
@@ -33,63 +33,52 @@
                         /**
                          * Default Constructor
                          */
-                        CubeMap();
+                        Texture2DBuffer();
                         /**
-                         * Construct the cubemap and generate or not his id
+                         * Construct the buffer and generate or not his id
                          * @param generate tell if the base class has to generate an id or not
                          */
-                        CubeMap(bool const& generate);
+                        Texture2DBuffer(bool const& generate);
 
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param buf the cubemap to copy
+                         * @param buf the 2D texture buffer to copy the content
                          */
-                        CubeMap(CubeMap const& buf) = delete;
+                        Texture2DBuffer(Texture2DBuffer const& buf) = delete;
 
                     //## Move-Constructor ##//
                         /**
                          * Move buf into this, leaving buf empty
-                         * @param buf the cubemap to move
+                         * @param buf the 2D texture buffer to move
                          */
-                        CubeMap(CubeMap && buf);
+                        Texture2DBuffer(Texture2DBuffer && buf);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * CubeMap Deconstructor
+                         * Texture2DBuffer Deconstructor
                          */
-                        virtual ~CubeMap();
+                        ~Texture2DBuffer();
 
                     //## Getter ##//
                         /**
-                         * Return the cubeMap type enum, used with derived class
-                         * @return the cubeMap type enum
+                         * Return the attribute type enum, used with derived class
+                         * @return the attribute type enum
                          */
                         virtual GLenum const getType() const = 0;
+                        /**
+                         * Return the attribute buffer target, used with derived class
+                         * @return the attribute buffer target
+                         */
+                        GLenum const getTarget() const override;
 
                     //## Setter ##//
 
                     //## Methods ##//
                         /**
-                         * Generate the buffer's id with different OpenGL command for different buffer
-                         */
-                        void generateID() override;
-                        /**
-                         * Delete the buffer's id with different OpenGL command for different buffer
-                         */
-                        void deleteID() override;
-                        /**
-                         * Bind the current buffer with his custom target and OpenGL command
-                         */
-                        void bind() const override;
-                        /**
-                         * Unbind the current buffer with his custom target and OpenGL command
-                         */
-                        void unbind() const override;
-                        /**
-                         * Allocate the 6 cubemap face with given parameters
+                         * Allocate the texture buffer with given parameters
                          * @param level          the level of the texture used in mipmap
                          * @param internalFormat the texture's pixels' internal's format
                          * @param w              the texture's width
@@ -99,50 +88,47 @@
                          */
                         void allocate(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, bool const& callFilter) const;
                         /**
-                         * Update the 6 cubemap texture with given parameters
+                         * Update the texture buffer with given parameters
                          * @param level   the level of the texture used in mipmap
                          * @param xOffset the buffers xOffset for particular region update
                          * @param yOffset the buffers yOffset for particular region update
                          * @param w       the updated region width
                          * @param h       the updated region height
                          * @param format  the texture's pixels' format
-                         * @param data    an array with pixels for all 6 faces
+                         * @param data    the texture's data
                          */
-                        void update(GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, std::vector<GLvoid*> const& data) const;
+                        void update(GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const;
                         /**
-                         * Allocate the 6 cubemap face with given parameters and fill them with an array of data
+                         * Allocate the texture buffer with given parameters and fill it with given data
                          * @param level          the level of the texture used in mipmap
                          * @param internalFormat the texture's pixels' internal's format
                          * @param w              the texture's width
                          * @param h              the texture's height
                          * @param format         the texture's pixels' format
-                         * @param data           an array with pixels for all 6 faces
+                         * @param data           the texture's data
                          * @param callFilter     tell if the function has to apply filter or not for the given binding
                          */
-                        void allocateAndFill(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, std::vector<GLvoid*> const& data, bool const& callFilter) const;
+                        void allocateAndFill(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data, bool const& callFilter) const;
                         /**
-                         * Cubemap specific filter
+                         * Texture specific filter
                          */
                         virtual void applyFilter() const = 0;
-                        /**
-                         * Store calls for VAO managing
-                         */
-                        void access() const;
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
-                         * No copy assigment allowed
-                         * @param buf the cubemap to copy
-                         */
-                        CubeMap& operator=(CubeMap const& buf) = delete;
-                        /**
-                         * Move assigment of buf into this, leaving buf empty
-                         * @param buf the cubemap to move into this
+                         * No copy allowed
+                         * @param buf the 2D texture buffer to copy into this
                          * @return the reference of himself
                          */
-                        CubeMap& operator=(CubeMap && buf);
+                        Texture2DBuffer& operator=(Texture2DBuffer const& buf) = delete;
+                        /**
+                         * Move assigment of buf into this, leaving buf empty
+                         * @param buf the 2D texture buffer to move into this
+                         * @return the reference of himself
+                         */
+                        Texture2DBuffer& operator=(Texture2DBuffer && buf);
 
                     //## Shortcut Operator ##//
 

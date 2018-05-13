@@ -110,7 +110,7 @@
                 float *data = stbi_loadf(path.c_str(), &w, &h, &nrComponents, 0);
                 cubeMap.setGLW(w);
                 cubeMap.setGLH(h);
-                cubeMap.TextureBuffer::allocateAndFill(0, cubeMap.getGLInternalFormat(), cubeMap.getGLW(), cubeMap.getGLH(), cubeMap.getGLFormat(), data, true);
+                cubeMap.Texture2DBuffer::allocateAndFill(0, cubeMap.getGLInternalFormat(), cubeMap.getGLW(), cubeMap.getGLH(), cubeMap.getGLFormat(), data, true);
                 cubeMap.setAllocated(true);
 
                 stbi_image_free(data);

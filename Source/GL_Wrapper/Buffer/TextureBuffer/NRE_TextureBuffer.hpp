@@ -65,11 +65,6 @@
 
                     //## Getter ##//
                         /**
-                         * Return the attribute type enum, used with derived class
-                         * @return the attribute type enum
-                         */
-                        virtual GLenum const getType() const = 0;
-                        /**
                          * Return the attribute buffer target, used with derived class
                          * @return the attribute buffer target
                          */
@@ -81,11 +76,11 @@
                         /**
                          * Generate the buffer's id with different OpenGL command for different buffer
                          */
-                        void generateID();
+                        void generateID() override;
                         /**
                          * Delete the buffer's id with different OpenGL command for different buffer
                          */
-                        void deleteID();
+                        void deleteID() override;
                         /**
                          * Bind the current buffer with his custom target and OpenGL command
                          */
@@ -94,42 +89,6 @@
                          * Unbind the current buffer with his custom target and OpenGL command
                          */
                         void unbind() const override;
-                        /**
-                         * Allocate the texture buffer with given parameters
-                         * @param level          the level of the texture used in mipmap
-                         * @param internalFormat the texture's pixels' internal's format
-                         * @param w              the texture's width
-                         * @param h              the texture's height
-                         * @param format         the texture's pixels' format
-                         * @param callFilter     tell if the function has to apply filter or not for the given binding
-                         */
-                        void allocate(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, bool const& callFilter) const;
-                        /**
-                         * Update the texture buffer with given parameters
-                         * @param level   the level of the texture used in mipmap
-                         * @param xOffset the buffers xOffset for particular region update
-                         * @param yOffset the buffers yOffset for particular region update
-                         * @param w       the updated region width
-                         * @param h       the updated region height
-                         * @param format  the texture's pixels' format
-                         * @param data    the texture's data
-                         */
-                        void update(GLint const& level, GLint const& xOffset, GLint const& yOffset, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data) const;
-                        /**
-                         * Allocate the texture buffer with given parameters and fill it with given data
-                         * @param level          the level of the texture used in mipmap
-                         * @param internalFormat the texture's pixels' internal's format
-                         * @param w              the texture's width
-                         * @param h              the texture's height
-                         * @param format         the texture's pixels' format
-                         * @param data           the texture's data
-                         * @param callFilter     tell if the function has to apply filter or not for the given binding
-                         */
-                        void allocateAndFill(GLint const& level, GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLenum const& format, GLvoid* const& data, bool const& callFilter) const;
-                        /**
-                         * Texture specific filter
-                         */
-                        virtual void applyFilter() const = 0;
                         /**
                          * Store calls for VAO managing
                          */

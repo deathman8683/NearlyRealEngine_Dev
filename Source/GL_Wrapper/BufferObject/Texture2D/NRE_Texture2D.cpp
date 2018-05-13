@@ -6,18 +6,18 @@
 
             GLenum Texture2D::DEFAULT_TYPE = GL_UNSIGNED_BYTE;
 
-            Texture2D::Texture2D() : TextureBuffer::TextureBuffer(true), type(DEFAULT_TYPE) {
+            Texture2D::Texture2D() : Texture2DBuffer::Texture2DBuffer(true), type(DEFAULT_TYPE) {
             }
 
-            Texture2D::Texture2D(std::string const& path) : TextureBuffer::TextureBuffer(true), SDL::Surface::Surface(path), type(DEFAULT_TYPE) {
+            Texture2D::Texture2D(std::string const& path) : Texture2DBuffer::Texture2DBuffer(true), SDL::Surface::Surface(path), type(DEFAULT_TYPE) {
                 allocateAndFill(true);
             }
 
-            Texture2D::Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t) : TextureBuffer::TextureBuffer(true), SDL::Surface::Surface(w, h, glFormat, glInternalFormat), type(t) {
+            Texture2D::Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t) : Texture2DBuffer::Texture2DBuffer(true), SDL::Surface::Surface(w, h, glFormat, glInternalFormat), type(t) {
                 allocate(true);
             }
 
-            Texture2D::Texture2D(Texture2D && tex) : TextureBuffer::TextureBuffer(std::move(tex)), BufferObject::BufferObject(std::move(tex)), SDL::Surface::Surface(std::move(tex)), type(std::move(tex.getType())) {
+            Texture2D::Texture2D(Texture2D && tex) : Texture2DBuffer::Texture2DBuffer(std::move(tex)), BufferObject::BufferObject(std::move(tex)), SDL::Surface::Surface(std::move(tex)), type(std::move(tex.getType())) {
             }
 
             Texture2D::~Texture2D() {
@@ -36,24 +36,24 @@
             }
 
             void Texture2D::bind() const {
-                TextureBuffer::bind();
+                Texture2DBuffer::bind();
             }
 
             void Texture2D::unbind() const {
-                TextureBuffer::unbind();
+                Texture2DBuffer::unbind();
             }
 
             void Texture2D::allocate(bool const& callFilter) {
-                TextureBuffer::allocate(0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), callFilter);
+                Texture2DBuffer::allocate(0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), callFilter);
                 setAllocated(true);
             }
 
             void Texture2D::update(GLint const& xOffset, GLint const& yOffset, GLvoid* const& data) const {
-                TextureBuffer::update(0, xOffset, yOffset, getGLW(), getGLH(), getGLFormat(), data);
+                Texture2DBuffer::update(0, xOffset, yOffset, getGLW(), getGLH(), getGLFormat(), data);
             }
 
             void Texture2D::allocateAndFill(bool const& callFilter) {
-                TextureBuffer::allocateAndFill(0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), getPixels(), callFilter);
+                Texture2DBuffer::allocateAndFill(0, getGLInternalFormat(), getGLW(), getGLH(), getGLFormat(), getPixels(), callFilter);
                 setAllocated(true);
                 free();
             }
@@ -70,7 +70,7 @@
             }
 
             Texture2D& Texture2D::operator=(Texture2D && tex) {
-                TextureBuffer::operator=(std::move(tex));
+                Texture2DBuffer::operator=(std::move(tex));
                 BufferObject::operator=(std::move(tex));
                 SDL::Surface::operator=(std::move(tex));
                 DepthBuffer::operator=(std::move(tex));

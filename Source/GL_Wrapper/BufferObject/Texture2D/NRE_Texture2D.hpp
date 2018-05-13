@@ -9,7 +9,7 @@
     #pragma once
 
     #include "../NRE_BufferObject.hpp"
-    #include "../../Buffer/TextureBuffer/NRE_TextureBuffer.hpp"
+    #include "../../Buffer/TextureBuffer/2D/NRE_Texture2DBuffer.hpp"
     #include "../../Buffer/DepthBuffer/NRE_DepthBuffer.hpp"
 
     /**
@@ -27,7 +27,7 @@
              * @class Texture2D
              * @brief GL's Object : A simple 2D Texture
              */
-            class Texture2D : public TextureBuffer, public BufferObject, public SDL::Surface, public DepthBuffer {
+            class Texture2D : public Texture2DBuffer, public BufferObject, public SDL::Surface, public DepthBuffer {
                 private:
                     GLenum type;
 
