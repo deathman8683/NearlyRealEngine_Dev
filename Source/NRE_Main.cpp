@@ -26,7 +26,7 @@
             engineLight.push_back(&engineLight4);
             engineLight.push_back(&engineLight5);
 
-            Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, rotation;
+            Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, rotation, tmp;
 
             Time::Clock engineClock;
 
@@ -41,8 +41,13 @@
             NREfloat skyboxAngleX = 0.0;
             //int nbFrames = 0;
 
-            Object::Object3D sphere(GL_FLOAT, Maths::Vector3D<GLuint>(0, 0, 0));
-            sphere.processSphere(GL_STATIC_DRAW, 10, 100, 100, 1);
+            std::vector<Object::Object3D*> materialSpheres;
+
+            for (GLuint i = 1; i < World::VoxelTypes::getSize(); i = i + 1) {
+                Object::Object3D* sphere = new Object::Object3D(GL_FLOAT, Maths::Vector3D<GLuint>(0, 0, 0));
+                sphere->processSphere(GL_STATIC_DRAW, 5, 100, 100, i);
+                materialSpheres.push_back(sphere);
+            }
 
             glViewport(0, 0, 1280.0, 720.0);
 
@@ -80,21 +85,24 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
+                    if (mode.isActive()) {
+                        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                    }
                     //engineWorld.render(modelview, &camera);
                     const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
-                    s->bind();
-                        s->sendModelview(modelview);
-                        if (mode.isActive()) {
-                            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-                        }
-                        sphere.draw();
-                        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-                    s->unbind();
+                    tmp = modelview;
+                    for (GLuint i = 0; i < materialSpheres.size(); i = i + 1) {
+                        s->bind();
+                            tmp.translate(Maths::Vector3D<NREfloat>(12, 0, 0));
+                            s->sendModelview(tmp);
+                            materialSpheres[i]->draw();
+                        s->unbind();
+                    }
 
-                    Maths::Matrix4x4<NREfloat> tmp(modelview);
-                    modelview = modelview * rotation;
-                    engineSkybox.render(projection, modelview);
-                    modelview = tmp;
+                    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+                    tmp = modelview * rotation;
+                    engineSkybox.render(projection, tmp);
                 engineDeferredRenderer.endGBufferPass();
 
                 invModelview = modelview;
@@ -105,6 +113,10 @@
                 engineWorld.update(1);
 
                 engineStage.updateScreen();
+            }
+
+            for (GLuint i = 0; i < materialSpheres.size(); i = i + 1) {
+                delete materialSpheres[i];
             }
         }
         catch (Exception::ExceptionHandler const& e) {
