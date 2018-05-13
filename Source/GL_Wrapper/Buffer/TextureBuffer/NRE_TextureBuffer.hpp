@@ -93,6 +93,10 @@
                          * Store calls for VAO managing
                          */
                         void access() const;
+                        /**
+                         * Texture specific filter
+                         */
+                        virtual void applyFilter() const = 0;
 
                     //## Access Operator ##//
 

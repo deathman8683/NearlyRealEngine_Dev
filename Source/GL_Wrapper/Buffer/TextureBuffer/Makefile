@@ -9,6 +9,7 @@ all : $(TARGET) after
 
 after:
 	@(cd $(2D) && $(MAKE))
+	@(cd $(3D) && $(MAKE))
 
 debug : $(OBJ)
 
