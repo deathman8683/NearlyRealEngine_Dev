@@ -45,7 +45,13 @@
                          */
                         Mesh3D();
                         /**
+                         * Construct a 3D mesh with a given vertex data type
+                         * @param type the vertex data type
+                         */
+                        Mesh3D(GLenum const& type);
+                        /**
                          * Construct a 3D mesh with a given target and his neighboors
+                         * @param type the vertex data type
                          * @param target the mesh's model to manage
                          * @param left   the mesh's model left neighbor
                          * @param right  the mesh's model right neighbor
@@ -54,7 +60,7 @@
                          * @param up     the mesh's model up neighbor
                          * @param bottom the mesh's model bottom neighbor
                          */
-                        Mesh3D(const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom);
+                        Mesh3D(GLenum const& type, const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom);
 
                     //## Copy-Constructor ##//
                         /**

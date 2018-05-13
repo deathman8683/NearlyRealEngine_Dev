@@ -36,10 +36,11 @@
                          */
                         Object3D();
                         /**
-                         * Construt a 3D object from his size
+                         * Construt a 3D object from his data type and size
+                         * @param type the vertex data type for the mesh
                          * @param size  the object's size
                          */
-                        Object3D(Maths::Vector3D<GLuint> size);
+                        Object3D(GLenum const& type, Maths::Vector3D<GLuint> size);
 
                     //## Copy-Constructor ##//
                         /**

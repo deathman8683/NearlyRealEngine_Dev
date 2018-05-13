@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_VertexData.hpp
-     * @brief Declaration of Engine's Object's Object : VertexData
+     * @file NRE_FloatVertexData.hpp
+     * @brief Declaration of Engine's Object's Object : FloatVertexData
      * @author Louis ABEL
      * @version 1.0
      */
@@ -22,10 +22,10 @@
         namespace Object {
 
             /**
-             * @class VertexData
-             * @brief Object's Object : A specialized data object for vertex storing
+             * @class FloatVertexData
+             * @brief Object's Object : A specialized data object for float vertex storing
              */
-            class VertexData : public Data<GLint> {
+            class FloatVertexData : public Data<NREfloat> {
                 private:
 
                 public:
@@ -33,29 +33,29 @@
                         /**
                          * Default Constructor
                          */
-                        VertexData();
+                        FloatVertexData();
 
                     //## Copy-Constructor ##//
                         /**
                          * Copy d into this
-                         * @param d the vertex data to copy the content
+                         * @param d the float vertex data to copy the content
                          */
-                        VertexData(VertexData const& d);
+                        FloatVertexData(FloatVertexData const& d);
 
                     //## Move-Constructor ##//
                         /**
                          * Move d into this, leaving d empty
-                         * @param d the vertex data to move
+                         * @param d the float vertex data to move
                          */
-                        VertexData(VertexData && d);
+                        FloatVertexData(FloatVertexData && d);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * VertexData Deconstructor
+                         * FloatVertexData Deconstructor
                          */
-                        ~VertexData();
+                        ~FloatVertexData();
 
                     //## Getter ##//
 
@@ -68,16 +68,16 @@
                     //## Assignment Operator ##//
                         /**
                          * Copy assigment of d into this
-                         * @param d the vertex data to copy into this
+                         * @param d the float vertex data to copy into this
                          * @return the reference of himself
                          */
-                        VertexData& operator=(VertexData const& d);
+                        FloatVertexData& operator=(FloatVertexData const& d);
                         /**
                          * Move assigment of d into this, leaving d empty
-                         * @param d the vertex data to move into this
+                         * @param d the float vertex data to move into this
                          * @return the reference of himself
                          */
-                        VertexData& operator=(VertexData && d);
+                        FloatVertexData& operator=(FloatVertexData && d);
 
                     //## Shortcut Operator ##//
 

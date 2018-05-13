@@ -7,7 +7,7 @@
             DeferredRenderer::DeferredRenderer() {
             }
 
-            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : Object2D::Object2D(GL_STATIC_DRAW, Maths::Point2D<GLint>(-1, -1), Maths::Vector2D<GLint>(2, 2)), gBuffer(size.getW(), size.getH()) {
+            DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : Object2D::Object2D(GL_INT, GL_STATIC_DRAW, Maths::Point2D<GLint>(-1, -1), Maths::Vector2D<GLint>(2, 2)), gBuffer(size.getW(), size.getH()) {
 
                 EngineShader::sendKernel(ssao);
 

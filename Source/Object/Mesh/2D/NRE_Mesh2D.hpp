@@ -35,6 +35,11 @@
                          * Default Constructor
                          */
                         Mesh2D();
+                        /**
+                         * Construct a 2D mesh with a given vertex data type
+                         * @param type the vertex data type
+                         */
+                        Mesh2D(GLenum const& type);
 
                     //## Copy-Constructor ##//
                         /**

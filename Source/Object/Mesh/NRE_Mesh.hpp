@@ -9,7 +9,8 @@
     #pragma once
 
     #include "Data/NRE_Data.hpp"
-    #include "Data/VertexData/NRE_VertexData.hpp"
+    #include "Data/IntVertexData/NRE_IntVertexData.hpp"
+    #include "Data/FloatVertexData/NRE_FloatVertexData.hpp"
     #include "Data/MaterialData/NRE_MaterialData.hpp"
     #include "Data/NormalData/NRE_NormalData.hpp"
     #include "Data/IndexData/NRE_IndexData.hpp"
@@ -35,6 +36,7 @@
             class Mesh {
                 protected:
                     std::vector<DataSet*> data;     /**< The mesh's array of data set fill with a model information */
+                    GLenum type;                    /**< The mesh's vertex data type */
 
                 public:
                     //## Constructor ##//
@@ -42,6 +44,11 @@
                          * Default Constructor
                          */
                         Mesh();
+                        /**
+                         * Construct a mesh with a base vertex data
+                         * @param type the vertex data type
+                         */
+                        Mesh(GLenum const& type);
 
                     //## Copy-Constructor ##//
                         /**
@@ -72,6 +79,11 @@
                          * @return       the corresponding data set
                          */
                         const DataSet* const getDataSet(GLuint const& index) const;
+                        /**
+                         * Type getter
+                         * @return the mesh's vertex data type enum
+                         */
+                        GLenum const& getType() const;
 
                     //## Setter ##//
 

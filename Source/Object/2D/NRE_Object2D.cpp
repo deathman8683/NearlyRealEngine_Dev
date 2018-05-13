@@ -5,15 +5,18 @@
         namespace Object {
 
             Object2D::Object2D() {
+            }
+
+            Object2D::Object2D(GLenum const& type) {
                 buffer = new GL::VBO(true);
                 buffer->push_back(new GL::UVBuffer(true));
 
-                mesh = new Mesh2D();
+                mesh = new Mesh2D(type);
 
-                access(GL_INT);
+                access();
             }
 
-            Object2D::Object2D(GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size) : Object2D() {
+            Object2D::Object2D(GLenum const& type, GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size) : Object2D() {
                 process(usage, coord, size);
             }
 

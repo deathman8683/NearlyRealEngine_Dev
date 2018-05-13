@@ -5,12 +5,15 @@
         namespace Object {
 
             Mesh3D::Mesh3D() : target(0), left(0), right(0), front(0), back(0), up(0), bottom(0) {
+            }
+
+            Mesh3D::Mesh3D(GLenum const& type) : Mesh(type), target(0), left(0), right(0), front(0), back(0), up(0), bottom(0) {
                 push_back(new MaterialData());
                 push_back(new NormalData());
                 push_back(new IndexData());
             }
 
-            Mesh3D::Mesh3D(const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom) : Mesh3D() {
+            Mesh3D::Mesh3D(GLenum const& type, const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom) : Mesh3D() {
                 this->target = target;
                 this->left = left;
                 this->right = right;

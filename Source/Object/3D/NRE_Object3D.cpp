@@ -7,14 +7,14 @@
             Object3D::Object3D() {
             }
 
-            Object3D::Object3D(Maths::Vector3D<GLuint> size) : model(size) {
+            Object3D::Object3D(GLenum const& type, Maths::Vector3D<GLuint> size) : model(size) {
                 buffer = new GL::IBO(true);
                 buffer->push_back(new GL::MaterialBuffer(true));
                 buffer->push_back(new GL::NormalBuffer(true));
 
-                mesh = new Mesh3D(&model, 0, 0, 0, 0, 0, 0);
+                mesh = new Mesh3D(type, &model, 0, 0, 0, 0, 0, 0);
 
-                access(GL_INT);
+                access();
             }
 
             Object3D::Object3D(Object3D && o) : Object::Object(std::move(o)), model(std::move(o.model)) {

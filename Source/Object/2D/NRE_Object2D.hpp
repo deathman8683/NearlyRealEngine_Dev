@@ -35,12 +35,18 @@
                          */
                         Object2D();
                         /**
-                         * Construt a 2D object from his rendering usage, position and size
+                         * Construt a 2D object with a base vertex data in the mesh
+                         * @param type the vertex data type for the mesh
+                         */
+                        Object2D(GLenum const& type);
+                        /**
+                         * Construt a 2D object from his data type, rendering usage, position and size
+                         * @param type the vertex data type for the mesh
                          * @param usage the object's rendering usage
                          * @param coord the object's position on screen
                          * @param size  the object's size
                          */
-                        Object2D(GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size);
+                        Object2D(GLenum const& type, GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size);
 
                     //## Copy-Constructor ##//
                         /**

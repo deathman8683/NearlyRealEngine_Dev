@@ -1,4 +1,5 @@
-VERTEX = VertexData
+IVERTEX = IntVertexData
+FVERTEX = FloatVertexData
 INDEX = IndexData
 MATERIAL = MaterialData
 NORMAL = NormalData
@@ -12,7 +13,8 @@ before:
 	@(cd $(DATASET) && $(MAKE))
 
 debug:
-	@(cd $(VERTEX) && $(MAKE))
+	@(cd $(IVERTEX) && $(MAKE))
+	@(cd $(FVERTEX) && $(MAKE))
 	@(cd $(INDEX) && $(MAKE))
 	@(cd $(MATERIAL) && $(MAKE))
 	@(cd $(NORMAL) && $(MAKE))

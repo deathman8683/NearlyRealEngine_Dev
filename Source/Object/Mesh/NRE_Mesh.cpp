@@ -5,13 +5,20 @@
         namespace Object {
 
             Mesh::Mesh() {
-                push_back(new VertexData());
             }
 
-            Mesh::Mesh(Mesh const& m) : data(m.data) {
+            Mesh::Mesh(GLenum const& type) : type(type) {
+                if (type == GL_INT) {
+                    push_back(new IntVertexData());
+                } else if (type == GL_FLOAT) {
+                    push_back(new FloatVertexData());
+                }
             }
 
-            Mesh::Mesh(Mesh && m) : data(std::move(m.data)) {
+            Mesh::Mesh(Mesh const& m) : data(m.data), type(m.type) {
+            }
+
+            Mesh::Mesh(Mesh && m) : data(std::move(m.data)), type(std::move(m.type)) {
             }
 
             Mesh::~Mesh() {
@@ -23,6 +30,10 @@
 
             const DataSet* const Mesh::getDataSet(GLuint const& index) const {
                 return data[index];
+            }
+
+            GLenum const& Mesh::getType() const {
+                return type;
             }
 
             void Mesh::push_back(DataSet* const& d) {
@@ -59,11 +70,13 @@
 
             Mesh& Mesh::operator=(Mesh const& m) {
                 data = m.data;
+                type = m.type;
                 return *this;
             }
 
             Mesh& Mesh::operator=(Mesh && m) {
                 data = std::move(m.data);
+                type = std::move(m.type);
                 return *this;
             }
 

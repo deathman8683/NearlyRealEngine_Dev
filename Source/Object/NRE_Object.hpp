@@ -45,10 +45,9 @@
                         /**
                          * Construct an object with his rendering buffer
                          * @param buf   the rendering buffer, containing (or not yet) the object's model
-                         * @param type  the rendering buffer vertex type
                          * @param mesh  the object mesh, containing (or not yet) the object's model
                          */
-                        Object(GL::VBO* buf, Mesh* mesh, GLenum const& type);
+                        Object(GL::VBO* buf, Mesh* mesh);
 
                     //## Copy-Constructor ##//
                         /**
@@ -90,7 +89,10 @@
                          * Draw the current object, need to be call from a rendering context (Shader bind)
                          */
                         void draw() const;
-                        void access(GLenum const& type);
+                        /**
+                         * Bind the VAO to the object Buffer using the mesh data type
+                         */
+                        void access();
 
                     //## Access Operator ##//
 

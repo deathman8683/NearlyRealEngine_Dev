@@ -5,6 +5,9 @@
         namespace Object {
 
             Mesh2D::Mesh2D() {
+            }
+
+            Mesh2D::Mesh2D(GLenum const& type) : Mesh(type) {
                 push_back(new UVData());
             }
 

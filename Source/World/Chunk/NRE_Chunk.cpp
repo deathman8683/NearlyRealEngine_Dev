@@ -17,7 +17,7 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : Object3D(SIZE), coord(coord), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : Object3D(GL_INT, SIZE), coord(coord), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
                                                                                        active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
             }
 
