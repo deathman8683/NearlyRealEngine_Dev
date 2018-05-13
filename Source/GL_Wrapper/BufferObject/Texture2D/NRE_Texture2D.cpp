@@ -7,8 +7,10 @@
             Texture2D::Texture2D() : Texture2DBuffer::Texture2DBuffer(true) {
             }
 
-            Texture2D::Texture2D(std::string const& path) : Texture2DBuffer::Texture2DBuffer(true), SDL::Surface::Surface(path) {
-                allocateAndFill(true);
+            Texture2D::Texture2D(std::string const& path, bool const& loadImmedialty) : Texture2DBuffer::Texture2DBuffer(true), SDL::Surface::Surface(path) {
+                if (loadImmedialty) {
+                    allocateAndFill(true);
+                }
             }
 
             Texture2D::Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t) : Texture2DBuffer::Texture2DBuffer(true, t), SDL::Surface::Surface(w, h, glFormat, glInternalFormat) {

@@ -10,6 +10,7 @@
 
     #include "../NRE_BufferObject.hpp"
     #include "../../Buffer/TextureBuffer/3D/NRE_Texture3DBuffer.hpp"
+    #include "../Texture2D/NRE_Texture2D.hpp"
 
     /**
      * @namespace NRE
@@ -68,6 +69,27 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Allocate the texture array with given parameters
+                         * @param internalFormat the texture's pixels' internal's format
+                         * @param w              the texture's width
+                         * @param h              the texture's height
+                         * @param z              the texture's level
+                         * @param format         the texture's pixels' format
+                         * @param callFilter     tell if the function has to apply filter or not for the given binding
+                         */
+                        void allocate(GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLsizei const& z, GLenum const& format, bool const& callFilter);
+                        /**
+                         * Allocate the texture array from a base texture
+                         * @param internalFormat the texture's pixels' internal's format
+                         * @param w              the texture's width
+                         * @param h              the texture's height
+                         * @param z              the texture's level
+                         * @param format         the texture's pixels' format
+                         * @param callFilter     tell if the function has to apply filter or not for the given binding
+                         */
+                        void allocate(GLsizei const& z, Texture2D const& tex, bool const& callFilter);
+                        void sendTexture(Texture2D const& tex, GLint const& layer);
                         /**
                          * Texture2DArray specific filter
                          */
