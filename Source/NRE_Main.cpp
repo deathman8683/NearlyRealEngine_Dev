@@ -12,7 +12,7 @@
             Support::Stage engineStage("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
 
-            Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), &engineWorld);
+            Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 2), Maths::Vector3D<NREfloat>(0, 0, 2), &engineWorld);
 
             std::vector<Light::Light*> engineLight;
             Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 0, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
@@ -42,9 +42,12 @@
             //int nbFrames = 0;
 
             Object::Object3D sphere(GL_FLOAT, Maths::Vector3D<GLuint>(0, 0, 0));
-            sphere.processSphere(GL_STATIC_DRAW, 10.0, 10, 10, 11);
+            sphere.processSphere(GL_STATIC_DRAW, 10, 100, 100, 1);
 
             glViewport(0, 0, 1280.0, 720.0);
+
+            Camera::Key& mode = camera.Keyboard::getKey(SDL_SCANCODE_F1);
+            mode.setSwitch(true);
 
             while(!camera.getQuit())
             {
@@ -81,7 +84,11 @@
                     const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
                     s->bind();
                         s->sendModelview(modelview);
+                        if (mode.isActive()) {
+                            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                        }
                         sphere.draw();
+                        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
                     s->unbind();
 
                     Maths::Matrix4x4<NREfloat> tmp(modelview);

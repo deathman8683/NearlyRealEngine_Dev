@@ -97,7 +97,6 @@
                          */
                         GLvoid* const value() override;
                         void clear() override;
-                        void resize(size_t const& n) override;
 
                     //## Access Operator ##//
 

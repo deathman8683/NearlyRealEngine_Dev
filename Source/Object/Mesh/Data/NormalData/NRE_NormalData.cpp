@@ -7,22 +7,22 @@
             NormalData::NormalData() {
             }
 
-            NormalData::NormalData(NormalData const& d) : Data<GLbyte>::Data(d) {
+            NormalData::NormalData(NormalData const& d) : Data<NREfloat>::Data(d) {
             }
 
-            NormalData::NormalData(NormalData && d) : Data<GLbyte>::Data(d) {
+            NormalData::NormalData(NormalData && d) : Data<NREfloat>::Data(d) {
             }
 
             NormalData::~NormalData() {
             }
 
             NormalData& NormalData::operator=(NormalData const& d) {
-                Data<GLbyte>::operator=(d);
+                Data<NREfloat>::operator=(d);
                 return *this;
             }
 
             NormalData& NormalData::operator=(NormalData && d) {
-                Data<GLbyte>::operator=(std::move(d));
+                Data<NREfloat>::operator=(std::move(d));
                 return *this;
             }
 

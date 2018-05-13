@@ -85,7 +85,6 @@
                          */
                         virtual GLvoid* const value() = 0;
                         virtual void clear() = 0;
-                        virtual void resize(size_t const& n) = 0;
 
                     //## Access Operator ##//
 

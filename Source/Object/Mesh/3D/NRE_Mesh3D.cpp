@@ -284,7 +284,7 @@
             }
 
             void Mesh3D::addPackedVertex(Maths::Point3D<GLint> const (&p)[4], GLuint const& face, size_t const& cCode) {
-                Maths::Vector3D<GLbyte> n;
+                Maths::Vector3D<NREfloat> n;
                 GLuint idx1, idx2, nIdx;
 
                 switch (face) {
@@ -350,16 +350,11 @@
                 NREfloat ring = 1.0 / static_cast <NREfloat> (rings - 1);
                 NREfloat sector = 1.0 / static_cast <NREfloat> (sectors - 1);
 
-
-                data[0]->resize(rings * sectors * 3);
-                data[2]->resize(rings * sectors * 3);
-                data[3]->resize(rings * sectors * 6);
-
                 for (GLint r = 0; r < static_cast <GLint> (rings); r = r + 1) {
                     for (GLint s = 0; s < static_cast <GLint> (sectors); s = s + 1) {
-                        NREfloat x = std::cos(2 * Global::PI * s * sector) * std::sin(Global::PI * r * ring);
-                        NREfloat y = std::sin(-Global::PI_2 + Global::PI * r * ring);
-                        NREfloat z = std::sin(2 * Global::PI * s * sector) * std::sin(Global::PI * r * ring);
+                        NREfloat x = std::cos(2.0 * Global::PI * static_cast <NREfloat> (s * sector)) * std::sin(Global::PI * static_cast <NREfloat> (r * ring));
+                        NREfloat y = std::sin(-Global::PI_2 + Global::PI * static_cast <NREfloat> (r * ring));
+                        NREfloat z = std::sin(2.0 * Global::PI * static_cast <NREfloat> (s * sector)) * std::sin(Global::PI * static_cast <NREfloat> (r * ring));
 
                         NREfloat vX = x * radius;
                         NREfloat vY = y * radius;
@@ -379,17 +374,17 @@
 
                 for (GLint r = 0; r < static_cast <GLint> (rings) - 1; r = r + 1) {
                     for (GLint s = 0; s < static_cast <GLint> (sectors) - 1; s = s + 1) {
-                        GLuint idx1 = r * sectors * s;
-                        GLuint idx2 = r * sectors * (s + 1);
-                        GLuint idx3 = (r + 1) * sectors * (s + 1);
-                        GLuint idx4 = (r + 1) * sectors * s;
+                        GLuint idx1 = r * sectors + s;
+                        GLuint idx2 = r * sectors + (s + 1);
+                        GLuint idx3 = (r + 1) * sectors + (s + 1);
+                        GLuint idx4 = (r + 1) * sectors + s;
 
+                        add(3, &idx4);
+                        add(3, &idx2);
                         add(3, &idx1);
                         add(3, &idx2);
-                        add(3, &idx3);
                         add(3, &idx4);
                         add(3, &idx3);
-                        add(3, &idx1);
                     }
                 }
 

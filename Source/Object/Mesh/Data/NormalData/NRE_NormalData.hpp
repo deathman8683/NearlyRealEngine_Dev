@@ -25,7 +25,7 @@
              * @class NormalData
              * @brief Object's Object : A specialized data object for normal storing
              */
-            class NormalData : public Data<GLbyte> {
+            class NormalData : public Data<NREfloat> {
                 private:
 
                 public:

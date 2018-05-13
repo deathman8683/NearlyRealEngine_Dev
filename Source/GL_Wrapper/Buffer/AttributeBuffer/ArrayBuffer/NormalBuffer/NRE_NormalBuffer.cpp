@@ -5,8 +5,8 @@
         namespace GL {
 
             GLint NormalBuffer::INDEX = 2;
-            GLenum NormalBuffer::TYPE = GL_BYTE;
-            GLint NormalBuffer::TYPESIZE = sizeof(GLbyte);
+            GLenum NormalBuffer::TYPE = GL_FLOAT;
+            GLint NormalBuffer::TYPESIZE = sizeof(NREfloat);
             GLint NormalBuffer::SIZE = 3;
 
             NormalBuffer::NormalBuffer() {

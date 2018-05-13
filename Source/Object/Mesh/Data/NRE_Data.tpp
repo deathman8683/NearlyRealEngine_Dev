@@ -55,12 +55,7 @@
             void Data<T>::clear() {
                 data.clear();
             }
-
-            template <class T>
-            void Data<T>::resize(size_t const& n) {
-                data.resize(n);
-            }
-
+            
             template <class T>
             Data<T>& Data<T>::operator=(Data const& d) {
                 data = d.data;
