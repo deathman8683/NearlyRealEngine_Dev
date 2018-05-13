@@ -5,6 +5,7 @@ OBJDIR = ../../../obj/Debug/GL_Wrapper/BufferObject/
 VBO = VBO
 IBO = IBO
 TEXTURE2D = Texture2D
+TEXTURE2DARRAY = Texture2DArray
 SKYBOX = SkyBox
 FBO = FBO
 
@@ -14,6 +15,7 @@ after:
 	@(cd $(VBO) && $(MAKE))
 	@(cd $(IBO) && $(MAKE))
 	@(cd $(TEXTURE2D) && $(MAKE))
+	@(cd $(TEXTURE2DARRAY) && $(MAKE))
 	@(cd $(SKYBOX) && $(MAKE))
 	@(cd $(FBO) && $(MAKE))
 

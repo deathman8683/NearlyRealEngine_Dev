@@ -10,7 +10,10 @@
             Texture3DBuffer::Texture3DBuffer(bool const& generate) : TextureBuffer::TextureBuffer(generate) {
             }
 
-            Texture3DBuffer::Texture3DBuffer(Texture3DBuffer && buf) {
+            Texture3DBuffer::Texture3DBuffer(bool const& generate, GLenum const& type) : TextureBuffer::TextureBuffer(generate, type) {
+            }
+
+            Texture3DBuffer::Texture3DBuffer(Texture3DBuffer && buf) : TextureBuffer::TextureBuffer(std::move(buf)) {
             }
 
             Texture3DBuffer::~Texture3DBuffer() {
@@ -41,6 +44,7 @@
             }
 
             Texture3DBuffer& Texture3DBuffer::operator=(Texture3DBuffer && buf) {
+                TextureBuffer::operator=(std::move(buf));
                 return *this;
             }
 

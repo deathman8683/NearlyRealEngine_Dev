@@ -10,7 +10,10 @@
             Texture2DBuffer::Texture2DBuffer(bool const& generate) : TextureBuffer::TextureBuffer(generate) {
             }
 
-            Texture2DBuffer::Texture2DBuffer(Texture2DBuffer && buf) {
+            Texture2DBuffer::Texture2DBuffer(bool const& generate, GLenum const& type) : TextureBuffer::TextureBuffer(generate, type) {
+            }
+
+            Texture2DBuffer::Texture2DBuffer(Texture2DBuffer && buf) : TextureBuffer::TextureBuffer(std::move(buf)) {
             }
 
             Texture2DBuffer::~Texture2DBuffer() {
@@ -45,6 +48,7 @@
             }
 
             Texture2DBuffer& Texture2DBuffer::operator=(Texture2DBuffer && buf) {
+                TextureBuffer::operator=(std::move(buf));
                 return *this;
             }
 

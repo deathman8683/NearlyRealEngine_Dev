@@ -29,7 +29,6 @@
              */
             class Texture2D : public Texture2DBuffer, public BufferObject, public SDL::Surface, public DepthBuffer {
                 private:
-                    GLenum type;
 
                 public:
                     //## Constructor ##//
@@ -50,19 +49,19 @@
                          * @param glInternalFormat the texture's pixel internal format
                          * @param t                the texture's type
                          */
-                        Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t = DEFAULT_TYPE);
+                        Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t = TextureBuffer::DEFAULT_TYPE);
 
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param tex the texture to copy
+                         * @param tex the 2D texture to copy
                          */
                         Texture2D(Texture2D const& tex) = delete;
 
                     //## Move-Constructor ##//
                         /**
                          * Move tex into this, leaving tex empty
-                         * @param tex the texture to move
+                         * @param tex the 2D texture to move
                          */
                         Texture2D(Texture2D && tex);
 
@@ -76,22 +75,12 @@
 
                     //## Getter ##//
                         /**
-                         * Return the texture type enum, used with derived class
-                         * @return the texture type enum
-                         */
-                        GLenum const getType() const;
-                        /**
                          * Return the texture target, used with derived class
                          * @return the texture target
                          */
                         GLenum const getTarget() const;
 
                     //## Setter ##//
-                        /**
-                         * Type setter
-                         * @param t the new texture type
-                         */
-                        void setType(GLenum const& t);
 
                     //## Methods ##//
                         /**
@@ -122,7 +111,7 @@
                         /**
                          * Texture2D specific filter
                          */
-                        void applyFilter() const;
+                        void applyFilter() const override;
                         /**
                          * Attach the texture to a specific attachment point
                          * @param attachment the specific attachment point
@@ -134,12 +123,12 @@
                     //## Assignment Operator ##//
                         /**
                          * No copy assigment allowed
-                         * @param tex the texture to copy
+                         * @param tex the 2D texture to copy
                          */
                         Texture2D& operator=(Texture2D const& tex) = delete;
                         /**
                          * Move assigment of tex into this, leaving tex empty
-                         * @param tex the texture to move into this
+                         * @param tex the 2D texture to move into this
                          * @return the reference of himself
                          */
                         Texture2D& operator=(Texture2D && tex);
@@ -155,7 +144,6 @@
                     //## Shift Operator ##//
 
                 private:
-                    static GLenum DEFAULT_TYPE; /**< The 2D texture default type enum */
             };
 
         };

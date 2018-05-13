@@ -4,35 +4,25 @@
     namespace NRE {
         namespace GL {
 
-            GLenum Texture2D::DEFAULT_TYPE = GL_UNSIGNED_BYTE;
-
-            Texture2D::Texture2D() : Texture2DBuffer::Texture2DBuffer(true), type(DEFAULT_TYPE) {
+            Texture2D::Texture2D() : Texture2DBuffer::Texture2DBuffer(true) {
             }
 
-            Texture2D::Texture2D(std::string const& path) : Texture2DBuffer::Texture2DBuffer(true), SDL::Surface::Surface(path), type(DEFAULT_TYPE) {
+            Texture2D::Texture2D(std::string const& path) : Texture2DBuffer::Texture2DBuffer(true), SDL::Surface::Surface(path) {
                 allocateAndFill(true);
             }
 
-            Texture2D::Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t) : Texture2DBuffer::Texture2DBuffer(true), SDL::Surface::Surface(w, h, glFormat, glInternalFormat), type(t) {
+            Texture2D::Texture2D(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat, GLenum const& t) : Texture2DBuffer::Texture2DBuffer(true, t), SDL::Surface::Surface(w, h, glFormat, glInternalFormat) {
                 allocate(true);
             }
 
-            Texture2D::Texture2D(Texture2D && tex) : Texture2DBuffer::Texture2DBuffer(std::move(tex)), BufferObject::BufferObject(std::move(tex)), SDL::Surface::Surface(std::move(tex)), type(std::move(tex.getType())) {
+            Texture2D::Texture2D(Texture2D && tex) : Texture2DBuffer::Texture2DBuffer(std::move(tex)), BufferObject::BufferObject(std::move(tex)), SDL::Surface::Surface(std::move(tex))  {
             }
 
             Texture2D::~Texture2D() {
             }
 
-            GLenum const Texture2D::getType() const {
-                return type;
-            }
-
             GLenum const Texture2D::getTarget() const {
                 return GL_TEXTURE_2D;
-            }
-
-            void Texture2D::setType(GLenum const& t) {
-                type = t;
             }
 
             void Texture2D::bind() const {

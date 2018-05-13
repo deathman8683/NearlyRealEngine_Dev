@@ -39,6 +39,12 @@
                          * @param generate tell if the base class has to generate an id or not
                          */
                         Texture3DBuffer(bool const& generate);
+                        /**
+                         * Construct the buffer and generate or not his id
+                         * @param generate  tell if the base class has to generate an id or not
+                         * @param type      the texture's type enum
+                         */
+                        Texture3DBuffer(bool const& generate, GLenum const& type);
 
                     //## Copy-Constructor ##//
                         /**
@@ -63,11 +69,6 @@
                         ~Texture3DBuffer();
 
                     //## Getter ##//
-                        /**
-                         * Return the attribute type enum, used with derived class
-                         * @return the attribute type enum
-                         */
-                        virtual GLenum const getType() const = 0;
                         /**
                          * Return the attribute buffer target, used with derived class
                          * @return the attribute buffer target

@@ -12,7 +12,7 @@
             Support::Stage engineStage("NRE 0.1 - Dev version", Maths::Vector2D<int>(1280, 720));
             World::World engineWorld(Maths::Vector2D<GLuint>(5, 5), Maths::Vector2D<GLint>(0, 0));
 
-            Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 2), Maths::Vector3D<NREfloat>(0, 0, 2), &engineWorld);
+            Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), &engineWorld);
 
             std::vector<Light::Light*> engineLight;
             Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 0, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
@@ -88,12 +88,13 @@
                     if (mode.isActive()) {
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
-                    //engineWorld.render(modelview, &camera);
+                    engineWorld.render(modelview, &camera);
                     const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
                     tmp = modelview;
+                    tmp.translate(Maths::Vector3D<NREfloat>(0, -90, 100));
                     for (GLuint i = 0; i < materialSpheres.size(); i = i + 1) {
                         s->bind();
-                            tmp.translate(Maths::Vector3D<NREfloat>(12, 0, 0));
+                            tmp.translate(Maths::Vector3D<NREfloat>(0, 12, 0));
                             s->sendModelview(tmp);
                             materialSpheres[i]->draw();
                         s->unbind();
