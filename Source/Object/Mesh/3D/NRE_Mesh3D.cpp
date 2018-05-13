@@ -13,7 +13,7 @@
                 push_back(new IndexData());
             }
 
-            Mesh3D::Mesh3D(GLenum const& type, const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom) : Mesh3D() {
+            Mesh3D::Mesh3D(GLenum const& type, const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom) : Mesh3D(type) {
                 this->target = target;
                 this->left = left;
                 this->right = right;
@@ -361,9 +361,9 @@
                         NREfloat y = std::sin(-Global::PI_2 + Global::PI * r * ring);
                         NREfloat z = std::sin(2 * Global::PI * s * sector) * std::sin(Global::PI * r * ring);
 
-                        GLint vX = static_cast <GLint> (x * radius);
-                        GLint vY = static_cast <GLint> (y * radius);
-                        GLint vZ = static_cast <GLint> (z * radius);
+                        NREfloat vX = x * radius;
+                        NREfloat vY = y * radius;
+                        NREfloat vZ = z * radius;
 
                         add(0, &vX);
                         add(0, &vY);

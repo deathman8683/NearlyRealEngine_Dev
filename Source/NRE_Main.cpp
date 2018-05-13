@@ -77,11 +77,11 @@
                 camera.setView(modelview);
 
                 engineDeferredRenderer.startGBufferPass();
-                    engineWorld.render(modelview, &camera);
+                    //engineWorld.render(modelview, &camera);
                     const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
                     s->bind();
                         s->sendModelview(modelview);
-                        //sphere.draw();
+                        sphere.draw();
                     s->unbind();
 
                     Maths::Matrix4x4<NREfloat> tmp(modelview);

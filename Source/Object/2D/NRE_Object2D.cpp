@@ -16,7 +16,7 @@
                 access();
             }
 
-            Object2D::Object2D(GLenum const& type, GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size) : Object2D() {
+            Object2D::Object2D(GLenum const& type, GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size) : Object2D(type) {
                 process(usage, coord, size);
             }
 
