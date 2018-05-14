@@ -15,9 +15,9 @@
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
                 format.push_back(GL_RGBA);
+                type.push_back(GL_UNSIGNED_BYTE);
                 type.push_back(GL_FLOAT);
-                type.push_back(GL_FLOAT);
-                internalFormat.push_back(GL_RGBA16F);
+                internalFormat.push_back(GL_RGBA);
                 internalFormat.push_back(GL_RGBA16F);
 
                 gBuffer.allocateColorBuffer(2, format, internalFormat, type);
@@ -43,18 +43,16 @@
 
                 shader->bind();
                     glActiveTexture(GL_TEXTURE0);
-                        World::VoxelTypes::getMaterialAlbedo()->bind();
-                    glActiveTexture(GL_TEXTURE2);
                         gBuffer.getDepthBuffer()->bind();
-                    glActiveTexture(GL_TEXTURE3);
+                    glActiveTexture(GL_TEXTURE1);
                         gBuffer.getColorBuffer(0)->bind();
-                    glActiveTexture(GL_TEXTURE4);
+                    glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->bind();
-                    glActiveTexture(GL_TEXTURE5);
+                    glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().bind();
-                    glActiveTexture(GL_TEXTURE6);
+                    glActiveTexture(GL_TEXTURE5);
                         skyBox.getPrefilterMap().bind();
-                    glActiveTexture(GL_TEXTURE7);
+                    glActiveTexture(GL_TEXTURE6);
                         skyBox.getBRDFLUT().bind();
 
                     shader->sendLigths(lights);
@@ -64,20 +62,18 @@
 
                     draw();
 
-                    glActiveTexture(GL_TEXTURE7);
-                        skyBox.getBRDFLUT().unbind();
                     glActiveTexture(GL_TEXTURE6);
-                        skyBox.getPrefilterMap().unbind();
+                        skyBox.getBRDFLUT().unbind();
                     glActiveTexture(GL_TEXTURE5);
-                        skyBox.getIrradianceMap().unbind();
+                        skyBox.getPrefilterMap().unbind();
                     glActiveTexture(GL_TEXTURE4);
-                        gBuffer.getColorBuffer(1)->unbind();
-                    glActiveTexture(GL_TEXTURE3);
-                        gBuffer.getColorBuffer(0)->unbind();
+                        skyBox.getIrradianceMap().unbind();
                     glActiveTexture(GL_TEXTURE2);
-                        gBuffer.getDepthBuffer()->unbind();
+                        gBuffer.getColorBuffer(1)->unbind();
+                    glActiveTexture(GL_TEXTURE1);
+                        gBuffer.getColorBuffer(0)->unbind();
                     glActiveTexture(GL_TEXTURE0);
-                        World::VoxelTypes::getMaterialAlbedo()->unbind();
+                        gBuffer.getDepthBuffer()->unbind();
                 shader->unbind();
             }
 
@@ -87,14 +83,9 @@
 
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
                     glDrawBuffers(2, buffers);
-
-                    glActiveTexture(GL_TEXTURE0);
-                        World::VoxelTypes::getMaterialNormal()->bind();
             }
 
             void DeferredRenderer::endGBufferPass() {
-                    glActiveTexture(GL_TEXTURE0);
-                        World::VoxelTypes::getMaterialNormal()->unbind();
                 gBuffer.unbind();
             }
 

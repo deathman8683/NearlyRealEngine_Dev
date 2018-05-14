@@ -7,22 +7,22 @@
             UVData::UVData() {
             }
 
-            UVData::UVData(UVData const& d) : Data<NREfloat>::Data(d) {
+            UVData::UVData(UVData const& d) : Data<GLshort>::Data(d) {
             }
 
-            UVData::UVData(UVData && d) : Data<NREfloat>::Data(d) {
+            UVData::UVData(UVData && d) : Data<GLshort>::Data(d) {
             }
 
             UVData::~UVData() {
             }
 
             UVData& UVData::operator=(UVData const& d) {
-                Data<NREfloat>::operator=(d);
+                Data<GLshort>::operator=(d);
                 return *this;
             }
 
             UVData& UVData::operator=(UVData && d) {
-                Data<NREfloat>::operator=(std::move(d));
+                Data<GLshort>::operator=(std::move(d));
                 return *this;
             }
 

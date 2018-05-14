@@ -8,9 +8,8 @@
 
             PBRShader::PBRShader() {
                 load();
-                addUniformLocation("texAlbedo");
                 addUniformLocation("texDepth");
-                addUniformLocation("texUVDiffuse");
+                addUniformLocation("texDiffuse");
                 addUniformLocation("texNormal");
                 addUniformLocation("irradianceMap");
                 addUniformLocation("prefilterMap");
@@ -76,13 +75,12 @@
             }
 
             void PBRShader::sendTextures() const {
-                use1I("texAlbedo", 0);
-                use1I("texDepth", 2);
-                use1I("texUVDiffuse", 3);
-                use1I("texNormal", 4);
-                use1I("irradianceMap", 5);
-                use1I("prefilterMap", 6);
-                use1I("brdfLUT", 7);
+                use1I("texDepth", 0);
+                use1I("texDiffuse", 1);
+                use1I("texNormal", 2);
+                use1I("irradianceMap", 4);
+                use1I("prefilterMap", 5);
+                use1I("brdfLUT", 6);
             }
 
             void PBRShader::sendInvProjection(Maths::Matrix4x4<NREfloat> const& m) const {

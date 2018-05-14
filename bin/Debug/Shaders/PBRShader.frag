@@ -25,9 +25,8 @@
     uniform mat4 lightModelview;
     uniform mat4 rotation;
 
-    uniform sampler2DArray texAlbedo;
     uniform sampler2D texDepth;
-    uniform sampler2D texUVDiffuse;
+    uniform sampler2D texDiffuse;
     uniform sampler2D texNormal;
     uniform sampler2D texShadow;
     uniform samplerCube irradianceMap;
@@ -90,12 +89,12 @@
     }
 
     float computeBlur(vec2 uv) {
-        vec2 texelSize = 1.0 / vec2(textureSize(texUVDiffuse, 0));
+        vec2 texelSize = 1.0 / vec2(textureSize(texDiffuse, 0));
         float result = 0.0;
         for (int x = -2; x < 2; x = x + 1) {
             for (int y = -2; y < 2; y = y + 1) {
                 vec2 offset = vec2(float(x), float(y)) * texelSize;
-                result += texture(texUVDiffuse, uv + offset).a;
+                result += texture(texDiffuse, uv + offset).a;
             }
         }
 
@@ -137,11 +136,9 @@
             vec3 V = normalize(cameraV - vertex);
             vec3 R = reflect(V, N);
             R = (rotation * vec4(R, 1.0)).xyz;
-            vec3 albedo = texture(texAlbedo, vec3(texture(texUVDiffuse, uv).xy, id)).xyz * materials[id].albedo;
-            float roughness = materials[id].roughness;
 
             vec3 F0 = vec3(0.04);
-            F0 = mix(F0, albedo, materials[id].metallic);
+            F0 = mix(F0, materials[id].albedo, materials[id].metallic);
 
             vec3 Lo = vec3(0.0);
             for (int i = 0; i < numLights; i = i + 1) {
@@ -152,8 +149,8 @@
                 float attenuation = mix(1.0, 1.0 / (distance * distance), lights[i].position.w);
                 vec3 radiance = lights[i].intensities * attenuation;
 
-                float NDF = distributionGGX(N, H, roughness);
-                float G = geometrySmith(N, V, L, roughness);
+                float NDF = distributionGGX(N, H, materials[id].roughness);
+                float G = geometrySmith(N, V, L, materials[id].roughness);
                 vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
 
                 vec3 kS = F;
@@ -166,21 +163,21 @@
 
 
                 float NdotL = max(dot(N, L), 0.0);
-                Lo += (kD * albedo / PI + specular) * radiance * NdotL;
+                Lo += (kD * materials[id].albedo / PI + specular) * radiance * NdotL;
             }
 
-            vec3 F = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, roughness);
+            vec3 F = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, materials[id].roughness);
 
             vec3 kS = F;
             vec3 kD = 1.0 - kS;
             kD *= 1.0 - materials[id].metallic;
 
             vec3 irradiance = texture(irradianceMap, N).rgb;
-            vec3 diffuse = irradiance * albedo;
+            vec3 diffuse = irradiance * materials[id].albedo;
 
             const float MAX_REFLECTION_LOD = 4.0;
-            vec3 prefilteredColor = textureLod(prefilterMap, R, roughness * MAX_REFLECTION_LOD).rgb;
-            vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
+            vec3 prefilteredColor = textureLod(prefilterMap, R, materials[id].roughness * MAX_REFLECTION_LOD).rgb;
+            vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), materials[id].roughness)).rg;
             vec3 specular = prefilteredColor * (F * brdf.x + brdf.y);
 
             vec3 ambient = (kD * computeBlur(uv) * diffuse + specular);
@@ -192,7 +189,7 @@
 
             out_Color = vec4(color, 1.0);
         } else {
-            out_Color = vec4(texture(texUVDiffuse, uv).rgb, 1.0);
+            out_Color = vec4(texture(texDiffuse, uv).rgb, 1.0);
         }
 
     }

@@ -9,7 +9,6 @@
     #pragma once
 
     #include "../VoxelType/Type/NRE_Type.hpp"
-    #include "../../../../GL_Wrapper/BufferObject/Texture2DArray/NRE_Texture2DArray.hpp"
 
     /**
      * @namespace NRE
@@ -46,16 +45,6 @@
                          * @return      the corresponding material type object
                          */
                         static Renderer::Material& getMaterial(GLubyte const& type);
-                        /**
-                         * Material Albedo getter
-                         * @return the material albedo texture
-                         */
-                        static GL::Texture2DArray* getMaterialAlbedo();
-                        /**
-                         * Material Normal getter
-                         * @return the material normal texture
-                         */
-                        static GL::Texture2DArray* getMaterialNormal();
 
                     //## Methods ##//
                         /**
@@ -68,12 +57,10 @@
                         static void free();
 
                 private:
-                    static VoxelType **voxelTypes;                /**< Store all differents voxel types */
-                    static Renderer::Material *materialTypes;     /**< Store all differents material types */
-                    static GL::Texture2DArray *materialAlbedo;    /**< Store all differents materials albedo textures */
-                    static GL::Texture2DArray *materialNormal;    /**< Store all differents materials normal textures */
+                    static VoxelType **voxelTypes;              /**< Store all differents voxel types */
+                    static Renderer::Material *materialTypes;   /**< Store all differents material types */
                 public:
-                    static GLuint size;                           /**< The size of both types array */
+                    static GLuint size;                         /**< The size of both types array */
             };
 
         };
