@@ -11,6 +11,7 @@
                 buffer = new GL::IBO(true);
                 buffer->push_back(new GL::MaterialBuffer(true));
                 buffer->push_back(new GL::NormalBuffer(true));
+                buffer->push_back(new GL::UVBuffer(true));
 
                 mesh = new Mesh3D(type, &model, 0, 0, 0, 0, 0, 0);
 

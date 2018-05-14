@@ -10,6 +10,7 @@
             Mesh3D::Mesh3D(GLenum const& type) : Mesh(type), target(0), left(0), right(0), front(0), back(0), up(0), bottom(0) {
                 push_back(new MaterialData());
                 push_back(new NormalData());
+                push_back(new UVData());
                 push_back(new IndexData());
             }
 
@@ -287,6 +288,10 @@
                 Maths::Vector3D<NREfloat> n;
                 GLuint idx1, idx2, nIdx;
 
+                Maths::Point2D<NREfloat> uv[4] = {
+                    {0, 0}, {0, 1}, {1, 0}, {1, 1}
+                };
+
                 switch (face) {
                     case (World::XNegative) : {
                         n = {-1, 0, 0};
@@ -317,33 +322,37 @@
                 }
 
                 add(0, p[2].value(), 3);
+                add(3, uv[2].value(), 2);
                 add(2, n.value(), 3);
                 add(1, &cCode);
                 nIdx = static_cast <GLuint> (getDataSet(0)->size() / 3) - 1;
-                add(3, &nIdx);
+                add(4, &nIdx);
                 idx1 = nIdx;
 
                 add(0, p[1].value(), 3);
+                add(3, uv[1].value(), 2);
                 add(2, n.value(), 3);
                 add(1, &cCode);
                 nIdx = static_cast <GLuint> (getDataSet(0)->size() / 3) - 1;
-                add(3, &nIdx);
+                add(4, &nIdx);
                 idx2 = nIdx;
 
                 add(0, p[0].value(), 3);
+                add(3, uv[0].value(), 2);
                 add(2, n.value(), 3);
                 add(1, &cCode);
                 nIdx = static_cast <GLuint> (getDataSet(0)->size() / 3) - 1;
-                add(3, &nIdx);
+                add(4, &nIdx);
 
                 add(0, p[3].value(), 3);
+                add(3, uv[3].value(), 2);
                 add(2, n.value(), 3);
                 add(1, &cCode);
                 nIdx = static_cast <GLuint> (getDataSet(0)->size() / 3) - 1;
-                add(3, &nIdx);
+                add(4, &nIdx);
 
-                add(3, &idx2);
-                add(3, &idx1);
+                add(4, &idx2);
+                add(4, &idx1);
             }
 
             void Mesh3D::processSphere(GL::IBO& buffer, GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type) {
@@ -359,6 +368,12 @@
                         NREfloat vX = x * radius;
                         NREfloat vY = y * radius;
                         NREfloat vZ = z * radius;
+
+                        NREfloat u = s * sector;
+                        NREfloat v = r * ring;
+
+                        add(3, &u);
+                        add(3, &v);
 
                         add(0, &vX);
                         add(0, &vY);
@@ -379,12 +394,12 @@
                         GLuint idx3 = (r + 1) * sectors + (s + 1);
                         GLuint idx4 = (r + 1) * sectors + s;
 
-                        add(3, &idx4);
-                        add(3, &idx2);
-                        add(3, &idx1);
-                        add(3, &idx2);
-                        add(3, &idx4);
-                        add(3, &idx3);
+                        add(4, &idx4);
+                        add(4, &idx2);
+                        add(4, &idx1);
+                        add(4, &idx2);
+                        add(4, &idx4);
+                        add(4, &idx3);
                     }
                 }
 

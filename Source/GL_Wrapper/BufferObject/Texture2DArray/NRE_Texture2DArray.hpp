@@ -36,6 +36,16 @@
                          * Default Constructor
                          */
                         Texture2DArray();
+                        /**
+                         * Construct a texture array and allocate the texture array with given parameters
+                         * @param internalFormat the texture's pixels' internal's format
+                         * @param w              the texture's width
+                         * @param h              the texture's height
+                         * @param z              the texture's level
+                         * @param format         the texture's pixels' format
+                         * @param callFilter     tell if the function has to apply filter or not for the given binding
+                         */
+                        Texture2DArray(GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLsizei const& z, GLenum const& format, bool const& callFilter);
 
                     //## Copy-Constructor ##//
                         /**

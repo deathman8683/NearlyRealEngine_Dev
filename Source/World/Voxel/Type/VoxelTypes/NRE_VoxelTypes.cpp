@@ -6,6 +6,8 @@
 
             VoxelType** VoxelTypes::voxelTypes = 0;
             Renderer::Material* VoxelTypes::materialTypes = 0;
+            GL::Texture2DArray* VoxelTypes::materialAlbedo = 0;
+            GL::Texture2DArray* VoxelTypes::materialNormal = 0;
             GLuint VoxelTypes::size = 0;
 
             GLuint const& VoxelTypes::getSize() {
@@ -18,6 +20,14 @@
 
             Renderer::Material& VoxelTypes::getMaterial(GLubyte const& type) {
                 return materialTypes[type];
+            }
+
+            GL::Texture2DArray* VoxelTypes::getMaterialAlbedo() {
+                return materialAlbedo;
+            }
+
+            GL::Texture2DArray* VoxelTypes::getMaterialNormal() {
+                return materialNormal;
             }
 
             void VoxelTypes::init() {
@@ -40,8 +50,14 @@
                 voxelTypes[TROPICAL_RAIN_FOREST] = new TropicalRainForest();
 
                 materialTypes = new Renderer::Material[TYPE_NUM];
+                materialAlbedo = new GL::Texture2DArray(GL_RGBA, 2048, 2048, TYPE_NUM, GL_RGBA, true);
+                materialNormal = new GL::Texture2DArray(GL_RGBA, 2048, 2048, TYPE_NUM, GL_RGBA, true);
+                GL::Texture2D texAlbedo("Data/Material/Test_Albedo.png", false);
+                GL::Texture2D texNormal("Data/Material/Test_Normal.png", false);
                 for (int i = 0; i < TYPE_NUM; i = i + 1) {
                     materialTypes[i] = voxelTypes[i]->getMaterial();
+                    materialAlbedo->sendTexture(texAlbedo, i);
+                    materialNormal->sendTexture(texNormal, i);
                 }
 
                 size = TYPE_NUM;
@@ -50,9 +66,8 @@
             void VoxelTypes::free() {
                 delete[] voxelTypes;
                 delete[] materialTypes;
-                voxelTypes = 0;
-                materialTypes = 0;
-                size = 0;
+                delete materialAlbedo;
+                delete materialNormal;
             }
 
         };

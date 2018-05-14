@@ -7,6 +7,10 @@
             Texture2DArray::Texture2DArray() : Texture3DBuffer::Texture3DBuffer(true) {
             }
 
+            Texture2DArray::Texture2DArray(GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLsizei const& z, GLenum const& format, bool const& callFilter) : Texture3DBuffer::Texture3DBuffer(true) {
+                allocate(internalFormat, w, h, z, format, callFilter);
+            }
+
             Texture2DArray::Texture2DArray(Texture2DArray && tex) : Texture3DBuffer::Texture3DBuffer(std::move(tex)), BufferObject::BufferObject(std::move(tex)) {
             }
 
