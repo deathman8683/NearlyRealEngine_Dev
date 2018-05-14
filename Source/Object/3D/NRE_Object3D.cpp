@@ -58,6 +58,11 @@
                 model.load(path);
             }
 
+            void Object3D::loadOBJ(std::string const& path) {
+                MeshLoader loader(static_cast <Mesh3D*> (mesh), path);
+                mesh->allocateAndFill(*buffer, GL_STATIC_DRAW);
+            }
+
             void Object3D::process(GLenum const& usage, Maths::Point2D<GLint> const& coord) {
                 static_cast <Mesh3D*> (mesh)->process(*(static_cast<GL::IBO*> (buffer)), usage, coord);
             }

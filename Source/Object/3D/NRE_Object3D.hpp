@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../NRE_Object.hpp"
+    #include "../Mesh/Loader/NRE_MeshLoader.hpp"
 
     /**
      * @namespace NRE
@@ -114,6 +115,7 @@
                          * @param path the file's path
                          */
                         void load(std::string const& path);
+                        void loadOBJ(std::string const& path);
                         /**
                          * Process the object's mesh
                          * @param usage the object's rendering usage

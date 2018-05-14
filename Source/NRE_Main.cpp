@@ -45,7 +45,7 @@
 
             for (GLuint i = 1; i < World::VoxelTypes::getSize(); i = i + 1) {
                 Object::Object3D* sphere = new Object::Object3D(GL_FLOAT, Maths::Vector3D<GLuint>(0, 0, 0));
-                sphere->processSphere(GL_STATIC_DRAW, 5, 100, 100, i);
+                sphere->processSphere(GL_STATIC_DRAW, 5, 50, 50, i);
                 materialSpheres.push_back(sphere);
             }
 
@@ -88,7 +88,7 @@
                     if (mode.isActive()) {
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
-                    engineWorld.render(modelview, &camera);
+                    //engineWorld.render(modelview, &camera);
                     const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
                     tmp = modelview;
                     tmp.translate(Maths::Vector3D<NREfloat>(0, -90, 100));
