@@ -75,11 +75,6 @@
                     }
                 }
 
-                std::cout << target->getDataSet(0)->size() << std::endl;
-                std::cout << target->getDataSet(1)->size() << std::endl;
-                std::cout << target->getDataSet(2)->size() << std::endl;
-                std::cout << target->getDataSet(3)->size() << std::endl;
-
                 GLubyte material = 16;
                 for (GLuint i = 0; i < target->getDataSet(0)->size() / 3; i = i + 1) {
                     target->add(1, &material);

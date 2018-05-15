@@ -340,5 +340,26 @@
                                                                     0.0, 0.8);
             }
 
+            Gold::Gold() {
+            }
+
+            Gold::~Gold() {
+            }
+
+            Color::RGB const Gold::getColor() const {
+                return Color::RGB(255, 181, 74);
+            }
+
+            bool const Gold::isSolid() const {
+                return true;
+            }
+
+            Renderer::Material const Gold::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
+                                                                    0.9, 0.1);
+            }
+
         };
     };

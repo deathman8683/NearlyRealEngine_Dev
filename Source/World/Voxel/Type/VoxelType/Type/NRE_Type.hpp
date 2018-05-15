@@ -60,7 +60,7 @@
 
             /**
              * @class Ocean
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a ocean type voxel
              */
             class Ocean : public VoxelType {
                 public:
@@ -96,7 +96,7 @@
 
             /**
              * @class Beach
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a beach type voxel
              */
             class Beach : public VoxelType {
                 public:
@@ -132,7 +132,7 @@
 
             /**
              * @class Scorched
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a scorched type voxel
              */
             class Scorched : public VoxelType {
                 public:
@@ -168,7 +168,7 @@
 
             /**
              * @class Bare
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a bare type voxel
              */
             class Bare : public VoxelType {
                 public:
@@ -204,7 +204,7 @@
 
             /**
              * @class Tundra
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a tundra type voxel
              */
             class Tundra : public VoxelType {
                 public:
@@ -240,7 +240,7 @@
 
             /**
              * @class Snow
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a snow type voxel
              */
             class Snow : public VoxelType {
                 public:
@@ -276,7 +276,7 @@
 
             /**
              * @class TemperateDesert
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a temperate desert type voxel
              */
             class TemperateDesert : public VoxelType {
                 public:
@@ -312,7 +312,7 @@
 
             /**
              * @class SubtropicalDesert
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a subtropical desert type voxel
              */
             class SubtropicalDesert : public VoxelType {
                 public:
@@ -348,7 +348,7 @@
 
             /**
              * @class Shrubland
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a shrubland type voxel
              */
             class Shrubland : public VoxelType {
                 public:
@@ -384,7 +384,7 @@
 
             /**
              * @class Taiga
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a taiga type voxel
              */
             class Taiga : public VoxelType {
                 public:
@@ -456,7 +456,7 @@
 
             /**
              * @class TemperateDeciduousForest
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a temperate deciduous forest type voxel
              */
             class TemperateDeciduousForest : public VoxelType {
                 public:
@@ -492,7 +492,7 @@
 
             /**
              * @class TemperateRainForest
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a temperate rain forest type voxel
              */
             class TemperateRainForest : public VoxelType {
                 public:
@@ -528,7 +528,7 @@
 
             /**
              * @class TropicalSeasonalForest
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a tropical seasonal forest type voxel
              */
             class TropicalSeasonalForest : public VoxelType {
                 public:
@@ -564,7 +564,7 @@
 
             /**
              * @class TropicalRainForest
-             * @brief World's Object : a grass type voxel
+             * @brief World's Object : a tropical rain forest type voxel
              */
             class TropicalRainForest : public VoxelType {
                 public:
@@ -579,6 +579,42 @@
                          * TropicalRainForest Deconstructor
                          */
                         ~TropicalRainForest();
+
+                    //## Getter ##//
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
+            };
+
+            /**
+             * @class Gold
+             * @brief World's Object : a gold type voxel
+             */
+            class Gold : public VoxelType {
+                public:
+                    //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
+                        Gold();
+
+                    //## Deconstructor ##//
+                        /**
+                         * Gold Deconstructor
+                         */
+                        ~Gold();
 
                     //## Getter ##//
                         /**

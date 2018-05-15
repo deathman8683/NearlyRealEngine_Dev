@@ -38,6 +38,7 @@
                 voxelTypes[TEMPERATE_RAIN_FOREST] = new TemperateRainForest();
                 voxelTypes[TROPICAL_SEASONAL_FOREST] = new TropicalSeasonalForest();
                 voxelTypes[TROPICAL_RAIN_FOREST] = new TropicalRainForest();
+                voxelTypes[GOLD] = new Gold();
 
                 materialTypes = new Renderer::Material[TYPE_NUM];
                 for (int i = 0; i < TYPE_NUM; i = i + 1) {
