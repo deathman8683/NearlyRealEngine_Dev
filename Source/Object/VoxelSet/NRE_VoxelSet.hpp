@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_Model.hpp
-     * @brief Declaration of Engine's Object's Object : Model
+     * @file NRE_VoxelSet.hpp
+     * @brief Declaration of Engine's Object's Object : VoxelSet
      * @author Louis ABEL
      * @version 1.0
      */
@@ -29,10 +29,10 @@
         namespace Object {
 
             /**
-             * @class Model
+             * @class VoxelSet
              * @brief Object's Object : Manage voxels storing for an object 3D model
              */
-            class Model {
+            class VoxelSet {
                 private:
                     World::Voxel* voxels;           /**< The model's voxels */
                     Maths::Vector3D<GLuint> size;   /**< The model's size */
@@ -43,34 +43,34 @@
                         /**
                          * Default Constructor
                          */
-                        Model();
+                        VoxelSet();
                         /**
                          * Construct a model with a given size
                          * @param size the model's size
                          */
-                        Model(Maths::Vector3D<GLuint> const& size);
+                        VoxelSet(Maths::Vector3D<GLuint> const& size);
 
                     //## Copy-Constructor ##//
                         /**
                          * Copy m into this
                          * @param m the model to copy the content
                          */
-                        Model(Model const& m);
+                        VoxelSet(VoxelSet const& m);
 
                     //## Move-Constructor ##//
                         /**
                          * Move m into this, leaving m empty
                          * @param m the model to move
                          */
-                        Model(Model && m);
+                        VoxelSet(VoxelSet && m);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * Model Deconstructor
+                         * VoxelSet Deconstructor
                          */
-                        ~Model();
+                        ~VoxelSet();
 
                     //## Getter ##//
                         /**
@@ -166,13 +166,13 @@
                          * @param m the model to copy into this
                          * @return the reference of himself
                          */
-                        Model& operator=(Model const& m);
+                        VoxelSet& operator=(VoxelSet const& m);
                         /**
                          * Move assigment of m into this, leaving m empty
                          * @param m the model to move into this
                          * @return the reference of himself
                          */
-                        Model& operator=(Model && m);
+                        VoxelSet& operator=(VoxelSet && m);
 
                     //## Shortcut Operator ##//
 
