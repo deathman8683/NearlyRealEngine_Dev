@@ -125,8 +125,6 @@
             DeferredRenderer& DeferredRenderer::operator=(DeferredRenderer && def) {
                 gBuffer = std::move(def.gBuffer);
                 ssao = std::move(def.ssao);
-                buffer = std::move(def.buffer);
-                vao = std::move(def.vao);
                 return *this;
             }
 

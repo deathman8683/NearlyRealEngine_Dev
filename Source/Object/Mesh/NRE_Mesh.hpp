@@ -17,6 +17,7 @@
     #include "Data/UVData/NRE_UVData.hpp"
     #include "Data/ColorData/NRE_ColorData.hpp"
     #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
+    #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
 
     /**
      * @namespace NRE
@@ -35,6 +36,8 @@
              */
             class Mesh {
                 protected:
+                    GL::VBO* buffer;                /**< The mesh's rendering buffer */
+                    GL::VAO vao;                    /**< The mesh's rendering VAO */
                     std::vector<DataSet*> data;     /**< The mesh's array of data set fill with a model information */
                     GLenum type;                    /**< The mesh's vertex data type */
 
@@ -52,10 +55,10 @@
 
                     //## Copy-Constructor ##//
                         /**
-                         * Copy m into this
+                         * No copy allowed
                          * @param m the mesh to copy the content
                          */
-                        Mesh(Mesh const& m);
+                        Mesh(Mesh const& m) = delete;
 
                     //## Move-Constructor ##//
                         /**
@@ -101,31 +104,42 @@
                          */
                         void add(GLuint const& index, const GLvoid* const value, GLuint const& nbValue = 1) const;
                         /**
-                         * Update a VBO with mesh's data
-                         * @param buffer the buffer to update
+                         * Update the VBO with mesh's data
                          * @param offset a set of offset to pass to VBO's update
                          */
-                        void update(GL::VBO& buffer, std::vector<GLintptr> const& offset);
+                        void update(std::vector<GLintptr> const& offset);
                         /**
-                         * Allocate and fill a VBO with mesh's data
-                         * @param buffer the buffer to allocate and fill
+                         * Update the VBO with mesh's data and null offset
+                         */
+                        void update();
+                        /**
+                         * Allocate and fill the VBO with mesh's data
                          * @param usage  the buffer's usage
                          */
-                        void allocateAndFill(GL::VBO& buffer, GLenum const& usage);
+                        void allocateAndFill(GLenum const& usage);
                         /**
                          * Clear all data set
                          */
                         void clear();
+                        /**
+                         * Draw the current mesh, need to be call from a rendering context (Shader bind)
+                         */
+                        void draw() const;
+                        /**
+                         * Bind the VAO to the object Buffer using the mesh data type
+                         */
+                        void access();
+                        void reload();
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
-                         * Copy assigment of m into this
+                         * No copy allowed
                          * @param m the mesh to copy into this
                          * @return the reference of himself
                          */
-                        Mesh& operator=(Mesh const& m);
+                        Mesh& operator=(Mesh const& m) = delete;
                         /**
                          * Move assigment of m into this, leaving m empty
                          * @param m the mesh to move into this
@@ -145,29 +159,25 @@
 
                 private:
                     /**
-                     * Update a VBO with mesh's data
-                     * @param buffer the buffer to update
+                     * Update the VBO with mesh's data
                      * @param offset a set of offset to pass to VBO's update
                      */
-                    void updateVBO(GL::VBO& buffer, std::vector<GLintptr> const& offset) const;
+                    void updateVBO(std::vector<GLintptr> const& offset) const;
                     /**
-                     * Update an IBO with mesh's data
-                     * @param buffer the buffer to update
+                     * Update the IBO with mesh's data
                      * @param offset a set of offset to pass to VBO's update
                      */
-                    void updateIBO(GL::IBO& buffer, std::vector<GLintptr> const& offset) const;
+                    void updateIBO(std::vector<GLintptr> const& offset) const;
                     /**
-                     * Allocate and fill a VBO with mesh's data
                      * @param buffer the buffer to allocate and fill
                      * @param usage  the buffer's usage
                      */
-                    void allocateAndFillVBO(GL::VBO& buffer, GLenum const& usage) const;
+                    void allocateAndFillVBO(GLenum const& usage) const;
                     /**
-                     * Allocate and fill an IBO with mesh's data
                      * @param buffer the buffer to allocate and fill
                      * @param usage  the buffer's usage
                      */
-                    void allocateAndFillIBO(GL::IBO& buffer, GLenum const& usage) const;
+                    void allocateAndFillIBO(GLenum const& usage) const;
             };
 
         };

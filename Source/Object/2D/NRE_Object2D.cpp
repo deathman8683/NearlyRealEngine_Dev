@@ -8,12 +8,7 @@
             }
 
             Object2D::Object2D(GLenum const& type) {
-                buffer = new GL::VBO(true);
-                buffer->push_back(new GL::UVBuffer(true));
-
                 mesh = new Mesh2D(type);
-
-                access();
             }
 
             Object2D::Object2D(GLenum const& type, GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size) : Object2D(type) {
@@ -27,7 +22,7 @@
             }
 
             void Object2D::process(GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> size) {
-                static_cast <Mesh2D*> (mesh)->process(*buffer, usage, coord, size);
+                static_cast <Mesh2D*> (mesh)->process(usage, coord, size);
             }
 
             Object2D& Object2D::operator=(Object2D && o) {

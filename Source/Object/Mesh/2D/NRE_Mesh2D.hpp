@@ -43,10 +43,10 @@
 
                     //## Copy-Constructor ##//
                         /**
-                         * Copy m into this
+                         * No copy allowed
                          * @param m the 2D mesh to copy the content
                          */
-                        Mesh2D(Mesh2D const& m);
+                        Mesh2D(Mesh2D const& m) = delete;
 
                     //## Move-Constructor ##//
                         /**
@@ -70,22 +70,21 @@
                     //## Methods ##//
                         /**
                          * Process the mesh and create the graphical model from the object coordinates and size
-                         * @param buffer the buffer to fill
                          * @param usage  the buffer's usage
                          * @param coord  the object's coordinates
                          * @param size   the object's size
                          */
-                        void process(GL::VBO& buffer, GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> const& size);
+                        void process(GLenum const& usage, Maths::Point2D<GLint> const& coord, Maths::Vector2D<GLint> const& size);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
-                         * Copy assigment of m into this
+                         * No copy allowed
                          * @param m the 2D mesh to copy into this
                          * @return the reference of himself
                          */
-                        Mesh2D& operator=(Mesh2D const& m);
+                        Mesh2D& operator=(Mesh2D const& m) = delete;
                         /**
                          * Move assigment of m into this, leaving m empty
                          * @param m the 2D mesh to move into this

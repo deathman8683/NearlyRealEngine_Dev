@@ -64,10 +64,10 @@
 
                     //## Copy-Constructor ##//
                         /**
-                         * Copy m into this
+                         * No copy allowed
                          * @param m the 3D mesh to copy the content
                          */
-                        Mesh3D(Mesh3D const& m);
+                        Mesh3D(Mesh3D const& m) = delete;
 
                     //## Move-Constructor ##//
                         /**
@@ -121,11 +121,10 @@
                     //## Methods ##//
                         /**
                          * Construct the mesh and create the graphical model from the target's model
-                         * @param buffer the buffer to fill
                          * @param usage  the buffer's usage
                          * @param coord  the model's coordinates
                          */
-                        void process(GL::IBO& buffer, GLenum const& usage, Maths::Point2D<GLint> const& coord);
+                        void process(GLenum const& usage, Maths::Point2D<GLint> const& coord);
                         /**
                          * Add a voxel into the mesh, compute several optimization like merging and culling
                          * @param x    the voxel x coordinates in model referencial
@@ -156,24 +155,23 @@
                         void addPackedVertex(Maths::Point3D<GLint> const (&p)[4], GLuint const& face, size_t const& cCode);
                         /**
                          * Process a sphere with given parameters
-                         * @param buffer  the buffer to fill
                          * @param usage   the buffer's usage
                          * @param radius  the sphere's radius
                          * @param rings   the sphere's number of rings
                          * @param sectors the sphere's number of sectors
                          * @param type    the sphere's material's type
                          */
-                        void processSphere(GL::IBO& buffer, GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type);
+                        void processSphere(GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
-                         * Copy assigment of m into this
+                         * No copy allowed
                          * @param m the 3D mesh to copy into this
                          * @return the reference of himself
                          */
-                        Mesh3D& operator=(Mesh3D const& m);
+                        Mesh3D& operator=(Mesh3D const& m) = delete;
                         /**
                          * Move assigment of m into this, leaving m empty
                          * @param m the 3D mesh to move into this

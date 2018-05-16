@@ -11,6 +11,12 @@
                 push_back(new MaterialData());
                 push_back(new NormalData());
                 push_back(new IndexData());
+
+                buffer = new GL::IBO(true);
+                buffer->push_back(new GL::MaterialBuffer(true));
+                buffer->push_back(new GL::NormalBuffer(true));
+
+                access();
             }
 
             Mesh3D::Mesh3D(GLenum const& type, const Model* target, const Model* left, const Model* right, const Model* front, const Model* back, const Model* up, const Model* bottom) : Mesh3D(type) {
@@ -21,9 +27,6 @@
                 this->back = back;
                 this->up = up;
                 this->bottom = bottom;
-            }
-
-            Mesh3D::Mesh3D(Mesh3D const& m) : Mesh::Mesh(m), target(m.target), left(m.left), right(m.right), front(m.front), back(m.back), up(m.up), bottom(m.bottom) {
             }
 
             Mesh3D::Mesh3D(Mesh3D && m) : Mesh::Mesh(std::move(m)), target(std::move(m.target)), left(std::move(m.left)), right(std::move(m.right)), front(std::move(m.front)), back(std::move(m.back)), up(std::move(m.up)), bottom(std::move(m.bottom)) {
@@ -56,7 +59,7 @@
                 bottom = model;
             }
 
-            void Mesh3D::process(GL::IBO& buffer, GLenum const& usage, Maths::Point2D<GLint> const& coord) {
+            void Mesh3D::process(GLenum const& usage, Maths::Point2D<GLint> const& coord) {
                 GLuint index;
                 bool face[World::FACE_NUM];
 
@@ -80,7 +83,7 @@
                     }
                 }
 
-                allocateAndFill(buffer, usage);
+                allocateAndFill(usage);
             }
 
             void Mesh3D::addVoxel(GLuint const& x, GLuint const& y, GLuint const& z, GLint const& rX, GLint const& rY, GLint const& rZ, bool const (&face)[6]) {
@@ -346,7 +349,7 @@
                 add(3, &idx1);
             }
 
-            void Mesh3D::processSphere(GL::IBO& buffer, GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type) {
+            void Mesh3D::processSphere(GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type) {
                 NREfloat ring = 1.0 / static_cast <NREfloat> (rings - 1);
                 NREfloat sector = 1.0 / static_cast <NREfloat> (sectors - 1);
 
@@ -388,19 +391,7 @@
                     }
                 }
 
-                allocateAndFill(buffer, usage);
-            }
-
-            Mesh3D& Mesh3D::operator=(Mesh3D const& m) {
-                Mesh::operator=(m);
-                target = m.target;
-                left = m.left;
-                right = m.right;
-                front = m.front;
-                back = m.back;
-                up = m.up;
-                bottom = m.bottom;
-                return *this;
+                allocateAndFill(usage);
             }
 
             Mesh3D& Mesh3D::operator=(Mesh3D && m) {

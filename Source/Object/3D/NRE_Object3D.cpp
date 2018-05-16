@@ -8,13 +8,7 @@
             }
 
             Object3D::Object3D(GLenum const& type, Maths::Vector3D<GLuint> size) : model(size) {
-                buffer = new GL::IBO(true);
-                buffer->push_back(new GL::MaterialBuffer(true));
-                buffer->push_back(new GL::NormalBuffer(true));
-
                 mesh = new Mesh3D(type, &model, 0, 0, 0, 0, 0, 0);
-
-                access();
             }
 
             Object3D::Object3D(Object3D && o) : Object::Object(std::move(o)), model(std::move(o.model)) {
@@ -60,15 +54,15 @@
 
             void Object3D::loadOBJ(std::string const& path) {
                 MeshLoader loader(static_cast <Mesh3D*> (mesh), path);
-                mesh->allocateAndFill(*buffer, GL_STATIC_DRAW);
+                mesh->allocateAndFill(GL_STATIC_DRAW);
             }
 
             void Object3D::process(GLenum const& usage, Maths::Point2D<GLint> const& coord) {
-                static_cast <Mesh3D*> (mesh)->process(*(static_cast<GL::IBO*> (buffer)), usage, coord);
+                static_cast <Mesh3D*> (mesh)->process(usage, coord);
             }
 
             void Object3D::processSphere(GLenum const& usage, NREfloat const& radius, NREfloat const& rings, NREfloat const& sectors, GLubyte const& type) {
-                static_cast <Mesh3D*> (mesh)->processSphere(*(static_cast<GL::IBO*> (buffer)), usage, radius, rings, sectors, type);
+                static_cast <Mesh3D*> (mesh)->processSphere(usage, radius, rings, sectors, type);
             }
 
             void Object3D::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type) {

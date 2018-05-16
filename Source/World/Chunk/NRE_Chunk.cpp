@@ -206,16 +206,13 @@
             void Chunk::reload() {
                 setConstructed(false);
                 setConstructing(false);
-                buffer->reload();
-                vao.access(*buffer, GL_INT);
+                Object::reload();
                 bounding.setCenter(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2);
             }
 
             Chunk& Chunk::operator=(Chunk && c) {
                 model = std::move(c.model);
                 coord = std::move(c.coord);
-                buffer = std::move(c.buffer);
-                vao = std::move(c.vao);
                 bounding = std::move(c.bounding);
                 active = std::move(c.active);
                 loaded = std::move(c.loaded);

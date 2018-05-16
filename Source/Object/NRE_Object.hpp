@@ -13,7 +13,6 @@
     #include "Mesh/NRE_Mesh.hpp"
     #include "Mesh/2D/NRE_Mesh2D.hpp"
     #include "Mesh/3D/NRE_Mesh3D.hpp"
-    #include "../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
 
     /**
      * @namespace NRE
@@ -32,8 +31,6 @@
              */
             class Object {
                 protected:
-                    GL::VBO* buffer;    /**< The object's rendering buffer */
-                    GL::VAO vao;        /**< The object's rendering VAO */
                     Mesh* mesh;         /**< The object's mesh */
 
                 public:
@@ -43,11 +40,10 @@
                          */
                         Object();
                         /**
-                         * Construct an object with his rendering buffer
-                         * @param buf   the rendering buffer, containing (or not yet) the object's model
+                         * Construct an object with his mesh
                          * @param mesh  the object mesh, containing (or not yet) the object's model
                          */
-                        Object(GL::VBO* buf, Mesh* mesh);
+                        Object(Mesh* mesh);
 
                     //## Copy-Constructor ##//
                         /**
@@ -96,10 +92,7 @@
                          * Draw the current object, need to be call from a rendering context (Shader bind)
                          */
                         void draw() const;
-                        /**
-                         * Bind the VAO to the object Buffer using the mesh data type
-                         */
-                        void access();
+                        void reload();
 
                     //## Access Operator ##//
 
