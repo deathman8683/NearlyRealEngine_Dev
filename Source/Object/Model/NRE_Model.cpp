@@ -1,63 +1,63 @@
 
-    #include "NRE_VoxelSet.hpp"
+    #include "NRE_Model.hpp"
 
     namespace NRE {
         namespace Object {
 
-            VoxelSet::VoxelSet() {
+            Model::Model() {
             }
 
-            VoxelSet::VoxelSet(Maths::Vector3D<GLuint> const& size) : size(size), maxSolidHeight(0) {
+            Model::Model(Maths::Vector3D<GLuint> const& size) : size(size), maxSolidHeight(0) {
                 voxels = new World::Voxel[size.getX() * size.getY() * size.getZ()];
             }
 
-            VoxelSet::VoxelSet(VoxelSet const& m) : voxels(m.voxels), size(m.size), maxSolidHeight(m.maxSolidHeight) {
+            Model::Model(Model const& m) : voxels(m.voxels), size(m.size), maxSolidHeight(m.maxSolidHeight) {
             }
 
-            VoxelSet::VoxelSet(VoxelSet && m) : voxels(std::move(m.voxels)), size(std::move(m.size)), maxSolidHeight(std::move(m.maxSolidHeight)) {
+            Model::Model(Model && m) : voxels(std::move(m.voxels)), size(std::move(m.size)), maxSolidHeight(std::move(m.maxSolidHeight)) {
             }
 
-            VoxelSet::~VoxelSet() {
+            Model::~Model() {
                 delete[] voxels;
             }
 
-            World::Voxel const& VoxelSet::getVoxel(Maths::Point3D<GLuint> const& p) const {
+            World::Voxel const& Model::getVoxel(Maths::Point3D<GLuint> const& p) const {
                 return getVoxel(p.getX(), p.getY(), p.getZ());
             }
 
-            World::Voxel const& VoxelSet::getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const {
+            World::Voxel const& Model::getVoxel(GLuint const& x, GLuint const& y, GLuint const& z) const {
                 return voxels[getVoxelIndex(x, y, z)];
             }
 
-            World::Voxel const& VoxelSet::getVoxel(GLuint const& index) const {
+            World::Voxel const& Model::getVoxel(GLuint const& index) const {
                 return voxels[index];
             }
 
-            GLuint const VoxelSet::getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) const {
+            GLuint const Model::getVoxelIndex(GLuint const& x, GLuint const& y, GLuint const& z) const {
                 return Array::get1DIndexFrom3D(x, y, z, size);
             }
 
-            Maths::Vector3D<GLuint> const& VoxelSet::getSize() const {
+            Maths::Vector3D<GLuint> const& Model::getSize() const {
                 return size;
             }
 
-            GLuint const& VoxelSet::getMaxSolidHeight() const {
+            GLuint const& Model::getMaxSolidHeight() const {
                 return maxSolidHeight;
             }
 
-            void VoxelSet::setMaxSolidHeight(GLuint const& height) {
+            void Model::setMaxSolidHeight(GLuint const& height) {
                 maxSolidHeight = height;
             }
 
-            void VoxelSet::setType(Maths::Point3D<GLuint> const& p, GLubyte const& type) {
+            void Model::setType(Maths::Point3D<GLuint> const& p, GLubyte const& type) {
                 voxels[getVoxelIndex(p.getX(), p.getY(), p.getZ())].setType(type);
             }
 
-            void VoxelSet::save(std::string const& path) const {
+            void Model::save(std::string const& path) const {
                 std::fstream modelFile;
                 modelFile.open(path, std::ios::trunc | std::ios::out | std::ios::binary);
                 if (!modelFile.is_open()) {
-                    throw (Exception::IOException("VoxelSet File could not be open : " + path));
+                    throw (Exception::IOException("Model File could not be open : " + path));
                 }
                 std::stringstream data;
                 writeCompressedData(data);
@@ -65,11 +65,11 @@
                 modelFile.close();
             }
 
-            void VoxelSet::load(std::string const& path) {
+            void Model::load(std::string const& path) {
                 std::fstream modelFile;
                 modelFile.open(path, std::ios::in | std::ios::binary | std::ios_base::ate);
                 if (!modelFile.is_open()) {
-                    throw (Exception::IOException("VoxelSet File could not be open : " + path));
+                    throw (Exception::IOException("Model File could not be open : " + path));
                 }
 
                 GLuint dataSize = modelFile.tellg();
@@ -86,7 +86,7 @@
                 }
             }
 
-            void VoxelSet::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type) {
+            void Model::loadVoxels(GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type) {
                 GLuint index, n = nb;
                 while (n != 0) {
                     index = getVoxelIndex(x, y, z);
@@ -109,7 +109,7 @@
                 }
             }
 
-            void VoxelSet::createProceduralTerrain(FastNoise const& soilGenerator, FastNoise const& moistureGenerator, Maths::Point2D<GLint> const& coord) {
+            void Model::createProceduralTerrain(FastNoise const& soilGenerator, FastNoise const& moistureGenerator, Maths::Point2D<GLint> const& coord) {
                 GLint z;
                 GLuint index;
 
@@ -219,7 +219,7 @@
                 }
             }
 
-            void VoxelSet::writeCompressedData(std::stringstream &data) const {
+            void Model::writeCompressedData(std::stringstream &data) const {
                 GLuint x = 0, y = 0, z = 0;
                 GLuint currentType = getVoxel(x, y, z).getType(), currentLineSize = 0;
                 while (z != size.getZ()) {
@@ -246,14 +246,14 @@
                 data.write(reinterpret_cast<char*> (&currentType), 1);
             }
 
-            VoxelSet& VoxelSet::operator=(VoxelSet const& m) {
+            Model& Model::operator=(Model const& m) {
                 voxels = m.voxels;
                 size = m.size;
                 maxSolidHeight = m.maxSolidHeight;
                 return *this;
             }
 
-            VoxelSet& VoxelSet::operator=(VoxelSet && m) {
+            Model& Model::operator=(Model && m) {
                 voxels = std::move(m.voxels);
                 size = std::move(m.size);
                 maxSolidHeight = std::move(m.maxSolidHeight);
