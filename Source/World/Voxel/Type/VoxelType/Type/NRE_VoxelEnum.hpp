@@ -40,7 +40,14 @@
                 TEMPERATE_RAIN_FOREST,
                 TROPICAL_SEASONAL_FOREST,
                 TROPICAL_RAIN_FOREST,
-                GOLD,
+                MAT_1,
+                MAT_2,
+                MAT_3,
+                MAT_4,
+                MAT_5,
+                MAT_6,
+                MAT_7,
+                MAT_8,
 
                 TYPE_NUM    /**< Number of voxel type */
             };

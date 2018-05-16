@@ -8,8 +8,11 @@
 
     #pragma once
 
+    #include <assimp/Importer.hpp>
+    #include <assimp/scene.h>
+    #include <assimp/postprocess.h>
     #include "../NRE_Object.hpp"
-    #include "../Mesh/Loader/NRE_MeshLoader.hpp"
+    #include "../../Exception/AssimpException/NRE_AssimpException.hpp"
 
     /**
      * @namespace NRE
@@ -63,7 +66,9 @@
                     //## Setter ##//
 
                     //## Methods ##//
-                        void loadOBJ(std::string const& path);
+                        void load(GLenum const& usage, std::string const& path);
+                        void processNode(aiNode *node, const aiScene *scene);
+                        Mesh3D* processMesh(aiMesh *mesh, const aiScene *scene);
                         /**
                          * Process a sphere into the current object
                          * @param usage the object's rendering usage

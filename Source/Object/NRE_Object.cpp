@@ -25,8 +25,20 @@
                 meshes[meshIndex]->update();
             }
 
+            void Object::update() {
+                for (Mesh* m : meshes) {
+                    m->update();
+                }
+            }
+
             void Object::allocateAndFill(GLuint const& meshIndex, GLenum const& usage) {
                 meshes[meshIndex]->allocateAndFill(usage);
+            }
+
+            void Object::allocateAndFill(GLenum const& usage) {
+                for (Mesh* m : meshes) {
+                    m->allocateAndFill(usage);
+                }
             }
 
             void Object::draw() const {

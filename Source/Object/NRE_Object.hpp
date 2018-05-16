@@ -80,12 +80,14 @@
                          * @param meshIndex the mesh's index in the meshes
                          */
                         void update(GLuint const& meshIndex);
+                        void update();
                         /**
                          * Allocate and fill the current object's buffer from his mesh
                          * @param meshIndex the mesh's index in the meshes
                          * @param usage the object's rendering usage
                          */
                         void allocateAndFill(GLuint const& meshIndex, GLenum const& usage);
+                        void allocateAndFill(GLenum const& usage);
                         /**
                          * Draw the current object, need to be call from a rendering context (Shader bind)
                          */

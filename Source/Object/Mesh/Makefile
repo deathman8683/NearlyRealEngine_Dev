@@ -5,7 +5,6 @@ OBJDIR = ../../../obj/Debug/Object/Mesh/
 DATA = Data
 2D = 2D
 3D = 3D
-LOADER = Loader
 
 all : before $(TARGET) after
 
@@ -15,7 +14,6 @@ before:
 after:
 	@(cd $(2D) && $(MAKE))
 	@(cd $(3D) && $(MAKE))
-	@(cd $(LOADER) && $(MAKE))
 
 debug: $(OBJ)
 

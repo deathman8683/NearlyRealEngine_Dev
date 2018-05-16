@@ -599,22 +599,274 @@
             };
 
             /**
-             * @class Gold
+             * @class Mat_1
              * @brief World's Object : a gold type voxel
              */
-            class Gold : public VoxelType {
+            class Mat_1 : public VoxelType {
                 public:
                     //## Constructor ##//
                         /**
                          * Default Constructor
                          */
-                        Gold();
+                        Mat_1();
 
                     //## Deconstructor ##//
                         /**
-                         * Gold Deconstructor
+                         * Mat_1 Deconstructor
                          */
-                        ~Gold();
+                        ~Mat_1();
+
+                    //## Getter ##//
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
+            };
+
+            /**
+             * @class Mat_2
+             * @brief World's Object : a gold type voxel
+             */
+            class Mat_2 : public VoxelType {
+                public:
+                    //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
+                        Mat_2();
+
+                    //## Deconstructor ##//
+                        /**
+                         * Mat_2 Deconstructor
+                         */
+                        ~Mat_2();
+
+                    //## Getter ##//
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
+            };
+
+            /**
+             * @class Mat_3
+             * @brief World's Object : a gold type voxel
+             */
+            class Mat_3 : public VoxelType {
+                public:
+                    //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
+                        Mat_3();
+
+                    //## Deconstructor ##//
+                        /**
+                         * Mat_3 Deconstructor
+                         */
+                        ~Mat_3();
+
+                    //## Getter ##//
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
+            };
+
+            /**
+             * @class Mat_4
+             * @brief World's Object : a gold type voxel
+             */
+            class Mat_4 : public VoxelType {
+                public:
+                    //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
+                        Mat_4();
+
+                    //## Deconstructor ##//
+                        /**
+                         * Mat_4 Deconstructor
+                         */
+                        ~Mat_4();
+
+                    //## Getter ##//
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
+            };
+
+            /**
+             * @class Mat_5
+             * @brief World's Object : a gold type voxel
+             */
+            class Mat_5 : public VoxelType {
+                public:
+                    //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
+                        Mat_5();
+
+                    //## Deconstructor ##//
+                        /**
+                         * Mat_5 Deconstructor
+                         */
+                        ~Mat_5();
+
+                    //## Getter ##//
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
+            };
+
+            /**
+             * @class Mat_6
+             * @brief World's Object : a gold type voxel
+             */
+            class Mat_6 : public VoxelType {
+                public:
+                    //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
+                        Mat_6();
+
+                    //## Deconstructor ##//
+                        /**
+                         * Mat_6 Deconstructor
+                         */
+                        ~Mat_6();
+
+                    //## Getter ##//
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
+            };
+
+            /**
+             * @class Mat_7
+             * @brief World's Object : a gold type voxel
+             */
+            class Mat_7 : public VoxelType {
+                public:
+                    //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
+                        Mat_7();
+
+                    //## Deconstructor ##//
+                        /**
+                         * Mat_7 Deconstructor
+                         */
+                        ~Mat_7();
+
+                    //## Getter ##//
+                        /**
+                         * Voxel color getter
+                         * @return the color of the voxel
+                         */
+                        Color::RGB const getColor() const;
+                        /**
+                         * Solid state getter
+                         * @return if the voxel is solid or not
+                         */
+                        bool const isSolid() const;
+                        /**
+                         * Voxel material getter
+                         * @return the voxel's material
+                         */
+                        Renderer::Material const getMaterial() const;
+            };
+
+            /**
+             * @class Mat_8
+             * @brief World's Object : a gold type voxel
+             */
+            class Mat_8 : public VoxelType {
+                public:
+                    //## Constructor ##//
+                        /**
+                         * Default Constructor
+                         */
+                        Mat_8();
+
+                    //## Deconstructor ##//
+                        /**
+                         * Mat_8 Deconstructor
+                         */
+                        ~Mat_8();
 
                     //## Getter ##//
                         /**

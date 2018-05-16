@@ -20,11 +20,13 @@
             Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 400.0, 0.0));
             Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 400.0));
             Light::PointLight engineLight5(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0));
+            Light::PointLight engineLight6(Maths::Point3D<NREfloat>(-0.5, -3.0,  28.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0));
             engineLight.push_back(&engineLight1);
-            engineLight.push_back(&engineLight2);
-            engineLight.push_back(&engineLight3);
-            engineLight.push_back(&engineLight4);
-            engineLight.push_back(&engineLight5);
+            engineLight.push_back(&engineLight6);
+            //engineLight.push_back(&engineLight2);
+            //engineLight.push_back(&engineLight3);
+            //engineLight.push_back(&engineLight4);
+            //engineLight.push_back(&engineLight5);
 
             Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, rotation, tmp;
 
@@ -49,6 +51,9 @@
                 sphere->processSphere(GL_STATIC_DRAW, 5, 50, 50, i);
                 materialSpheres.push_back(sphere);
             }
+
+            Object::Object3D ironMan;
+            ironMan.load(GL_STATIC_DRAW, "Data/Model/IronMan.obj");
 
             glViewport(0, 0, 1280.0, 720.0);
 
@@ -89,10 +94,10 @@
                     if (mode.isActive()) {
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
-                    engineWorld.render(modelview, &camera);
+                    //engineWorld.render(modelview, &camera);
                     const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
                     tmp = modelview;
-                    tmp.translate(Maths::Vector3D<NREfloat>(0, -90, 100));
+                    tmp.translate(Maths::Vector3D<NREfloat>(0, -85, 100));
                     for (GLuint i = 0; i < materialSpheres.size(); i = i + 1) {
                         s->bind();
                             tmp.translate(Maths::Vector3D<NREfloat>(0, 12, 0));
@@ -100,6 +105,11 @@
                             materialSpheres[i]->draw();
                         s->unbind();
                     }
+                    s->bind();
+                        tmp = modelview;
+                        s->sendModelview(tmp);
+                        ironMan.draw();
+                    s->unbind();
 
                     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 

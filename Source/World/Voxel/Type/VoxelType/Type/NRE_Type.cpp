@@ -340,21 +340,168 @@
                                                                     0.0, 0.8);
             }
 
-            Gold::Gold() {
+            Mat_1::Mat_1() {
             }
 
-            Gold::~Gold() {
+            Mat_1::~Mat_1() {
             }
 
-            Color::RGB const Gold::getColor() const {
-                return Color::RGB(255, 181, 74);
+            Color::RGB const Mat_1::getColor() const {
+                return Color::RGB(102, 102, 102);
             }
 
-            bool const Gold::isSolid() const {
+            bool const Mat_1::isSolid() const {
                 return true;
             }
 
-            Renderer::Material const Gold::getMaterial() const {
+            Renderer::Material const Mat_1::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
+                                                                    0.9, 0.1);
+            }
+
+            Mat_2::Mat_2() {
+            }
+
+            Mat_2::~Mat_2() {
+            }
+
+            Color::RGB const Mat_2::getColor() const {
+                return Color::RGB(0, 0, 0);
+            }
+
+            bool const Mat_2::isSolid() const {
+                return true;
+            }
+
+            Renderer::Material const Mat_2::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
+                                                                    0.9, 0.1);
+            }
+
+            Mat_3::Mat_3() {
+            }
+
+            Mat_3::~Mat_3() {
+            }
+
+            Color::RGB const Mat_3::getColor() const {
+                return Color::RGB(204, 204, 204);
+            }
+
+            bool const Mat_3::isSolid() const {
+                return true;
+            }
+
+            Renderer::Material const Mat_3::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
+                                                                    0.9, 0.1);
+            }
+
+            Mat_4::Mat_4() {
+            }
+
+            Mat_4::~Mat_4() {
+            }
+
+            Color::RGB const Mat_4::getColor() const {
+                return Color::RGB(153, 122, 25);
+            }
+
+            bool const Mat_4::isSolid() const {
+                return true;
+            }
+
+            Renderer::Material const Mat_4::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
+                                                                    0.9, 0.1);
+            }
+
+            Mat_5::Mat_5() {
+            }
+
+            Mat_5::~Mat_5() {
+            }
+
+            Color::RGB const Mat_5::getColor() const {
+                return Color::RGB(0, 0, 0);
+            }
+
+            bool const Mat_5::isSolid() const {
+                return true;
+            }
+
+            Renderer::Material const Mat_5::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
+                                                                    0.9, 0.1);
+            }
+
+            Mat_6::Mat_6() {
+            }
+
+            Mat_6::~Mat_6() {
+            }
+
+            Color::RGB const Mat_6::getColor() const {
+                return Color::RGB(102, 25, 25);
+            }
+
+            bool const Mat_6::isSolid() const {
+                return true;
+            }
+
+            Renderer::Material const Mat_6::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
+                                                                    0.9, 0.1);
+            }
+
+            Mat_7::Mat_7() {
+            }
+
+            Mat_7::~Mat_7() {
+            }
+
+            Color::RGB const Mat_7::getColor() const {
+                return Color::RGB(51, 51, 51);
+            }
+
+            bool const Mat_7::isSolid() const {
+                return true;
+            }
+
+            Renderer::Material const Mat_7::getMaterial() const {
+                return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
+                                                                    std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
+                                                                    0.9, 0.1);
+            }
+
+            Mat_8::Mat_8() {
+            }
+
+            Mat_8::~Mat_8() {
+            }
+
+            Color::RGB const Mat_8::getColor() const {
+                return Color::RGB(51, 51, 51);
+            }
+
+            bool const Mat_8::isSolid() const {
+                return true;
+            }
+
+            Renderer::Material const Mat_8::getMaterial() const {
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
