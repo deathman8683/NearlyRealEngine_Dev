@@ -6,7 +6,7 @@
         namespace World {
 
             void Chunk::createProceduralTerrain(World* w) {
-                model.createProceduralTerrain(w->getSoilGenerator(), w->getMoistureGenerator(), getCoord());
+                voxelSets[0].createProceduralTerrain(w->getSoilGenerator(), w->getMoistureGenerator(), getCoord());
             }
 
         };

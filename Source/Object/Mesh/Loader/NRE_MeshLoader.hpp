@@ -12,6 +12,7 @@
     #include <fstream>
     #include <algorithm>
     #include "../3D/NRE_Mesh3D.hpp"
+    #include "../../../Exception/IOException/NRE_IOException.hpp"
 
     /**
      * @namespace NRE

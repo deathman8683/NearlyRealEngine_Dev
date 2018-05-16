@@ -334,22 +334,22 @@
                Maths::Point2D<GLint> neighbor(coord);
                if (coord.getX() - 1 >= static_cast <GLint> (-getHExtent().getX() + getShift().getX())) {
                    neighbor.setX(neighbor.getX() - 1);
-                   getChunk(coord)->setLeft(*getChunk(neighbor));
+                   getChunk(coord)->setLeft(0, getChunk(neighbor)->getVoxelSet(0));
                    neighbor = coord;
                }
                if (coord.getX() + 1 <= static_cast <GLint> (getHExtent().getX() + getShift().getX())) {
                    neighbor.setX(neighbor.getX() + 1);
-                   getChunk(coord)->setRight(*getChunk(neighbor));
+                   getChunk(coord)->setRight(0, getChunk(neighbor)->getVoxelSet(0));
                    neighbor = coord;
                }
                if (coord.getY() - 1 >= static_cast <GLint> (-getHExtent().getY() + getShift().getY())) {
                    neighbor.setY(neighbor.getY() - 1);
-                   getChunk(coord)->setBack(*getChunk(neighbor));
+                   getChunk(coord)->setBack(0, getChunk(neighbor)->getVoxelSet(0));
                    neighbor = coord;
                }
                if (coord.getY() + 1 <= static_cast <GLint> (getHExtent().getX() + getShift().getY())) {
                    neighbor.setY(neighbor.getY() + 1);
-                   getChunk(coord)->setFront(*getChunk(neighbor));
+                   getChunk(coord)->setFront(0, getChunk(neighbor)->getVoxelSet(0));
                    neighbor = coord;
                }
            }

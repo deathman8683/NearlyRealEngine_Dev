@@ -12,7 +12,7 @@
     #include "../Maths/NRE_Maths.hpp"
     #include "Mesh/NRE_Mesh.hpp"
     #include "Mesh/2D/NRE_Mesh2D.hpp"
-    #include "Mesh/3D/NRE_Mesh3D.hpp"
+    #include "Mesh/3D/VoxelMesh/NRE_VoxelMesh.hpp"
 
     /**
      * @namespace NRE
@@ -31,7 +31,7 @@
              */
             class Object {
                 protected:
-                    Mesh* mesh;         /**< The object's mesh */
+                    std::vector<Mesh*> meshes;
 
                 public:
                     //## Constructor ##//
@@ -39,11 +39,6 @@
                          * Default Constructor
                          */
                         Object();
-                        /**
-                         * Construct an object with his mesh
-                         * @param mesh  the object mesh, containing (or not yet) the object's model
-                         */
-                        Object(Mesh* mesh);
 
                     //## Copy-Constructor ##//
                         /**
@@ -74,25 +69,29 @@
                     //## Methods ##//
                         /**
                          * Add a set of value into in the mesh
-                         * @param index   the dataSet's index in the mesh
-                         * @param value   the pointer to the set of value
-                         * @param nbValue the number of value to add
+                         * @param meshIndex the mesh's index in the meshes
+                         * @param setIndex  the dataSet's index in the mesh
+                         * @param value     the pointer to the set of value
+                         * @param nbValue   the number of value to add
                          */
-                        void add(GLuint const& index, void* value, GLuint const& nbValue = 1) const;
+                        void add(GLuint const& meshIndex, GLuint const& setIndex, void* value, GLuint const& nbValue = 1) const;
                         /**
                          * Update the current object from his mesh
+                         * @param meshIndex the mesh's index in the meshes
                          */
-                        void update();
+                        void update(GLuint const& meshIndex);
                         /**
                          * Allocate and fill the current object's buffer from his mesh
+                         * @param meshIndex the mesh's index in the meshes
                          * @param usage the object's rendering usage
                          */
-                        void allocateAndFill(GLenum const& usage);
+                        void allocateAndFill(GLuint const& meshIndex, GLenum const& usage);
                         /**
                          * Draw the current object, need to be call from a rendering context (Shader bind)
                          */
                         void draw() const;
                         void reload();
+                        void push_back(Mesh* m);
 
                     //## Access Operator ##//
 

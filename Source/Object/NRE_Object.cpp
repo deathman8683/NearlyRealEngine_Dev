@@ -4,43 +4,49 @@
     namespace NRE {
         namespace Object {
 
-            Object::Object() : mesh(0) {
+            Object::Object() {
             }
 
-            Object::Object(Mesh* mesh) : mesh(mesh) {
-            }
-
-            Object::Object(Object && o) : mesh(std::move(o.mesh)) {
+            Object::Object(Object && o) : meshes(std::move(o.meshes)) {
             }
 
             Object::~Object() {
-                if (mesh != 0) {
-                    delete mesh;
+                for (Mesh* m : meshes) {
+                    delete m;
                 }
+                meshes.erase(meshes.begin(), meshes.end());
             }
 
-            void Object::add(GLuint const& index, void* value, GLuint const& nbValue) const {
-                mesh->add(index, value, nbValue);
+            void Object::add(GLuint const& meshIndex, GLuint const& setIndex, void* value, GLuint const& nbValue) const {
+                meshes[meshIndex]->add(setIndex, value, nbValue);
             }
 
-            void Object::update() {
-                mesh->update();
+            void Object::update(GLuint const& meshIndex) {
+                meshes[meshIndex]->update();
             }
 
-            void Object::allocateAndFill(GLenum const& usage) {
-                mesh->allocateAndFill(usage);
+            void Object::allocateAndFill(GLuint const& meshIndex, GLenum const& usage) {
+                meshes[meshIndex]->allocateAndFill(usage);
             }
 
             void Object::draw() const {
-                mesh->draw();
+                for (Mesh* m : meshes) {
+                    m->draw();
+                }
             }
 
             void Object::reload() {
-                mesh->reload();
+                for (Mesh* m : meshes) {
+                    m->reload();
+                }
+            }
+
+            void Object::push_back(Mesh* m) {
+                meshes.push_back(m);
             }
 
             Object& Object::operator=(Object && o) {
-                mesh = std::move(o.mesh);
+                meshes = std::move(o.meshes);
                 return *this;
             }
 

@@ -116,7 +116,7 @@
                 bool find = false, stop = false;
 
                 while (world->isInBound(voxel) && !find && !stop) {
-                    if (world->getChunk(res.getChunkCoord())->getModel().getVoxel(res.getCoord()).getType() != World::VOID) {
+                    if (world->getChunk(res.getChunkCoord())->getVoxelSet(0).getVoxel(res.getCoord()).getType() != World::VOID) {
                         find = true;
                     } else {
                         if (tMaxX < tMaxY) {

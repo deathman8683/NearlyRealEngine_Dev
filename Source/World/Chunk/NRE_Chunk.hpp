@@ -12,7 +12,8 @@
     #include <fstream>
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
-    #include "../../Object/3D/NRE_Object3D.hpp"
+    #include "../../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"
+    #include "../../Object/3D/VoxelObject/NRE_VoxelObject.hpp"
 
     /**
      * @namespace NRE
@@ -31,7 +32,7 @@
              * @class Chunk
              * @brief World's Object : A collection of voxel
              */
-            class Chunk : public Object::Object3D {
+            class Chunk : public Object::VoxelObject {
                 private:
                     Maths::Point2D<GLint> coord;    /**< Chunk coordinates */
                     Physics::AABB<GLint> bounding;  /**< Chunk bounding box */

@@ -1,6 +1,6 @@
-SRC = NRE_Model.cpp
-OBJ = $(OBJDIR)NRE_Model.o
-OBJDIR = ../../../obj/Debug/Object/Model/
+SRC = NRE_VoxelSet.cpp
+OBJ = $(OBJDIR)NRE_VoxelSet.o
+OBJDIR = ../../../obj/Debug/Object/VoxelSet/
 
 all : $(TARGET)
 

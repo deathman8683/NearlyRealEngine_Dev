@@ -17,11 +17,12 @@
             Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), generateID) {
             }
 
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : Object3D(GL_INT, SIZE), coord(coord), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : coord(coord), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
                                                                                        active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
+                push_back(SIZE);
             }
 
-            Chunk::Chunk(Chunk && c) : Object3D(std::move(c)), coord(std::move(c.coord)), bounding(std::move(c.bounding)),
+            Chunk::Chunk(Chunk && c) : VoxelObject(std::move(c)), coord(std::move(c.coord)), bounding(std::move(c.bounding)),
                                        active(std::move(c.active)), loaded(std::move(c.loaded)), constructed(std::move(c.constructed)), loading(std::move(c.loading)), constructing(std::move(c.constructing)), modified(std::move(c.modified)) {
             }
 
@@ -93,7 +94,7 @@
             }
 
             void Chunk::setType(Maths::Point3D<GLuint> const& p, GLubyte const& type) {
-                model.setType(p, type);
+                voxelSets[0].setType(p, type);
                 reload();
             }
 
@@ -117,7 +118,7 @@
 
                 if (offset == 0 && size == 0) {
                     std::stringstream data;
-                    model.writeCompressedData(data);
+                    voxelSets[0].writeCompressedData(data);
                     GLuint dataSize = data.tellp();
                     chunkFile.seekg(0, chunkFile.end);
                     GLuint endOffset = chunkFile.tellp();
@@ -138,7 +139,7 @@
                 } else {
                     if (isModfied()) {
                         std::stringstream data;
-                        model.writeCompressedData(data);
+                        voxelSets[0].writeCompressedData(data);
                         GLuint dataSize = data.tellp();
                         chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
                         chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
@@ -188,7 +189,7 @@
                         data.read(reinterpret_cast<char*> (&voxType), 1);
                         dataSize = dataSize - 3;
 
-                        model.loadVoxels(x, y, z, voxNumber, voxType);
+                        loadVoxels(0, x, y, z, voxNumber, voxType);
                     }
                 }
                 setLoaded(true);
@@ -211,7 +212,7 @@
             }
 
             Chunk& Chunk::operator=(Chunk && c) {
-                model = std::move(c.model);
+                VoxelObject::operator=(std::move(c));
                 coord = std::move(c.coord);
                 bounding = std::move(c.bounding);
                 active = std::move(c.active);

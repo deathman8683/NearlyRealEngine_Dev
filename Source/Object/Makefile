@@ -6,14 +6,14 @@ OBJDIR = ../../obj/Debug/Object/
 3D = 3D
 MESH = Mesh
 CACHE = MergingCache
-MODEL = Model
+VOXEL = VoxelSet
 
 all : before $(TARGET) after
 
 before:
 	@(cd $(MESH) && $(MAKE))
 	@(cd $(CACHE) && $(MAKE))
-	@(cd $(MODEL) && $(MAKE))
+	@(cd $(VOXEL) && $(MAKE))
 
 after:
 	@(cd $(2D) && $(MAKE))

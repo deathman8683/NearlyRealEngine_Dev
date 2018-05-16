@@ -44,7 +44,8 @@
             std::vector<Object::Object3D*> materialSpheres;
 
             for (GLuint i = 1; i < World::VoxelTypes::getSize(); i = i + 1) {
-                Object::Object3D* sphere = new Object::Object3D(GL_FLOAT, Maths::Vector3D<GLuint>(0, 0, 0));
+                Object::Object3D* sphere = new Object::Object3D();
+                sphere->push_back(new Object::Mesh3D(GL_FLOAT));
                 sphere->processSphere(GL_STATIC_DRAW, 5, 50, 50, i);
                 materialSpheres.push_back(sphere);
             }
