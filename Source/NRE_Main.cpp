@@ -20,13 +20,13 @@
             Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 400.0, 0.0));
             Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 400.0));
             Light::PointLight engineLight5(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0));
-            Light::PointLight engineLight6(Maths::Point3D<NREfloat>(-0.5, -3.0,  28.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0));
+            Light::PointLight engineLight6(Maths::Point3D<NREfloat>(-0.5, -5.0,  28.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0));
             engineLight.push_back(&engineLight1);
+            engineLight.push_back(&engineLight2);
+            engineLight.push_back(&engineLight3);
+            engineLight.push_back(&engineLight4);
+            engineLight.push_back(&engineLight5);
             engineLight.push_back(&engineLight6);
-            //engineLight.push_back(&engineLight2);
-            //engineLight.push_back(&engineLight3);
-            //engineLight.push_back(&engineLight4);
-            //engineLight.push_back(&engineLight5);
 
             Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, rotation, tmp;
 
