@@ -74,6 +74,8 @@
 
                 camera.update();
 
+                camera.turnAround(Maths::Point3D<NREfloat>(-0.5, -5.0,  28.0), 50, Maths::Vector3D<NREfloat>(0, 0, 1));
+
                 skyboxAngleX += 0.01;
                 if (skyboxAngleX >= 360) {
                     skyboxAngleX = 0.0;

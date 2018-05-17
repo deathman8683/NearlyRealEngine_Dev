@@ -75,3 +75,4 @@
     #include "Matrix/4D/NRE_Matrix4x4.hpp"
     #include "Plane/NRE_Plane.hpp"
     #include "Frustum/NRE_Frustum.hpp"
+    #include "Quaternion/NRE_Quaternion.hpp"
