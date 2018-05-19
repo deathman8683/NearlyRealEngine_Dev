@@ -95,8 +95,20 @@
                         Quaternion<T>& operator=(Quaternion<T> && q);
 
                     //## Shortcut Operator ##//
+                        /**
+                         * Multiply this by a quaternion k
+                         * @param k the multiplication quaternion
+                         * @return the reference of himself
+                         */
+                        Quaternion<T>& operator*=(Quaternion<T> const& k);
 
                     //## Arithmetic Operator ##//
+                        /**
+                         * Compute the quaternion resulting in the multiplication of this and q
+                         * @param q the multiplication quaternion
+                         * @return the newly computed quaternion
+                         */
+                        Quaternion<T> operator*(Quaternion<T> const& q) const;
 
                     //## Comparison Operator ##//
 

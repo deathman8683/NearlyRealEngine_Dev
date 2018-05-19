@@ -42,5 +42,22 @@
                 return *this;
             }
 
+            template <class T>
+            Quaternion<T>& Quaternion<T>::operator*=(Quaternion<T> const& q) {
+                Quaternion<T> tmp(this->getW() * q.getW() - this->getX() * q.getX() - this->getY() * q.getY() - this->getZ() * q.getZ(),
+                                  this->getW() * q.getX() + this->getX() * q.getW() + this->getY() * q.getZ() - this->getZ() * q.getY(),
+                                  this->getW() * q.getY() + this->getY() * q.getW() + this->getX() * q.getZ() - this->getZ() * q.getX(),
+                                  this->getW() * q.getZ() + this->getZ() * q.getW() + this->getX() * q.getY() - this->getY() * q.getX()
+                              );
+                *this = tmp;
+                return *this;
+            }
+
+            template <class T>
+            Quaternion<T> Quaternion<T>::operator*(Quaternion<T> const& q) const {
+                Quaternion<T> tmp(*this);
+                return tmp *= q;
+            }
+
         };
     };

@@ -44,6 +44,27 @@
             }
 
             template <class T>
+            template <class K>
+            Matrix3x3<T>::Matrix3x3(Quaternion<K> const& q) {
+                T xSq = q.getX() * q.getX();
+                T ySq = q.getY() * q.getY();
+                T zSq = q.getZ() * q.getZ();
+                T wSq = q.getW() * q.getW();
+                T twoX = static_cast <T> (2) * q.getX();
+                T twoY = static_cast <T> (2) * q.getY();
+                T twoW = static_cast <T> (2) * q.getW();
+                T xY = twoX * q.getY();
+                T xZ = twoX * q.getZ();
+                T yZ = twoY * q.getZ();
+                T wX = twoW * q.getX();
+                T wY = twoW * q.getY();
+                T wZ = twoW * q.getZ();
+                setL1(Vector3D<T>(wSq + xSq - ySq - zSq, xY - wZ, xZ + wY));
+                setL2(Vector3D<T>(xY + wZ, wSq - xSq + ySq - zSq, yZ - wX));
+                setL3(Vector3D<T>(xZ - wY, yZ + wX, wSq - xSq - ySq + zSq));
+            }
+
+            template <class T>
             Matrix3x3<T>::~Matrix3x3() {
             }
 
