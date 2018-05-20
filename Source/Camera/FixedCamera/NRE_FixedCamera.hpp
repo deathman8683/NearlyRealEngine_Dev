@@ -170,6 +170,7 @@
                          */
                         size_t getVertices(GLfloat* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf);
                         void turnAround(Maths::Point3D<NREfloat> const& target, NREfloat const& distance, Maths::Vector3D<NREfloat> const& axis = Maths::Vector3D<NREfloat>(0, 0, 1));
+                        void travelTo(Maths::Point3D<NREfloat> const& target, NREfloat const& speed);
 
                     //## Access Operator ##//
 

@@ -238,17 +238,26 @@
             }
 
             void FixedCamera::turnAround(Maths::Point3D<NREfloat> const& target, NREfloat const& distance, Maths::Vector3D<NREfloat> const& axis) {
-                if (axis == Maths::Vector3D<NREfloat>(0, 0, 1)) {
-                    angle.setX(180.0);
-                    angle.setY(angle.getY() + 1);
+                angle.setX(180.0);
+                angle.setY(angle.getY() + 1);
+                computeVector();
+                setCenter(target);
+                Maths::Quaternion<NREfloat> q(axis, 90);
+                Maths::Matrix3x3<NREfloat> rotation(q);
+                forward = rotation * forward;
+                left = rotation * left;
+                up = rotation * up;
+                setEye(getCenter() - getForward() * distance);
+            }
+
+            void FixedCamera::travelTo(Maths::Point3D<NREfloat> const& target, NREfloat const& speed) {
+
+                if (getEye().distanceSquared(target) >= 1)
+                {
+                    Maths::Vector3D<NREfloat> v = (getEye() - target);
+                    v.normalize();
+                    setEye(getEye() + (v * speed));
                     setCenter(target);
-                    setEye(getCenter() - getForward() * distance);
-                    computeVector();
-                } else if (axis == Maths::Vector3D<NREfloat>(0, 1, 0)) {
-                    angle.setX(angle.getX() + 1);
-                    angle.setY(0.0);
-                    setCenter(target);
-                    setEye(getCenter() - getForward() * distance);
                     computeVector();
                 }
             }
