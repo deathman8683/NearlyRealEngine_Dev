@@ -39,12 +39,6 @@
                          * @return      the corresponding voxel type object
                          */
                         static VoxelType* getVoxelType(GLubyte const& type);
-                        /**
-                         * Specific material type getter
-                         * @param  type the specific type enum
-                         * @return      the corresponding material type object
-                         */
-                        static Renderer::Material& getMaterial(GLubyte const& type);
 
                     //## Methods ##//
                         /**
@@ -58,8 +52,6 @@
 
                 private:
                     static VoxelType **voxelTypes;              /**< Store all differents voxel types */
-                    static Renderer::Material *materialTypes;   /**< Store all differents material types */
-                public:
                     static GLuint size;                         /**< The size of both types array */
             };
 

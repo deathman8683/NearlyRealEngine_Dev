@@ -22,7 +22,7 @@
                     addUniformLocation("lights[" + index.str() + "].direction");
                     addUniformLocation("lights[" + index.str() + "].angle");
                 }
-                for (unsigned int i = 0; i < World::VoxelTypes::getSize(); i = i + 1) {
+                for (unsigned int i = 0; i < MaterialManager::getSize(); i = i + 1) {
                     std::ostringstream index;
                     index << i;
                     addUniformLocation("materials[" + index.str() + "].albedo");
@@ -52,12 +52,12 @@
             }
 
             void PBRShader::sendMaterials() const {
-                for (unsigned int i = 0; i < World::VoxelTypes::getSize(); i = i + 1) {
+                for (unsigned int i = 0; i < MaterialManager::getSize(); i = i + 1) {
                     std::ostringstream index;
                     index << i;
-                    use3FV("materials[" + index.str() + "].albedo", 1, World::VoxelTypes::getMaterial(i).getAlbedo().value());
-                    use1FV("materials[" + index.str() + "].metallic", 1, World::VoxelTypes::getMaterial(i).getMetallicValue());
-                    use1FV("materials[" + index.str() + "].roughness", 1, World::VoxelTypes::getMaterial(i).getRoughnessValue());
+                    use3FV("materials[" + index.str() + "].albedo", 1, MaterialManager::getMaterial(i).getAlbedo().value());
+                    use1FV("materials[" + index.str() + "].metallic", 1, MaterialManager::getMaterial(i).getMetallicValue());
+                    use1FV("materials[" + index.str() + "].roughness", 1, MaterialManager::getMaterial(i).getRoughnessValue());
                 }
             }
 

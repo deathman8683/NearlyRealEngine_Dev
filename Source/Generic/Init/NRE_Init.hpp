@@ -11,6 +11,7 @@
     #include "../../World/Voxel/Type/VoxelTypes/NRE_VoxelTypes.hpp"
     #include "../../Object/MergingCache/NRE_MergingCache.hpp"
     #include "../../Renderer/Shader/EngineShader/NRE_EngineShader.hpp"
+    #include "../../Renderer/Material/MaterialManager/NRE_MaterialManager.hpp"
 
     /**
      * @namespace NRE
@@ -19,7 +20,7 @@
     namespace NRE {
 
         /**
-         * Initializa the engine
+         * Initialize the engine
          */
         void init();
         /**
