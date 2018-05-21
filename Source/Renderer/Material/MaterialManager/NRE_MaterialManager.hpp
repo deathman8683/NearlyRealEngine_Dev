@@ -32,6 +32,7 @@
                     //## Getter ##//
                         static Material& getMaterial(GLuint const& index);
                         static size_t const getSize();
+                        static GL::Texture2DArray& getMaterialArray();
 
                     //## Setter ##//
 

@@ -10,6 +10,7 @@
 
     #include "../../Maths/NRE_Maths.hpp"
     #include "../../Generic/NRE_Type.hpp"
+    #include "../../GL_Wrapper/BufferObject/Texture2D/NRE_Texture2D.hpp"
 
     /**
      * @namespace NRE
@@ -31,6 +32,7 @@
                     Maths::Vector3D<NREfloat> albedo;   /**< The material albedo */
                     NREfloat metallic;                  /**< The material metallic aspect */
                     NREfloat roughness;                 /**< The material roughness */
+                    GL::Texture2D* albedoTex;
 
                 public:
                     //## Constructor ##//
@@ -43,8 +45,9 @@
                          * @param albedo    the new material albedo
                          * @param metallic  the new material metallic aspect
                          * @param roughness the new material roughness
+                         * @param path      the path to the material's textures
                          */
-                        Material(Maths::Vector3D<NREfloat> const& albedo, NREfloat const& metallic, NREfloat const& roughness);
+                        Material(Maths::Vector3D<NREfloat> const& albedo, NREfloat const& metallic, NREfloat const& roughness, std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
@@ -84,6 +87,7 @@
                          * @return the material roughness
                          */
                         NREfloat const& getRoughness() const;
+                        GL::Texture2D const& getAlbedoTexture() const;
                         /**
                          * Metallic pointer getter
                          * @return the material metallic pointer, used with uniform in shader
@@ -113,6 +117,7 @@
                         void setRoughness(NREfloat const& value);
 
                     //## Methods ##//
+                        void freeTextures();
 
                     //## Access Operator ##//
 

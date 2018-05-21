@@ -11,6 +11,7 @@
                 addUniformLocation("texDepth");
                 addUniformLocation("texDiffuse");
                 addUniformLocation("texNormal");
+                addUniformLocation("texMaterial");
                 addUniformLocation("irradianceMap");
                 addUniformLocation("prefilterMap");
                 addUniformLocation("brdfLUT");
@@ -78,6 +79,7 @@
                 use1I("texDepth", 0);
                 use1I("texDiffuse", 1);
                 use1I("texNormal", 2);
+                use1I("texMaterial", 3);
                 use1I("irradianceMap", 4);
                 use1I("prefilterMap", 5);
                 use1I("brdfLUT", 6);

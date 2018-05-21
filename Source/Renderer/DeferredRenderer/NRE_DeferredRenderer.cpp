@@ -48,6 +48,8 @@
                         gBuffer.getColorBuffer(0)->bind();
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->bind();
+                    glActiveTexture(GL_TEXTURE3);
+                        MaterialManager::getMaterialArray().bind();
                     glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().bind();
                     glActiveTexture(GL_TEXTURE5);
@@ -68,6 +70,8 @@
                         skyBox.getPrefilterMap().unbind();
                     glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().unbind();
+                    glActiveTexture(GL_TEXTURE3);
+                        MaterialManager::getMaterialArray().unbind();
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->unbind();
                     glActiveTexture(GL_TEXTURE1);

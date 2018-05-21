@@ -32,6 +32,7 @@
     uniform samplerCube irradianceMap;
     uniform samplerCube prefilterMap;
     uniform sampler2D brdfLUT;
+    uniform sampler2DArray texMaterial;
 
     uniform vec3 cameraV;
 
