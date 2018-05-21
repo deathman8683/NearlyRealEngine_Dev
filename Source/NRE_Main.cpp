@@ -74,7 +74,7 @@
 
                 camera.update();
 
-                camera.travelTo(Maths::Point3D<NREfloat>(-0.5, -5.0,  28.0), 0.5);
+                //camera.travelTo(Maths::Point3D<NREfloat>(-0.5, -5.0,  28.0), 0.5);
 
                 skyboxAngleX += 0.01;
                 if (skyboxAngleX >= 360) {

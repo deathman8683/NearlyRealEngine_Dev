@@ -22,7 +22,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.1, "Test");
+                                                                    0.0, 0.1, "Void");
             }
 
             Ocean::Ocean() {
@@ -43,7 +43,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.1, "Test");
+                                                                    0.0, 0.1, "Ocean");
             }
 
             Beach::Beach() {
@@ -64,7 +64,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.9, "Test");
+                                                                    0.0, 0.9, "Beach");
             }
 
             Scorched::Scorched() {
@@ -85,7 +85,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.9, "Test");
+                                                                    0.0, 0.9, "Scorched");
             }
 
             Bare::Bare() {
@@ -106,7 +106,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Bare");
             }
 
             Tundra::Tundra() {
@@ -116,7 +116,7 @@
             }
 
             Color::RGB const Tundra::getColor() const {
-                return Color::RGB(187, 187, 170);
+                return Color::RGB(187, 187, 187);
             }
 
             bool const Tundra::isSolid() const {
@@ -127,7 +127,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Tundra");
             }
 
             Snow::Snow() {
@@ -137,7 +137,7 @@
             }
 
             Color::RGB const Snow::getColor() const {
-                return Color::RGB(221, 221, 228);
+                return Color::RGB(221, 221, 221);
             }
 
             bool const Snow::isSolid() const {
@@ -148,7 +148,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Snow");
             }
 
             TemperateDesert::TemperateDesert() {
@@ -169,7 +169,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.9, "Test");
+                                                                    0.0, 0.9, "Temperate_Desert");
             }
 
             SubtropicalDesert::SubtropicalDesert() {
@@ -190,7 +190,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.9, "Test");
+                                                                    0.0, 0.9, "Subtropical_Desert");
             }
 
             Shrubland::Shrubland() {
@@ -211,7 +211,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Shrubland");
             }
 
             Taiga::Taiga() {
@@ -232,7 +232,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Taiga");
             }
 
             Grassland::Grassland() {
@@ -253,7 +253,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Grassland");
             }
 
             TemperateDeciduousForest::TemperateDeciduousForest() {
@@ -274,7 +274,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Temperate_Deciduous_Forest");
             }
 
             TemperateRainForest::TemperateRainForest() {
@@ -295,7 +295,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Temperate_Rain_Forest");
             }
 
             TropicalSeasonalForest::TropicalSeasonalForest() {
@@ -316,7 +316,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Tropical_Seasonal_Forest");
             }
 
             TropicalRainForest::TropicalRainForest() {
@@ -337,7 +337,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.0, 0.8, "Test");
+                                                                    0.0, 0.8, "Tropical_Rain_Forest");
             }
 
             Mat_1::Mat_1() {
@@ -358,7 +358,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.9, 0.1, "Test");
+                                                                    0.9, 0.1, "Mat_1");
             }
 
             Mat_2::Mat_2() {
@@ -379,7 +379,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.9, 0.1, "Test");
+                                                                    0.9, 0.1, "Mat_2");
             }
 
             Mat_3::Mat_3() {
@@ -400,7 +400,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.9, 0.1, "Test");
+                                                                    0.9, 0.1, "Mat_3");
             }
 
             Mat_4::Mat_4() {
@@ -421,7 +421,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.9, 0.1, "Test");
+                                                                    0.9, 0.1, "Mat_4");
             }
 
             Mat_5::Mat_5() {
@@ -442,7 +442,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.9, 0.1, "Test");
+                                                                    0.9, 0.1, "Mat_5");
             }
 
             Mat_6::Mat_6() {
@@ -463,7 +463,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.9, 0.1, "Test");
+                                                                    0.9, 0.1, "Mat_6");
             }
 
             Mat_7::Mat_7() {
@@ -484,7 +484,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.9, 0.1, "Test");
+                                                                    0.9, 0.1, "Mat_7");
             }
 
             Mat_8::Mat_8() {
@@ -505,7 +505,7 @@
                 return Renderer::Material(Maths::Vector3D<NREfloat>(std::pow(static_cast <NREfloat> (getColor().getR()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getG()) / 255.0, 2.2),
                                                                     std::pow(static_cast <NREfloat> (getColor().getB()) / 255.0, 2.2)),
-                                                                    0.9, 0.1, "Test");
+                                                                    0.9, 0.1, "Mat_8");
             }
 
         };

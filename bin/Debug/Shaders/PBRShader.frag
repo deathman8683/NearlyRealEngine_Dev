@@ -137,9 +137,10 @@
             vec3 V = normalize(cameraV - vertex);
             vec3 R = reflect(V, N);
             R = (rotation * vec4(R, 1.0)).xyz;
+            vec3 albedo = texture(texMaterial, vec3(vertex.xy, id)).rgb;
 
             vec3 F0 = vec3(0.04);
-            F0 = mix(F0, materials[id].albedo, materials[id].metallic);
+            F0 = mix(F0, albedo, materials[id].metallic);
 
             vec3 Lo = vec3(0.0);
             for (int i = 0; i < numLights; i = i + 1) {
@@ -174,7 +175,7 @@
             kD *= 1.0 - materials[id].metallic;
 
             vec3 irradiance = texture(irradianceMap, N).rgb;
-            vec3 diffuse = irradiance * materials[id].albedo;
+            vec3 diffuse = irradiance * albedo;
 
             const float MAX_REFLECTION_LOD = 4.0;
             vec3 prefilteredColor = textureLod(prefilterMap, R, materials[id].roughness * MAX_REFLECTION_LOD).rgb;
