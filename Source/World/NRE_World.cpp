@@ -10,7 +10,7 @@
             World::World() : World(Maths::Vector2D<GLuint>(0, 0), Maths::Vector2D<GLint>(0, 0)) {
             }
 
-            World::World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift) : chunkMap((hExtent.getX() * 2 + 1) * (hExtent.getY() * 2 + 1)), regionsManager(this), hExtent(hExtent), shift(shift){
+            World::World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift) : chunkMap((hExtent.getX() * 2 + 1) * (hExtent.getY() * 2 + 1)), regionsManager(0), hExtent(hExtent), shift(shift) {
                 FastNoise worldGen, worldGen2;
                 worldGen.SetNoiseType(FastNoise::Simplex);
                 worldGen.SetSeed(DEFAULT_SOIL_SEED);
@@ -19,6 +19,8 @@
                 worldGen2.SetSeed(DEFAULT_MOISTURE_SEED);
                 soilGenerator = worldGen;
                 moistureGenerator = worldGen2;
+
+                regionsManager = new RegionsManager(this);
 
                 for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
@@ -38,9 +40,9 @@
 
             World::~World() {
                 for (auto &it : chunkMap) {
-                    regionsManager.addChunkToSave(it.second);
+                    regionsManager->addChunkToSave(it.second);
                 }
-                regionsManager.emptySaveMap();
+                delete regionsManager;
                 for (const auto &it : chunkMap) {
                     delete it.second;
                 }
@@ -84,7 +86,7 @@
                         it.second->checkActiveState(camera);
                         if (!it.second->isLoaded()) {
                             if (!it.second->isLoading()) {
-                                regionsManager.addChunkToLoad(it.second);
+                                regionsManager->addChunkToLoad(it.second);
                             }
                         }
                         if (it.second->isLoaded() && !it.second->isConstructed()) {
@@ -102,11 +104,11 @@
             }
 
             void World::update(GLuint const& loadLimit) {
-                regionsManager.emptyLoadMap();
+                regionsManager->emptyLoadMap();
                 for (GLuint i = 0; i < loadLimit; i = i + 1) {
                     updateConstructionQueue();
                 }
-                regionsManager.emptySaveMap();
+                regionsManager->emptySaveMap();
             }
 
             NREfloat const World::getSoilNoise(NREfloat const& x, NREfloat const& y) const {
@@ -150,28 +152,28 @@
                         shiftSize.setX(shiftSize.getX() - 1);
                     }
                 }
-                regionsManager.emptySaveMap();
+                regionsManager->emptySaveMap();
                 if (shiftSize.getX()  < 0) {
                     while (shiftSize.getX() < 0) {
                         shiftChunksLeft();
                         shiftSize.setX(shiftSize.getX() + 1);
                     }
                 }
-                regionsManager.emptySaveMap();
+                regionsManager->emptySaveMap();
                 if (shiftSize.getY() > 0) {
                     while (shiftSize.getY() > 0) {
                         shiftChunksFront();
                         shiftSize.setY(shiftSize.getY() - 1);
                     }
                 }
-                regionsManager.emptySaveMap();
+                regionsManager->emptySaveMap();
                 if (shiftSize.getY() < 0) {
                     while (shiftSize.getY() < 0) {
                         shiftChunksBack();
                         shiftSize.setY(shiftSize.getY() + 1);
                     }
                 }
-                regionsManager.emptySaveMap();
+                regionsManager->emptySaveMap();
             }
 
             void World::shiftChunksRight() {
@@ -179,7 +181,7 @@
                     Maths::Point2D<GLint> coord(getHExtent().getX() + getShift().getX(), y + getShift().getY());
                     Maths::Point2D<GLint> tmp = coord;
                     tmp.setX(-(getHExtent().getX() - getShift().getX() + 1));
-                    regionsManager.addChunkToSave(getChunk(coord), coord);
+                    regionsManager->addChunkToSave(getChunk(coord), coord);
                     getChunk(coord)->setCoord(tmp);
                     getChunk(coord)->reload();
                     Chunk* adr = getChunk(coord);
@@ -195,7 +197,7 @@
                     Maths::Point2D<GLint> coord(-(getHExtent().getX()) + getShift().getX(), y + getShift().getY());
                     Maths::Point2D<GLint> tmp = coord;
                     tmp.setX(getHExtent().getX() + getShift().getX() + 1);
-                    regionsManager.addChunkToSave(getChunk(coord), coord);
+                    regionsManager->addChunkToSave(getChunk(coord), coord);
                     getChunk(coord)->setCoord(tmp);
                     getChunk(coord)->reload();
                     Chunk* adr = getChunk(coord);
@@ -211,7 +213,7 @@
                     Maths::Point2D<GLint> coord(x  + getShift().getX(), getHExtent().getY() + getShift().getY());
                     Maths::Point2D<GLint> tmp = coord;
                     tmp.setY(-(getHExtent().getY() - getShift().getY() + 1));
-                    regionsManager.addChunkToSave(getChunk(coord), coord);
+                    regionsManager->addChunkToSave(getChunk(coord), coord);
                     getChunk(coord)->setCoord(tmp);
                     getChunk(coord)->reload();
                     Chunk* adr = getChunk(coord);
@@ -227,7 +229,7 @@
                     Maths::Point2D<GLint> coord(x + getShift().getX(), -(getHExtent().getY()) + getShift().getY());
                     Maths::Point2D<GLint> tmp = coord;
                     tmp.setY(getHExtent().getY() + getShift().getY() + 1);
-                    regionsManager.addChunkToSave(getChunk(coord), coord);
+                    regionsManager->addChunkToSave(getChunk(coord), coord);
                     getChunk(coord)->setCoord(tmp);
                     getChunk(coord)->reload();
                     Chunk* adr = getChunk(coord);

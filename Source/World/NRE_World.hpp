@@ -31,7 +31,7 @@
             class World {
                 private:
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> chunkMap;         /**< World chunk hash map */
-                    RegionsManager regionsManager;
+                    RegionsManager* regionsManager;
                     std::queue<Chunk*> constructionQueue;                               /**< The construction queue to load chunk on fly while rendering */
                     Maths::Vector2D<GLuint> hExtent;                                    /**< World half extent */
                     Maths::Vector2D<GLint> shift;                                       /**< World shift vector from (0, 0) */

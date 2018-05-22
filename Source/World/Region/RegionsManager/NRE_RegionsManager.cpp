@@ -17,6 +17,7 @@
             }
 
             RegionsManager::~RegionsManager() {
+                emptySaveMap();
             }
 
             void RegionsManager::addChunkToLoad(Chunk *chunk) {
