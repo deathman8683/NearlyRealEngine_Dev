@@ -8,6 +8,7 @@
 
     #pragma once
 
+    #include <unordered_map>
     #include "../NRE_Region.hpp"
 
     /**
@@ -21,12 +22,17 @@
          */
         namespace World {
 
+            class World;
+
             /**
              * @class RegionsManager
              * @brief World's Object : Manage regions, manage saving and loading for chunks into region
              */
             class RegionsManager {
                 private:
+                    World* w;
+                    std::unordered_map<Maths::Point2D<GLint>, Region*> saveMap;
+                    std::unordered_map<Maths::Point2D<GLint>, Region*> loadMap;
 
                 public:
                     //## Constructor ##//
@@ -34,6 +40,7 @@
                          * Default Constructor
                          */
                         RegionsManager();
+                        RegionsManager(World* w);
 
                     //## Copy-Constructor ##//
                         /**
@@ -62,6 +69,46 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Add a chunk to the load map, construct region on fly if necessary
+                         * @param chunk the chunk to add
+                         */
+                        void addChunkToLoad(Chunk *chunk);
+                        /**
+                         * Add a chunk to the save map, construct region on fly if necessary
+                         * @param chunk the chunk to add
+                         */
+                        void addChunkToSave(Chunk *chunk);
+                        /**
+                         * Add a chunk with different coordinates to the save map, construct region on fly if necessary
+                         * @param chunk the chunk to add
+                         * @param coord the chunk's coordinates used when the chunk will be saved
+                         */
+                        void addChunkToSave(Chunk *chunk, Maths::Point2D<GLint> const& coord);
+                        /**
+                         * Update the load map, process the first chunk in the map
+                         */
+                        void updateLoadMap();
+                        /**
+                         * Update the save map, process the first chunk in the map
+                         */
+                        void updateSaveMap();
+                        /**
+                         * Empty the load map, process all chunk in the map
+                         */
+                        void emptyLoadMap();
+                        /**
+                         * Empty the save map, process all chunk in the map
+                         */
+                        void emptySaveMap();
+                        /**
+                         * Flush the load map, just erase them from the map
+                         */
+                        void flushLoadMap();
+                        /**
+                         * Flush the save map, just erase them from the map
+                         */
+                        void flushSaveMap();
 
                     //## Access Operator ##//
 

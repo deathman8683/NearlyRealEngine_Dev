@@ -10,7 +10,7 @@
             World::World() : World(Maths::Vector2D<GLuint>(0, 0), Maths::Vector2D<GLint>(0, 0)) {
             }
 
-            World::World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift) : chunkMap((hExtent.getX() * 2 + 1) * (hExtent.getY() * 2 + 1)), hExtent(hExtent), shift(shift){
+            World::World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift) : chunkMap((hExtent.getX() * 2 + 1) * (hExtent.getY() * 2 + 1)), regionsManager(this), hExtent(hExtent), shift(shift){
                 FastNoise worldGen, worldGen2;
                 worldGen.SetNoiseType(FastNoise::Simplex);
                 worldGen.SetSeed(DEFAULT_SOIL_SEED);
@@ -32,15 +32,15 @@
                 }
             }
 
-            World::World(World && w) : chunkMap(std::move(w.chunkMap)), loadRegionMap(std::move(w.loadRegionMap)), saveRegionMap(std::move(w.saveRegionMap)), constructionQueue(std::move(w.constructionQueue)),
+            World::World(World && w) : chunkMap(std::move(w.chunkMap)), regionsManager(std::move(w.regionsManager)), constructionQueue(std::move(w.constructionQueue)),
                                         hExtent(std::move(w.getHExtent())), shift(std::move(w.getShift())), soilGenerator(std::move(w.getSoilGenerator())), moistureGenerator(std::move(w.getMoistureGenerator())) {
             }
 
             World::~World() {
                 for (auto &it : chunkMap) {
-                    addChunkToSaveRegion(it.second);
+                    regionsManager.addChunkToSave(it.second);
                 }
-                emptySaveRegionMap();
+                regionsManager.emptySaveMap();
                 for (const auto &it : chunkMap) {
                     delete it.second;
                 }
@@ -84,7 +84,7 @@
                         it.second->checkActiveState(camera);
                         if (!it.second->isLoaded()) {
                             if (!it.second->isLoading()) {
-                                addChunkToLoadRegion(it.second);
+                                regionsManager.addChunkToLoad(it.second);
                             }
                         }
                         if (it.second->isLoaded() && !it.second->isConstructed()) {
@@ -102,11 +102,11 @@
             }
 
             void World::update(GLuint const& loadLimit) {
-                emptyLoadRegionMap();
+                regionsManager.emptyLoadMap();
                 for (GLuint i = 0; i < loadLimit; i = i + 1) {
                     updateConstructionQueue();
                 }
-                emptySaveRegionMap();
+                regionsManager.emptySaveMap();
             }
 
             NREfloat const World::getSoilNoise(NREfloat const& x, NREfloat const& y) const {
@@ -117,72 +117,9 @@
                 return (getMoistureGenerator().GetNoise(x, y) + 1.0) / 2.0;
             }
 
-            void World::addChunkToLoadRegion(Chunk *chunk) {
-                chunk->setLoading(true);
-                Maths::Point2D<GLint> regionCoord;
-                if (chunk->getCoord().getX() < 0) {
-                    regionCoord.setX((chunk->getCoord().getX() / 16) - 1);
-                } else {
-                    regionCoord.setX((chunk->getCoord().getX() / 16));
-                }
-                if (chunk->getCoord().getY() < 0) {
-                    regionCoord.setY((chunk->getCoord().getY() / 16) - 1);
-                } else {
-                    regionCoord.setY((chunk->getCoord().getY() / 16));
-                }
-                if (loadRegionMap.count(regionCoord) == 0) {
-                    loadRegionMap[regionCoord] = new Region(chunk);
-                } else {
-                    auto it = loadRegionMap.find(regionCoord);
-                    it->second->add(chunk);
-                }
-            }
-
-            void World::addChunkToSaveRegion(Chunk *chunk) {
-                addChunkToSaveRegion(chunk, chunk->getCoord());
-            }
-
-            void World::addChunkToSaveRegion(Chunk *chunk, Maths::Point2D<GLint> const& coord) {
-                Maths::Point2D<GLint> regionCoord;
-                if (chunk->getCoord().getX() < 0) {
-                    regionCoord.setX((chunk->getCoord().getX() / 16) - 1);
-                } else {
-                    regionCoord.setX((chunk->getCoord().getX() / 16));
-                }
-                if (chunk->getCoord().getY() < 0) {
-                    regionCoord.setY((chunk->getCoord().getY() / 16) - 1);
-                } else {
-                    regionCoord.setY((chunk->getCoord().getY() / 16));
-                }
-                if (saveRegionMap.count(regionCoord) == 0) {
-                    saveRegionMap[regionCoord] = new Region(chunk);
-                } else {
-                    auto it = saveRegionMap.find(regionCoord);
-                    it->second->add(chunk, coord);
-                }
-            }
-
             void World::addChunkToConstruction(Chunk *chunk) {
                 chunk->setConstructing(true);
                 constructionQueue.push(chunk);
-            }
-
-            void World::updateLoadRegionMap() {
-                if (!loadRegionMap.empty()) {
-                    auto it = loadRegionMap.begin();
-                    it->second->load(this);
-                    delete it->second;
-                    loadRegionMap.erase(loadRegionMap.begin());
-                }
-            }
-
-            void World::updateSaveRegionMap() {
-                if (!saveRegionMap.empty()) {
-                    auto it = saveRegionMap.begin();
-                    it->second->save();
-                    delete it->second;
-                    saveRegionMap.erase(saveRegionMap.begin());
-                }
             }
 
             void World::updateConstructionQueue() {
@@ -194,38 +131,9 @@
                 }
             }
 
-            void World::emptyLoadRegionMap() {
-                while (!loadRegionMap.empty()) {
-                    updateLoadRegionMap();
-                }
-            }
-
-            void World::emptySaveRegionMap() {
-                while (!saveRegionMap.empty()) {
-                    updateSaveRegionMap();
-                }
-            }
-
             void World::emptyConstructionQueue() {
                 while (!constructionQueue.empty()) {
                     updateConstructionQueue();
-                }
-            }
-
-
-            void World::flushLoadRegionMap() {
-                while (!loadRegionMap.empty()) {
-                    auto it = loadRegionMap.begin();
-                    delete it->second;
-                    loadRegionMap.erase(loadRegionMap.begin());
-                }
-            }
-
-            void World::flushSaveRegionMap() {
-                while (!saveRegionMap.empty()) {
-                    auto it = saveRegionMap.begin();
-                    delete it->second;
-                    saveRegionMap.erase(saveRegionMap.begin());
                 }
             }
 
@@ -242,28 +150,28 @@
                         shiftSize.setX(shiftSize.getX() - 1);
                     }
                 }
-                emptySaveRegionMap();
+                regionsManager.emptySaveMap();
                 if (shiftSize.getX()  < 0) {
                     while (shiftSize.getX() < 0) {
                         shiftChunksLeft();
                         shiftSize.setX(shiftSize.getX() + 1);
                     }
                 }
-                emptySaveRegionMap();
+                regionsManager.emptySaveMap();
                 if (shiftSize.getY() > 0) {
                     while (shiftSize.getY() > 0) {
                         shiftChunksFront();
                         shiftSize.setY(shiftSize.getY() - 1);
                     }
                 }
-                emptySaveRegionMap();
+                regionsManager.emptySaveMap();
                 if (shiftSize.getY() < 0) {
                     while (shiftSize.getY() < 0) {
                         shiftChunksBack();
                         shiftSize.setY(shiftSize.getY() + 1);
                     }
                 }
-                emptySaveRegionMap();
+                regionsManager.emptySaveMap();
             }
 
             void World::shiftChunksRight() {
@@ -271,7 +179,7 @@
                     Maths::Point2D<GLint> coord(getHExtent().getX() + getShift().getX(), y + getShift().getY());
                     Maths::Point2D<GLint> tmp = coord;
                     tmp.setX(-(getHExtent().getX() - getShift().getX() + 1));
-                    addChunkToSaveRegion(getChunk(coord), coord);
+                    regionsManager.addChunkToSave(getChunk(coord), coord);
                     getChunk(coord)->setCoord(tmp);
                     getChunk(coord)->reload();
                     Chunk* adr = getChunk(coord);
@@ -287,7 +195,7 @@
                     Maths::Point2D<GLint> coord(-(getHExtent().getX()) + getShift().getX(), y + getShift().getY());
                     Maths::Point2D<GLint> tmp = coord;
                     tmp.setX(getHExtent().getX() + getShift().getX() + 1);
-                    addChunkToSaveRegion(getChunk(coord), coord);
+                    regionsManager.addChunkToSave(getChunk(coord), coord);
                     getChunk(coord)->setCoord(tmp);
                     getChunk(coord)->reload();
                     Chunk* adr = getChunk(coord);
@@ -303,7 +211,7 @@
                     Maths::Point2D<GLint> coord(x  + getShift().getX(), getHExtent().getY() + getShift().getY());
                     Maths::Point2D<GLint> tmp = coord;
                     tmp.setY(-(getHExtent().getY() - getShift().getY() + 1));
-                    addChunkToSaveRegion(getChunk(coord), coord);
+                    regionsManager.addChunkToSave(getChunk(coord), coord);
                     getChunk(coord)->setCoord(tmp);
                     getChunk(coord)->reload();
                     Chunk* adr = getChunk(coord);
@@ -319,7 +227,7 @@
                     Maths::Point2D<GLint> coord(x + getShift().getX(), -(getHExtent().getY()) + getShift().getY());
                     Maths::Point2D<GLint> tmp = coord;
                     tmp.setY(getHExtent().getY() + getShift().getY() + 1);
-                    addChunkToSaveRegion(getChunk(coord), coord);
+                    regionsManager.addChunkToSave(getChunk(coord), coord);
                     getChunk(coord)->setCoord(tmp);
                     getChunk(coord)->reload();
                     Chunk* adr = getChunk(coord);
@@ -362,8 +270,7 @@
 
             World& World::operator=(World && w) {
                 chunkMap = std::move(w.chunkMap);
-                loadRegionMap = std::move(w.loadRegionMap);
-                saveRegionMap = std::move(w.saveRegionMap);
+                regionsManager = std::move(w.regionsManager);
                 constructionQueue = std::move(w.constructionQueue);
                 hExtent = std::move(w.hExtent);
                 shift = std::move(w.shift);

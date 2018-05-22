@@ -10,8 +10,8 @@
 
     #include <algorithm>
     #include <unordered_map>
-    #include "Region/NRE_Region.hpp"
     #include "../Renderer/Shader/ShadersManager/NRE_ShadersManager.hpp"
+    #include "Region/RegionsManager/NRE_RegionsManager.hpp"
 
     /**
      * @namespace NRE
@@ -31,8 +31,7 @@
             class World {
                 private:
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> chunkMap;         /**< World chunk hash map */
-                    std::unordered_map<Maths::Point2D<GLint>, Region*> loadRegionMap;   /**< World loading region hash map */
-                    std::unordered_map<Maths::Point2D<GLint>, Region*> saveRegionMap;   /**< World saving region hash map */
+                    RegionsManager regionsManager;
                     std::queue<Chunk*> constructionQueue;                               /**< The construction queue to load chunk on fly while rendering */
                     Maths::Vector2D<GLuint> hExtent;                                    /**< World half extent */
                     Maths::Vector2D<GLint> shift;                                       /**< World shift vector from (0, 0) */
