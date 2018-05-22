@@ -50,7 +50,7 @@
             void EnvironmentMap::allocate() {
                 map.allocate(SIZE, SIZE, true);
                 irradianceMap.allocate(32, 32, true);
-                prefilterMap.allocate(512, 512, false);
+                prefilterMap.allocate(256, 256, false);
                 prefilterMap.bind();
                     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
                     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -181,8 +181,8 @@
                     capture.bind();
                     GLuint maxMipLevels = 5;
                     for (GLuint mip = 0; mip < maxMipLevels; mip = mip + 1) {
-                        GLuint mipWidth = 512 * std::pow(0.5, mip);
-                        GLuint mipHeight = 512 * std::pow(0.5, mip);
+                        GLuint mipWidth = 256 * std::pow(0.5, mip);
+                        GLuint mipHeight = 256 * std::pow(0.5, mip);
                         tmp->allocate(GL_DEPTH_COMPONENT24, mipWidth, mipHeight);
 
                         glViewport(0, 0, mipWidth, mipHeight);
@@ -196,7 +196,7 @@
                             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                             getVAO().bind();
-                                    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+                                glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
                             getVAO().unbind();
                         }
                     }

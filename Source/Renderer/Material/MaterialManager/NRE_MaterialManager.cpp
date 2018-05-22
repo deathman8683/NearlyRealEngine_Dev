@@ -28,6 +28,10 @@
                     materialsAlbedo->sendTexture(getMaterial(i).getAlbedoTexture(), i);
                     getMaterial(i).freeTextures();
                 }
+                materialsAlbedo->bind();
+                    glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
+                    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+                materialsAlbedo->unbind();
             }
 
             void MaterialManager::free() {
