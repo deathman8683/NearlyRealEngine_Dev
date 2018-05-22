@@ -26,9 +26,8 @@
     uniform mat4 rotation;
 
     uniform sampler2D texDepth;
-    uniform sampler2D texDiffuse;
+    uniform sampler2D texDiffuseUV;
     uniform sampler2D texNormal;
-    uniform sampler2D texUV;
     uniform samplerCube irradianceMap;
     uniform samplerCube prefilterMap;
     uniform sampler2D brdfLUT;
@@ -90,12 +89,12 @@
     }
 
     float computeBlur(vec2 uv) {
-        vec2 texelSize = 1.0 / vec2(textureSize(texDiffuse, 0));
+        vec2 texelSize = 1.0 / vec2(textureSize(texDiffuseUV, 0));
         float result = 0.0;
         for (int x = -2; x < 2; x = x + 1) {
             for (int y = -2; y < 2; y = y + 1) {
                 vec2 offset = vec2(float(x), float(y)) * texelSize;
-                result += texture(texDiffuse, uv + offset).a;
+                result += texture(texDiffuseUV, uv + offset).a;
             }
         }
 
@@ -137,7 +136,7 @@
             vec3 V = normalize(cameraV - vertex);
             vec3 R = reflect(V, N);
             R = (rotation * vec4(R, 1.0)).xyz;
-            vec2 textureUV = texture(texUV, uv).xy;
+            vec2 textureUV = texture(texDiffuseUV, uv).xy;
             vec2 tileUV = mix(textureUV, fract(vec2(dot(normal.zxy, vertex), dot(normal.yzx, vertex))), textureUV == vec2(-1.0, -1.0));
             vec3 albedo = texture(texMaterial, vec3(tileUV, id)).rgb;
 
@@ -193,7 +192,7 @@
 
             out_Color = vec4(color, 1.0);
         } else {
-            out_Color = vec4(texture(texDiffuse, uv).rgb, 1.0);
+            out_Color = vec4(texture(texDiffuseUV, uv).rgb, 1.0);
         }
 
     }

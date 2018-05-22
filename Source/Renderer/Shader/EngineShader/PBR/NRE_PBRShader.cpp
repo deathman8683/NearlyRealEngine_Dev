@@ -9,9 +9,8 @@
             PBRShader::PBRShader() {
                 load();
                 addUniformLocation("texDepth");
-                addUniformLocation("texDiffuse");
+                addUniformLocation("texDiffuseUV");
                 addUniformLocation("texNormal");
-                addUniformLocation("texUV");
                 addUniformLocation("irradianceMap");
                 addUniformLocation("prefilterMap");
                 addUniformLocation("brdfLUT");
@@ -78,9 +77,8 @@
 
             void PBRShader::sendTextures() const {
                 use1I("texDepth", 0);
-                use1I("texDiffuse", 1);
+                use1I("texDiffuseUV", 1);
                 use1I("texNormal", 2);
-                use1I("texUV", 3);
                 use1I("irradianceMap", 4);
                 use1I("prefilterMap", 5);
                 use1I("brdfLUT", 6);

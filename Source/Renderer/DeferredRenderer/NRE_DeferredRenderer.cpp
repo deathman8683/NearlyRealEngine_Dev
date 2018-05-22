@@ -15,15 +15,12 @@
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
                 format.push_back(GL_RGBA);
-                format.push_back(GL_RGBA);
-                type.push_back(GL_UNSIGNED_BYTE);
                 type.push_back(GL_FLOAT);
                 type.push_back(GL_FLOAT);
-                internalFormat.push_back(GL_RGBA);
                 internalFormat.push_back(GL_RGBA16F);
                 internalFormat.push_back(GL_RGBA16F);
 
-                gBuffer.allocateColorBuffer(3, format, internalFormat, type);
+                gBuffer.allocateColorBuffer(2, format, internalFormat, type);
                 gBuffer.setDepthBuffer(new GL::Texture2D(gBuffer.getSize().getW(), gBuffer.getSize().getH(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT32F, GL_FLOAT));
                 gBuffer.attachDepthBuffer(GL_DEPTH_ATTACHMENT);
 
@@ -51,8 +48,6 @@
                         gBuffer.getColorBuffer(0)->bind();
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->bind();
-                    glActiveTexture(GL_TEXTURE3);
-                        gBuffer.getColorBuffer(2)->bind();
                     glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().bind();
                     glActiveTexture(GL_TEXTURE5);
@@ -77,8 +72,6 @@
                         skyBox.getPrefilterMap().unbind();
                     glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().unbind();
-                    glActiveTexture(GL_TEXTURE3);
-                        gBuffer.getColorBuffer(2)->unbind();
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->unbind();
                     glActiveTexture(GL_TEXTURE1);
