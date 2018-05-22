@@ -12,6 +12,7 @@
     #include <unordered_map>
     #include "../Renderer/Shader/ShadersManager/NRE_ShadersManager.hpp"
     #include "Region/RegionsManager/NRE_RegionsManager.hpp"
+    #include "Chunk/ChunksManager/NRE_ChunksManager.hpp"
 
     /**
      * @namespace NRE
@@ -32,7 +33,7 @@
                 private:
                     std::unordered_map<Maths::Point2D<GLint>, Chunk*> chunkMap;         /**< World chunk hash map */
                     RegionsManager* regionsManager;
-                    std::queue<Chunk*> constructionQueue;                               /**< The construction queue to load chunk on fly while rendering */
+                    ChunksManager chunksManager;
                     Maths::Vector2D<GLuint> hExtent;                                    /**< World half extent */
                     Maths::Vector2D<GLint> shift;                                       /**< World shift vector from (0, 0) */
                     FastNoise soilGenerator;                                            /**< FastNoise generator used for soil generation */
@@ -141,63 +142,6 @@
                          * @return   the computed noise
                          */
                         NREfloat const getMoistureNoise(NREfloat const& x, NREfloat const& y) const;
-                        /**
-                         * Add a chunk to the load region map, construct region on fly if necessary
-                         * @param chunk the chunk to add
-                         */
-                        void addChunkToLoadRegion(Chunk *chunk);
-                        /**
-                         * Add a chunk to the save region map, construct region on fly if necessary
-                         * @param chunk the chunk to add
-                         */
-                        void addChunkToSaveRegion(Chunk *chunk);
-                        /**
-                         * Add a chunk with different coordinates to the save region map, construct region on fly if necessary
-                         * @param chunk the chunk to add
-                         * @param coord the chunk's coordinates used when the chunk will be saved
-                         */
-                        void addChunkToSaveRegion(Chunk *chunk, Maths::Point2D<GLint> const& coord);
-                        /**
-                         * Add a chunk to the construction queue
-                         * @param chunk the chunk to add
-                         */
-                        void addChunkToConstruction(Chunk *chunk);
-                        /**
-                         * Update the load region map, process the first chunk in the map
-                         */
-                        void updateLoadRegionMap();
-                        /**
-                         * Update the save region map, process the first chunk in the map
-                         */
-                        void updateSaveRegionMap();
-                        /**
-                         * Update the construction queue, process the first chunk in the queue
-                         */
-                        void updateConstructionQueue();
-                        /**
-                         * Empty the load region map, process all chunk in the map
-                         */
-                        void emptyLoadRegionMap();
-                        /**
-                         * Empty the save region map, process all chunk in the map
-                         */
-                        void emptySaveRegionMap();
-                        /**
-                         * Empty the construction queue, process all chunk in the queue
-                         */
-                        void emptyConstructionQueue();
-                        /**
-                         * Flush the load region map, just erase them from the map
-                         */
-                        void flushLoadRegionMap();
-                        /**
-                         * Flush the save region map, just erase them from the map
-                         */
-                        void flushSaveRegionMap();
-                        /**
-                         * Flush the construction queue, just erase them from the queue
-                         */
-                        void flushConstructionQueue();
                         /**
                          * Shift all chunks from a shift vector
                          * @param shiftSize the shift vector

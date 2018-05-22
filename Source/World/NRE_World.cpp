@@ -34,7 +34,7 @@
                 }
             }
 
-            World::World(World && w) : chunkMap(std::move(w.chunkMap)), regionsManager(std::move(w.regionsManager)), constructionQueue(std::move(w.constructionQueue)),
+            World::World(World && w) : chunkMap(std::move(w.chunkMap)), regionsManager(std::move(w.regionsManager)), chunksManager(std::move(w.chunksManager)),
                                         hExtent(std::move(w.getHExtent())), shift(std::move(w.getShift())), soilGenerator(std::move(w.getSoilGenerator())), moistureGenerator(std::move(w.getMoistureGenerator())) {
             }
 
@@ -91,7 +91,7 @@
                         }
                         if (it.second->isLoaded() && !it.second->isConstructed()) {
                             if (!it.second->isConstructing()) {
-                                addChunkToConstruction(it.second);
+                                chunksManager.addChunkToConstruction(it.second);
                             }
                         }
                         if (it.second->isActive()) {
@@ -106,7 +106,7 @@
             void World::update(GLuint const& loadLimit) {
                 regionsManager->emptyLoadMap();
                 for (GLuint i = 0; i < loadLimit; i = i + 1) {
-                    updateConstructionQueue();
+                    chunksManager.updateConstructionQueue();
                 }
                 regionsManager->emptySaveMap();
             }
@@ -117,32 +117,6 @@
 
             NREfloat const World::getMoistureNoise(NREfloat const& x, NREfloat const& y) const {
                 return (getMoistureGenerator().GetNoise(x, y) + 1.0) / 2.0;
-            }
-
-            void World::addChunkToConstruction(Chunk *chunk) {
-                chunk->setConstructing(true);
-                constructionQueue.push(chunk);
-            }
-
-            void World::updateConstructionQueue() {
-                if (!constructionQueue.empty()) {
-                    constructionQueue.front()->process(GL_STATIC_DRAW, constructionQueue.front()->getCoord());
-                    constructionQueue.front()->setConstructed(true);
-                    constructionQueue.front()->setConstructing(false);
-                    constructionQueue.pop();
-                }
-            }
-
-            void World::emptyConstructionQueue() {
-                while (!constructionQueue.empty()) {
-                    updateConstructionQueue();
-                }
-            }
-
-            void World::flushConstructionQueue() {
-                while (!constructionQueue.empty()) {
-                    constructionQueue.pop();
-                }
             }
 
             void World::shiftChunks(Maths::Vector2D<GLint> shiftSize) {
@@ -273,7 +247,7 @@
             World& World::operator=(World && w) {
                 chunkMap = std::move(w.chunkMap);
                 regionsManager = std::move(w.regionsManager);
-                constructionQueue = std::move(w.constructionQueue);
+                chunksManager = std::move(w.chunksManager);
                 hExtent = std::move(w.hExtent);
                 shift = std::move(w.shift);
                 soilGenerator = std::move(w.soilGenerator);
