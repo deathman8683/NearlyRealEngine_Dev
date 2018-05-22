@@ -17,7 +17,7 @@
     #include "../../Light/PointLight/NRE_PointLight.hpp"
     #include "../../World/NRE_World.hpp"
     #include "../SSAO/NRE_SSAO.hpp"
-    #include "../Material/MaterialManager/NRE_MaterialManager.hpp"
+    #include "../Material/MaterialsManager/NRE_MaterialsManager.hpp"
 
     /**
      * @namespace NRE

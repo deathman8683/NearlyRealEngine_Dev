@@ -1,6 +1,6 @@
 SRC = NRE_SSAOShader.cpp
 OBJ = $(OBJDIR)NRE_SSAOShader.o
-OBJDIR = ../../../../../obj/Debug/Renderer/Shader/EngineShader/SSAO/
+OBJDIR = ../../../../../obj/Debug/Renderer/Shader/ShadersManager/SSAO/
 
 all : $(TARGET)
 

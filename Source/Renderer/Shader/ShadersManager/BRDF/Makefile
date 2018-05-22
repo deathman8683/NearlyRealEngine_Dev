@@ -1,6 +1,6 @@
 SRC = NRE_BRDFShader.cpp
 OBJ = $(OBJDIR)NRE_BRDFShader.o
-OBJDIR = ../../../../../obj/Debug/Renderer/Shader/EngineShader/BRDF/
+OBJDIR = ../../../../../obj/Debug/Renderer/Shader/ShadersManager/BRDF/
 
 all : $(TARGET)
 

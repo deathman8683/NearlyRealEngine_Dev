@@ -11,7 +11,7 @@
     #include <algorithm>
     #include <unordered_map>
     #include "Region/NRE_Region.hpp"
-    #include "../Renderer/Shader/EngineShader/NRE_EngineShader.hpp"
+    #include "../Renderer/Shader/ShadersManager/NRE_ShadersManager.hpp"
 
     /**
      * @namespace NRE

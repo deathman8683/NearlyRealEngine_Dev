@@ -5,7 +5,7 @@ OBJDIR = ../../obj/Debug/Light/
 POINT = PointLight
 SPOT = SpotLight
 DIRECTIONNAL = DirectionnalLight
-ENGINE = EngineLights
+ENGINE = LightsManager
 
 all : $(TARGET) after
 

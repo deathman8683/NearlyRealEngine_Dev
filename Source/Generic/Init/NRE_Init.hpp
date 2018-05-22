@@ -10,9 +10,9 @@
 
     #include "../../World/Voxel/Type/VoxelTypes/NRE_VoxelTypes.hpp"
     #include "../../Object/MergingCache/NRE_MergingCache.hpp"
-    #include "../../Renderer/Shader/EngineShader/NRE_EngineShader.hpp"
-    #include "../../Renderer/Material/MaterialManager/NRE_MaterialManager.hpp"
-    #include "../../Light/EngineLights/NRE_EngineLights.hpp"
+    #include "../../Renderer/Shader/ShadersManager/NRE_ShadersManager.hpp"
+    #include "../../Renderer/Material/MaterialsManager/NRE_MaterialsManager.hpp"
+    #include "../../Light/LightsManager/NRE_LightsManager.hpp"
 
     /**
      * @namespace NRE

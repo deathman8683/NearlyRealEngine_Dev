@@ -9,7 +9,7 @@
 
             DeferredRenderer::DeferredRenderer(Maths::Vector2D<GLushort> const& size) : Object2D::Object2D(GL_INT, GL_STATIC_DRAW, Maths::Point2D<GLint>(-1, -1), Maths::Vector2D<GLint>(2, 2)), gBuffer(size.getW(), size.getH()) {
 
-                EngineShader::sendKernel(ssao);
+                ShadersManager::sendKernel(ssao);
 
                 std::vector<GLenum> format, type;
                 std::vector<GLint> internalFormat;
@@ -37,7 +37,7 @@
 
                 SSAOPass();
 
-                const PBRShader* shader = static_cast <const PBRShader*> (EngineShader::getShader("PBR"));
+                const PBRShader* shader = static_cast <const PBRShader*> (ShadersManager::getShader("PBR"));
 
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -55,11 +55,11 @@
                     glActiveTexture(GL_TEXTURE5);
                         skyBox.getBRDFLUT().bind();
                     glActiveTexture(GL_TEXTURE6);
-                        MaterialManager::getMaterialsAlbedo().bind();
+                        MaterialsManager::getMaterialsAlbedo().bind();
                     glActiveTexture(GL_TEXTURE7);
-                        MaterialManager::getMaterialsRoughness().bind();
+                        MaterialsManager::getMaterialsRoughness().bind();
                     glActiveTexture(GL_TEXTURE8);
-                        MaterialManager::getMaterialsMetallic().bind();
+                        MaterialsManager::getMaterialsMetallic().bind();
 
                     shader->sendLigths(lights);
                     shader->sendCamera(camera);
@@ -70,11 +70,11 @@
 
 
                     glActiveTexture(GL_TEXTURE8);
-                    MaterialManager::getMaterialsMetallic().unbind();
+                    MaterialsManager::getMaterialsMetallic().unbind();
                     glActiveTexture(GL_TEXTURE7);
-                    MaterialManager::getMaterialsRoughness().unbind();
+                    MaterialsManager::getMaterialsRoughness().unbind();
                     glActiveTexture(GL_TEXTURE6);
-                    MaterialManager::getMaterialsAlbedo().unbind();
+                    MaterialsManager::getMaterialsAlbedo().unbind();
                     glActiveTexture(GL_TEXTURE5);
                         skyBox.getBRDFLUT().unbind();
                     glActiveTexture(GL_TEXTURE4);
@@ -97,17 +97,17 @@
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
                     glDrawBuffers(3, buffers);
 
-                    MaterialManager::getMaterialsNormal().bind();
+                    MaterialsManager::getMaterialsNormal().bind();
             }
 
             void DeferredRenderer::endGBufferPass() {
-                    MaterialManager::getMaterialsNormal().unbind();
+                    MaterialsManager::getMaterialsNormal().unbind();
                 gBuffer.unbind();
             }
 
             void DeferredRenderer::SSAOPass() {
 
-                const Shader* shader = EngineShader::getShader("SSAO");
+                const Shader* shader = ShadersManager::getShader("SSAO");
 
                 gBuffer.bind();
                     glDepthMask(false);

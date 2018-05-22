@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_EngineLights.hpp
-     * @brief Declaration of Engine's Light's Object : EngineLights
+     * @file NRE_LightsManager.hpp
+     * @brief Declaration of Engine's Light's Object : LightsManager
      * @author Louis ABEL
      * @version 1.0
      */
@@ -22,10 +22,10 @@
         namespace Light {
 
             /**
-             * @class EngineLights
+             * @class LightsManager
              * @brief Light's Object : Manage the engine's lighting by regrouping all light's source
              */
-            class EngineLights {
+            class LightsManager {
                 public:
                     //## Getter ##//
 

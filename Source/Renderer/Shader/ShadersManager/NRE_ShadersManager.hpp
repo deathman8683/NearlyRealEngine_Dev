@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_EngineShader.hpp
-     * @brief Declaration of Engine's Renderer's Object : EngineShader
+     * @file NRE_ShadersManager.hpp
+     * @brief Declaration of Engine's Renderer's Object : ShadersManager
      * @author Louis ABEL
      * @version 1.0
      */
@@ -30,10 +30,10 @@
         namespace Renderer {
 
             /**
-             * @class EngineShader
+             * @class ShadersManager
              * @brief Renderer's Object : A singleton used to regroup all engine's specific shader
              */
-            class EngineShader {
+            class ShadersManager {
                 public:
                     //## Getter ##//
                         /**

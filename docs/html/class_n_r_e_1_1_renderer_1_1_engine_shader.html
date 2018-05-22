@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NearlyRealEngine: NRE::Renderer::EngineShader Class Reference</title>
+<title>NearlyRealEngine: NRE::Renderer::ShadersManager Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,7 +60,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespace_n_r_e.html">NRE</a></li><li class="navelem"><b>Renderer</b></li><li class="navelem"><a class="el" href="class_n_r_e_1_1_renderer_1_1_engine_shader.html">EngineShader</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_n_r_e.html">NRE</a></li><li class="navelem"><b>Renderer</b></li><li class="navelem"><a class="el" href="class_n_r_e_1_1_renderer_1_1_engine_shader.html">ShadersManager</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -68,14 +68,14 @@ $(function() {
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_n_r_e_1_1_renderer_1_1_engine_shader-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">NRE::Renderer::EngineShader Class Reference</div>  </div>
+<div class="title">NRE::Renderer::ShadersManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><a class="el" href="namespace_renderer.html" title="Engine&#39;s Renderer Module. ">Renderer</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : A singleton used to regroup all engine's specific shader.  
  <a href="class_n_r_e_1_1_renderer_1_1_engine_shader.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_n_r_e___engine_shader_8hpp_source.html">NRE_EngineShader.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_n_r_e___engine_shader_8hpp_source.html">NRE_ShadersManager.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -103,7 +103,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NRE::Renderer::EngineShader::free </td>
+          <td class="memname">void NRE::Renderer::ShadersManager::free </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -129,7 +129,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html">Shader</a> *const  &amp; NRE::Renderer::EngineShader::getShader </td>
+          <td class="memname">const <a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html">Shader</a> *const  &amp; NRE::Renderer::ShadersManager::getShader </td>
           <td>(</td>
           <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -162,7 +162,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NRE::Renderer::EngineShader::init </td>
+          <td class="memname">void NRE::Renderer::ShadersManager::init </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -188,7 +188,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NRE::Renderer::EngineShader::sendKernel </td>
+          <td class="memname">void NRE::Renderer::ShadersManager::sendKernel </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o.html">SSAO</a> const &amp;&#160;</td>
           <td class="paramname"><em>ssao</em></td><td>)</td>
@@ -220,7 +220,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NRE::Renderer::EngineShader::sendProjection </td>
+          <td class="memname">void NRE::Renderer::ShadersManager::sendProjection </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; const &amp;&#160;</td>
           <td class="paramname"><em>m</em></td><td>)</td>
@@ -243,8 +243,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Source/Renderer/Shader/EngineShader/<a class="el" href="_n_r_e___engine_shader_8hpp_source.html">NRE_EngineShader.hpp</a></li>
-<li>Source/Renderer/Shader/EngineShader/NRE_EngineShader.cpp</li>
+<li>Source/Renderer/Shader/ShadersManager/<a class="el" href="_n_r_e___engine_shader_8hpp_source.html">NRE_ShadersManager.hpp</a></li>
+<li>Source/Renderer/Shader/ShadersManager/NRE_ShadersManager.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

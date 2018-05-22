@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_MaterialManager.hpp
-     * @brief Declaration of Engine's Renderer's Object : MaterialManager
+     * @file NRE_MaterialsManager.hpp
+     * @brief Declaration of Engine's Renderer's Object : MaterialsManager
      * @author Louis ABEL
      * @version 1.0
      */
@@ -24,10 +24,10 @@
         namespace Renderer {
 
             /**
-             * @class MaterialManager
+             * @class MaterialsManager
              * @brief Renderer's Object : Manage all materials
              */
-            class MaterialManager {
+            class MaterialsManager {
                 public:
                     //## Getter ##//
                         static Material& getMaterial(GLuint const& index);

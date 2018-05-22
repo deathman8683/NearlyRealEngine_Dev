@@ -1,6 +1,6 @@
-SRC = NRE_EngineShader.cpp
-OBJ = $(OBJDIR)NRE_EngineShader.o
-OBJDIR = ../../../../obj/Debug/Renderer/Shader/EngineShader/
+SRC = NRE_ShadersManager.cpp
+OBJ = $(OBJDIR)NRE_ShadersManager.o
+OBJDIR = ../../../../obj/Debug/Renderer/Shader/ShadersManager/
 
 BRDF = BRDF
 CAPTURE = Capture

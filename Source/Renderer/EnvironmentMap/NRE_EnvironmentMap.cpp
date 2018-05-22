@@ -93,10 +93,10 @@
 
             void EnvironmentMap::capture(std::string const& path) {
 
-                const CaptureShader*    captureShader    = static_cast <const CaptureShader*>    (EngineShader::getShader("Capture"));
-                const IrradianceShader* irradianceShader = static_cast <const IrradianceShader*> (EngineShader::getShader("Irradiance"));
-                const PrefilterShader*  prefilterShader  = static_cast <const PrefilterShader*>  (EngineShader::getShader("Prefilter"));
-                const BRDFShader*       brdfShader       = static_cast <const BRDFShader*>       (EngineShader::getShader("BRDF"));
+                const CaptureShader*    captureShader    = static_cast <const CaptureShader*>    (ShadersManager::getShader("Capture"));
+                const IrradianceShader* irradianceShader = static_cast <const IrradianceShader*> (ShadersManager::getShader("Irradiance"));
+                const PrefilterShader*  prefilterShader  = static_cast <const PrefilterShader*>  (ShadersManager::getShader("Prefilter"));
+                const BRDFShader*       brdfShader       = static_cast <const BRDFShader*>       (ShadersManager::getShader("BRDF"));
 
                 GL::Texture2D cubeMap;
 
@@ -218,7 +218,7 @@
 
             void EnvironmentMap::render(Maths::Matrix4x4<NREfloat> const& projection, Maths::Matrix4x4<NREfloat> const& modelview) const {
 
-                const SkyBoxShader* shader = static_cast <const SkyBoxShader*> (EngineShader::getShader("SkyBox"));
+                const SkyBoxShader* shader = static_cast <const SkyBoxShader*> (ShadersManager::getShader("SkyBox"));
 
                 Maths::Matrix4x4<NREfloat> MVP = projection * Maths::Matrix4x4<NREfloat>(Maths::Matrix3x3<NREfloat>(modelview));
                 glDepthFunc(GL_LEQUAL);

@@ -20,7 +20,7 @@ var searchData=
   ['nre_5fdeferredrenderer_2ehpp',['NRE_DeferredRenderer.hpp',['../_n_r_e___deferred_renderer_8hpp.html',1,'']]],
   ['nre_5fdepthbuffer_2ehpp',['NRE_DepthBuffer.hpp',['../_n_r_e___depth_buffer_8hpp.html',1,'']]],
   ['nre_5fdirectionnallight_2ehpp',['NRE_DirectionnalLight.hpp',['../_n_r_e___directionnal_light_8hpp.html',1,'']]],
-  ['nre_5fengineshader_2ehpp',['NRE_EngineShader.hpp',['../_n_r_e___engine_shader_8hpp.html',1,'']]],
+  ['nre_5fengineshader_2ehpp',['NRE_ShadersManager.hpp',['../_n_r_e___engine_shader_8hpp.html',1,'']]],
   ['nre_5fenvironmentmap_2ehpp',['NRE_EnvironmentMap.hpp',['../_n_r_e___environment_map_8hpp.html',1,'']]],
   ['nre_5fevent_2ehpp',['NRE_Event.hpp',['../_n_r_e___event_8hpp.html',1,'']]],
   ['nre_5feventhandler_2ehpp',['NRE_EventHandler.hpp',['../_n_r_e___event_handler_8hpp.html',1,'']]],

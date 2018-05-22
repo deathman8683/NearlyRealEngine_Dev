@@ -1,6 +1,6 @@
 SRC = NRE_CaptureShader.cpp
 OBJ = $(OBJDIR)NRE_CaptureShader.o
-OBJDIR = ../../../../../obj/Debug/Renderer/Shader/EngineShader/Capture/
+OBJDIR = ../../../../../obj/Debug/Renderer/Shader/ShadersManager/Capture/
 
 all : $(TARGET)
 

@@ -2,7 +2,7 @@ SRC = NRE_Material.cpp
 OBJ = $(OBJDIR)NRE_Material.o
 OBJDIR = ../../../obj/Debug/Renderer/Material/
 
-MANAGER = MaterialManager
+MANAGER = MaterialsManager
 
 all : $(TARGET) after
 

@@ -1,6 +1,6 @@
 SRC = NRE_PBRShader.cpp
 OBJ = $(OBJDIR)NRE_PBRShader.o
-OBJDIR = ../../../../../obj/Debug/Renderer/Shader/EngineShader/PBR/
+OBJDIR = ../../../../../obj/Debug/Renderer/Shader/ShadersManager/PBR/
 
 all : $(TARGET)
 

@@ -36,7 +36,7 @@
 
             camera.computeProjectionMatrix(projection);
 
-            Renderer::EngineShader::sendProjection(projection);
+            Renderer::ShadersManager::sendProjection(projection);
 
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
@@ -97,7 +97,7 @@
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
                     engineWorld.render(modelview, &camera);
-                    const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
+                    const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::ShadersManager::getShader("GBuffer"));
                     tmp = modelview;
                     tmp.translate(Maths::Vector3D<NREfloat>(0, -85, 100));
                     for (GLuint i = 0; i < materialSpheres.size(); i = i + 1) {

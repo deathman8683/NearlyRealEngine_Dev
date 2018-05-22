@@ -4,7 +4,7 @@ OBJDIR = ../../../obj/Debug/Renderer/Shader/
 
 BASE = ShaderBase
 MAP = ShaderMap
-ENGINE = EngineShader
+ENGINE = ShadersManager
 
 all : before $(TARGET) after
 

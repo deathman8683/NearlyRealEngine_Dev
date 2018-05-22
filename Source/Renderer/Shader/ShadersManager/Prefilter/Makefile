@@ -1,6 +1,6 @@
 SRC = NRE_PrefilterShader.cpp
 OBJ = $(OBJDIR)NRE_PrefilterShader.o
-OBJDIR = ../../../../../obj/Debug/Renderer/Shader/EngineShader/Prefilter/
+OBJDIR = ../../../../../obj/Debug/Renderer/Shader/ShadersManager/Prefilter/
 
 all : $(TARGET)
 

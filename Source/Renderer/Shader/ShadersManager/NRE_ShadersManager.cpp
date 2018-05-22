@@ -1,16 +1,16 @@
 
-    #include "NRE_EngineShader.hpp"
+    #include "NRE_ShadersManager.hpp"
 
     namespace NRE {
         namespace Renderer {
 
-            std::unordered_map<std::string, const Shader*>* EngineShader::programs = 0;
+            std::unordered_map<std::string, const Shader*>* ShadersManager::programs = 0;
 
-            const Shader* const& EngineShader::getShader(std::string const& name) {
+            const Shader* const& ShadersManager::getShader(std::string const& name) {
                 return programs->find(name)->second;
             }
 
-            void EngineShader::init() {
+            void ShadersManager::init() {
                 programs = new std::unordered_map<std::string, const Shader*>(8);
                 (*programs)["BRDF"] = new BRDFShader();
                 (*programs)["Capture"] = new CaptureShader();
@@ -22,7 +22,7 @@
                 (*programs)["SSAO"] = new SSAOShader();
             }
 
-            void EngineShader::sendProjection(Maths::Matrix4x4<NREfloat> const& m) {
+            void ShadersManager::sendProjection(Maths::Matrix4x4<NREfloat> const& m) {
                 Maths::Matrix4x4<NREfloat> inv(m);
                 inv.inverse();
 
@@ -43,14 +43,14 @@
                 gBuffer->unbind();
             }
 
-            void EngineShader::sendKernel(SSAO const& ssao) {
+            void ShadersManager::sendKernel(SSAO const& ssao) {
                 const SSAOShader* s = static_cast<const SSAOShader*> (getShader("SSAO"));
                 s->bind();
                     s->sendKernel(ssao);
                 s->unbind();
             }
 
-            void EngineShader::free() {
+            void ShadersManager::free() {
                 for (const auto &it : *programs) {
                     delete it.second;
                 }

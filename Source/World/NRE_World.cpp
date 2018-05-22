@@ -76,7 +76,7 @@
 
             void World::render(Maths::Matrix4x4<NREfloat> const& modelview, Camera::FixedCamera* const& camera) {
 
-                const Renderer::GBufferShader* shader = static_cast <const Renderer::GBufferShader*> (Renderer::EngineShader::getShader("GBuffer"));
+                const Renderer::GBufferShader* shader = static_cast <const Renderer::GBufferShader*> (Renderer::ShadersManager::getShader("GBuffer"));
 
                 shader->bind();
                     shader->sendModelview(modelview);

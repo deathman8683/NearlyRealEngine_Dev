@@ -13,7 +13,7 @@
     #include "../../GL_Wrapper/BufferObject/IBO/NRE_IBO.hpp"
     #include "../../GL_Wrapper/Buffer/VAO/NRE_VAO.hpp"
     #include "../../Maths/NRE_Maths.hpp"
-    #include "../Shader/EngineShader/NRE_EngineShader.hpp"
+    #include "../Shader/ShadersManager/NRE_ShadersManager.hpp"
 
     /**
      * @namespace NRE

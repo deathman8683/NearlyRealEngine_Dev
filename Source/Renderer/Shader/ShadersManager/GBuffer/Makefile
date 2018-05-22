@@ -1,6 +1,6 @@
 SRC = NRE_GBufferShader.cpp
 OBJ = $(OBJDIR)NRE_GBufferShader.o
-OBJDIR = ../../../../../obj/Debug/Renderer/Shader/EngineShader/GBuffer/
+OBJDIR = ../../../../../obj/Debug/Renderer/Shader/ShadersManager/GBuffer/
 
 all : $(TARGET)
 

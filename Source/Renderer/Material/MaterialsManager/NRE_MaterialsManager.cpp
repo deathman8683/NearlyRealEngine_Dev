@@ -1,41 +1,41 @@
 
-    #include "NRE_MaterialManager.hpp"
+    #include "NRE_MaterialsManager.hpp"
 
     namespace NRE {
         namespace Renderer {
 
-            size_t MaterialManager::RESOLUTION = 256;
-            std::vector<Material*>* MaterialManager::materials = 0;
-            GL::Texture2DArray* MaterialManager::materialsAlbedo = 0;
-            GL::Texture2DArray* MaterialManager::materialsNormal = 0;
-            GL::Texture2DArray* MaterialManager::materialsRoughness = 0;
-            GL::Texture2DArray* MaterialManager::materialsMetallic = 0;
+            size_t MaterialsManager::RESOLUTION = 256;
+            std::vector<Material*>* MaterialsManager::materials = 0;
+            GL::Texture2DArray* MaterialsManager::materialsAlbedo = 0;
+            GL::Texture2DArray* MaterialsManager::materialsNormal = 0;
+            GL::Texture2DArray* MaterialsManager::materialsRoughness = 0;
+            GL::Texture2DArray* MaterialsManager::materialsMetallic = 0;
 
-            Material& MaterialManager::getMaterial(GLuint const& index) {
+            Material& MaterialsManager::getMaterial(GLuint const& index) {
                 return *((*materials)[index]);
             }
 
-            size_t const MaterialManager::getSize() {
+            size_t const MaterialsManager::getSize() {
                 return materials->size();
             }
 
-            GL::Texture2DArray& MaterialManager::getMaterialsAlbedo() {
+            GL::Texture2DArray& MaterialsManager::getMaterialsAlbedo() {
                 return *materialsAlbedo;
             }
 
-            GL::Texture2DArray& MaterialManager::getMaterialsNormal() {
+            GL::Texture2DArray& MaterialsManager::getMaterialsNormal() {
                 return *materialsNormal;
             }
 
-            GL::Texture2DArray& MaterialManager::getMaterialsRoughness() {
+            GL::Texture2DArray& MaterialsManager::getMaterialsRoughness() {
                 return *materialsRoughness;
             }
 
-            GL::Texture2DArray& MaterialManager::getMaterialsMetallic() {
+            GL::Texture2DArray& MaterialsManager::getMaterialsMetallic() {
                 return *materialsMetallic;
             }
 
-            void MaterialManager::init() {
+            void MaterialsManager::init() {
                 materials = new std::vector<Material*>();
                 materialsAlbedo = new GL::Texture2DArray();
                 materialsNormal = new GL::Texture2DArray();
@@ -63,7 +63,7 @@
                 materialsNormal->unbind();
             }
 
-            void MaterialManager::free() {
+            void MaterialsManager::free() {
                 for (GLuint i = 0; i < materials->size(); i = i + 1) {
                     delete (*materials)[i];
                 }

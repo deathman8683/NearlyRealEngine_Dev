@@ -5,17 +5,17 @@
 
         void init() {
             World::VoxelTypes::init();
-            Renderer::MaterialManager::init();
+            Renderer::MaterialsManager::init();
             Object::MergingCache::init();
-            Renderer::EngineShader::init();
-            Light::EngineLights::init();
+            Renderer::ShadersManager::init();
+            Light::LightsManager::init();
         }
 
         void quit() {
-            Light::EngineLights::free();
-            Renderer::EngineShader::free();
+            Light::LightsManager::free();
+            Renderer::ShadersManager::free();
             Object::MergingCache::free();
-            Renderer::MaterialManager::free();
+            Renderer::MaterialsManager::free();
             World::VoxelTypes::free();
         }
 
