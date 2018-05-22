@@ -14,8 +14,8 @@
                 delete lights;
             }
 
-            void EngineLights::push_back(Light l) {
-                lights->push_back(l);
+            void EngineLights::push_back(Light && l) {
+                lights->push_back(std::move(l));
             }
 
         };

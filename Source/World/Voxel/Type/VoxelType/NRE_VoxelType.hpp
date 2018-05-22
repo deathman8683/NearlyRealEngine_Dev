@@ -48,9 +48,9 @@
                         virtual bool const isSolid() const = 0;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        virtual Renderer::Material const getMaterial() const = 0;
+                        virtual std::string const getMaterialPath() const = 0;
             };
 
         };

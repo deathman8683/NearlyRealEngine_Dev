@@ -32,7 +32,7 @@
                          * Array size getter
                          * @return the size of the voxel type array
                          */
-                        static GLuint const& getSize();
+                        static GLuint const getSize();
                         /**
                          * Specific voxel type getter
                          * @param  type the specific type enum
@@ -52,7 +52,6 @@
 
                 private:
                     static VoxelType **voxelTypes;              /**< Store all differents voxel types */
-                    static GLuint size;                         /**< The size of both types array */
             };
 
         };

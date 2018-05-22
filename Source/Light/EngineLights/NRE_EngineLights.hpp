@@ -34,7 +34,7 @@
                     //## Methods ##//
                         static void init();
                         static void free();
-                        static void push_back(Light l);
+                        static void push_back(Light && l);
 
                 private:
                     static std::vector<Light>* lights;

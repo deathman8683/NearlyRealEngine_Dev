@@ -14,8 +14,8 @@
                 return false;
             }
 
-            Renderer::Material const Void::getMaterial() const {
-                return Renderer::Material("Void");
+            std::string const Void::getMaterialPath() const {
+                return "Void";
             }
 
             Ocean::Ocean() {
@@ -28,8 +28,8 @@
                 return true;
             }
 
-            Renderer::Material const Ocean::getMaterial() const {
-                return Renderer::Material("Ocean");
+            std::string const Ocean::getMaterialPath() const {
+                return "Ocean";
             }
 
             Beach::Beach() {
@@ -42,8 +42,8 @@
                 return true;
             }
 
-            Renderer::Material const Beach::getMaterial() const {
-                return Renderer::Material("Beach");
+            std::string const Beach::getMaterialPath() const {
+                return "Beach";
             }
 
             Scorched::Scorched() {
@@ -56,8 +56,8 @@
                 return true;
             }
 
-            Renderer::Material const Scorched::getMaterial() const {
-                return Renderer::Material("Scorched");
+            std::string const Scorched::getMaterialPath() const {
+                return "Scorched";
             }
 
             Bare::Bare() {
@@ -70,8 +70,8 @@
                 return true;
             }
 
-            Renderer::Material const Bare::getMaterial() const {
-                return Renderer::Material("Bare");
+            std::string const Bare::getMaterialPath() const {
+                return "Bare";
             }
 
             Tundra::Tundra() {
@@ -84,8 +84,8 @@
                 return true;
             }
 
-            Renderer::Material const Tundra::getMaterial() const {
-                return Renderer::Material("Tundra");
+            std::string const Tundra::getMaterialPath() const {
+                return "Tundra";
             }
 
             Snow::Snow() {
@@ -98,8 +98,8 @@
                 return true;
             }
 
-            Renderer::Material const Snow::getMaterial() const {
-                return Renderer::Material("Snow");
+            std::string const Snow::getMaterialPath() const {
+                return "Snow";
             }
 
             TemperateDesert::TemperateDesert() {
@@ -112,8 +112,8 @@
                 return true;
             }
 
-            Renderer::Material const TemperateDesert::getMaterial() const {
-                return Renderer::Material("Temperate_Desert");
+            std::string const TemperateDesert::getMaterialPath() const {
+                return "Temperate_Desert";
             }
 
             SubtropicalDesert::SubtropicalDesert() {
@@ -126,8 +126,8 @@
                 return true;
             }
 
-            Renderer::Material const SubtropicalDesert::getMaterial() const {
-                return Renderer::Material("Subtropical_Desert");
+            std::string const SubtropicalDesert::getMaterialPath() const {
+                return "Subtropical_Desert";
             }
 
             Shrubland::Shrubland() {
@@ -140,8 +140,8 @@
                 return true;
             }
 
-            Renderer::Material const Shrubland::getMaterial() const {
-                return Renderer::Material("Shrubland");
+            std::string const Shrubland::getMaterialPath() const {
+                return "Shrubland";
             }
 
             Taiga::Taiga() {
@@ -154,8 +154,8 @@
                 return true;
             }
 
-            Renderer::Material const Taiga::getMaterial() const {
-                return Renderer::Material("Taiga");
+            std::string const Taiga::getMaterialPath() const {
+                return "Taiga";
             }
 
             Grassland::Grassland() {
@@ -168,8 +168,8 @@
                 return true;
             }
 
-            Renderer::Material const Grassland::getMaterial() const {
-                return Renderer::Material("Grassland");
+            std::string const Grassland::getMaterialPath() const {
+                return "Grassland";
             }
 
             TemperateDeciduousForest::TemperateDeciduousForest() {
@@ -182,8 +182,8 @@
                 return true;
             }
 
-            Renderer::Material const TemperateDeciduousForest::getMaterial() const {
-                return Renderer::Material("Temperate_Deciduous_Forest");
+            std::string const TemperateDeciduousForest::getMaterialPath() const {
+                return "Temperate_Deciduous_Forest";
             }
 
             TemperateRainForest::TemperateRainForest() {
@@ -196,8 +196,8 @@
                 return true;
             }
 
-            Renderer::Material const TemperateRainForest::getMaterial() const {
-                return Renderer::Material("Temperate_Rain_Forest");
+            std::string const TemperateRainForest::getMaterialPath() const {
+                return "Temperate_Rain_Forest";
             }
 
             TropicalSeasonalForest::TropicalSeasonalForest() {
@@ -210,8 +210,8 @@
                 return true;
             }
 
-            Renderer::Material const TropicalSeasonalForest::getMaterial() const {
-                return Renderer::Material("Tropical_Seasonal_Forest");
+            std::string const TropicalSeasonalForest::getMaterialPath() const {
+                return "Tropical_Seasonal_Forest";
             }
 
             TropicalRainForest::TropicalRainForest() {
@@ -224,8 +224,8 @@
                 return true;
             }
 
-            Renderer::Material const TropicalRainForest::getMaterial() const {
-                return Renderer::Material("Tropical_Rain_Forest");
+            std::string const TropicalRainForest::getMaterialPath() const {
+                return "Tropical_Rain_Forest";
             }
 
             Mat_1::Mat_1() {
@@ -238,8 +238,8 @@
                 return true;
             }
 
-            Renderer::Material const Mat_1::getMaterial() const {
-                return Renderer::Material("Mat_1");
+            std::string const Mat_1::getMaterialPath() const {
+                return "Mat_1";
             }
 
             Mat_2::Mat_2() {
@@ -252,8 +252,8 @@
                 return true;
             }
 
-            Renderer::Material const Mat_2::getMaterial() const {
-                return Renderer::Material("Mat_2");
+            std::string const Mat_2::getMaterialPath() const {
+                return "Mat_2";
             }
 
             Mat_3::Mat_3() {
@@ -266,8 +266,8 @@
                 return true;
             }
 
-            Renderer::Material const Mat_3::getMaterial() const {
-                return Renderer::Material("Mat_3");
+            std::string const Mat_3::getMaterialPath() const {
+                return "Mat_3";
             }
 
             Mat_4::Mat_4() {
@@ -280,8 +280,8 @@
                 return true;
             }
 
-            Renderer::Material const Mat_4::getMaterial() const {
-                return Renderer::Material("Mat_4");
+            std::string const Mat_4::getMaterialPath() const {
+                return "Mat_4";
             }
 
             Mat_5::Mat_5() {
@@ -294,8 +294,8 @@
                 return true;
             }
 
-            Renderer::Material const Mat_5::getMaterial() const {
-                return Renderer::Material("Mat_5");
+            std::string const Mat_5::getMaterialPath() const {
+                return "Mat_5";
             }
 
             Mat_6::Mat_6() {
@@ -308,8 +308,8 @@
                 return true;
             }
 
-            Renderer::Material const Mat_6::getMaterial() const {
-                return Renderer::Material("Mat_6");
+            std::string const Mat_6::getMaterialPath() const {
+                return "Mat_6";
             }
 
             Mat_7::Mat_7() {
@@ -322,8 +322,8 @@
                 return true;
             }
 
-            Renderer::Material const Mat_7::getMaterial() const {
-                return Renderer::Material("Mat_7");
+            std::string const Mat_7::getMaterialPath() const {
+                return "Mat_7";
             }
 
             Mat_8::Mat_8() {
@@ -336,8 +336,8 @@
                 return true;
             }
 
-            Renderer::Material const Mat_8::getMaterial() const {
-                return Renderer::Material("Mat_8");
+            std::string const Mat_8::getMaterialPath() const {
+                return "Mat_8";
             }
 
         };

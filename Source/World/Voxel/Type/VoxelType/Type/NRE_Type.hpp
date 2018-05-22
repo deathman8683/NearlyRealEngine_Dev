@@ -48,9 +48,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -79,9 +79,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -110,9 +110,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -141,9 +141,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -172,9 +172,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -203,9 +203,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -234,9 +234,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -265,9 +265,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -296,9 +296,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -327,9 +327,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -358,9 +358,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -389,9 +389,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -420,9 +420,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -451,9 +451,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -482,9 +482,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -513,9 +513,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -544,9 +544,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -575,9 +575,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -606,9 +606,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -637,9 +637,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -668,9 +668,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -699,9 +699,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -730,9 +730,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
             /**
@@ -761,9 +761,9 @@
                         bool const isSolid() const;
                         /**
                          * Voxel material getter
-                         * @return the voxel's material
+                         * @return the voxel's material's path
                          */
-                        Renderer::Material const getMaterial() const;
+                        std::string const getMaterialPath() const;
             };
 
         };

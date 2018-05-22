@@ -5,10 +5,9 @@
         namespace World {
 
             VoxelType** VoxelTypes::voxelTypes = 0;
-            GLuint VoxelTypes::size = 0;
 
-            GLuint const& VoxelTypes::getSize() {
-                return size;
+            GLuint const VoxelTypes::getSize() {
+                return TYPE_NUM;
             }
 
             VoxelType* VoxelTypes::getVoxelType(GLubyte const& type) {
@@ -41,8 +40,6 @@
                 voxelTypes[MAT_6] = new Mat_6();
                 voxelTypes[MAT_7] = new Mat_7();
                 voxelTypes[MAT_8] = new Mat_8();
-
-                size = TYPE_NUM;
             }
 
             void VoxelTypes::free() {

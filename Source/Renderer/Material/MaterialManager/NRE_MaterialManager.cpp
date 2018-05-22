@@ -5,14 +5,14 @@
         namespace Renderer {
 
             size_t MaterialManager::RESOLUTION = 256;
-            std::vector<Material>* MaterialManager::materials = 0;
+            std::vector<Material*>* MaterialManager::materials = 0;
             GL::Texture2DArray* MaterialManager::materialsAlbedo = 0;
             GL::Texture2DArray* MaterialManager::materialsNormal = 0;
             GL::Texture2DArray* MaterialManager::materialsRoughness = 0;
             GL::Texture2DArray* MaterialManager::materialsMetallic = 0;
 
             Material& MaterialManager::getMaterial(GLuint const& index) {
-                return (*materials)[index];
+                return *((*materials)[index]);
             }
 
             size_t const MaterialManager::getSize() {
@@ -36,7 +36,7 @@
             }
 
             void MaterialManager::init() {
-                materials = new std::vector<Material>;
+                materials = new std::vector<Material*>();
                 materialsAlbedo = new GL::Texture2DArray();
                 materialsNormal = new GL::Texture2DArray();
                 materialsRoughness = new GL::Texture2DArray();
@@ -46,7 +46,7 @@
                 materialsRoughness->allocate(GL_RGBA, RESOLUTION, RESOLUTION, World::VoxelTypes::getSize(), GL_RGBA, true);
                 materialsMetallic->allocate(GL_RGBA, RESOLUTION, RESOLUTION, World::VoxelTypes::getSize(), GL_RGBA, true);
                 for (GLuint i = 0; i < World::VoxelTypes::getSize(); i = i + 1) {
-                    materials->push_back(World::VoxelTypes::getVoxelType(i)->getMaterial());
+                    materials->push_back(new Material(World::VoxelTypes::getVoxelType(i)->getMaterialPath()));
                     materialsAlbedo->sendTexture(getMaterial(i).getAlbedo(), i);
                     materialsNormal->sendTexture(getMaterial(i).getNormal(), i);
                     materialsRoughness->sendTexture(getMaterial(i).getRoughness(), i);
@@ -64,6 +64,9 @@
             }
 
             void MaterialManager::free() {
+                for (GLuint i = 0; i < materials->size(); i = i + 1) {
+                    delete (*materials)[i];
+                }
                 delete materials;
                 delete materialsAlbedo;
                 delete materialsNormal;

@@ -44,7 +44,7 @@
                         static void free();
 
                 private:
-                    static std::vector<Material>* materials;
+                    static std::vector<Material*>* materials;
                     static GL::Texture2DArray* materialsAlbedo;
                     static GL::Texture2DArray* materialsNormal;
                     static GL::Texture2DArray* materialsRoughness;
