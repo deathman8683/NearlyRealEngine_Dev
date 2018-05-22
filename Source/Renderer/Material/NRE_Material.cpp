@@ -4,29 +4,23 @@
     namespace NRE {
         namespace Renderer {
 
-            Material::Material() : Material(0.0, 0.0, "") {
+            Material::Material() : Material("") {
             }
 
-            Material::Material(NREfloat const& metallic, NREfloat const& roughness, std::string const& path) : metallic(metallic), roughness(roughness), albedo(0), normal(0) {
+            Material::Material(std::string const& path) : albedo(0), normal(0), roughness(0), metallic(0) {
                 albedo = new GL::Texture2D("Data/Material/" + path + "/" + path + "_Albedo.png", false);
                 normal = new GL::Texture2D("Data/Material/" + path + "/" + path + "_Normal.png", false);
+                roughness = new GL::Texture2D("Data/Material/" + path + "/" + path + "_Roughness.png", false);
+                metallic = new GL::Texture2D("Data/Material/" + path + "/" + path + "_Metallic.png", false);
             }
 
-            Material::Material(Material const& mat) : metallic(mat.getMetallic()), roughness(mat.getRoughness()), albedo(mat.albedo), normal(mat.normal) {
+            Material::Material(Material const& mat) : albedo(mat.albedo), normal(mat.normal), roughness(mat.roughness), metallic(mat.metallic) {
             }
 
-            Material::Material(Material && mat) : metallic(std::move(mat.getMetallic())), roughness(std::move(mat.getRoughness())), albedo(std::move(mat.albedo)), normal(std::move(mat.normal)) {
+            Material::Material(Material && mat) : albedo(std::move(mat.albedo)), normal(std::move(mat.normal)), roughness(std::move(mat.roughness)), metallic(std::move(mat.metallic)) {
             }
 
             Material::~Material() {
-            }
-
-            NREfloat const& Material::getMetallic() const {
-                return metallic;
-            }
-
-            NREfloat const& Material::getRoughness() const {
-                return roughness;
             }
 
             GL::Texture2D const& Material::getAlbedo() const {
@@ -37,42 +31,38 @@
                 return *normal;
             }
 
-            NREfloat* const Material::getMetallicValue() {
-                return &metallic;
+            GL::Texture2D const& Material::getRoughness() const {
+                return *roughness;
             }
 
-            NREfloat* const Material::getRoughnessValue() {
-                return &roughness;
-            }
-
-            void Material::setMetallic(NREfloat const& value) {
-                metallic = value;
-            }
-
-            void Material::setRoughness(NREfloat const& value) {
-                roughness = value;
+            GL::Texture2D const& Material::getMetallic() const {
+                return *metallic;
             }
 
             void Material::freeTextures() {
                 delete albedo;
                 delete normal;
+                delete roughness;
+                delete metallic;
                 albedo = 0;
                 normal = 0;
+                roughness = 0;
+                metallic = 0;
             }
 
             Material& Material::operator=(Material const& mat) {
-                metallic = mat.getMetallic();
-                roughness = mat.getRoughness();
                 albedo = mat.albedo;
                 normal = mat.normal;
+                roughness = mat.roughness;
+                metallic = mat.metallic;
                 return *this;
             }
 
             Material& Material::operator=(Material && mat) {
-                metallic = std::move(mat.metallic);
-                roughness = std::move(mat.roughness);
                 albedo = std::move(mat.albedo);
                 normal = std::move(mat.normal);
+                roughness = std::move(mat.roughness);
+                metallic = std::move(mat.metallic);
                 return *this;
             }
 

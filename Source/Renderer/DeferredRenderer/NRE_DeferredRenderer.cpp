@@ -48,14 +48,18 @@
                         gBuffer.getColorBuffer(0)->bind();
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->bind();
-                    glActiveTexture(GL_TEXTURE4);
+                    glActiveTexture(GL_TEXTURE3);
                         skyBox.getIrradianceMap().bind();
-                    glActiveTexture(GL_TEXTURE5);
+                    glActiveTexture(GL_TEXTURE4);
                         skyBox.getPrefilterMap().bind();
-                    glActiveTexture(GL_TEXTURE6);
+                    glActiveTexture(GL_TEXTURE5);
                         skyBox.getBRDFLUT().bind();
-                    glActiveTexture(GL_TEXTURE7);
+                    glActiveTexture(GL_TEXTURE6);
                         MaterialManager::getMaterialsAlbedo().bind();
+                    glActiveTexture(GL_TEXTURE7);
+                        MaterialManager::getMaterialsRoughness().bind();
+                    glActiveTexture(GL_TEXTURE8);
+                        MaterialManager::getMaterialsMetallic().bind();
 
                     shader->sendLigths(lights);
                     shader->sendCamera(camera);
@@ -64,13 +68,18 @@
 
                     draw();
 
+
+                    glActiveTexture(GL_TEXTURE8);
+                    MaterialManager::getMaterialsMetallic().unbind();
                     glActiveTexture(GL_TEXTURE7);
-                    MaterialManager::getMaterialsAlbedo().unbind();
+                    MaterialManager::getMaterialsRoughness().unbind();
                     glActiveTexture(GL_TEXTURE6);
-                        skyBox.getBRDFLUT().unbind();
+                    MaterialManager::getMaterialsAlbedo().unbind();
                     glActiveTexture(GL_TEXTURE5);
-                        skyBox.getPrefilterMap().unbind();
+                        skyBox.getBRDFLUT().unbind();
                     glActiveTexture(GL_TEXTURE4);
+                        skyBox.getPrefilterMap().unbind();
+                    glActiveTexture(GL_TEXTURE3);
                         skyBox.getIrradianceMap().unbind();
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->unbind();

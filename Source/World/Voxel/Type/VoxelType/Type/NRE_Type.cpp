@@ -15,7 +15,7 @@
             }
 
             Renderer::Material const Void::getMaterial() const {
-                return Renderer::Material(0.0, 0.1, "Void");
+                return Renderer::Material("Void");
             }
 
             Ocean::Ocean() {
@@ -29,7 +29,7 @@
             }
 
             Renderer::Material const Ocean::getMaterial() const {
-                return Renderer::Material(0.0, 0.1, "Ocean");
+                return Renderer::Material("Ocean");
             }
 
             Beach::Beach() {
@@ -43,7 +43,7 @@
             }
 
             Renderer::Material const Beach::getMaterial() const {
-                return Renderer::Material(0.0, 0.9, "Beach");
+                return Renderer::Material("Beach");
             }
 
             Scorched::Scorched() {
@@ -57,7 +57,7 @@
             }
 
             Renderer::Material const Scorched::getMaterial() const {
-                return Renderer::Material(0.0, 0.9, "Scorched");
+                return Renderer::Material("Scorched");
             }
 
             Bare::Bare() {
@@ -71,7 +71,7 @@
             }
 
             Renderer::Material const Bare::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Bare");
+                return Renderer::Material("Bare");
             }
 
             Tundra::Tundra() {
@@ -85,7 +85,7 @@
             }
 
             Renderer::Material const Tundra::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Tundra");
+                return Renderer::Material("Tundra");
             }
 
             Snow::Snow() {
@@ -99,7 +99,7 @@
             }
 
             Renderer::Material const Snow::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Snow");
+                return Renderer::Material("Snow");
             }
 
             TemperateDesert::TemperateDesert() {
@@ -113,7 +113,7 @@
             }
 
             Renderer::Material const TemperateDesert::getMaterial() const {
-                return Renderer::Material(0.0, 0.9, "Temperate_Desert");
+                return Renderer::Material("Temperate_Desert");
             }
 
             SubtropicalDesert::SubtropicalDesert() {
@@ -127,7 +127,7 @@
             }
 
             Renderer::Material const SubtropicalDesert::getMaterial() const {
-                return Renderer::Material(0.0, 0.9, "Subtropical_Desert");
+                return Renderer::Material("Subtropical_Desert");
             }
 
             Shrubland::Shrubland() {
@@ -141,7 +141,7 @@
             }
 
             Renderer::Material const Shrubland::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Shrubland");
+                return Renderer::Material("Shrubland");
             }
 
             Taiga::Taiga() {
@@ -155,7 +155,7 @@
             }
 
             Renderer::Material const Taiga::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Taiga");
+                return Renderer::Material("Taiga");
             }
 
             Grassland::Grassland() {
@@ -169,7 +169,7 @@
             }
 
             Renderer::Material const Grassland::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Grassland");
+                return Renderer::Material("Grassland");
             }
 
             TemperateDeciduousForest::TemperateDeciduousForest() {
@@ -183,7 +183,7 @@
             }
 
             Renderer::Material const TemperateDeciduousForest::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Temperate_Deciduous_Forest");
+                return Renderer::Material("Temperate_Deciduous_Forest");
             }
 
             TemperateRainForest::TemperateRainForest() {
@@ -197,7 +197,7 @@
             }
 
             Renderer::Material const TemperateRainForest::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Temperate_Rain_Forest");
+                return Renderer::Material("Temperate_Rain_Forest");
             }
 
             TropicalSeasonalForest::TropicalSeasonalForest() {
@@ -211,7 +211,7 @@
             }
 
             Renderer::Material const TropicalSeasonalForest::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Tropical_Seasonal_Forest");
+                return Renderer::Material("Tropical_Seasonal_Forest");
             }
 
             TropicalRainForest::TropicalRainForest() {
@@ -225,7 +225,7 @@
             }
 
             Renderer::Material const TropicalRainForest::getMaterial() const {
-                return Renderer::Material(0.0, 0.8, "Tropical_Rain_Forest");
+                return Renderer::Material("Tropical_Rain_Forest");
             }
 
             Mat_1::Mat_1() {
@@ -239,7 +239,7 @@
             }
 
             Renderer::Material const Mat_1::getMaterial() const {
-                return Renderer::Material(0.9, 0.1, "Mat_1");
+                return Renderer::Material("Mat_1");
             }
 
             Mat_2::Mat_2() {
@@ -253,7 +253,7 @@
             }
 
             Renderer::Material const Mat_2::getMaterial() const {
-                return Renderer::Material(0.9, 0.1, "Mat_2");
+                return Renderer::Material("Mat_2");
             }
 
             Mat_3::Mat_3() {
@@ -267,7 +267,7 @@
             }
 
             Renderer::Material const Mat_3::getMaterial() const {
-                return Renderer::Material(0.9, 0.1, "Mat_3");
+                return Renderer::Material("Mat_3");
             }
 
             Mat_4::Mat_4() {
@@ -281,7 +281,7 @@
             }
 
             Renderer::Material const Mat_4::getMaterial() const {
-                return Renderer::Material(0.9, 0.1, "Mat_4");
+                return Renderer::Material("Mat_4");
             }
 
             Mat_5::Mat_5() {
@@ -295,7 +295,7 @@
             }
 
             Renderer::Material const Mat_5::getMaterial() const {
-                return Renderer::Material(0.9, 0.1, "Mat_5");
+                return Renderer::Material("Mat_5");
             }
 
             Mat_6::Mat_6() {
@@ -309,7 +309,7 @@
             }
 
             Renderer::Material const Mat_6::getMaterial() const {
-                return Renderer::Material(0.9, 0.1, "Mat_6");
+                return Renderer::Material("Mat_6");
             }
 
             Mat_7::Mat_7() {
@@ -323,7 +323,7 @@
             }
 
             Renderer::Material const Mat_7::getMaterial() const {
-                return Renderer::Material(0.9, 0.1, "Mat_7");
+                return Renderer::Material("Mat_7");
             }
 
             Mat_8::Mat_8() {
@@ -337,7 +337,7 @@
             }
 
             Renderer::Material const Mat_8::getMaterial() const {
-                return Renderer::Material(0.9, 0.1, "Mat_8");
+                return Renderer::Material("Mat_8");
             }
 
         };

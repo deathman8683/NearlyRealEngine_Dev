@@ -34,6 +34,8 @@
                         static size_t const getSize();
                         static GL::Texture2DArray& getMaterialsAlbedo();
                         static GL::Texture2DArray& getMaterialsNormal();
+                        static GL::Texture2DArray& getMaterialsRoughness();
+                        static GL::Texture2DArray& getMaterialsMetallic();
 
                     //## Setter ##//
 
@@ -45,6 +47,8 @@
                     static std::vector<Material>* materials;
                     static GL::Texture2DArray* materialsAlbedo;
                     static GL::Texture2DArray* materialsNormal;
+                    static GL::Texture2DArray* materialsRoughness;
+                    static GL::Texture2DArray* materialsMetallic;
                     static size_t RESOLUTION;
             };
 

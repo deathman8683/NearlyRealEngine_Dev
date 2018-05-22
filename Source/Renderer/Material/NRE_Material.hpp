@@ -29,10 +29,10 @@
              */
             class Material {
                 private:
-                    NREfloat metallic;                  /**< The material metallic aspect */
-                    NREfloat roughness;                 /**< The material roughness */
                     GL::Texture2D* albedo;
                     GL::Texture2D* normal;
+                    GL::Texture2D* roughness;
+                    GL::Texture2D* metallic;
 
                 public:
                     //## Constructor ##//
@@ -42,11 +42,9 @@
                         Material();
                         /**
                          * Construct a material from his different attributes
-                         * @param metallic  the new material metallic aspect
-                         * @param roughness the new material roughness
                          * @param path      the path to the material's textures
                          */
-                        Material(NREfloat const& metallic, NREfloat const& roughness, std::string const& path);
+                        Material(std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
@@ -71,40 +69,12 @@
                         ~Material();
 
                     //## Getter ##//
-                        /**
-                         * Metallic Aspect getter
-                         * @return the material metallic aspect
-                         */
-                        NREfloat const& getMetallic() const;
-                        /**
-                         * Roughness getter
-                         * @return the material roughness
-                         */
-                        NREfloat const& getRoughness() const;
                         GL::Texture2D const& getAlbedo() const;
                         GL::Texture2D const& getNormal() const;
-                        /**
-                         * Metallic pointer getter
-                         * @return the material metallic pointer, used with uniform in shader
-                         */
-                        NREfloat* const getMetallicValue();
-                        /**
-                         * Roughness pointer getter
-                         * @return the material roughness pointer, used with uniform in shader
-                         */
-                        NREfloat* const getRoughnessValue();
+                        GL::Texture2D const& getRoughness() const;
+                        GL::Texture2D const& getMetallic() const;
 
                     //## Setter ##//
-                        /**
-                         * Metallic Aspect setter
-                         * @param value the new metallic aspect value
-                         */
-                        void setMetallic(NREfloat const& value);
-                        /**
-                         * Roughness setter
-                         * @param value the new roughness value
-                         */
-                        void setRoughness(NREfloat const& value);
 
                     //## Methods ##//
                         void freeTextures();

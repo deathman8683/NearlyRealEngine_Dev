@@ -15,6 +15,8 @@
                 addUniformLocation("prefilterMap");
                 addUniformLocation("brdfLUT");
                 addUniformLocation("texMaterial");
+                addUniformLocation("texRoughness");
+                addUniformLocation("texMetallic");
                 for (GLuint i = 0; i < MAX_LIGHTS; i = i + 1) {
                     std::ostringstream index;
                     index << i;
@@ -23,12 +25,6 @@
                     addUniformLocation("lights[" + index.str() + "].direction");
                     addUniformLocation("lights[" + index.str() + "].angle");
                 }
-                for (unsigned int i = 0; i < MaterialManager::getSize(); i = i + 1) {
-                    std::ostringstream index;
-                    index << i;
-                    addUniformLocation("materials[" + index.str() + "].metallic");
-                    addUniformLocation("materials[" + index.str() + "].roughness");
-                }
                 addUniformLocation("cameraV");
                 addUniformLocation("invModelview");
                 addUniformLocation("invProjection");
@@ -36,7 +32,6 @@
                 addUniformLocation("numLights");
 
                 bind();
-                    sendMaterials();
                     sendTextures();
                 unbind();
             }
@@ -49,15 +44,6 @@
 
             std::string const PBRShader::getPath() const {
                 return "PBR";
-            }
-
-            void PBRShader::sendMaterials() const {
-                for (unsigned int i = 0; i < MaterialManager::getSize(); i = i + 1) {
-                    std::ostringstream index;
-                    index << i;
-                    use1FV("materials[" + index.str() + "].metallic", 1, MaterialManager::getMaterial(i).getMetallicValue());
-                    use1FV("materials[" + index.str() + "].roughness", 1, MaterialManager::getMaterial(i).getRoughnessValue());
-                }
             }
 
             void PBRShader::sendLigths(std::vector<Light::Light*> const& lights) const {
@@ -77,10 +63,12 @@
                 use1I("texDepth", 0);
                 use1I("texDiffuseUV", 1);
                 use1I("texNormal", 2);
-                use1I("irradianceMap", 4);
-                use1I("prefilterMap", 5);
-                use1I("brdfLUT", 6);
-                use1I("texMaterial", 7);
+                use1I("irradianceMap", 3);
+                use1I("prefilterMap", 4);
+                use1I("brdfLUT", 5);
+                use1I("texMaterial", 6);
+                use1I("texRoughness", 7);
+                use1I("texMetallic", 8);
             }
 
             void PBRShader::sendInvProjection(Maths::Matrix4x4<NREfloat> const& m) const {

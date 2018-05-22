@@ -73,10 +73,6 @@
 
                     //## Methods ##//
                         /**
-                         * Send all materials values to the shader
-                         */
-                        void sendMaterials() const;
-                        /**
                          * Send all lights values to the shader
                          * @param lights the arrays of lights
                          */

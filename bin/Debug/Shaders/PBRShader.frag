@@ -2,7 +2,6 @@
     #version 450
 
     #define MAX_LIGHTS 10
-    #define MAX_MATERIAL 32
 
     uniform int numLights;
     uniform struct Light {
@@ -11,11 +10,6 @@
        vec3 direction;
        float angle;
     } lights[MAX_LIGHTS];
-
-    uniform struct Material {
-        float metallic;
-        float roughness;
-    } materials[MAX_MATERIAL];
 
     in vec2 uv;
 
@@ -31,6 +25,8 @@
     uniform samplerCube prefilterMap;
     uniform sampler2D brdfLUT;
     uniform sampler2DArray texMaterial;
+    uniform sampler2DArray texRoughness;
+    uniform sampler2DArray texMetallic;
 
     uniform vec3 cameraV;
 
@@ -137,9 +133,11 @@
             R = (rotation * vec4(R, 1.0)).xyz;
             vec2 tileUV = texture(texDiffuseUV, uv).xy;
             vec3 albedo = texture(texMaterial, vec3(tileUV, id)).rgb;
+            float roughness = texture(texRoughness, vec3(tileUV, id)).r;
+            float metallic = texture(texMetallic, vec3(tileUV, id)).r;
 
             vec3 F0 = vec3(0.04);
-            F0 = mix(F0, albedo, materials[id].metallic);
+            F0 = mix(F0, albedo, metallic);
 
             vec3 Lo = vec3(0.0);
             for (int i = 0; i < numLights; i = i + 1) {
@@ -150,13 +148,13 @@
                 float attenuation = mix(1.0, 1.0 / (distance * distance), lights[i].position.w);
                 vec3 radiance = lights[i].intensities * attenuation;
 
-                float NDF = distributionGGX(N, H, materials[id].roughness);
-                float G = geometrySmith(N, V, L, materials[id].roughness);
+                float NDF = distributionGGX(N, H, roughness);
+                float G = geometrySmith(N, V, L, roughness);
                 vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
 
                 vec3 kS = F;
                 vec3 kD = vec3(1.0) - kS;
-                kD *= 1.0 - materials[id].metallic;
+                kD *= 1.0 - metallic;
 
                 vec3 numerator = NDF * G * F;
                 float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
@@ -167,18 +165,18 @@
                 Lo += (kD * albedo / PI + specular) * radiance * NdotL;
             }
 
-            vec3 F = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, materials[id].roughness);
+            vec3 F = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, roughness);
 
             vec3 kS = F;
             vec3 kD = 1.0 - kS;
-            kD *= 1.0 - materials[id].metallic;
+            kD *= 1.0 - metallic;
 
             vec3 irradiance = texture(irradianceMap, N).rgb;
             vec3 diffuse = irradiance * albedo;
 
             const float MAX_REFLECTION_LOD = 4.0;
-            vec3 prefilteredColor = textureLod(prefilterMap, R, materials[id].roughness * MAX_REFLECTION_LOD).rgb;
-            vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), materials[id].roughness)).rg;
+            vec3 prefilteredColor = textureLod(prefilterMap, R, roughness * MAX_REFLECTION_LOD).rgb;
+            vec2 brdf = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
             vec3 specular = prefilteredColor * (F * brdf.x + brdf.y);
 
             vec3 ambient = (kD * computeBlur(uv) * diffuse + specular);
