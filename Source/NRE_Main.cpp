@@ -96,7 +96,7 @@
                     if (mode.isActive()) {
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
-                    //engineWorld.render(modelview, &camera);
+                    engineWorld.render(modelview, &camera);
                     const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
                     tmp = modelview;
                     tmp.translate(Maths::Vector3D<NREfloat>(0, -85, 100));

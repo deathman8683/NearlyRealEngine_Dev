@@ -25,7 +25,7 @@
              * @class UVData
              * @brief Object's Object : A specialized data object for uv storing
              */
-            class UVData : public Data<GLshort> {
+            class UVData : public Data<GLfloat> {
                 private:
 
                 public:
