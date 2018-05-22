@@ -41,7 +41,7 @@
             Renderer::DeferredRenderer engineDeferredRenderer(Maths::Vector2D<NREfloat>(1280.0, 720.0));
 
             NREfloat skyboxAngleX = 0.0;
-            //int nbFrames = 0;
+            int nbFrames = 0;
 
             std::vector<Object::Object3D*> materialSpheres;
 
@@ -62,15 +62,15 @@
 
             while(!camera.getQuit())
             {
-                /*engineClock.updateActualTime();
+                engineClock.updateActualTime();
                 nbFrames = nbFrames + 1;
 
                 if (engineClock.getActualTime() - engineClock.getLastTime() >= 1000.0) {
                     std::cout << 1000.0 / nbFrames << "ms / frame" << std::endl;
                     nbFrames = 0;
                     engineClock.setLastTime(engineClock.getLastTime() + 1000.0);
-                }*/
-                engineClock.updateTimestep(1000.0 / 60.0);
+                }
+                //engineClock.updateTimestep(1000.0 / 60.0);
 
                 camera.update();
 
@@ -96,7 +96,7 @@
                     if (mode.isActive()) {
                         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                     }
-                    //engineWorld.render(modelview, &camera);
+                    engineWorld.render(modelview, &camera);
                     const Renderer::GBufferShader* const s = static_cast <const Renderer::GBufferShader* const> (Renderer::EngineShader::getShader("GBuffer"));
                     tmp = modelview;
                     tmp.translate(Maths::Vector3D<NREfloat>(0, -85, 100));
