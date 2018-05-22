@@ -26,10 +26,6 @@
                 return type;
             }
 
-            Color::RGB const Voxel::getColor() const {
-                return VoxelTypes::getVoxelType(getType())->getColor();
-            }
-
             bool const Voxel::isSolid() const {
                 return VoxelTypes::getVoxelType(getType())->isSolid();
             }
@@ -50,7 +46,7 @@
                     vBuf[21] = 1; vBuf[22] = 1; vBuf[23] = 0;
 
                 cBuf = new GLfloat[NB_VERTICES];
-                    Color::RGB voxColor = getColor();
+                    Color::RGB voxColor = Color::RGB(255, 255, 255);
                     for (int i = 0; i < NB_VERTICES; i = i + 3) {
                         cBuf[i] = voxColor.getR() / 255.0;
                         cBuf[i + 1] = voxColor.getG() / 255.0;

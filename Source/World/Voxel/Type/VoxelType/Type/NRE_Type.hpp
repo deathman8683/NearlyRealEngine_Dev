@@ -42,11 +42,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -77,11 +72,6 @@
                         ~Ocean();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -114,11 +104,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -149,11 +134,6 @@
                         ~Scorched();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -186,11 +166,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -221,11 +196,6 @@
                         ~Tundra();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -258,11 +228,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -293,11 +258,6 @@
                         ~TemperateDesert();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -330,11 +290,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -365,11 +320,6 @@
                         ~Shrubland();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -402,11 +352,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -437,11 +382,6 @@
                         ~Grassland();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -474,11 +414,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -509,11 +444,6 @@
                         ~TemperateRainForest();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -546,11 +476,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -581,11 +506,6 @@
                         ~TropicalRainForest();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -618,11 +538,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -653,11 +568,6 @@
                         ~Mat_2();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -690,11 +600,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -725,11 +630,6 @@
                         ~Mat_4();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -762,11 +662,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -797,11 +692,6 @@
                         ~Mat_6();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not
@@ -834,11 +724,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */
@@ -869,11 +754,6 @@
                         ~Mat_8();
 
                     //## Getter ##//
-                        /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        Color::RGB const getColor() const;
                         /**
                          * Solid state getter
                          * @return if the voxel is solid or not

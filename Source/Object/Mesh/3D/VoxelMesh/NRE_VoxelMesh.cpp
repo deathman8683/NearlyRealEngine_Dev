@@ -300,8 +300,10 @@
                     }
                 }
 
+                Maths::Quaternion<NREfloat> q(n, 90);
+
                 Maths::Vector2D<NREfloat> uv(-1, -1);
-                Maths::Vector3D<NREfloat> tangent = Maths::Vector3D<NREfloat>(0, 0, 1) ^ n;
+                Maths::Vector3D<NREfloat> tangent = Maths::Matrix3x3<NREfloat>(q) * n;
 
                 add(3, tangent.value(), 3);
                 add(3, tangent.value(), 3);

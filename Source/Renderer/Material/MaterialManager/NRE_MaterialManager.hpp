@@ -32,18 +32,20 @@
                     //## Getter ##//
                         static Material& getMaterial(GLuint const& index);
                         static size_t const getSize();
-                        static GL::Texture2DArray& getMaterialArray();
+                        static GL::Texture2DArray& getMaterialsAlbedo();
+                        static GL::Texture2DArray& getMaterialsNormal();
 
                     //## Setter ##//
 
                     //## Methods ##//
                         static void init();
                         static void free();
-                        static void sendMaterial();
 
                 private:
                     static std::vector<Material>* materials;
                     static GL::Texture2DArray* materialsAlbedo;
+                    static GL::Texture2DArray* materialsNormal;
+                    static size_t RESOLUTION;
             };
 
         };

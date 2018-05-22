@@ -70,11 +70,6 @@
                          */
                         GLubyte const& getType() const;
                         /**
-                         * Voxel color getter
-                         * @return the voxel volor using the voxel type lookup table
-                         */
-                        Color::RGB const getColor() const;
-                        /**
                          * Voxel solid state getter
                          * @return the voxel solid state using the voxel type lookup table
                          */

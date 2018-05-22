@@ -29,10 +29,10 @@
              */
             class Material {
                 private:
-                    Maths::Vector3D<NREfloat> albedo;   /**< The material albedo */
                     NREfloat metallic;                  /**< The material metallic aspect */
                     NREfloat roughness;                 /**< The material roughness */
-                    GL::Texture2D* albedoTex;
+                    GL::Texture2D* albedo;
+                    GL::Texture2D* normal;
 
                 public:
                     //## Constructor ##//
@@ -42,12 +42,11 @@
                         Material();
                         /**
                          * Construct a material from his different attributes
-                         * @param albedo    the new material albedo
                          * @param metallic  the new material metallic aspect
                          * @param roughness the new material roughness
                          * @param path      the path to the material's textures
                          */
-                        Material(Maths::Vector3D<NREfloat> const& albedo, NREfloat const& metallic, NREfloat const& roughness, std::string const& path);
+                        Material(NREfloat const& metallic, NREfloat const& roughness, std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
@@ -73,11 +72,6 @@
 
                     //## Getter ##//
                         /**
-                         * Albedo getter
-                         * @return the material albedo
-                         */
-                        Maths::Vector3D<NREfloat> const& getAlbedo() const;
-                        /**
                          * Metallic Aspect getter
                          * @return the material metallic aspect
                          */
@@ -87,7 +81,8 @@
                          * @return the material roughness
                          */
                         NREfloat const& getRoughness() const;
-                        GL::Texture2D const& getAlbedoTexture() const;
+                        GL::Texture2D const& getAlbedo() const;
+                        GL::Texture2D const& getNormal() const;
                         /**
                          * Metallic pointer getter
                          * @return the material metallic pointer, used with uniform in shader
@@ -100,11 +95,6 @@
                         NREfloat* const getRoughnessValue();
 
                     //## Setter ##//
-                        /**
-                         * Albedo setter
-                         * @param albedo the new albedo value
-                         */
-                        void setAlbedo(Maths::Vector3D<NREfloat> const& albedo);
                         /**
                          * Metallic Aspect setter
                          * @param value the new metallic aspect value

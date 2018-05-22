@@ -26,7 +26,6 @@
                 for (unsigned int i = 0; i < MaterialManager::getSize(); i = i + 1) {
                     std::ostringstream index;
                     index << i;
-                    addUniformLocation("materials[" + index.str() + "].albedo");
                     addUniformLocation("materials[" + index.str() + "].metallic");
                     addUniformLocation("materials[" + index.str() + "].roughness");
                 }
@@ -56,7 +55,6 @@
                 for (unsigned int i = 0; i < MaterialManager::getSize(); i = i + 1) {
                     std::ostringstream index;
                     index << i;
-                    use3FV("materials[" + index.str() + "].albedo", 1, MaterialManager::getMaterial(i).getAlbedo().value());
                     use1FV("materials[" + index.str() + "].metallic", 1, MaterialManager::getMaterial(i).getMetallicValue());
                     use1FV("materials[" + index.str() + "].roughness", 1, MaterialManager::getMaterial(i).getRoughnessValue());
                 }

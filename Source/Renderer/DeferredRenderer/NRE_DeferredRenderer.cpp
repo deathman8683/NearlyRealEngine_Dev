@@ -55,7 +55,7 @@
                     glActiveTexture(GL_TEXTURE6);
                         skyBox.getBRDFLUT().bind();
                     glActiveTexture(GL_TEXTURE7);
-                        MaterialManager::getMaterialArray().bind();
+                        MaterialManager::getMaterialsAlbedo().bind();
 
                     shader->sendLigths(lights);
                     shader->sendCamera(camera);
@@ -65,7 +65,7 @@
                     draw();
 
                     glActiveTexture(GL_TEXTURE7);
-                    MaterialManager::getMaterialArray().unbind();
+                    MaterialManager::getMaterialsAlbedo().unbind();
                     glActiveTexture(GL_TEXTURE6);
                         skyBox.getBRDFLUT().unbind();
                     glActiveTexture(GL_TEXTURE5);
@@ -87,9 +87,12 @@
 
                     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
                     glDrawBuffers(3, buffers);
+
+                    MaterialManager::getMaterialsNormal().bind();
             }
 
             void DeferredRenderer::endGBufferPass() {
+                    MaterialManager::getMaterialsNormal().unbind();
                 gBuffer.unbind();
             }
 

@@ -4,7 +4,7 @@
     namespace NRE {
         namespace GL {
 
-            GLint TangentBuffer::INDEX = 1;
+            GLint TangentBuffer::INDEX = 5;
             GLenum TangentBuffer::TYPE = GL_FLOAT;
             GLint TangentBuffer::TYPESIZE = sizeof(GLfloat);
             GLint TangentBuffer::SIZE = 3;

@@ -42,11 +42,6 @@
 
                     //## Getter ##//
                         /**
-                         * Voxel color getter
-                         * @return the color of the voxel
-                         */
-                        virtual Color::RGB const getColor() const = 0;
-                        /**
                          * Solid state getter
                          * @return if the voxel is solid or not
                          */

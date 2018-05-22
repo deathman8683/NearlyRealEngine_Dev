@@ -13,7 +13,6 @@
     } lights[MAX_LIGHTS];
 
     uniform struct Material {
-        vec3 albedo;
         float metallic;
         float roughness;
     } materials[MAX_MATERIAL];
@@ -136,8 +135,7 @@
             vec3 V = normalize(cameraV - vertex);
             vec3 R = reflect(V, N);
             R = (rotation * vec4(R, 1.0)).xyz;
-            vec2 textureUV = texture(texDiffuseUV, uv).xy;
-            vec2 tileUV = mix(textureUV, fract(vec2(dot(normal.zxy, vertex), dot(normal.yzx, vertex))), textureUV == vec2(-1.0, -1.0));
+            vec2 tileUV = texture(texDiffuseUV, uv).xy;
             vec3 albedo = texture(texMaterial, vec3(tileUV, id)).rgb;
 
             vec3 F0 = vec3(0.04);
@@ -190,7 +188,7 @@
             color = color / (color + vec3(1.0));
             color = pow(color, vec3(1.0/2.2));
 
-            out_Color = vec4(normal, 1.0);
+            out_Color = vec4(color, 1.0);
         } else {
             out_Color = vec4(texture(texDiffuseUV, uv).rgb, 1.0);
         }
