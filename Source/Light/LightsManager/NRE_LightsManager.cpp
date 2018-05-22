@@ -6,6 +6,14 @@
 
             std::vector<Light>* LightsManager::lights = 0;
 
+            Light& LightsManager::getLight(GLuint const& index) {
+                return (*lights)[index];
+            }
+
+            size_t const LightsManager::getSize() {
+                return lights->size();
+            }
+
             void LightsManager::init() {
                 lights = new std::vector<Light>;
             }

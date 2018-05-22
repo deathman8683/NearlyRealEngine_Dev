@@ -11,7 +11,7 @@
     #include <sstream>
     #include <fstream>
     #include "../../NRE_Shader.hpp"
-    #include "../../../../Light/NRE_Light.hpp"
+    #include "../../../../Light/LightsManager/NRE_LightsManager.hpp"
     #include "../../../../Camera/FixedCamera/NRE_FixedCamera.hpp"
 
     /**
@@ -73,9 +73,8 @@
                     //## Methods ##//
                         /**
                          * Send all lights values to the shader
-                         * @param lights the arrays of lights
                          */
-                        void sendLigths(std::vector<Light::Light*> const& lights) const;
+                        void sendLigths() const;
                         /**
                          * Send textures's index to the shader
                          */

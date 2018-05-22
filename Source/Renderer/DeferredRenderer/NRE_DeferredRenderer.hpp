@@ -13,8 +13,6 @@
     #include "../../Object/2D/NRE_Object2D.hpp"
     #include "../EnvironmentMap/NRE_EnvironmentMap.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
-    #include "../../Light/DirectionnalLight/NRE_DirectionnalLight.hpp"
-    #include "../../Light/PointLight/NRE_PointLight.hpp"
     #include "../../World/NRE_World.hpp"
     #include "../SSAO/NRE_SSAO.hpp"
     #include "../Material/MaterialsManager/NRE_MaterialsManager.hpp"
@@ -83,10 +81,9 @@
                          * @param invModelview  the inverse modelview matrix
                          * @param rotation      the rotation matrix for the skybox
                          * @param camera        the player camera
-                         * @param lights        the array which store all light in the stage
                          * @param skyBox        the skybox to render
                          */
-                        void render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& lights, EnvironmentMap const& skyBox);
+                        void render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, EnvironmentMap const& skyBox);
                         /**
                          * Setup draw command to start filling the G-Buffer
                          */

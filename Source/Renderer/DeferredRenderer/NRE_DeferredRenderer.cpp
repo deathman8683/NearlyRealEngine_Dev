@@ -33,7 +33,7 @@
             DeferredRenderer::~DeferredRenderer() {
             }
 
-            void DeferredRenderer::render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, std::vector<Light::Light*> const& lights, EnvironmentMap const& skyBox) {
+            void DeferredRenderer::render(Maths::Matrix4x4<NREfloat> const& invModelview, Maths::Matrix4x4<NREfloat> const& rotation, Camera::FixedCamera const& camera, EnvironmentMap const& skyBox) {
 
                 SSAOPass();
 
@@ -61,7 +61,7 @@
                     glActiveTexture(GL_TEXTURE8);
                         MaterialsManager::getMaterialsMetallic().bind();
 
-                    shader->sendLigths(lights);
+                    shader->sendLigths();
                     shader->sendCamera(camera);
                     shader->sendInvModelview(invModelview);
                     shader->sendRotation(rotation);

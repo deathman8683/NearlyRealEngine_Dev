@@ -14,19 +14,13 @@
 
             Camera::MoveableCamera camera(70.0, 1280.0 / 720.0, Maths::Vector2D<NREfloat>(0.1, 2000.0), Maths::Vector3D<NREfloat>(0, 1, 100), Maths::Vector3D<NREfloat>(0, 0, 100), &engineWorld);
 
-            std::vector<Light::Light*> engineLight;
-            Light::DirectionnalLight engineLight1(Maths::Point3D<NREfloat>(0, 0, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0));
-            Light::PointLight engineLight2(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(400.0, 0.0, 0.0));
-            Light::PointLight engineLight3(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 400.0, 0.0));
-            Light::PointLight engineLight4(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 400.0));
-            Light::PointLight engineLight5(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0));
-            Light::PointLight engineLight6(Maths::Point3D<NREfloat>(-0.5, -5.0,  28.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0));
-            engineLight.push_back(&engineLight1);
-            engineLight.push_back(&engineLight2);
-            engineLight.push_back(&engineLight3);
-            engineLight.push_back(&engineLight4);
-            engineLight.push_back(&engineLight5);
-            engineLight.push_back(&engineLight6);
+
+            Light::LightsManager::push_back(Light::DirectionnalLight(Maths::Point3D<NREfloat>(0, 0, 300),Maths::Vector3D<NREfloat>(0.06, 0.16, 0.5), Maths::Vector3D<NREfloat>(0.0, 0.0, -1.0)));
+            Light::LightsManager::push_back(Light::PointLight(Maths::Point3D<NREfloat>(29.7,  28.0, 29.0), Maths::Vector3D<NREfloat>(400.0, 0.0, 0.0)));
+            Light::LightsManager::push_back(Light::PointLight(Maths::Point3D<NREfloat>(71.6,  41.7, 29.0), Maths::Vector3D<NREfloat>(0.0, 400.0, 0.0)));
+            Light::LightsManager::push_back(Light::PointLight(Maths::Point3D<NREfloat>(60.5, -44.8, 29.0), Maths::Vector3D<NREfloat>(0.0, 0.0, 400.0)));
+            Light::LightsManager::push_back(Light::PointLight(Maths::Point3D<NREfloat>(50.0, -4.8,  29.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0)));
+            Light::LightsManager::push_back(Light::PointLight(Maths::Point3D<NREfloat>(-0.5, -5.0,  28.0), Maths::Vector3D<NREfloat>(4000.0, 4000.0, 4000.0)));
 
             Maths::Matrix4x4<NREfloat> projection, modelview, invProjection, invModelview, rotation, tmp;
 
@@ -84,7 +78,7 @@
 
                 rotation.rotate(-skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
 
-                engineLight1.setPosition(rotation * Maths::Vector3D<NREfloat>(0, 0, 300));
+                Light::LightsManager::getLight(0).setPosition(rotation * Maths::Vector3D<NREfloat>(0, 0, 300));
 
                 rotation.rotate(skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
                 rotation.rotate(skyboxAngleX, Maths::Vector3D<NREfloat>(0.0, 1.0, 0.0));
@@ -122,7 +116,7 @@
                 invModelview = modelview;
                 invModelview.inverse();
 
-                engineDeferredRenderer.render(invModelview, rotation, camera, engineLight, engineSkybox);
+                engineDeferredRenderer.render(invModelview, rotation, camera, engineSkybox);
 
                 engineWorld.update(1);
 

@@ -46,16 +46,16 @@
                 return "PBR";
             }
 
-            void PBRShader::sendLigths(std::vector<Light::Light*> const& lights) const {
-                use1I("numLights", lights.size());
+            void PBRShader::sendLigths() const {
+                use1I("numLights", Light::LightsManager::getSize());
 
-                for (unsigned int i = 0; i < lights.size(); i = i + 1) {
+                for (unsigned int i = 0; i < Light::LightsManager::getSize(); i = i + 1) {
                     std::ostringstream index;
                     index << i;
-                    use4FV("lights[" + index.str() + "].position", 1, lights.at(i)->getPosition().value());
-                    use3FV("lights[" + index.str() + "].intensities", 1, lights.at(i)->getIntensities().value());
-                    use3FV("lights[" + index.str() + "].direction", 1, lights.at(i)->getDirection().value());
-                    use1FV("lights[" + index.str() + "].angle", 1, lights.at(i)->getAngleValue());
+                    use4FV("lights[" + index.str() + "].position", 1, Light::LightsManager::getLight(i).getPosition().value());
+                    use3FV("lights[" + index.str() + "].intensities", 1, Light::LightsManager::getLight(i).getIntensities().value());
+                    use3FV("lights[" + index.str() + "].direction", 1, Light::LightsManager::getLight(i).getDirection().value());
+                    use1FV("lights[" + index.str() + "].angle", 1, Light::LightsManager::getLight(i).getAngleValue());
                 }
             }
 

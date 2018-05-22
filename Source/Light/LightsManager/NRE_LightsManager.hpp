@@ -9,6 +9,8 @@
     #pragma once
 
     #include "../NRE_Light.hpp"
+    #include "../DirectionnalLight/NRE_DirectionnalLight.hpp"
+    #include "../PointLight/NRE_PointLight.hpp"
 
     /**
      * @namespace NRE
@@ -28,6 +30,8 @@
             class LightsManager {
                 public:
                     //## Getter ##//
+                        static Light& getLight(GLuint const& index);
+                        static size_t const getSize();
 
                     //## Setter ##//
 
