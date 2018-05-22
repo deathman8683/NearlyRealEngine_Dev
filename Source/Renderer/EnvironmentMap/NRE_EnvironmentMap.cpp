@@ -243,7 +243,7 @@
                     1, -1, 0
                 };
 
-                GLshort uvData[8] = {
+                GLfloat uvData[8] = {
                     0, 1,
                     0, 0,
                     1, 1,

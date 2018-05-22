@@ -29,7 +29,6 @@
     uniform sampler2D texDiffuse;
     uniform sampler2D texNormal;
     uniform sampler2D texUV;
-    uniform sampler2D texShadow;
     uniform samplerCube irradianceMap;
     uniform samplerCube prefilterMap;
     uniform sampler2D brdfLUT;
@@ -103,7 +102,7 @@
         return result / (4.0 * 4.0);
     }
 
-    float computeShadow(vec3 vertex, vec3 lightDir, vec3 normal) {
+    /*float computeShadow(vec3 vertex, vec3 lightDir, vec3 normal) {
         vec4 vertexLS = lightModelview * vec4(vertex, 1.0);
         vertexLS = inverse(invProjection) * vertexLS;
         vec3 projCoords = vertexLS.xyz / vertexLS.w;
@@ -127,7 +126,7 @@
         }
 
         return 1.0 - shadow;
-    }
+    }*/
 
     void main() {
         vec3 vertex = (invModelview * WorldPosFromDepth(uv)).xyz;
@@ -139,8 +138,7 @@
             vec3 R = reflect(V, N);
             R = (rotation * vec4(R, 1.0)).xyz;
             vec2 textureUV = texture(texUV, uv).xy;
-            vec2 tileUV = mix(textureUV, vec2(dot(normal.zxy, vertex), dot(normal.yzx, vertex)), textureUV == vec2(-1.0, -1.0));
-            tileUV = fract(tileUV);
+            vec2 tileUV = mix(textureUV, fract(vec2(dot(normal.zxy, vertex), dot(normal.yzx, vertex))), textureUV == vec2(-1.0, -1.0));
             vec3 albedo = texture(texMaterial, vec3(tileUV, id)).rgb;
 
             vec3 F0 = vec3(0.04);
