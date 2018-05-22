@@ -13,6 +13,7 @@
     #include "Data/FloatVertexData/NRE_FloatVertexData.hpp"
     #include "Data/MaterialData/NRE_MaterialData.hpp"
     #include "Data/NormalData/NRE_NormalData.hpp"
+    #include "Data/TangentData/NRE_TangentData.hpp"
     #include "Data/IndexData/NRE_IndexData.hpp"
     #include "Data/UVData/NRE_UVData.hpp"
     #include "Data/ColorData/NRE_ColorData.hpp"

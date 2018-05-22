@@ -3,6 +3,7 @@
 
     in vec3 in_Vertex;
     in vec3 in_Normal;
+    in vec3 in_Tangent;
     in float in_Material;
     in vec2 in_UV;
 

@@ -10,12 +10,14 @@
             Mesh3D::Mesh3D(GLenum const& type) : Mesh(type) {
                 push_back(new MaterialData());
                 push_back(new NormalData());
+                push_back(new TangentData());
                 push_back(new UVData());
                 push_back(new IndexData());
 
                 buffer = new GL::IBO(true);
                 buffer->push_back(new GL::MaterialBuffer(true));
                 buffer->push_back(new GL::NormalBuffer(true));
+                buffer->push_back(new GL::TangentBuffer(true));
                 buffer->push_back(new GL::UVBuffer(true));
 
                 access();
@@ -44,18 +46,20 @@
                         NREfloat u = s * sector;
                         NREfloat v = r * ring;
 
+                        Maths::Vector3D<NREfloat> n(x, y, z);
+                        Maths::Vector3D<NREfloat> tangent = Maths::Vector3D<NREfloat>(0, 0, 1) ^ n;
+
                         add(0, &vX);
                         add(0, &vY);
                         add(0, &vZ);
 
                         add(1, &type);
 
-                        add(2, &x);
-                        add(2, &y);
-                        add(2, &z);
+                        add(2, n.value(), 3);
+                        add(3, tangent.value(), 3);
 
-                        add(3, &u);
-                        add(3, &v);
+                        add(4, &u);
+                        add(4, &v);
                     }
                 }
 
@@ -66,12 +70,12 @@
                         GLuint idx3 = (r + 1) * sectors + (s + 1);
                         GLuint idx4 = (r + 1) * sectors + s;
 
-                        add(4, &idx4);
-                        add(4, &idx2);
-                        add(4, &idx1);
-                        add(4, &idx2);
-                        add(4, &idx4);
-                        add(4, &idx3);
+                        add(5, &idx4);
+                        add(5, &idx2);
+                        add(5, &idx1);
+                        add(5, &idx2);
+                        add(5, &idx4);
+                        add(5, &idx3);
                     }
                 }
 

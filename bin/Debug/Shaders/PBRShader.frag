@@ -190,7 +190,7 @@
             color = color / (color + vec3(1.0));
             color = pow(color, vec3(1.0/2.2));
 
-            out_Color = vec4(color, 1.0);
+            out_Color = vec4(normal, 1.0);
         } else {
             out_Color = vec4(texture(texDiffuseUV, uv).rgb, 1.0);
         }

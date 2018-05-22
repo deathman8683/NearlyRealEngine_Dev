@@ -54,6 +54,7 @@
                 glBindAttribLocation(getID(), 2, "in_Normal");
                 glBindAttribLocation(getID(), 3, "in_UV");
                 glBindAttribLocation(getID(), 4, "in_Material");
+                glBindAttribLocation(getID(), 5, "in_Tangent");
 
                 glLinkProgram(getID());
 

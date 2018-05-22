@@ -5,6 +5,7 @@ OBJDIR = ../../../../../obj/Debug/GL_Wrapper/Buffer/AttributeBuffer/ArrayBuffer/
 COLOR = ColorBuffer
 MATERIAL = MaterialBuffer
 NORMAL = NormalBuffer
+TANGENT = TangentBuffer
 UV = UVBuffer
 VERTEX = VertexBuffer
 
@@ -15,6 +16,7 @@ after:
 	@(cd $(COLOR) && $(MAKE))
 	@(cd $(MATERIAL) && $(MAKE))
 	@(cd $(NORMAL) && $(MAKE))
+	@(cd $(TANGENT) && $(MAKE))
 	@(cd $(UV) && $(MAKE))
 
 debug: $(OBJ)

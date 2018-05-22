@@ -3,6 +3,7 @@ FVERTEX = FloatVertexData
 INDEX = IndexData
 MATERIAL = MaterialData
 NORMAL = NormalData
+TANGENT = TangentData
 UV = UVData
 COLOR = ColorData
 DATASET = DataSet
@@ -18,5 +19,6 @@ debug:
 	@(cd $(INDEX) && $(MAKE))
 	@(cd $(MATERIAL) && $(MAKE))
 	@(cd $(NORMAL) && $(MAKE))
+	@(cd $(TANGENT) && $(MAKE))
 	@(cd $(UV) && $(MAKE))
 	@(cd $(COLOR) && $(MAKE))

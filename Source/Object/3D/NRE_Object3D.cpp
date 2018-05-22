@@ -15,7 +15,7 @@
 
             void Object3D::load(GLenum const& usage, std::string const& path) {
                 Assimp::Importer importer;
-                const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+                const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
                 if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE ||!scene->mRootNode) {
                     throw (Exception::AssimpException(importer.GetErrorString()));
@@ -50,6 +50,10 @@
                     vector.setY(mesh->mNormals[i].y);
                     vector.setZ(mesh->mNormals[i].z);
                     nreMesh->add(2, vector.value(), 3);
+                    vector.setX(mesh->mTangents[i].x);
+                    vector.setY(mesh->mTangents[i].y);
+                    vector.setZ(mesh->mTangents[i].z);
+                    nreMesh->add(3, vector.value(), 3);
                     nreMesh->add(1, &material);
                     Maths::Vector2D<NREfloat> uv;
                     if (mesh->mTextureCoords[0]) {
@@ -58,13 +62,13 @@
                     } else {
                         uv.setCoord(-1, -1);
                     }
-                    nreMesh->add(3, uv.value(), 2);
+                    nreMesh->add(4, uv.value(), 2);
                 }
 
                 for (GLuint i = 0; i < mesh->mNumFaces; i = i + 1) {
                     aiFace face = mesh->mFaces[i];
                     for (GLuint j = 0; j < face.mNumIndices; j = j + 1) {
-                        nreMesh->add(4, &face.mIndices[j]);
+                        nreMesh->add(5, &face.mIndices[j]);
                     }
                 }
 
