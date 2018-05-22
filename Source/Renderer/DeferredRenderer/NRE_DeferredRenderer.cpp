@@ -15,12 +15,15 @@
                 std::vector<GLint> internalFormat;
                 format.push_back(GL_RGBA);
                 format.push_back(GL_RGBA);
+                format.push_back(GL_RGBA);
                 type.push_back(GL_UNSIGNED_BYTE);
+                type.push_back(GL_FLOAT);
                 type.push_back(GL_FLOAT);
                 internalFormat.push_back(GL_RGBA);
                 internalFormat.push_back(GL_RGBA16F);
+                internalFormat.push_back(GL_RGBA16F);
 
-                gBuffer.allocateColorBuffer(2, format, internalFormat, type);
+                gBuffer.allocateColorBuffer(3, format, internalFormat, type);
                 gBuffer.setDepthBuffer(new GL::Texture2D(gBuffer.getSize().getW(), gBuffer.getSize().getH(), GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT32F, GL_FLOAT));
                 gBuffer.attachDepthBuffer(GL_DEPTH_ATTACHMENT);
 
@@ -49,13 +52,15 @@
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->bind();
                     glActiveTexture(GL_TEXTURE3);
-                        MaterialManager::getMaterialArray().bind();
+                        gBuffer.getColorBuffer(2)->bind();
                     glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().bind();
                     glActiveTexture(GL_TEXTURE5);
                         skyBox.getPrefilterMap().bind();
                     glActiveTexture(GL_TEXTURE6);
                         skyBox.getBRDFLUT().bind();
+                    glActiveTexture(GL_TEXTURE7);
+                        MaterialManager::getMaterialArray().bind();
 
                     shader->sendLigths(lights);
                     shader->sendCamera(camera);
@@ -64,6 +69,8 @@
 
                     draw();
 
+                    glActiveTexture(GL_TEXTURE7);
+                    MaterialManager::getMaterialArray().unbind();
                     glActiveTexture(GL_TEXTURE6);
                         skyBox.getBRDFLUT().unbind();
                     glActiveTexture(GL_TEXTURE5);
@@ -71,7 +78,7 @@
                     glActiveTexture(GL_TEXTURE4);
                         skyBox.getIrradianceMap().unbind();
                     glActiveTexture(GL_TEXTURE3);
-                        MaterialManager::getMaterialArray().unbind();
+                        gBuffer.getColorBuffer(2)->unbind();
                     glActiveTexture(GL_TEXTURE2);
                         gBuffer.getColorBuffer(1)->unbind();
                     glActiveTexture(GL_TEXTURE1);
@@ -85,8 +92,8 @@
                 gBuffer.bind();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                    GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
-                    glDrawBuffers(2, buffers);
+                    GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
+                    glDrawBuffers(3, buffers);
             }
 
             void DeferredRenderer::endGBufferPass() {

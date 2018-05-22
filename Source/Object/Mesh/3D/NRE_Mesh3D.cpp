@@ -10,11 +10,13 @@
             Mesh3D::Mesh3D(GLenum const& type) : Mesh(type) {
                 push_back(new MaterialData());
                 push_back(new NormalData());
+                push_back(new UVData());
                 push_back(new IndexData());
 
                 buffer = new GL::IBO(true);
                 buffer->push_back(new GL::MaterialBuffer(true));
                 buffer->push_back(new GL::NormalBuffer(true));
+                buffer->push_back(new GL::UVBuffer(true));
 
                 access();
             }
@@ -39,6 +41,9 @@
                         NREfloat vY = y * radius;
                         NREfloat vZ = z * radius;
 
+                        NREfloat u = s * sector;
+                        NREfloat v = r * ring;
+
                         add(0, &vX);
                         add(0, &vY);
                         add(0, &vZ);
@@ -48,6 +53,9 @@
                         add(2, &x);
                         add(2, &y);
                         add(2, &z);
+
+                        add(3, &u);
+                        add(3, &v);
                     }
                 }
 
@@ -58,12 +66,12 @@
                         GLuint idx3 = (r + 1) * sectors + (s + 1);
                         GLuint idx4 = (r + 1) * sectors + s;
 
-                        add(3, &idx4);
-                        add(3, &idx2);
-                        add(3, &idx1);
-                        add(3, &idx2);
-                        add(3, &idx4);
-                        add(3, &idx3);
+                        add(4, &idx4);
+                        add(4, &idx2);
+                        add(4, &idx1);
+                        add(4, &idx2);
+                        add(4, &idx4);
+                        add(4, &idx3);
                     }
                 }
 

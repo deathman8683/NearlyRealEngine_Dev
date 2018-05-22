@@ -28,6 +28,7 @@
     uniform sampler2D texDepth;
     uniform sampler2D texDiffuse;
     uniform sampler2D texNormal;
+    uniform sampler2D texUV;
     uniform sampler2D texShadow;
     uniform samplerCube irradianceMap;
     uniform samplerCube prefilterMap;
@@ -137,7 +138,10 @@
             vec3 V = normalize(cameraV - vertex);
             vec3 R = reflect(V, N);
             R = (rotation * vec4(R, 1.0)).xyz;
-            vec3 albedo = texture(texMaterial, vec3(vertex.xy, id)).rgb;
+            vec2 textureUV = texture(texUV, uv).xy;
+            vec2 tileUV = mix(textureUV, vec2(dot(normal.zxy, vertex), dot(normal.yzx, vertex)), textureUV == vec2(-1.0, -1.0));
+            tileUV = fract(tileUV);
+            vec3 albedo = texture(texMaterial, vec3(tileUV, id)).rgb;
 
             vec3 F0 = vec3(0.04);
             F0 = mix(F0, albedo, materials[id].metallic);
@@ -165,7 +169,7 @@
 
 
                 float NdotL = max(dot(N, L), 0.0);
-                Lo += (kD * materials[id].albedo / PI + specular) * radiance * NdotL;
+                Lo += (kD * albedo / PI + specular) * radiance * NdotL;
             }
 
             vec3 F = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, materials[id].roughness);
