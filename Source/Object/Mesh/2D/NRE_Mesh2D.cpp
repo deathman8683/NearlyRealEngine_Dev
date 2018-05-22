@@ -33,7 +33,7 @@
 
                 add(0, vData, 18);
 
-                GLfloat uvData[] = {
+                GLshort uvData[] = {
                     0, 0,
                     1, 0,
                     1, 1,

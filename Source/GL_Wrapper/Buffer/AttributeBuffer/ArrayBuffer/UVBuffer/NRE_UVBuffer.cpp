@@ -5,8 +5,8 @@
         namespace GL {
 
             GLint UVBuffer::INDEX = 3;
-            GLenum UVBuffer::TYPE = GL_FLOAT;
-            GLint UVBuffer::TYPESIZE = sizeof(GLfloat);
+            GLenum UVBuffer::TYPE = GL_SHORT;
+            GLint UVBuffer::TYPESIZE = sizeof(GLshort);
             GLint UVBuffer::SIZE = 2;
 
             UVBuffer::UVBuffer() {

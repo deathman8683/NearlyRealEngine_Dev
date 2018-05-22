@@ -271,7 +271,6 @@
             void VoxelMesh::addPackedVertex(Maths::Point3D<GLint> const (&p)[4], GLuint const& face, size_t const& cCode) {
                 Maths::Vector3D<NREfloat> n;
                 GLuint idx1, idx2, nIdx;
-                Maths::Vector2D<NREfloat> uv(-1, -1);
 
                 switch (face) {
                     case (World::XNegative) : {
@@ -306,34 +305,30 @@
                 add(2, n.value(), 3);
                 add(1, &cCode);
                 nIdx = static_cast <GLuint> (getDataSet(0)->size() / 3) - 1;
-                add(3, uv.value(), 2);
-                add(4, &nIdx);
+                add(3, &nIdx);
                 idx1 = nIdx;
 
                 add(0, p[1].value(), 3);
                 add(2, n.value(), 3);
                 add(1, &cCode);
                 nIdx = static_cast <GLuint> (getDataSet(0)->size() / 3) - 1;
-                add(3, uv.value(), 2);
-                add(4, &nIdx);
+                add(3, &nIdx);
                 idx2 = nIdx;
 
                 add(0, p[0].value(), 3);
                 add(2, n.value(), 3);
                 add(1, &cCode);
                 nIdx = static_cast <GLuint> (getDataSet(0)->size() / 3) - 1;
-                add(3, uv.value(), 2);
-                add(4, &nIdx);
+                add(3, &nIdx);
 
                 add(0, p[3].value(), 3);
                 add(2, n.value(), 3);
                 add(1, &cCode);
                 nIdx = static_cast <GLuint> (getDataSet(0)->size() / 3) - 1;
-                add(3, uv.value(), 2);
-                add(4, &nIdx);
+                add(3, &nIdx);
 
-                add(4, &idx2);
-                add(4, &idx1);
+                add(3, &idx2);
+                add(3, &idx1);
             }
 
             VoxelMesh& VoxelMesh::operator=(VoxelMesh && m) {

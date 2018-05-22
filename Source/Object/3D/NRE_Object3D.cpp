@@ -51,20 +51,12 @@
                     vector.setZ(mesh->mNormals[i].z);
                     nreMesh->add(2, vector.value(), 3);
                     nreMesh->add(1, &material);
-                    Maths::Vector2D<NREfloat> uv;
-                    if (mesh->mTextureCoords[0]) {
-                        uv.setX(mesh->mTextureCoords[0][i].x);
-                        uv.setY(mesh->mTextureCoords[0][i].y);
-                    } else {
-                        uv.setCoord(-1, -1);
-                    }
-                    nreMesh->add(3, uv.value(), 2);
                 }
 
                 for (GLuint i = 0; i < mesh->mNumFaces; i = i + 1) {
                     aiFace face = mesh->mFaces[i];
                     for (GLuint j = 0; j < face.mNumIndices; j = j + 1) {
-                        nreMesh->add(4, &face.mIndices[j]);
+                        nreMesh->add(3, &face.mIndices[j]);
                     }
                 }
 
