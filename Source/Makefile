@@ -10,6 +10,7 @@ LIB = lib
 MATHS = Maths
 SDL_WRAPPER = SDL_Wrapper
 GL_WRAPPER = GL_Wrapper
+IO = IO
 OBJECT = Object
 TIME = Time
 RENDERER = Renderer
@@ -25,6 +26,7 @@ before :
 	@(cd $(LIB) && $(MAKE))
 	@(cd $(SDL_WRAPPER) && $(MAKE))
 	@(cd $(GL_WRAPPER) && $(MAKE))
+	@(cd $(IO) && $(MAKE))
 	@(cd $(OBJECT) && $(MAKE))
 	@(cd $(TIME) && $(MAKE))
 	@(cd $(RENDERER) && $(MAKE))
