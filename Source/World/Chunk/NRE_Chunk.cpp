@@ -1,5 +1,6 @@
 
     #include "NRE_Chunk.hpp"
+    #include "../NRE_World.hpp"
 
     namespace NRE {
         namespace World {
@@ -194,6 +195,10 @@
                 }
                 setLoaded(true);
                 setLoading(false);
+            }
+            
+            void Chunk::createProceduralTerrain(World* w) {
+                voxelSets[0].createProceduralTerrain(w->getSoilGenerator(), w->getMoistureGenerator(), getCoord());
             }
 
             void Chunk::checkActiveState(Camera::FixedCamera* camera) {

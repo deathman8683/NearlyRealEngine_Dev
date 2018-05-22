@@ -5,17 +5,13 @@ OBJDIR = ../../obj/Debug/World/
 VOXEL = Voxel
 CHUNK = Chunk
 REGION = Region
-CONSTRUCTOR = ChunkConstructor
 
-all : before $(TARGET) after
+all : before $(TARGET)
 
 before:
 	@(cd $(VOXEL) && $(MAKE))
 	@(cd $(CHUNK) && $(MAKE))
 	@(cd $(REGION) && $(MAKE))
-
-after:
-	@(cd $(CONSTRUCTOR) && $(MAKE))
 
 debug: $(OBJ)
 
