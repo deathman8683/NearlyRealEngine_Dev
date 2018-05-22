@@ -5,6 +5,7 @@ OBJDIR = ../../obj/Debug/Light/
 POINT = PointLight
 SPOT = SpotLight
 DIRECTIONNAL = DirectionnalLight
+ENGINE = EngineLights
 
 all : $(TARGET) after
 
@@ -12,6 +13,7 @@ after:
 	@(cd $(POINT) && $(MAKE))
 	@(cd $(SPOT) && $(MAKE))
 	@(cd $(DIRECTIONNAL) && $(MAKE))
+	@(cd $(ENGINE) && $(MAKE))
 
 debug: $(OBJ)
 

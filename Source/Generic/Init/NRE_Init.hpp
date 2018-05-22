@@ -12,6 +12,7 @@
     #include "../../Object/MergingCache/NRE_MergingCache.hpp"
     #include "../../Renderer/Shader/EngineShader/NRE_EngineShader.hpp"
     #include "../../Renderer/Material/MaterialManager/NRE_MaterialManager.hpp"
+    #include "../../Light/EngineLights/NRE_EngineLights.hpp"
 
     /**
      * @namespace NRE

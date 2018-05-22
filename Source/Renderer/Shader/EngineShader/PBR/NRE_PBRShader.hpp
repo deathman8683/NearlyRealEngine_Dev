@@ -13,7 +13,6 @@
     #include "../../NRE_Shader.hpp"
     #include "../../../../Light/NRE_Light.hpp"
     #include "../../../../Camera/FixedCamera/NRE_FixedCamera.hpp"
-    #include "../../../Material/MaterialManager/NRE_MaterialManager.hpp"
 
     /**
      * @namespace NRE

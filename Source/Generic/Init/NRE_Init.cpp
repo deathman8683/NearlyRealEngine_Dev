@@ -8,13 +8,15 @@
             Renderer::MaterialManager::init();
             Object::MergingCache::init();
             Renderer::EngineShader::init();
+            Light::EngineLights::init();
         }
 
         void quit() {
-            World::VoxelTypes::free();
-            Renderer::MaterialManager::free();
-            Object::MergingCache::free();
+            Light::EngineLights::free();
             Renderer::EngineShader::free();
+            Object::MergingCache::free();
+            Renderer::MaterialManager::free();
+            World::VoxelTypes::free();
         }
 
     };

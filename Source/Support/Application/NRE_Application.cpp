@@ -10,20 +10,14 @@
             Application::Application(std::string const& title, Maths::Vector2D<GLuint> const& size) : Stage(title, size) {
             }
 
-            Application::Application(Application const& app) {
-            }
-
-            Application::Application(Application && app) {
+            Application::Application(Application && app) : Stage(std::move(app)) {
             }
 
             Application::~Application() {
             }
 
-            Application& Application::operator=(Application const& app) {
-                return *this;
-            }
-
             Application& Application::operator=(Application && app) {
+                Stage::operator=(std::move(app));
                 return *this;
             }
 

@@ -8,7 +8,7 @@
 
     #pragma once
 
-    #include "../Generic/NRE_Type.hpp"
+    #include "../Stage/NRE_Stage.hpp"
 
     /**
      * @namespace NRE
@@ -39,10 +39,10 @@
 
                     //## Copy-Constructor ##//
                         /**
-                         * Copy app into this
+                         * No copy allowed
                          * @param app the application to copy the content
                          */
-                        Application(Application const& app);
+                        Application(Application const& app) = delete;
 
                     //## Move-Constructor ##//
                         /**
@@ -70,11 +70,11 @@
 
                     //## Assignment Operator ##//
                         /**
-                         * Copy assigment of app into this
+                         * No copy allowed
                          * @param app the application to copy into this
                          * @return the reference of himself
                          */
-                        Application& operator=(Application const& app);
+                        Application& operator=(Application const& app) = delete;
                         /**
                          * Move assigment of app into this, leaving app empty
                          * @param app the application to move into this
