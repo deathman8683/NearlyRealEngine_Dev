@@ -15,7 +15,7 @@
     #include "../../Generic/Array/NRE_ArrayOperation.hpp"
     #include "../../Maths/NRE_Maths.hpp"
     #include "../../lib/FastNoise/FastNoise.h"
-    #include "../../Exception/IOException/NRE_IOException.hpp"
+    #include "../../Exception/NRE_Exception.hpp"
 
     /**
      * @namespace NRE

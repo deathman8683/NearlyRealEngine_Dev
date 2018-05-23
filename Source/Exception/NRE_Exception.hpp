@@ -1,0 +1,10 @@
+
+    #include "NRE_ExceptionHandler.hpp"
+    #include "AssimpException/NRE_AssimpException.hpp"
+    #include "GLException/NRE_GLException.hpp"
+    #include "IOException/NRE_IOException.hpp"
+    #include "IOException/FileNotExistingException/NRE_FileNotExistingException.hpp"
+    #include "IOException/FileNotOpeningException/NRE_FileNotOpeningException.hpp"
+    #include "SDLException/NRE_SDLException.hpp"
+    #include "ShaderException/NRE_ShaderException.hpp"
+    #include "SupportException/NRE_SupportException.hpp"

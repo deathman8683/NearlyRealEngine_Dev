@@ -13,7 +13,7 @@
     #include "../../Renderer/Shader/ShadersManager/NRE_ShadersManager.hpp"
     #include "../../Renderer/Material/MaterialsManager/NRE_MaterialsManager.hpp"
     #include "../../Light/LightsManager/NRE_LightsManager.hpp"
-    #include "../../Exception/SupportException/NRE_SupportException.hpp"
+    #include "../../Exception/NRE_Exception.hpp"
     #include "../../SDL_Wrapper/Window/NRE_Window.hpp"
 
     /**

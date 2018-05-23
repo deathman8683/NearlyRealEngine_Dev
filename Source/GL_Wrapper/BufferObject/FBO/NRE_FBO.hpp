@@ -13,7 +13,7 @@
     #include "../../Buffer/FrameBuffer/NRE_FrameBuffer.hpp"
     #include "../../Buffer/DepthBuffer/NRE_DepthBuffer.hpp"
     #include "../../Buffer/RenderBuffer/NRE_RenderBuffer.hpp"
-    #include "../../../Exception/GLException/NRE_GLException.hpp"
+    #include "../../../Exception/NRE_Exception.hpp"
 
     /**
      * @namespace NRE

@@ -24,6 +24,10 @@
             }
 
             bool const File::exist() const {
+                if (path.empty()) {
+                    return false;
+                }
+                
                 std::ifstream tmp(path.c_str());
                 return tmp.good();
             }

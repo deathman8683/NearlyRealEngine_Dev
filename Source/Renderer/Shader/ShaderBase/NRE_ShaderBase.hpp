@@ -10,7 +10,7 @@
 
     #include <fstream>
     #include "../../../Generic/NRE_Type.hpp"
-    #include "../../../Exception/ShaderException/NRE_ShaderException.hpp"
+    #include "../../../Exception/NRE_Exception.hpp"
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace

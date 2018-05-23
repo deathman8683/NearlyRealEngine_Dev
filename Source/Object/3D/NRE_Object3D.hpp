@@ -12,7 +12,7 @@
     #include <assimp/scene.h>
     #include <assimp/postprocess.h>
     #include "../NRE_Object.hpp"
-    #include "../../Exception/AssimpException/NRE_AssimpException.hpp"
+    #include "../../Exception/NRE_Exception.hpp"
 
     /**
      * @namespace NRE

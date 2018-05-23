@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../File/NRE_File.hpp"
+    #include "../../Exception/NRE_Exception.hpp"
 
     /**
      * @namespace NRE
@@ -34,7 +35,8 @@
                         /**
                          * Default Constructor
                          */
-                        IOFile();
+                        IOFile() = delete;
+                        IOFile(std::string const& path, std::ios_base::openmode mode)
 
                     //## Copy-Constructor ##//
                         /**
@@ -63,6 +65,7 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        bool const isOpen() const;
 
                     //## Access Operator ##//
 
