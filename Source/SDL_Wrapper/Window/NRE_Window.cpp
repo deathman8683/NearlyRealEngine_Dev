@@ -4,9 +4,6 @@
     namespace NRE {
         namespace SDL {
 
-            Window::Window() {
-            }
-
             Window::Window(std::string const& title, Maths::Point2D<int> const& coord, Maths::Vector2D<int> const& size, Uint32 const& flags) : item(0) {
                 createWindow(title, coord, size, flags);
             }

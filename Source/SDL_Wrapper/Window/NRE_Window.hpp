@@ -37,7 +37,7 @@
                         /**
                          * Default Constructor
                          */
-                        Window();
+                        Window() = delete;
                         /**
                          * Construct a window with her attributes
                          * @param title the window title
