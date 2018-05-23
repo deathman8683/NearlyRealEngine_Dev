@@ -4,9 +4,6 @@
     namespace NRE {
         namespace World {
 
-            RegionsManager::RegionsManager() : RegionsManager(0) {
-            }
-
             RegionsManager::RegionsManager(World* w) : w(w) {
             }
 

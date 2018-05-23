@@ -34,7 +34,7 @@
                         /**
                          * Default Constructor
                          */
-                        Mesh3D();
+                        Mesh3D() = delete;
                         /**
                          * Construct a 3D mesh with a given vertex data type
                          * @param type the vertex data type

@@ -4,9 +4,6 @@
     namespace NRE {
         namespace Support {
 
-            Application::Application() {
-            }
-
             Application::Application(std::string const& title, Maths::Vector2D<GLuint> const& size) : Stage(title, size) {
             }
 

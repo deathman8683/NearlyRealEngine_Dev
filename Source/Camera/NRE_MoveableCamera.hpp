@@ -39,7 +39,7 @@
                         /**
                          * Default Constructor
                          */
-                        MoveableCamera();
+                        MoveableCamera() = delete;
                         /**
                          * Construct a moveable camera from all needed parameters for base class
                          * @param fov    the fixed camera's fov

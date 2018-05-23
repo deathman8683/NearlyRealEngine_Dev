@@ -44,7 +44,7 @@
                         /**
                          * Default Constructor
                          */
-                        World();
+                        World() = delete;
                         /**
                          * Construct a world witha his size (half extent) and a base shift
                          * @param hExtent the world half extent

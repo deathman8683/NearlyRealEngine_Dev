@@ -4,9 +4,6 @@
     namespace NRE {
         namespace Object {
 
-            VoxelSet::VoxelSet() {
-            }
-
             VoxelSet::VoxelSet(Maths::Vector3D<GLuint> const& size) : size(size), maxSolidHeight(0) {
                 voxels = new World::Voxel[size.getX() * size.getY() * size.getZ()];
             }

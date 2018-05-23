@@ -50,16 +50,10 @@
                          */
                         Chunk();
                         /**
-                         * Construct a chunk and generate buffer's id on fly or not
-                         * @param generateID tell if the constructor has to generate buffer's id on fly
-                         */
-                        Chunk(bool const& generateID);
-                        /**
-                         * Construct a chunk with given coordinates and id's generation or not
+                         * Construct a chunk with given coordinates
                          * @param coord      the new chunk coordinates
-                         * @param generateID tell if the constructor has to generate buffer's id on fly
                          */
-                        Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID);
+                        Chunk(Maths::Point2D<GLint> const& coord);
 
                     //## Copy-Constructor ##//
                         /**

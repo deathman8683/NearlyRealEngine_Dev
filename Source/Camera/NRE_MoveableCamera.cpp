@@ -6,9 +6,6 @@
 
             NREfloat MoveableCamera::DEFAULT_SPEED = 3.0;
 
-            MoveableCamera::MoveableCamera() : speed(DEFAULT_SPEED), world(0) {
-            }
-
             MoveableCamera::MoveableCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
                                            Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center, World::World* world, NREfloat const& speed)
                                            : FixedCamera::FixedCamera(fov, ratio, dist, eye, center), speed(speed), world(world) {

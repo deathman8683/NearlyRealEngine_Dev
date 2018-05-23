@@ -2,9 +2,6 @@
     namespace NRE {
         namespace Support {
 
-            Thread::Thread() {
-            }
-
             template <class Function, class... Args>
             Thread::Thread(Function&& f, Args&&... args) : item(std::forward<Function>(f), std::forward<Args>(args)...) {
             }

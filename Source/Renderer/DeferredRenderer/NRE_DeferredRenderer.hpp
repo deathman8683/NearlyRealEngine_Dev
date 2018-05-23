@@ -42,7 +42,7 @@
                         /**
                          * Default Constructor
                          */
-                        DeferredRenderer();
+                        DeferredRenderer() = delete;
                         /**
                          * Construct a Deferred Renderer with the screen size
                          * @param size the screen size for the rendering

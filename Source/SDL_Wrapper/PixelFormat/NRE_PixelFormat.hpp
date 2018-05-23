@@ -35,7 +35,7 @@
                         /**
                          * Default Constructor
                          */
-                        PixelFormat();
+                        PixelFormat() = delete;
                         /**
                          * Construct a pixelFormat from the given format
                          * @param allocate tell if PixelFormat has to be allocated or not

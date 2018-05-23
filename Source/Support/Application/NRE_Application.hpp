@@ -34,7 +34,7 @@
                         /**
                          * Default Constructor
                          */
-                        Application();
+                        Application() = delete;
                         Application(std::string const& title, Maths::Vector2D<GLuint> const& size);
 
                     //## Copy-Constructor ##//

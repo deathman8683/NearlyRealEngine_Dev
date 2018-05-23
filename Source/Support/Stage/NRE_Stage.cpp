@@ -10,9 +10,6 @@
             int Stage::MINOR_VERSION = 5;
             int Stage::DEPTH_SIZE = 24;
 
-            Stage::Stage() : context(0) {
-            }
-
             Stage::Stage(std::string const& title, Maths::Vector2D<int> size, Maths::Point2D<int> coord) : context(0) {
                 int err = SDL_Init(SDL_INIT_FLAGS);
                 if (err != 0) {

@@ -4,9 +4,6 @@
     namespace NRE {
         namespace SDL {
 
-            PixelFormat::PixelFormat() : item(0), allocated(false) {
-            }
-
             PixelFormat::PixelFormat(bool const& allocate, Uint32 const& format) : item(0), allocated(allocate) {
                 if (allocate) {
                     item = SDL_AllocFormat(format);

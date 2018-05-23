@@ -43,7 +43,7 @@
                         /**
                          * Default Constructor
                          */
-                        VoxelSet();
+                        VoxelSet() = delete;
                         /**
                          * Construct a model with a given size
                          * @param size the model's size

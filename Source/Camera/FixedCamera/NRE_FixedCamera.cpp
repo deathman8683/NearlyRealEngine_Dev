@@ -7,9 +7,6 @@
             NREfloat FixedCamera::MAX_PHI = 269.9;
             NREfloat FixedCamera::MIN_PHI = 90.1;
 
-            FixedCamera::FixedCamera() {
-            }
-
             FixedCamera::FixedCamera(NREfloat const& fov, NREfloat const& ratio, Maths::Vector2D<NREfloat> const& dist,
                                      Maths::Point3D<NREfloat> const& eye, Maths::Point3D<NREfloat> const& center)
                                     : Maths::Frustum<NREfloat>::Frustum(fov, ratio, dist), eye(eye), center(center) {

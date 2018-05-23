@@ -39,7 +39,7 @@
                         /**
                          * Default Constructor
                          */
-                        Material();
+                        Material() = delete;
                         /**
                          * Construct a material from his different attributes
                          * @param path      the path to the material's textures

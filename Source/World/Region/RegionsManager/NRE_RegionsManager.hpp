@@ -39,7 +39,7 @@
                         /**
                          * Default Constructor
                          */
-                        RegionsManager();
+                        RegionsManager() = delete;
                         RegionsManager(World* w);
 
                     //## Copy-Constructor ##//

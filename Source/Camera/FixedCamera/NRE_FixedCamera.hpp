@@ -40,7 +40,7 @@
                         /**
                          * Default Constructor
                          */
-                        FixedCamera();
+                        FixedCamera() = delete;
                         /**
                          * Construct a fixed camera with different passed attributes
                          * @param fov    the camera's frustum's fov

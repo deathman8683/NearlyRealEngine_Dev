@@ -4,9 +4,6 @@
     namespace NRE {
         namespace Renderer {
 
-            Material::Material() : Material("") {
-            }
-
             Material::Material(std::string const& path) : albedo(0), normal(0), roughness(0), metallic(0) {
                 albedo = new GL::Texture2D("Data/Material/" + path + "/" + path + "_Albedo.png", false);
                 normal = new GL::Texture2D("Data/Material/" + path + "/" + path + "_Normal.png", false);

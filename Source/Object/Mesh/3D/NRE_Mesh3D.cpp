@@ -4,9 +4,6 @@
     namespace NRE {
         namespace Object {
 
-            Mesh3D::Mesh3D() {
-            }
-
             Mesh3D::Mesh3D(GLenum const& type) : Mesh(type) {
                 push_back(new MaterialData());
                 push_back(new NormalData());

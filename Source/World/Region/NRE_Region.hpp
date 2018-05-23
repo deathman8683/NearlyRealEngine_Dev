@@ -38,7 +38,7 @@
                         /**
                          * Default Constructor
                          */
-                        Region();
+                        Region() = delete;
                         /**
                          * Construct a region from a path to region file
                          * @param path the path to a region file

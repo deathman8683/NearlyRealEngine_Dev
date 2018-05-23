@@ -35,7 +35,7 @@
                         /**
                          * Default Constructor
                          */
-                        Texture2D();
+                        Texture2D() = delete;
                         /**
                          * Construct a texture with a path to a file which will be loaded by the SDL wrapper
                          * @param path              the path to the texture file

@@ -4,9 +4,6 @@
     namespace NRE {
         namespace SDL {
 
-            Surface::Surface() : item(0), glFormat(0), glInternalFormat(0) {
-            }
-
             Surface::Surface(std::string const& path) : item(0), glW(0), glH(0), glFormat(0), glInternalFormat(0) {
                 loadByIMG(path);
             }

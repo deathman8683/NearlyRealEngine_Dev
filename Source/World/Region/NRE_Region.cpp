@@ -4,9 +4,6 @@
     namespace NRE {
         namespace World {
 
-            Region::Region() : path("") {
-            }
-
             Region::Region(std::string const& path) : path(path) {
             }
 

@@ -39,7 +39,7 @@
                         /**
                          * Default Constructor
                          */
-                        Stage();
+                        Stage() = delete;
                         /**
                          * Construct a stage with different parameters for the window construction
                          * @param title the window title

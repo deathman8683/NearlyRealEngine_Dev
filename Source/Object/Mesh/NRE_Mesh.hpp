@@ -47,7 +47,7 @@
                         /**
                          * Default Constructor
                          */
-                        Mesh();
+                        Mesh() = delete;
                         /**
                          * Construct a mesh with a base vertex data
                          * @param type the vertex data type

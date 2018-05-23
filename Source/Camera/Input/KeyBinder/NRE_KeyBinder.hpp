@@ -39,7 +39,7 @@
                         /**
                          * Default Constructor
                          */
-                        KeyBinder();
+                        KeyBinder() = delete;
                         /**
                          * Construct a keyBinder with n key inside the keyMap
                          * @param n the number of key at construction

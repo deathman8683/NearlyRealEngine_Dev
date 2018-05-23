@@ -40,7 +40,7 @@
                         /**
                          * Default Constructor
                          */
-                        Surface();
+                        Surface() = delete;
                         /**
                          * Construct a surface with SDL image library with a file path
                          * @param path the path to the file to load

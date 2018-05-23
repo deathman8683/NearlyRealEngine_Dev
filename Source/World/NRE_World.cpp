@@ -7,9 +7,6 @@
             int World::DEFAULT_SOIL_SEED = 6'032'018;
             int World::DEFAULT_MOISTURE_SEED = 21'032'018;
 
-            World::World() : World(Maths::Vector2D<GLuint>(0, 0), Maths::Vector2D<GLint>(0, 0)) {
-            }
-
             World::World(Maths::Vector2D<GLuint> const& hExtent, Maths::Vector2D<GLuint> const& shift) : chunkMap((hExtent.getX() * 2 + 1) * (hExtent.getY() * 2 + 1)), regionsManager(0), hExtent(hExtent), shift(shift) {
                 FastNoise worldGen, worldGen2;
                 worldGen.SetNoiseType(FastNoise::Simplex);
@@ -25,7 +22,7 @@
                 for (int x = -getHExtent().getX(); x <= static_cast <GLint> (getHExtent().getX()); x = x + 1) {
                     for (int y = -getHExtent().getY(); y <= static_cast<GLint> (getHExtent().getY()); y = y + 1) {
                         Maths::Point2D<GLint> tmp(x + getShift().getX(), y + getShift().getY());
-                        chunkMap[tmp] = new Chunk(tmp, true);
+                        chunkMap[tmp] = new Chunk(tmp);
                     }
                 }
 

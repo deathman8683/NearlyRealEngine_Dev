@@ -35,7 +35,7 @@
                         /**
                          * Default Constructor
                          */
-                        Thread();
+                        Thread() = delete;
                         /**
                          * Construct a new thread from the function to use and the function's arguments
                          * @param f    the thread's function

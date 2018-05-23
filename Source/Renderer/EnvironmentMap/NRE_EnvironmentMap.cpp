@@ -8,9 +8,6 @@
 
             GLuint EnvironmentMap::SIZE = 1024;
 
-            EnvironmentMap::EnvironmentMap() {
-            }
-
             EnvironmentMap::EnvironmentMap(std::string const& path) : brdfLUT(SIZE, SIZE, GL_RG, GL_RG16F, GL_FLOAT), buffer(true), vao(true) {
                 fillBuffer();
                 allocate();
@@ -98,20 +95,13 @@
                 const PrefilterShader*  prefilterShader  = static_cast <const PrefilterShader*>  (ShadersManager::getShader("Prefilter"));
                 const BRDFShader*       brdfShader       = static_cast <const BRDFShader*>       (ShadersManager::getShader("BRDF"));
 
-                GL::Texture2D cubeMap;
-
-                cubeMap.setType(GL_FLOAT);
-                cubeMap.setGLInternalFormat(GL_RGB16F);
-                cubeMap.setGLFormat(GL_RGB);
-
-                stbi_set_flip_vertically_on_load(true);
 
                 int w, h, nrComponents;
+                stbi_set_flip_vertically_on_load(true);
                 float *data = stbi_loadf(path.c_str(), &w, &h, &nrComponents, 0);
-                cubeMap.setGLW(w);
-                cubeMap.setGLH(h);
-                cubeMap.Texture2DBuffer::allocateAndFill(0, cubeMap.getGLInternalFormat(), cubeMap.getGLW(), cubeMap.getGLH(), cubeMap.getGLFormat(), data, true);
-                cubeMap.setAllocated(true);
+
+                GL::Texture2D cubeMap(w, h, GL_RGB, GL_RGB16F, GL_FLOAT);
+                cubeMap.update(0, 0, data);
 
                 stbi_image_free(data);
 

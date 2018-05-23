@@ -41,7 +41,7 @@
                         /**
                          * Default Constructor
                          */
-                        FBO();
+                        FBO() = delete;
                         /**
                          * Construct a frame buffer object with a given size
                          * @param w the fbo's width

@@ -4,9 +4,6 @@
     namespace NRE {
         namespace GL {
 
-            Texture2D::Texture2D() : Texture2DBuffer::Texture2DBuffer(true) {
-            }
-
             Texture2D::Texture2D(std::string const& path, bool const& loadImmedialty) : Texture2DBuffer::Texture2DBuffer(true), SDL::Surface::Surface(path) {
                 if (loadImmedialty) {
                     allocateAndFill(true);

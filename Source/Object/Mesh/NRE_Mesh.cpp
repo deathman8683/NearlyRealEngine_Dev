@@ -4,9 +4,6 @@
     namespace NRE {
         namespace Object {
 
-            Mesh::Mesh() : buffer(0), vao(true) {
-            }
-
             Mesh::Mesh(GLenum const& type) : buffer(0), vao(true), type(type) {
                 if (type == GL_INT) {
                     push_back(new IntVertexData());

@@ -44,7 +44,7 @@
                         /**
                          * Default Constructor
                          */
-                        EnvironmentMap();
+                        EnvironmentMap() = delete;
                         /**
                          * Construct an environment map with a specific file
                          * @param path  the path to the main skybox

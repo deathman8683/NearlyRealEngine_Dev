@@ -4,9 +4,6 @@
     namespace NRE {
         namespace GL {
 
-            FBO::FBO() {
-            }
-
             FBO::FBO(GLsizei const& w, GLsizei const& h) : FrameBuffer::FrameBuffer(true), depthBuffer(0), size(w, h) {
             }
 

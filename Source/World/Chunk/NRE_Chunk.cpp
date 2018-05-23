@@ -12,13 +12,10 @@
             GLuint Chunk::SECTOR_SIZE = 4096;
             GLuint Chunk::LOOKUP_SIZE = 1024;
 
-            Chunk::Chunk() {
+            Chunk::Chunk() : Chunk(Maths::Point2D<GLint>(0)) {
             }
 
-            Chunk::Chunk(bool const& generateID) : Chunk(Maths::Point2D<GLint>(0), generateID) {
-            }
-
-            Chunk::Chunk(Maths::Point2D<GLint> const& coord, bool const& generateID) : coord(coord), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
+            Chunk::Chunk(Maths::Point2D<GLint> const& coord) : coord(coord), bounding(Maths::Point3D<GLint>(coord.getX() * SIZE_X, coord.getY() * SIZE_Y, 0) + SIZE / 2, Maths::Vector3D<GLint>(SIZE / 2)),
                                                                                        active(true), loaded(false), constructed(false), loading(false), constructing(false), modified(false) {
                 push_back(SIZE);
             }
@@ -196,7 +193,7 @@
                 setLoaded(true);
                 setLoading(false);
             }
-            
+
             void Chunk::createProceduralTerrain(World* w) {
                 voxelSets[0].createProceduralTerrain(w->getSoilGenerator(), w->getMoistureGenerator(), getCoord());
             }
