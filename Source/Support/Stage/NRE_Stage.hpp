@@ -8,11 +8,8 @@
 
     #pragma once
 
-    #include "../../Generic/NRE_Type.hpp"
     #include "../../Generic/Init/NRE_Init.hpp"
     #include "../Viewport/NRE_Viewport.hpp"
-    #include "../../SDL_Wrapper/Window/NRE_Window.hpp"
-    #include "../../Exception/SupportException/NRE_SupportException.hpp"
     /**
      * @namespace NRE
      * @brief The global NearlyRealEngine's namespace
@@ -28,7 +25,7 @@
              * @class Stage
              * @brief Support's Object : Manage the application window and viewport
              */
-            class Stage {
+            class Stage : private Init {
                 private:
                     SDL::Window window;     /**< The stage window */
                     Viewport viewport;      /**< The stage viewport */
@@ -57,10 +54,10 @@
 
                     //## Move-Constructor ##//
                         /**
-                         * Move s into this, leaving s empty
+                         * No move allowed
                          * @param s the stage to move
                          */
-                        Stage(Stage && s);
+                        Stage(Stage && s) = delete;
 
                     //## Convertor ##//
 
@@ -81,10 +78,6 @@
 
                     //## Methods ##//
                         /**
-                         * Initialize the stage while calling SDL - GLEW - GL initialisation command
-                         */
-                        void init();
-                        /**
                          * Refresh the screen
                          */
                         void updateScreen();
@@ -99,11 +92,11 @@
                          */
                         Stage& operator=(Stage const& s) = delete;
                         /**
-                         * Move assigment of s into this, leaving s empty
+                         * No move allowed
                          * @param s the stage to move into this
                          * @return the reference of himself
                          */
-                        Stage& operator=(Stage && s);
+                        Stage& operator=(Stage && s) = delete;
 
                     //## Shortcut Operator ##//
 
@@ -126,10 +119,6 @@
                     void initGL();
 
                     static Uint32 DEFAULT_FLAGS;    /**< Default flags for the window */
-                    static Uint32 SDL_INIT_FLAGS;   /**< Default flags for the SDL init command */
-                    static int MAJOR_VERSION;       /**< Major version used for OpenGL */
-                    static int MINOR_VERSION;       /**< Minor version used for OpenGL */
-                    static int DEPTH_SIZE;          /**< Size of the window's depth buffer */
             };
 
         };

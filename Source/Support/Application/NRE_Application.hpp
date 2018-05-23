@@ -46,10 +46,10 @@
 
                     //## Move-Constructor ##//
                         /**
-                         * Move app into this, leaving app empty
+                         * No move allowed
                          * @param app the application to move
                          */
-                        Application(Application && app);
+                        Application(Application && app) = delete;
 
                     //## Convertor ##//
 
@@ -76,11 +76,11 @@
                          */
                         Application& operator=(Application const& app) = delete;
                         /**
-                         * Move assigment of app into this, leaving app empty
+                         * No move allowed
                          * @param app the application to move into this
                          * @return the reference of himself
                          */
-                        Application& operator=(Application && app);
+                        Application& operator=(Application && app) = delete;
 
                     //## Shortcut Operator ##//
 
