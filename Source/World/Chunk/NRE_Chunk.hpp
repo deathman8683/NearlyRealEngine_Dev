@@ -8,7 +8,6 @@
 
     #pragma once
 
-    #include <sstream>
     #include "../../IO/NRE_IO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"

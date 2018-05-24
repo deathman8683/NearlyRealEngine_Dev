@@ -36,7 +36,7 @@
                          * Default Constructor
                          */
                         IOFile() = delete;
-                        IOFile(std::string const& path, std::ios_base::openmode mode);
+                        IOFile(std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
@@ -62,11 +62,13 @@
 
                     //## Getter ##//
                         std::fstream& getStream();
+                        bool const isOpen() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                        bool const isOpen() const;
+                        void open(std::ios_base::openmode mode, bool const& truncate = false);
+                        void write(std::stringstream& data);
 
                     //## Access Operator ##//
 

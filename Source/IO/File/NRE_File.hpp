@@ -8,6 +8,7 @@
 
     #pragma once
 
+    #include <sstream>
     #include <fstream>
     #include "../../Generic/NRE_Type.hpp"
 
@@ -27,7 +28,7 @@
              * @brief IO's Object : Manage a file path
              */
             class File {
-                private:
+                protected:
                     std::string path;
 
                 public:
