@@ -96,11 +96,7 @@
                          * @param w the world used for chunk border computation
                          */
                         void load(World* w);
-                        /**
-                         * Create the lookup table for the region file
-                         * @param chunkFile the region file stream
-                         */
-                        void createTable(std::fstream &chunkFile);
+                        void createTable();
                         /**
                          * Add a chunk in the queue
                          * @param chunk the chunk to add

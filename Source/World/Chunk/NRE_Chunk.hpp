@@ -9,7 +9,7 @@
     #pragma once
 
     #include <sstream>
-    #include <fstream>
+    #include "../../IO/NRE_IO.hpp"
     #include "../../Renderer/Shader/NRE_Shader.hpp"
     #include "../../Camera/FixedCamera/NRE_FixedCamera.hpp"
     #include "../../GL_Wrapper/BufferObject/VBO/NRE_VBO.hpp"

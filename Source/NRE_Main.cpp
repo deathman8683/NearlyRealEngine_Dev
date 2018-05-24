@@ -133,6 +133,10 @@
         catch (std::exception const& e) {
             std::cout << e.what() << std::endl;
         }
+        catch (...)
+        {
+            std::cout << "Unknown exception caught" << std::endl;
+        }
 
         return 0;
     }

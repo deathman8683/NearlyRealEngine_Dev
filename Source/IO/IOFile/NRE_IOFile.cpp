@@ -5,7 +5,7 @@
         namespace IO {
 
             IOFile::IOFile(std::string const& path, std::ios_base::openmode mode) : File::File(path) {
-                if (File::exists()) {
+                if (File::exist()) {
                     file.open(getPath(), mode);
                     if (!isOpen()) {
                         throw (Exception::FileNotOpeningException(path));
@@ -15,10 +15,14 @@
                 }
             }
 
-            IOFile::IOFile(IOFile && f) {
+            IOFile::IOFile(IOFile && f) : File::File(std::move(f)), file(std::move(f.file)) {
             }
 
             IOFile::~IOFile() {
+            }
+
+            std::fstream& IOFile::getStream() {
+                return file;
             }
 
             bool const IOFile::isOpen() const {
@@ -26,6 +30,8 @@
             }
 
             IOFile& IOFile::operator=(IOFile && f) {
+                File::operator=(f);
+                file = std::move(f.file);
                 return *this;
             }
 

@@ -41,38 +41,38 @@
             }
 
             void Region::save() {
-                std::fstream chunkFile;
-                chunkFile.open(path, std::ios::in | std::ios::out | std::ios::binary);
-                if (!chunkFile.is_open()) {
-                    createTable(chunkFile);
+                try {
+                    IO::IOFile chunkFile(path, std::ios::in | std::ios::out | std::ios::binary);
+                    size_t limit = chunk.size();
+                    for (GLuint i = 0; i < limit; i = i + 1) {
+                        Maths::Point2D<GLint> tmp = chunk.front().second->getCoord();
+                        chunk.front().second->setCoord(chunk.front().first);
+                        chunk.front().second->save(chunkFile.getStream());
+                        chunk.front().second->setCoord(tmp);
+                        chunk.pop();
+                    }
                 }
-                size_t limit = chunk.size();
-                for (GLuint i = 0; i < limit; i = i + 1) {
-                    Maths::Point2D<GLint> tmp = chunk.front().second->getCoord();
-                    chunk.front().second->setCoord(chunk.front().first);
-                    chunk.front().second->save(chunkFile);
-                    chunk.front().second->setCoord(tmp);
-                    chunk.pop();
+                catch (Exception::FileNotExistingException const& e) {
+                    createTable();
                 }
-                chunkFile.close();
             }
 
             void Region::load(World* w) {
-                std::fstream chunkFile;
-                chunkFile.open(path, std::ios::in | std::ios::out | std::ios::binary);
-                if (!chunkFile.is_open()) {
-                    createTable(chunkFile);
+                try {
+                    IO::IOFile chunkFile(path, std::ios::in | std::ios::out | std::ios::binary);
+                    size_t limit = chunk.size();
+                    for (GLuint i = 0; i < limit; i = i + 1) {
+                        chunk.front().second->load(chunkFile.getStream(), w);
+                        chunk.pop();
+                    }
                 }
-                size_t limit = chunk.size();
-                for (GLuint i = 0; i < limit; i = i + 1) {
-                    chunk.front().second->load(chunkFile, w);
-                    chunk.pop();
+                catch (Exception::FileNotExistingException const& e) {
+                    createTable();
                 }
-                chunkFile.close();
             }
 
-            void Region::createTable(std::fstream &chunkFile) {
-                chunkFile.open(path, std::ios::trunc | std::ios::out | std::ios::binary);
+            void Region::createTable() {
+                IO::IOFile chunkFile(path, std::ios::trunc | std::ios::in | std::ios::out | std::ios::binary);
                 std::stringstream table;
                 GLuint offset = 0, size = 0;
                 for (GLuint x = 0; x < 16; x = x + 1) {
@@ -81,7 +81,7 @@
                         table.write(reinterpret_cast<char*> (&size), 1);
                     }
                 }
-                chunkFile << table.rdbuf();
+                chunkFile.getStream() << table.rdbuf();
             }
 
             void Region::add(Chunk *chunk) {

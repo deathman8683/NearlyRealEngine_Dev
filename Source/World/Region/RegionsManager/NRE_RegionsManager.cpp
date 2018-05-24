@@ -14,7 +14,12 @@
             }
 
             RegionsManager::~RegionsManager() {
-                emptySaveMap();
+                try {
+                    emptySaveMap();
+                }
+                catch (Exception::IOException const& e) {
+                    std::cout << e.what() << std::endl;
+                }
             }
 
             void RegionsManager::addChunkToLoad(Chunk *chunk) {
