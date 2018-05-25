@@ -61,6 +61,11 @@
                          * @return the file's stream
                          */
                         virtual std::fstream& getStream() = 0;
+                        /**
+                         * Cursor position getter
+                         * @return the stream cursor position
+                         */
+                        std::streampos const getPosition();
 
                     //## Setter ##//
 
@@ -71,6 +76,16 @@
                          */
                         template <class T>
                         void write(T const& object);
+                        /**
+                         * Set the file cursor position to the begin + offset
+                         * @param offset the file's offset
+                         */
+                        void seekBegin(size_t const& offset = 0);
+                        /**
+                         * Set the file cursor position to the end - offset
+                         * @param offset the file's offset
+                         */
+                        void seekEnd(size_t const& offset = 0);
 
                     //## Access Operator ##//
 

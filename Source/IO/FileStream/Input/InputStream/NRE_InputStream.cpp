@@ -13,6 +13,18 @@
             InputStream::~InputStream() {
             }
 
+            std::streampos const InputStream::getPosition() {
+                return getStream().tellg();
+            }
+
+            void InputStream::seekBegin(size_t const& offset) {
+                getStream().seekg(offset, getStream().beg);
+            }
+
+            void InputStream::seekEnd(size_t const& offset) {
+                getStream().seekg(offset, getStream().end);
+            }
+
             InputStream& InputStream::operator=(InputStream && s) {
                 return *this;
             }

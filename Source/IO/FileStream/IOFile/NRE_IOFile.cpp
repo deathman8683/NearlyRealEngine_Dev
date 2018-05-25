@@ -18,7 +18,7 @@
             }
 
             std::fstream& IOFile::getStream() {
-                return FileStream::getStream();
+                return file;
             }
 
             IOFile& IOFile::operator=(IOFile && f) {

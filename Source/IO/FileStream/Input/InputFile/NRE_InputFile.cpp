@@ -18,7 +18,7 @@
             }
 
             std::fstream& InputFile::getStream() {
-                return FileStream::getStream();
+                return file;
             }
 
             InputFile& InputFile::operator=(InputFile && f) {

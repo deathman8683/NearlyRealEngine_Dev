@@ -27,7 +27,7 @@
              * @brief IO's Object : The base interface for Input, Output and IO file
              */
             class FileStream : public File {
-                private:
+                protected:
                     std::fstream file;  /**< The file stream */
 
                 public:
@@ -76,6 +76,7 @@
                          */
                         bool const isOpen() const;
 
+
                     //## Setter ##//
 
                     //## Methods ##//
@@ -115,11 +116,6 @@
                     //## Shift Operator ##//
 
                 protected:
-                    /**
-                     * Stream getter
-                     * @return the file's stream
-                     */
-                    std::fstream& getStream();
             };
 
         };

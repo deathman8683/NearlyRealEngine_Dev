@@ -46,7 +46,7 @@
                 for (GLuint i = 0; i < limit; i = i + 1) {
                     Maths::Point2D<GLint> tmp = chunk.front().second->getCoord();
                     chunk.front().second->setCoord(chunk.front().first);
-                    chunk.front().second->save(chunkFile.getStream());
+                    chunk.front().second->save(chunkFile);
                     chunk.front().second->setCoord(tmp);
                     chunk.pop();
                 }
@@ -60,7 +60,7 @@
                 chunkFile.open();
                 size_t limit = chunk.size();
                 for (GLuint i = 0; i < limit; i = i + 1) {
-                    chunk.front().second->load(chunkFile.getStream(), w);
+                    chunk.front().second->load(chunkFile, w);
                     chunk.pop();
                 }
             }

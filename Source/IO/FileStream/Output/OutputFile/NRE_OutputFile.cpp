@@ -14,7 +14,7 @@
             }
 
             std::fstream& OutputFile::getStream() {
-                return FileStream::getStream();
+                return file;
             }
 
             std::ios_base::openmode const OutputFile::getMode() const {

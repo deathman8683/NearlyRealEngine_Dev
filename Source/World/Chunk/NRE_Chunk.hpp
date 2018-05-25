@@ -168,16 +168,16 @@
 
                     //## Methods ##//
                         /**
-                         * Save the chunk into a passed file stream
-                         * @param chunkFile the chunk's file stream
+                         * Save the chunk into a passed file
+                         * @param chunkFile the chunk's file
                          */
-                        void save(std::fstream &chunkFile);
+                        void save(IO::BinaryIOFile &chunkFile);
                         /**
-                         * Load the chunk from a passed file stream
-                         * @param chunkFile the chunk's file stream
+                         * Load the chunk from a passed file
+                         * @param chunkFile the chunk's file
                          * @param w         the world used to generate procedural terrain if necessary
                          */
-                        void load(std::fstream &chunkFile, World* w);
+                        void load(IO::BinaryIOFile &chunkFile, World* w);
                         /**
                          * Construct a procedural terrain from a custom generator using FastNoise library
                          * @param w the world used to get the seed and FastNoise generator

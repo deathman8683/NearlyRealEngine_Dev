@@ -96,7 +96,7 @@
                 reload();
             }
 
-            void Chunk::save(std::fstream &chunkFile) {
+            void Chunk::save(IO::BinaryIOFile &chunkFile) {
                 GLuint xOff, yOff;
                 if (getCoord().getX() < 0) {
                     xOff = (-(getCoord().getX() + 1) % 16) * 16;
@@ -109,48 +109,50 @@
                     yOff = (getCoord().getY() % 16);
                 }
                 size_t fileOffset = 4 * (xOff + yOff);
-                chunkFile.seekg(fileOffset, chunkFile.beg);
+                chunkFile.InputStream::seekBegin(fileOffset);
+
                 GLuint offset = 0, size = 0;
-                chunkFile.read(reinterpret_cast<char*> (&offset), 3);
-                chunkFile.read(reinterpret_cast<char*> (&size), 1);
+                chunkFile.readBinary(offset, 3);
+                chunkFile.readBinary(size, 1);
 
                 if (offset == 0 && size == 0) {
                     std::stringstream data;
                     voxelSets[0].writeCompressedData(data);
                     GLuint dataSize = data.tellp();
-                    chunkFile.seekg(0, chunkFile.end);
-                    GLuint endOffset = chunkFile.tellp();
-                    chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
+                    chunkFile.OutputStream::seekEnd();
+                    GLuint endOffset = chunkFile.OutputStream::getPosition();
+                    chunkFile.writeBinary(dataSize, 4);
                     dataSize = dataSize + 4;
-                    chunkFile << data.rdbuf();
+                    chunkFile.write(data.rdbuf());
                     size_t paddingSize = std::ceil((static_cast <NREfloat> (dataSize)) / SECTOR_SIZE) * SECTOR_SIZE - dataSize;
                     if (paddingSize > 0) {
-                        char padding[paddingSize] = {0};
-                        chunkFile.write(padding, paddingSize);
+                        char* padding = new char[paddingSize]{0};
+                        chunkFile.writeBinary(padding[0], paddingSize);
+                        delete padding;
                     }
 
-                    chunkFile.seekg(fileOffset, chunkFile.beg);
+                    chunkFile.OutputStream::seekBegin(fileOffset);
                     GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize)) / SECTOR_SIZE);
                     GLuint chunkOffset = std::ceil((static_cast <NREfloat> (endOffset - LOOKUP_SIZE)) / SECTOR_SIZE);
-                    chunkFile.write(reinterpret_cast<char*> (&chunkOffset), 3);
-                    chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
+                    chunkFile.writeBinary(chunkOffset, 3);
+                    chunkFile.writeBinary(chunkSize, 1);
                 } else {
                     if (isModfied()) {
                         std::stringstream data;
                         voxelSets[0].writeCompressedData(data);
                         GLuint dataSize = data.tellp();
-                        chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
-                        chunkFile.write(reinterpret_cast<char*> (&dataSize), 4);
-                        chunkFile << data.rdbuf();
+                        chunkFile.OutputStream::seekBegin(offset * SECTOR_SIZE + LOOKUP_SIZE);
+                        chunkFile.writeBinary(dataSize, 4);
+                        chunkFile.write(data.rdbuf());
 
-                        chunkFile.seekg(fileOffset + 3, chunkFile.beg);
+                        chunkFile.OutputStream::seekBegin(fileOffset + 3);
                         GLuint chunkSize = std::ceil((static_cast <NREfloat> (dataSize)) / SECTOR_SIZE);
-                        chunkFile.write(reinterpret_cast<char*> (&chunkSize), 1);
+                        chunkFile.writeBinary(chunkSize, 1);
                     }
                 }
             }
 
-            void Chunk::load(std::fstream &chunkFile, World* w) {
+            void Chunk::load(IO::BinaryIOFile &chunkFile, World* w) {
                 GLuint xOff, yOff;
                 if (getCoord().getX() < 0) {
                     xOff = (-(getCoord().getX() + 1) % 16) * 16;
@@ -163,20 +165,21 @@
                     yOff = (getCoord().getY() % 16);
                 }
                 size_t fileOffset = 4 * (xOff + yOff);
-                chunkFile.seekg(fileOffset, chunkFile.beg);
+                chunkFile.InputStream::seekBegin(fileOffset);
+
                 GLuint offset = 0, size = 0;
-                chunkFile.read(reinterpret_cast<char*> (&offset), 3);
-                chunkFile.read(reinterpret_cast<char*> (&size), 1);
+                chunkFile.readBinary(offset, 3);
+                chunkFile.readBinary(size, 1);
 
                 if (offset == 0 && size == 0) {
                     createProceduralTerrain(w);
                 } else {
-                    chunkFile.seekg(offset * SECTOR_SIZE + LOOKUP_SIZE, chunkFile.beg);
+                    chunkFile.InputStream::seekBegin(offset * SECTOR_SIZE + LOOKUP_SIZE);
                     GLuint dataSize = 0;
-                    chunkFile.read(reinterpret_cast<char*> (&dataSize), 4);
+                    chunkFile.readBinary(dataSize, 4);
 
                     std::vector<char> buffer(dataSize);
-                    chunkFile.read(&buffer[0], dataSize);
+                    chunkFile.readBinary(buffer[0], dataSize);
                     std::stringstream data;
                     data.rdbuf()->pubsetbuf(&buffer[0], dataSize);
 
