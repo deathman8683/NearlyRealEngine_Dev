@@ -1,6 +1,6 @@
 SRC = NRE_IOFile.cpp
 OBJ = $(OBJDIR)NRE_IOFile.o
-OBJDIR = ../../../obj/Debug/IO/IOFile/
+OBJDIR = ../../../../obj/Debug/IO/FileStream/IOFile/
 
 all : $(TARGET)
 

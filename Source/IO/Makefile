@@ -2,8 +2,8 @@
 all : $(TARGET)
 
 FILE = File
-IO = IOFile
+STREAM = FileStream
 
 debug :
 	@(cd $(FILE) && $(MAKE))
-	@(cd $(IO) && $(MAKE))
+	@(cd $(STREAM) && $(MAKE))

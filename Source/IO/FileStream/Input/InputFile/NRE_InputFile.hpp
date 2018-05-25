@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_InputStream.hpp
-     * @brief Declaration of Engine's IO's Object : InputStream
+     * @file NRE_InputFile.hpp
+     * @brief Declaration of Engine's IO's Object : InputFile
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../../File/NRE_File.hpp"
+    #include "../../NRE_FileStream.hpp"
 
     /**
      * @namespace NRE
@@ -22,10 +22,10 @@
         namespace IO {
 
             /**
-             * @class InputStream
-             * @brief IO's Object : Base interface for Input related stream
+             * @class InputFile
+             * @brief IO's Object : Manage Input file stream
              */
-            class InputStream {
+            class InputFile : public FileStream, public InputStream {
                 private:
 
                 public:
@@ -33,52 +33,54 @@
                         /**
                          * Default Constructor
                          */
-                        InputStream();
+                        InputFile() = delete;
+                        InputFile(std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param s the input stream to copy the content
+                         * @param f the Input file to copy the content
                          */
-                        InputStream(InputStream const& s) = delete;
+                        InputFile(InputFile const& f) = delete;
 
                     //## Move-Constructor ##//
                         /**
-                         * Move s into this, leaving s empty
-                         * @param s the input stream to move
+                         * Move f into this, leaving f empty
+                         * @param f the Input file to move
                          */
-                        InputStream(InputStream && s);
+                        InputFile(InputFile && f);
+
+                    //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * InputStream Deconstructor
+                         * InputFile Deconstructor
                          */
-                        ~InputStream();
+                        ~InputFile();
 
                     //## Getter ##//
-                        virtual std::fstream& getStream() = 0;
+                        std::ios_base::openmode const getMode() const override;
+                        std::fstream& getStream() override;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                        template <class T>
-                        void read(T& object);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
                          * No copy allowed
-                         * @param s the input stream to copy into this
+                         * @param f the Input file to copy into this
                          * @return the reference of himself
                          */
-                        InputStream& operator=(InputStream const& s) = delete;
+                        InputFile& operator=(InputFile const& f) = delete;
                         /**
-                         * Move assigment of s into this, leaving s empty
-                         * @param s the input stream to move into this
+                         * Move assigment of f into this, leaving f empty
+                         * @param f the Input file to move into this
                          * @return the reference of himself
                          */
-                        InputStream& operator=(InputStream && s);
+                        InputFile& operator=(InputFile && f);
 
                     //## Shortcut Operator ##//
 
@@ -95,5 +97,3 @@
 
         };
     };
-
-    #include "NRE_InputStream.tpp"

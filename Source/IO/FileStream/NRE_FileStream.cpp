@@ -41,5 +41,9 @@
                 return *this;
             }
 
+            std::fstream& FileStream::getStream() {
+                return file;
+            }
+
         };
     };

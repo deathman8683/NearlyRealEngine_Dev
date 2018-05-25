@@ -1,15 +1,14 @@
 
     /**
-     * @file NRE_IOFile.hpp
-     * @brief Declaration of Engine's IO's Object : IOFile
+     * @file NRE_OutputFile.hpp
+     * @brief Declaration of Engine's IO's Object : OutputFile
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../File/NRE_File.hpp"
-    #include "../../Exception/NRE_Exception.hpp"
+    #include "../../NRE_FileStream.hpp"
 
     /**
      * @namespace NRE
@@ -23,68 +22,65 @@
         namespace IO {
 
             /**
-             * @class IOFile
-             * @brief IO's Object : Manage a input/output base with users-defined opening mode
+             * @class OutputFile
+             * @brief IO's Object : Manage Output file stream
              */
-            class IOFile : public File {
+            class OutputFile : public FileStream, public OutputStream {
                 private:
-                    std::fstream file;
 
                 public:
                     //## Constructor ##//
                         /**
                          * Default Constructor
                          */
-                        IOFile() = delete;
-                        IOFile(std::string const& path);
+                        OutputFile() = delete;
+                        OutputFile(std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param f the IO file to copy the content
+                         * @param f the Output file to copy the content
                          */
-                        IOFile(IOFile const& f) = delete;
+                        OutputFile(OutputFile const& f) = delete;
 
                     //## Move-Constructor ##//
                         /**
                          * Move f into this, leaving f empty
-                         * @param f the IO file to move
+                         * @param f the Output file to move
                          */
-                        IOFile(IOFile && f);
+                        OutputFile(OutputFile && f);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * IOFile Deconstructor
+                         * OutputFile Deconstructor
                          */
-                        ~IOFile();
+                        ~OutputFile();
 
                     //## Getter ##//
-                        std::fstream& getStream();
-                        bool const isOpen() const;
+                        std::ios_base::openmode const getMode() const override;
+                        std::fstream& getStream() override;
 
                     //## Setter ##//
 
                     //## Methods ##//
-                        void open(std::ios_base::openmode mode, bool const& truncate = false);
-                        void write(std::stringstream& data);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
                          * No copy allowed
-                         * @param f the IO file to copy into this
+                         * @param f the Output file to copy into this
                          * @return the reference of himself
                          */
-                        IOFile& operator=(IOFile const& f) = delete;
+                        OutputFile& operator=(OutputFile const& f) = delete;
                         /**
                          * Move assigment of f into this, leaving f empty
-                         * @param f the IO file to move into this
+                         * @param f the Output file to move into this
                          * @return the reference of himself
                          */
-                        IOFile& operator=(IOFile && f);
+                        OutputFile& operator=(OutputFile && f);
 
                     //## Shortcut Operator ##//
 

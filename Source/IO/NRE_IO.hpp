@@ -9,4 +9,6 @@
     #pragma once
 
     #include "File/NRE_File.hpp"
-    #include "IOFile/NRE_IOFile.hpp"
+    #include "FileStream/IOFile/NRE_IOFile.hpp"
+    #include "FileStream/Input/InputFile/NRE_InputFile.hpp"
+    #include "FileStream/Output/OutputFile/NRE_OutputFile.hpp"

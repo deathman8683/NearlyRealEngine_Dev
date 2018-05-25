@@ -8,6 +8,7 @@
 
     #pragma once
 
+    #include "../../Exception/NRE_Exception.hpp"
     #include "Input/InputStream/NRE_InputStream.hpp"
     #include "Output/OutputStream/NRE_OutputStream.hpp"
 
@@ -61,7 +62,7 @@
                         ~FileStream();
 
                     //## Getter ##//
-                        std::ios_base::openmode const getMode() = 0;
+                        virtual std::ios_base::openmode const getMode() const = 0;
                         bool const isOpen() const;
 
                     //## Setter ##//
@@ -96,7 +97,8 @@
 
                     //## Shift Operator ##//
 
-                private:
+                protected:
+                    std::fstream& getStream();
             };
 
         };

@@ -56,7 +56,7 @@
                         ~OutputStream();
 
                     //## Getter ##//
-                        std::fstream& getStream() = 0;
+                        virtual std::fstream& getStream() = 0;
 
                     //## Setter ##//
 
