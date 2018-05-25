@@ -4,8 +4,8 @@
     namespace NRE {
         namespace SDL {
 
-            Surface::Surface(std::string const& path) : item(0), glW(0), glH(0), glFormat(0), glInternalFormat(0) {
-                loadByIMG(path);
+            Surface::Surface(IO::File const& file) : item(0), glW(0), glH(0), glFormat(0), glInternalFormat(0) {
+                loadByIMG(file);
             }
 
             Surface::Surface(GLsizei const& w, GLsizei const& h, GLenum const& glFormat, GLint const& glInternalFormat) : item(0), glW(w), glH(h), glFormat(glFormat), glInternalFormat(glInternalFormat) {
@@ -104,15 +104,27 @@
                 SDL_UnlockSurface(getItem());
             }
 
-            void Surface::loadByIMG(std::string const& path) {
-                item = IMG_Load(path.c_str());
+            void Surface::loadByIMG(IO::File const& file) {
+                if (!file.exist()) {
+                    throw (Exception::FileNotExistingException(file.getPath()));
+                }
+
+                item = IMG_Load(file.getPath().c_str());
+
+                if (item == 0) {
+                    throw (Exception::SDLException("Could not load IMG : " + file.getPath()));
+                }
 
                 setGLW(getW());
                 setGLH(getH());
 
                 flip();
 
-                loadFormat();
+                try {
+                    loadFormat();
+                } catch (Exception::SDLException const& e) {
+                    throw (Exception::SDLException("Unknown Pixel Format : " + file.getPath()));
+                }
             }
 
             void Surface::flip() {
@@ -157,6 +169,8 @@
                     } else {
                         setGLFormat(GL_BGRA);
                     }
+                } else {
+                    throw (Exception::SDLException("Unknown Pixel Format"));
                 }
             }
 

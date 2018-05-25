@@ -11,6 +11,8 @@
     #include "../../Generic/NRE_Type.hpp"
     #include "../../Maths/NRE_Maths.hpp"
     #include "../PixelFormat/NRE_PixelFormat.hpp"
+    #include "../../IO/File/NRE_File.hpp"
+    #include "../../Exception/NRE_Exception.hpp"
 
     /**
      * @namespace NRE
@@ -43,9 +45,9 @@
                         Surface() = delete;
                         /**
                          * Construct a surface with SDL image library with a file path
-                         * @param path the path to the file to load
+                         * @param file the file path
                          */
-                        Surface(std::string const& path);
+                        Surface(IO::File const& file);
                         /**
                          * Construct an empty surface for OpenGL only purpose
                          * @param w                the surface width
@@ -181,9 +183,9 @@
                         void unlock();
                         /**
                          * Load a surface with SDL Image library
-                         * @param path the path to the image to load
+                         * @param file the file to load
                          */
-                        void loadByIMG(std::string const& path);
+                        void loadByIMG(IO::File const& file);
                         /**
                          * Flip the surface to get OpenGL order
                          */
