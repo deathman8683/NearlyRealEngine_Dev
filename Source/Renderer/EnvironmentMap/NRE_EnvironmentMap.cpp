@@ -8,10 +8,10 @@
 
             GLuint EnvironmentMap::SIZE = 1024;
 
-            EnvironmentMap::EnvironmentMap(std::string const& path) : brdfLUT(SIZE, SIZE, GL_RG, GL_RG16F, GL_FLOAT), buffer(true), vao(true) {
+            EnvironmentMap::EnvironmentMap(IO::File const& file) : brdfLUT(SIZE, SIZE, GL_RG, GL_RG16F, GL_FLOAT), buffer(true), vao(true) {
                 fillBuffer();
                 allocate();
-                capture(path);
+                capture(file);
             }
 
             EnvironmentMap::EnvironmentMap(EnvironmentMap && map) : map(std::move(map.map)), irradianceMap(std::move(map.irradianceMap)), prefilterMap(std::move(map.prefilterMap)), brdfLUT(std::move(map.brdfLUT)), buffer(std::move(map.buffer)), vao(std::move(map.vao)) {
@@ -88,7 +88,7 @@
                 vao.access(buffer, GL_INT, true);
             }
 
-            void EnvironmentMap::capture(std::string const& path) {
+            void EnvironmentMap::capture(IO::File const& file) {
 
                 const CaptureShader*    captureShader    = static_cast <const CaptureShader*>    (ShadersManager::getShader("Capture"));
                 const IrradianceShader* irradianceShader = static_cast <const IrradianceShader*> (ShadersManager::getShader("Irradiance"));
@@ -98,7 +98,10 @@
 
                 int w, h, nrComponents;
                 stbi_set_flip_vertically_on_load(true);
-                float *data = stbi_loadf(path.c_str(), &w, &h, &nrComponents, 0);
+                if (!file.exist()) {
+                    throw (Exception::FileNotExistingException(file.getPath()));
+                }
+                float *data = stbi_loadf(file.getPath().c_str(), &w, &h, &nrComponents, 0);
 
                 GL::Texture2D cubeMap(w, h, GL_RGB, GL_RGB16F, GL_FLOAT);
                 cubeMap.update(0, 0, data);

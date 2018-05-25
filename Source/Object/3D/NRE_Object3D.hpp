@@ -12,6 +12,7 @@
     #include <assimp/scene.h>
     #include <assimp/postprocess.h>
     #include "../NRE_Object.hpp"
+    #include "../../IO/NRE_IO.hpp"
     #include "../../Exception/NRE_Exception.hpp"
 
     /**
@@ -69,9 +70,9 @@
                         /**
                          * Load the object from a given file
                          * @param usage the object's rendering usage
-                         * @param path  the object's file path
+                         * @param file  the object's file path
                          */
-                        void load(GLenum const& usage, std::string const& path);
+                        void load(GLenum const& usage, IO::File const& file);
                         /**
                          * Process an Assimp node
                          * @param node  the assimp's node to process

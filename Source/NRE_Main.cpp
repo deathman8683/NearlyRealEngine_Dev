@@ -26,7 +26,7 @@
 
             Time::Clock engineClock;
 
-            Renderer::EnvironmentMap engineSkybox("Data/SkyBox/Space_HD.hdr");
+            Renderer::EnvironmentMap engineSkybox(std::string("Data/SkyBox/Space_HD.hdr"));
 
             camera.computeProjectionMatrix(projection);
 
@@ -47,7 +47,7 @@
             }
 
             Object::Object3D ironMan;
-            ironMan.load(GL_STATIC_DRAW, "Data/Model/IronMan.obj");
+            ironMan.load(GL_STATIC_DRAW, std::string("Data/Model/IronMan.obj"));
 
             glViewport(0, 0, 1280.0, 720.0);
 

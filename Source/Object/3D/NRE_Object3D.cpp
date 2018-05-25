@@ -13,9 +13,12 @@
             Object3D::~Object3D() {
             }
 
-            void Object3D::load(GLenum const& usage, std::string const& path) {
+            void Object3D::load(GLenum const& usage, IO::File const& file) {
+                if (!file.exist()) {
+                    throw (Exception::FileNotExistingException(file.getPath()));
+                }
                 Assimp::Importer importer;
-                const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+                const aiScene* scene = importer.ReadFile(file.getPath(), aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
                 if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE ||!scene->mRootNode) {
                     throw (Exception::AssimpException(importer.GetErrorString()));

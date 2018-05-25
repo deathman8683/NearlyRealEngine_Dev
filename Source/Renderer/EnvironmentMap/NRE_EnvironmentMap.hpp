@@ -47,9 +47,9 @@
                         EnvironmentMap() = delete;
                         /**
                          * Construct an environment map with a specific file
-                         * @param path  the path to the main skybox
+                         * @param file  the main skybox file's path
                          */
-                        EnvironmentMap(std::string const& path);
+                        EnvironmentMap(IO::File const& file);
 
                     //## Copy-Constructor ##//
                         /**
@@ -118,9 +118,9 @@
                         void fillBuffer();
                         /**
                          * Capture all map for later rendering
-                         * @param path   the path to the main skybox
+                         * @param file  the main skybox file's path
                          */
-                        void capture(std::string const& path);
+                        void capture(IO::File const& file);
                         /**
                          * Render the base skybox
                          * @param projection the proection matrix
