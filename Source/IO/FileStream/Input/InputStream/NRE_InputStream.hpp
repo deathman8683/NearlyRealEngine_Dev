@@ -95,5 +95,3 @@
 
         };
     };
-
-    #include "NRE_InputStream.tpp"
