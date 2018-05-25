@@ -38,10 +38,10 @@
                         Texture2D() = delete;
                         /**
                          * Construct a texture with a path to a file which will be loaded by the SDL wrapper
-                         * @param path              the path to the texture file
+                         * @param file              the texture file's path
                          * @param loadImmedialty    tell if the texture have to be send to the GPU on construction
                          */
-                        Texture2D(std::string const& path, bool const& loadImmedialty);
+                        Texture2D(IO::File const& file, bool const& loadImmedialty);
                         /**
                          * Construct a texture base for further allocation
                          * @param w                the texture's width

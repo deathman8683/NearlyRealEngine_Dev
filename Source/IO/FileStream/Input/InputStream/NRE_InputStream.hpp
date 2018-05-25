@@ -77,6 +77,12 @@
                         template <class T>
                         void read(T& object);
                         /**
+                         * Read a file's line and store it into the given string
+                         * @param line the string to store the readed line
+                         * @return     tell if the read has been performed
+                         */
+                        bool const readLine(std::string &line);
+                        /**
                          * Set the file cursor position to the begin + offset
                          * @param offset the file's offset
                          */

@@ -10,6 +10,7 @@
 
     #include <fstream>
     #include "../../../Generic/NRE_Type.hpp"
+    #include "../../../IO/NRE_IO.hpp"
     #include "../../../Exception/NRE_Exception.hpp"
     /**
      * @namespace NRE
@@ -81,9 +82,9 @@
                     //## Methods ##//
                         /**
                          * Compile the current shader
-                         * @param name  the shader's name (And with the base path added)
+                         * @param file  the shader's file's path
                          */
-                        void compile(std::string const& name);
+                        void compile(IO::File const& file);
 
                     //## Access Operator ##//
 

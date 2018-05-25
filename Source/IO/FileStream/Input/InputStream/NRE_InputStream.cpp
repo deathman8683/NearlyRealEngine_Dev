@@ -17,6 +17,10 @@
                 return getStream().tellg();
             }
 
+            bool const InputStream::readLine(std::string &line) {
+                return (std::getline(getStream(), line)) ? true : false;
+            }
+
             void InputStream::seekBegin(size_t const& offset) {
                 getStream().seekg(offset, getStream().beg);
             }

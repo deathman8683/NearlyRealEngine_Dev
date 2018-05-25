@@ -18,22 +18,21 @@
                 return id;
             }
 
-            void ShaderBase::compile(std::string const& name) {
+            void ShaderBase::compile(IO::File const& file) {
                 if (glIsShader(getID()) == GL_TRUE) {
                     glDeleteShader(getID());
                 }
 
                 id = glCreateShader(getType());
 
-                std::ifstream shaderFile((name + getExt()).c_str());
+                IO::InputFile shaderFile(file.getPath() + getExt());
+                shaderFile.open();
 
                 std::string line, sourceCode;
 
-                while(getline(shaderFile, line)) {
+                while(shaderFile.readLine(line)) {
                     sourceCode = sourceCode + line + '\n';
                 }
-
-                shaderFile.close();
 
                 const GLchar* sourceCodeChar = sourceCode.c_str();
 
@@ -55,7 +54,7 @@
                     delete[] error;
                     glDeleteShader(getID());
 
-                    throw (Exception::ShaderException((name + getExt()) + " : " + std::string(eError)));
+                    throw (Exception::ShaderException((file.getPath() + getExt()) + " : " + std::string(eError)));
                 }
             }
 
