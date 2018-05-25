@@ -8,11 +8,8 @@
 
     #pragma once
 
+    #include "../File/NRE_File.hpp"
     #include "../../Exception/NRE_Exception.hpp"
-    #include "Input/InputStream/NRE_InputStream.hpp"
-    #include "Output/OutputStream/NRE_OutputStream.hpp"
-    #include "BinaryStream/BinaryInput/BinaryInputStream/NRE_BinaryInputStream.hpp"
-    #include "BinaryStream/BinaryOutput/BinaryOutputStream/NRE_BinaryOutputStream.hpp"
 
     /**
      * @namespace NRE

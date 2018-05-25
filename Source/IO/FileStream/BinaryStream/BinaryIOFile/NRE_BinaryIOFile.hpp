@@ -9,6 +9,8 @@
     #pragma once
 
     #include "../../IOFile/NRE_IOFile.hpp"
+    #include "../BinaryInput/BinaryInputStream/NRE_BinaryInputStream.hpp"
+    #include "../BinaryOutput/BinaryOutputStream/NRE_BinaryOutputStream.hpp"
 
     /**
      * @namespace NRE
@@ -56,11 +58,11 @@
                         /**
                          * BinaryIOFile Deconstructor
                          */
-                        virtual ~BinaryIOFile();
+                        ~BinaryIOFile();
 
                     //## Getter ##//
-                        virtual std::ios_base::openmode const getMode() const override;
-                        virtual std::fstream& getStream() override;
+                        std::ios_base::openmode const getMode() const override;
+                        std::fstream& getStream() override;
 
                     //## Setter ##//
 

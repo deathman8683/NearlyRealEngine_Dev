@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../../NRE_FileStream.hpp"
+    #include "../InputStream/NRE_InputStream.hpp"
 
     /**
      * @namespace NRE

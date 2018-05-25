@@ -9,6 +9,7 @@
     #pragma once
 
     #include "../../../Input/InputFile/NRE_InputFile.hpp"
+    #include "../BinaryInputStream/NRE_BinaryInputStream.hpp"
 
     /**
      * @namespace NRE
