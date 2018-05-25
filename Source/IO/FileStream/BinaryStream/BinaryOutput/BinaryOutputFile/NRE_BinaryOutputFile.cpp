@@ -4,7 +4,7 @@
     namespace NRE {
         namespace IO {
 
-            BinaryOutputFile::BinaryOutputFile(std::string const& path) : OutputFile::OutputFile(path) {
+            BinaryOutputFile::BinaryOutputFile(File const& path) : OutputFile::OutputFile(path) {
             }
 
             BinaryOutputFile::BinaryOutputFile(BinaryOutputFile && f) : OutputFile::OutputFile(std::move(f)) {

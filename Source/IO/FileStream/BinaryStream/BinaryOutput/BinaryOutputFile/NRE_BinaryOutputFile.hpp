@@ -39,7 +39,7 @@
                          * Construct a binary output file stream with a given file's path
                          * @param path the file's stream path
                          */
-                        BinaryOutputFile(std::string const& path);
+                        BinaryOutputFile(File const& path);
 
                     //## Copy-Constructor ##//
                         /**

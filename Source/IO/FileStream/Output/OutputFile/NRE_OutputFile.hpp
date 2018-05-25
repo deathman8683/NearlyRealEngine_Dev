@@ -39,7 +39,7 @@
                          * Construct an output file stream with a given file's path
                          * @param path the file's stream path
                          */
-                        OutputFile(std::string const& path);
+                        OutputFile(File const& path);
 
                     //## Copy-Constructor ##//
                         /**

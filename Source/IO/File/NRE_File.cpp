@@ -4,6 +4,9 @@
     namespace NRE {
         namespace IO {
 
+            File::File() : path("") {
+            }
+
             File::File(std::string const& path) : path(path) {
             }
 
@@ -18,6 +21,10 @@
 
             std::string const& File::getPath() const {
                 return path;
+            }
+
+            void File::setPath(std::string const& path) {
+                this->path = path;
             }
 
             bool const File::exist() const {

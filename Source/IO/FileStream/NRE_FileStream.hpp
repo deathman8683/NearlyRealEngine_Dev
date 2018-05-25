@@ -40,7 +40,7 @@
                          * Construct a file stream with a given file's path
                          * @param path the file's stream path
                          */
-                        FileStream(std::string const& path);
+                        FileStream(File const& path);
 
                     //## Copy-Constructor ##//
                         /**

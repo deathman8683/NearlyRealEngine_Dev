@@ -40,7 +40,7 @@
                          * Construct a binary IO file stream with a given file's path
                          * @param path the file's stream path
                          */
-                        BinaryIOFile(std::string const& path);
+                        BinaryIOFile(File const& path);
 
                     //## Copy-Constructor ##//
                         /**

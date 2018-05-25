@@ -36,7 +36,7 @@
                         /**
                          * Default Constructor
                          */
-                        File() = delete;
+                        File();
                         /**
                          * Construct a File with the given path
                          * @param path the file's path
@@ -73,6 +73,11 @@
                         std::string const& getPath() const;
 
                     //## Setter ##//
+                        /**
+                         * Path's setter
+                         * @param path the new file's path
+                         */
+                        void setPath(std::string const& path);
 
                     //## Methods ##//
                         /**

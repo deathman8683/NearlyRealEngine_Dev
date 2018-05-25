@@ -30,7 +30,7 @@
              */
             class Region {
                 private:
-                    std::string path;                                           /**< The Region file path */
+                    IO::File file;                                              /**< The Region file path */
                     std::queue<std::pair<Maths::Point2D<GLint>, Chunk*>> chunk; /**< The Region chunk queue */
 
                 public:
@@ -43,7 +43,7 @@
                          * Construct a region from a path to region file
                          * @param path the path to a region file
                          */
-                        Region(std::string const& path);
+                        Region(IO::File const& file);
                         /**
                          * Construct a region from a chunk to add directly in the queue
                          * @param chunk the chunk to add directly, used to get the region path
@@ -73,11 +73,6 @@
                         ~Region();
 
                     //## Getter ##//
-                        /**
-                         * Path getter
-                         * @return the region path value
-                         */
-                        std::string const& getPath() const;
 
                     //## Setter ##//
 

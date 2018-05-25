@@ -4,7 +4,7 @@
     namespace NRE {
         namespace World {
 
-            Region::Region(std::string const& path) : path(path) {
+            Region::Region(IO::File const& file) : file(file) {
             }
 
             Region::Region(Chunk *chunk) {
@@ -19,21 +19,17 @@
                 } else {
                     yStr << (chunk->getCoord().getY() / 16);
                 }
-                path = "Data/Region/r." + xStr.str() + "." + yStr.str() + ".dat";
+                file.setPath("Data/Region/r." + xStr.str() + "." + yStr.str() + ".dat");
                 this->chunk.push(std::pair<Maths::Point2D<GLint>, Chunk*>(chunk->getCoord(), chunk));
             }
 
-            Region::Region(Region const& reg) : path(reg.getPath()), chunk(reg.chunk) {
+            Region::Region(Region const& reg) : file(reg.file), chunk(reg.chunk) {
             }
 
-            Region::Region(Region && reg) : path(std::move(reg.getPath())), chunk(std::move(reg.chunk)) {
+            Region::Region(Region && reg) : file(std::move(reg.file)), chunk(std::move(reg.chunk)) {
             }
 
             Region::~Region() {
-            }
-
-            std::string const& Region::getPath() const {
-                return path;
             }
 
             bool Region::isEmpty() const {
@@ -41,7 +37,7 @@
             }
 
             void Region::save() {
-                IO::BinaryIOFile chunkFile(path);
+                IO::BinaryIOFile chunkFile(file);
                 if (!chunkFile.exist()) {
                     createTable();
                 }
@@ -57,7 +53,7 @@
             }
 
             void Region::load(World* w) {
-                IO::BinaryIOFile chunkFile(path);
+                IO::BinaryIOFile chunkFile(file);
                 if (!chunkFile.exist()) {
                     createTable();
                 }
@@ -70,7 +66,7 @@
             }
 
             void Region::createTable() {
-                IO::BinaryOutputFile chunkFile(path);
+                IO::BinaryOutputFile chunkFile(file);
                 chunkFile.openEmpty();
                 std::stringstream table;
                 GLuint offset = 0, size = 0;
@@ -92,13 +88,13 @@
             }
 
             Region& Region::operator=(Region const& reg) {
-                path = reg.path;
+                file = reg.file;
                 chunk = reg.chunk;
                 return *this;
             }
 
             Region& Region::operator=(Region && reg) {
-                path = std::move(reg.path);
+                file = std::move(reg.file);
                 chunk = std::move(reg.chunk);
                 return *this;
             }

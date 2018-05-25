@@ -4,7 +4,7 @@
     namespace NRE {
         namespace IO {
 
-            OutputFile::OutputFile(std::string const& path) : FileStream::FileStream(path) {
+            OutputFile::OutputFile(File const& path) : FileStream::FileStream(path) {
             }
 
             OutputFile::OutputFile(OutputFile && f) : FileStream::FileStream(std::move(f)) {

@@ -39,7 +39,7 @@
                          * Construct an input file stream with a given file's path
                          * @param path the file's stream path
                          */
-                        InputFile(std::string const& path);
+                        InputFile(File const& path);
 
                     //## Copy-Constructor ##//
                         /**
