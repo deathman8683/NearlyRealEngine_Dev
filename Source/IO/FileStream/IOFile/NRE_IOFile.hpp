@@ -36,6 +36,10 @@
                          * Default Constructor
                          */
                         IOFile() = delete;
+                        /**
+                         * Construct an IO file stream with a given file's path
+                         * @param path the file's stream path
+                         */
                         IOFile(std::string const& path);
 
                     //## Copy-Constructor ##//
@@ -61,7 +65,15 @@
                         virtual ~IOFile();
 
                     //## Getter ##//
+                        /**
+                         * Opening mode getter
+                         * @return the IO file stream opening mode
+                         */
                         virtual std::ios_base::openmode const getMode() const override;
+                        /**
+                         * Stream getter
+                         * @return the IO file's stream
+                         */
                         virtual std::fstream& getStream() override;
 
                     //## Setter ##//

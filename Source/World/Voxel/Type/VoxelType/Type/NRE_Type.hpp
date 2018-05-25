@@ -1,7 +1,7 @@
 
     /**
-     * @file NRE_VoxelType.hpp
-     * @brief Declaration of Engine's World's Object : VoxelType
+     * @file VoxelType/Type/NRE_Type.hpp
+     * @brief Declaration of Engine's World's Object : VoxelType class
      * @author Louis ABEL
      * @version 1.0
      */

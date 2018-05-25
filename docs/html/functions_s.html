@@ -67,8 +67,8 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_color_1_1_h_s_l.html#a3971505f5f9add310298d60af22b8e24">NRE::Color::HSL</a>
 </li>
 <li>save()
-: <a class="el" href="class_n_r_e_1_1_object_1_1_model.html#a9b905bab4e2008e2b316c3891de3ef0f">NRE::Object::Model</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object3_d.html#a38d244b37bb543caa82c095cb70ebe84">NRE::Object::Object3D</a>
+: <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_object.html#aa91376a334ff6b8a50a60398bed80e3e">NRE::Object::VoxelObject</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_set.html#ad318d5cce014cd8169c56dc51847927b">NRE::Object::VoxelSet</a>
 , <a class="el" href="class_n_r_e_1_1_world_1_1_chunk.html#a9db1c2c7c095b84e8688da4b201b9685">NRE::World::Chunk</a>
 , <a class="el" href="class_n_r_e_1_1_world_1_1_region.html#ae57028d4efdc2b1472ae4d41a9cc0401">NRE::World::Region</a>
 </li>
@@ -86,6 +86,9 @@ $(function() {
 <li>SECTOR_SIZE
 : <a class="el" href="class_n_r_e_1_1_world_1_1_chunk.html#af0201e6a8576467456fc235dad7d5854">NRE::World::Chunk</a>
 </li>
+<li>SecurityException()
+: <a class="el" href="class_n_r_e_1_1_exception_1_1_security_exception.html#a6ec49e3bd76163cd7854e7e954ec3b0e">NRE::Exception::SecurityException</a>
+</li>
 <li>sendCamera()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#a20e8fabd629d2ec1c73648f3dfadf3c0">NRE::Renderer::PBRShader</a>
 </li>
@@ -97,14 +100,11 @@ $(function() {
 , <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o_shader.html#afa212ab519c4233c5270c8845b04503e">NRE::Renderer::SSAOShader</a>
 </li>
 <li>sendKernel()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_engine_shader.html#a684bdf8950fbd0810f2bdee5400122b3">NRE::Renderer::ShadersManager</a>
+: <a class="el" href="class_n_r_e_1_1_renderer_1_1_shaders_manager.html#ae35f8e644051dfe4cd97e02e185ee678">NRE::Renderer::ShadersManager</a>
 , <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o_shader.html#a8d4636cca4dc6a06fe6e11688458bd6c">NRE::Renderer::SSAOShader</a>
 </li>
 <li>sendLigths()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#ad3211798efec2b3ecc32ce5d4475c459">NRE::Renderer::PBRShader</a>
-</li>
-<li>sendMaterials()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#a78c9f20733f3bf168caccfe97d465e6b">NRE::Renderer::PBRShader</a>
+: <a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#adb655970fcb21c931f916265fe15a4c9">NRE::Renderer::PBRShader</a>
 </li>
 <li>sendModelview()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_capture_shader.html#a8b1d4e28e77358e30daf96a070b4ee61">NRE::Renderer::CaptureShader</a>
@@ -116,8 +116,8 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_sky_box_shader.html#a19003848de00f056e42c830588c2edc4">NRE::Renderer::SkyBoxShader</a>
 </li>
 <li>sendProjection()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_engine_shader.html#a737c8d3578f36253d239041f079baa75">NRE::Renderer::ShadersManager</a>
-, <a class="el" href="class_n_r_e_1_1_renderer_1_1_g_buffer_shader.html#a30849b27cf9985127607eedfddc4d6de">NRE::Renderer::GBufferShader</a>
+: <a class="el" href="class_n_r_e_1_1_renderer_1_1_g_buffer_shader.html#a30849b27cf9985127607eedfddc4d6de">NRE::Renderer::GBufferShader</a>
+, <a class="el" href="class_n_r_e_1_1_renderer_1_1_shaders_manager.html#a763957f86cade2f0a65d00c65120f52a">NRE::Renderer::ShadersManager</a>
 , <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o_shader.html#a76b1227119200fb51f0a01c8385762ee">NRE::Renderer::SSAOShader</a>
 </li>
 <li>sendRotation()
@@ -125,6 +125,9 @@ $(function() {
 </li>
 <li>sendRoughness()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_prefilter_shader.html#a807e1feff0e4982c86b7e2179a0ab245">NRE::Renderer::PrefilterShader</a>
+</li>
+<li>sendTexture()
+: <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_array.html#ae819ea407533dc8cbe7bb2d340f0e857">NRE::GL::Texture2DArray</a>
 </li>
 <li>sendTextures()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#a59b8de451af9d8260e4af044f3d2de0b">NRE::Renderer::PBRShader</a>
@@ -144,9 +147,6 @@ $(function() {
 <li>setActualTime()
 : <a class="el" href="class_n_r_e_1_1_time_1_1_timestep.html#a3b8e43887879b6512d9667ec02a3beb7">NRE::Time::Timestep</a>
 </li>
-<li>setAlbedo()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_material.html#ac09288d961031b137f8d496e0533ebb1">NRE::Renderer::Material</a>
-</li>
 <li>setAllocated()
 : <a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer_object.html#af90ce1c9fd7c27670c1bb4ebbd95fe73">NRE::GL::BufferObject</a>
 , <a class="el" href="class_n_r_e_1_1_s_d_l_1_1_pixel_format.html#ac2452d1711c4ae9d1d21ee1b11eee07b">NRE::SDL::PixelFormat</a>
@@ -159,12 +159,12 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_maths_1_1_vector3_d.html#aa8af5582d93c59118a4f09c83c6d489a">NRE::Maths::Vector3D&lt; T &gt;</a>
 </li>
 <li>setBack()
-: <a class="el" href="class_n_r_e_1_1_object_1_1_mesh3_d.html#abc5419bae2fb0b411a59a7bf1c87c4c0">NRE::Object::Mesh3D</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object3_d.html#ae36d668303ff5a58e3b9ab3e24610a85">NRE::Object::Object3D</a>
+: <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_mesh.html#ad4028395a547fdd3795f5ac9a65d568e">NRE::Object::VoxelMesh</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_object.html#a08ade606a499a4d47e55ce43a56b5a8a">NRE::Object::VoxelObject</a>
 </li>
 <li>setBottom()
-: <a class="el" href="class_n_r_e_1_1_object_1_1_mesh3_d.html#a5b2138b97e2b4fec09977b072ab64700">NRE::Object::Mesh3D</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object3_d.html#a70a33c5fed631e51634c7279c1765761">NRE::Object::Object3D</a>
+: <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_mesh.html#a0d0d5bf590c51da1f5f4d292915b45bf">NRE::Object::VoxelMesh</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_object.html#a4687a69b34b774f0f0b7dcc069bc944d">NRE::Object::VoxelObject</a>
 </li>
 <li>setBounding()
 : <a class="el" href="class_n_r_e_1_1_world_1_1_chunk.html#a5a7247e49c92eb40d7d2633638432cf8">NRE::World::Chunk</a>
@@ -232,8 +232,8 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#ac6d198d75802c1a9adabdc58c6a72650">NRE::Camera::FixedCamera</a>
 </li>
 <li>setFront()
-: <a class="el" href="class_n_r_e_1_1_object_1_1_mesh3_d.html#a132b03ae7de7a412d6e330d5e51f481f">NRE::Object::Mesh3D</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object3_d.html#a82f67786dca46cce5ac01f9fbad98cef">NRE::Object::Object3D</a>
+: <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_mesh.html#aa2f603ee7731186b3c98467bbedf432b">NRE::Object::VoxelMesh</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_object.html#aca404a70330afd5b1f2ac8d407a10dcb">NRE::Object::VoxelObject</a>
 </li>
 <li>setG()
 : <a class="el" href="class_n_r_e_1_1_maths_1_1_vector3_d.html#af26872e6ffe8f9d2b9285b8237b9a166">NRE::Maths::Vector3D&lt; T &gt;</a>
@@ -293,8 +293,8 @@ $(function() {
 </li>
 <li>setLeft()
 : <a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a1af21db5c311f12bf71ea6b5118e5afd">NRE::Camera::FixedCamera</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_mesh3_d.html#adce89659d8ce08a86b5c7ceda05c34ef">NRE::Object::Mesh3D</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object3_d.html#a9323becb5069ce174750ee90619e6443">NRE::Object::Object3D</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_mesh.html#ab417b36305b22e36da9f53a324a38211">NRE::Object::VoxelMesh</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_object.html#aae2ee9eca32d0dc05b520c637a631a03">NRE::Object::VoxelObject</a>
 </li>
 <li>setLoaded()
 : <a class="el" href="class_n_r_e_1_1_world_1_1_chunk.html#a07f8a19f78bb1fd3ec9dbc3dc82c4e0c">NRE::World::Chunk</a>
@@ -309,10 +309,7 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_s_d_l_1_1_window.html#a49721743c0af35d3551427bdc65f451c">NRE::SDL::Window</a>
 </li>
 <li>setMaxSolidHeight()
-: <a class="el" href="class_n_r_e_1_1_object_1_1_model.html#aa2ec432c74b955dc858ffab4017941be">NRE::Object::Model</a>
-</li>
-<li>setMetallic()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_material.html#aad7088446837bbe2daedd616b9918e9c">NRE::Renderer::Material</a>
+: <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_set.html#a39aff6c331dfa0b6cdb4837e76d49603">NRE::Object::VoxelSet</a>
 </li>
 <li>setMinSize()
 : <a class="el" href="class_n_r_e_1_1_s_d_l_1_1_window.html#a47fb426cce6a88ebd1c40fb24d6c79d9">NRE::SDL::Window</a>
@@ -346,11 +343,8 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_maths_1_1_vector3_d.html#a21c1b61a1dd039d8ae9d73ace2cb8bb9">NRE::Maths::Vector3D&lt; T &gt;</a>
 </li>
 <li>setRight()
-: <a class="el" href="class_n_r_e_1_1_object_1_1_mesh3_d.html#ade38e99a7c8539a3de20e51b41f7e8e1">NRE::Object::Mesh3D</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object3_d.html#ab8bd512682160d699735b4b41f9b7568">NRE::Object::Object3D</a>
-</li>
-<li>setRoughness()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_material.html#ae6dbac6c90cdae6d0dfb5eabc7340af2">NRE::Renderer::Material</a>
+: <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_mesh.html#a18402b4289b5b8a380caf271cacdc366">NRE::Object::VoxelMesh</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_object.html#a2c59e909de66d2af1ccd8f90edbe192a">NRE::Object::VoxelObject</a>
 </li>
 <li>setS()
 : <a class="el" href="class_n_r_e_1_1_color_1_1_h_s_l.html#a36a40b3ea4884a5570b2d5b41f300261">NRE::Color::HSL</a>
@@ -377,15 +371,15 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_s_d_l_1_1_window.html#a0705a94389665928dd17a5128ad3e6a2">NRE::SDL::Window</a>
 </li>
 <li>setType()
-: <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#a2a72d09761e75425c8f262c0c8476850">NRE::GL::Texture2D</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_model.html#a9dbad30e8d0f3e98531acf08e6386bf1">NRE::Object::Model</a>
+: <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a4fb67fb78325d3818915c648baaee9b3">NRE::GL::TextureBuffer</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_set.html#accfb0dff64f59e18f8955eb8624dfe4b">NRE::Object::VoxelSet</a>
 , <a class="el" href="class_n_r_e_1_1_world_1_1_chunk.html#a7929965bf8caa46c7f12df7397f0624e">NRE::World::Chunk</a>
 , <a class="el" href="class_n_r_e_1_1_world_1_1_voxel.html#ad7c9c02ecf6b496afe16fffc18f8b8e6">NRE::World::Voxel</a>
 </li>
 <li>setUp()
 : <a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a35e281db75ad9b29ed5d45ab1ffb1163">NRE::Camera::FixedCamera</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_mesh3_d.html#a9f1fad1a5acb89c9393066994a5a70d3">NRE::Object::Mesh3D</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object3_d.html#a2676b9baec3545072e30263eec3c457e">NRE::Object::Object3D</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_mesh.html#a6e2dfc4941bc4b57dde763fcac570b0b">NRE::Object::VoxelMesh</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_object.html#a8bced7213a99a8d63f8467be92629b40">NRE::Object::VoxelObject</a>
 </li>
 <li>setView()
 : <a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a50ca9a49854459296f06abfc5092664a">NRE::Camera::FixedCamera</a>
@@ -411,16 +405,16 @@ $(function() {
 , <a class="el" href="class_n_r_e_1_1_maths_1_1_vector3_d.html#ae45feee477220c91c4c3a1224aed60e1">NRE::Maths::Vector3D&lt; T &gt;</a>
 </li>
 <li>Shader()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html#a670210643f75247eab85d3292fa58a78">NRE::Renderer::Shader</a>
+: <a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html#aa723071c31f51d550fd393955ad8bb52">NRE::Renderer::Shader</a>
 </li>
 <li>ShaderBase()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_base.html#a26cef8a6e2e9ff89558221ae411e566e">NRE::Renderer::ShaderBase</a>
 </li>
 <li>ShaderException()
-: <a class="el" href="class_n_r_e_1_1_exception_1_1_shader_exception.html#aa2659b2d6f34faa65f4e7ede17a00f77">NRE::Exception::ShaderException</a>
+: <a class="el" href="class_n_r_e_1_1_exception_1_1_shader_exception.html#aa5a819523e987f05bbdf71aaf3df6fb2">NRE::Exception::ShaderException</a>
 </li>
 <li>ShaderMap()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_map.html#a27f8ae55782b52510ced4dc6deea0d49">NRE::Renderer::ShaderMap</a>
+: <a class="el" href="class_n_r_e_1_1_renderer_1_1_shader_map.html#af23afa5cabeb6ba9f597b976801fd1d7">NRE::Renderer::ShaderMap</a>
 </li>
 <li>shiftChunks()
 : <a class="el" href="class_n_r_e_1_1_world_1_1_world.html#a0d2c75f4e83cae9b154d46696dfd2e82">NRE::World::World</a>
@@ -450,9 +444,6 @@ $(function() {
 <li>SIZE
 : <a class="el" href="class_n_r_e_1_1_world_1_1_chunk.html#a41a2dddd81d45fe602c0a8b919f6e683">NRE::World::Chunk</a>
 </li>
-<li>size
-: <a class="el" href="class_n_r_e_1_1_world_1_1_voxel_types.html#a94accf971a81107955e99fb72ee0503d">NRE::World::VoxelTypes</a>
-</li>
 <li>SIZE_X
 : <a class="el" href="class_n_r_e_1_1_world_1_1_chunk.html#ad65b54f2ab679bf1620d579af4270d9a">NRE::World::Chunk</a>
 </li>
@@ -463,7 +454,7 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_world_1_1_chunk.html#ab760341d6eb28151a675ddbe2276f0c8">NRE::World::Chunk</a>
 </li>
 <li>SkyBox()
-: <a class="el" href="class_n_r_e_1_1_g_l_1_1_sky_box.html#a58ff54b0c99cb3f5a964c91fb0f01e2b">NRE::GL::SkyBox</a>
+: <a class="el" href="class_n_r_e_1_1_g_l_1_1_sky_box.html#acfa720950121677f47870e94e00c1cec">NRE::GL::SkyBox</a>
 </li>
 <li>SkyBoxShader()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_sky_box_shader.html#aca692e5ffcc377e63714844ff25cb0f5">NRE::Renderer::SkyBoxShader</a>
@@ -475,7 +466,7 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_maths_1_1_frustum.html#ad1828b93ba46b34cdb3ec7f0d60a25ad">NRE::Maths::Frustum&lt; T &gt;</a>
 </li>
 <li>SpotLight()
-: <a class="el" href="class_n_r_e_1_1_light_1_1_spot_light.html#a480dcb892a09b4c7c0c1d16bc1081106">NRE::Light::SpotLight</a>
+: <a class="el" href="class_n_r_e_1_1_light_1_1_spot_light.html#afad3bb093eabebe2568b980bbd04c881">NRE::Light::SpotLight</a>
 </li>
 <li>SSAO()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o.html#af184085a13ee7a26e0cf4b1312f74f8f">NRE::Renderer::SSAO</a>
@@ -484,10 +475,10 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#a4d2d85fd17f21038a17e4670d60d7a46">NRE::Renderer::DeferredRenderer</a>
 </li>
 <li>SSAOShader()
-: <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o_shader.html#a11362fd0ddf88a7aa4e1f35428c86edd">NRE::Renderer::SSAOShader</a>
+: <a class="el" href="class_n_r_e_1_1_renderer_1_1_s_s_a_o_shader.html#ac8392eac4f1293bf54de746c63a0f161">NRE::Renderer::SSAOShader</a>
 </li>
 <li>Stage()
-: <a class="el" href="class_n_r_e_1_1_support_1_1_stage.html#aa61990b154c6e1e42df0ff923d87913c">NRE::Support::Stage</a>
+: <a class="el" href="class_n_r_e_1_1_support_1_1_stage.html#a5f289d7cb9305fb16bc25e40896f2b2d">NRE::Support::Stage</a>
 </li>
 <li>startGBufferPass()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html#ac7b5db70d1694bd6168eadeecd1de5da">NRE::Renderer::DeferredRenderer</a>
@@ -496,10 +487,10 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_world_1_1_subtropical_desert.html#a6d5ab5689e9369fc1c00319f9b104297">NRE::World::SubtropicalDesert</a>
 </li>
 <li>SupportException()
-: <a class="el" href="class_n_r_e_1_1_exception_1_1_support_exception.html#a6354d68b52e020cb42ad287ea689cbaa">NRE::Exception::SupportException</a>
+: <a class="el" href="class_n_r_e_1_1_exception_1_1_support_exception.html#ac546f5b267579c028c608a68ef5352b3">NRE::Exception::SupportException</a>
 </li>
 <li>Surface()
-: <a class="el" href="class_n_r_e_1_1_s_d_l_1_1_surface.html#a1830fbb45cbfb6fa953c5fb1b38811e6">NRE::SDL::Surface</a>
+: <a class="el" href="class_n_r_e_1_1_s_d_l_1_1_surface.html#a96247114ca021293ca84d3b458226bdd">NRE::SDL::Surface</a>
 </li>
 <li>swap()
 : <a class="el" href="class_n_r_e_1_1_camera_1_1_key_binder.html#ab2152730fe7ffae97e89565fcc6c3be0">NRE::Camera::KeyBinder</a>

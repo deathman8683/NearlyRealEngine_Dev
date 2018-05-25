@@ -90,8 +90,8 @@ Inheritance diagram for NRE::Camera::FixedCamera:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1e40baad6a9d701601c285ad0c905b49"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a1e40baad6a9d701601c285ad0c905b49">FixedCamera</a> ()</td></tr>
-<tr class="separator:a1e40baad6a9d701601c285ad0c905b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a950ad4d57e3062e5aeff6e74fb315871"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a950ad4d57e3062e5aeff6e74fb315871">FixedCamera</a> ()=delete</td></tr>
+<tr class="separator:a950ad4d57e3062e5aeff6e74fb315871"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5f4c7bde4a8bafb52b73d6a83a4d75a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#ab5f4c7bde4a8bafb52b73d6a83a4d75a">FixedCamera</a> (NREfloat const &amp;<a class="el" href="class_n_r_e_1_1_maths_1_1_frustum.html#a4685d80d68d1c235559d972568c3d2e1">fov</a>, NREfloat const &amp;<a class="el" href="class_n_r_e_1_1_maths_1_1_frustum.html#ac144d35acb43b5c577bcc132d06c8ac2">ratio</a>, <a class="el" href="class_n_r_e_1_1_maths_1_1_vector2_d.html">Maths::Vector2D</a>&lt; NREfloat &gt; const &amp;<a class="el" href="class_n_r_e_1_1_maths_1_1_frustum.html#a6953afa533e7ac1496e2653e120c8155">dist</a>, <a class="el" href="class_n_r_e_1_1_maths_1_1_point3_d.html">Maths::Point3D</a>&lt; NREfloat &gt; const &amp;<a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#aac5c96779ae7a024580cdd3b7ae373e8">eye</a>, <a class="el" href="class_n_r_e_1_1_maths_1_1_point3_d.html">Maths::Point3D</a>&lt; NREfloat &gt; const &amp;<a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a4f55ebab0955888622cd3bdce6717338">center</a>)</td></tr>
 <tr class="separator:ab5f4c7bde4a8bafb52b73d6a83a4d75a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c0271b9f82ea388a8e155c4408cd6d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a5c0271b9f82ea388a8e155c4408cd6d2">FixedCamera</a> (<a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html">FixedCamera</a> const &amp;camera)</td></tr>
@@ -136,6 +136,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5fbb6e85b085f6a3d0b0410889dc47cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6556a8d344ab0b0e80a4840dab17c526"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a6556a8d344ab0b0e80a4840dab17c526">getVertices</a> (GLfloat *&amp;vBuf, GLfloat *&amp;cBuf, GLbyte *&amp;nBuf, GLuint *&amp;iBuf)</td></tr>
 <tr class="separator:a6556a8d344ab0b0e80a4840dab17c526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a165544f87bb020c0acfd9e17985c675a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a165544f87bb020c0acfd9e17985c675a">turnAround</a> (<a class="el" href="class_n_r_e_1_1_maths_1_1_point3_d.html">Maths::Point3D</a>&lt; NREfloat &gt; const &amp;target, NREfloat const &amp;distance, <a class="el" href="class_n_r_e_1_1_maths_1_1_vector3_d.html">Maths::Vector3D</a>&lt; NREfloat &gt; const &amp;axis=<a class="el" href="class_n_r_e_1_1_maths_1_1_vector3_d.html">Maths::Vector3D</a>&lt; NREfloat &gt;(0, 0, 1))</td></tr>
+<tr class="separator:a165544f87bb020c0acfd9e17985c675a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f4ba7001bbaacbc017085c22f80ce74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a8f4ba7001bbaacbc017085c22f80ce74">travelTo</a> (<a class="el" href="class_n_r_e_1_1_maths_1_1_point3_d.html">Maths::Point3D</a>&lt; NREfloat &gt; const &amp;target, NREfloat const &amp;speed)</td></tr>
+<tr class="separator:a8f4ba7001bbaacbc017085c22f80ce74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f479a224253fdfb2cf6d3bdccca09a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html">FixedCamera</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a8f479a224253fdfb2cf6d3bdccca09a5">operator=</a> (<a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html">FixedCamera</a> const &amp;camera)</td></tr>
 <tr class="separator:a8f479a224253fdfb2cf6d3bdccca09a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ad440305f60edb7384aec3a10ad15d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html">FixedCamera</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#af8ad440305f60edb7384aec3a10ad15d">operator=</a> (<a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html">FixedCamera</a> &amp;&amp;camera)</td></tr>
@@ -219,11 +223,14 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="namespace_camera.html" title="Engine&#39;s Camera Module. ">Camera</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : A basic fixed camera. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1e40baad6a9d701601c285ad0c905b49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e40baad6a9d701601c285ad0c905b49">&#9670;&nbsp;</a></span>FixedCamera() <span class="overload">[1/4]</span></h2>
+<a id="a950ad4d57e3062e5aeff6e74fb315871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a950ad4d57e3062e5aeff6e74fb315871">&#9670;&nbsp;</a></span>FixedCamera() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">NRE::Camera::FixedCamera::FixedCamera </td>
@@ -232,6 +239,11 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Default Constructor </p>
 
@@ -810,6 +822,83 @@ Additional Inherited Members</h2></td></tr>
 <p>Compute the new modelview matrix from camera's vector </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">modelview</td><td>the matrix to modify </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8f4ba7001bbaacbc017085c22f80ce74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f4ba7001bbaacbc017085c22f80ce74">&#9670;&nbsp;</a></span>travelTo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::Camera::FixedCamera::travelTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_point3_d.html">Maths::Point3D</a>&lt; NREfloat &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">NREfloat const &amp;&#160;</td>
+          <td class="paramname"><em>speed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Travel to a given target </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>the targeted point </td></tr>
+    <tr><td class="paramname">speed</td><td>the travelling speed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a165544f87bb020c0acfd9e17985c675a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a165544f87bb020c0acfd9e17985c675a">&#9670;&nbsp;</a></span>turnAround()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::Camera::FixedCamera::turnAround </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_point3_d.html">Maths::Point3D</a>&lt; NREfloat &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">NREfloat const &amp;&#160;</td>
+          <td class="paramname"><em>distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_maths_1_1_vector3_d.html">Maths::Vector3D</a>&lt; NREfloat &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>axis</em> = <code><a class="el" href="class_n_r_e_1_1_maths_1_1_vector3_d.html">Maths::Vector3D</a>&lt;NREfloat&gt;(0,&#160;0,&#160;1)</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Orbit around a given target </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>the targeted point </td></tr>
+    <tr><td class="paramname">distance</td><td>the distance to the point </td></tr>
+    <tr><td class="paramname">axis</td><td>the rotation axis </td></tr>
   </table>
   </dd>
 </dl>

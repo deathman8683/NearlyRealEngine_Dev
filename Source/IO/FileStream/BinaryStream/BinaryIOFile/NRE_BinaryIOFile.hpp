@@ -36,6 +36,10 @@
                          * Default Constructor
                          */
                         BinaryIOFile() = delete;
+                        /**
+                         * Construct a binary IO file stream with a given file's path
+                         * @param path the file's stream path
+                         */
                         BinaryIOFile(std::string const& path);
 
                     //## Copy-Constructor ##//
@@ -61,7 +65,15 @@
                         ~BinaryIOFile();
 
                     //## Getter ##//
+                        /**
+                         * Opening mode getter
+                         * @return the binary IO file stream opening mode
+                         */
                         std::ios_base::openmode const getMode() const override;
+                        /**
+                         * Stream getter
+                         * @return the binary IO file's stream
+                         */
                         std::fstream& getStream() override;
 
                     //## Setter ##//

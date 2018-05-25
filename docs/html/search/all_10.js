@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['querylocation',['queryLocation',['../class_n_r_e_1_1_renderer_1_1_shader_map.html#a614deeb6e4a6d98a80df60355b3e05dc',1,'NRE::Renderer::ShaderMap']]],
-  ['quit',['quit',['../namespace_n_r_e.html#aceda91b1177e7eb5fe5730d53d93b0da',1,'NRE']]]
+  ['quaternion',['Quaternion',['../class_n_r_e_1_1_maths_1_1_quaternion.html',1,'NRE::Maths::Quaternion&lt; T &gt;'],['../class_n_r_e_1_1_maths_1_1_quaternion.html#addb08ff953076370c3b4abf20c48c1d0',1,'NRE::Maths::Quaternion::Quaternion()'],['../class_n_r_e_1_1_maths_1_1_quaternion.html#a60dec5b99bf626516d0162bd0511632f',1,'NRE::Maths::Quaternion::Quaternion(T const &amp;x, T const &amp;y, T const &amp;z, T const &amp;w)'],['../class_n_r_e_1_1_maths_1_1_quaternion.html#a32f0e74b4c1f37e552d17221fe38fd73',1,'NRE::Maths::Quaternion::Quaternion(T const &amp;value)'],['../class_n_r_e_1_1_maths_1_1_quaternion.html#a0b5fc4ab6c5509e8fb74fdeac35d9cdd',1,'NRE::Maths::Quaternion::Quaternion(Vector3D&lt; T &gt; const &amp;axis, T const &amp;theta)'],['../class_n_r_e_1_1_maths_1_1_quaternion.html#a26f50e2a87081c83f1874116798c459d',1,'NRE::Maths::Quaternion::Quaternion(Quaternion const &amp;q)'],['../class_n_r_e_1_1_maths_1_1_quaternion.html#aeb4130ad98437c01b4d32d0809f0050c',1,'NRE::Maths::Quaternion::Quaternion(Quaternion &amp;&amp;q)']]],
+  ['querylocation',['queryLocation',['../class_n_r_e_1_1_renderer_1_1_shader_map.html#a614deeb6e4a6d98a80df60355b3e05dc',1,'NRE::Renderer::ShaderMap']]]
 ];

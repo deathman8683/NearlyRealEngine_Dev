@@ -35,6 +35,11 @@
                          * Default Constructor
                          */
                         Application() = delete;
+                        /**
+                         * Create an application with a given title and a size
+                         * @param title the application's title
+                         * @param size  the application's size
+                         */
                         Application(std::string const& title, Maths::Vector2D<GLuint> const& size);
 
                     //## Copy-Constructor ##//
@@ -64,6 +69,9 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Initialize the engine
+                         */
                         void init();
 
                     //## Access Operator ##//

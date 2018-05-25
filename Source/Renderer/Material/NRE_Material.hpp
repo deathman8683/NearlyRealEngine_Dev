@@ -29,10 +29,10 @@
              */
             class Material {
                 private:
-                    GL::Texture2D* albedo;
-                    GL::Texture2D* normal;
-                    GL::Texture2D* roughness;
-                    GL::Texture2D* metallic;
+                    GL::Texture2D* albedo;      /**< The material albedo's texture */
+                    GL::Texture2D* normal;      /**< The material normal's texture */
+                    GL::Texture2D* roughness;   /**< The material roughness's texture */
+                    GL::Texture2D* metallic;    /**< The material metallic's texture */
 
                 public:
                     //## Constructor ##//
@@ -69,14 +69,33 @@
                         ~Material();
 
                     //## Getter ##//
+                        /**
+                         * Albedo Texture getter
+                         * @return the material's albedo texture
+                         */
                         GL::Texture2D const& getAlbedo() const;
+                        /**
+                         * Normal Texture getter
+                         * @return the material's normal texture
+                         */
                         GL::Texture2D const& getNormal() const;
+                        /**
+                         * Rougness Texture getter
+                         * @return the material's roughness texture
+                         */
                         GL::Texture2D const& getRoughness() const;
-                        GL::Texture2D const& getMetallic() const;
+                        /**
+                         * Metallic Texture getter
+                         * @return the material's metallic texture
+                         */
+                         GL::Texture2D const& getMetallic() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Free all material's textures
+                         */
                         void freeTextures();
 
                     //## Access Operator ##//

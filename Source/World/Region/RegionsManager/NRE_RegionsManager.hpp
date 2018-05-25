@@ -30,9 +30,9 @@
              */
             class RegionsManager {
                 private:
-                    World* w;
-                    std::unordered_map<Maths::Point2D<GLint>, Region*> saveMap;
-                    std::unordered_map<Maths::Point2D<GLint>, Region*> loadMap;
+                    World* w;                                                   /**< The world to manage */
+                    std::unordered_map<Maths::Point2D<GLint>, Region*> saveMap; /**< The save region storage */
+                    std::unordered_map<Maths::Point2D<GLint>, Region*> loadMap; /**< The load region storage */
 
                 public:
                     //## Constructor ##//
@@ -40,6 +40,10 @@
                          * Default Constructor
                          */
                         RegionsManager() = delete;
+                        /**
+                         * Construct a region manager with the targeted world
+                         * @param w the region manager managed world
+                         */
                         RegionsManager(World* w);
 
                     //## Copy-Constructor ##//

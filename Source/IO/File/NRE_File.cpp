@@ -4,9 +4,6 @@
     namespace NRE {
         namespace IO {
 
-            File::File() : File("") {
-            }
-
             File::File(std::string const& path) : path(path) {
             }
 
@@ -27,7 +24,7 @@
                 if (path.empty()) {
                     return false;
                 }
-                
+
                 std::ifstream tmp(path.c_str());
                 return tmp.good();
             }

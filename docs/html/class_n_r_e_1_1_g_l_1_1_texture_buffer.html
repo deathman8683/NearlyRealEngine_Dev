@@ -66,6 +66,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="class_n_r_e_1_1_g_l_1_1_texture_buffer-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">NRE::GL::TextureBuffer Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -82,8 +83,11 @@ Inheritance diagram for NRE::GL::TextureBuffer:</div>
  <div class="center">
   <img src="class_n_r_e_1_1_g_l_1_1_texture_buffer.png" usemap="#NRE::GL::TextureBuffer_map" alt=""/>
   <map id="NRE::GL::TextureBuffer_map" name="NRE::GL::TextureBuffer_map">
-<area href="class_n_r_e_1_1_g_l_1_1_buffer.html" title="GL&#39;s Object : A typical buffer used in BufferObject. " alt="NRE::GL::Buffer" shape="rect" coords="0,0,142,24"/>
-<area href="class_n_r_e_1_1_g_l_1_1_texture2_d.html" title="GL&#39;s Object : A simple 2D Texture. " alt="NRE::GL::Texture2D" shape="rect" coords="0,112,142,136"/>
+<area href="class_n_r_e_1_1_g_l_1_1_buffer.html" title="GL&#39;s Object : A typical buffer used in BufferObject. " alt="NRE::GL::Buffer" shape="rect" coords="84,0,242,24"/>
+<area href="class_n_r_e_1_1_g_l_1_1_texture2_d_buffer.html" title="GL&#39;s Object : Manage 2D texture. " alt="NRE::GL::Texture2DBuffer" shape="rect" coords="0,112,158,136"/>
+<area href="class_n_r_e_1_1_g_l_1_1_texture3_d_buffer.html" title="GL&#39;s Object : Manage 3D texture. " alt="NRE::GL::Texture3DBuffer" shape="rect" coords="168,112,326,136"/>
+<area href="class_n_r_e_1_1_g_l_1_1_texture2_d.html" title="GL&#39;s Object : A simple 2D Texture. " alt="NRE::GL::Texture2D" shape="rect" coords="0,168,158,192"/>
+<area href="class_n_r_e_1_1_g_l_1_1_texture2_d_array.html" title="GL&#39;s Object : Manage a 2D texture array. " alt="NRE::GL::Texture2DArray" shape="rect" coords="168,168,326,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -93,34 +97,32 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2e9fb9f7679fe0327fdcbe17eaa5bed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedaa5bf855ccb9a44d80d02049e4a9ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#aedaa5bf855ccb9a44d80d02049e4a9ef">TextureBuffer</a> (bool const &amp;generate)</td></tr>
 <tr class="separator:aedaa5bf855ccb9a44d80d02049e4a9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f18d174c1f9795f43e3ae1f6a3cc409"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a5f18d174c1f9795f43e3ae1f6a3cc409">TextureBuffer</a> (bool const &amp;generate, GLenum const &amp;type)</td></tr>
+<tr class="separator:a5f18d174c1f9795f43e3ae1f6a3cc409"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81e265abfbcdce5fd25616218a31b28e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a81e265abfbcdce5fd25616218a31b28e">TextureBuffer</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html">TextureBuffer</a> const &amp;buf)=delete</td></tr>
 <tr class="separator:a81e265abfbcdce5fd25616218a31b28e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac262bfb1e2897d5a6d284d6cbd31e9c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#ac262bfb1e2897d5a6d284d6cbd31e9c2">TextureBuffer</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html">TextureBuffer</a> &amp;&amp;buf)</td></tr>
 <tr class="separator:ac262bfb1e2897d5a6d284d6cbd31e9c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20e9a04e0828ea1b812c3751284d70d8"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a20e9a04e0828ea1b812c3751284d70d8">~TextureBuffer</a> ()</td></tr>
 <tr class="separator:a20e9a04e0828ea1b812c3751284d70d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56b5b69bd1095663b5230f3b9c1d3937"><td class="memItemLeft" align="right" valign="top">virtual GLenum const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a56b5b69bd1095663b5230f3b9c1d3937">getType</a> () const =0</td></tr>
-<tr class="separator:a56b5b69bd1095663b5230f3b9c1d3937"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb047b3c4bb2627d7850698d02fcfd90"><td class="memItemLeft" align="right" valign="top">GLenum const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#aeb047b3c4bb2627d7850698d02fcfd90">getType</a> () const</td></tr>
+<tr class="separator:aeb047b3c4bb2627d7850698d02fcfd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71d08b7af7c6602a9bcef2537116ee42"><td class="memItemLeft" align="right" valign="top">virtual GLenum const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a71d08b7af7c6602a9bcef2537116ee42">getTarget</a> () const =0</td></tr>
 <tr class="separator:a71d08b7af7c6602a9bcef2537116ee42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f008138ded1bd9555a16b8440cdedf1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a3f008138ded1bd9555a16b8440cdedf1">generateID</a> ()</td></tr>
-<tr class="separator:a3f008138ded1bd9555a16b8440cdedf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a562b813b20cf8dd7c9a478f57da7ddbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a562b813b20cf8dd7c9a478f57da7ddbf">deleteID</a> ()</td></tr>
-<tr class="separator:a562b813b20cf8dd7c9a478f57da7ddbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fb67fb78325d3818915c648baaee9b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a4fb67fb78325d3818915c648baaee9b3">setType</a> (GLenum const &amp;t)</td></tr>
+<tr class="separator:a4fb67fb78325d3818915c648baaee9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a545fac65e4dbb0fa695e35a190d56c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a3a545fac65e4dbb0fa695e35a190d56c">generateID</a> () override</td></tr>
+<tr class="separator:a3a545fac65e4dbb0fa695e35a190d56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e197cb92c50e9837e251d893043f2bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a8e197cb92c50e9837e251d893043f2bc">deleteID</a> () override</td></tr>
+<tr class="separator:a8e197cb92c50e9837e251d893043f2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae6bc449c10a97ecfba8ef177cea6b32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#aae6bc449c10a97ecfba8ef177cea6b32">bind</a> () const override</td></tr>
 <tr class="separator:aae6bc449c10a97ecfba8ef177cea6b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a461863ab496354b451ed466b7c0da8e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a461863ab496354b451ed466b7c0da8e0">unbind</a> () const override</td></tr>
 <tr class="separator:a461863ab496354b451ed466b7c0da8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa65834e0f142df78c4cd95908912819"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#afa65834e0f142df78c4cd95908912819">allocate</a> (GLint const &amp;level, GLint const &amp;internalFormat, GLsizei const &amp;w, GLsizei const &amp;h, GLenum const &amp;format, bool const &amp;callFilter) const</td></tr>
-<tr class="separator:afa65834e0f142df78c4cd95908912819"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52c930efaf0a92023f4ad30982e8ff21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a52c930efaf0a92023f4ad30982e8ff21">update</a> (GLint const &amp;level, GLint const &amp;xOffset, GLint const &amp;yOffset, GLsizei const &amp;w, GLsizei const &amp;h, GLenum const &amp;format, GLvoid *const &amp;data) const</td></tr>
-<tr class="separator:a52c930efaf0a92023f4ad30982e8ff21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a275eea9fab30a14b1cc548d5201a18ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a275eea9fab30a14b1cc548d5201a18ed">allocateAndFill</a> (GLint const &amp;level, GLint const &amp;internalFormat, GLsizei const &amp;w, GLsizei const &amp;h, GLenum const &amp;format, GLvoid *const &amp;data, bool const &amp;callFilter) const</td></tr>
-<tr class="separator:a275eea9fab30a14b1cc548d5201a18ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e603bce320e5b764bdee135ab551cbe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a4e603bce320e5b764bdee135ab551cbe">applyFilter</a> () const =0</td></tr>
-<tr class="separator:a4e603bce320e5b764bdee135ab551cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35dc23d5f8b59eff4c3fc5906ed83570"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a35dc23d5f8b59eff4c3fc5906ed83570">access</a> () const</td></tr>
 <tr class="separator:a35dc23d5f8b59eff4c3fc5906ed83570"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e603bce320e5b764bdee135ab551cbe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a4e603bce320e5b764bdee135ab551cbe">applyFilter</a> () const =0</td></tr>
+<tr class="separator:a4e603bce320e5b764bdee135ab551cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d0a1b5467455036f986d98fbc550985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html">TextureBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a6d0a1b5467455036f986d98fbc550985">operator=</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html">TextureBuffer</a> const &amp;buf)=delete</td></tr>
 <tr class="separator:a6d0a1b5467455036f986d98fbc550985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35a840a786ad606a479cf8ff075cd636"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html">TextureBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a35a840a786ad606a479cf8ff075cd636">operator=</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html">TextureBuffer</a> &amp;&amp;buf)</td></tr>
@@ -143,6 +145,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acf438aafcba34f56d2fcdc8af49de9be inherit pub_methods_class_n_r_e_1_1_g_l_1_1_buffer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer.html">Buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer.html#acf438aafcba34f56d2fcdc8af49de9be">operator=</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer.html">Buffer</a> &amp;&amp;buf)</td></tr>
 <tr class="separator:acf438aafcba34f56d2fcdc8af49de9be inherit pub_methods_class_n_r_e_1_1_g_l_1_1_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a88a06a17925c1f340c6b119f2cf4cbe3"><td class="memItemLeft" align="right" valign="top">static GLenum&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a88a06a17925c1f340c6b119f2cf4cbe3">DEFAULT_TYPE</a> = GL_UNSIGNED_BYTE</td></tr>
+<tr class="separator:a88a06a17925c1f340c6b119f2cf4cbe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_class_n_r_e_1_1_g_l_1_1_buffer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_n_r_e_1_1_g_l_1_1_buffer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_n_r_e_1_1_g_l_1_1_buffer.html">NRE::GL::Buffer</a></td></tr>
@@ -153,7 +160,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p><a class="el" href="namespace_g_l.html" title="Engine&#39;s OpenGL&#39;s Wrapper&#39;s Module. ">GL</a>'s <a class="el" href="namespace_object.html" title="The Engine&#39;s Object&#39;s managing system&gt; ">Object</a> : A specialized buffer for texture managing. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2e9fb9f7679fe0327fdcbe17eaa5bed4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e9fb9f7679fe0327fdcbe17eaa5bed4">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e9fb9f7679fe0327fdcbe17eaa5bed4">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,7 +178,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <a id="aedaa5bf855ccb9a44d80d02049e4a9ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aedaa5bf855ccb9a44d80d02049e4a9ef">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aedaa5bf855ccb9a44d80d02049e4a9ef">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,8 +201,43 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a5f18d174c1f9795f43e3ae1f6a3cc409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f18d174c1f9795f43e3ae1f6a3cc409">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NRE::GL::TextureBuffer::TextureBuffer </td>
+          <td>(</td>
+          <td class="paramtype">bool const &amp;&#160;</td>
+          <td class="paramname"><em>generate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLenum const &amp;&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Construct the buffer and generate or not his id </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">generate</td><td>tell if the base class has to generate an id or not </td></tr>
+    <tr><td class="paramname">type</td><td>the texture's type enum </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a81e265abfbcdce5fd25616218a31b28e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81e265abfbcdce5fd25616218a31b28e">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e265abfbcdce5fd25616218a31b28e">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +269,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <a id="ac262bfb1e2897d5a6d284d6cbd31e9c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac262bfb1e2897d5a6d284d6cbd31e9c2">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac262bfb1e2897d5a6d284d6cbd31e9c2">&#9670;&nbsp;</a></span>TextureBuffer() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -295,139 +337,6 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="afa65834e0f142df78c4cd95908912819"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa65834e0f142df78c4cd95908912819">&#9670;&nbsp;</a></span>allocate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NRE::GL::TextureBuffer::allocate </td>
-          <td>(</td>
-          <td class="paramtype">GLint const &amp;&#160;</td>
-          <td class="paramname"><em>level</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint const &amp;&#160;</td>
-          <td class="paramname"><em>internalFormat</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLsizei const &amp;&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLsizei const &amp;&#160;</td>
-          <td class="paramname"><em>h</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum const &amp;&#160;</td>
-          <td class="paramname"><em>format</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool const &amp;&#160;</td>
-          <td class="paramname"><em>callFilter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Allocate the texture buffer with given parameters </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">level</td><td>the level of the texture used in mipmap </td></tr>
-    <tr><td class="paramname">internalFormat</td><td>the texture's pixels' internal's format </td></tr>
-    <tr><td class="paramname">w</td><td>the texture's width </td></tr>
-    <tr><td class="paramname">h</td><td>the texture's height </td></tr>
-    <tr><td class="paramname">format</td><td>the texture's pixels' format </td></tr>
-    <tr><td class="paramname">callFilter</td><td>tell if the function has to apply filter or not for the given binding </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a275eea9fab30a14b1cc548d5201a18ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a275eea9fab30a14b1cc548d5201a18ed">&#9670;&nbsp;</a></span>allocateAndFill()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NRE::GL::TextureBuffer::allocateAndFill </td>
-          <td>(</td>
-          <td class="paramtype">GLint const &amp;&#160;</td>
-          <td class="paramname"><em>level</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint const &amp;&#160;</td>
-          <td class="paramname"><em>internalFormat</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLsizei const &amp;&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLsizei const &amp;&#160;</td>
-          <td class="paramname"><em>h</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum const &amp;&#160;</td>
-          <td class="paramname"><em>format</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLvoid *const &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool const &amp;&#160;</td>
-          <td class="paramname"><em>callFilter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Allocate the texture buffer with given parameters and fill it with given data </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">level</td><td>the level of the texture used in mipmap </td></tr>
-    <tr><td class="paramname">internalFormat</td><td>the texture's pixels' internal's format </td></tr>
-    <tr><td class="paramname">w</td><td>the texture's width </td></tr>
-    <tr><td class="paramname">h</td><td>the texture's height </td></tr>
-    <tr><td class="paramname">format</td><td>the texture's pixels' format </td></tr>
-    <tr><td class="paramname">data</td><td>the texture's data </td></tr>
-    <tr><td class="paramname">callFilter</td><td>tell if the function has to apply filter or not for the given binding </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a4e603bce320e5b764bdee135ab551cbe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e603bce320e5b764bdee135ab551cbe">&#9670;&nbsp;</a></span>applyFilter()</h2>
 
@@ -452,7 +361,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Texture specific filter </p>
 
-<p>Implemented in <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#a49ddc552222249cb75062a3a9a02815e">NRE::GL::Texture2D</a>.</p>
+<p>Implemented in <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture3_d_buffer.html#a540e0db4661d621a564744668f66653d">NRE::GL::Texture3DBuffer</a>, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_buffer.html#a620fa1fb4dd87d8152310f83ec0a7a6c">NRE::GL::Texture2DBuffer</a>, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#abfe6f71432ec7f3e573bcaf6edbb48b0">NRE::GL::Texture2D</a>, and <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_array.html#acadab62b677bf039fb6cac8b0a369895">NRE::GL::Texture2DArray</a>.</p>
 
 </div>
 </div>
@@ -486,8 +395,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a562b813b20cf8dd7c9a478f57da7ddbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a562b813b20cf8dd7c9a478f57da7ddbf">&#9670;&nbsp;</a></span>deleteID()</h2>
+<a id="a8e197cb92c50e9837e251d893043f2bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e197cb92c50e9837e251d893043f2bc">&#9670;&nbsp;</a></span>deleteID()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -504,7 +413,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -514,8 +423,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a3f008138ded1bd9555a16b8440cdedf1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f008138ded1bd9555a16b8440cdedf1">&#9670;&nbsp;</a></span>generateID()</h2>
+<a id="a3a545fac65e4dbb0fa695e35a190d56c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a545fac65e4dbb0fa695e35a190d56c">&#9670;&nbsp;</a></span>generateID()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -532,7 +441,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -566,35 +475,25 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Return the attribute buffer target, used with derived class </p><dl class="section return"><dt>Returns</dt><dd>the attribute buffer target </dd></dl>
 
-<p>Implemented in <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#ae329a9c7d1ca91ab71dbb4a8dd760366">NRE::GL::Texture2D</a>.</p>
+<p>Implemented in <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#ae329a9c7d1ca91ab71dbb4a8dd760366">NRE::GL::Texture2D</a>, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_buffer.html#a8e4317bd93590326264d0a73a57b6b04">NRE::GL::Texture2DBuffer</a>, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture3_d_buffer.html#a9ec9ee7c764d5fa64ae09fb29943288e">NRE::GL::Texture3DBuffer</a>, and <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_array.html#adf09f855c8e5ae34afaebdf30623eedb">NRE::GL::Texture2DArray</a>.</p>
 
 </div>
 </div>
-<a id="a56b5b69bd1095663b5230f3b9c1d3937"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56b5b69bd1095663b5230f3b9c1d3937">&#9670;&nbsp;</a></span>getType()</h2>
+<a id="aeb047b3c4bb2627d7850698d02fcfd90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb047b3c4bb2627d7850698d02fcfd90">&#9670;&nbsp;</a></span>getType()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual GLenum const NRE::GL::TextureBuffer::getType </td>
+          <td class="memname">GLenum const  &amp; NRE::GL::TextureBuffer::getType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-<p>Return the attribute type enum, used with derived class </p><dl class="section return"><dt>Returns</dt><dd>the attribute type enum </dd></dl>
-
-<p>Implemented in <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#aacea92eb81e8ba8b9b07a6d5ed2f748d">NRE::GL::Texture2D</a>.</p>
+<p>Return the texture type enum, used with derived class </p><dl class="section return"><dt>Returns</dt><dd>the texture type enum </dd></dl>
 
 </div>
 </div>
@@ -655,6 +554,30 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a4fb67fb78325d3818915c648baaee9b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fb67fb78325d3818915c648baaee9b3">&#9670;&nbsp;</a></span>setType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::GL::TextureBuffer::setType </td>
+          <td>(</td>
+          <td class="paramtype">GLenum const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Type setter </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the new texture type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a461863ab496354b451ed466b7c0da8e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a461863ab496354b451ed466b7c0da8e0">&#9670;&nbsp;</a></span>unbind()</h2>
 
@@ -685,73 +608,27 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a52c930efaf0a92023f4ad30982e8ff21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52c930efaf0a92023f4ad30982e8ff21">&#9670;&nbsp;</a></span>update()</h2>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a88a06a17925c1f340c6b119f2cf4cbe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88a06a17925c1f340c6b119f2cf4cbe3">&#9670;&nbsp;</a></span>DEFAULT_TYPE</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NRE::GL::TextureBuffer::update </td>
-          <td>(</td>
-          <td class="paramtype">GLint const &amp;&#160;</td>
-          <td class="paramname"><em>level</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint const &amp;&#160;</td>
-          <td class="paramname"><em>xOffset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint const &amp;&#160;</td>
-          <td class="paramname"><em>yOffset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLsizei const &amp;&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLsizei const &amp;&#160;</td>
-          <td class="paramname"><em>h</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum const &amp;&#160;</td>
-          <td class="paramname"><em>format</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLvoid *const &amp;&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
+          <td class="memname">GLenum NRE::GL::TextureBuffer::DEFAULT_TYPE = GL_UNSIGNED_BYTE</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p>Update the texture buffer with given parameters </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">level</td><td>the level of the texture used in mipmap </td></tr>
-    <tr><td class="paramname">xOffset</td><td>the buffers xOffset for particular region update </td></tr>
-    <tr><td class="paramname">yOffset</td><td>the buffers yOffset for particular region update </td></tr>
-    <tr><td class="paramname">w</td><td>the updated region width </td></tr>
-    <tr><td class="paramname">h</td><td>the updated region height </td></tr>
-    <tr><td class="paramname">format</td><td>the texture's pixels' format </td></tr>
-    <tr><td class="paramname">data</td><td>the texture's data </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>The texture default type enum </p>
 
 </div>
 </div>

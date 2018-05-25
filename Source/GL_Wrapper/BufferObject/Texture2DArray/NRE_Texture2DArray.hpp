@@ -19,13 +19,13 @@
     namespace NRE {
         /**
          * @namespace GL
-         * @brief <Module_Desc>
+         * @brief Engine's OpenGL's Wrapper's Module
          */
         namespace GL {
 
             /**
              * @class Texture2DArray
-             * @brief GL's Object : <Class_Desc>
+             * @brief GL's Object : Manage a 2D texture array
              */
             class Texture2DArray : public Texture3DBuffer, public BufferObject {
                 private:
@@ -81,14 +81,16 @@
                         void allocate(GLint const& internalFormat, GLsizei const& w, GLsizei const& h, GLsizei const& z, GLenum const& format, bool const& callFilter);
                         /**
                          * Allocate the texture array from a base texture
-                         * @param internalFormat the texture's pixels' internal's format
-                         * @param w              the texture's width
-                         * @param h              the texture's height
                          * @param z              the texture's level
-                         * @param format         the texture's pixels' format
+                         * @param tex            the base texture
                          * @param callFilter     tell if the function has to apply filter or not for the given binding
                          */
                         void allocate(GLsizei const& z, Texture2D const& tex, bool const& callFilter);
+                        /**
+                         * Send a given texture into the texture array
+                         * @param tex   the texture to send
+                         * @param layer the texture's layer
+                         */
                         void sendTexture(Texture2D const& tex, GLint const& layer);
                         /**
                          * Texture2DArray specific filter

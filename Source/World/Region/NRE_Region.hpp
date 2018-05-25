@@ -96,6 +96,9 @@
                          * @param w the world used for chunk border computation
                          */
                         void load(World* w);
+                        /**
+                         * Create the lookup table in the region file
+                         */
                         void createTable();
                         /**
                          * Add a chunk in the queue

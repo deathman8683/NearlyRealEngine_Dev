@@ -130,6 +130,9 @@
                          * Bind the VAO to the object Buffer using the mesh data type
                          */
                         void access();
+                        /**
+                         * Reload the mesh
+                         */
                         void reload();
 
                     //## Access Operator ##//

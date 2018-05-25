@@ -56,11 +56,20 @@
                         ~BinaryOutputStream();
 
                     //## Getter ##//
+                        /**
+                         * Stream getter
+                         * @return the file's stream
+                         */
                         virtual std::fstream& getStream() = 0;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Write a given number of bytes from the passed data into the file stream
+                         * @param object        the data to write some bytes
+                         * @param sizeInBytes   the number of bytes to write
+                         */
                         template <class T>
                         void writeBinary(T const& object, size_t const& sizeInBytes);
 

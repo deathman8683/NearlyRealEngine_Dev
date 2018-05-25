@@ -98,10 +98,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3215fb097f9cc4c9c8c1657b7152e6ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12c7ccf22bb020e7ec88ddbee13cce9c"><td class="memItemLeft" align="right" valign="top">std::string const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#a12c7ccf22bb020e7ec88ddbee13cce9c">getPath</a> () const override</td></tr>
 <tr class="separator:a12c7ccf22bb020e7ec88ddbee13cce9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78c9f20733f3bf168caccfe97d465e6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#a78c9f20733f3bf168caccfe97d465e6b">sendMaterials</a> () const</td></tr>
-<tr class="separator:a78c9f20733f3bf168caccfe97d465e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3211798efec2b3ecc32ce5d4475c459"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#ad3211798efec2b3ecc32ce5d4475c459">sendLigths</a> (std::vector&lt; <a class="el" href="class_n_r_e_1_1_light_1_1_light.html">Light::Light</a> *&gt; const &amp;lights) const</td></tr>
-<tr class="separator:ad3211798efec2b3ecc32ce5d4475c459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb655970fcb21c931f916265fe15a4c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#adb655970fcb21c931f916265fe15a4c9">sendLigths</a> () const</td></tr>
+<tr class="separator:adb655970fcb21c931f916265fe15a4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59b8de451af9d8260e4af044f3d2de0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#a59b8de451af9d8260e4af044f3d2de0b">sendTextures</a> () const</td></tr>
 <tr class="separator:a59b8de451af9d8260e4af044f3d2de0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ce72ebfebc1a7cb45be85a3b7b4f7b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_renderer_1_1_p_b_r_shader.html#a7ce72ebfebc1a7cb45be85a3b7b4f7b3">sendInvProjection</a> (<a class="el" href="class_n_r_e_1_1_maths_1_1_matrix4x4.html">Maths::Matrix4x4</a>&lt; NREfloat &gt; const &amp;m) const</td></tr>
@@ -467,8 +465,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ad3211798efec2b3ecc32ce5d4475c459"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3211798efec2b3ecc32ce5d4475c459">&#9670;&nbsp;</a></span>sendLigths()</h2>
+<a id="adb655970fcb21c931f916265fe15a4c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb655970fcb21c931f916265fe15a4c9">&#9670;&nbsp;</a></span>sendLigths()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -476,36 +474,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void NRE::Renderer::PBRShader::sendLigths </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_n_r_e_1_1_light_1_1_light.html">Light::Light</a> *&gt; const &amp;&#160;</td>
-          <td class="paramname"><em>lights</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Send all lights values to the shader </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">lights</td><td>the arrays of lights </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a78c9f20733f3bf168caccfe97d465e6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78c9f20733f3bf168caccfe97d465e6b">&#9670;&nbsp;</a></span>sendMaterials()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NRE::Renderer::PBRShader::sendMaterials </td>
-          <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Send all materials values to the shader </p>
+<p>Send all lights values to the shader </p>
 
 </div>
 </div>

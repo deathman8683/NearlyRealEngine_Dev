@@ -66,8 +66,24 @@
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Load the object from a given file
+                         * @param usage the object's rendering usage
+                         * @param path  the object's file path
+                         */
                         void load(GLenum const& usage, std::string const& path);
+                        /**
+                         * Process an Assimp node
+                         * @param node  the assimp's node to process
+                         * @param scene the assimp's scene (main node);
+                         */
                         void processNode(aiNode *node, const aiScene *scene);
+                        /**
+                         * Process a NRE mesh from an Assimp mesh
+                         * @param  mesh  the assimp's mesh to process
+                         * @param  scene the assimp's scene (main node)
+                         * @return       the resulting NRE mesh
+                         */
                         Mesh3D* processMesh(aiMesh *mesh, const aiScene *scene);
                         /**
                          * Process a sphere into the current object

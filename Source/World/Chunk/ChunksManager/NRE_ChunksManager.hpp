@@ -30,7 +30,7 @@
              */
             class ChunksManager {
                 private:
-                    std::queue<Chunk*> constructionQueue;
+                    std::queue<Chunk*> constructionQueue;   /**< The Chunk manager construction queue */
 
                 public:
                     //## Constructor ##//

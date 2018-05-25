@@ -56,11 +56,20 @@
                         ~BinaryInputStream();
 
                     //## Getter ##//
+                        /**
+                         * Stream getter
+                         * @return the file's stream
+                         */
                         virtual std::fstream& getStream() = 0;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Read a given number of bytes into the passed data from the file stream
+                         * @param object        the data to store the read return
+                         * @param sizeInBytes   the number of bytes to read
+                         */
                         template <class T>
                         void readBinary(T& object, size_t const& sizeInBytes);
 

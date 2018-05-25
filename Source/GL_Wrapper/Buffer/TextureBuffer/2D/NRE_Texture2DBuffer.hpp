@@ -17,7 +17,7 @@
     namespace NRE {
         /**
          * @namespace GL
-         * @brief <Module_Desc>
+         * @brief Engine's OpenGL's Wrapper's Module
          */
         namespace GL {
 

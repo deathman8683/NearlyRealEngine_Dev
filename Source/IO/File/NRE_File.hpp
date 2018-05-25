@@ -29,14 +29,18 @@
              */
             class File {
                 protected:
-                    std::string path;
+                    std::string path;   /**< The file's path */
 
                 public:
                     //## Constructor ##//
                         /**
                          * Default Constructor
                          */
-                        File();
+                        File() = delete;
+                        /**
+                         * Construct a File with the given path
+                         * @param path the file's path
+                         */
                         File(std::string const& path);
 
                     //## Copy-Constructor ##//
@@ -62,11 +66,19 @@
                         ~File();
 
                     //## Getter ##//
+                        /**
+                         * Path's getter
+                         * @return the file's path
+                         */
                         std::string const& getPath() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Test if the file's path exist
+                         * @return [description]
+                         */
                         bool const exist() const;
 
                     //## Access Operator ##//
@@ -105,7 +117,7 @@
              * @return the modified outstream
              */
             inline std::ostream& operator<<(std::ostream &stream, File const& f) {
-                stream << "(" << f.getPath() << ")";
+                stream << f.getPath();
                 return stream;
             }
 

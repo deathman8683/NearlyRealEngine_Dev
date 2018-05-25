@@ -9,6 +9,7 @@ var searchData=
   ['default_5fr',['DEFAULT_R',['../class_n_r_e_1_1_color_1_1_r_g_b.html#a9053c009880217c152a4192cbbab02bc',1,'NRE::Color::RGB']]],
   ['default_5fratio',['DEFAULT_RATIO',['../class_n_r_e_1_1_maths_1_1_frustum.html#a3ae4d54eb2380e82ca74f3868b0e3448',1,'NRE::Maths::Frustum']]],
   ['default_5fs',['DEFAULT_S',['../class_n_r_e_1_1_color_1_1_h_s_l.html#a422d0dcc222d1ba187486c398db22a09',1,'NRE::Color::HSL']]],
+  ['default_5ftype',['DEFAULT_TYPE',['../class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a88a06a17925c1f340c6b119f2cf4cbe3',1,'NRE::GL::TextureBuffer']]],
   ['default_5fw',['DEFAULT_W',['../class_n_r_e_1_1_maths_1_1_vector4_d.html#a20444611a28d1ad72beb51c316ec3b65',1,'NRE::Maths::Vector4D']]],
   ['default_5fx',['DEFAULT_X',['../class_n_r_e_1_1_maths_1_1_point2_d.html#a5e717a2f9214b153d80182daa42a344f',1,'NRE::Maths::Point2D::DEFAULT_X()'],['../class_n_r_e_1_1_maths_1_1_vector2_d.html#af378eeb4c3cba3a3e41fca7b0d7d4f3c',1,'NRE::Maths::Vector2D::DEFAULT_X()']]],
   ['default_5fy',['DEFAULT_Y',['../class_n_r_e_1_1_maths_1_1_point2_d.html#aa347a76c6f8acc784727ccdbfcea048c',1,'NRE::Maths::Point2D::DEFAULT_Y()'],['../class_n_r_e_1_1_maths_1_1_vector2_d.html#a95d849552dabfb5f9d5f543808aa7f7e',1,'NRE::Maths::Vector2D::DEFAULT_Y()']]],

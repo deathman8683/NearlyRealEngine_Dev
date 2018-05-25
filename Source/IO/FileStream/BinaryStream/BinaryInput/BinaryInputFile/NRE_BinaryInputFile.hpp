@@ -35,6 +35,10 @@
                          * Default Constructor
                          */
                         BinaryInputFile() = delete;
+                        /**
+                         * Construct a binary input file stream with a given file's path
+                         * @param path the file's stream path
+                         */
                         BinaryInputFile(std::string const& path);
 
                     //## Copy-Constructor ##//
@@ -60,7 +64,15 @@
                         ~BinaryInputFile();
 
                     //## Getter ##//
+                        /**
+                         * Opening mode getter
+                         * @return the binary input file stream opening mode
+                         */
                         std::ios_base::openmode const getMode() const override;
+                        /**
+                         * Stream getter
+                         * @return the binary input file's stream
+                         */
                         std::fstream& getStream() override;
 
                     //## Setter ##//

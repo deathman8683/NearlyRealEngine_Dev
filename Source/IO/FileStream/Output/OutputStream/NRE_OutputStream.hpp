@@ -56,11 +56,19 @@
                         virtual ~OutputStream();
 
                     //## Getter ##//
+                        /**
+                         * Stream getter
+                         * @return the file's stream
+                         */
                         virtual std::fstream& getStream() = 0;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Write the passed data into the file stream
+                         * @param object the data to write
+                         */
                         template <class T>
                         void write(T const& object);
 

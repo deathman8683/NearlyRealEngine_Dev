@@ -43,6 +43,10 @@
                          * Default Constructor
                          */
                         VoxelMesh();
+                        /**
+                         * Construct a voxel mesh from a voxel set
+                         * @param set the base voxel set, the mesh's target
+                         */
                         VoxelMesh(const VoxelSet* const set);
 
                     //## Copy-Constructor ##//

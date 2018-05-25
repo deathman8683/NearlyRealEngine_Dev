@@ -35,6 +35,10 @@
                          * Default Constructor
                          */
                         InputFile() = delete;
+                        /**
+                         * Construct an input file stream with a given file's path
+                         * @param path the file's stream path
+                         */
                         InputFile(std::string const& path);
 
                     //## Copy-Constructor ##//
@@ -60,7 +64,15 @@
                         virtual ~InputFile();
 
                     //## Getter ##//
+                        /**
+                         * Opening mode getter
+                         * @return the input file stream opening mode
+                         */
                         virtual std::ios_base::openmode const getMode() const override;
+                        /**
+                         * Stream getter
+                         * @return the input file's stream
+                         */
                         virtual std::fstream& getStream() override;
 
                     //## Setter ##//

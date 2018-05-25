@@ -35,6 +35,10 @@
                          * Default Constructor
                          */
                         OutputFile() = delete;
+                        /**
+                         * Construct an output file stream with a given file's path
+                         * @param path the file's stream path
+                         */
                         OutputFile(std::string const& path);
 
                     //## Copy-Constructor ##//
@@ -60,7 +64,15 @@
                         virtual ~OutputFile();
 
                     //## Getter ##//
+                        /**
+                         * Opening mode getter
+                         * @return the output file stream opening mode
+                         */
                         virtual std::ios_base::openmode const getMode() const override;
+                        /**
+                         * Stream getter
+                         * @return the output file's stream
+                         */
                         virtual std::fstream& getStream() override;
 
                     //## Setter ##//

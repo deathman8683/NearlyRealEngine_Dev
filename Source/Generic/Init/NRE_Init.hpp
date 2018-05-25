@@ -22,6 +22,10 @@
      */
     namespace NRE {
 
+        /**
+         * @class Init
+         * @brief NRE's Object : Initialization class
+         */
         class Init {
             public:
                 //## Constructor ##//
@@ -51,8 +55,19 @@
                     ~Init();
 
                 //## Methods ##//
+                    /**
+                     * Initialize SDL and GLEW
+                     */
                     void iniatilizeLib();
+                    /**
+                     * Initialize OpenGL
+                     * @param glContext the openGL context to initialize
+                     * @param window    the window used to initialize the context
+                     */
                     void initializeOpenGL(SDL_GLContext &glContext, SDL::Window &window);
+                    /**
+                     * Initialize all engine's manager
+                     */
                     void initializeManager();
 
                 //## Assignment Operator ##//

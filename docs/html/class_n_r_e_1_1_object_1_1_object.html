@@ -86,7 +86,8 @@ Inheritance diagram for NRE::Object::Object:</div>
 <area href="class_n_r_e_1_1_object_1_1_object2_d.html" title="Object&#39;s Object : Manage 2D object. " alt="NRE::Object::Object2D" shape="rect" coords="0,56,206,80"/>
 <area href="class_n_r_e_1_1_object_1_1_object3_d.html" title="Object&#39;s Object : Manage 3D object. " alt="NRE::Object::Object3D" shape="rect" coords="216,56,422,80"/>
 <area href="class_n_r_e_1_1_renderer_1_1_deferred_renderer.html" title="Renderer&#39;s Object : Manage deferred renderding techniques using FBO. " alt="NRE::Renderer::DeferredRenderer" shape="rect" coords="0,112,206,136"/>
-<area href="class_n_r_e_1_1_world_1_1_chunk.html" title="World&#39;s Object : A collection of voxel. " alt="NRE::World::Chunk" shape="rect" coords="216,112,422,136"/>
+<area href="class_n_r_e_1_1_object_1_1_voxel_object.html" title="Object&#39;s Object : Manage a voxel type object. " alt="NRE::Object::VoxelObject" shape="rect" coords="216,112,422,136"/>
+<area href="class_n_r_e_1_1_world_1_1_chunk.html" title="World&#39;s Object : A collection of voxel. " alt="NRE::World::Chunk" shape="rect" coords="216,168,422,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -94,24 +95,28 @@ Inheritance diagram for NRE::Object::Object:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a26b3a1500ad830fede6e46124916459a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a26b3a1500ad830fede6e46124916459a">Object</a> ()</td></tr>
 <tr class="separator:a26b3a1500ad830fede6e46124916459a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accc52d3aed547a5e07dc17b539a57c81"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#accc52d3aed547a5e07dc17b539a57c81">Object</a> (<a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">GL::VBO</a> *buf, <a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a> *<a class="el" href="class_n_r_e_1_1_object_1_1_object.html#ae310dcc8438d2ddaf5bbe56206a3d6ee">mesh</a>)</td></tr>
-<tr class="separator:accc52d3aed547a5e07dc17b539a57c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b587df9f7b7240a9444633e04cfd5aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a9b587df9f7b7240a9444633e04cfd5aa">Object</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> const &amp;o)=delete</td></tr>
 <tr class="separator:a9b587df9f7b7240a9444633e04cfd5aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85de2b6b348d6ebfd6d4185a2a4cac1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a85de2b6b348d6ebfd6d4185a2a4cac1c">Object</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> &amp;&amp;o)</td></tr>
 <tr class="separator:a85de2b6b348d6ebfd6d4185a2a4cac1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add84df02bf832bacde3badf42399b752"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#add84df02bf832bacde3badf42399b752">~Object</a> ()</td></tr>
 <tr class="separator:add84df02bf832bacde3badf42399b752"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ec32a1dd9adbcba2cdd39c005f9fb53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a3ec32a1dd9adbcba2cdd39c005f9fb53">add</a> (GLuint const &amp;index, void *value, GLuint const &amp;nbValue=1) const</td></tr>
-<tr class="separator:a3ec32a1dd9adbcba2cdd39c005f9fb53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab65a7442157f1ce4274b494a8a87fcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#aab65a7442157f1ce4274b494a8a87fcc">add</a> (GLuint const &amp;meshIndex, GLuint const &amp;setIndex, void *value, GLuint const &amp;nbValue=1) const</td></tr>
+<tr class="separator:aab65a7442157f1ce4274b494a8a87fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa344ca57ff36c3efe11053cde076eedb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#aa344ca57ff36c3efe11053cde076eedb">update</a> (GLuint const &amp;meshIndex)</td></tr>
+<tr class="separator:aa344ca57ff36c3efe11053cde076eedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32410b0f95deada0accda2e436231e5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a32410b0f95deada0accda2e436231e5a">update</a> ()</td></tr>
 <tr class="separator:a32410b0f95deada0accda2e436231e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e177f64bd580e2b1fbcc726c4474c21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a2e177f64bd580e2b1fbcc726c4474c21">allocateAndFill</a> (GLuint const &amp;meshIndex, GLenum const &amp;usage)</td></tr>
+<tr class="separator:a2e177f64bd580e2b1fbcc726c4474c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb3d74d4f086a92fa7b0659c64deef59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#afb3d74d4f086a92fa7b0659c64deef59">allocateAndFill</a> (GLenum const &amp;usage)</td></tr>
 <tr class="separator:afb3d74d4f086a92fa7b0659c64deef59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6137c80358103b59fcdcc0d74471ad1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#ad6137c80358103b59fcdcc0d74471ad1">draw</a> () const</td></tr>
 <tr class="separator:ad6137c80358103b59fcdcc0d74471ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a792cd302a2c8f7c1e911cac83e3ba87a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a792cd302a2c8f7c1e911cac83e3ba87a">access</a> ()</td></tr>
-<tr class="separator:a792cd302a2c8f7c1e911cac83e3ba87a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5db16a38a738800c3d6de207c042680a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a5db16a38a738800c3d6de207c042680a">reload</a> ()</td></tr>
+<tr class="separator:a5db16a38a738800c3d6de207c042680a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a524eaa72dfe2d3dfb59466729cbe13e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a524eaa72dfe2d3dfb59466729cbe13e4">push_back</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a> *m)</td></tr>
+<tr class="separator:a524eaa72dfe2d3dfb59466729cbe13e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad114d786a74ceb056454e9bd34aefb59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#ad114d786a74ceb056454e9bd34aefb59">operator=</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> const &amp;o)=delete</td></tr>
 <tr class="separator:ad114d786a74ceb056454e9bd34aefb59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69d90f0bd8778f7891035385afc36d19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a69d90f0bd8778f7891035385afc36d19">operator=</a> (<a class="el" href="class_n_r_e_1_1_object_1_1_object.html">Object</a> &amp;&amp;o)</td></tr>
@@ -119,18 +124,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a112d90eab17a3c8e2abaf4cd7b6dfa33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">GL::VBO</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a112d90eab17a3c8e2abaf4cd7b6dfa33">buffer</a></td></tr>
-<tr class="separator:a112d90eab17a3c8e2abaf4cd7b6dfa33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeba9bc20ef129d130f2bc3126766dd7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_a_o.html">GL::VAO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#aeba9bc20ef129d130f2bc3126766dd7f">vao</a></td></tr>
-<tr class="separator:aeba9bc20ef129d130f2bc3126766dd7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae310dcc8438d2ddaf5bbe56206a3d6ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#ae310dcc8438d2ddaf5bbe56206a3d6ee">mesh</a></td></tr>
-<tr class="separator:ae310dcc8438d2ddaf5bbe56206a3d6ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4057bc5c2fb9e4d5613dd1d29bf4c790"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a4057bc5c2fb9e4d5613dd1d29bf4c790">meshes</a></td></tr>
+<tr class="separator:a4057bc5c2fb9e4d5613dd1d29bf4c790"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_n_r_e_1_1_object_1_1_object.html" title="Object&#39;s Object : Manage a simple object with a VBO (or IBO) and a VAO. ">Object</a>'s <a class="el" href="class_n_r_e_1_1_object_1_1_object.html" title="Object&#39;s Object : Manage a simple object with a VBO (or IBO) and a VAO. ">Object</a> : Manage a simple object with a VBO (or IBO) and a VAO. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a26b3a1500ad830fede6e46124916459a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26b3a1500ad830fede6e46124916459a">&#9670;&nbsp;</a></span>Object() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a26b3a1500ad830fede6e46124916459a">&#9670;&nbsp;</a></span>Object() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,43 +148,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="accc52d3aed547a5e07dc17b539a57c81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accc52d3aed547a5e07dc17b539a57c81">&#9670;&nbsp;</a></span>Object() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">NRE::Object::Object::Object </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">GL::VBO</a> *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a> *&#160;</td>
-          <td class="paramname"><em>mesh</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Construct an object with his rendering buffer </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buf</td><td>the rendering buffer, containing (or not yet) the object's model </td></tr>
-    <tr><td class="paramname">mesh</td><td>the object mesh, containing (or not yet) the object's model </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a9b587df9f7b7240a9444633e04cfd5aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b587df9f7b7240a9444633e04cfd5aa">&#9670;&nbsp;</a></span>Object() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b587df9f7b7240a9444633e04cfd5aa">&#9670;&nbsp;</a></span>Object() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -215,7 +181,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a85de2b6b348d6ebfd6d4185a2a4cac1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85de2b6b348d6ebfd6d4185a2a4cac1c">&#9670;&nbsp;</a></span>Object() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a85de2b6b348d6ebfd6d4185a2a4cac1c">&#9670;&nbsp;</a></span>Object() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,26 +223,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a792cd302a2c8f7c1e911cac83e3ba87a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a792cd302a2c8f7c1e911cac83e3ba87a">&#9670;&nbsp;</a></span>access()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void NRE::Object::Object::access </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Bind the VAO to the object Buffer using the mesh data type </p>
-
-</div>
-</div>
-<a id="a3ec32a1dd9adbcba2cdd39c005f9fb53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ec32a1dd9adbcba2cdd39c005f9fb53">&#9670;&nbsp;</a></span>add()</h2>
+<a id="aab65a7442157f1ce4274b494a8a87fcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab65a7442157f1ce4274b494a8a87fcc">&#9670;&nbsp;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -285,7 +233,13 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void NRE::Object::Object::add </td>
           <td>(</td>
           <td class="paramtype">GLuint const &amp;&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
+          <td class="paramname"><em>meshIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLuint const &amp;&#160;</td>
+          <td class="paramname"><em>setIndex</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -308,7 +262,8 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Add a set of value into in the mesh </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>the dataSet's index in the mesh </td></tr>
+    <tr><td class="paramname">meshIndex</td><td>the mesh's index in the meshes </td></tr>
+    <tr><td class="paramname">setIndex</td><td>the dataSet's index in the mesh </td></tr>
     <tr><td class="paramname">value</td><td>the pointer to the set of value </td></tr>
     <tr><td class="paramname">nbValue</td><td>the number of value to add </td></tr>
   </table>
@@ -317,8 +272,43 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a2e177f64bd580e2b1fbcc726c4474c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e177f64bd580e2b1fbcc726c4474c21">&#9670;&nbsp;</a></span>allocateAndFill() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::Object::Object::allocateAndFill </td>
+          <td>(</td>
+          <td class="paramtype">GLuint const &amp;&#160;</td>
+          <td class="paramname"><em>meshIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLenum const &amp;&#160;</td>
+          <td class="paramname"><em>usage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocate and fill a mesh in the object </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">meshIndex</td><td>the mesh's index in the meshes </td></tr>
+    <tr><td class="paramname">usage</td><td>the object's rendering usage </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="afb3d74d4f086a92fa7b0659c64deef59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb3d74d4f086a92fa7b0659c64deef59">&#9670;&nbsp;</a></span>allocateAndFill()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afb3d74d4f086a92fa7b0659c64deef59">&#9670;&nbsp;</a></span>allocateAndFill() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -332,7 +322,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Allocate and fill the current object's buffer from his mesh </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Allocate and fill all meshes in the object </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">usage</td><td>the object's rendering usage </td></tr>
   </table>
@@ -417,8 +407,74 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a524eaa72dfe2d3dfb59466729cbe13e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a524eaa72dfe2d3dfb59466729cbe13e4">&#9670;&nbsp;</a></span>push_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::Object::Object::push_back </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Push back a mesh into the meshes array </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>the mesh to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5db16a38a738800c3d6de207c042680a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5db16a38a738800c3d6de207c042680a">&#9670;&nbsp;</a></span>reload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::Object::Object::reload </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reload the object, by reloading all meshes </p>
+
+</div>
+</div>
+<a id="aa344ca57ff36c3efe11053cde076eedb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa344ca57ff36c3efe11053cde076eedb">&#9670;&nbsp;</a></span>update() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NRE::Object::Object::update </td>
+          <td>(</td>
+          <td class="paramtype">GLuint const &amp;&#160;</td>
+          <td class="paramname"><em>meshIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Update a mesh in the object </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">meshIndex</td><td>the mesh's index in the meshes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a32410b0f95deada0accda2e436231e5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32410b0f95deada0accda2e436231e5a">&#9670;&nbsp;</a></span>update()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a32410b0f95deada0accda2e436231e5a">&#9670;&nbsp;</a></span>update() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -431,13 +487,13 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Update the current object from his mesh </p>
+<p>Update all meshes in the object </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a112d90eab17a3c8e2abaf4cd7b6dfa33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a112d90eab17a3c8e2abaf4cd7b6dfa33">&#9670;&nbsp;</a></span>buffer</h2>
+<a id="a4057bc5c2fb9e4d5613dd1d29bf4c790"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4057bc5c2fb9e4d5613dd1d29bf4c790">&#9670;&nbsp;</a></span>meshes</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -446,7 +502,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html">GL::VBO</a>* NRE::Object::Object::buffer</td>
+          <td class="memname">std::vector&lt;<a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a>*&gt; NRE::Object::Object::meshes</td>
         </tr>
       </table>
   </td>
@@ -455,53 +511,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The object's rendering buffer </p>
-
-</div>
-</div>
-<a id="ae310dcc8438d2ddaf5bbe56206a3d6ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae310dcc8438d2ddaf5bbe56206a3d6ee">&#9670;&nbsp;</a></span>mesh</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html">Mesh</a>* NRE::Object::Object::mesh</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The object's mesh </p>
-
-</div>
-</div>
-<a id="aeba9bc20ef129d130f2bc3126766dd7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeba9bc20ef129d130f2bc3126766dd7f">&#9670;&nbsp;</a></span>vao</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_n_r_e_1_1_g_l_1_1_v_a_o.html">GL::VAO</a> NRE::Object::Object::vao</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The object's rendering VAO </p>
+<p>The object's meshes </p>
 
 </div>
 </div>

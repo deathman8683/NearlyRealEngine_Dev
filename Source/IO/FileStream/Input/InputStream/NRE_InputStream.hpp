@@ -56,11 +56,19 @@
                         virtual ~InputStream();
 
                     //## Getter ##//
+                        /**
+                         * Stream getter
+                         * @return the file's stream
+                         */
                         virtual std::fstream& getStream() = 0;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Read into the passed data from the file stream
+                         * @param object the data to store the read return
+                         */
                         template <class T>
                         void read(T& object);
 

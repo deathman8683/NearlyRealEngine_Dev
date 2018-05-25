@@ -1,6 +1,6 @@
 
     /**
-     * @file NRE_Type.hpp
+     * @file Generic/NRE_Type.hpp
      * @brief Declaration of Engine's Main Header
      * @author Louis ABEL
      * @version 1.0

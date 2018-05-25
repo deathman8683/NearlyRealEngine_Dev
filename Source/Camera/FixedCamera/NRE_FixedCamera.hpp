@@ -169,7 +169,18 @@
                          * @return      the number of index added in the index buffer
                          */
                         size_t getVertices(GLfloat* & vBuf, GLfloat* & cBuf, GLbyte* & nBuf, GLuint* & iBuf);
+                        /**
+                         * Orbit around a given target
+                         * @param target   the targeted point
+                         * @param distance the distance to the point
+                         * @param axis     the rotation axis
+                         */
                         void turnAround(Maths::Point3D<NREfloat> const& target, NREfloat const& distance, Maths::Vector3D<NREfloat> const& axis = Maths::Vector3D<NREfloat>(0, 0, 1));
+                        /**
+                         * Travel to a given target
+                         * @param target the targeted point
+                         * @param speed  the travelling speed
+                         */
                         void travelTo(Maths::Point3D<NREfloat> const& target, NREfloat const& speed);
 
                     //## Access Operator ##//

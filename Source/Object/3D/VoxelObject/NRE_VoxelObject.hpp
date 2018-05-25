@@ -28,7 +28,7 @@
              */
             class VoxelObject : public Object3D {
                 protected:
-                    std::vector<VoxelSet> voxelSets;
+                    std::vector<VoxelSet> voxelSets;    /**< The voxel's object voxel set, representing the object's target and neighbors */
 
                 public:
                     //## Constructor ##//
@@ -60,14 +60,49 @@
                         ~VoxelObject();
 
                     //## Getter ##//
+                        /**
+                         * Voxel Set getter
+                         * @param  index the voxel set's index
+                         * @return       the corresponding voxel set's
+                         */
                         VoxelSet const& getVoxelSet(GLuint const& index) const;
 
                     //## Setter ##//
+                        /**
+                         * Set the left voxel set
+                         * @param index the set's index
+                         * @param s     the voxel set
+                         */
                         void setLeft(GLuint const& index, VoxelSet const& s);
+                        /**
+                         * Set the right voxel set
+                         * @param index the set's index
+                         * @param s     the voxel set
+                         */
                         void setRight(GLuint const& index, VoxelSet const& s);
+                        /**
+                         * Set the front voxel set
+                         * @param index the set's index
+                         * @param s     the voxel set
+                         */
                         void setFront(GLuint const& index, VoxelSet const& s);
+                        /**
+                         * Set the back voxel set
+                         * @param index the set's index
+                         * @param s     the voxel set
+                         */
                         void setBack(GLuint const& index, VoxelSet const& s);
+                        /**
+                         * Set the up voxel set
+                         * @param index the set's index
+                         * @param s     the voxel set
+                         */
                         void setUp(GLuint const& index, VoxelSet const& s);
+                        /**
+                         * Set the bottom voxel set
+                         * @param index the set's index
+                         * @param s     the voxel set
+                         */
                         void setBottom(GLuint const& index, VoxelSet const& s);
 
                     //## Methods ##//
@@ -97,6 +132,10 @@
                          * @param type  the voxel's type
                          */
                         void loadVoxels(GLuint const& index, GLuint &x, GLuint &y, GLuint &z, GLuint const& nb, GLubyte const& type);
+                        /**
+                         * Push a new voxel mesh and set into the object
+                         * @param size the voxel set/mesh size
+                         */
                         void push_back(Maths::Vector3D<GLuint> const& size);
 
                     //## Access Operator ##//

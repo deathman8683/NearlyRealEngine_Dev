@@ -31,7 +31,7 @@
              */
             class Object {
                 protected:
-                    std::vector<Mesh*> meshes;
+                    std::vector<Mesh*> meshes;  /**< The object's meshes */
 
                 public:
                     //## Constructor ##//
@@ -76,23 +76,37 @@
                          */
                         void add(GLuint const& meshIndex, GLuint const& setIndex, void* value, GLuint const& nbValue = 1) const;
                         /**
-                         * Update the current object from his mesh
+                         * Update a mesh in the object
                          * @param meshIndex the mesh's index in the meshes
                          */
                         void update(GLuint const& meshIndex);
+                        /**
+                         * Update all meshes in the object
+                         */
                         void update();
                         /**
-                         * Allocate and fill the current object's buffer from his mesh
+                         * Allocate and fill a mesh in the object
                          * @param meshIndex the mesh's index in the meshes
                          * @param usage the object's rendering usage
                          */
                         void allocateAndFill(GLuint const& meshIndex, GLenum const& usage);
+                        /**
+                         * Allocate and fill all meshes in the object
+                         * @param usage the object's rendering usage
+                         */
                         void allocateAndFill(GLenum const& usage);
                         /**
                          * Draw the current object, need to be call from a rendering context (Shader bind)
                          */
                         void draw() const;
+                        /**
+                         * Reload the object, by reloading all meshes
+                         */
                         void reload();
+                        /**
+                         * Push back a mesh into the meshes array
+                         * @param m the mesh to add
+                         */
                         void push_back(Mesh* m);
 
                     //## Access Operator ##//

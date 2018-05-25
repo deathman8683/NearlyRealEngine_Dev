@@ -48,6 +48,11 @@
                          * @param value new x, y, z and w values
                          */
                         Quaternion(T const& value);
+                        /**
+                         * Construct a quaternion with a given rotation axis and a given angle
+                         * @param axis  the quaternion's axis
+                         * @param theta the quaternion's rotation angle
+                         */
                         Quaternion(Vector3D<T> const& axis, T const& theta);
 
                     //## Copy-Constructor ##//

@@ -30,18 +30,37 @@
             class LightsManager {
                 public:
                     //## Getter ##//
+                        /**
+                         * Light getter
+                         * @param  index the light's index
+                         * @return       the corresponding light
+                         */
                         static Light& getLight(GLuint const& index);
+                        /**
+                         * Size getter
+                         * @return the light's array size
+                         */
                         static size_t const getSize();
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Initialize the light's manager
+                         */
                         static void init();
+                        /**
+                         * Desallocate the light's manager
+                         */
                         static void free();
+                        /**
+                         * Push back a new light into the manager
+                         * @param l the light to add
+                         */
                         static void push_back(Light && l);
 
                 private:
-                    static std::vector<Light>* lights;
+                    static std::vector<Light>* lights;  /**< The manager light's array */
             };
 
         };

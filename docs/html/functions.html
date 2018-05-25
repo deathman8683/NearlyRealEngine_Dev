@@ -80,7 +80,7 @@ $(function() {
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a35dc23d5f8b59eff4c3fc5906ed83570">NRE::GL::TextureBuffer</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_v_a_o.html#a48ab58f43b9331a9e0d8e00a1e8aea83">NRE::GL::VAO</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#abafa6e7a0bba5a1fb6a421e7ed6bbf0b">NRE::GL::VBO</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a792cd302a2c8f7c1e911cac83e3ba87a">NRE::Object::Object</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html#a169f78634e3880f666892f11e6ae9406">NRE::Object::Mesh</a>
 </li>
 <li>activeKeys
 : <a class="el" href="class_n_r_e_1_1_camera_1_1_key_binder.html#a754aab930d94f4270df3e2a80c05a37d">NRE::Camera::KeyBinder</a>
@@ -89,26 +89,26 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_object_1_1_data.html#a2df90754f4ae82cf61edb421cb5a0701">NRE::Object::Data&lt; T &gt;</a>
 , <a class="el" href="class_n_r_e_1_1_object_1_1_data_set.html#ae20fd4b4e21562532b67829aecc25b4d">NRE::Object::DataSet</a>
 , <a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html#ac2a291b47fd7bfe384df0630c40d38b5">NRE::Object::Mesh</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a3ec32a1dd9adbcba2cdd39c005f9fb53">NRE::Object::Object</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_object.html#aab65a7442157f1ce4274b494a8a87fcc">NRE::Object::Object</a>
 , <a class="el" href="class_n_r_e_1_1_world_1_1_region.html#a87ebca4224c04b1f00d64bc2191503d7">NRE::World::Region</a>
 </li>
 <li>addChunkToConstruction()
-: <a class="el" href="class_n_r_e_1_1_world_1_1_world.html#af01c2ba95c5e494338301ef21af4ae2d">NRE::World::World</a>
+: <a class="el" href="class_n_r_e_1_1_world_1_1_chunks_manager.html#adaa83cf29769eda5201f49286a1978f9">NRE::World::ChunksManager</a>
 </li>
-<li>addChunkToLoadRegion()
-: <a class="el" href="class_n_r_e_1_1_world_1_1_world.html#a8fb4bebdef32b54a4d4d96bf7dde0998">NRE::World::World</a>
+<li>addChunkToLoad()
+: <a class="el" href="class_n_r_e_1_1_world_1_1_regions_manager.html#afe1a4e32debb00208ee9e5cb6b9a8ef4">NRE::World::RegionsManager</a>
 </li>
-<li>addChunkToSaveRegion()
-: <a class="el" href="class_n_r_e_1_1_world_1_1_world.html#ad5c1271c48012b3261f9b2de6c8dcf75">NRE::World::World</a>
+<li>addChunkToSave()
+: <a class="el" href="class_n_r_e_1_1_world_1_1_regions_manager.html#af7a3ba9e38ea186c5c72fb340741045f">NRE::World::RegionsManager</a>
 </li>
 <li>addPackedVertex()
-: <a class="el" href="class_n_r_e_1_1_object_1_1_mesh3_d.html#a2fff3df15d8f5669c866f6ed75415356">NRE::Object::Mesh3D</a>
+: <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_mesh.html#a93a1f6c3ef81ffc21bad7d7c81875e38">NRE::Object::VoxelMesh</a>
 </li>
 <li>addUniformLocation()
 : <a class="el" href="class_n_r_e_1_1_renderer_1_1_shader.html#ac773ac15057f28198ccb12ce6417e967">NRE::Renderer::Shader</a>
 </li>
 <li>addVoxel()
-: <a class="el" href="class_n_r_e_1_1_object_1_1_mesh3_d.html#a84b6853c6f27c02dc55840a80cb8cbbc">NRE::Object::Mesh3D</a>
+: <a class="el" href="class_n_r_e_1_1_object_1_1_voxel_mesh.html#ab087c9a5f706a18d04c4cbff1b756dd2">NRE::Object::VoxelMesh</a>
 </li>
 <li>AdvancedDate()
 : <a class="el" href="class_n_r_e_1_1_time_1_1_advanced_date.html#a6a62bb801d6252528a474861c250de77">NRE::Time::AdvancedDate</a>
@@ -120,7 +120,9 @@ $(function() {
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_render_buffer.html#abf851551a51ebbe4d5f8b43f8a1d2eec">NRE::GL::RenderBuffer</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_sky_box.html#a4ccfd82f05d08d129d175e3bb0bbd5be">NRE::GL::SkyBox</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#adc2e712325e1fce2ac2d1eb55381b73f">NRE::GL::Texture2D</a>
-, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#afa65834e0f142df78c4cd95908912819">NRE::GL::TextureBuffer</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_array.html#a6562a82f9b50de4c474c5c3546d6091a">NRE::GL::Texture2DArray</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_buffer.html#a4fecbc9b7b8aafb82e11091a02b59b00">NRE::GL::Texture2DBuffer</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture3_d_buffer.html#afece8b73b2cab65b235632640f478d00">NRE::GL::Texture3DBuffer</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#ab05f1a49a99153b0eb87114ed8c37e09">NRE::GL::VBO</a>
 , <a class="el" href="class_n_r_e_1_1_renderer_1_1_environment_map.html#abb73147bad09ae8fd42a4d5bd7edf8b9">NRE::Renderer::EnvironmentMap</a>
 </li>
@@ -129,10 +131,11 @@ $(function() {
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_cube_map.html#a7ca3a1705993f078377c00f52870ec2b">NRE::GL::CubeMap</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_i_b_o.html#a0bd1bac6cfd5b95620c4f437d36a15cd">NRE::GL::IBO</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#aefa28985deb849f7d11585bd91970fc4">NRE::GL::Texture2D</a>
-, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a275eea9fab30a14b1cc548d5201a18ed">NRE::GL::TextureBuffer</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_buffer.html#a341f58f813745a4bc45a8139920eed49">NRE::GL::Texture2DBuffer</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture3_d_buffer.html#a110f29ef75ac669ac8464c52e4247c95">NRE::GL::Texture3DBuffer</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_v_b_o.html#ab5ceda41a817973ca6da5907cd26c851">NRE::GL::VBO</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html#a906d2eb7bd8388b934d4aab1ecb37d1a">NRE::Object::Mesh</a>
-, <a class="el" href="class_n_r_e_1_1_object_1_1_object.html#afb3d74d4f086a92fa7b0659c64deef59">NRE::Object::Object</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_mesh.html#ac20ce19fb83aa0ab7c2a03ba0da08544">NRE::Object::Mesh</a>
+, <a class="el" href="class_n_r_e_1_1_object_1_1_object.html#a2e177f64bd580e2b1fbcc726c4474c21">NRE::Object::Object</a>
 </li>
 <li>allocateColorBuffer()
 : <a class="el" href="class_n_r_e_1_1_g_l_1_1_f_b_o.html#aa237fc6e55de5f9a7d818aea24294bda">NRE::GL::FBO</a>
@@ -140,14 +143,23 @@ $(function() {
 <li>angle
 : <a class="el" href="class_n_r_e_1_1_camera_1_1_fixed_camera.html#a29accad8fedf87c3d14cce267eaa8f6b">NRE::Camera::FixedCamera</a>
 </li>
+<li>Application()
+: <a class="el" href="class_n_r_e_1_1_support_1_1_application.html#abc2450f565b5999cedd7b3446183a1ca">NRE::Support::Application</a>
+</li>
 <li>applyFilter()
 : <a class="el" href="class_n_r_e_1_1_g_l_1_1_cube_map.html#ab9801e710ff3457c97abe800de3f4246">NRE::GL::CubeMap</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_sky_box.html#a4193c68812012e517bbfef27c3f6fc9a">NRE::GL::SkyBox</a>
-, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#a49ddc552222249cb75062a3a9a02815e">NRE::GL::Texture2D</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d.html#abfe6f71432ec7f3e573bcaf6edbb48b0">NRE::GL::Texture2D</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_array.html#acadab62b677bf039fb6cac8b0a369895">NRE::GL::Texture2DArray</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture2_d_buffer.html#a620fa1fb4dd87d8152310f83ec0a7a6c">NRE::GL::Texture2DBuffer</a>
+, <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture3_d_buffer.html#a540e0db4661d621a564744668f66653d">NRE::GL::Texture3DBuffer</a>
 , <a class="el" href="class_n_r_e_1_1_g_l_1_1_texture_buffer.html#a4e603bce320e5b764bdee135ab551cbe">NRE::GL::TextureBuffer</a>
 </li>
 <li>ArrayBuffer()
-: <a class="el" href="class_n_r_e_1_1_g_l_1_1_array_buffer.html#a6e0319d0ab3ab7bc9a7211965aa4b919">NRE::GL::ArrayBuffer</a>
+: <a class="el" href="class_n_r_e_1_1_g_l_1_1_array_buffer.html#a9ea34f26d25d2314a14273bc7ccb813f">NRE::GL::ArrayBuffer</a>
+</li>
+<li>AssimpException()
+: <a class="el" href="class_n_r_e_1_1_exception_1_1_assimp_exception.html#ae02028b3bdf6b0b4032c2a6e88753ed1">NRE::Exception::AssimpException</a>
 </li>
 <li>attach()
 : <a class="el" href="class_n_r_e_1_1_g_l_1_1_depth_buffer.html#a71278874f32cea0c9e3b8165fb67dfa8">NRE::GL::DepthBuffer</a>
@@ -161,7 +173,7 @@ $(function() {
 : <a class="el" href="class_n_r_e_1_1_g_l_1_1_f_b_o.html#a6c8e0848c443f3dc8f3e72794f853414">NRE::GL::FBO</a>
 </li>
 <li>AttributeBuffer()
-: <a class="el" href="class_n_r_e_1_1_g_l_1_1_attribute_buffer.html#ac824ba78fef614367ddf42bc01137f99">NRE::GL::AttributeBuffer</a>
+: <a class="el" href="class_n_r_e_1_1_g_l_1_1_attribute_buffer.html#a8021e7df2624abd29905ac33681fc7a3">NRE::GL::AttributeBuffer</a>
 </li>
 </ul>
 </div><!-- contents -->

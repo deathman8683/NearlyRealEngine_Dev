@@ -28,7 +28,7 @@
              */
             class FileStream : public File {
                 private:
-                    std::fstream file;
+                    std::fstream file;  /**< The file stream */
 
                 public:
                     //## Constructor ##//
@@ -36,6 +36,10 @@
                          * Default Constructor
                          */
                         FileStream() = delete;
+                        /**
+                         * Construct a file stream with a given file's path
+                         * @param path the file's stream path
+                         */
                         FileStream(std::string const& path);
 
                     //## Copy-Constructor ##//
@@ -61,13 +65,27 @@
                         virtual ~FileStream();
 
                     //## Getter ##//
+                        /**
+                         * Opening mode getter
+                         * @return the file stream opening mode
+                         */
                         virtual std::ios_base::openmode const getMode() const = 0;
+                        /**
+                         * Opening state getter
+                         * @return the file's stream opening state
+                         */
                         bool const isOpen() const;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        /**
+                         * Open the file stream with the file's path and file stream opening mode
+                         */
                         void open();
+                        /**
+                         * Open the file stream but truncate all data inside the file
+                         */
                         void openEmpty();
 
                     //## Access Operator ##//
@@ -97,6 +115,10 @@
                     //## Shift Operator ##//
 
                 protected:
+                    /**
+                     * Stream getter
+                     * @return the file's stream
+                     */
                     std::fstream& getStream();
             };
 
