@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_OutputFile.hpp
-     * @brief Declaration of Engine's IO's Object : OutputFile
+     * @file NRE_BinaryIOFile.hpp
+     * @brief Declaration of Engine's IO's Object : BinaryIOFile
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../NRE_FileStream.hpp"
+    #include "../../IOFile/NRE_IOFile.hpp"
 
     /**
      * @namespace NRE
@@ -22,10 +22,10 @@
         namespace IO {
 
             /**
-             * @class OutputFile
-             * @brief IO's Object : Manage Output file stream
+             * @class BinaryIOFile
+             * @brief IO's Object : Manage Binary Input-Output file stream
              */
-            class OutputFile : public FileStream, public OutputStream {
+            class BinaryIOFile : public IOFile, public BinaryInputStream, public BinaryOutputStream {
                 private:
 
                 public:
@@ -33,30 +33,30 @@
                         /**
                          * Default Constructor
                          */
-                        OutputFile() = delete;
-                        OutputFile(std::string const& path);
+                        BinaryIOFile() = delete;
+                        BinaryIOFile(std::string const& path);
 
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param f the Output file to copy the content
+                         * @param f the IO file to copy the content
                          */
-                        OutputFile(OutputFile const& f) = delete;
+                        BinaryIOFile(BinaryIOFile const& f) = delete;
 
                     //## Move-Constructor ##//
                         /**
                          * Move f into this, leaving f empty
-                         * @param f the Output file to move
+                         * @param f the IO file to move
                          */
-                        OutputFile(OutputFile && f);
+                        BinaryIOFile(BinaryIOFile && f);
 
                     //## Convertor ##//
 
                     //## Deconstructor ##//
                         /**
-                         * OutputFile Deconstructor
+                         * BinaryIOFile Deconstructor
                          */
-                        virtual ~OutputFile();
+                        virtual ~BinaryIOFile();
 
                     //## Getter ##//
                         virtual std::ios_base::openmode const getMode() const override;
@@ -71,16 +71,16 @@
                     //## Assignment Operator ##//
                         /**
                          * No copy allowed
-                         * @param f the Output file to copy into this
+                         * @param f the IO file to copy into this
                          * @return the reference of himself
                          */
-                        OutputFile& operator=(OutputFile const& f) = delete;
+                        BinaryIOFile& operator=(BinaryIOFile const& f) = delete;
                         /**
                          * Move assigment of f into this, leaving f empty
-                         * @param f the Output file to move into this
+                         * @param f the IO file to move into this
                          * @return the reference of himself
                          */
-                        OutputFile& operator=(OutputFile && f);
+                        BinaryIOFile& operator=(BinaryIOFile && f);
 
                     //## Shortcut Operator ##//
 

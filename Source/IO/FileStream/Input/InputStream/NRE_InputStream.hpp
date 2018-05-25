@@ -53,7 +53,7 @@
                         /**
                          * InputStream Deconstructor
                          */
-                        ~InputStream();
+                        virtual ~InputStream();
 
                     //## Getter ##//
                         virtual std::fstream& getStream() = 0;

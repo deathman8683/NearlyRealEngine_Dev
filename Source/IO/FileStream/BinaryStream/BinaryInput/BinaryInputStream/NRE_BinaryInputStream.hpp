@@ -1,14 +1,14 @@
 
     /**
-     * @file NRE_OutputFile.hpp
-     * @brief Declaration of Engine's IO's Object : OutputFile
+     * @file NRE_BinaryInputStream.hpp
+     * @brief Declaration of Engine's IO's Object : BinaryInputStream
      * @author Louis ABEL
      * @version 1.0
      */
 
     #pragma once
 
-    #include "../../NRE_FileStream.hpp"
+    #include "../../../../File/NRE_File.hpp"
 
     /**
      * @namespace NRE
@@ -22,10 +22,10 @@
         namespace IO {
 
             /**
-             * @class OutputFile
-             * @brief IO's Object : Manage Output file stream
+             * @class BinaryInputStream
+             * @brief IO's Object : Base interface for Input related stream
              */
-            class OutputFile : public FileStream, public OutputStream {
+            class BinaryInputStream {
                 private:
 
                 public:
@@ -33,54 +33,52 @@
                         /**
                          * Default Constructor
                          */
-                        OutputFile() = delete;
-                        OutputFile(std::string const& path);
+                        BinaryInputStream();
 
                     //## Copy-Constructor ##//
                         /**
                          * No copy allowed
-                         * @param f the Output file to copy the content
+                         * @param s the binary input stream to copy the content
                          */
-                        OutputFile(OutputFile const& f) = delete;
+                        BinaryInputStream(BinaryInputStream const& s) = delete;
 
                     //## Move-Constructor ##//
                         /**
-                         * Move f into this, leaving f empty
-                         * @param f the Output file to move
+                         * Move s into this, leaving s empty
+                         * @param s the binary input stream to move
                          */
-                        OutputFile(OutputFile && f);
-
-                    //## Convertor ##//
+                        BinaryInputStream(BinaryInputStream && s);
 
                     //## Deconstructor ##//
                         /**
-                         * OutputFile Deconstructor
+                         * BinaryInputStream Deconstructor
                          */
-                        virtual ~OutputFile();
+                        ~BinaryInputStream();
 
                     //## Getter ##//
-                        virtual std::ios_base::openmode const getMode() const override;
-                        virtual std::fstream& getStream() override;
+                        virtual std::fstream& getStream() = 0;
 
                     //## Setter ##//
 
                     //## Methods ##//
+                        template <class T>
+                        void readBinary(T& object, size_t const& sizeInBytes);
 
                     //## Access Operator ##//
 
                     //## Assignment Operator ##//
                         /**
                          * No copy allowed
-                         * @param f the Output file to copy into this
+                         * @param s the binary input stream to copy into this
                          * @return the reference of himself
                          */
-                        OutputFile& operator=(OutputFile const& f) = delete;
+                        BinaryInputStream& operator=(BinaryInputStream const& s) = delete;
                         /**
-                         * Move assigment of f into this, leaving f empty
-                         * @param f the Output file to move into this
+                         * Move assigment of s into this, leaving s empty
+                         * @param s the binary input stream to move into this
                          * @return the reference of himself
                          */
-                        OutputFile& operator=(OutputFile && f);
+                        BinaryInputStream& operator=(BinaryInputStream && s);
 
                     //## Shortcut Operator ##//
 
@@ -97,3 +95,5 @@
 
         };
     };
+
+    #include "NRE_BinaryInputStream.tpp"

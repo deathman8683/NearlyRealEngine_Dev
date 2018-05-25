@@ -5,6 +5,7 @@ OBJDIR = ../../../obj/Debug/IO/FileStream/
 IO = IOFile
 INPUT = Input
 OUTPUT = Output
+BINARY = BinaryStream
 
 all : $(TARGET) after
 
@@ -14,6 +15,7 @@ after:
 	@(cd $(INPUT) && $(MAKE))
 	@(cd $(OUTPUT) && $(MAKE))
 	@(cd $(IO) && $(MAKE))
+	@(cd $(BINARY) && $(MAKE))
 
 $(OBJDIR)%.o : %.cpp %.hpp
 	@$(CXX) -o $@ -c $< $(CFLAGS) $(INC)

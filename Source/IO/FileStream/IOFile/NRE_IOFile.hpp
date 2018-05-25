@@ -56,11 +56,11 @@
                         /**
                          * IOFile Deconstructor
                          */
-                        ~IOFile();
+                        virtual ~IOFile();
 
                     //## Getter ##//
-                        std::ios_base::openmode const getMode() const override;
-                        std::fstream& getStream() override;
+                        virtual std::ios_base::openmode const getMode() const override;
+                        virtual std::fstream& getStream() override;
 
                     //## Setter ##//
 
