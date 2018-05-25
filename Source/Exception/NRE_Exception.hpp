@@ -8,3 +8,4 @@
     #include "SDLException/NRE_SDLException.hpp"
     #include "ShaderException/NRE_ShaderException.hpp"
     #include "SupportException/NRE_SupportException.hpp"
+    #include "SecurityException/NRE_SecurityException.hpp"

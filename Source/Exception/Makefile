@@ -7,6 +7,7 @@ SUPPORT = SupportException
 SDL = SDLException
 GL = GLException
 IO = IOException
+SECURITY = SecurityException
 ASSIMP = AssimpException
 
 all : $(TARGET) after
@@ -17,6 +18,7 @@ after:
 	@(cd $(SDL) && $(MAKE))
 	@(cd $(GL) && $(MAKE))
 	@(cd $(IO) && $(MAKE))
+	@(cd $(SECURITY) && $(MAKE))
 	@(cd $(ASSIMP) && $(MAKE))
 
 debug: $(OBJ)
