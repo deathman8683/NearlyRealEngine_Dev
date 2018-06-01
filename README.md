@@ -3,7 +3,7 @@
 ![WallPaper](https://github.com/AbelDoc/NearlyRealEngine_Dev/blob/master/WallPaper.png)
 
 ## Available features currently :
-### World Generation/Managment
+### World Generation/Management
 * **Fast voxel mesh construction**
 
 A fast voxel mesh construction system has been built in the engine, it use hashmap and several visual optimization in order to construct chunk's mesh in less than 1-2ms.
@@ -61,7 +61,7 @@ The player can destroy/place block in the world, still WIP.
 Environment map are used in the engine to represent advanced skybox, they are loaded with equirectangular HDR image.
 Some calculation are done on fly to process object reflections with them.
 
-### Entity / Player Managment
+### Entity / Player Management
 * **Fixed/Moveable camera control**
 
 The camera control in the engine are separated in several class (from basics key input to high level movelable camera). Fixed Camera are used for off-screen rendering.
