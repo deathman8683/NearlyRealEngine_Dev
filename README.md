@@ -25,17 +25,20 @@ Voxels are merged together if they have same properties (type, ...), that's a pa
 * **World shifting**
 
 While the player / camera move, the world load/save dynamicly chunk around it.
+* **World interaction**
+
+The player can destroy/place block in the world, still WIP.
 
 ### Rendering / FX / Sound / Shader
 * **Deferred Rendering**
 
     The engine dont' render scene with forward rendering, it use deferred rendering with 2 pass, the first for the geometry, the second for the SSAO computation. Finally the result is being coomputed when the Deferred Renderer is called. **Doesn't support transparency**.
-    * *Blinn-Phong lighting*
+    * *Physically Based Rendering* **PBR**
 
-    Blinn-Phong model is used to compute ambient/diffuse/specular component per-fragment in the engine, it can a lot of light without any lags
+    The engine use PBR to display object, it use material loaded on fly (Texture file) to compute needed value
     * *Screen-Space Ambient Occlusion* **(SSAO)**
 
-    SSAO is added to Blinn-Phong ambient component to compute simple shadow, low number of sample are used with a random/noise kernel rotation.
+    SSAO is added to PBR ambient component to compute simple shadow, low number of sample are used with a random/noise kernel rotation.
     * *Depth buffer Reconstruction*
 
     Deferred Rendering can be expensive while storing position/normal/diffuse component into the gBuffer, so the engine only use 2 texture :
@@ -47,9 +50,16 @@ While the player / camera move, the world load/save dynamicly chunk around it.
     * *Water reflection*
 
     The engine compute water reflection based on a skybox texture and voxel type properties
-* **SkyBox**
+    * *Texture mapping*
 
-A full skybox support has been implemented, it's fast and simple to use. It's uses in shader to compute some effect
+    The engine can support texturing, in addition to the material system.
+    * *Normal mapping*
+
+    A technique of vertex displacement to show elevation in texture, in order to make things less flat and more realistic combined with PBR lighting.
+* **EnvironmentMap**
+
+Environment map are used in the engine to represent advanced skybox, they are loaded with equirectangular HDR image.
+Some calculation are done on fly to process object reflections with them.
 
 ### Entity / Player Managment
 * **Fixed/Moveable camera control**
@@ -61,6 +71,16 @@ The input system use the KeyBinder feature, so any controller can be mapped in t
 * **Customizable binding system**
 
 KeyBinder feature save all input into readable-file, so that a random user can remap all key from the file or in the application.
+
+### Object Management
+* **2D object support**
+
+The engine support 2D object rendering, they can be loaded with texture and display with relative ease
+
+* **3D and Voxel object support**
+
+Complex 3D model can be loaded using Assimp library, as voxel model can be loaded from custom compressed file.
+They are optimized to work with the engine's mesh system.
 
 ### Wrapper
 * Wrap a lot of OpenGL functionnality into class
@@ -94,19 +114,15 @@ Color conversion system is implemented in order to work with RGB color as HSL co
 A simple time module with several class to manage date, timestep, application clock, cpu management
     * Control CPU utilization
 
-## Work in Progress :
-### Exception Handling
-* Strong exception system to prevent any error in the application
+* **IO Module**
 
-### World Generation/Managment
-* **World interaction**
+A full IO system has been created to secure in and output with exception, it's used in the whole engine
+Also used to write/read from file with more ease than standard stream.
+
+## Work in Progress :
 
 ### Entity / Player Managment
 * AI Entity
-
-### 3D Modeling
-* Full support to load 3D object
-* **Custom voxel model support**
 
 ### Rendering / FX / Sound / Shader
 * Full sound support
@@ -115,6 +131,7 @@ A simple time module with several class to manage date, timestep, application cl
 ## Stress Test
 
 Memory taken for 51x51 world (80m+ voxels) : ~500Mo
++ 1M Vertices model
 
 Performance (limited to 60fps) *tested with 5 light source and all effect feature* :
 * Average 60fps
